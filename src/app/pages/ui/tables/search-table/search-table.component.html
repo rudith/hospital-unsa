@@ -1,0 +1,134 @@
+<tc-card class="mb-0">
+  <tc-table [rows]="tableData" [hovered]="true" [search]="true">
+    <tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'name'" [enableSorting]="true">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'Nombres y Apellidos'" [columnName]="'name'" [enableSorting]="true">
+      <ng-template #tableTDTemplate let-value>
+        <span [tcColor]="'#a5a5a5'">{{ value }}</span>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'DNI'" [columnName]="'id'">
+      <ng-template #tableTDTemplate let-value>
+        <span [tcColor]="'#a5a5a5'" #id>{{ value }}</span>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'Actualizar Datos'" [columnName]="'actions'">
+      <ng-template #tableTDTemplate let-row="row">
+        <div class="actions">
+
+
+          <button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'info'" [square]="true" [tcShape]="500"
+            [size]="'sm'" (click)="openModal(modalBody, 'Update patient info', modalFooter, row)"></button>
+
+        </div>
+      </ng-template>
+    </tc-table-col>
+  </tc-table>
+</tc-card>
+
+<!-- edit patient Modal window -->
+<ng-container>
+  <ng-template #modalBody>
+    <form [formGroup]="patientForm" novalidate class="new-patient-form">
+      <tc-form-group>
+        <tc-form-label>Nombres y Apellidos</tc-form-label>
+        <tc-input [placeholder]="'name'" formControlName="name" ></tc-input>
+      </tc-form-group>
+
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>DNI</tc-form-label>
+            <tc-input [placeholder]="'Number'" [type]="'number'" formControlName="number" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Edad</tc-form-label>
+            <tc-input [placeholder]="'Age'" [type]="'number'" formControlName="age" readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Genero</tc-form-label>
+            <tc-select [placeholder]="'Gender'" formControlName="gender" [options]="gender"></tc-select>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Talla</tc-form-label>
+            <tc-input [placeholder]="'talla'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Peso</tc-form-label>
+            <tc-input [placeholder]="'peso'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Temperatura</tc-form-label>
+            <tc-input [placeholder]="'temperatura'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Frecuencia Respiratoria</tc-form-label>
+            <tc-input [placeholder]="'frecuenciaR'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Frecuencia Cardiaca</tc-form-label>
+            <tc-input [placeholder]="'frecuendiaC'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Presión Arterial</tc-form-label>
+            <tc-input [placeholder]="'presionArt'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Fecha</tc-form-label>
+            <tc-input [placeholder]="'fechaReg'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Numero de Cita</tc-form-label>
+            <tc-input [placeholder]="'cita'" [type]="'number'" formControlName="age"></tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div class="actions justify-content-between">
+      <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancel</button>
+      <button tc-button [view]="'info'"  (click)="updatePatient(patientForm)">
+          Update patient
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+<!-- end Modal window -->

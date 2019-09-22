@@ -1,0 +1,83 @@
+<div class="row">
+	<tc-form-group class="col-sm-6 col-lg-10">
+		<tc-input [placeholder]="'Buscar Cita'" [(ngModel)]="dni" [suffixIcon]="'icofont-search-document'">
+		</tc-input>
+	</tc-form-group>
+	<tc-form-group class="col-sm-6 col-lg-2">
+		<button tc-button [view]="'info'" (click)="onChangeTable()">
+			Buscar
+		</button>
+	</tc-form-group>
+</div>
+<tc-card class="mb-0">
+	<tc-table [rows]="citas" [hovered]="true">
+		<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Numero de Recibo'" [columnName]="'numeroRecibo'" [enableSorting]="true">
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Fecha de Cita'" [columnName]="'fechaSeparacion'" [enableSorting]="true">
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Estado de Cita'" [columnName]="'estadoCita'" [enableSorting]="true">
+			<ng-template #tableTDTemplate let-value>
+				<tc-badge [view]="value === 'E' ? 'Cancelado' : 'warning'">{{ value }}</tc-badge>
+			</ng-template>
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Médico'" [columnName]="'medico'" [enableSorting]="true">
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Especialidad'" [columnName]="'especialidad'" [enableSorting]="true">
+			<ng-template #tableTDTemplate let-value>
+				<tc-badge class="nowrap" [view]="'accent'">{{ value }}</tc-badge>
+			</ng-template>
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
+			<ng-template #tableTDTemplate let-row="row">
+				<div class="actions">
+					<button class="col-6" tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true"
+						[tcShape]="500" [size]="'sm'"
+						(click)="openModal(modalBody, 'Editar Cita', modalFooter,row);sendCita(row)"></button>
+				</div>
+			</ng-template>
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Cancelar'" [columnName]="'actions'">
+			<ng-template #tableTDTemplate let-row="row">
+				<div class="actions">
+					<button class="col-6" tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'" [square]="true"
+						[tcShape]="500" [size]="'sm'" (click)="CancelarCita(row.numeroRecibo)"></button>
+				</div>
+			</ng-template>
+		</tc-table-col>
+	</tc-table>
+</tc-card>
+
+<ng-container>
+	<ng-template #modalBody>
+		<form [formGroup]="appointmentForm">
+			<tc-form-group>
+				<tc-form-label>Especialidad</tc-form-label>
+				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption">
+				</tc-select>
+				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="appointmentForm.controls.especialidad.touched && appointmentForm.controls.especialidad.invalid ">
+					Seleccione especialidad
+				</tc-form-description>
+			</tc-form-group>
+			<tc-form-group>
+				<tc-input type="date" formControlName="fechaSeparacion"></tc-input>
+				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="appointmentForm.controls.fechaSeparacion.touched && appointmentForm.controls.fechaSeparacion.invalid ">
+					Ingrese Fecha de Atencion
+				</tc-form-description>
+			</tc-form-group>
+		</form>
+	</ng-template>
+
+	<ng-template #modalFooter>
+		<div class="actions justify-content-between">
+			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
+			<button tc-button [view]="'info'" [disabled]="appointmentForm.invalid"
+				(click)="addAppointment(appointmentForm)">
+				Guardar
+			</button>
+		</div>
+	</ng-template>
+</ng-container>

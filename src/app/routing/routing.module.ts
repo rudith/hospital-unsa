@@ -61,6 +61,8 @@ import { CitasComponent } from '../pages/Admision/citas/citas.component';
 import { HistorialComponent } from '../pages/Admision/historial/historial.component';
 import { EditarComponent } from '../pages/Administrador/editar/editar.component';
 import {ListarDatosComponent} from '../pages/Triaje/listar-datos/listar-datos.component';
+import { ConsultasComponent } from '../pages/Consultorio/consultas/consultas.component';
+import { ListarConsultasComponent } from '../pages/Consultorio/listar-consultas/listar-consultas.component';
 
 const VERTICAL_ROUTES: Routes = [
   { path: 'default-dashboard', component: PageDashboardComponent },
@@ -118,7 +120,8 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'historial', component: HistorialComponent },
   { path: 'adminUser', component: EditarComponent },
   { path: 'listar-datos', component: ListarDatosComponent },
-  
+  { path: 'consultas', component: ConsultasComponent },
+  { path: 'Lconsultas', component: ListarConsultasComponent },
   { path: '**', component: Page404Component }
 ];
 

@@ -1,0 +1,196 @@
+<tc-card [tcGradient]="['#fff', '#fbfbfb']">
+<div class="row">
+  <div class="col-12 col-sm-2">
+    <tc-form-label>Numero de Historia</tc-form-label>
+  </div>
+  <div class="col-12 col-sm-2">
+    <tc-form-label>DNI</tc-form-label>
+  </div>
+  <div class="col-12 col-sm-6">
+    <tc-form-label>Nombre</tc-form-label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-2">
+    <label>{{numHistRecibido}}</label>
+  </div>
+  <div class="col-12 col-sm-2">
+    <label>{{dniRecibido}}</label>
+  </div>
+  <div class="col-12 col-sm-6">
+    <label>{{nombreRecibido}}</label>
+  </div>
+</div>
+</tc-card>
+<tc-card class="mb-0">
+  <tc-table [rows]="consultas" [hovered]="true" [pagination]="true">
+    <tc-table-col [columnTitle]="'Consulta'" [columnName]="'id'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>Consulta {{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+    <tc-table-col [columnTitle]="'Fecha y Hora de Atención'" [columnName]="'horaEntrada'" [enableSorting]="true">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+    <tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
+      <ng-template #tableTDTemplate let-row="row">
+        <div class="actions">
+          <button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
+            [tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
+            (click)="openModalVerC(modalBodyVerC, 'Ver Consulta', modalFooterVerC, row.id)">VerMas</button>
+        </div>
+      </ng-template>
+    </tc-table-col>
+  </tc-table>
+</tc-card>
+
+
+
+<div class="add-action-box">
+  <button tc-button [afterIcon]="'icofont-ui-keyboard'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'"
+    (click)="openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)"></button>
+</div>
+
+<!-- Modal Crear Consulta -->
+<ng-container>
+  <ng-template #modalCrearCBody>
+    <form [formGroup]="consultForm" novalidate class="new-patient-form">
+      <tc-form-group>
+        <tc-textarea [placeholder]="'Motivo de Consulta*'" formControlName="motivoConsulta"></tc-textarea>
+      </tc-form-group>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-input [placeholder]="'Apetito*'" formControlName="apetito"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-input [placeholder]="'Orina*'" formControlName="orina"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-input [placeholder]="'Deposiciones*'" formControlName="deposiciones"></tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <tc-form-group>
+        <tc-textarea [placeholder]="'Sintomas*'" formControlName="examenFisico"></tc-textarea>
+      </tc-form-group>
+      <tc-form-group>
+        <tc-textarea [placeholder]="'Diagnostico*'" formControlName="diagnostico"></tc-textarea>
+      </tc-form-group>
+      <tc-form-group>
+        <tc-textarea [placeholder]="'Tratamiento*'" formControlName="tratamiento"></tc-textarea>
+      </tc-form-group>
+    </form>
+  </ng-template>
+
+  <ng-template #modalCrearCFooter>
+    <div class="actions justify-content-between">
+      <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalC()">Cancelar</button>
+      <button tc-button [view]="'info'" [disabled]="consultForm.invalid" (click)="addConsult(consultForm)">
+        Agregar Consulta
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+<!-- end Modal Crear Consulta -->
+
+<!-- Open Modal Ver Mas -->
+<ng-container>
+  <ng-template #modalBodyVerC>
+    <form [formGroup]="verMasCForm" novalidate class="new-patient-form">
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Talla</tc-form-label>
+            <tc-input [placeholder]="'Talla'" formControlName="talla" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Peso</tc-form-label>
+            <tc-input [placeholder]="'peso'" formControlName="peso" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Temp</tc-form-label>
+            <tc-input [placeholder]="'Temp'" formControlName="temperatura" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Frec. R.</tc-form-label>
+            <tc-input [placeholder]="'Frec R'" formControlName="frecuenciaR" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Frec. C.</tc-form-label>
+            <tc-input [placeholder]="'Frec C'" formControlName="frecuenciaC" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Pres. Art.</tc-form-label>
+            <tc-input [placeholder]="'Pres Art'" formControlName="presionArt" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+                <tc-form-label>Apetito</tc-form-label>
+              <tc-input [placeholder]="'Apetito'" formControlName="apetito"readonly="readonly"></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+                <tc-form-label>Orina</tc-form-label>
+              <tc-input [placeholder]="'Orina*'" formControlName="orina" readonly="readonly"></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+                <tc-form-label>Deposiciones</tc-form-label>
+              <tc-input [placeholder]="'Deposiciones*'" formControlName="deposiciones"readonly="readonly"></tc-input>
+            </tc-form-group>
+          </div>
+        </div>
+        <tc-form-group>
+            <tc-form-label>Sintomas</tc-form-label>
+          <tc-textarea [placeholder]="'Sintomas'" formControlName="exaFis" readonly="readonly"></tc-textarea>
+        </tc-form-group>
+        <tc-form-group>
+            <tc-form-label>Diagnostico</tc-form-label>
+          <tc-textarea [placeholder]="'Diagnostico'" formControlName="diagnostico" readonly="readonly"></tc-textarea>
+        </tc-form-group>
+        <tc-form-group>
+            <tc-form-label>Tratamiento</tc-form-label>
+
+          <tc-textarea [placeholder]="'Tratamiento'" formControlName="tratamiento" readonly="readonly"></tc-textarea>
+        </tc-form-group>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooterVerC>
+    <div class="actions justify-content-between">
+      <button tc-button [type]="'button'" [tcBgColor]="'#009688'" [block]="true"
+        (click)="closeModalVerC()">Aceptar</button>
+    </div>
+  </ng-template>
+</ng-container>
+<!--End Modal Ver Mas-->

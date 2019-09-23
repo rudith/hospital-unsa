@@ -69,12 +69,13 @@ import { PageSettingsComponent } from './settings';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ListarDatosComponent } from './Triaje/listar-datos/listar-datos.component';
 import { CitasComponent } from './Admision/citas/citas.component';
-import { HistorialComponent} from './Admision/historial/historial.component';
+import { HistorialComponent } from './Admision/historial/historial.component';
 import { EditarComponent } from './Administrador/editar/editar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
-
+import { ConsultasComponent } from './Consultorio/consultas/consultas.component';
+import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -154,10 +155,12 @@ import {ToastrModule} from 'ngx-toastr';
     PageSettingsComponent,
     ListarDatosComponent,
     HistorialComponent,
-	CitasComponent,
-	EditarComponent
+    CitasComponent,
+    EditarComponent,
+    ConsultasComponent,
+    ListarConsultasComponent
   ],
-  exports: [ ],
-  entryComponents: [ ]
+  exports: [],
+  entryComponents: []
 })
-export class PagesModule {}
+export class PagesModule { }

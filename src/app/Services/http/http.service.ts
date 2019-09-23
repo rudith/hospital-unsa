@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Historial } from '../../interfaces/historial';
@@ -13,6 +12,8 @@ import { Especialidad } from '../../interfaces/especialidad';
 import { Medico } from '../../interfaces/medico';
 import { User } from '../../interfaces/user';
 import { Triaje } from '../../interfaces/triaje';
+import { HistoriaCompleta } from '../../interfaces/historia-completa';
+import { Consulta } from '../../interfaces/consulta';
 
 @Injectable({
 	providedIn: 'root',
@@ -210,5 +211,36 @@ export class HttpService {
 				user_permissions: user.user_permissions,
 			}
 		);
+	}
+	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta>{
+		return this.http.get<HistoriaCompleta>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/' + nro + "/");
+	}
+	createConsulta(newConsulta: Consulta) {
+		console.log(newConsulta);
+		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
+			{
+				horaEntrada: newConsulta.horaEntrada,
+				horaSalida: newConsulta.horaSalida,
+				motivoConsulta: newConsulta.motivoConsulta,
+				apetito: newConsulta.apetito,
+				orina: newConsulta.orina,
+				deposiciones: newConsulta.deposiciones,
+				examenFisico: newConsulta.examenFisico,
+				diagnostico: newConsulta.diagnostico,
+				tratamiento: newConsulta.tratamiento,
+				proximaCita: newConsulta.proximaCita,
+				estadoAtencion: newConsulta.estadoAtencion,
+				motivoAnulacion: newConsulta.motivoAnulacion,
+				estReg: newConsulta.estReg,
+				triaje: newConsulta.triaje,
+				numeroHistoria: newConsulta.numeroHistoria,
+				medico: newConsulta.medico,
+			}).subscribe(
+				data => {
+					console.log("CREAR Consulta Completo");
+				},
+				error => {
+					console.log(error.message);
+				});
 	}
 }

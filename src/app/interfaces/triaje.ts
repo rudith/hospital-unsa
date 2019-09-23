@@ -1,4 +1,5 @@
 export interface Triaje {
+    id:number,
     talla: number;
     peso: number;
     temperatura:number;

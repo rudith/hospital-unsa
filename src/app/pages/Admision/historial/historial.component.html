@@ -82,8 +82,12 @@
 	</tc-table>
 </tc-card>
 <div class="add-action-box">
-	<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
-		(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
+	<button tc-button 
+	[afterIcon]="'icofont-contact-add'" 
+	[square]="true" 
+	[tcShape]="500"
+	[tcBgColor]="'#3f51b5'"
+	(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
 </div>
 <!-- Modal Crear Cita  -->
 <ng-container>
@@ -148,7 +152,7 @@
 						<tc-input [placeholder]="'DNI*'" formControlName="dni" [charLimiting]="8"></tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.dni.touched && patientForm.controls.dni.invalid ">
-							Ingrese DNI, debe contener solo 8 digitos.
+							Ingrese DNI, debe contener 8 digitos
 						</tc-form-description>
 					</tc-form-group>
 				</div>
@@ -188,85 +192,69 @@
 					Ingrese la direccion
 				</tc-form-description>
 			</tc-form-group>
-			
 			<div class="row">
-					<div class="col-12 col-sm-4">
-							<tc-form-group>
-								<tc-select [placeholder]="'Distrito'" formControlName="distrito" [options]="distritosOption">
-								</tc-select>
-							</tc-form-group>
-						</div>
-					<div class="col-12 col-sm-4">
-						<tc-form-group>
-							<tc-select [placeholder]="'Provincia'" formControlName="provincia" [options]="provinciasOption">
-							</tc-select>
-						</tc-form-group>
-					</div>
-					<div class="col-12 col-sm-4">
-							<tc-form-group>
-								<tc-select [placeholder]="'Departamento'" formControlName="departamento"
-									[options]="departamentosOption">
-								</tc-select>
-							</tc-form-group>
-						</div>
-					
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-input [placeholder]="'Telefono'" [type]="'number'" formControlName="telefono"
+							[charLimiting]="9"></tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+							*ngIf="patientForm.controls.telefono.touched && patientForm.controls.telefono.invalid ">
+							Ingrese el numero de telefono, este solo debe contener 9 digitos
+						</tc-form-description>
+					</tc-form-group>
 				</div>
-				
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-input [placeholder]="'Celular*'" [type]="'number'" formControlName="celular"
+							[charLimiting]="9"></tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+							*ngIf="patientForm.controls.celular.touched && patientForm.controls.celular.invalid ">
+							Ingrese el numero de celular, este solo debe contener 9 digitos
+						</tc-form-description>
+					</tc-form-group>
+				</div>
+			</div>
 			<div class="row">
 
-				
-				<div class="col-12 col-sm-5">
+				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-input type="date" [placeholder]="'Fecha de Nacimiento'" formControlName="fechaNac"></tc-input>
-						<tc-form-description  [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						<tc-select [placeholder]="'Departamento'" formControlName="departamento"
+							[options]="departamentosOption">
+						</tc-select>
+					</tc-form-group>
+				</div>
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-input type="date" formControlName="fechaNac"></tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.fechaNac.touched && patientForm.controls.fechaNac.invalid ">
 							Ingrese Fecha de Nacimiento correcta aaaa-mm-dd
 						</tc-form-description>
 					</tc-form-group>
 				</div>
-				<div class="col-12 col-sm-3">
-						<tc-form-group>
-							<tc-input [placeholder]="'Edad*'" [type]="'number'" formControlName="edad" [charLimiting]="2">
-							</tc-input>
-							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-								*ngIf="patientForm.controls.edad.touched && patientForm.controls.edad.invalid ">
-								Ingrese una Edad valida
-							</tc-form-description>
-	
-						</tc-form-group>
-					</div>
-					<div class="col-12 col-sm-4">
-							<tc-form-group>
-								<tc-form-group>
-									<tc-select [placeholder]="'Sexo'" formControlName="sexo" [options]="sexOption">
-									</tc-select>
-								</tc-form-group>
-							</tc-form-group>
-						</div>
 			</div>
-			
 			<div class="row">
-					<div class="col-12 col-sm-6">
-						<tc-form-group>
-							<tc-input [placeholder]="'Telefono'" [type]="'number'" formControlName="telefono"
-								[charLimiting]="6"></tc-input>
-							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-								*ngIf="patientForm.controls.telefono.touched && patientForm.controls.telefono.invalid ">
-								Ingrese el numero de telefono, este solo debe contener 6 digitos
-							</tc-form-description>
-						</tc-form-group>
-					</div>
-					<div class="col-12 col-sm-6">
-						<tc-form-group>
-							<tc-input [placeholder]="'Celular*'" [type]="'number'" formControlName="celular"
-								[charLimiting]="9"></tc-input>
-							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-								*ngIf="patientForm.controls.celular.touched && patientForm.controls.celular.invalid ">
-								Ingrese el numero de celular, este solo debe contener 9 digitos
-							</tc-form-description>
-						</tc-form-group>
-					</div>
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-input [placeholder]="'Edad*'" [type]="'number'" formControlName="edad" [charLimiting]="2">
+						</tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+							*ngIf="patientForm.controls.edad.touched && patientForm.controls.edad.invalid ">
+							Ingrese una Edad valida
+						</tc-form-description>
+
+					</tc-form-group>
 				</div>
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-input [placeholder]="'Sexo*'" formControlName="sexo"></tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+							*ngIf="patientForm.controls.sexo.touched && patientForm.controls.sexo.invalid ">
+							Este campo solo debe tener letras
+						</tc-form-description>
+					</tc-form-group>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
@@ -275,18 +263,16 @@
 							*ngIf="patientForm.controls.gradoInstruccion.touched && patientForm.controls.gradoInstruccion.invalid ">
 							Este campo solo debe tener letras
 						</tc-form-description>
-						
 					</tc-form-group>
 				</div>
-
-				
 				<div class="col-12 col-sm-6">
-						<tc-form-group>
-								<tc-form-group>
-									<tc-select [placeholder]="'Ocupacion'" formControlName="ocupacion" [options]="ocupacionOption">
-									</tc-select>
-								</tc-form-group>
-							</tc-form-group>
+					<tc-form-group>
+						<tc-input [placeholder]="'Ocupacion'" formControlName="ocupacion"></tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+							*ngIf="patientForm.controls.ocupacion.touched && patientForm.controls.ocupacion.invalid ">
+							Este campo solo debe tener letras
+						</tc-form-description>
+					</tc-form-group>
 				</div>
 			</div>
 			<div class="row">
@@ -299,7 +285,13 @@
 						</tc-form-description>
 					</tc-form-group>
 				</div>
-				
+				<div class="col-12 col-sm-4">
+					<tc-form-group>
+						<tc-select [placeholder]="'G. Sanguineo*'" formControlName="grupoSanguineo"
+							[options]="gruposangOption">
+						</tc-select>
+					</tc-form-group>
+				</div>
 
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
@@ -311,7 +303,23 @@
 					</tc-form-group>
 				</div>
 			</div>
-			
+			<div class="row">
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-select [placeholder]="'Provincia'" formControlName="provincia" [options]="provinciasOption">
+						</tc-select>
+					</tc-form-group>
+				</div>
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-select [placeholder]="'Distrito'" formControlName="distrito" [options]="distritosOption">
+						</tc-select>
+					</tc-form-group>
+				</div>
+			</div>
+			<tc-form-group>
+				<tc-textarea [placeholder]="'Descripcion'" formControlName="descripcion"></tc-textarea>
+			</tc-form-group>
 
 		</form>
 	</ng-template>
@@ -440,12 +448,18 @@
 						</tc-input>
 					</tc-form-group>
 				</div>
-				
+				<div class="col-12 col-sm-4">
+					<tc-form-group>
+						<tc-form-label>Descripcion</tc-form-label>
+						<tc-input [placeholder]="'Descripcion'" formControlName="descripcion" readonly="readonly">
+						</tc-input>
+					</tc-form-group>
+				</div>
 
 			</div>
 			<div class="row">
 
-				<div class="col-12 col-sm-8">
+				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Email</tc-form-label>
 						<tc-input [placeholder]="'Email'" [type]="'email'" sformControlName="email" readonly="readonly">
@@ -453,6 +467,13 @@
 					</tc-form-group>
 				</div>
 
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-form-label>Grupo Sanguineo</tc-form-label>
+						<tc-input [placeholder]="'Grupo Sanguineo'" formControlName="grupoSanguineo"
+							readonly="readonly"></tc-input>
+					</tc-form-group>
+				</div>
 
 			</div>
 			<div class="row">

@@ -3,16 +3,15 @@ import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
 import { HttpService } from '../../../services/http/http.service';
-import { IPatient } from '../../../interfaces/patient';
 import { Cita } from '../../../interfaces/cita';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IOption } from '../../../ui/interfaces/option';
 import { Content } from '../../../ui/interfaces/modal';
-import * as PatientsActions from '../../../store/actions/patients.actions';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-citas',
@@ -37,7 +36,8 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		httpSv: HttpService,
 		private modal: TCModalService,
 		private fb: FormBuilder,
-		private http: HttpClient
+		private http: HttpClient,
+		private toastr:ToastrService,
 	) {
 
 		super(store, httpSv);
@@ -88,8 +88,8 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	ngOnDestroy() {
 		super.ngOnDestroy();
 	}
-	onChangeTable() {
 
+	onChangeTable() {
 		if (this.dni == "" || this.dni == undefined) {
 			this.httpSv.loadCitas().subscribe(citas => {
 				this.citas = citas
@@ -170,6 +170,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			newAppointment.numeroHistoria = this.cita.numeroHistoria;
 			newAppointment.medico = this.cita.medico;
 			this.updateCita(newAppointment);
+			
 			this.closeModal();
 			this.appointmentForm.reset();
 		}
@@ -189,6 +190,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			.subscribe(
 				data => {
 					newCita = <Cita>{};
+					this.toastr.success('','Cita Modificada con exito');
 					this.loadCitas();
 				},
 				error => {

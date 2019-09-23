@@ -10,12 +10,12 @@
 	</tc-form-group>
 </div>
 <tc-card class="mb-0">
-	<tc-table [rows]="citas" [hovered]="true">
+	<tc-table [rows]="citas" [hovered]="true" [pagination]="true">
 		<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
 		</tc-table-col>
 		<tc-table-col [columnTitle]="'Numero de Recibo'" [columnName]="'numeroRecibo'" [enableSorting]="true">
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Fecha de Cita'" [columnName]="'fechaSeparacion'" [enableSorting]="true">
+		<tc-table-col [columnTitle]="'Fecha de Cita'" [columnName]="'fechaAtencion'" [enableSorting]="true">
 		</tc-table-col>
 		<tc-table-col [columnTitle]="'Estado de Cita'" [columnName]="'estadoCita'" [enableSorting]="true">
 			<ng-template #tableTDTemplate let-value>

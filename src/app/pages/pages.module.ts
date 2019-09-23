@@ -71,6 +71,9 @@ import { ListarDatosComponent } from './Triaje/listar-datos/listar-datos.compone
 import { CitasComponent } from './Admision/citas/citas.component';
 import { HistorialComponent} from './Admision/historial/historial.component';
 import { EditarComponent } from './Administrador/editar/editar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+
 
 @NgModule({
   imports: [
@@ -78,7 +81,12 @@ import { EditarComponent } from './Administrador/editar/editar.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 8000,
+      positionClass: 'toast-bottom-full-width',
+      preventDuplicates: false,
+    }),
     ChartsModule,
     NgxChartsModule,
     NgxEchartsModule,

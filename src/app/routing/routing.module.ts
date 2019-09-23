@@ -60,6 +60,8 @@ import { PageSearchPaginationTableComponent } from '../pages/ui/tables/search-pa
 import { CitasComponent } from '../pages/Admision/citas/citas.component';
 import { HistorialComponent } from '../pages/Admision/historial/historial.component';
 import { EditarComponent } from '../pages/Administrador/editar/editar.component';
+import {ListarDatosComponent} from '../pages/Triaje/listar-datos/listar-datos.component';
+
 const VERTICAL_ROUTES: Routes = [
   { path: 'default-dashboard', component: PageDashboardComponent },
   { path: 'doctors', component: PageDoctorsComponent },
@@ -115,6 +117,7 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'citas', component: CitasComponent },
   { path: 'historial', component: HistorialComponent },
   { path: 'adminUser', component: EditarComponent },
+  { path: 'listar-datos', component: ListarDatosComponent },
   
   { path: '**', component: Page404Component }
 ];

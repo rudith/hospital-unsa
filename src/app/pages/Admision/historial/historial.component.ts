@@ -19,6 +19,7 @@ import { Provincia } from '../../../interfaces/provincia';
 import { Departamento } from '../../../interfaces/departamento';
 import { Distrito } from '../../../interfaces/distrito';
 import { Medico } from '../../../interfaces/medico';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-historial',
@@ -31,10 +32,13 @@ export class HistorialComponent extends BasePageComponent
 	@ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
 	public gruposang: Grupsang[];
 	public gruposangOption: IOption[];
+	public gradoInstruccionOption:IOption[];
 	public departamentos: Departamento[];
 	public departamentosOption: IOption[];
 	public provincias: Provincia[];
 	public provinciasOption: IOption[];
+	public sexOption: IOption[];
+	public ocupacionOption: IOption[];
 	public distritos: Distrito[];
 	public medicos: Medico[];
 	public distritosOption: IOption[];
@@ -62,14 +66,18 @@ export class HistorialComponent extends BasePageComponent
 		private modal: TCModalService,
 		private formBuilder: FormBuilder,
 		private http: HttpClient,
+		private toastr:ToastrService,
 	) {
 		super(store, httpSv);
 		this.gruposang = [];
 		this.gruposangOption = [];
+		this.gradoInstruccionOption=[];
 		this.departamentos = [];
 		this.departamentosOption = [];
 		this.provincias = [];
 		this.provinciasOption = [];
+		this.sexOption = [];
+		this.ocupacionOption=[];
 		this.distritos = [];
 		this.medOption = [];
 		this.distritosOption = [];
@@ -153,28 +161,27 @@ export class HistorialComponent extends BasePageComponent
 
 	closeModalH() {
 		this.modal.close();
-		this.patientForm.reset();
 	}
 	initPatientForm() {
 		this.patientForm = this.formBuilder.group({
 			numeroHistoria: ['', Validators.required],
-			dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+			dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
 			nombres: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			apellido_paterno: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			apellido_materno: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
-			sexo: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
+			sexo: ['', [Validators.required]],
 			edad: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(2)]],
 			fechaNac: ['', Validators.required],
 			celular: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-			telefono: ['', [Validators.minLength(9), Validators.maxLength(9)]],
+			telefono: ['', [Validators.minLength(6), Validators.maxLength(6)]],
 			estadoCivil: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			gradoInstruccion: ['', [Validators.pattern('[A-Za-z ]*')]],
 			ocupacion: ['', [Validators.pattern('[A-Za-z ]*')]],
 			direccion: ['', Validators.required],
 			nacionalidad: ['', [Validators.pattern('[A-Za-z ]*')]],
-			descripcion: ['', [Validators.pattern('[A-Za-z ]*')]],
+			//descripcion: ['', [Validators.pattern('[A-Za-z ]*')]],
 			email: [''],
-			grupoSanguineo: ['', Validators.required],
+			//grupoSanguineo: ['', Validators.required],
 			distrito: ['', Validators.required],
 			provincia: ['', Validators.required],
 			departamento: ['', Validators.required]
@@ -186,7 +193,9 @@ export class HistorialComponent extends BasePageComponent
 			let newPatient: Historial = form.value;
 			newPatient.fechaNac = formatDate(form.value.fechaNac, 'yyyy-MM-dd', 'en-US', '+0530');
 			newPatient.estReg = true;
+		
 			this.httpSv.createHISTORIAL(newPatient);
+			this.toastr.success('','Historial Creado con Exito');
 			this.closeModalH();
 			this.loadHistorias();
 			this.patientForm.reset();
@@ -194,10 +203,26 @@ export class HistorialComponent extends BasePageComponent
 	}
 
 	loadData() {
-		this.httpSv.loadGSang().subscribe(gruposang => {
+		/*this.httpSv.loadGSang().subscribe(gruposang => {
 			this.gruposang = gruposang,
 				this.loadSangre()
 		});
+		*/
+		//Sexo
+		this.sexOption[0] =	{ label: "Masculino",value: "Masculino",};
+		this.sexOption[1] =	{label: "Femenino",	value: "Femenino",};
+
+		//Ocupacion
+		this.ocupacionOption[0] ={label: "Profesor",value: "Profesor",};
+		this.ocupacionOption[1] ={label: "Doctor",	value: "Doctor",};
+		this.ocupacionOption[2] ={label: "Licenciado",	value: "Licenciado",};
+		this.ocupacionOption[3] ={label: "Medico",	value: "Medico",};
+		this.ocupacionOption[4] ={label: "Ingeniero",	value: "Ingeniero",};
+		this.ocupacionOption[5] ={label: "Otro",	value: "Otro",};
+		this.ocupacionOption[6] ={label: "Independiente",	value: "Independiente",};
+
+
+		this.loadprovincias();
 		this.httpSv.loadProvincia().subscribe(provincias => {
 			this.provincias = provincias,
 				this.loadprovincias()
@@ -220,6 +245,10 @@ export class HistorialComponent extends BasePageComponent
 		});
 
 	}
+	
+		
+		
+	
 	loadSangre() {
 		for (let i in this.gruposang) {
 			this.gruposangOption[i] =
@@ -339,6 +368,7 @@ export class HistorialComponent extends BasePageComponent
 			newAppointment.numeroHistoria = this.numero;
 
 			this.httpSv.createCITA(newAppointment);
+			this.toastr.success('','Cita ha sido creada con exito');
 			this.closeModal();
 			this.appointmentForm.reset();
 		}
@@ -386,10 +416,9 @@ export class HistorialComponent extends BasePageComponent
 	}
 
 	initHistoriaForm(data: Historial) {
-
 		this.historiaForm = this.formBuilder.group({
 			numeroHistoria: [data.numeroHistoria ? data.numeroHistoria : '', Validators.required],
-			dni: [data.numeroHistoria ? data.numeroHistoria : '', Validators.required],
+			dni: [data.dni ? data.dni : '', Validators.required],
 			nombres: [data.nombres ? data.nombres : '', Validators.required],
 			apellido_paterno: [data.apellido_paterno ? data.apellido_paterno : '', Validators.required],
 			apellido_materno: [data.apellido_materno ? data.apellido_materno : '', Validators.required],
@@ -403,10 +432,10 @@ export class HistorialComponent extends BasePageComponent
 			ocupacion: [data.ocupacion ? data.ocupacion : '', Validators.required],
 			direccion: [data.direccion ? data.direccion : '', Validators.required],
 			nacionalidad: [data.nacionalidad ? data.nacionalidad : '', Validators.required],
-			descripcion: [data.descripcion ? data.descripcion : '', Validators.required],
+			//descripcion: [data.descripcion ? data.descripcion : '', Validators.required],
 			email: [data.email ? data.email : '', Validators.required],
 			estReg: [data.estReg ? data.estReg : '', Validators.required],
-			grupoSanguineo: [data.grupoSanguineo ? data.grupoSanguineo : '', Validators.required],
+			//grupoSanguineo: [data.grupoSanguineo ? data.grupoSanguineo : '', Validators.required],
 			distrito: [data.distrito ? data.distrito : '', Validators.required],
 			provincia: [data.provincia ? data.provincia : '', Validators.required],
 			departamento: [data.departamento ? data.departamento : '', Validators.required],

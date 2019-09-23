@@ -5,15 +5,11 @@ import { IAppState } from '../../../interfaces/app-state';
 import { HttpService } from '../../../services/http/http.service';
 import { IPatient } from '../../../interfaces/patient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IOption } from '../../../ui/interfaces/option';
 import { Content } from '../../../ui/interfaces/modal';
-import * as PatientsActions from '../../../store/actions/patients.actions';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import {Historial} from '../../../../app/interfaces/historial';
 import { HttpClient } from '@angular/common/http';
 import {Triaje} from '../../../../app/interfaces/triaje';
-import { formatDate } from '@angular/common';
-import { Observable } from 'rxjs';
 import {Cita}from '../../../../app/interfaces/cita'
 
 @Component({
@@ -54,10 +50,10 @@ export class PagePatientsComponent extends BasePageComponent implements OnInit, 
           route: 'default-dashboard'
         },
         {
-          title: 'Triaje'
+          title: 'Al'
         },
         {
-          title: 'Search'
+          title: 'Al'
         },
         
       ]

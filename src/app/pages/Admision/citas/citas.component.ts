@@ -29,7 +29,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	public dni: string;
 	appointmentForm: FormGroup;
 	public espOption: IOption[];
-	public especialidades: Especialidad[]=[];
+	public especialidades: Especialidad[] = [];
 	constructor(
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
@@ -37,7 +37,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		private modal: TCModalService,
 		private fb: FormBuilder,
 		private http: HttpClient,
-		private toastr:ToastrService,
+		private toastr: ToastrService,
 	) {
 		super(store, httpSv);
 
@@ -104,7 +104,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		for (let i in this.especialidades) {
 			this.espOption[i] = {
 				label: this.especialidades[i].nombre,
-				value: this.especialidades[i].id,
+				value: this.especialidades[i].id.toString()
 			};
 		}
 	}
@@ -169,7 +169,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			newAppointment.numeroHistoria = this.cita.numeroHistoria;
 			newAppointment.medico = this.cita.medico;
 			this.updateCita(newAppointment);
-			
+
 			this.closeModal();
 			this.appointmentForm.reset();
 		}
@@ -189,7 +189,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			.subscribe(
 				data => {
 					newCita = <Cita>{};
-					this.toastr.success('','Cita Modificada con exito');
+					this.toastr.success('', 'Cita Modificada con exito');
 					this.loadCitas();
 				},
 				error => {

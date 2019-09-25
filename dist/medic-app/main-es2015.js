@@ -3484,7 +3484,7 @@ let CitasComponent = class CitasComponent extends _base_page__WEBPACK_IMPORTED_M
         for (let i in this.especialidades) {
             this.espOption[i] = {
                 label: this.especialidades[i].nombre,
-                value: String(this.especialidades[i].id),
+                value: this.especialidades[i].id.toString()
             };
         }
     }

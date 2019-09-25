@@ -42,5 +42,25 @@
 		},
 		"routing": "patients",
 		"layout": "vertical"
+	},
+	{
+		"title": "Consultorio",
+		"groupTitle": true
+	},
+	{
+		"title": "Citas Programadas",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "consultas",
+		"layout": "vertical"
+	},
+	{
+		"title": "Listar Consultas",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "Lconsultas",
+		"layout": "vertical"
 	}
 ]

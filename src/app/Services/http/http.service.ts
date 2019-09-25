@@ -19,6 +19,10 @@ import { Consulta } from '../../interfaces/consulta';
 	providedIn: 'root',
 })
 export class HttpService {
+	public admin: boolean = false;
+	public admis: boolean = false;
+	public triaje: boolean = false;
+	public consultorio: boolean = false;
 	public HistorialGetUpdate: Historial[] = [];
 	public CitaGetUpdate: Cita[] = [];
 	public GrupSangGetUpdate: Grupsang[] = [];
@@ -212,7 +216,7 @@ export class HttpService {
 			}
 		);
 	}
-	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta>{
+	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta> {
 		return this.http.get<HistoriaCompleta>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/' + nro + "/");
 	}
 	createConsulta(newConsulta: Consulta) {

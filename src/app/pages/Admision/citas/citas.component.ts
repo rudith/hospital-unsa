@@ -29,7 +29,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	public dni: string;
 	appointmentForm: FormGroup;
 	public espOption: IOption[];
-	public especialidades: Especialidad[];
+	public especialidades: Especialidad[]=[];
 	constructor(
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
@@ -39,7 +39,6 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		private http: HttpClient,
 		private toastr:ToastrService,
 	) {
-
 		super(store, httpSv);
 
 		this.pageData = {
@@ -105,7 +104,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		for (let i in this.especialidades) {
 			this.espOption[i] = {
 				label: this.especialidades[i].nombre,
-				value: this.especialidades[i].id.toString()
+				value: this.especialidades[i].id,
 			};
 		}
 	}

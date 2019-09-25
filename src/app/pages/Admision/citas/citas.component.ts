@@ -104,7 +104,11 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		for (let i in this.especialidades) {
 			this.espOption[i] = {
 				label: this.especialidades[i].nombre,
+<<<<<<< HEAD
 				value: this.especialidades[i].id.toString()
+=======
+				value: String(this.especialidades[i].id),
+>>>>>>> fa1e6b6b82b573245828f1c1eebe5c54e13c341a
 			};
 		}
 	}

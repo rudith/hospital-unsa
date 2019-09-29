@@ -9,5 +9,8 @@ export interface Cita {
 	estReg: boolean,
 	especialidad: Especialidad,
 	numeroHistoria: number,
-	medico: string
+	medico: string,
+	exonerado: boolean,
+	responsable: string,	
 }
+    

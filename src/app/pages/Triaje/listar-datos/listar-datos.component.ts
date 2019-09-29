@@ -30,6 +30,7 @@ import { ToastrService } from 'ngx-toastr';
     busForm: FormGroup;
     dni2:string;
     historial: Historial[];
+    idT:number;
       
     constructor(
       store: Store<IAppState>,
@@ -80,8 +81,7 @@ import { ToastrService } from 'ngx-toastr';
       });;
     }
   
-    buscar(busca:FormGroup){
-  
+    buscar(busca:FormGroup){  
       this.dato=busca.get('datoBus').value;
       this.buscartriaje(this.dato);
     }
@@ -104,8 +104,8 @@ import { ToastrService } from 'ngx-toastr';
     // open modal window
     openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: any) 
     {
-      this.initPatientForm1(row,row);
-      this.initPatientForm2(row,row);
+      this.initPatientForm1(row );
+      this.initPatientForm2(row);
       this.modal.open({
         body: body,
         header: header,
@@ -126,26 +126,21 @@ import { ToastrService } from 'ngx-toastr';
       });
     }
     // init form
-     initPatientForm1(ci: Cita,his: Historial) {
+     initPatientForm1(ci: Cita) {      
       this.patientForm1 = this.fb.group({
-        numeroHistoria:[his.numeroHistoria ? his.numeroHistoria: '', Validators.required],
-        especialidad:[ci.especialidad ? ci.especialidad: '', Validators.required],
-        fechaAtencion:[ci.fechaAtencion ? ci.fechaAtencion :'', Validators.required],
-  
-  
-        
+        fechaAtencion:[ci.fechaAtencion ? ci.fechaAtencion: '', Validators.required],    
       });
     }
    
-    initPatientForm2(ci: Cita, his: Historial) {
+    initPatientForm2(ci: Cita) {
       this.patientForm2=this.fb.group({
-        talla:['',[ Validators.required, Validators.pattern('[1-9].[0-9]*')] ],
+        talla:['',[ Validators.required, Validators.pattern('[0-9].[0-9]*')] ],
         peso:['',[ Validators.required, Validators.pattern('[0-9]*.[0-9]*')] ],
         temperatura:['', [ Validators.required, Validators.pattern('[0-9]*.[0-9]*')]],
         frecuenciaR: ['', [Validators.required,Validators.pattern('[0-9]*')]],
         frecuenciaC: ['', [Validators.required,Validators.pattern('[0-9]*')]],
         presionArt: ['', [ Validators.required, Validators.pattern('[0-9]*/[0-9]*')]],
-        numeroHistoria2:[his.id ?his.id: '', Validators.required],//capturara el id de historial
+        numeroHistoria:[ci.numeroHistoria ?ci.numeroHistoria: '', Validators.required],//capturara el id de historial
         cita:[ci.id ? ci.id:'', Validators.required],   //ID de la cita
               
       });
@@ -154,10 +149,17 @@ import { ToastrService } from 'ngx-toastr';
   
     // Crear Triaje
     CreateTriaje(form: FormGroup) {
+      
       if (form.valid) {
         let newTriaje: Triaje = form.value;
         console.log('entra al envio');
-        newTriaje.personal= 1;
+        newTriaje.personal= 2;
+        newTriaje.talla=parseInt(form.get('talla').value);
+        newTriaje.peso=parseInt(form.get('peso').value);
+        newTriaje.frecuenciaC=parseInt(form.get('frecuenciaC').value);
+        newTriaje.frecuenciaR=parseInt(form.get('frecuenciaR').value);
+        newTriaje.temperatura=parseInt(form.get('temperatura').value);
+        console.log(newTriaje.talla);
         console.log(newTriaje);
         this.httpSv.crearTriaje(newTriaje);
         this.closeModal();

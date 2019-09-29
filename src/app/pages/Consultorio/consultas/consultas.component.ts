@@ -64,7 +64,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 
 	ngOnInit() {
     super.ngOnInit();
-    this.initBusForm();
+    //this.initBusForm();
 		this.store.select('citas').subscribe(citas => {
 			if (citas && citas.length) {
 				this.citas = citas;
@@ -75,9 +75,14 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 	ngOnChanges($event) {
 		console.log(this.dni);
 	}
+	loadCitas() {
+		this.httpSv.loadCitasMedico(this.idMedico).subscribe(citas => {
+			this.citas = citas.citasM;
+		});
+	}
 	ngOnDestroy() {
 		super.ngOnDestroy();
-	}
+	}/*
 	onChangeTable() {
 		if (this.dni == "" || this.dni == undefined) {
 			this.httpSv.loadCitas().subscribe(citas => {
@@ -89,17 +94,12 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 			});;
 		}
 	}
-	loadCitas() {
-		this.httpSv.loadCitasMedico(this.idMedico).subscribe(citas => {
-			this.citas = citas.citasM;
-		});
-	}
   initBusForm() {
     this.busForm = this.formBuilder.group({
       datoBus: ['', Validators.required],
     });
     this.dni=this.busForm.get('datoBus').value;
-	}
+	} */
 	atender(nro:string,id:number){
 		this.httpSv.setNroHC(nro,id);
 		this.router.navigate(['/vertical/Lconsultas']);

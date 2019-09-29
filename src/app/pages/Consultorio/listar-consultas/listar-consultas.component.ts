@@ -13,6 +13,8 @@ import { IUser } from '../../../ui/interfaces/user';
 import { Triaje } from '../../../interfaces/triaje';
 import { Consulta } from '../../../interfaces/consulta';
 import {ToastrService} from 'ngx-toastr'; 
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-consultas',
@@ -42,6 +44,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     private modal: TCModalService,
     private http: HttpClient,		
     private toastr:ToastrService,
+		private router: Router,
   ) {
 
     super(store, httpSv);
@@ -171,6 +174,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   ngOnDestroy() {
     super.ngOnDestroy();
   }
-
+  regresar(){
+		this.router.navigate(['/vertical/consultas']);
+	}
 
 }

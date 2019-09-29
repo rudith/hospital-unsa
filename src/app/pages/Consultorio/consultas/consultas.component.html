@@ -18,54 +18,22 @@
 </form>
 <tc-card class="mb-0">
 	<tc-table [rows]="citas" [hovered]="true">
-		<tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'id'">
+		<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Nombres'" [columnName]="'numeroRecibo'" [enableSorting]="true"></tc-table-col>
-		<tc-table-col [columnTitle]="'Apellido Paterno'" [columnName]="'fechaAtencion'" [enableSorting]="true">
+		<tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'numeroHistoria'" [enableSorting]="true">
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'estadoCita'" [enableSorting]="true"></tc-table-col>
-		<tc-table-col [columnTitle]="'DNI'" [columnName]="'especialidad'" [enableSorting]="true"></tc-table-col>
-		<tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
+		<tc-table-col [columnTitle]="'Nombres'" [columnName]="'numeroRecibo'" ></tc-table-col>
+		<tc-table-col [columnTitle]="'Apellido Paterno'" [columnName]="'numeroRecibo'" >
+		</tc-table-col>
+		<tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'numeroRecibo'" ></tc-table-col>
+		<tc-table-col [columnTitle]="'Especialidad'" [columnName]="'especialidad'"></tc-table-col>
+		<tc-table-col [columnTitle]="'Atender Paciente'" [columnName]="''">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
 					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
-						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'">Ver
-						Mas</button>
+						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'" (click)="atender(row.numeroHistoria,row.id)">Atender</button>
 				</div>
 			</ng-template>
 		</tc-table-col>
 	</tc-table>
 </tc-card>
-
-<ng-container>
-	<ng-template #modalBody> <!--
-		<form [formGroup]="appointmentForm">
-			<tc-form-group>
-				<tc-form-label>Especialidad</tc-form-label>
-				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption">
-				</tc-select>
-				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="appointmentForm.controls.especialidad.touched && appointmentForm.controls.especialidad.invalid ">
-					Seleccione especialidad
-				</tc-form-description>
-			</tc-form-group>
-			<tc-form-group>
-				<tc-input type="date" formControlName="fechaSeparacion"></tc-input>
-				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="appointmentForm.controls.fechaSeparacion.touched && appointmentForm.controls.fechaSeparacion.invalid ">
-					Ingrese Fecha de Separacion
-				</tc-form-description>
-			</tc-form-group>
-		</form>-->
-	</ng-template>
-
-	<ng-template #modalFooter>
-		<div class="actions justify-content-between">
-			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
-			 <!-- <button tc-button [view]="'info'"[disabled]="appointmentForm.invalid"
-				(click)="addAppointment(appointmentForm)">
-				Agregar Cita
-			</button>-->
-		</div>
-	</ng-template>
-</ng-container>

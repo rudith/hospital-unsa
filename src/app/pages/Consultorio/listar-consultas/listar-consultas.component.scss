@@ -11,4 +11,14 @@
       font-size: 30px;
     }
   }
+  .back-action-box {
+    bottom: $module-rem * 8;
+    position: fixed;
+    left: $module-rem * 2;
+    z-index: 9997;
+
+    .tc-btn {
+      font-size: 30px;
+    }
+  }
 }

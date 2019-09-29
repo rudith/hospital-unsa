@@ -22,7 +22,7 @@
 	</div>
 </form>
 <br>
-<tc-card class="mb-0">
+<tc-card class="mb-0" (usuarioSeleccionado )="setSeleccionado($event)">
 	<tc-table [rows]="historiales" [hovered]="true" [pagination]="true">
 		<tc-table-col [columnTitle]="'ID'" [columnName]="'id'">
 			<ng-template #tableTDTemplate let-value>

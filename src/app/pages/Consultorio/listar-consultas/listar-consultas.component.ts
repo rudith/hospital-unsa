@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
@@ -22,7 +22,6 @@ import {ToastrService} from 'ngx-toastr';
 export class ListarConsultasComponent extends BasePageComponent implements OnInit {
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
   @ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
-  today: Date;
   paciente: IUser;
   historiaForm: FormGroup;
   consultForm: FormGroup;
@@ -30,11 +29,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   historiaRecibida: HistoriaCompleta;
   consultas: Consulta[];
   triajes: Triaje[];
-  datoBus: string = "1";
+  datoBus: string;
   private nombreRecibido:string;
   private numHistRecibido: string;
   private dniRecibido:string;
-  private triajeRecibido:number;
+  private edadRecibido:number;
+  private sexoRecibido:string;
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
@@ -64,6 +64,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     };
     this.consultas = [];
     this.triajes=[];
+    this.datoBus=this.httpSv.getNroHC();
+    console.log(this.datoBus);
     this.cargarPaciente();    
   }
 
@@ -72,8 +74,6 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   }
   //Modal Crear Consulta
   openModalC<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
-    this.today = new Date();
-    this.triajeRecibido=4;
     this.initConsultForm();
     this.modal.open({
       body: body,
@@ -94,24 +94,20 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       deposiciones: ['', Validators.required],
       examenFisico: ['', Validators.required],
       diagnostico: ['', Validators.required],
-      tratamiento: ['', Validators.required]
+      tratamiento: ['', Validators.required],
+      proximaCita:[null]
     });
 
   }
   addConsult(form: FormGroup) {
 		if (form.valid) {
-			let newConsult: Consulta = form.value;
-      newConsult.horaEntrada = formatDate(this.today, 'yyyy-MM-dd hh:mm', 'en-US', '+0530');
-      this.today = new Date();
-      newConsult.horaSalida = formatDate(this.today, 'yyyy-MM-dd hh:mm', 'en-US', '+0530');
-      newConsult.proximaCita=null;
-      newConsult.estadoAtencion="A";
-      newConsult.motivoAnulacion="ninguno";
-      newConsult.estReg = true;
-      newConsult.numeroHistoria=this.numHistRecibido;
-      newConsult.triaje=this.triajeRecibido;
+      let newConsult: Consulta = form.value;
+      newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
+      newConsult.numeroHistoria=1;
+      newConsult.triaje=this.httpSv.getIdHC();
       newConsult.medico=2;
-			this.httpSv.createConsulta(newConsult);
+      console.log(newConsult);
+			this.httpSv.crearConsulta(newConsult);
 			this.closeModalC();
 			this.toastr.success('','Consulta Agregada con Exito');
 			this.cargarPaciente();
@@ -124,7 +120,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   //Modal Ver Consulta
   openModalVerC<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any) {
-    this.initVerMasForm(options);
+    this.initVerMasForm(1);
+    console.log(options);
     this.modal.open({
       body: body,
       header: header,
@@ -161,22 +158,15 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       this.historiaRecibida = data;
       this.consultas = this.historiaRecibida.consultas;
       this.triajes = this.historiaRecibida.triajes;
-      this.nombreRecibido = this.historiaRecibida.nombres;
+      this.nombreRecibido = this.historiaRecibida.nombres+" "+this.historiaRecibida.apellido_paterno+" "+this.historiaRecibida.apellido_materno;
       this.dniRecibido = this.historiaRecibida.dni;
       this.numHistRecibido = this.historiaRecibida.numeroHistoria;
+      this.edadRecibido = this.historiaRecibida.edad;
+      this.sexoRecibido = this.historiaRecibida.sexo;
       console.log(this.historiaRecibida.nombres);
             
     });;
   }
-
-  /*
-numeroHistoria: [this.historiaRecibida.numeroHistoria ? this.historiaRecibida.numeroHistoria : '', Validators.required],
-dni: [this.historiaRecibida.dni ? this.historiaRecibida.dni : '', Validators.required],
-nombres: [this.historiaRecibida.nombres ? this.historiaRecibida.nombres : '', Validators.required],
-apellido_paterno: [data.apellido_paterno ? data.apellido_paterno : '', Validators.required],
-apellido_materno: [data.apellido_materno ? data.apellido_materno : '', Validators.required],
-sexo: [data.sexo ? data.sexo : '', Validators.required],
-edad: [data.edad ? data.edad : '', Validators.required],*/
 
   ngOnDestroy() {
     super.ngOnDestroy();

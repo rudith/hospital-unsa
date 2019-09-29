@@ -54,7 +54,7 @@
 </tc-card>
 
 <div class="back-action-box">
-  <button tc-button [afterIcon]="'icofont-rounded-left'" [square]="true" [tcShape]="500" [size]="'sm'"
+  <button tc-button [afterIcon]="'icofont-rounded-left'" [square]="true" [tcShape]="500" 
     (click)="regresar()"></button>
 </div>
 
@@ -67,34 +67,63 @@
 <ng-container>
   <ng-template #modalCrearCBody>
     <form [formGroup]="consultForm" novalidate class="new-patient-form">
+      <label>Llene los campos con letras, no utilice números ni caracteres especiales </label>
       <tc-form-group>
         <tc-textarea [placeholder]="'Motivo de Consulta*'" formControlName="motivoConsulta"></tc-textarea>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.motivoConsulta.touched && consultForm.controls.motivoConsulta.invalid ">
+						Ingrese el Motivo de Consulta, este solo debe contener letras
+				</tc-form-description>
       </tc-form-group>
       <div class="row">
         <div class="col-12 col-sm-4">
           <tc-form-group>
             <tc-input [placeholder]="'Apetito*'" formControlName="apetito"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.apetito.touched && consultForm.controls.apetito.invalid ">
+						Ingrese el Apetito, este solo debe contener letras
+				    </tc-form-description>
           </tc-form-group>
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
             <tc-input [placeholder]="'Orina*'" formControlName="orina"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.orina.touched && consultForm.controls.orina.invalid ">
+						Ingrese el Orina, este solo debe contener letras
+				</tc-form-description>
           </tc-form-group>
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
             <tc-input [placeholder]="'Deposiciones*'" formControlName="deposiciones"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.deposiciones.touched && consultForm.controls.deposiciones.invalid ">
+						Ingrese el Deposiciones, este solo debe contener letras
+				</tc-form-description>
           </tc-form-group>
         </div>
       </div>
       <tc-form-group>
         <tc-textarea [placeholder]="'Sintomas*'" formControlName="examenFisico"></tc-textarea>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.examenFisico.touched && consultForm.controls.examenFisico.invalid ">
+						Ingrese el Sintomas, este solo debe contener letras
+				</tc-form-description>
       </tc-form-group>
       <tc-form-group>
         <tc-textarea [placeholder]="'Diagnostico*'" formControlName="diagnostico"></tc-textarea>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.diagnostico.touched && consultForm.controls.diagnostico.invalid ">
+						Ingrese el Diagnostico, este solo debe contener letras
+				</tc-form-description>
       </tc-form-group>
       <tc-form-group>
         <tc-textarea [placeholder]="'Tratamiento*'" formControlName="tratamiento"></tc-textarea>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="consultForm.controls.tratamiento.touched && consultForm.controls.tratamiento.invalid ">
+						Ingrese el Tratamiento, este solo debe contener letras
+				</tc-form-description>
       </tc-form-group>
       <tc-form-group>
         <tc-form-label>Proxima Cita</tc-form-label>

@@ -92,12 +92,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   initConsultForm() {
     this.consultForm = this.formBuilder.group({
       motivoConsulta: ['', Validators.required],
-      apetito: ['', Validators.required],
-      orina: ['', Validators.required],
-      deposiciones: ['', Validators.required],
-      examenFisico: ['', Validators.required],
-      diagnostico: ['', Validators.required],
-      tratamiento: ['', Validators.required],
+      apetito: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
+      orina: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
+      deposiciones: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
+      examenFisico: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
+      diagnostico: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
+      tratamiento: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
       proximaCita:[null]
     });
 

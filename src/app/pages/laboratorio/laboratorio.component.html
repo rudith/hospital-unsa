@@ -4,7 +4,7 @@
 			<div class="row">
 				<div class="col-md-7">
 					<tc-form-group>
-						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
+						<tc-input [placeholder]="'Ingrese Nombre a buscar*'" formControlName="datoBus"></tc-input>
 					</tc-form-group>
 				</div>
 				<div class="col-md-2">
@@ -36,7 +36,7 @@
 				<div class="actions">
 					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
 						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
-						(click)="openModalVerMas(modalBodyH, 'Ver HistorialCompleto', modalFooterH, row)">Ver
+						(click)="openModalVerMas(modalBodyH, 'Ver Resultados', modalFooterH, row)">Ver
 						Mas</button>
 				</div>
 			</ng-template>
@@ -55,7 +55,7 @@
 </tc-card>
 <div class="add-action-box">
 	<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'"
-		(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
+		(click)="openModalH(modalCrearHBody, 'Agregar Resultado', modalCrearHFooter)"></button>
 </div>
 
 	<!-- Modal Crear Historial -->
@@ -143,7 +143,7 @@
 			<div class="actions justify-content-between">
 				<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">Cancelar</button>
 				<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addPatient(patientForm)">
-					Agregar Historial
+					Agregar 
 				</button>
 			</div>
 		</ng-template>

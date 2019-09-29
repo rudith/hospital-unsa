@@ -88,44 +88,34 @@
 <!-- Modal Crear Cita  -->
 <ng-container>
 	<ng-template #modalCrearCBody>
-		<form [formGroup]="appointmentForm">
-			<tc-form-group>
-					<tc-form-label>Seleccione lo siguiente:</tc-form-label>
-				<div class="radio">
-					<label>
-						<input type="radio" formControlName="gender" value="Male" (click)="setradio('Male')"
-							[checked]='true' ngModel>
-						Recibo
-					</label>
-					<div *ngIf="isSelected('Male')">
-							<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'text'" formControlName="numeroRecibo">
-							</tc-input> 
+		<form [formGroup]="appointmentForm">	
+				<tc-form-group>
+						<tc-form-label>Seleccione lo siguiente:</tc-form-label>
+						<div >
+							<label class="radio">
+								<input type="radio" formControlName="eleccion" value="Male"  (click)="setradio('Male')" [checked]='true' ngModel>
+								<span>Recibo </span>
+							</label>
+							<div *ngIf="isSelected('Male')">
+								<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'text'"
+									formControlName="numeroRecibo">
+								</tc-input>
+							</div>
 						</div>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" formControlName="gender" value="Female" (click)="setradio('Female')"ngModel>
-						Exonerado
-					</label>
-					<div *ngIf="isSelected('Female')">
-						<tc-input [placeholder]="'Ingrese el Nombre del Responsable*'" [type]="'text'" formControlName="numeroRecibo">
-						</tc-input> 
+						<div >
+							<label class="radio">
+								<input type="radio" formControlName="eleccion" value="Female"  (click)="setradio('Female')"
+									ngModel>
+								<span>Exonerado </span>
+							</label>
+							<div *ngIf="isSelected('Female')">
+								<tc-input [placeholder]="'Ingrese el Nombre del Responsable*'" [type]="'text'"
+									formControlName="responsable">
+								</tc-input>
+							</div>
 						</div>
-				</div>
-
-				
-
-				
-			</tc-form-group>
-			
-			<tc-form-group>
-				<tc-input [placeholder]="'Numero de Recibo*'" [type]="'number'" formControlName="numeroRecibo">
-				</tc-input>
-				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="appointmentForm.controls.numeroRecibo.touched && appointmentForm.controls.numeroRecibo.invalid ">
-					Ingrese el numero de recibo
-				</tc-form-description>
-			</tc-form-group>
+					</tc-form-group>
+			<br>
 			<tc-form-group>
 				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption">
 				</tc-select>

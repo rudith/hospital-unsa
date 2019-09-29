@@ -54,13 +54,7 @@
     <ng-template #modalBody>
       <form [formGroup]="patientForm1" novalidate class="new-patient-form">
         <div class="row">
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Número de Historia</tc-form-label>
-              <tc-input [placeholder]="'Numero de Historia'" [type]="'number'" formControlName="numeroHistoria"
-                readonly="readonly"></tc-input>
-            </tc-form-group>
-          </div>
+          
   
           <div class="col-12 col-sm-4">
             <tc-form-group>
@@ -70,12 +64,7 @@
             </tc-form-group>
           </div>
   
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Especialidad</tc-form-label>
-              <tc-input [placeholder]="'Especialidad'" formControlName="especialidad" readonly="readonly"></tc-input>
-            </tc-form-group>
-          </div>
+          
         </div>
       </form>
   
@@ -86,6 +75,10 @@
             <tc-form-group>
               <tc-form-label>Talla</tc-form-label>
               <tc-input [placeholder]="'talla'" [type]="'number'" formControlName="talla"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
+					Debe ingresar un numero positivo
+				</tc-form-description>
             </tc-form-group>
           </div>
   
@@ -94,6 +87,10 @@
             <tc-form-group>
               <tc-form-label>Peso</tc-form-label>
               <tc-input [placeholder]="'peso'" [type]="'number'" formControlName="peso"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
+					Debe ingresar un numero positivo
+				</tc-form-description>
             </tc-form-group>
           </div>
   
@@ -101,6 +98,10 @@
             <tc-form-group>
               <tc-form-label>Temperatura</tc-form-label>
               <tc-input [placeholder]="'temperatura'" [type]="'number'" formControlName="temperatura"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
+					Debe ingresar un numero positivo
+				</tc-form-description>
             </tc-form-group>
           </div>
   
@@ -108,6 +109,10 @@
             <tc-form-group>
               <tc-form-label>Frecuencia Resp.</tc-form-label>
               <tc-input [placeholder]="'frecuenciaR'" [type]="'number'" formControlName="frecuenciaR"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
+					Debe ingresar un numero positivo
+				</tc-form-description>
             </tc-form-group>
           </div>
   
@@ -122,6 +127,10 @@
             <tc-form-group>
               <tc-form-label>Presión Arterial</tc-form-label>
               <tc-input [placeholder]="'presionArt'" formControlName="presionArt"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid ">
+					Ingrese el siguiente formato "##/##"
+				</tc-form-description>
             </tc-form-group>
           </div>
         </div>

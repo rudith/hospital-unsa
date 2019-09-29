@@ -19,7 +19,6 @@ import { Provincia } from '../../../interfaces/provincia';
 import { Departamento } from '../../../interfaces/departamento';
 import { Distrito } from '../../../interfaces/distrito';
 import { Medico } from '../../../interfaces/medico';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-historial',
@@ -32,7 +31,7 @@ export class HistorialComponent extends BasePageComponent
 	@ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
 	public gruposang: Grupsang[];
 	public gruposangOption: IOption[];
-	public gradoInstruccionOption:IOption[];
+	public gradoInstruccionOption: IOption[];
 	public departamentos: Departamento[];
 	public departamentosOption: IOption[];
 	public provincias: Provincia[];
@@ -59,25 +58,24 @@ export class HistorialComponent extends BasePageComponent
 	public espOption: IOption[];
 	public busqOption: IOption[];
 	public especialidades: Especialidad[];
-	public users:User[]=[];
+	public users: User[] = [];
 	constructor(
 		store: Store<IAppState>,
 		httpSv: HttpService,
 		private modal: TCModalService,
 		private formBuilder: FormBuilder,
 		private http: HttpClient,
-		private toastr:ToastrService,
 	) {
 		super(store, httpSv);
 		this.gruposang = [];
 		this.gruposangOption = [];
-		this.gradoInstruccionOption=[];
+		this.gradoInstruccionOption = [];
 		this.departamentos = [];
 		this.departamentosOption = [];
 		this.provincias = [];
 		this.provinciasOption = [];
 		this.sexOption = [];
-		this.ocupacionOption=[];
+		this.ocupacionOption = [];
 		this.distritos = [];
 		this.medOption = [];
 		this.distritosOption = [];
@@ -179,9 +177,7 @@ export class HistorialComponent extends BasePageComponent
 			ocupacion: ['', [Validators.pattern('[A-Za-z ]*')]],
 			direccion: ['', Validators.required],
 			nacionalidad: ['', [Validators.pattern('[A-Za-z ]*')]],
-			//descripcion: ['', [Validators.pattern('[A-Za-z ]*')]],
 			email: [''],
-			//grupoSanguineo: ['', Validators.required],
 			distrito: ['', Validators.required],
 			provincia: ['', Validators.required],
 			departamento: ['', Validators.required]
@@ -193,9 +189,7 @@ export class HistorialComponent extends BasePageComponent
 			let newPatient: Historial = form.value;
 			newPatient.fechaNac = formatDate(form.value.fechaNac, 'yyyy-MM-dd', 'en-US', '+0530');
 			newPatient.estReg = true;
-		
 			this.httpSv.createHISTORIAL(newPatient);
-			this.toastr.success('','Historial Creado con Exito');
 			this.closeModalH();
 			this.loadHistorias();
 			this.patientForm.reset();
@@ -203,23 +197,19 @@ export class HistorialComponent extends BasePageComponent
 	}
 
 	loadData() {
-		/*this.httpSv.loadGSang().subscribe(gruposang => {
-			this.gruposang = gruposang,
-				this.loadSangre()
-		});
-		*/
+
 		//Sexo
-		this.sexOption[0] =	{ label: "Masculino",value: "Masculino",};
-		this.sexOption[1] =	{label: "Femenino",	value: "Femenino",};
+		this.sexOption[0] = { label: "Masculino", value: "Masculino", };
+		this.sexOption[1] = { label: "Femenino", value: "Femenino", };
 
 		//Ocupacion
-		this.ocupacionOption[0] ={label: "Profesor",value: "Profesor",};
-		this.ocupacionOption[1] ={label: "Doctor",	value: "Doctor",};
-		this.ocupacionOption[2] ={label: "Licenciado",	value: "Licenciado",};
-		this.ocupacionOption[3] ={label: "Medico",	value: "Medico",};
-		this.ocupacionOption[4] ={label: "Ingeniero",	value: "Ingeniero",};
-		this.ocupacionOption[5] ={label: "Otro",	value: "Otro",};
-		this.ocupacionOption[6] ={label: "Independiente",	value: "Independiente",};
+		this.ocupacionOption[0] = { label: "Profesor", value: "Profesor", };
+		this.ocupacionOption[1] = { label: "Doctor", value: "Doctor", };
+		this.ocupacionOption[2] = { label: "Licenciado", value: "Licenciado", };
+		this.ocupacionOption[3] = { label: "Medico", value: "Medico", };
+		this.ocupacionOption[4] = { label: "Ingeniero", value: "Ingeniero", };
+		this.ocupacionOption[5] = { label: "Otro", value: "Otro", };
+		this.ocupacionOption[6] = { label: "Independiente", value: "Independiente", };
 
 
 		this.loadprovincias();
@@ -245,10 +235,7 @@ export class HistorialComponent extends BasePageComponent
 		});
 
 	}
-	
-		
-		
-	
+
 	loadSangre() {
 		for (let i in this.gruposang) {
 			this.gruposangOption[i] =
@@ -294,13 +281,6 @@ export class HistorialComponent extends BasePageComponent
 					value: this.users[i].id.toString()
 				};
 		}
-		// for (let i in this.medicos) {
-		// 	this.medOption[i] =
-		// 		{
-		// 			label: this.medicos[i].nombres + " " + this.medicos[i].apellido_paterno + " " + this.medicos[i].apellido_materno,
-		// 			value: this.medicos[i].id.toString()
-		// 		};
-		// }
 	}
 
 	// open modal Cita
@@ -328,10 +308,12 @@ export class HistorialComponent extends BasePageComponent
 	initAppoForm(data: any) {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
-			numeroRecibo: ['', Validators.required],
+			numeroRecibo: ['', ],
 			fechaSeparacion: ['', Validators.required],
 			especialidad: ['', Validators.required],
-			medico: ['', Validators.required]
+			medico: ['', Validators.required],
+			responsable: ['',],
+			eleccion:['',],
 		});
 	}
 	initBusForm() {
@@ -363,12 +345,24 @@ export class HistorialComponent extends BasePageComponent
 				'en-US',
 				'+0530'
 			);
-			newAppointment.estadoCita = 'E';
+			
+			newAppointment.estadoCita = 'Activo';
 			newAppointment.estReg = true;
 			newAppointment.numeroHistoria = this.numero;
+			console.log(newAppointment.responsable);
+			if(newAppointment.responsable=="" ){
+				newAppointment.responsable = "No";
+				newAppointment.exonerado=false;
+				console.log(newAppointment.exonerado + " entro if ");
+			}
+			else {
+				newAppointment.numeroRecibo=0;
+				newAppointment.exonerado=true;
+				console.log(newAppointment.exonerado + " entro else ");
 
+			}
+			
 			this.httpSv.createCITA(newAppointment);
-			this.toastr.success('','Cita ha sido creada con exito');
 			this.closeModal();
 			this.appointmentForm.reset();
 		}
@@ -432,17 +426,25 @@ export class HistorialComponent extends BasePageComponent
 			ocupacion: [data.ocupacion ? data.ocupacion : '', Validators.required],
 			direccion: [data.direccion ? data.direccion : '', Validators.required],
 			nacionalidad: [data.nacionalidad ? data.nacionalidad : '', Validators.required],
-			//descripcion: [data.descripcion ? data.descripcion : '', Validators.required],
 			email: [data.email ? data.email : '', Validators.required],
 			estReg: [data.estReg ? data.estReg : '', Validators.required],
-			//grupoSanguineo: [data.grupoSanguineo ? data.grupoSanguineo : '', Validators.required],
 			distrito: [data.distrito ? data.distrito : '', Validators.required],
 			provincia: [data.provincia ? data.provincia : '', Validators.required],
 			departamento: [data.departamento ? data.departamento : '', Validators.required],
 		});
 	}
 
+	private selectedLink: string = "rec";
+	setradio(e: string): void {
+		this.selectedLink = e;
+	}
 
+	isSelected(name: string): boolean {
+		if (!this.selectedLink) { 
+			return false;
+		}
+		return (this.selectedLink === name); // if current radio button is selected, return true, else return false  
+	}
 
 
 	// Imprimir Historial

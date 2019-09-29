@@ -60,6 +60,9 @@ export class HttpService {
 	loadCitas(): Observable<Cita[]> {
 		return this.http.get<Cita[]>("http://18.216.2.122:9000/consultorio/crear-cita/");
 	}
+	loadCitasTriaje(): Observable<Cita[]> {
+		return this.http.get<Cita[]>("http://18.216.2.122:9000/consultorio/ver-citas/");
+	}
 	CancelarCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/cancelarcita/" + id + "/");
 	}
@@ -89,7 +92,6 @@ export class HttpService {
 				temperatura: newTriaje.temperatura,
 				frecuenciaR: newTriaje.frecuenciaR,
 				frecuenciaC: newTriaje.frecuenciaC,
-
 				presionArt: newTriaje.presionArt,
 				numeroHistoria: newTriaje.numeroHistoria,
 				cita: newTriaje.cita,
@@ -125,10 +127,8 @@ export class HttpService {
 				ocupacion: newHistoria.ocupacion,
 				direccion: newHistoria.direccion,
 				nacionalidad: newHistoria.nacionalidad,
-				descripcion: newHistoria.descripcion,
 				email: newHistoria.email,
 				estReg: newHistoria.estReg,
-				grupoSanguineo: newHistoria.grupoSanguineo,
 				distrito: newHistoria.distrito,
 				provincia: newHistoria.provincia,
 				departamento: newHistoria.departamento,
@@ -157,6 +157,8 @@ export class HttpService {
 				especialidad: newCita.especialidad,
 				numeroHistoria: newCita.numeroHistoria,
 				medico: newCita.medico,
+				responsable:newCita.responsable,
+				exonerado:newCita.exonerado,
 			})
 			.subscribe(
 				data => {

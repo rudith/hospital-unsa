@@ -9,4 +9,5 @@ export interface Triaje {
     numeroHistoria:number,
     cita: number,
     personal: number,
+    especialidad:string,
 }

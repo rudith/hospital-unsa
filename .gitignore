@@ -7,7 +7,7 @@ firebase.json
 # compiled output
 
 # No borrar esta carpeta, necesario para AWS
-# /dist
+/dist
 
 # /tmp
 # /out-tsc

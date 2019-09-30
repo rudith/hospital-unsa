@@ -365,7 +365,7 @@ export class HistorialComponent extends BasePageComponent
 				console.log(newAppointment.exonerado + " entro else ");
 
 			}
-
+			this.messageService.add({ severity: 'info', summary: 'Cita Creada' });
 			this.httpSv.createCITA(newAppointment);
 			this.closeModal();
 			this.appointmentForm.reset();

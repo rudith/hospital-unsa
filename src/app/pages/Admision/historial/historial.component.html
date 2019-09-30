@@ -88,33 +88,33 @@
 <!-- Modal Crear Cita  -->
 <ng-container>
 	<ng-template #modalCrearCBody>
-		<form [formGroup]="appointmentForm">	
-				<tc-form-group>
-						<tc-form-label>Seleccione lo siguiente:</tc-form-label>
-						<div >
-							<label class="radio">
-								<input type="radio" formControlName="eleccion" value="rec"  (click)="setradio('rec')" [checked]='true' ngModel>
-								<span>Recibo </span>
-							</label>
-							<div *ngIf="isSelected('rec')">
-								<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'text'"
-									formControlName="numeroRecibo">
-								</tc-input>
-							</div>
-						</div>
-						<div >
-							<label class="radio">
-								<input type="radio" formControlName="eleccion" value="res"  (click)="setradio('res')"
-									ngModel>
-								<span>Exonerado </span>
-							</label>
-							<div *ngIf="isSelected('res')">
-								<tc-input [placeholder]="'Ingrese el Nombre del Responsable*'" [type]="'text'"
-									formControlName="responsable">
-								</tc-input>
-							</div>
-						</div>
-					</tc-form-group>
+		<form [formGroup]="appointmentForm">
+			<tc-form-group>
+				<tc-form-label>Seleccione lo siguiente:</tc-form-label>
+				<div>
+					<label class="radio">
+						<input type="radio" formControlName="eleccion" value="rec" (click)="setradio('rec')"
+							[checked]='true' ngModel>
+						<span>Recibo </span>
+					</label>
+					<div *ngIf="isSelected('rec')">
+						<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'text'"
+							formControlName="numeroRecibo">
+						</tc-input>
+					</div>
+				</div>
+				<div>
+					<label class="radio">
+						<input type="radio" formControlName="eleccion" value="res" (click)="setradio('res')" ngModel>
+						<span>Exonerado </span>
+					</label>
+					<div *ngIf="isSelected('res')">
+						<tc-input [placeholder]="'Ingrese el Nombre del Responsable*'" [type]="'text'"
+							formControlName="responsable">
+						</tc-input>
+					</div>
+				</div>
+			</tc-form-group>
 			<br>
 			<tc-form-group>
 				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption">

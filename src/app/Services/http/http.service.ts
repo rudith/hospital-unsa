@@ -33,6 +33,8 @@ export class HttpService {
 	public MedicoGetUpdate: Medico[] = [];
 	public historia: Historial;
 	public cita: Cita;
+	private nroHisCom:string;
+	private idHisCom:number;
 	constructor(private http: HttpClient) { }
 
 	getData(source: string) {
@@ -41,7 +43,16 @@ export class HttpService {
 			catchError(this.handleError)
 		);
 	}
-
+	getNroHC():string{
+		return this.nroHisCom;
+	}
+	getIdHC():number{
+		return this.idHisCom;
+	}
+	setNroHC(change:string, cha:number){
+		this.nroHisCom=change;
+		this.idHisCom=cha;
+	}
 	private handleError(error: any) {
 		return observableThrowError(error.error || 'Server error');
 	}
@@ -218,26 +229,25 @@ export class HttpService {
 			}
 		);
 	}
+	loadCitasMedico(nro: number): Observable<any> {
+		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/' + nro + "/");
+	}
 	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta> {
 		return this.http.get<HistoriaCompleta>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/' + nro + "/");
 	}
-	createConsulta(newConsulta: Consulta) {
+	crearConsulta(newConsulta: Consulta) {
 		console.log(newConsulta);
+		console.log(JSON.stringify(newConsulta));
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
-				horaEntrada: newConsulta.horaEntrada,
-				horaSalida: newConsulta.horaSalida,
 				motivoConsulta: newConsulta.motivoConsulta,
 				apetito: newConsulta.apetito,
-				orina: newConsulta.orina,
+				orina: newConsulta.orina, 
 				deposiciones: newConsulta.deposiciones,
 				examenFisico: newConsulta.examenFisico,
 				diagnostico: newConsulta.diagnostico,
 				tratamiento: newConsulta.tratamiento,
 				proximaCita: newConsulta.proximaCita,
-				estadoAtencion: newConsulta.estadoAtencion,
-				motivoAnulacion: newConsulta.motivoAnulacion,
-				estReg: newConsulta.estReg,
 				triaje: newConsulta.triaje,
 				numeroHistoria: newConsulta.numeroHistoria,
 				medico: newConsulta.medico,

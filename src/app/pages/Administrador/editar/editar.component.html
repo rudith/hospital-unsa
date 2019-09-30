@@ -1,49 +1,47 @@
-<div class="row">
-	<div class="col-sm-12">
-		<div class="row">
-			<div class="actions">
-				<button class="col-sm-2 col-lg-2" tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true"
-					[tcShape]="500" [size]="'sm'"
-					(click)="openModal(modalUser, 'Agregar User', modalUser2);updateEst(false)"></button>
-			</div>
-			<tc-form-group class="col-sm-6 col-lg-8">
-				<tc-input [placeholder]="'Buscar Usuario'" [(ngModel)]="id" [suffixIcon]="'icofont-search-document'">
-				</tc-input>
-			</tc-form-group>
-			<tc-form-group class="col-sm-4 col-lg-2">
-				<button tc-button [view]="'info'" (click)="onChangeTable()">
-					Buscar
-				</button>
-			</tc-form-group>
-		</div>
-		<tc-card class="mb-0">
-			<tc-table [rows]="users" [hovered]="true">
-				<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
-				</tc-table-col>
-				<tc-table-col [columnTitle]="'Email'" [columnName]="'email'" [enableSorting]="true">
-				</tc-table-col>
-				<tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
-					<ng-template #tableTDTemplate let-row="row">
-						<div class="actions">
-							<button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true"
-								[tcShape]="500" [size]="'sm'"
-								(click)="openModalEdit(modalUser, 'Editar User', modalUser2,row);sendUser(row);updateEst(true)"></button>
-						</div>
-					</ng-template>
-				</tc-table-col>
-				<tc-table-col [columnTitle]="'Eliminar'" [columnName]="'actions'">
-					<ng-template #tableTDTemplate let-row="row">
-						<div class="actions">
-							<button tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'" [square]="true"
-								[tcShape]="500" [size]="'sm'" (click)="deleteUser(row.id)"></button>
-						</div>
-					</ng-template>
-				</tc-table-col>
-			</tc-table>
-		</tc-card>
+<p-toast></p-toast>
+<div class="col-sm-12">
+	<div class="row">
+		<tc-form-group class="col-sm-2 col-lg-2">
+			<button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+				(click)="openModal(modalUser, 'Agregar User', modalUser2);updateEst(false)"></button>
+		</tc-form-group>
+		<tc-form-group class="col-sm-6 col-lg-8">
+			<tc-input [placeholder]="'Buscar Usuario'" [(ngModel)]="id" [suffixIcon]="'icofont-search-document'">
+			</tc-input>
+		</tc-form-group>
+		<tc-form-group class="col-sm-4 col-lg-2">
+			<button tc-button [view]="'info'" (click)="onChangeTable()">
+				Buscar
+			</button>
+		</tc-form-group>
 	</div>
-
+	<tc-card class="mb-0">
+		<tc-table [rows]="users" [hovered]="true">
+			<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
+			</tc-table-col>
+			<tc-table-col [columnTitle]="'Email'" [columnName]="'email'" [enableSorting]="true">
+			</tc-table-col>
+			<tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
+				<ng-template #tableTDTemplate let-row="row">
+					<div class="actions">
+						<button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true"
+							[tcShape]="500" [size]="'sm'"
+							(click)="openModalEdit(modalUser, 'Editar User', modalUser2,row);sendUser(row);updateEst(true)"></button>
+					</div>
+				</ng-template>
+			</tc-table-col>
+			<tc-table-col [columnTitle]="'Eliminar'" [columnName]="'actions'">
+				<ng-template #tableTDTemplate let-row="row">
+					<div class="actions">
+						<button tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'" [square]="true"
+							[tcShape]="500" [size]="'sm'" (click)="deleteUser(row.id)"></button>
+					</div>
+				</ng-template>
+			</tc-table-col>
+		</tc-table>
+	</tc-card>
 </div>
+
 <!-- Modal User -->
 <ng-container>
 	<ng-template #modalUser>

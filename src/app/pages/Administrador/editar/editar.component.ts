@@ -15,11 +15,15 @@ import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
 import { User } from '../../../interfaces/user';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
 	selector: 'app-editar',
 	templateUrl: './editar.component.html',
-	styleUrls: ['./editar.component.scss']
+	styleUrls: ['./editar.component.scss',
+		'../../../../../node_modules/primeng/resources/primeng.css',
+		'../../../../../node_modules/primeicons/primeicons.css'],
+	providers: [MessageService]
 })
 export class EditarComponent extends BasePageComponent
 	implements OnInit, OnDestroy {
@@ -31,14 +35,15 @@ export class EditarComponent extends BasePageComponent
 	public id: string;
 	appointmentForm: FormGroup;
 	public update: boolean = false;
-
+	val: number;
 	constructor(
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
 		httpSv: HttpService,
 		private modal: TCModalService,
 		private fb: FormBuilder,
-		private http: HttpClient
+		private http: HttpClient,
+		private messageService: MessageService
 	) {
 
 		super(store, httpSv);
@@ -85,6 +90,9 @@ export class EditarComponent extends BasePageComponent
 		);
 	}
 	onChangeTable() {
+		console.log("Entra");
+		this.messageService.add({ severity: 'success', summary: 'holi', detail: '2' });
+		console.log("Entra2");
 		if (this.id == "" || this.id == undefined) {
 			this.httpSv.loadUsers().subscribe(users => {
 				this.users = users

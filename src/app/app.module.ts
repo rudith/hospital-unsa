@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreModule } from '@ngrx/store';
 
+import {ToastModule} from 'primeng/toast';
+
 import { AppComponent } from './app.component';
 import { ROUTES, RoutingModule } from './routing/routing.module';
 import { LayoutModule } from './layout/layout.module';
@@ -34,7 +36,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     RoutingModule,
     LayoutModule,
     UIModule,
-    PagesModule
+    PagesModule,
+    ToastModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

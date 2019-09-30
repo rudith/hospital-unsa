@@ -22,6 +22,9 @@ import { RegisterFormComponent } from './components/register-form';
 import { NavbarSkeletonComponent } from './components/navbar-skeleton';
 import { SettingsComponent } from './components/settings';
 
+import {ToastModule} from 'primeng/toast';
+import {MenubarModule} from 'primeng/menubar';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +32,9 @@ import { SettingsComponent } from './components/settings';
     FormsModule,
     ReactiveFormsModule,
     MalihuScrollbarModule.forRoot(),
-    UIModule
+    UIModule,
+    ToastModule,
+    MenubarModule
   ],
   declarations: [
     BaseLayoutComponent,
@@ -47,6 +52,7 @@ import { SettingsComponent } from './components/settings';
     RegisterFormComponent,
     NavbarSkeletonComponent,
     SettingsComponent
+    
   ],
   exports: [
     LoginFormComponent,

@@ -72,7 +72,8 @@ import { CitasComponent } from './Admision/citas/citas.component';
 import { HistorialComponent } from './Admision/historial/historial.component';
 import { EditarComponent } from './Administrador/editar/editar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import {ToastModule} from 'primeng/toast';
+import {RatingModule} from 'primeng/rating';
 
 import { ConsultasComponent } from './Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
@@ -83,11 +84,6 @@ import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-
     ReactiveFormsModule,
     RouterModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      timeOut: 8000,
-      positionClass: 'toast-bottom-full-width',
-      preventDuplicates: false,
-    }),
     ChartsModule,
     NgxChartsModule,
     NgxEchartsModule,
@@ -97,7 +93,9 @@ import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-
     LeafletModule,
     FullCalendarModule,
     UIModule,
-    LayoutModule
+    LayoutModule,
+    ToastModule,
+    RatingModule
   ],
   declarations: [
     BasePageComponent,

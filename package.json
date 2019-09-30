@@ -39,7 +39,7 @@
     "ng2-dragula": "2.1.1",
     "ngx-echarts": "4.1.1",
     "ngx-malihu-scrollbar": "7.0.0",
-    "ngx-toastr": "^10.2.0",
+    "primeicons": "^2.0.0",
     "primeng": "^8.0.3",
     "rxjs": "6.5.2",
     "tslib": "1.9.3",

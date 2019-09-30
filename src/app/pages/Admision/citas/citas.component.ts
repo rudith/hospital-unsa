@@ -11,7 +11,6 @@ import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-citas',
@@ -37,7 +36,6 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		private modal: TCModalService,
 		private fb: FormBuilder,
 		private http: HttpClient,
-		private toastr: ToastrService,
 	) {
 		super(store, httpSv);
 
@@ -189,7 +187,6 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			.subscribe(
 				data => {
 					newCita = <Cita>{};
-					this.toastr.success('', 'Cita Modificada con exito');
 					this.loadCitas();
 				},
 				error => {

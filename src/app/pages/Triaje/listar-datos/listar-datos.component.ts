@@ -10,8 +10,7 @@ import { TCModalService } from '../../../ui/services/modal/modal.service';
 import {Historial} from '../../../../app/interfaces/historial';
 import { HttpClient } from '@angular/common/http';
 import {Triaje} from '../../../../app/interfaces/triaje';
-import {Cita}from '../../../../app/interfaces/cita'
-import { ToastrService } from 'ngx-toastr';
+import {Cita}from '../../../../app/interfaces/cita';
 
 @Component({
   selector: 'app-listar-datos',
@@ -39,7 +38,6 @@ import { ToastrService } from 'ngx-toastr';
       private formBuilder: FormBuilder,
       private modal: TCModalService,
       private http: HttpClient,
-      private toastr:ToastrService,
       
       
     ) { 

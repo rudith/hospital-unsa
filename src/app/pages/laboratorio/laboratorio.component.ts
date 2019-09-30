@@ -19,7 +19,6 @@ import { Provincia } from '../../interfaces/provincia';
 import { Departamento } from '../../interfaces/departamento';
 import { Distrito } from '../../interfaces/distrito';
 import { Medico } from '../../interfaces/medico';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-laboratorio',
@@ -66,10 +65,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
     httpSv: HttpService,
     private modal: TCModalService,
 		private formBuilder: FormBuilder,
-		private http: HttpClient,
-		private toastr:ToastrService,
-	
-
+		private http: HttpClient
 	) {
     super(store, httpSv);
     this.gruposang = [];
@@ -199,7 +195,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			newPatient.estReg = true;
 		
 			this.httpSv.createHISTORIAL(newPatient);
-			this.toastr.success('','Historial Creado con Exito');
+			// this.toastr.success('','Historial Creado con Exito');
 			this.closeModalH();
 			this.loadHistorias();
 			this.patientForm.reset();
@@ -372,7 +368,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			newAppointment.numeroHistoria = this.numero;
 
 			this.httpSv.createCITA(newAppointment);
-			this.toastr.success('','Cita ha sido creada con exito');
+			// this.toastr.success('','Cita ha sido creada con exito');
 			this.closeModal();
 			this.appointmentForm.reset();
 		}

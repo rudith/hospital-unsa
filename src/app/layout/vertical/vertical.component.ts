@@ -15,7 +15,7 @@ import * as SettingsActions from '../../store/actions/app-settings.actions';
 	styleUrls: [
 		'../base-layout/base-layout.component.scss',
 		'./vertical.component.scss'
-	]
+	],
 })
 export class VerticalLayoutComponent extends BaseLayoutComponent implements OnInit {
 

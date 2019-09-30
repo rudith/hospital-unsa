@@ -1,9 +1,7 @@
 export interface Consulta {
   id: number,
-  numeroHistoria: string,
+  numeroHistoria: number,
   medico: number,
-  horaEntrada: string,
-  horaSalida: string,
   motivoConsulta: string,
   apetito: string,
   orina: string,
@@ -12,8 +10,5 @@ export interface Consulta {
   diagnostico: string,
   tratamiento: string,
   proximaCita: string,
-  estadoAtencion: string,
-  motivoAnulacion: string,
-  estReg: boolean,
   triaje: number
 }

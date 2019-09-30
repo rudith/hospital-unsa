@@ -1,4 +1,5 @@
 <div class="app-container" [ngClass]="{ 'boxed': appSettings.boxed, 'scrolled': scrolled }" *ngIf="appSettings">
+	<!-- <p-toast [style]="{marginTop: '80px'}" ></p-toast> -->
 	<!-- Horizontal navbar -->
 	<navbar [boxed]="appSettings.boxed" [tcBgColor]="appSettings.topbarBg" [tcColor]="appSettings.topbarColor"
 		[minHeight]="'4.28571429rem'">
@@ -41,6 +42,7 @@
 	<!-- end Vertical navbar -->
 
 	<main class="main-content" (scroll)="onScroll($event)" [ngClass]="{ 'loaded': pageData?.loaded }">
+
 		<div class="app-loader" *ngIf="!pageData?.loaded"><i class="icofont-spinner-alt-4 rotate"></i></div>
 
 		<div class="main-content-wrap" [ngClass]="{ 'full-filled': pageData?.fullFilled }">
@@ -48,7 +50,9 @@
 				<h1 class="page-title">{{ pageData.title }}</h1>
 			</header>
 
-			<router-outlet></router-outlet>
+			<router-outlet>
+
+			</router-outlet>
 		</div>
 	</main>
 

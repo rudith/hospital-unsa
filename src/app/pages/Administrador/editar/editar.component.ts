@@ -21,8 +21,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
 	selector: 'app-editar',
 	templateUrl: './editar.component.html',
 	styleUrls: ['./editar.component.scss',
-		'../../../../../node_modules/primeng/resources/primeng.css',
-		'../../../../../node_modules/primeicons/primeicons.css'],
+		// '../../../../../node_modules/primeng/resources/primeng.css'],
+	],
 	providers: [MessageService]
 })
 export class EditarComponent extends BasePageComponent
@@ -85,20 +85,23 @@ export class EditarComponent extends BasePageComponent
 	}
 	deleteUser(id: string) {
 		this.httpSv.DeleteUser(id).subscribe(
-			data =>
-				this.loadUsers(),
+			data => {
+				this.messageService.add({ severity: 'info', summary: 'Datos Eliminado' });
+				this.loadUsers();
+			}
 		);
 	}
 	onChangeTable() {
-		console.log("Entra");
-		this.messageService.add({ severity: 'success', summary: 'holi', detail: '2' });
-		console.log("Entra2");
+
 		if (this.id == "" || this.id == undefined) {
 			this.httpSv.loadUsers().subscribe(users => {
-				this.users = users
+				this.users = users;
+				this.messageService.add({ severity: 'info', summary: 'Campo Vacio' });
 			});
 		} else {
+
 			this.httpSv.searchUsers(this.id).subscribe(data => {
+				this.messageService.add({ severity: 'info', summary: 'Datos CArgados' });
 				this.users = []
 				this.users[0] = data;
 				console.log(JSON.stringify(data));
@@ -189,6 +192,7 @@ export class EditarComponent extends BasePageComponent
 	updateUser(User: User) {
 		this.httpSv.UpdateUser(User).subscribe(
 			data => {
+				this.messageService.add({ severity: 'info', summary: 'Usuario Actualizado' });
 				this.loadUsers();
 				this.closeModal();
 			},
@@ -197,6 +201,7 @@ export class EditarComponent extends BasePageComponent
 	createUser(newUser: User) {
 		this.httpSv.CreateUser(newUser).subscribe(
 			data => {
+				this.messageService.add({ severity: 'info', summary: 'Usuario Creado' });
 				this.loadUsers();
 				this.closeModal();
 			}

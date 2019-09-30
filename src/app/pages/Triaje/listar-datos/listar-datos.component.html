@@ -1,4 +1,5 @@
-<form [formGroup]="busForm">
+<div class="col-sm-12">
+  <form [formGroup]="busForm">
     <div class="row">
       <div class="col col-12 ">
         <div class="row">
@@ -18,25 +19,25 @@
   </form>
   <tc-card class="mb-0">
     <tc-table [rows]="citas" [hovered]="true" [pagination]="true">
-  
+
       <tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'numeroHistoria'" [enableSorting]="true">
         <ng-template #tableTDTemplate let-value>
           <strong>{{ value }}</strong>
         </ng-template>
       </tc-table-col>
-  
+
       <tc-table-col [columnTitle]="'Fecha de Atencion '" [columnName]="'fechaAtencion'" [enableSorting]="true">
         <ng-template #tableTDTemplate let-value>
           <strong>{{value}}</strong>
         </ng-template>
       </tc-table-col>
-  
+
       <tc-table-col [columnTitle]="'Especialidad'" [columnName]="'especialidad'" [enableSorting]="true">
         <ng-template #tableTDTemplate let-value>
           <strong>{{value}}</strong>
         </ng-template>
       </tc-table-col>
-  
+
       <tc-table-col [columnTitle]="'Actualizar Datos'" [columnName]="'actions'">
         <ng-template #tableTDTemplate let-row="row">
           <div class="actions">
@@ -48,102 +49,102 @@
       </tc-table-col>
     </tc-table>
   </tc-card>
-  
-  <!-- edit patient Modal window -->
-  <ng-container>
-    <ng-template #modalBody>
-      <form [formGroup]="patientForm1" novalidate class="new-patient-form">
-        <div class="row">
-          
-  
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Fecha de Atencion</tc-form-label>
-              <tc-input [placeholder]="'Fecha de Atención'" formControlName="fechaAtencion" readonly="readonly">
-              </tc-input>
-            </tc-form-group>
-          </div>
-  
-          
+</div>
+<!-- edit patient Modal window -->
+<ng-container>
+  <ng-template #modalBody>
+    <form [formGroup]="patientForm1" novalidate class="new-patient-form">
+      <div class="row">
+
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Fecha de Atencion</tc-form-label>
+            <tc-input [placeholder]="'Fecha de Atención'" formControlName="fechaAtencion" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
         </div>
-      </form>
-  
-  
-      <form [formGroup]="patientForm2" novalidate class="new-patient-form">
-        <div class="row">
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Talla</tc-form-label>
-              <tc-input [placeholder]="'talla'" [type]="'number'" formControlName="talla"></tc-input>
-              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
-					Debe ingresar un numero positivo
-				</tc-form-description>
-            </tc-form-group>
-          </div>
-  
-  
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Peso</tc-form-label>
-              <tc-input [placeholder]="'peso'" [type]="'number'" formControlName="peso"></tc-input>
-              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
-					Debe ingresar un numero positivo
-				</tc-form-description>
-            </tc-form-group>
-          </div>
-  
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Temperatura</tc-form-label>
-              <tc-input [placeholder]="'temperatura'" [type]="'number'" formControlName="temperatura"></tc-input>
-              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
-					Debe ingresar un numero positivo
-				</tc-form-description>
-            </tc-form-group>
-          </div>
-  
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Frecuencia Resp.</tc-form-label>
-              <tc-input [placeholder]="'frecuenciaR'" [type]="'number'" formControlName="frecuenciaR"></tc-input>
-              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
-					Debe ingresar un numero positivo
-				</tc-form-description>
-            </tc-form-group>
-          </div>
-  
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Frecuencia Cardiaca</tc-form-label>
-              <tc-input [placeholder]="'frecuendiaC'" [type]="'number'" formControlName="frecuenciaC"></tc-input>
-            </tc-form-group>
-          </div>
-  
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Presión Arterial</tc-form-label>
-              <tc-input [placeholder]="'presionArt'" formControlName="presionArt"></tc-input>
-              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid ">
-					Ingrese el siguiente formato "##/##"
-				</tc-form-description>
-            </tc-form-group>
-          </div>
-        </div>
-      </form>
-    </ng-template>
-  
-    <ng-template #modalFooter>
-      <div class="actions justify-content-between">
-        <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
-        <button tc-button [view]="'info'" (click)="CreateTriaje(patientForm2)">
-          Crear Triaje
-        </button>
+
+
       </div>
-    </ng-template>
-  </ng-container>
-  <!-- end Modal window -->
+    </form>
+
+
+    <form [formGroup]="patientForm2" novalidate class="new-patient-form">
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Talla</tc-form-label>
+            <tc-input [placeholder]="'talla'" [type]="'number'" formControlName="talla"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+              *ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
+              Debe ingresar un numero positivo
+            </tc-form-description>
+          </tc-form-group>
+        </div>
+
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Peso</tc-form-label>
+            <tc-input [placeholder]="'peso'" [type]="'number'" formControlName="peso"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+              *ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
+              Debe ingresar un numero positivo
+            </tc-form-description>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Temperatura</tc-form-label>
+            <tc-input [placeholder]="'temperatura'" [type]="'number'" formControlName="temperatura"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+              *ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
+              Debe ingresar un numero positivo
+            </tc-form-description>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Frecuencia Resp.</tc-form-label>
+            <tc-input [placeholder]="'frecuenciaR'" [type]="'number'" formControlName="frecuenciaR"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+              *ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
+              Debe ingresar un numero positivo
+            </tc-form-description>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Frecuencia Cardiaca</tc-form-label>
+            <tc-input [placeholder]="'frecuendiaC'" [type]="'number'" formControlName="frecuenciaC"></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Presión Arterial</tc-form-label>
+            <tc-input [placeholder]="'presionArt'" formControlName="presionArt"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+              *ngIf="patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid ">
+              Ingrese el siguiente formato "##/##"
+            </tc-form-description>
+          </tc-form-group>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div class="actions justify-content-between">
+      <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
+      <button tc-button [view]="'info'" (click)="CreateTriaje(patientForm2)">
+        Crear Triaje
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+<!-- end Modal window -->

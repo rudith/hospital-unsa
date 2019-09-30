@@ -73,8 +73,6 @@ import { HistorialComponent } from './Admision/historial/historial.component';
 import { EditarComponent } from './Administrador/editar/editar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastModule} from 'primeng/toast';
-import {RatingModule} from 'primeng/rating';
-
 import { ConsultasComponent } from './Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
 @NgModule({
@@ -94,8 +92,7 @@ import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-
     FullCalendarModule,
     UIModule,
     LayoutModule,
-    ToastModule,
-    RatingModule
+    ToastModule
   ],
   declarations: [
     BasePageComponent,

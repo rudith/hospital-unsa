@@ -8,7 +8,7 @@
 
     <tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'Numero de Historia'" [enableSorting]="true">
       <ng-template #tableTDTemplate let-value>
-        <span class="nowrap" [tcColor]="'#a5a5a5'">dania se la come</span>
+        <span class="nowrap" [tcColor]="'#a5a5a5'">{{ value }}</span>
       </ng-template>
     </tc-table-col>
 
@@ -24,19 +24,12 @@
       </ng-template>
     </tc-table-col>
 
-    
+
     <tc-table-col [columnTitle]="'Actualizar Datos'" [columnName]="'Actualizar Datos'">
       <ng-template #tableTDTemplate let-row="row">
         <div class="actions">
-          <button
-            tc-button
-            [afterIcon]="'icofont-ui-edit'"
-            [view]="'info'"
-            [square]="true"
-            [tcShape]="500"
-            [size]="'sm'"
-            (click)="edit(row)"
-          ></button>
+          <button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'info'" [square]="true" [tcShape]="500"
+            [size]="'sm'" (click)="edit(row)"></button>
         </div>
       </ng-template>
     </tc-table-col>
@@ -54,7 +47,8 @@
       </tc-form-group>
 
       <tc-form-group>
-        <tc-autocomplete [placeholder]="'Doctor'" [data]="doctors" [key]="'name'" formControlName="doctor"></tc-autocomplete>
+        <tc-autocomplete [placeholder]="'Doctor'" [data]="doctors" [key]="'name'" formControlName="doctor">
+        </tc-autocomplete>
       </tc-form-group>
 
       <tc-form-group>

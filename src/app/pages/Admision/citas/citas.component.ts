@@ -11,11 +11,13 @@ import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
 	selector: 'app-citas',
 	templateUrl: './citas.component.html',
-	styleUrls: ['./citas.component.scss']
+	styleUrls: ['./citas.component.scss'],
+	providers: [MessageService]
 })
 export class CitasComponent extends BasePageComponent implements OnInit, OnChanges {
 	cita: Cita;
@@ -36,6 +38,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		private modal: TCModalService,
 		private fb: FormBuilder,
 		private http: HttpClient,
+		private messageService: MessageService
 	) {
 		super(store, httpSv);
 
@@ -87,6 +90,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	}
 
 	onChangeTable() {
+		console.log("Entra");
 		if (this.dni == "" || this.dni == undefined) {
 			this.httpSv.loadCitas().subscribe(citas => {
 				this.citas = citas
@@ -153,18 +157,15 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 				'en-US',
 				'+0530'
 			);
-			newAppointment.fechaAtencion = formatDate(
-				this.today,
-				'yyyy-MM-dd',
-				'en-US',
-				'+0530'
-			);
+			newAppointment.fechaAtencion = this.cita.fechaAtencion;
 			newAppointment.especialidad = form.value.especialidad;
 			newAppointment.id = this.cita.id;
 			newAppointment.numeroRecibo = this.cita.numeroRecibo;
 			newAppointment.estadoCita = this.cita.estadoCita;
 			newAppointment.estReg = this.cita.estReg;
 			newAppointment.numeroHistoria = this.cita.numeroHistoria;
+			newAppointment.exonerado = this.cita.exonerado;
+			newAppointment.responsable = this.cita.responsable;
 			newAppointment.medico = this.cita.medico;
 			this.updateCita(newAppointment);
 
@@ -179,6 +180,8 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			fechaSeparacion: newCita.fechaSeparacion,
 			fechaAtencion: newCita.fechaAtencion,
 			estadoCita: newCita.estadoCita,
+			exonerado: newCita.exonerado,
+			responsable: newCita.responsable,
 			estReg: newCita.estReg,
 			especialidad: newCita.especialidad,
 			numeroHistoria: newCita.numeroHistoria,
@@ -186,6 +189,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		})
 			.subscribe(
 				data => {
+					this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
 					newCita = <Cita>{};
 					this.loadCitas();
 				},
@@ -211,7 +215,10 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		// 	}, error => {
 		// 		console.log(error.message);
 		// });
-		this.httpSv.CancelarCita(id).subscribe(cita => { this.loadCitas() });
+		this.httpSv.CancelarCita(id).subscribe(cita => {
+			this.loadCitas();
+			this.messageService.add({ severity: 'info', summary: 'Cita Cancelada' });
+		});
 	}
 
 }

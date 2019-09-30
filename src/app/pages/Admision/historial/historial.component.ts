@@ -19,11 +19,13 @@ import { Provincia } from '../../../interfaces/provincia';
 import { Departamento } from '../../../interfaces/departamento';
 import { Distrito } from '../../../interfaces/distrito';
 import { Medico } from '../../../interfaces/medico';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
 	selector: 'app-historial',
 	templateUrl: './historial.component.html',
-	styleUrls: ['./historial.component.scss']
+	styleUrls: ['./historial.component.scss'],
+	providers: [MessageService]
 })
 export class HistorialComponent extends BasePageComponent
 	implements OnInit, OnDestroy, OnChanges {
@@ -65,6 +67,7 @@ export class HistorialComponent extends BasePageComponent
 		private modal: TCModalService,
 		private formBuilder: FormBuilder,
 		private http: HttpClient,
+		private messageService: MessageService
 	) {
 		super(store, httpSv);
 		this.gruposang = [];
@@ -190,6 +193,7 @@ export class HistorialComponent extends BasePageComponent
 			newPatient.fechaNac = formatDate(form.value.fechaNac, 'yyyy-MM-dd', 'en-US', '+0530');
 			newPatient.estReg = true;
 			this.httpSv.createHISTORIAL(newPatient);
+			this.messageService.add({ severity: 'info', summary: 'Historial creado' })
 			this.closeModalH();
 			this.loadHistorias();
 			this.patientForm.reset();
@@ -308,12 +312,12 @@ export class HistorialComponent extends BasePageComponent
 	initAppoForm(data: any) {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
-			numeroRecibo: ['', ],
+			numeroRecibo: ['',],
 			fechaSeparacion: ['', Validators.required],
 			especialidad: ['', Validators.required],
 			medico: ['', Validators.required],
 			responsable: ['',],
-			eleccion:['',],
+			eleccion: ['',],
 		});
 	}
 	initBusForm() {
@@ -345,23 +349,23 @@ export class HistorialComponent extends BasePageComponent
 				'en-US',
 				'+0530'
 			);
-			
+
 			newAppointment.estadoCita = 'Activo';
 			newAppointment.estReg = true;
 			newAppointment.numeroHistoria = this.numero;
 			console.log(newAppointment.responsable);
-			if(newAppointment.responsable=="" ){
+			if (newAppointment.responsable == "") {
 				newAppointment.responsable = "No";
-				newAppointment.exonerado=false;
+				newAppointment.exonerado = false;
 				console.log(newAppointment.exonerado + " entro if ");
 			}
 			else {
-				newAppointment.numeroRecibo=0;
-				newAppointment.exonerado=true;
+				newAppointment.numeroRecibo = 0;
+				newAppointment.exonerado = true;
 				console.log(newAppointment.exonerado + " entro else ");
 
 			}
-			
+
 			this.httpSv.createCITA(newAppointment);
 			this.closeModal();
 			this.appointmentForm.reset();
@@ -372,7 +376,7 @@ export class HistorialComponent extends BasePageComponent
 	onChangeTable() {
 		if (this.opBus == " ") {
 			this.httpSv.loadHistorias().subscribe(historiales => {
-				this.historiales = historiales
+				this.historiales = historiales;
 			});
 		} else if (this.opBus == "1") {
 			this.httpSv.searcHistoriasDNI(this.datoBus).subscribe(data => {
@@ -387,6 +391,7 @@ export class HistorialComponent extends BasePageComponent
 				console.log("entro bus" + this.datoBus);
 			});;
 		}
+		this.messageService.add({ severity: 'info', summary: 'Historias cargadas' });
 	}
 	buscar(busca: FormGroup) {
 		this.datoBus = busca.get('datoBus').value;
@@ -440,7 +445,7 @@ export class HistorialComponent extends BasePageComponent
 	}
 
 	isSelected(name: string): boolean {
-		if (!this.selectedLink) { 
+		if (!this.selectedLink) {
 			return false;
 		}
 		return (this.selectedLink === name); // if current radio button is selected, return true, else return false  
@@ -450,6 +455,7 @@ export class HistorialComponent extends BasePageComponent
 	// Imprimir Historial
 
 	imprimir(data) {
+		this.messageService.add({ severity: 'info', summary: 'PDF generado' });
 		var doc = new jsPDF();
 
 		var imgData =

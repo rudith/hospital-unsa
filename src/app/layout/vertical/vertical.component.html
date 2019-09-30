@@ -46,6 +46,7 @@
 		<div class="app-loader" *ngIf="!pageData?.loaded"><i class="icofont-spinner-alt-4 rotate"></i></div>
 
 		<div class="main-content-wrap" [ngClass]="{ 'full-filled': pageData?.fullFilled }">
+			
 			<header class="page-header" *ngIf="pageData && !pageData?.fullFilled && pageData.title.length">
 				<h1 class="page-title">{{ pageData.title }}</h1>
 			</header>

@@ -44,6 +44,14 @@
 		"layout": "vertical"
 	},
 	{
+		"title": "Laboratorio",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "laboratorio",
+		"layout": "vertical"
+	},
+	{
 		"title": "Consultorio",
 		"groupTitle": true
 	},

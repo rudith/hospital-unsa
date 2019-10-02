@@ -75,6 +75,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastModule} from 'primeng/toast';
 import { ConsultasComponent } from './Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
+import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -153,7 +155,8 @@ import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-
     CitasComponent,
     EditarComponent,
     ConsultasComponent,
-    ListarConsultasComponent
+    ListarConsultasComponent,
+    LaboratorioComponent
   ],
   exports: [],
   entryComponents: []

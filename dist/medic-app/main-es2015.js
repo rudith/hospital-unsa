@@ -8307,6 +8307,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var primeng_toast__WEBPACK_IMPORTED_MODULE_72___default = /*#__PURE__*/__webpack_require__.n(primeng_toast__WEBPACK_IMPORTED_MODULE_72__);
 /* harmony import */ var _Consultorio_consultas_consultas_component__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./Consultorio/consultas/consultas.component */ "./src/app/pages/Consultorio/consultas/consultas.component.ts");
 /* harmony import */ var _Consultorio_listar_consultas_listar_consultas_component__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./Consultorio/listar-consultas/listar-consultas.component */ "./src/app/pages/Consultorio/listar-consultas/listar-consultas.component.ts");
+/* harmony import */ var _pages_laboratorio_laboratorio_component__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ../pages/laboratorio/laboratorio.component */ "./src/app/pages/laboratorio/laboratorio.component.ts");
+
 
 
 
@@ -8463,7 +8465,8 @@ PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _Admision_citas_citas_component__WEBPACK_IMPORTED_MODULE_68__["CitasComponent"],
             _Administrador_editar_editar_component__WEBPACK_IMPORTED_MODULE_70__["EditarComponent"],
             _Consultorio_consultas_consultas_component__WEBPACK_IMPORTED_MODULE_73__["ConsultasComponent"],
-            _Consultorio_listar_consultas_listar_consultas_component__WEBPACK_IMPORTED_MODULE_74__["ListarConsultasComponent"]
+            _Consultorio_listar_consultas_listar_consultas_component__WEBPACK_IMPORTED_MODULE_74__["ListarConsultasComponent"],
+            _pages_laboratorio_laboratorio_component__WEBPACK_IMPORTED_MODULE_75__["LaboratorioComponent"]
         ],
         exports: [],
         entryComponents: []

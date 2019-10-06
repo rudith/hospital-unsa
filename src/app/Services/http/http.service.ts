@@ -14,6 +14,7 @@ import { User } from '../../interfaces/user';
 import { Triaje } from '../../interfaces/triaje';
 import { HistoriaCompleta } from '../../interfaces/historia-completa';
 import { Consulta } from '../../interfaces/consulta';
+import { CitaM } from '../../interfaces/cita-m';
 
 @Injectable({
 	providedIn: 'root',
@@ -229,15 +230,18 @@ export class HttpService {
 			}
 		);
 	}
+
+	//Servicios de Consultorio
 	loadCitasMedico(nro: number): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/' + nro + "/");
 	}
 	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta> {
 		return this.http.get<HistoriaCompleta>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/' + nro + "/");
 	}
+	searcTriajeC(nro: number): Observable<Triaje> {
+		return this.http.get<Triaje>('http://18.216.2.122:9000/consultorio/triajeporcita/' + nro + "/");
+	}
 	crearConsulta(newConsulta: Consulta) {
-		console.log(newConsulta);
-		console.log(JSON.stringify(newConsulta));
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
 				motivoConsulta: newConsulta.motivoConsulta,

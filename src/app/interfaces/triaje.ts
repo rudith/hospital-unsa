@@ -1,13 +1,15 @@
+import { Historial } from './historial';
+
 export interface Triaje {
     id:number,
-    talla: number;
-    peso: number;
-    temperatura:number;
-    frecuenciaR: number;
-    frecuenciaC: number;
-    presionArt: string;
-    numeroHistoria:number,
-    cita: number,
+    numeroHistoria:Historial,
+    talla: number,
+    peso: number,
+    temperatura:number,
+    frecuenciaR: number,
+    frecuenciaC: number,
+    presionArt: string,
+    fechaReg:string,
     personal: number,
-    especialidad:string,
+    cita: number
 }

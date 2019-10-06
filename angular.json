@@ -30,6 +30,7 @@
               "node_modules/primeicons/primeicons.css",
               "node_modules/primeng/resources/primeng.min.css",
               "src/assets/sass/bootstrap.scss",
+              "node_modules/ngx-toastr/toastr.css",
               "src/assets/sass/simple-line-icons.scss",
               "src/assets/css/icofont.min.css",
               "node_modules/leaflet/dist/leaflet.css",

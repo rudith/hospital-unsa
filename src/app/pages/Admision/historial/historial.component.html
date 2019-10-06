@@ -1,4 +1,4 @@
-<p-toast [style]="{background: '#F9F7AE',opacity: '0.8'}"></p-toast>
+
 <div class="col-sm-12">
 	<form [formGroup]="busForm">
 		<div class="row">
@@ -13,6 +13,10 @@
 					<div class="col-md-7">
 						<tc-form-group>
 							<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
+							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="busForm.controls.datoBus.touched && busForm.controls.datoBus.invalid ">
+					Ingrese solo numeros
+				</tc-form-description>
 						</tc-form-group>
 					</div>
 					<div class="col-md-2">
@@ -249,17 +253,7 @@
 						</tc-form-description>
 					</tc-form-group>
 				</div>
-				<div class="col-12 col-sm-3">
-					<tc-form-group>
-						<tc-input [placeholder]="'Edad*'" [type]="'number'" formControlName="edad" [charLimiting]="2">
-						</tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.edad.touched && patientForm.controls.edad.invalid ">
-							Ingrese una Edad valida
-						</tc-form-description>
-
-					</tc-form-group>
-				</div>
+				
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
 						<tc-form-group>

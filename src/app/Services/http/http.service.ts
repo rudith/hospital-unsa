@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { throwError as observableThrowError, Observable } from 'rxjs';
+import { throwError as observableThrowError, Observable, ConnectableObservable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Historial } from '../../interfaces/historial';
 import { Cita } from '../../interfaces/cita';
@@ -36,7 +36,7 @@ export class HttpService {
 	public cita: Cita;
 	private nroHisCom:string;
 	private idHisCom:number;
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient, private toastr:ToastrService) { }
 
 	getData(source: string) {
 		return this.http.get(source).pipe(
@@ -67,7 +67,7 @@ export class HttpService {
 		return this.http.get<Medico[]>("http://18.216.2.122:9000/administrador/ver-personal/");
 	}
 	loadHistorias(): Observable<Historial[]> {
-		return this.http.get<Historial[]>("http://18.216.2.122:9000/admision/ver-historias/");
+		return this.http.get<Historial[]>("http://18.216.2.122:9000/admision/ver-historias/")
 	}
 	loadCitas(): Observable<Cita[]> {
 		return this.http.get<Cita[]>("http://18.216.2.122:9000/consultorio/crear-cita/");
@@ -91,7 +91,9 @@ export class HttpService {
 		return this.http.get<Departamento[]>("http://18.216.2.122:9000/admision/departamentos/");
 	}
 	searchHistoriaTriaje(dni: string): Observable<any> {
+		
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citadni/' + dni + "/");
+		
 	}
 	crearTriaje(newTriaje: Triaje) {
 		console.log('servicio triaje');
@@ -112,7 +114,7 @@ export class HttpService {
 
 			}).subscribe(
 				data => {
-
+					
 					console.log('triaje creado completo');
 				},
 				error => {
@@ -122,8 +124,7 @@ export class HttpService {
 	}
 	createHISTORIAL(newHistoria: Historial) {
 		console.log(newHistoria);
-		this.http.post<any>('http://18.216.2.122:9000/admision/crear-historia/',
-			{
+		this.http.post<any>('http://18.216.2.122:9000/admision/crear-historia/',{
 				numeroHistoria: newHistoria.numeroHistoria,
 				dni: newHistoria.dni,
 				nombres: newHistoria.nombres,
@@ -146,10 +147,13 @@ export class HttpService {
 				departamento: newHistoria.departamento,
 			}).subscribe(
 				data => {
+					this.toastr.success("Historial Creado correctamente");
 					console.log("CREAR Historial Completo");
 				},
 				error => {
 					console.log(error.message);
+					this.toastr.error("No se pudo crear el Historial");
+					this.toastr.warning("Recuerde que no debe repetirse el DNI");
 				});
 	}
 	searcHistoriasDNI(dni: string): Observable<Historial> {
@@ -176,9 +180,12 @@ export class HttpService {
 				data => {
 					newCita = <Cita>{};
 					console.log('CITA Completo');
+					this.toastr.success("Cita Agregada correctamente");
 				},
 				error => {
 					console.log(error.message);
+					this.toastr.error("No se pudo agregar la cita");
+					this.toastr.warning("Recuerde que no debe repetirse el Numero de Recibo");
 				}
 			);
 	}

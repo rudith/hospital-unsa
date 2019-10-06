@@ -11,13 +11,14 @@ import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
 	selector: 'app-citas',
 	templateUrl: './citas.component.html',
 	styleUrls: ['./citas.component.scss'],
-	providers: [MessageService]
+	providers: [ConfirmationService]
 })
 export class CitasComponent extends BasePageComponent implements OnInit, OnChanges {
 	cita: Cita;
@@ -38,7 +39,8 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		private modal: TCModalService,
 		private fb: FormBuilder,
 		private http: HttpClient,
-		private messageService: MessageService
+		private toastr: ToastrService,
+		private conf: ConfirmationService
 	) {
 		super(store, httpSv);
 
@@ -72,7 +74,14 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			this.loadOptions();
 		});
 	}
-
+	confirm() {
+		this.conf.confirm({
+			message: 'Are you sure that you want to perform this action?',
+			accept: () => {
+				this.toastr.success('', 'Cita ACtualizad2a');
+			}
+		});
+	}
 	ngOnInit() {
 		super.ngOnInit();
 		this.store.select('citas').subscribe(citas => {
@@ -189,7 +198,8 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		})
 			.subscribe(
 				data => {
-					this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
+					this.toastr.success('', 'Cita ACtualizad2a');
+					// this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
 					newCita = <Cita>{};
 					this.loadCitas();
 				},
@@ -217,7 +227,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		// });
 		this.httpSv.CancelarCita(id).subscribe(cita => {
 			this.loadCitas();
-			this.messageService.add({ severity: 'info', summary: 'Cita Cancelada' });
+			// this.messageService.add({ severity: 'info', summary: 'Cita Cancelada' });
 		});
 	}
 

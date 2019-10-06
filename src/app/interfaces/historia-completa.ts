@@ -1,6 +1,7 @@
 import { Triaje } from './triaje';
 import { Consulta } from './consulta';
 export interface HistoriaCompleta {
+  id:number,
   nombres: string,
   apellido_paterno: string,
   apellido_materno: string,

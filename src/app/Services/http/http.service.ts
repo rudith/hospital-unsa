@@ -81,6 +81,9 @@ export class HttpService {
 	loadCitas(): Observable<Cita[]> {
 		return this.http.get<Cita[]>("http://18.216.2.122:9000/consultorio/crear-cita/");
 	}
+	loadCitasEdit(): Observable<CitaM[]> {
+		return this.http.get<CitaM[]>("http://18.216.2.122:9000/consultorio/ver-citas/");
+	}
 	CancelarCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/cancelarcita/" + id + "/");
 	}

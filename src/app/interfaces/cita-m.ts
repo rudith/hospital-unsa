@@ -1,15 +1,27 @@
-import { Historial } from './historial'
-import { Especialidad } from './especialidad'
+import { Especialidad } from './especialidad';
 
 export interface CitaM {
   id: number,
-  numeroHistoria: Historial;
+  numeroHistoria: {
+    id: number,
+    numeroHistoria: number,
+    dni: number,
+    nombres: string,
+    apellido_paterno: string,
+    apellido_materno: string,
+    sexo: string,
+    edad: number
+  },
   especialidad: Especialidad;
+  medico: {
+    id: 1,
+    username: string,
+  },
   numeroRecibo: number,
-	fechaSeparacion: string,
-	fechaAtencion: string,
-	estadoCita: string,
+  fechaSeparacion: string,
+  fechaAtencion: string,
+  estadoCita: string,
   exonerado: boolean,
-	responsable: string,
+  responsable: string,
   estReg: boolean
 }

@@ -13,6 +13,7 @@ import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationService } from 'primeng/api';
+import { CitaM } from '../../../interfaces/cita-m';
 
 @Component({
 	selector: 'app-citas',
@@ -23,6 +24,7 @@ import { ConfirmationService } from 'primeng/api';
 export class CitasComponent extends BasePageComponent implements OnInit, OnChanges {
 	cita: Cita;
 	citas: Cita[];
+	citasEdit:CitaM[];
 	public today: Date;
 	tableData: any;
 	patientForm: FormGroup;
@@ -67,19 +69,12 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		};
 		this.tableData = [];
 		this.citas = [];
+		this.citasEdit=[];
 		this.loadCitas();
 		this.espOption = [];
 		this.httpSv.loadEspecialidades().subscribe(especialidades => {
 			this.especialidades = especialidades;
 			this.loadOptions();
-		});
-	}
-	confirm() {
-		this.conf.confirm({
-			message: 'Are you sure that you want to perform this action?',
-			accept: () => {
-				this.toastr.success('', 'Cita ACtualizad2a');
-			}
 		});
 	}
 	ngOnInit() {
@@ -99,15 +94,16 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	}
 
 	onChangeTable() {
-		console.log("Entra");
 		if (this.dni == "" || this.dni == undefined) {
 			this.httpSv.loadCitas().subscribe(citas => {
+				this.toastr.warning('Ningun valor ingresado');
 				this.citas = citas
 			});
 		} else {
 			this.httpSv.searchCita(this.dni).subscribe(data => {
 				this.citas = data.citas;
-				// console.log(JSON.stringify(this.citas));
+			},error=>{
+				this.toastr.warning('No encontrado');
 			});;
 		}
 	}
@@ -198,13 +194,13 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		})
 			.subscribe(
 				data => {
-					this.toastr.success('', 'Cita ACtualizad2a');
+					this.toastr.success('', 'Cita ACtualizada');
 					// this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
 					newCita = <Cita>{};
 					this.loadCitas();
 				},
 				error => {
-					console.log(error.message);
+					this.toastr.warning('Error Cita no Actualizada');
 				}
 			);
 		// console.log(JSON.stringify(this.newHistoria));
@@ -215,20 +211,24 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	loadCitas() {
 		this.httpSv.loadCitas().subscribe(citas => {
 			this.citas = citas
-
+		});
+		this.httpSv.loadCitasEdit().subscribe(citas => {
+			this.citasEdit = citas
+			// console.log(JSON.stringify(this.citasEdit));
 		});
 	}
 	CancelarCita(id: number) {
-		// this.http.get("http://18.216.2.122:9000/consultorio/cancelarcita/"+id).subscribe((data: Cita[]) => {
-		// 		this.citas = data;
-		// 		console.log("cita eliminada");
-		// 	}, error => {
-		// 		console.log(error.message);
-		// });
-		this.httpSv.CancelarCita(id).subscribe(cita => {
-			this.loadCitas();
-			// this.messageService.add({ severity: 'info', summary: 'Cita Cancelada' });
-		});
+		this.conf.confirm({
+			message: '¿Esta seguro de cancelar la cita?',
+			accept: () => {
+				this.httpSv.CancelarCita(id).subscribe(cita => {
+					this.loadCitas();
+					this.toastr.success('', 'Cita Cancelada');
+				},error=>{
+					this.toastr.warning('Error Cita no cancelada');
+				});
+			}
+		});	
 	}
 
 }

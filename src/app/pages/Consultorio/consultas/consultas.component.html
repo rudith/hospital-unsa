@@ -18,21 +18,18 @@
 	</div>
 </form> -->
 <tc-card class="mb-0">
-	<tc-table [rows]="citas" [hovered]="true">
+	<tc-table [rows]="CitasC" [hovered]="true">
 		<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'numeroHistoria'" [enableSorting]="true">
+		<tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'numeroRecibo'" [enableSorting]="true">
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Nombres'" [columnName]="'numeroRecibo'" ></tc-table-col>
-		<tc-table-col [columnTitle]="'Apellido Paterno'" [columnName]="'numeroRecibo'" >
-		</tc-table-col>
-		<tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'numeroRecibo'" ></tc-table-col>
-		<tc-table-col [columnTitle]="'Especialidad'" [columnName]="'especialidad'"></tc-table-col>
+		<tc-table-col [columnTitle]="'Nombre Completo'" [columnName]="'responsable'" ></tc-table-col>
+		<tc-table-col [columnTitle]="'Especialidad'" [columnName]="'fechaAtencion'"></tc-table-col>
 		<tc-table-col [columnTitle]="'Atender Paciente'" [columnName]="''">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
-					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
-						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'" (click)="atender(row.numeroHistoria,row.id)">Atender</button>
+					<button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
+						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'" (click)="atender(row.numeroRecibo,row.id)">Atender</button>
 				</div>
 			</ng-template>
 		</tc-table-col>

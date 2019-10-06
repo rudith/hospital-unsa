@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, ElementRef, ɵConsole } from '@angular/core';
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
@@ -13,12 +13,14 @@ import { IUser } from '../../../ui/interfaces/user';
 import { Triaje } from '../../../interfaces/triaje';
 import { Consulta } from '../../../interfaces/consulta';
 import { Router } from '@angular/router';
-
+import { MessageService } from 'primeng/components/common/messageservice';
+import { id } from '@swimlane/ngx-charts/release/utils';
 
 @Component({
   selector: 'app-consultas',
   templateUrl: './listar-consultas.component.html',
-  styleUrls: ['./listar-consultas.component.scss']
+  styleUrls: ['./listar-consultas.component.scss'],
+  providers: [MessageService]
 })
 export class ListarConsultasComponent extends BasePageComponent implements OnInit {
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
@@ -27,22 +29,27 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   historiaForm: FormGroup;
   consultForm: FormGroup;
   verMasCForm: FormGroup;
+  verTriajeForm:FormGroup;
   historiaRecibida: HistoriaCompleta;
+  triajeRecibido:Triaje;
   consultas: Consulta[];
   triajes: Triaje[];
   datoBus: string;
+  private idRecibido:number;
   private nombreRecibido:string;
   private numHistRecibido: string;
   private dniRecibido:string;
   private edadRecibido:number;
   private sexoRecibido:string;
+  private idTriajeRecibido:number;
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
     private modal: TCModalService,
-    private http: HttpClient,		
-		private router: Router,
+    private http: HttpClient,   
+    private router: Router,
+    private messageService: MessageService,
   ) {
 
     super(store, httpSv);
@@ -66,7 +73,10 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.consultas = [];
     this.triajes=[];
     this.datoBus=this.httpSv.getNroHC();
-    console.log(this.datoBus);
+    this.idTriajeRecibido=this.httpSv.getIdHC();
+    this.httpSv.searcTriajeC(this.idTriajeRecibido).subscribe(data =>{
+      this.triajeRecibido=data;
+    });
     this.cargarPaciente();    
   }
 
@@ -75,6 +85,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   }
   //Modal Crear Consulta
   openModalC<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
+    this.initverTriajeForm();
     this.initConsultForm();
     this.modal.open({
       body: body,
@@ -86,6 +97,17 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   closeModalC() {
     this.modal.close();
     this.consultForm.reset();
+  }
+  initverTriajeForm() {
+    this.verTriajeForm = this.formBuilder.group({
+      talla: [this.triajeRecibido.talla ? this.triajeRecibido.talla: '', Validators.required],
+      peso: [this.triajeRecibido.peso ? this.triajeRecibido.peso: '', Validators.required],
+      temperatura: [this.triajeRecibido.temperatura ? this.triajeRecibido.temperatura: '', Validators.required],
+      frecuenciaR: [this.triajeRecibido.frecuenciaR ? this.triajeRecibido.frecuenciaR: '', Validators.required],
+      frecuenciaC: [this.triajeRecibido.frecuenciaC ? this.triajeRecibido.frecuenciaC: '', Validators.required],
+      presionArt:[this.triajeRecibido.presionArt ? this.triajeRecibido.presionArt: '', Validators.required]
+    });
+
   }
   initConsultForm() {
     this.consultForm = this.formBuilder.group({
@@ -101,19 +123,20 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   }
   addConsult(form: FormGroup) {
-		if (form.valid) {
+    if (form.valid) {
       let newConsult: Consulta = form.value;
       newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
-      newConsult.numeroHistoria=1;
-      newConsult.triaje=this.httpSv.getIdHC();
-      newConsult.medico=2;
+      newConsult.numeroHistoria=this.idRecibido;
+      newConsult.triaje=this.triajeRecibido.id;
+      newConsult.medico=1;
       console.log(newConsult);
-			this.httpSv.crearConsulta(newConsult);
-			this.closeModalC();
-			this.cargarPaciente();
-			this.consultForm.reset();
-		}
-	}
+      this.httpSv.crearConsulta(newConsult);
+      this.closeModalC();
+      this.consultForm.reset();
+      this.router.navigate(['/vertical/consultas']);
+      this.messageService.add({ severity: 'info', summary: 'Consulta creada' });
+    }
+  }
 
 
   //fin de Modal Crear Consulta
@@ -155,6 +178,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   cargarPaciente() {
     this.httpSv.searcHistoriaCompleta(this.datoBus).subscribe(data => {
+      this.idRecibido=data.id;
       this.historiaRecibida = data;
       this.consultas = this.historiaRecibida.consultas;
       this.triajes = this.historiaRecibida.triajes;
@@ -163,8 +187,6 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       this.numHistRecibido = this.historiaRecibida.numeroHistoria;
       this.edadRecibido = this.historiaRecibida.edad;
       this.sexoRecibido = this.historiaRecibida.sexo;
-      console.log(this.historiaRecibida.nombres);
-            
     });;
   }
 
@@ -172,7 +194,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     super.ngOnDestroy();
   }
   regresar(){
-		this.router.navigate(['/vertical/consultas']);
-	}
+    this.router.navigate(['/vertical/consultas']);
+  }
 
 }

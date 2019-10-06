@@ -76,7 +76,7 @@ import {ToastModule} from 'primeng/toast';
 import { ConsultasComponent } from './Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
 import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component';
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -94,7 +94,8 @@ import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component
     FullCalendarModule,
     UIModule,
     LayoutModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule
   ],
   declarations: [
     BasePageComponent,

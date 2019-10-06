@@ -15,11 +15,15 @@ import { Triaje } from '../../interfaces/triaje';
 import { HistoriaCompleta } from '../../interfaces/historia-completa';
 import { Consulta } from '../../interfaces/consulta';
 import { CitaM } from '../../interfaces/cita-m';
+import { ToastrService } from 'ngx-toastr';
+import { IOption } from 'src/app/ui/interfaces/option';
+// import { IOption } from 'src/app/ui/interfaces/option';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class HttpService {
+
 	public admin: boolean = false;
 	public admis: boolean = false;
 	public triaje: boolean = false;
@@ -34,9 +38,23 @@ export class HttpService {
 	public MedicoGetUpdate: Medico[] = [];
 	public historia: Historial;
 	public cita: Cita;
-	private nroHisCom:string;
-	private idHisCom:number;
-	constructor(private http: HttpClient, private toastr:ToastrService) { }
+	private nroHisCom: string;
+	private idHisCom: number;
+	public users: User[] = [];
+	public medOption: IOption[];
+
+	constructor(private http: HttpClient, private toastr: ToastrService) {
+		this.loadUsers().subscribe(medicos => {
+			this.users = medicos;
+			for (let i in this.users) {
+				this.medOption[i] =
+					{
+						label: this.users[i].username,
+						value: this.users[i].id.toString()
+					};
+			}
+		});
+	}
 
 	getData(source: string) {
 		return this.http.get(source).pipe(
@@ -44,15 +62,15 @@ export class HttpService {
 			catchError(this.handleError)
 		);
 	}
-	getNroHC():string{
+	getNroHC(): string {
 		return this.nroHisCom;
 	}
-	getIdHC():number{
+	getIdHC(): number {
 		return this.idHisCom;
 	}
-	setNroHC(change:string, cha:number){
-		this.nroHisCom=change;
-		this.idHisCom=cha;
+	setNroHC(change: string, cha: number) {
+		this.nroHisCom = change;
+		this.idHisCom = cha;
 	}
 	private handleError(error: any) {
 		return observableThrowError(error.error || 'Server error');
@@ -91,9 +109,9 @@ export class HttpService {
 		return this.http.get<Departamento[]>("http://18.216.2.122:9000/admision/departamentos/");
 	}
 	searchHistoriaTriaje(dni: string): Observable<any> {
-		
+
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citadni/' + dni + "/");
-		
+
 	}
 	crearTriaje(newTriaje: Triaje) {
 		console.log('servicio triaje');
@@ -114,7 +132,7 @@ export class HttpService {
 
 			}).subscribe(
 				data => {
-					
+
 					console.log('triaje creado completo');
 				},
 				error => {
@@ -124,37 +142,37 @@ export class HttpService {
 	}
 	createHISTORIAL(newHistoria: Historial) {
 		console.log(newHistoria);
-		this.http.post<any>('http://18.216.2.122:9000/admision/crear-historia/',{
-				numeroHistoria: newHistoria.numeroHistoria,
-				dni: newHistoria.dni,
-				nombres: newHistoria.nombres,
-				apellido_paterno: newHistoria.apellido_paterno,
-				apellido_materno: newHistoria.apellido_materno,
-				sexo: newHistoria.sexo,
-				edad: newHistoria.edad,
-				fechaNac: newHistoria.fechaNac,
-				celular: newHistoria.celular,
-				telefono: newHistoria.telefono,
-				estadoCivil: newHistoria.estadoCivil,
-				gradoInstruccion: newHistoria.gradoInstruccion,
-				ocupacion: newHistoria.ocupacion,
-				direccion: newHistoria.direccion,
-				nacionalidad: newHistoria.nacionalidad,
-				email: newHistoria.email,
-				estReg: newHistoria.estReg,
-				distrito: newHistoria.distrito,
-				provincia: newHistoria.provincia,
-				departamento: newHistoria.departamento,
-			}).subscribe(
-				data => {
-					this.toastr.success("Historial Creado correctamente");
-					console.log("CREAR Historial Completo");
-				},
-				error => {
-					console.log(error.message);
-					this.toastr.error("No se pudo crear el Historial");
-					this.toastr.warning("Recuerde que no debe repetirse el DNI");
-				});
+		this.http.post<any>('http://18.216.2.122:9000/admision/crear-historia/', {
+			numeroHistoria: newHistoria.numeroHistoria,
+			dni: newHistoria.dni,
+			nombres: newHistoria.nombres,
+			apellido_paterno: newHistoria.apellido_paterno,
+			apellido_materno: newHistoria.apellido_materno,
+			sexo: newHistoria.sexo,
+			edad: newHistoria.edad,
+			fechaNac: newHistoria.fechaNac,
+			celular: newHistoria.celular,
+			telefono: newHistoria.telefono,
+			estadoCivil: newHistoria.estadoCivil,
+			gradoInstruccion: newHistoria.gradoInstruccion,
+			ocupacion: newHistoria.ocupacion,
+			direccion: newHistoria.direccion,
+			nacionalidad: newHistoria.nacionalidad,
+			email: newHistoria.email,
+			estReg: newHistoria.estReg,
+			distrito: newHistoria.distrito,
+			provincia: newHistoria.provincia,
+			departamento: newHistoria.departamento,
+		}).subscribe(
+			data => {
+				this.toastr.success("Historial Creado correctamente");
+				console.log("CREAR Historial Completo");
+			},
+			error => {
+				console.log(error.message);
+				this.toastr.error("No se pudo crear el Historial");
+				this.toastr.warning("Recuerde que no debe repetirse el DNI");
+			});
 	}
 	searcHistoriasDNI(dni: string): Observable<Historial> {
 		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historiadni/' + dni + "/");
@@ -173,8 +191,8 @@ export class HttpService {
 				especialidad: newCita.especialidad,
 				numeroHistoria: newCita.numeroHistoria,
 				medico: newCita.medico,
-				responsable:newCita.responsable,
-				exonerado:newCita.exonerado,
+				responsable: newCita.responsable,
+				exonerado: newCita.exonerado,
 			})
 			.subscribe(
 				data => {
@@ -253,7 +271,7 @@ export class HttpService {
 			{
 				motivoConsulta: newConsulta.motivoConsulta,
 				apetito: newConsulta.apetito,
-				orina: newConsulta.orina, 
+				orina: newConsulta.orina,
 				deposiciones: newConsulta.deposiciones,
 				examenFisico: newConsulta.examenFisico,
 				diagnostico: newConsulta.diagnostico,

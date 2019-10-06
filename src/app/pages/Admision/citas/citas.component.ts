@@ -22,9 +22,9 @@ import { CitaM } from '../../../interfaces/cita-m';
 	providers: [ConfirmationService]
 })
 export class CitasComponent extends BasePageComponent implements OnInit, OnChanges {
-	cita: Cita;
+	cita: CitaM;
 	citas: Cita[];
-	citasEdit:CitaM[];
+	citasEdit: CitaM[];
 	public today: Date;
 	tableData: any;
 	patientForm: FormGroup;
@@ -69,7 +69,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		};
 		this.tableData = [];
 		this.citas = [];
-		this.citasEdit=[];
+		this.citasEdit = [];
 		this.loadCitas();
 		this.espOption = [];
 		this.httpSv.loadEspecialidades().subscribe(especialidades => {
@@ -102,7 +102,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		} else {
 			this.httpSv.searchCita(this.dni).subscribe(data => {
 				this.citas = data.citas;
-			},error=>{
+			}, error => {
 				this.toastr.warning('No encontrado');
 			});;
 		}
@@ -116,7 +116,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		}
 	}
 	// open modal window
-	openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Cita) {
+	openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: CitaM) {
 		// console.log(JSON.stringify(row));
 		this.initForm();
 		this.modal.open({
@@ -125,7 +125,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			footer: footer,
 			options: null
 		});
-		console.log("Cita obtenida" + JSON.stringify(row));
+		// console.log("Cita obtenida" + JSON.stringify(row));
 	}
 	initForm() {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
@@ -134,28 +134,22 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			especialidad: ['', Validators.required]
 		});
 	}
-	// init form
-	// initForm(data: Cita) {
-	// 	// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
-	// 	this.appointmentForm = this.formBuilder.group({
-	// 		fechaSeparacion: [data.fechaSeparacion, Validators.required],
-	// 		especialidad: [data.especialidad, Validators.required]
-	// 	});
-	// }
 
 	// close modal window
 	closeModal() {
 		this.modal.close();
 		this.appointmentForm.reset();
 	}
-	sendCita(cita: Cita) {
+	sendCita(cita: CitaM) {
 		this.cita = cita;
 	}
 	addAppointment(form: FormGroup) {
-		// console.log(JSON.stringify(form));
+
+		console.log(JSON.stringify(+form.value.especialidad));
 		if (form.valid) {
 			this.today = new Date();
 			let newAppointment: Cita = form.value;
+
 			newAppointment.fechaSeparacion = formatDate(
 				form.value.fechaSeparacion,
 				'yyyy-MM-dd',
@@ -168,10 +162,10 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			newAppointment.numeroRecibo = this.cita.numeroRecibo;
 			newAppointment.estadoCita = this.cita.estadoCita;
 			newAppointment.estReg = this.cita.estReg;
-			newAppointment.numeroHistoria = this.cita.numeroHistoria;
+			newAppointment.numeroHistoria = this.cita.numeroHistoria.id;
 			newAppointment.exonerado = this.cita.exonerado;
 			newAppointment.responsable = this.cita.responsable;
-			newAppointment.medico = this.cita.medico;
+			newAppointment.medico = this.cita.medico.id.toString();
 			this.updateCita(newAppointment);
 
 			this.closeModal();
@@ -224,11 +218,11 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 				this.httpSv.CancelarCita(id).subscribe(cita => {
 					this.loadCitas();
 					this.toastr.success('', 'Cita Cancelada');
-				},error=>{
+				}, error => {
 					this.toastr.warning('Error Cita no cancelada');
 				});
 			}
-		});	
+		});
 	}
 
 }

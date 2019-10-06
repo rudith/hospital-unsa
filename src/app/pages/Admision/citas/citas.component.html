@@ -1,9 +1,10 @@
-<p-confirmDialog [style]="{background: '#70B1C9',opacity: '0.8'}" header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
+<p-confirmDialog [style]="{background: '#70B1C9',opacity: '0.8'}" header="Confirmation"
+	icon="pi pi-exclamation-triangle"></p-confirmDialog>
 <div class="col-sm-12">
 	<div class="row">
 		<tc-form-group class="col-sm-6 col-lg-10">
-			<tc-input [placeholder]="'Buscar Cita'" [(ngModel)]="dni" [suffixIcon]="'icofont-search-document'">
+			<tc-input [placeholder]="'Buscar Cita'" type="number" [(ngModel)]="dni"
+				[suffixIcon]="'icofont-search-document'">
 			</tc-input>
 		</tc-form-group>
 		<tc-form-group class="col-sm-6 col-lg-2">
@@ -13,46 +14,84 @@
 		</tc-form-group>
 	</div>
 	<tc-card class="mb-0">
-		<tc-table [rows]="citas" [hovered]="true" [pagination]="true">
-			<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Numero de Recibo'" [columnName]="'numeroRecibo'" [enableSorting]="true">
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Fecha de Atención'" [columnName]="'fechaAtencion'" [enableSorting]="true">
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Fecha de Separación'" [columnName]="'fechaSeparacion'" [enableSorting]="true">
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Estado de Cita'" [columnName]="'estadoCita'" [enableSorting]="true">
-				<ng-template #tableTDTemplate let-value>
-					<tc-badge [view]="value === 'Espera' ? 'Activo' : 'warning'">{{ value }}</tc-badge>
-				</ng-template>
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Médico'" [columnName]="'medico'" [enableSorting]="true">
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Especialidad'" [columnName]="'especialidad'" [enableSorting]="true">
-				<ng-template #tableTDTemplate let-value>
-					<tc-badge class="nowrap" [view]="'accent'">{{ value }}</tc-badge>
-				</ng-template>
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
-				<ng-template #tableTDTemplate let-row="row">
-					<div class="actions">
-						<button class="col-6" tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true"
-							[tcShape]="500" [size]="'sm'"
-							(click)="openModal(modalBody, 'Editar Cita', modalFooter,row);sendCita(row)"></button>
-					</div>
-				</ng-template>
-			</tc-table-col>
-			<tc-table-col [columnTitle]="'Cancelar'" [columnName]="'actions'">
-				<ng-template #tableTDTemplate let-row="row">
-					<div class="actions">
-						<button class="col-6" tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'"
-							[square]="true" [tcShape]="500" [size]="'sm'"
-							(click)="CancelarCita(row.numeroRecibo)"></button>
-					</div>
-				</ng-template>
-			</tc-table-col>
-		</tc-table>
+		<div class="table-wrap">
+			<table class="table-box">
+				<thead>
+					<tr>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							Numero de Historia
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							N° Recibo
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							DNI
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							F. Atencion
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							F. Separación
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							Estado
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							Especialidad
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							Modificar
+						</th>
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							Cancelar
+						</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr *ngFor="let row of citasEdit">
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.numeroHistoria.numeroHistoria}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.numeroRecibo}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.numeroHistoria.dni}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.fechaAtencion}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.fechaSeparacion}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.estadoCita}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.especialidad.nombre}}
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							<div class="actions">
+								<button class="col-6" tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'"
+									[square]="true" [tcShape]="500" [size]="'sm'"
+									(click)="openModal(modalBody, 'Editar Cita', modalFooter,row);sendCita(row)"></button>
+							</div>
+
+						</td>
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							<div class="actions">
+								<button class="col-6" tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'"
+									[square]="true" [tcShape]="500" [size]="'sm'"
+									(click)="CancelarCita(row.id)"></button>
+							</div>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
 	</tc-card>
 </div>
 <ng-container>
@@ -60,7 +99,7 @@
 		<form [formGroup]="appointmentForm">
 			<tc-form-group>
 				<tc-form-label>Especialidad</tc-form-label>
-				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption">
+				<tc-select [placeholder]="'Especialidad'" type="number" formControlName="especialidad" [options]="espOption">
 				</tc-select>
 				<tc-form-label>Fecha de Separación</tc-form-label>
 				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"

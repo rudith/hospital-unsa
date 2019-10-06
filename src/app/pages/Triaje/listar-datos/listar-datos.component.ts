@@ -11,13 +11,11 @@ import { Historial } from '../../../../app/interfaces/historial';
 import { HttpClient } from '@angular/common/http';
 import { Triaje } from '../../../../app/interfaces/triaje';
 import { Cita } from '../../../../app/interfaces/cita';
-import { MessageService } from 'primeng/components/common/messageservice';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-listar-datos',
   templateUrl: './listar-datos.component.html',
-  styleUrls: ['./listar-datos.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./listar-datos.component.scss']
 })
 export class ListarDatosComponent extends BasePageComponent implements OnInit, OnDestroy {
   patients: IPatient[];
@@ -40,7 +38,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     private formBuilder: FormBuilder,
     private modal: TCModalService,
     private http: HttpClient,
-    private messageService: MessageService
+    private toastr: ToastrService,
 
   ) {
     super(store, httpSv);
@@ -74,13 +72,11 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   }
 
   buscartriaje(dni: string) {
-
-    this.messageService.add({ severity: 'info', summary: 'Buscando' });
     console.log("buscando");
     this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
       this.citas = data.citas;
       this.dni2 = data.dni;
-      console.log("entro busqueda" + dni);
+      this.toastr.success('', 'Encontrado');
     });;
   }
 
@@ -166,7 +162,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
       this.httpSv.crearTriaje(newTriaje);
       this.closeModal();
       this.patientForm1.reset();
-      this.messageService.add({ severity: 'info', summary: 'Creando Triaje' });
+      this.toastr.success('', 'Triaje Creado');
     }
   }
 

@@ -1,13 +1,15 @@
-import { Component , OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
 import { HttpService } from '../../../services/http/http.service';
-import { Cita } from '../../../interfaces/cita';
+import { CitaM } from '../../../interfaces/cita-m';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Historial } from '../../../interfaces/historial';
+import { Especialidad } from '../../../interfaces/especialidad';
 
 
 @Component({
@@ -17,13 +19,15 @@ import { Router } from '@angular/router';
 })
 export class ConsultasComponent extends BasePageComponent implements OnInit, OnChanges {
 	tableData: any;
-	cita: Cita;
-	citas: Cita[];
-  busForm: FormGroup;
+	cita: CitaM;
+	CitasC: CitaM[];
+	historialesC: Historial;
+	especialidadesC: Especialidad;
+	busForm: FormGroup;
 	public today: Date;
 	public dni: string;
-	private idMedico:number;
-	
+	private idMedico: number;
+
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -57,28 +61,34 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 			]
 		};
 		this.tableData = [];
-		this.idMedico=2;
-		this.citas = [];
+		this.idMedico = 1;
+		this.CitasC=[];
 		this.loadCitas();
 	}
 
 	ngOnInit() {
-    super.ngOnInit();
-    //this.initBusForm();
+		super.ngOnInit();
+		//this.initBusForm();
 		this.store.select('citas').subscribe(citas => {
 			if (citas && citas.length) {
-				this.citas = citas;
+				this.CitasC=[];
+				this.CitasC = citas.citasM;
 				!this.pageData.loaded ? this.setLoaded() : null;
 			}
 		});
 	}
-	ngOnChanges($event) {
-		console.log(this.dni);
-	}
+	ngOnChanges($event) {	}
 	loadCitas() {
-		this.httpSv.loadCitasMedico(this.idMedico).subscribe(citas => {
-			this.citas = citas.citasM;
+		this.httpSv.loadCitasMedico(this.idMedico).subscribe(data => {
+			this.CitasC=[];
+			this.CitasC = data.citasM;
+			for(let i in this.CitasC){
+				this.CitasC[i].numeroRecibo=this.CitasC[i].numeroHistoria.numeroHistoria;
+				this.CitasC[i].responsable=this.CitasC[i].numeroHistoria.nombres+" "+this.CitasC[i].numeroHistoria.apellido_paterno+" "+this.CitasC[i].numeroHistoria.apellido_materno;
+				this.CitasC[i].fechaAtencion=this.CitasC[i].especialidad.nombre;
+			}
 		});
+		
 	}
 	ngOnDestroy() {
 		super.ngOnDestroy();
@@ -100,8 +110,8 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
     });
     this.dni=this.busForm.get('datoBus').value;
 	} */
-	atender(nro:string,id:number){
-		this.httpSv.setNroHC(nro,id);
+	atender(nro: string, id: number) {
+		this.httpSv.setNroHC(nro, id);
 		this.router.navigate(['/vertical/Lconsultas']);
 	}
 }

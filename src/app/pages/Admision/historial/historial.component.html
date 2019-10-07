@@ -40,14 +40,14 @@
 				<ng-template #tableTDTemplate let-value>
 					<strong>{{ value }}</strong>
 				</ng-template>
-			</tc-table-col>
+			
+			<tc-table-col [columnTitle]="'DNI'" [columnName]="'dni'" [enableSorting]="true"></tc-table-col></tc-table-col>
 			<tc-table-col [columnTitle]="'Nombres'" [columnName]="'nombres'" [enableSorting]="true"></tc-table-col>
 			<tc-table-col [columnTitle]="'Apellido Paterno'" [columnName]="'apellido_paterno'" [enableSorting]="true">
 			</tc-table-col>
 			<tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'apellido_materno'" [enableSorting]="true">
 			</tc-table-col>
-			<tc-table-col [columnTitle]="'Edad'" [columnName]="'edad'">
-			</tc-table-col>
+			
 			<tc-table-col [columnTitle]="'Celular'" [columnName]="'celular'">
 				<ng-template #tableTDTemplate let-value>
 					<span class="d-flex align-items-center nowrap" [tcColor]="'#336cfb'">

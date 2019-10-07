@@ -355,6 +355,7 @@ export class HistorialComponent extends BasePageComponent
 			newAppointment.numeroHistoria = this.numero;
 			
 			if (newAppointment.responsable == "") {
+				
 				newAppointment.exonerado = false;
 				console.log(newAppointment.exonerado + " entro if ");
 			}

@@ -130,6 +130,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       this.httpSv.crearConsulta(newConsult);
       this.atenderCita(this.idTriajeRecibido);
       this.closeModalC();
+      this.cargarPaciente();
       this.consultForm.reset();
     //  this.router.navigate(['/vertical/consultas']);
     }
@@ -152,6 +153,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   closeModalVerC() {
     this.modal.close();
     this.verMasCForm.reset();
+
   }
   initVerMasForm(data: number) {
     this.verMasCForm = this.formBuilder.group({

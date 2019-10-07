@@ -93,15 +93,15 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		super.ngOnDestroy();
 	}
 
-	onChangeTable() {
+	buscar() {
+		console.log(this.dni);
 		if (this.dni == "" || this.dni == undefined) {
-			this.httpSv.loadCitas().subscribe(citas => {
-				this.toastr.warning('Ningun valor ingresado');
-				this.citas = citas
-			});
+			this.loadCitas();
+			this.toastr.warning('Todas las citas cargadas','Ningun valor ingresado');
 		} else {
 			this.httpSv.searchCita(this.dni).subscribe(data => {
-				this.citas = data.citas;
+				this.citasEdit = data.citas;
+				this.toastr.success('Cita(s) encontrada(s)');
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});;
@@ -203,9 +203,6 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	// init form
 
 	loadCitas() {
-		this.httpSv.loadCitas().subscribe(citas => {
-			this.citas = citas
-		});
 		this.httpSv.loadCitasEdit().subscribe(citas => {
 			this.citasEdit = citas
 			// console.log(JSON.stringify(this.citasEdit));

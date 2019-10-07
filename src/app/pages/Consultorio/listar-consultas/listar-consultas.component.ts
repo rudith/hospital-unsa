@@ -13,14 +13,12 @@ import { IUser } from '../../../ui/interfaces/user';
 import { Triaje } from '../../../interfaces/triaje';
 import { Consulta } from '../../../interfaces/consulta';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/components/common/messageservice';
-import { id } from '@swimlane/ngx-charts/release/utils';
+
 
 @Component({
   selector: 'app-consultas',
   templateUrl: './listar-consultas.component.html',
   styleUrls: ['./listar-consultas.component.scss'],
-  providers: [MessageService]
 })
 export class ListarConsultasComponent extends BasePageComponent implements OnInit {
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
@@ -49,7 +47,6 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     private modal: TCModalService,
     private http: HttpClient,   
     private router: Router,
-    private messageService: MessageService,
   ) {
 
     super(store, httpSv);
@@ -131,14 +128,14 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       newConsult.medico=1;
       console.log(newConsult);
       this.httpSv.crearConsulta(newConsult);
+      this.atenderCita(this.idTriajeRecibido);
       this.closeModalC();
       this.consultForm.reset();
-      this.router.navigate(['/vertical/consultas']);
-      this.messageService.add({ severity: 'info', summary: 'Consulta creada' });
+    //  this.router.navigate(['/vertical/consultas']);
     }
   }
 
-
+ 
   //fin de Modal Crear Consulta
 
   //Modal Ver Consulta
@@ -196,5 +193,11 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   regresar(){
     this.router.navigate(['/vertical/consultas']);
   }
+
+  atenderCita(id: number) {
+    this.httpSv.AtenderCita(id).subscribe(cita => {
+      this.httpSv.loadCitasM();
+    });
+}
 
 }

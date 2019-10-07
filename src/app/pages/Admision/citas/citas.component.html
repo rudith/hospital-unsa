@@ -8,7 +8,7 @@
 			</tc-input>
 		</tc-form-group>
 		<tc-form-group class="col-sm-6 col-lg-2">
-			<button tc-button [view]="'info'" (click)="onChangeTable()">
+			<button tc-button [view]="'info'" (click)="buscar()">
 				Buscar
 			</button>
 		</tc-form-group>
@@ -26,12 +26,9 @@
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							DNI
-						</th>
+						</th>						
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							F. Atencion
-						</th>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							F. Separación
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							Estado
@@ -58,9 +55,6 @@
 						</td>
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.numeroHistoria.dni}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.fechaAtencion}}
 						</td>
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.fechaSeparacion}}

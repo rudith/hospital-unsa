@@ -11,7 +11,9 @@ import { Historial } from '../../../../app/interfaces/historial';
 import { HttpClient } from '@angular/common/http';
 import { Triaje } from '../../../../app/interfaces/triaje';
 import { Cita } from '../../../../app/interfaces/cita';
+import { CitaM } from '../../../../app/interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-listar-datos',
   templateUrl: './listar-datos.component.html',
@@ -20,6 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ListarDatosComponent extends BasePageComponent implements OnInit, OnDestroy {
   patients: IPatient[];
   citas: Cita[];
+  citasTriaje:CitaM[];
   triaje: Triaje[];
   patientForm1: FormGroup;
   patientForm2: FormGroup;
@@ -30,6 +33,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   dni2: string;
   historial: Historial[];
   idT: number;
+  idCita:number;
 
   constructor(
     store: Store<IAppState>,
@@ -59,6 +63,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 
       ]
     };
+    this.citasTriaje=[];
     this.patients = [];
     this.triaje = [];
     this.citas = [];
@@ -66,18 +71,21 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   }
 
   loadCitas() {
-    this.httpSv.loadCitas().subscribe(citas => {
-      this.citas = citas
+    this.httpSv.loadCitasM().subscribe(citas => {
+      this.citasTriaje = citas
     });
   }
 
   buscartriaje(dni: string) {
+    this.toastr.warning( 'Buscando');
     console.log("buscando");
     this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
-      this.citas = data.citas;
-      this.dni2 = data.dni;
-      this.toastr.success('', 'Encontrado');
-    });;
+      this.citasTriaje=data.citas;
+    },
+    error => {
+      console.log(error.message);
+      this.toastr.error("No se encontro ningun triaje con ese dni");
+    });
   }
 
   buscar(busca: FormGroup) {
@@ -104,6 +112,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: any) {
     this.initPatientForm1(row);
     this.initPatientForm2(row);
+    this.idCita=row.id;
     this.modal.open({
       body: body,
       header: header,
@@ -140,14 +149,12 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
       presionArt: ['', [Validators.required, Validators.pattern('[0-9]*/[0-9]*')]],
       numeroHistoria: [ci.numeroHistoria ? ci.numeroHistoria : '', Validators.required],//capturara el id de historial
       cita: [ci.id ? ci.id : '', Validators.required],   //ID de la cita
-
     });
 
   }
 
   // Crear Triaje
-  CreateTriaje(form: FormGroup) {
-
+  CreateTriaje(form: FormGroup,) {
     if (form.valid) {
       let newTriaje: Triaje = form.value;
       console.log('entra al envio');
@@ -160,13 +167,17 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
       console.log(newTriaje.talla);
       console.log(newTriaje);
       this.httpSv.crearTriaje(newTriaje);
+      this.TriarCita(this.idCita);
       this.closeModal();
       this.patientForm1.reset();
       this.toastr.success('', 'Triaje Creado');
     }
   }
-
-
+  TriarCita(id: number) {
+				this.httpSv.TriarCita(id).subscribe(cita => {
+					this.loadCitas();
+				});
+	}
 }
 
 

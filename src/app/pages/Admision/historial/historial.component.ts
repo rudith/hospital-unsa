@@ -167,7 +167,7 @@ export class HistorialComponent extends BasePageComponent
 	}
 	initPatientForm() {
 		this.patientForm = this.formBuilder.group({
-			numeroHistoria: ['', Validators.required],
+			numeroHistoria: ['', [Validators.required,Validators.pattern('[0-9]*')]],
 			dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
 			nombres: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			apellido_paterno: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
@@ -371,23 +371,32 @@ export class HistorialComponent extends BasePageComponent
 
 
 	onChangeTable() {
-		this.toastr.info("Buscando Historia...");
+		
 		if (this.opBus == " ") {
+			this.toastr.warning('Ningun valor ingresado');
 			this.httpSv.loadHistorias().subscribe(historiales => {
 				this.historiales = historiales;
+				
 			});
 		} else if (this.opBus == "1") {
+			this.toastr.warning('Buscando...');
 			this.httpSv.searcHistoriasDNI(this.datoBus).subscribe(data => {
 				this.historiales = [];
 				this.historiales[0] = data;
 				console.log("entro bus" + this.datoBus);
-			});;
+			}, error => {
+				this.toastr.warning('No encontrado');
+			});
+		
 		} else if (this.opBus == "2") {
+			this.toastr.warning('Buscando...');
 			this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data => {
 				this.historiales = [];
 				this.historiales[0] = data;
 				console.log("entro bus" + this.datoBus);
-			});;
+			}, error => {
+				this.toastr.warning('No encontrado');
+			});
 		}
 
 	}

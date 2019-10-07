@@ -320,7 +320,6 @@
 					</tc-form-group>
 				</div>
 
-
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
 						<tc-input [placeholder]="'Nacionalidad*'" formControlName="nacionalidad"></tc-input>
@@ -448,6 +447,13 @@
 
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
+						<tc-form-label>edad</tc-form-label>
+						<tc-input [placeholder]="'Edad'" formControlName="edad" readonly="readonly">
+						</tc-input>
+					</tc-form-group>
+				</div>
+				<div class="col-12 col-sm-4">
+					<tc-form-group>
 						<tc-form-label>Direccion</tc-form-label>
 						<tc-input [placeholder]="'Direccion'" formControlName="direccion" readonly="readonly">
 						</tc-input>
@@ -457,18 +463,6 @@
 					<tc-form-group>
 						<tc-form-label>Nacionalidad</tc-form-label>
 						<tc-input [placeholder]="'Nacionalidad'" formControlName="nacionalidad" readonly="readonly">
-						</tc-input>
-					</tc-form-group>
-				</div>
-
-
-			</div>
-			<div class="row">
-
-				<div class="col-12 col-sm-8">
-					<tc-form-group>
-						<tc-form-label>Email</tc-form-label>
-						<tc-input [placeholder]="'Email'" [type]="'email'" sformControlName="email" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>

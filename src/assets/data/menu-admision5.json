@@ -1,14 +1,14 @@
 [
 	{
-		"title": "Triaje",
+		"title": "Consultorio",
 		"groupTitle": true
 	},
 	{
-		"title": "Paciente",
+		"title": "Laboratorio",
 		"icon": {
 			"class": "icofont-thermometer-alt"
 		},
-		"routing": "listar-datos",
+		"routing": "laboratorio",
 		"layout": "vertical"
 	}
 ]

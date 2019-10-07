@@ -49,5 +49,12 @@ export class LoginFormComponent implements OnInit {
       this.http.triaje = true;
       this.router.navigate(['/vertical/listar-datos']);
     }
+    if (lg.get('login').value === "lab" && lg.get('pass').value === "lab") {
+      this.http.admin = false;
+      this.http.admis = false;
+      this.http.consultorio = false;
+      this.http.triaje = true;
+      this.router.navigate(['/vertical/laboratorio']);
+    }
   }
 }

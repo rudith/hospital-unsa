@@ -6,7 +6,7 @@ import { Historial } from '../../interfaces/historial';
 import { Cita } from '../../interfaces/cita';
 import { Grupsang } from '../../interfaces/grupsang';
 import { Distrito } from '../../interfaces/distrito';
-import { Tipoexamen} from '../../interfaces/tipoexamen';
+import { Tipoexamen } from '../../interfaces/tipoexamen';
 import { Provincia } from '../../interfaces/provincia';
 import { Departamento } from '../../interfaces/departamento';
 import { Especialidad } from '../../interfaces/especialidad';
@@ -15,7 +15,7 @@ import { User } from '../../interfaces/user';
 import { Triaje } from '../../interfaces/triaje';
 import { HistoriaCompleta } from '../../interfaces/historia-completa';
 import { Consulta } from '../../interfaces/consulta';
-import {Cabeceralab} from '../../interfaces/cabeceralab';
+import { Cabeceralab } from '../../interfaces/cabeceralab';
 import { CitaM } from '../../interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
 
@@ -32,13 +32,13 @@ export class HttpService {
 	public CitaGetUpdate: Cita[] = [];
 	public GrupSangGetUpdate: Grupsang[] = [];
 	public DistritoGetUpdate: Distrito[] = [];
-	public TipoexamenGetUpdate: Tipoexamen[] =[];
+	public TipoexamenGetUpdate: Tipoexamen[] = [];
 	public ProvinciaGetUpdate: Provincia[] = [];
 	public DepartamentoGetUpdate: Departamento[] = [];
 	public EspecialidadGetUpdate: Especialidad[] = [];
 	public MedicoGetUpdate: Medico[] = [];
 	public historia: Historial;
-	public cabecera:Cabeceralab;
+	public cabecera: Cabeceralab;
 	public cita: Cita;
 	private nroHisCom: string;
 	private idHisCom: number;
@@ -266,7 +266,7 @@ export class HttpService {
 			{
 				motivoConsulta: newConsulta.motivoConsulta,
 				apetito: newConsulta.apetito,
-				orina: newConsulta.orina, 
+				orina: newConsulta.orina,
 				deposiciones: newConsulta.deposiciones,
 				examenFisico: newConsulta.examenFisico,
 				diagnostico: newConsulta.diagnostico,
@@ -303,12 +303,12 @@ export class HttpService {
 		console.log(newCabecera);
 		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabCab/',
 			{
-				nombre:newCabecera.nombre,
-				dni:newCabecera.dni,
-				orden:newCabecera.orden,
-				fecha:newCabecera.fecha,
-				observaciones:newCabecera.observaciones,
-				tipoExam:newCabecera.tipoExam,
+				nombre: newCabecera.nombre,
+				dni: newCabecera.dni,
+				orden: newCabecera.orden,
+				fecha: newCabecera.fecha,
+				observaciones: newCabecera.observaciones,
+				tipoExam: newCabecera.tipoExam,
 			}).subscribe(
 				data => {
 					console.log("CREAR Cabecera Completo");

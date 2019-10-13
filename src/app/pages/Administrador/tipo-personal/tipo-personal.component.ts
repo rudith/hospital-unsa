@@ -61,11 +61,13 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
       }
     });
   }
+  //carga lisata de tipos
   loadTipopersonal() {
     this.admService.loadTPersonal().subscribe(tipopersonal => {
       this.tipopersonal = tipopersonal;
     });
   }
+  //busca segun el input y devuelve un mensaje de confirmación
   buscar() {
     if (this.id == 0 || this.id == undefined) {
       this.loadTipopersonal();
@@ -80,6 +82,7 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
       });;
     }
   }
+  //abre modal
   openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null) {
     this.initForm();
     this.modal.open({
@@ -89,15 +92,19 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
       options: null
     });
   }
+  //cierra modal
   closeModal() {
     this.modal.close();
   }
+  //inicia Formulario
   initForm() {
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
       nombre: ["", Validators.required]
     });
   }
+
+  // Agrega un tipo a la bd
   addAppointment(form: FormGroup) {
     // console.log(JSON.stringify(form));
     if (form.valid) {

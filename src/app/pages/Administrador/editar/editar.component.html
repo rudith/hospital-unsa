@@ -19,7 +19,9 @@
 		<tc-table [rows]="users" [hovered]="true">
 			<tc-table-col [columnTitle]="'Id'" [columnName]="'id'">
 			</tc-table-col>
-			<tc-table-col [columnTitle]="'Email'" [columnName]="'email'" [enableSorting]="true">
+			<tc-table-col [columnTitle]="'UserName'" [columnName]="'username'">
+			</tc-table-col>
+			<tc-table-col [columnTitle]="'Email'" [columnName]="'email'">
 			</tc-table-col>
 			<tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
 				<ng-template #tableTDTemplate let-row="row">
@@ -33,8 +35,9 @@
 			<tc-table-col [columnTitle]="'Asignar'" [columnName]="'actions'">
 				<ng-template #tableTDTemplate let-row="row">
 					<div class="actions">
-						<button style="background: rgb(205, 220, 57)" tc-button [afterIcon]="'icofont-medical-sign-alt'" [square]="true"
-							[tcShape]="500" [size]="'sm'" (click)="openModalEdit(modalPersonal, 'Crear Personal', modalPersonal2,row)"></button>
+						<button style="background: rgb(205, 220, 57)" tc-button [afterIcon]="'icofont-medical-sign-alt'"
+							[square]="true" [tcShape]="500" [size]="'sm'"
+							(click)="openModalPersonal(modalPersonal, 'Aún no hay modelo definido de personal', modalPersonal2,row)"></button>
 					</div>
 				</ng-template>
 			</tc-table-col>
@@ -108,7 +111,7 @@
 <!-- Modal Personal -->
 <ng-container>
 	<ng-template #modalPersonal>
-		<form [formGroup]="appointmentForm">
+		<form [formGroup]="PersonalForm">
 			<tc-form-group>
 				<div class="row align-items-center">
 					<div class="col-12 col-md-4 text-md-right">
@@ -125,9 +128,9 @@
 	<ng-template #modalPersonal2>
 		<div class="actions justify-content-between">
 			<button class="col" tc-button [type]="'button'" [view]="'error'" [tcShape]="500"
-				(click)="closeModal()">Cancelar</button>
+				(click)="closeModalPersonal()">Cancelar</button>
 			<button class="col" tc-button [view]="'success'" [tcShape]="500" [afterIcon]="'icofont-save'"
-				[disabled]="appointmentForm.invalid" (click)="addAppointment(appointmentForm)">
+				[disabled]="PersonalForm.invalid" (click)="addPersonal(PersonalForm)">
 				Crear Area
 			</button>
 		</div>

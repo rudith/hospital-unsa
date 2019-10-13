@@ -35,8 +35,10 @@ export class EditarComponent extends BasePageComponent
 	status: IOption[];
 	public id: string;
 	appointmentForm: FormGroup;
+	PersonalForm: FormGroup;
 	public update: boolean = false;
 	val: number;
+
 	constructor(
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
@@ -84,6 +86,7 @@ export class EditarComponent extends BasePageComponent
 	ngOnDestroy() {
 		super.ngOnDestroy();
 	}
+	// Elimina usuario de se envia el id y retorna un mensaje de confirmacion
 	deleteUser(id: string) {
 		this.httpSv.DeleteUser(id).subscribe(
 			data => {
@@ -92,6 +95,7 @@ export class EditarComponent extends BasePageComponent
 			}
 		);
 	}
+	// Verifica el campo de texto antes de la busqueda  y devuelve un mensaje de confirmacion
 	onChangeTable() {
 
 		if (this.id == "" || this.id == undefined) {
@@ -112,6 +116,7 @@ export class EditarComponent extends BasePageComponent
 	loadOptions() {
 
 	}
+	// abre modal
 	openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null) {
 		this.initForm();
 		this.modal.open({
@@ -121,6 +126,7 @@ export class EditarComponent extends BasePageComponent
 			options: null
 		});
 	}
+	// inicia el formulario
 	initForm() {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
@@ -129,6 +135,7 @@ export class EditarComponent extends BasePageComponent
 			password: ["", Validators.required],
 		});
 	}
+	// inicia el formulario de edicion
 	openModalEdit<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: User) {
 		// console.log(JSON.stringify(row));
 		this.initFormEdit(row);
@@ -139,7 +146,8 @@ export class EditarComponent extends BasePageComponent
 			options: null
 		});
 	}
-	openModalPersonal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null,row:Personal) {
+	// abre el modal de personal
+	openModalPersonal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Personal) {
 		this.initFormPersonal(row);
 		this.modal.open({
 			body: body,
@@ -157,23 +165,40 @@ export class EditarComponent extends BasePageComponent
 			password: [data.password, Validators.required],
 		});
 	}
-	initFormPersonal(row:Personal) {
-		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
-		this.appointmentForm = this.formBuilder.group({
+	initFormPersonal(row: Personal) {
+		this.PersonalForm = this.formBuilder.group({
 			nombre: ["", Validators.required]
 		});
 	}
-	// close modal window
+	// cierra modal
 	updateEst(bool: boolean) {
 		this.update = bool;
 	}
+	// guarda el usuario para edicion
 	sendUser(user: User) {
 		this.user = user;
 	}
+	// cierra modal
 	closeModal() {
 		this.modal.close();
 		this.appointmentForm.reset();
 	}
+	// cierra modal
+	closeModalPersonal() {
+		this.modal.close();
+		this.PersonalForm.reset();
+	}
+	// verifica formulario del modal personal y agregara a la bd, devuelve un mensaje de confirmación
+	addPersonal(form: FormGroup) {
+		console.log(JSON.stringify(form.value));
+		if (form.valid) {
+			// console.log(JSON.stringify(form));
+			this.PersonalForm.reset();
+			this.closeModalPersonal();
+		}
+
+	}
+	// verifica formulario del modal usuario y agregara a la bd, devuelve un mensaje de confirmación
 	addAppointment(form: FormGroup) {
 		// console.log(JSON.stringify(form));
 		if (form.valid) {
@@ -203,6 +228,7 @@ export class EditarComponent extends BasePageComponent
 		}
 
 	}
+	// actualiza usuario y devuelve un mensaje de confirmación
 	updateUser(User: User) {
 		this.httpSv.UpdateUser(User).subscribe(
 			data => {
@@ -212,6 +238,7 @@ export class EditarComponent extends BasePageComponent
 			},
 		);
 	}
+	// actualiza usuario y devuelve un mensaje de confirmación
 	createUser(newUser: User) {
 		this.httpSv.CreateUser(newUser).subscribe(
 			data => {
@@ -221,6 +248,7 @@ export class EditarComponent extends BasePageComponent
 			}
 		);
 	}
+	// carga usuarios y devuelve un mensaje de confirmación
 	loadUsers() {
 		this.httpSv.loadUsers().subscribe(users => {
 			this.users = users

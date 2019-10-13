@@ -52,6 +52,7 @@ export class PersonalComponent  extends BasePageComponent implements OnInit {
     this.loadAreas();
   }
 
+  // TODO ESTO SE REESTRUCTURARA ES UN COPIA Y PEGA DE AREA PARA QUE NO HAYA ERRORES AL MOMENTO DE DEPLOYARLO
   ngOnInit() {
     super.ngOnInit();
 		this.store.select('areas').subscribe(areas => {
@@ -61,11 +62,13 @@ export class PersonalComponent  extends BasePageComponent implements OnInit {
 			}
 		});
   }
+  // carga areas
   loadAreas() {
     this.admService.loadAreas().subscribe(areas => {
       this.areas = areas;
     });
   }
+  //busca segun el input y devuelve un mensaje de confirmación
   buscar() {
     if (this.id == 0 || this.id == undefined) {
       this.loadAreas();
@@ -80,6 +83,7 @@ export class PersonalComponent  extends BasePageComponent implements OnInit {
       });;
     }
   }
+  // abre modal
   openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null) {
 		this.initForm();
 		this.modal.open({
@@ -89,15 +93,19 @@ export class PersonalComponent  extends BasePageComponent implements OnInit {
 			options: null
 		});
   }
+  // cierra modal
   closeModal() {
 		this.modal.close();
-	}
+  }
+  
+  //inicia formulario
   initForm() {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
 			nombre: ["", Validators.required]
 		});
   }
+//agrega area a la bd
   addAppointment(form: FormGroup) {
 		// console.log(JSON.stringify(form));
 		if (form.valid) {

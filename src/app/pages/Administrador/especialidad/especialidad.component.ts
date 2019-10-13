@@ -62,11 +62,13 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       }
     });
   }
+  //carga especialidades 
   loadEspecialidades() {
     this.admService.loadEspecialidades().subscribe(especialidades => {
       this.especialidades = especialidades;
     });
   }
+  //buscara segun el campo de texto y devuelve un mensaje de confirmación
   buscar() {
     if (this.id == 0 || this.id == undefined) {
       this.loadEspecialidades();
@@ -81,6 +83,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       });;
     }
   }
+  //abre modal
   openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null) {
     this.initForm();
     this.modal.open({
@@ -90,9 +93,11 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       options: null
     });
   }
+  //cierra modal
   closeModal() {
     this.modal.close();
   }
+  //inicia formulario
   initForm() {
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
@@ -100,6 +105,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       descripcion: ["", Validators.required]
     });
   }
+  // crea especialidad y devuelve un mensaje de confirmación
   addAppointment(form: FormGroup) {
     // console.log(JSON.stringify(form));
     if (form.valid) {

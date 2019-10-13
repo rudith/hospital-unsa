@@ -78,10 +78,14 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 		});
 	}
 	ngOnChanges($event) {	}
+	/*** LoadCitas: Hace una llamada al servicio Http en el cual le envia el id del medico actual y 
+	 * 	 este le retorna la lista de todas sus citas a atender, se asigna esta data a CitasC que muestra por interfaz los datos requeridos.
+	 * 	 la plantilla no permite asignar valores de segundos niveles en json a traves de la interfaz, por lo que se asignaron en este metodo para visualizarlos
+	 ***/
 	loadCitas() {
 		this.httpSv.loadCitasMedico(this.idMedico).subscribe(data => {
 			this.CitasC=[];
-			this.CitasC = data.citasM;
+			this.CitasC = data;
 			for(let i in this.CitasC){
 				this.CitasC[i].numeroRecibo=this.CitasC[i].numeroHistoria.numeroHistoria;
 				this.CitasC[i].responsable=this.CitasC[i].numeroHistoria.nombres+" "+this.CitasC[i].numeroHistoria.apellido_paterno+" "+this.CitasC[i].numeroHistoria.apellido_materno;
@@ -110,6 +114,10 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
     });
     this.dni=this.busForm.get('datoBus').value;
 	} */
+
+	/*** parametros: nro de historia, id de la cita
+	 *   atender: Hace uso de un servicio para pasar los parametros al componente Lconsultas
+	 ***/
 	atender(nro: string, id: number) {
 		this.httpSv.setNroHC(nro, id);
 		this.router.navigate(['/vertical/Lconsultas']);

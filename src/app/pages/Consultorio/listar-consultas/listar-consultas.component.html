@@ -58,8 +58,13 @@
 </div>
 
 <div class="add-action-box">
-  <button tc-button [afterIcon]="'icofont-ui-keyboard'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'"
-    (click)="openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)"></button>
+  <button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'" 
+    (click)="openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)">Agregar Consulta</button>
+</div>
+
+<div class="addlab-action-box">
+  <button tc-button  [square]="true" [tcShape]="500" 
+  (click)="openModalExamenes(modalBodyVerE, 'Ver listado de Examenes', modalFooterVerE)">Ver Examenes</button>
 </div>
 
 <!-- Modal Crear Consulta -->
@@ -240,6 +245,10 @@
           </tc-form-group>
         </div>
       </div>
+      <tc-form-group>
+        <tc-form-label>Motivo de Consulta</tc-form-label>
+        <tc-textarea [placeholder]="'Motivo'" formControlName="motivo" readonly="readonly"></tc-textarea>
+      </tc-form-group>
       <div class="row">
         <div class="col-12 col-sm-4">
           <tc-form-group>
@@ -284,3 +293,19 @@
   </ng-template>
 </ng-container>
 <!--End Modal Ver Mas-->
+
+
+<!-- Open Modal Ver Examenes -->
+<ng-container>
+  <ng-template #modalBodyVerE>
+    
+  </ng-template>
+
+  <ng-template #modalFooterVerE>
+    <div class="actions justify-content-between">
+      <button tc-button [type]="'button'" [tcBgColor]="'#009688'" [block]="true"
+        (click)="closeModalExamenes()">Aceptar</button>
+    </div>
+  </ng-template>
+</ng-container>
+<!--End Modal Ver Examenes-->

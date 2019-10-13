@@ -20,7 +20,7 @@ import { Router } from '@angular/router';
   templateUrl: './listar-consultas.component.html',
   styleUrls: ['./listar-consultas.component.scss'],
 })
-export class ListarConsultasComponent extends BasePageComponent implements OnInit {
+export class ListarConsultasComponent extends BasePageComponent implements OnInit, OnChanges{
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
   @ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
   paciente: IUser;
@@ -39,7 +39,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   private dniRecibido:string;
   private edadRecibido:number;
   private sexoRecibido:string;
-  private idTriajeRecibido:number;
+  private idCitaRecibida:number;
+  private triajeVerMas:Triaje[];
+  private consultaVerMas:Consulta[];
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
@@ -69,16 +71,47 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     };
     this.consultas = [];
     this.triajes=[];
+    this.triajeVerMas=[];
+    this.consultaVerMas=[];
     this.datoBus=this.httpSv.getNroHC();
-    this.idTriajeRecibido=this.httpSv.getIdHC();
-    this.httpSv.searcTriajeC(this.idTriajeRecibido).subscribe(data =>{
+    this.idCitaRecibida=this.httpSv.getIdHC();
+    this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data =>{
       this.triajeRecibido=data;
-    });
+    }); 
     this.cargarPaciente();    
   }
-
   ngOnInit() {
     super.ngOnInit();
+  }
+  ngOnChanges($event) {
+		console.log();
+  }
+  ngOnDestroy() {
+    super.ngOnDestroy();
+  }
+  cargarPaciente() {
+    this.httpSv.searcHistoriaCompleta(this.datoBus).subscribe(data => {
+      this.idRecibido=data.id;
+      this.historiaRecibida = data;
+      this.consultas = this.historiaRecibida.consultas;
+      this.triajes = this.historiaRecibida.triajes;
+      this.nombreRecibido = this.historiaRecibida.nombres+" "+this.historiaRecibida.apellido_paterno+" "+this.historiaRecibida.apellido_materno;
+      this.dniRecibido = this.historiaRecibida.dni;
+      this.numHistRecibido = this.historiaRecibida.numeroHistoria;
+      this.edadRecibido = this.historiaRecibida.edad;
+      this.sexoRecibido = this.historiaRecibida.sexo;
+      for (let index = 0; index < this.consultas.length; index++) {
+        this.consultas[index].triaje=index;
+      }
+    });
+  }
+  regresar(){
+    this.router.navigate(['/vertical/consultas']);
+  }
+  atenderCita(id: number) {
+    this.httpSv.AtenderCita(id).subscribe(cita => {
+      this.httpSv.loadCitasM();
+    });
   }
   //Modal Crear Consulta
   openModalC<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
@@ -128,21 +161,19 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       newConsult.medico=1;
       console.log(newConsult);
       this.httpSv.crearConsulta(newConsult);
-      this.atenderCita(this.idTriajeRecibido);
+      this.atenderCita(this.idCitaRecibida);
       this.closeModalC();
       this.cargarPaciente();
       this.consultForm.reset();
-    //  this.router.navigate(['/vertical/consultas']);
+    //this.router.navigate(['/vertical/consultas']);   
+      this.cargarPaciente();    
     }
   }
-
- 
   //fin de Modal Crear Consulta
 
   //Modal Ver Consulta
   openModalVerC<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any) {
-    this.initVerMasForm(1);
-    console.log(options);
+    this.initVerMasForm(options.triaje);
     this.modal.open({
       body: body,
       header: header,
@@ -157,49 +188,59 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   }
   initVerMasForm(data: number) {
     this.verMasCForm = this.formBuilder.group({
-      talla: [this.historiaRecibida.triajes[data-1].talla ? this.historiaRecibida.triajes[data-1].talla: '', Validators.required],
-      peso: [this.historiaRecibida.triajes[data-1].peso ? this.historiaRecibida.triajes[data-1].peso: '', Validators.required],
-      temperatura: [this.historiaRecibida.triajes[data-1].temperatura ? this.historiaRecibida.triajes[data-1].temperatura: '', Validators.required],
-      frecuenciaR: [this.historiaRecibida.triajes[data-1].frecuenciaR ? this.historiaRecibida.triajes[data-1].frecuenciaR: '', Validators.required],
-      frecuenciaC: [this.historiaRecibida.triajes[data-1].frecuenciaC ? this.historiaRecibida.triajes[data-1].frecuenciaC: '', Validators.required],
-      presionArt:[this.historiaRecibida.triajes[data-1].presionArt ? this.historiaRecibida.triajes[data-1].presionArt: '', Validators.required],
-      motivo: [this.historiaRecibida.consultas[data-1].motivoConsulta ? this.historiaRecibida.consultas[data-1].motivoConsulta: '', Validators.required],
-      apetito: [this.historiaRecibida.consultas[data-1].apetito ? this.historiaRecibida.consultas[data-1].apetito: '', Validators.required],
-      orina: [this.historiaRecibida.consultas[data-1].orina ? this.historiaRecibida.consultas[data-1].orina: '', Validators.required],
-      deposiciones: [this.historiaRecibida.consultas[data-1].deposiciones ? this.historiaRecibida.consultas[data-1].deposiciones: '', Validators.required],
-      exaFis: [this.historiaRecibida.consultas[data-1].examenFisico ? this.historiaRecibida.consultas[data-1].examenFisico: '', Validators.required],
-      diagnostico: [this.historiaRecibida.consultas[data-1].diagnostico ? this.historiaRecibida.consultas[data-1].diagnostico: '', Validators.required],
-      tratamiento: [this.historiaRecibida.consultas[data-1].tratamiento ? this.historiaRecibida.consultas[data-1].tratamiento: '', Validators.required],
+      talla: [this.triajes[data].talla ? this.triajes[data].talla: '', Validators.required],
+      peso: [this.triajes[data].peso ? this.triajes[data].peso: '', Validators.required],
+      temperatura: [this.triajes[data].temperatura ? this.triajes[data].temperatura: '', Validators.required],
+      frecuenciaR: [this.triajes[data].frecuenciaR ? this.triajes[data].frecuenciaR: '', Validators.required],
+      frecuenciaC: [this.triajes[data].frecuenciaC ? this.triajes[data].frecuenciaC: '', Validators.required],
+      presionArt:[this.triajes[data].presionArt ? this.triajes[data].presionArt: '', Validators.required],
+      motivo: [this.consultas[data].motivoConsulta ? this.consultas[data].motivoConsulta: '', Validators.required],
+      apetito: [this.consultas[data].apetito ? this.consultas[data].apetito: '', Validators.required],
+      orina: [this.consultas[data].orina ? this.consultas[data].orina: '', Validators.required],
+      deposiciones: [this.consultas[data].deposiciones ? this.consultas[data].deposiciones: '', Validators.required],
+      exaFis: [this.consultas[data].examenFisico ? this.consultas[data].examenFisico: '', Validators.required],
+      diagnostico: [this.consultas[data].diagnostico ? this.consultas[data].diagnostico: '', Validators.required],
+      tratamiento: [this.consultas[data].tratamiento ? this.consultas[data].tratamiento: '', Validators.required],
     });
 
-  }
+  }/*
+  initVerMasForm(nro:number) {
+    this.httpSv.searchTriaje(nro).subscribe(data =>{
+      this.triajeVerMas[0]=data;
+    });
+    this.httpSv.searchConsulta(nro).subscribe(data =>{
+      this.consultaVerMas[0]=data;
+    });
+    this.verMasCForm = this.formBuilder.group({
+      talla: [this.triajeVerMas[0].talla ? this.triajeVerMas[0].talla: '', Validators.required],
+      peso: [this.triajeVerMas[0].peso ? this.triajeVerMas[0].peso: '', Validators.required],
+      temperatura: [this.triajeVerMas[0].temperatura ? this.triajeVerMas[0].temperatura: '', Validators.required],
+      frecuenciaR: [this.triajeVerMas[0].frecuenciaR ? this.triajeVerMas[0].frecuenciaR: '', Validators.required],
+      frecuenciaC: [this.triajeVerMas[0].frecuenciaC ? this.triajeVerMas[0].frecuenciaC: '', Validators.required],
+      presionArt:[this.triajeVerMas[0].presionArt ? this.triajeVerMas[0].presionArt: '', Validators.required],
+      motivo: [this.consultaVerMas[0].motivoConsulta ? this.consultaVerMas[0].motivoConsulta: '', Validators.required],
+      apetito: [this.consultaVerMas[0].apetito ? this.consultaVerMas[0].apetito: '', Validators.required],
+      orina: [this.consultaVerMas[0].orina ? this.consultaVerMas[0].orina: '', Validators.required],
+      deposiciones: [this.consultaVerMas[0].deposiciones ? this.consultaVerMas[0].deposiciones: '', Validators.required],
+      exaFis: [this.consultaVerMas[0].examenFisico ? this.consultaVerMas[0].examenFisico: '', Validators.required],
+      diagnostico: [this.consultaVerMas[0].diagnostico ? this.consultaVerMas[0].diagnostico: '', Validators.required],
+      tratamiento: [this.consultaVerMas[0].tratamiento ? this.consultaVerMas[0].tratamiento: '', Validators.required],
+    });
+
+  }*/
   //fin de Modal Ver Consulta
 
-  cargarPaciente() {
-    this.httpSv.searcHistoriaCompleta(this.datoBus).subscribe(data => {
-      this.idRecibido=data.id;
-      this.historiaRecibida = data;
-      this.consultas = this.historiaRecibida.consultas;
-      this.triajes = this.historiaRecibida.triajes;
-      this.nombreRecibido = this.historiaRecibida.nombres+" "+this.historiaRecibida.apellido_paterno+" "+this.historiaRecibida.apellido_materno;
-      this.dniRecibido = this.historiaRecibida.dni;
-      this.numHistRecibido = this.historiaRecibida.numeroHistoria;
-      this.edadRecibido = this.historiaRecibida.edad;
-      this.sexoRecibido = this.historiaRecibida.sexo;
-    });;
-  }
-
-  ngOnDestroy() {
-    super.ngOnDestroy();
-  }
-  regresar(){
-    this.router.navigate(['/vertical/consultas']);
-  }
-
-  atenderCita(id: number) {
-    this.httpSv.AtenderCita(id).subscribe(cita => {
-      this.httpSv.loadCitasM();
+  //Modal Examenes de Laboratorio
+  openModalExamenes<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any) {
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: options
     });
-}
-
+  }
+  closeModalExamenes() {
+    this.modal.close();
+  }
+  //fin de Modal Examenes de Laboratorio
 }

@@ -251,16 +251,25 @@ export class HttpService {
 			}
 		);
 	}
+
+	/***  loadCitasMedico: recibe el id del medico
+	 ***/
 	loadCitasMedico(nro: number): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/' + nro + "/");
+		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/?id=' + nro);
 	}
+	/***  searcHistoriaCompleta: recibe el nro de historia 
+	 ***/
 	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta> {
 		return this.http.get<HistoriaCompleta>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/' + nro + "/");
 	}
+	/***  searcTriajeC: recibe el id del medico
+	 ***/
 	searcTriajeC(nro: number): Observable<Triaje> {
 		return this.http.get<Triaje>('http://18.216.2.122:9000/consultorio/triajeporcita/' + nro + "/");
 	}
-
+	/***  crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
+	 * 	 	en el back correctamente.
+	 ***/
 	crearConsulta(newConsulta: Consulta) {
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
@@ -285,10 +294,11 @@ export class HttpService {
 					this.toastr.error("No se pudo agregar la Consulta");
 				});
 	}
+	/***  AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
+	 ***/
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
-
 	searchLabName(nombre: string): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre + "/");
 	}

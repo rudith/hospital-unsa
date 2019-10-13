@@ -2,7 +2,10 @@ import { Historial } from './historial';
 
 export interface Triaje {
     id:number,
-    numeroHistoria:Historial,
+    numeroHistoria?: {
+        id?: number,
+        numeroHistoria?: number,
+    },
     talla: number,
     peso: number,
     temperatura:number,

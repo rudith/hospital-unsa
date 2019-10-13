@@ -2,12 +2,29 @@
 	<div class="row">
 		<div class="col col-12 ">
 			<div class="row">
-				<div class="col-md-3">
+				<tc-form-group class="col-md-1">
+					<div class="add-action-box">
+						<button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500"
+							[tcBgColor]="'#3f51b5'"
+							(click)="openModalH(modalCrearHBody, 'Agregar Cabecera',modalCrearHFooter)">
+						</button>
+					</div>
+				</tc-form-group>
+				<tc-form-group class="col-md-1">
+					<div class="add-action-box">
+						<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
+							[tcBgColor]="'#3f51b5'"
+							(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter)">
+						</button>
+					</div>
+				</tc-form-group>
+
+				<div class="col-md-2">
 					<tc-form-group>
 						<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption"></tc-select>
 					</tc-form-group>
 				</div>
-				<div class="col-md-7">
+				<div class="col-md-6">
 					<tc-form-group>
 						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 					</tc-form-group>
@@ -23,18 +40,22 @@
 </form>
 <br>
 <tc-card class="mb-0">
-	<tc-table [rows]="historiales" [hovered]="true" [pagination]="true">
-		<tc-table-col [columnTitle]="'Nombre'" [columnName]="'nombres'">
+	<tc-table [rows]="examen" [hovered]="true" [pagination]="true">
+		<tc-table-col [columnTitle]="'Nombre'" [columnName]="'nombre'">
 			<ng-template #tableTDTemplate let-value>
 				<strong>{{ value }}</strong>
 			</ng-template>
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Fecha'" [columnName]="'numeroHistoria'" [enableSorting]="true">
+		<tc-table-col [columnTitle]="'DNI'" [columnName]="'dni'">
 			<ng-template #tableTDTemplate let-value>
 				<strong>{{ value }}</strong>
 			</ng-template>
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Tipo de examen'" [columnName]="'id'" [enableSorting]="true"></tc-table-col>
+		<tc-table-col [columnTitle]="'Fecha'" [columnName]="'fecha'">
+			<ng-template #tableTDTemplate let-value>
+				<strong>{{ value }}</strong>
+			</ng-template>
+		</tc-table-col>
 
 		<tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
 			<ng-template #tableTDTemplate let-row="row">
@@ -58,12 +79,10 @@
 		</tc-table-col>
 	</tc-table>
 </tc-card>
-<div class="add-action-box">
-	<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'"
-		(click)="openModalH(modalCrearHBody, 'Agregar Resultado', modalCrearHFooter)"></button>
-</div>
 
-<!-- Modal Crear Historial -->
+
+<!-- Modal Crear cabecera -->
+
 <ng-container>
 	<ng-template #modalCrearHBody>
 		<form [formGroup]="patientForm" novalidate class="new-patient-form">
@@ -76,8 +95,8 @@
 							Ingrese el nombre, este solo debe contener letras.
 						</tc-form-description>
 					</tc-form-group>
-
 				</div>
+
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-input [placeholder]="'DNI*'" formControlName="dni" [charLimiting]="8"></tc-input>
@@ -88,14 +107,14 @@
 					</tc-form-group>
 				</div>
 			</div>
+
 			<div class="row">
-				
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-input [placeholder]="'Fecha*'" formControlName="fecha"></tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.fecha.touched && patientForm.controls.fecha.invalid ">
-							Ingrese Fecha  correcta aaaa-mm-dd
+							Ingrese Fecha correcta aaaa-mm-dd
 						</tc-form-description>
 					</tc-form-group>
 				</div>
@@ -105,53 +124,137 @@
 						<tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
 						</tc-select>
 					</tc-form-group>
-					
 				</div>
 			</div>
 
 			<tc-form-group>
-				<tc-input [placeholder]="'Orden*'" formControlName="orden" >
+				<tc-input [placeholder]="'Orden*'" formControlName="orden">
 				</tc-input>
-				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+				<tc-form-description [tcColor]="'#e24d4d'"
 					*ngIf="patientForm.controls.orden.touched && patientForm.controls.orden.invalid ">
 					Este campo solo debe tener letras
 				</tc-form-description>
 			</tc-form-group>
 
-
 			<tc-form-group>
 				<tc-input [placeholder]="'Observaciones*'" formControlName="observaciones"></tc-input>
-				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+				<tc-form-description [tcColor]="'#e24d4d'"
 					*ngIf="patientForm.controls.observaciones.touched && patientForm.controls.observaciones.invalid ">
 					Este campo solo debe tener letras
 				</tc-form-description>
 			</tc-form-group>
-
-
-
 		</form>
-	</ng-template>
 
+	</ng-template>
 	<ng-template #modalCrearHFooter>
 		<div class="actions justify-content-between">
 			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">Cancelar</button>
-			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm)">
+			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm) ; openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter) ">
 				Agregar
 			</button>
 		</div>
 	</ng-template>
 </ng-container>
-<!-- end Modal Crear Historial -->
+<!-- end Modal Crear cabecera -->
+
+
+
+
+
+
+<!-- Modal Crear detalle -->
+<ng-container>
+	<ng-template #modalCrearDBody>
+		<form [formGroup]="detalleForm" novalidate class="new-patient-form">
+			<div class="col-md-12">
+				<tc-form-group>
+					<tc-input [placeholder]="'Descripcion*'" formControlName="descripcion"></tc-input>
+					<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid ">
+						Ingrese la descripcion, este solo debe contener letras.
+					</tc-form-description>
+				</tc-form-group>
+
+			</div>
+			<div class="col-md-12">
+				<tc-form-group>
+					<tc-input [placeholder]="'Resultado Obtenido*'" formControlName="resultado_obtenido"></tc-input>
+					<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid ">
+						Ingrese Resultado Obtenido, este solo debe contener letras.
+					</tc-form-description>
+				</tc-form-group>
+			</div>
+
+
+			<div class="col-md-12">
+				<tc-form-group>
+					<tc-input [placeholder]="'Unidades*'" formControlName="unidades"></tc-input>
+					<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="detalleForm.controls.unidades.touched && detalleForm.controls.unidades.invalid ">
+						Ingrese unidades.
+					</tc-form-description>
+				</tc-form-group>
+			</div>
+
+			<div class="col-md-12">
+				<tc-form-group>
+					<tc-input [placeholder]="'Rango de Referencia*'" formControlName="rango_referencia"></tc-input>
+					<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+						*ngIf="detalleForm.controls.rango_referencia.touched && detalleForm.controls.rango_referencia.invalid ">
+						Ingrese Rango de referencia.
+					</tc-form-description>
+				</tc-form-group>
+			</div>
+
+		</form>
+	</ng-template>
+
+	<ng-template #modalCrearDFooter>
+		<div class="actions justify-content-between">
+			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalD()">Cancelar</button>
+			<button tc-button [view]="'info'" [disabled]="detalleForm.invalid" (click)="addDetalle(detalleForm)">
+				Agregar
+			</button>
+		</div>
+	</ng-template>
+</ng-container>
+
+
+
+<!-- end Modal Crear detalle -->
+
+
+
+
+
+
 
 <!-- Open Modal Ver Mas -->
 <ng-container>
 	<ng-template #modalBodyH>
-		<form [formGroup]="historiaForm" novalidate class="new-patient-form">
+		<form [formGroup]="examenForm" novalidate class="new-patient-form">
+			<div class="row">
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-form-label>Nombre</tc-form-label>
+						<tc-input [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
+						</tc-input>
+					</tc-form-group>
+				</div>
+
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-form-label>DNI</tc-form-label>
+						<tc-input [placeholder]="'Fecha'" formControlName="dni" readonly="readonly"></tc-input>
+					</tc-form-group>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Tipo de Examen</tc-form-label>
-						<tc-input [placeholder]="'Tipo de Examen'" formControlName="fechaNac" readonly="readonly">
+						<tc-input [placeholder]="'Tipo de Examen'" formControlName="tipoExam" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>
@@ -159,56 +262,31 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Fecha</tc-form-label>
-						<tc-input [placeholder]="'Fecha'" formControlName="fechaNac" readonly="readonly"></tc-input>
-					</tc-form-group>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-sm-4">
-					<tc-form-group>
-						<tc-form-label>Nombre</tc-form-label>
-						<tc-input [placeholder]="'Nombre'" formControlName="nombres" readonly="readonly"></tc-input>
+						<tc-input [placeholder]="'Fecha'" formControlName="fecha" readonly="readonly"></tc-input>
 					</tc-form-group>
 				</div>
 
-				<div class="col-12 col-sm-4">
-					<tc-form-group>
-						<tc-form-label>Apellido Paterno</tc-form-label>
-						<tc-input [placeholder]="'Apellido Paterno'" formControlName="apellido_paterno"
-							readonly="readonly">
-						</tc-input>
-					</tc-form-group>
-				</div>
-
-
-				<div class="col-12 col-sm-4">
-					<tc-form-group>
-						<tc-form-label>Apellido Materno</tc-form-label>
-						<tc-input [placeholder]="'Apellido Materno'" formControlName="apellido_materno"
-							readonly="readonly">
-						</tc-input>
-					</tc-form-group>
-				</div>
 			</div>
 
 			<div class="col-12 col-sm-12">
 				<tc-form-group>
-					<tc-form-label> Descripción </tc-form-label>
-					<tc-input [placeholder]="'Edad'" formControlName="fechaNac" readonly="readonly"></tc-input>
+					<tc-form-label> Observaciones </tc-form-label>
+					<tc-input [placeholder]="'Observaciones'" formControlName="observaciones" readonly="readonly">
+					</tc-input>
 				</tc-form-group>
 			</div>
-			<div class="col-12 col-sm-12">
+			<!--<div class="col-12 col-sm-12">
 				<tc-form-group>
-					<tc-form-label>Resultados Obtenidos</tc-form-label>
-					<tc-input [placeholder]="'Telefono'" [type]="'number'" formControlName="telefono"
+					<tc-form-label>Descripción</tc-form-label>
+					<tc-input [placeholder]="'Descripción'" [type]="'descripción'" formControlName="telefono"
 						readonly="readonly">
 					</tc-input>
 				</tc-form-group>
 			</div>
 			<div class="col-12 col-sm-12">
 				<tc-form-group>
-					<tc-form-label>Situación </tc-form-label>
-					<tc-input [placeholder]="'Celular'" [type]="'number'" formControlName="celular" readonly="readonly">
+					<tc-form-label>Resultados obtenidos </tc-form-label>
+					<tc-input [placeholder]="'Resultados obtenidos'" [type]="'number'" formControlName="celular" readonly="readonly">
 					</tc-input>
 				</tc-form-group>
 			</div>
@@ -219,7 +297,7 @@
 					<tc-input [placeholder]="'Celular'" [type]="'number'" formControlName="celular" readonly="readonly">
 					</tc-input>
 				</tc-form-group>
-			</div>
+			</div>-->
 
 		</form>
 	</ng-template>
@@ -232,3 +310,6 @@
 	</ng-template>
 </ng-container>
 <!--End Modal Ver Mas-->
+
+
+

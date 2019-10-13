@@ -1,3 +1,6 @@
+MASTER
+
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
@@ -18,6 +21,8 @@ import { Consulta } from '../../interfaces/consulta';
 import { Cabeceralab } from '../../interfaces/cabeceralab';
 import { CitaM } from '../../interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
+import {Examen} from '../../interfaces/examen';
+import {Detalle} from '../../interfaces/detalle';
 
 @Injectable({
 	providedIn: 'root',
@@ -38,8 +43,10 @@ export class HttpService {
 	public EspecialidadGetUpdate: Especialidad[] = [];
 	public MedicoGetUpdate: Medico[] = [];
 	public historia: Historial;
-	public cabecera: Cabeceralab;
-	public cita: Cita;
+	public cabecera: Cabeceralab[]=[];
+	public detalle:Detalle[]=[];
+	public cita: Cita[]=[];
+	public examen:Examen[]=[];
 	private nroHisCom: string;
 	private idHisCom: number;
 
@@ -305,10 +312,35 @@ export class HttpService {
 	searchLabFecha(fecha: string): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
 	}
+	searchLabDni(dni:string): Observable<any>{
+		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni+ "/" );
+	}
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>("http://18.216.2.122:9000/laboratorio/TipoExamen/");
 	}
+	loadExamen():Observable<Examen[]> {
+		return this.http.get<Examen[]> ("http://18.216.2.122:9000/laboratorio/ExamenLabCab/");
 
+	}
+	createDetalle(detalle: Detalle){
+		console.log(detalle);
+		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabCab/',
+			{
+				descripcion: detalle.descripcion,
+				resultado_obtenido: detalle.resultado_obtenido,
+				unidades: detalle.unidades,
+				rango_referencia: detalle.rango_referencia,
+				codigoExam: detalle.codigoExam,
+			}).subscribe(
+				data => {
+					console.log("CREAR detalle Completo");
+				},
+				error => {
+					console.log(error.message);
+				});
+
+	}
+	
 	createCabecera(newCabecera: Cabeceralab) {
 		console.log(newCabecera);
 		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabCab/',

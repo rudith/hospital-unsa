@@ -77,6 +77,10 @@ import { ConsultasComponent } from './Consultorio/consultas/consultas.component'
 import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
 import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { PersonalComponent } from './Administrador/personal/personal.component';
+import { AreaComponent } from './Administrador/area/area.component';
+import { EspecialidadComponent } from './Administrador/especialidad/especialidad.component';
+import { TipoPersonalComponent } from './Administrador/tipo-personal/tipo-personal.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -157,7 +161,11 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     EditarComponent,
     ConsultasComponent,
     ListarConsultasComponent,
-    LaboratorioComponent
+    LaboratorioComponent,
+    PersonalComponent,
+    AreaComponent,
+    EspecialidadComponent,
+    TipoPersonalComponent
   ],
   exports: [],
   entryComponents: []

@@ -64,6 +64,10 @@ import {ListarDatosComponent} from '../pages/Triaje/listar-datos/listar-datos.co
 import { ConsultasComponent } from '../pages/Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from '../pages/Consultorio/listar-consultas/listar-consultas.component';
 import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component';
+import { PersonalComponent } from '../pages/Administrador/personal/personal.component';
+import { AreaComponent } from '../pages/Administrador/area/area.component';
+import { EspecialidadComponent } from '../pages/Administrador/especialidad/especialidad.component';
+import { TipoPersonalComponent } from '../pages/Administrador/tipo-personal/tipo-personal.component';
 
 const VERTICAL_ROUTES: Routes = [
   { path: 'default-dashboard', component: PageDashboardComponent },
@@ -120,6 +124,10 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'citas', component: CitasComponent },
   { path: 'historial', component: HistorialComponent },
   { path: 'adminUser', component: EditarComponent },
+  { path: 'typeUser', component: TipoPersonalComponent },
+  { path: 'especialidad', component: EspecialidadComponent },
+  { path: 'area', component: AreaComponent },
+  { path: 'personal', component: PersonalComponent },
   { path: 'listar-datos', component: ListarDatosComponent },
   { path: 'consultas', component: ConsultasComponent },
   { path: 'Lconsultas', component: ListarConsultasComponent },

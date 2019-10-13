@@ -1,11 +1,11 @@
-<p-toast [style]="{background: '#F9F7AE',opacity: '0.8'}" ></p-toast>
+<p-toast [style]="{background: '#F9F7AE',opacity: '0.8'}"></p-toast>
 <div class="col-sm-12">
 	<div class="row">
-		<tc-form-group class="col-sm-2 col-lg-2">
+		<tc-form-group class="col-sm-1 col-lg-1">
 			<button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
 				(click)="openModal(modalUser, 'Agregar User', modalUser2);updateEst(false)"></button>
 		</tc-form-group>
-		<tc-form-group class="col-sm-6 col-lg-8">
+		<tc-form-group class="col-sm-7 col-lg-9">
 			<tc-input [placeholder]="'Buscar Usuario'" [(ngModel)]="id" [suffixIcon]="'icofont-search-document'">
 			</tc-input>
 		</tc-form-group>
@@ -27,6 +27,14 @@
 						<button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true"
 							[tcShape]="500" [size]="'sm'"
 							(click)="openModalEdit(modalUser, 'Editar User', modalUser2,row);sendUser(row);updateEst(true)"></button>
+					</div>
+				</ng-template>
+			</tc-table-col>
+			<tc-table-col [columnTitle]="'Asignar'" [columnName]="'actions'">
+				<ng-template #tableTDTemplate let-row="row">
+					<div class="actions">
+						<button style="background: rgb(205, 220, 57)" tc-button [afterIcon]="'icofont-medical-sign-alt'" [square]="true"
+							[tcShape]="500" [size]="'sm'" (click)="openModalEdit(modalPersonal, 'Crear Personal', modalPersonal2,row)"></button>
 					</div>
 				</ng-template>
 			</tc-table-col>
@@ -56,26 +64,6 @@
 					</div>
 				</div>
 			</tc-form-group>
-			<!-- <tc-form-group>
-				<div class="row align-items-center">
-					<div class="col-12 col-md-4 text-md-right">
-						<tc-form-label class="mb-md-0">Nombre:</tc-form-label>
-					</div>
-					<div class="col-12 col-md-8">
-						<tc-input [prefixIcon]="'icofont-invisible'" formControlName="first_name"></tc-input>
-					</div>
-				</div>
-			</tc-form-group>
-			<tc-form-group>
-				<div class="row align-items-center">
-					<div class="col-12 col-md-4 text-md-right">
-						<tc-form-label class="mb-md-0">Apellido:</tc-form-label>
-					</div>
-					<div class="col-12 col-md-8">
-						<tc-input [prefixIcon]="'icofont-invisible'" formControlName="last_name"></tc-input>
-					</div>
-				</div>
-			</tc-form-group> -->
 			<tc-form-group>
 				<div class="row align-items-center">
 					<div class="col-12 col-md-4 text-md-right">
@@ -112,6 +100,35 @@
 				[afterIcon]="'icofont-pixels'" [disabled]="appointmentForm.invalid"
 				(click)="addAppointment(appointmentForm)">
 				Guardar
+			</button>
+		</div>
+	</ng-template>
+</ng-container>
+
+<!-- Modal Personal -->
+<ng-container>
+	<ng-template #modalPersonal>
+		<form [formGroup]="appointmentForm">
+			<tc-form-group>
+				<div class="row align-items-center">
+					<div class="col-12 col-md-4 text-md-right">
+						<tc-form-label class="mb-md-0">Personal:</tc-form-label>
+					</div>
+					<div class="col-12 col-md-8">
+						<tc-input [prefixIcon]="'icofont-id'" formControlName="nombre"></tc-input>
+					</div>
+				</div>
+			</tc-form-group>
+		</form>
+	</ng-template>
+
+	<ng-template #modalPersonal2>
+		<div class="actions justify-content-between">
+			<button class="col" tc-button [type]="'button'" [view]="'error'" [tcShape]="500"
+				(click)="closeModal()">Cancelar</button>
+			<button class="col" tc-button [view]="'success'" [tcShape]="500" [afterIcon]="'icofont-save'"
+				[disabled]="appointmentForm.invalid" (click)="addAppointment(appointmentForm)">
+				Crear Area
 			</button>
 		</div>
 	</ng-template>

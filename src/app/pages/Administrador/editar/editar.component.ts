@@ -16,6 +16,7 @@ import { formatDate } from '@angular/common';
 import { Especialidad } from '../../../interfaces/especialidad';
 import { User } from '../../../interfaces/user';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { Personal } from '../../../interfaces/personal';
 
 @Component({
 	selector: 'app-editar',
@@ -138,7 +139,15 @@ export class EditarComponent extends BasePageComponent
 			options: null
 		});
 	}
-
+	openModalPersonal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null,row:Personal) {
+		this.initFormPersonal(row);
+		this.modal.open({
+			body: body,
+			header: header,
+			footer: footer,
+			options: null
+		});
+	}
 	// init form
 	initFormEdit(data: User) {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
@@ -148,7 +157,12 @@ export class EditarComponent extends BasePageComponent
 			password: [data.password, Validators.required],
 		});
 	}
-
+	initFormPersonal(row:Personal) {
+		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
+		this.appointmentForm = this.formBuilder.group({
+			nombre: ["", Validators.required]
+		});
+	}
 	// close modal window
 	updateEst(bool: boolean) {
 		this.update = bool;

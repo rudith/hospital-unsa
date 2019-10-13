@@ -1,0 +1,73 @@
+<!-- <p-confirmDialog [style]="{background: '#70B1C9',opacity: '0.8'}" header="Confirmation"
+    icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
+<div class="col-sm-12">
+    <div class="row">
+        <tc-form-group class="col-sm-1 col-lg-1">
+            <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+                (click)="openModal(modalArea, 'Agregar Area', modalActions)"></button>
+        </tc-form-group>
+        <tc-form-group class="col-sm-7 col-lg-9">
+            <tc-input [placeholder]="'Buscar Area'" type="number" [(ngModel)]="id"
+                [suffixIcon]="'icofont-search-document'">
+            </tc-input>
+        </tc-form-group>
+        <tc-form-group class="col-sm-4 col-lg-2">
+            <button tc-button [view]="'info'" (click)="buscar()">
+                Buscar
+            </button>
+        </tc-form-group>
+    </div>
+    <tc-card class="mb-0">
+        <div class="table-wrap">
+            <table class="table-box">
+                <thead>
+                    <tr>
+                        <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                            Id
+                        </th>
+                        <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                            Nombre
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let row of areas">
+                        <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                            {{row.id}}
+                        </td>
+                        <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                            {{row.nombre}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </tc-card>
+</div>
+<ng-container>
+    <ng-template #modalArea>
+        <form [formGroup]="appointmentForm">
+            <tc-form-group>
+                <tc-form-label class="mb-md-0">Nombre:</tc-form-label>
+                <tc-input [prefixIcon]="'icofont-id'" formControlName="nombre"></tc-input>
+                <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                    *ngIf="appointmentForm.controls.nombre.touched && appointmentForm.controls.nombre.invalid ">
+                    Ingrese nombre de área correcto
+                </tc-form-description>
+            </tc-form-group>
+        </form>
+    </ng-template>
+
+    <ng-template #modalActions>
+        <div class="actions justify-content-between row">
+            <button class="col" tc-button [type]="'button'" [view]="'error'" [tcShape]="500" (click)="closeModal()">Cancelar</button>
+            <button class="col" tc-button [view]="'success'" [tcShape]="500"
+                [afterIcon]="'icofont-save'" [disabled]="appointmentForm.invalid"
+                (click)="addAppointment(appointmentForm)">
+                Crear Area
+            </button>
+        </div>
+    </ng-template>
+</ng-container>

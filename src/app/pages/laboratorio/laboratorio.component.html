@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col col-12 ">
 			<div class="row">
+				
 				<tc-form-group class="col-md-1">
 					<div class="add-action-box">
 						<button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500"
@@ -10,16 +11,8 @@
 						</button>
 					</div>
 				</tc-form-group>
-				<tc-form-group class="col-md-1">
-					<div class="add-action-box">
-						<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
-							[tcBgColor]="'#3f51b5'"
-							(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter)">
-						</button>
-					</div>
-				</tc-form-group>
-
-				<div class="col-md-2">
+				
+						<div class="col-md-2">
 					<tc-form-group>
 						<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption"></tc-select>
 					</tc-form-group>
@@ -57,7 +50,7 @@
 			</ng-template>
 		</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
+		<tc-table-col [columnTitle]="'Ver Mas'" >
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
 					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
@@ -67,8 +60,18 @@
 				</div>
 			</ng-template>
 		</tc-table-col>
+		<tc-table-col [columnTitle]="'Agregar Detalle'" >
+			<ng-template #tableTDTemplate let-row="row">
+			<div class="add-action-box">
+				<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
+					[tcBgColor]="'#3f51b5'"
+					(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)">
+				</button>
+			</div>
+		</ng-template>
+	</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Imprimir'" [columnName]="'numeroHistoria'">
+		<tc-table-col [columnTitle]="'Imprimir'" >
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions align-items-center ">
 					<button tc-button [afterIcon]="'icofont-print'" [tcColor]="['#795548', '#fff']"
@@ -149,7 +152,7 @@
 	<ng-template #modalCrearHFooter>
 		<div class="actions justify-content-between">
 			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">Cancelar</button>
-			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm) ; openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter) ">
+			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm)">
 				Agregar
 			</button>
 		</div>

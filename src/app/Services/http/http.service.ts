@@ -1,6 +1,3 @@
-MASTER
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
@@ -90,6 +87,9 @@ export class HttpService {
 	loadCitasM(): Observable<CitaM[]> {
 		return this.http.get<CitaM[]>("http://18.216.2.122:9000/consultorio/ver-citas/");
 	}
+	loadCitasT(): Observable<CitaM[]> {
+		return this.http.get<CitaM[]>("http://18.216.2.122:9000/consultorio/citasenespera/");
+	}
 	loadCitasEdit(): Observable<CitaM[]> {
 		return this.http.get<CitaM[]>("http://18.216.2.122:9000/consultorio/ver-citas/");
 	}
@@ -108,11 +108,16 @@ export class HttpService {
 	loadProvincia(): Observable<Provincia[]> {
 		return this.http.get<Provincia[]>("http://18.216.2.122:9000/admision/provincias/");
 	}
+	loadMedicosXesp(): Observable<Provincia[]> {
+		return this.http.get<Provincia[]>("http://18.216.2.122:9000/admision/provincias/");
+	}
 	loadDepartamento(): Observable<Departamento[]> {
 		return this.http.get<Departamento[]>("http://18.216.2.122:9000/admision/departamentos/");
 	}
+	searchCitasxEsp(id:number): Observable<CitaM[]> {
+		return this.http.get<CitaM[]>("http://18.216.2.122:9000/consultorio/citasporespecialidad/"+id+"/");
+	}
 	searchHistoriaTriaje(dni: string): Observable<any> {
-
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citadni/' + dni + "/");
 
 	}
@@ -307,13 +312,13 @@ export class HttpService {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
 	searchLabName(nombre: string): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre + "/");
+		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
 	}
 	searchLabFecha(fecha: string): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
 	}
 	searchLabDni(dni:string): Observable<any>{
-		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni+ "/" );
+		return this.http.get<Examen>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
 	}
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>("http://18.216.2.122:9000/laboratorio/TipoExamen/");
@@ -324,7 +329,7 @@ export class HttpService {
 	}
 	createDetalle(detalle: Detalle){
 		console.log(detalle);
-		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabCab/',
+		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabDet/',
 			{
 				descripcion: detalle.descripcion,
 				resultado_obtenido: detalle.resultado_obtenido,
@@ -333,10 +338,12 @@ export class HttpService {
 				codigoExam: detalle.codigoExam,
 			}).subscribe(
 				data => {
+					this.toastr.success("El detalle ha sido crado con exito");
 					console.log("CREAR detalle Completo");
 				},
 				error => {
 					console.log(error.message);
+					this.toastr.error("El detalle no se ha creado");
 				});
 
 	}

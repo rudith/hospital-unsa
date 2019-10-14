@@ -96,7 +96,8 @@ export class AreaComponent extends BasePageComponent implements OnInit {
 
    // cierra modal
   closeModal() {
-		this.modal.close();
+    this.modal.close();
+    this.loadAreas();
   }
   
   //inicia formulario

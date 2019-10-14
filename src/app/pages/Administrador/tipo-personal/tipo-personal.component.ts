@@ -95,6 +95,7 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   //cierra modal
   closeModal() {
     this.modal.close();
+    this.loadTipopersonal();
   }
   //inicia Formulario
   initForm() {

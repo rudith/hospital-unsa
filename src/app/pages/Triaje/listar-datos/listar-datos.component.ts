@@ -24,7 +24,6 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   citas: Cita[];
   citasTriaje:CitaM[];
   triaje: Triaje[];
-  patientForm1: FormGroup;
   patientForm2: FormGroup;
   today: Date;
   dato: string;
@@ -34,6 +33,8 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   historial: Historial[];
   idT: number;
   idCita:number;
+  cabTri:FormGroup;
+  n:string;
 
   constructor(
     store: Store<IAppState>,
@@ -67,15 +68,18 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     this.patients = [];
     this.triaje = [];
     this.citas = [];
-    this.loadCitas();
+    this.cargarCitas();
   }
 
-  loadCitas() {
-    this.httpSv.loadCitasM().subscribe(citas => {
+  //Metodo que carga todas las citas que esten con el estado de cita 'Espera'
+  //a traves del servicio : loadCitasT()
+  cargarCitas() {
+    this.httpSv.loadCitasT().subscribe(citas => {
       this.citasTriaje = citas
     });
   }
 
+  //Metodo que recibe el dni para buscar los triajes correspondientes a ese dni
   buscartriaje(dni: string) {
     this.toastr.warning( 'Buscando');
     console.log("buscando");
@@ -88,11 +92,13 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     });
   }
 
+  //metodo que recibe el formGroup desde el html para poder obtener el dni
   buscar(busca: FormGroup) {
     this.dato = busca.get('datoBus').value;
     this.buscartriaje(this.dato);
   }
 
+  //metodo encragado de inicializar una vez que se crague la pagina
   ngOnInit() {
     super.ngOnInit();
     this.initBusForm();
@@ -108,10 +114,10 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     super.ngOnDestroy();
   }
 
-  // open modal window
+  //Metodo para abrir el modal de crear triaje donde se muestran datos del paciente y el form correspondiente
   openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: any) {
-    this.initPatientForm1(row);
     this.initPatientForm2(row);
+    this.initFormModCita(row);
     this.idCita=row.id;
     this.modal.open({
       body: body,
@@ -121,24 +127,29 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     });
   }
 
-  // close modal window
+  //Metodo para cerrar el modal de Crear Triaje 
   closeModal() {
     this.modal.close();
-    this.patientForm1.reset();
   }
 
+  //Metodo que inicializa el form de busqueda
   initBusForm() {
     this.busForm = this.formBuilder.group({
       datoBus: ['', Validators.required],
     });
   }
-  // init form
-  initPatientForm1(ci: Cita) {
-    this.patientForm1 = this.fb.group({
-      fechaAtencion: [ci.fechaAtencion ? ci.fechaAtencion : '', Validators.required],
-    });
-  }
 
+  //Metodo para inicializar el form que mostrara datos del paciente en el modal
+  initFormModCita(data:any ) {
+    this.n=data.numeroHistoria.nombres+" "+data.numeroHistoria.apellido_paterno;
+		this.cabTri = this.formBuilder.group({
+			numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria:'', Validators.required],
+      dni: [data.numeroHistoria.dni ?data.numeroHistoria.dni : '', Validators.required],
+      nombres:[this.n ? this.n:'', Validators.required]
+		});
+	}
+  
+  //Metodo para inicializar el form en donde se llenaran los datos a actualizar
   initPatientForm2(ci: Cita) {
     this.patientForm2 = this.fb.group({
       talla: ['', [Validators.required, Validators.pattern('[0-9].[0-9]*')]],
@@ -153,7 +164,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 
   }
 
-  // Crear Triaje
+  //Metodo para crear el triaje
   CreateTriaje(form: FormGroup,) {
     if (form.valid) {
       let newTriaje: Triaje = form.value;
@@ -169,13 +180,13 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
       this.httpSv.crearTriaje(newTriaje);
       this.TriarCita(this.idCita);
       this.closeModal();
-      this.patientForm1.reset();
       this.toastr.success('', 'Triaje Creado');
     }
   }
+   //Metodo para cambiar el estado de la cita a Triado
   TriarCita(id: number) {
 				this.httpSv.TriarCita(id).subscribe(cita => {
-					this.loadCitas();
+					this.cargarCitas();
 				});
 	}
 }

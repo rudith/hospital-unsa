@@ -95,7 +95,8 @@ export class PersonalComponent  extends BasePageComponent implements OnInit {
   }
   // cierra modal
   closeModal() {
-		this.modal.close();
+    this.modal.close();
+    
   }
   
   //inicia formulario

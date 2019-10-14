@@ -32,8 +32,13 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 	status: IOption[];
 	public dni: string;
 	appointmentForm: FormGroup;
+	cabModCita:FormGroup;
 	public espOption: IOption[];
 	public especialidades: Especialidad[] = [];
+	options: IOption[];
+	selectedOptions: any;
+	multiple:boolean;
+	
 	constructor(
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
@@ -72,6 +77,7 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		this.citasEdit = [];
 		this.loadCitas();
 		this.espOption = [];
+		this.multiple = false;
 		this.httpSv.loadEspecialidades().subscribe(especialidades => {
 			this.especialidades = especialidades;
 			this.loadOptions();
@@ -115,10 +121,13 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			};
 		}
 	}
+	
 	// open modal window
 	openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: CitaM) {
 		// console.log(JSON.stringify(row));
-		this.initForm();
+		this.initForm(row);
+		this.initFormModCita(row);
+		//this.initFormCabecera(row.numeroHistoria.numeroHistoria,row.);
 		this.modal.open({
 			body: body,
 			header: header,
@@ -127,14 +136,20 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		});
 		// console.log("Cita obtenida" + JSON.stringify(row));
 	}
-	initForm() {
-		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
+	initForm(data:CitaM ) {
 		this.appointmentForm = this.formBuilder.group({
-			fechaSeparacion: ['', Validators.required],
-			especialidad: ['', Validators.required]
+			fechaAtencion: [data.fechaAtencion ? data.fechaAtencion:'', Validators.required],
+			especialidad: [data.especialidad.nombre ? data.especialidad.nombre : '', Validators.required]
 		});
 	}
-
+	
+	initFormModCita(data:CitaM ) {
+		this.cabModCita = this.formBuilder.group({
+			numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria:'', Validators.required],
+			dni: [data.numeroHistoria.dni ?data.numeroHistoria.dni : '', Validators.required],
+			numeroRecibo: [data.numeroRecibo ? data.numeroRecibo :'' , Validators.required],
+		});
+	}
 	// close modal window
 	closeModal() {
 		this.modal.close();
@@ -149,14 +164,14 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 		if (form.valid) {
 			this.today = new Date();
 			let newAppointment: Cita = form.value;
-
-			newAppointment.fechaSeparacion = formatDate(
-				form.value.fechaSeparacion,
+			newAppointment.fechaAtencion = formatDate(
+				form.value.fechaAtencion,
 				'yyyy-MM-dd',
 				'en-US',
 				'+0530'
 			);
-			newAppointment.fechaAtencion = this.cita.fechaAtencion;
+			newAppointment.fechaSeparacion=this.cita.fechaSeparacion;
+			//newAppointment.fechaAtencion = this.cita.fechaAtencion;
 			newAppointment.especialidad = form.value.especialidad;
 			newAppointment.id = this.cita.id;
 			newAppointment.numeroRecibo = this.cita.numeroRecibo;
@@ -167,7 +182,6 @@ export class CitasComponent extends BasePageComponent implements OnInit, OnChang
 			newAppointment.responsable = this.cita.responsable;
 			newAppointment.medico = this.cita.medico.id.toString();
 			this.updateCita(newAppointment);
-
 			this.closeModal();
 			this.appointmentForm.reset();
 		}

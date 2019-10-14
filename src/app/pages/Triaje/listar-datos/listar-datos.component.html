@@ -95,21 +95,26 @@
 <!-- edit patient Modal window -->
 <ng-container>
   <ng-template #modalBody>
-    <form [formGroup]="patientForm1" novalidate class="new-patient-form">
-      <div class="row">
+      <form [formGroup]="cabTri">
 
-
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Fecha de Atencion</tc-form-label>
-            <tc-input [placeholder]="'Fecha de Atención'" formControlName="fechaAtencion" readonly="readonly">
-            </tc-input>
-          </tc-form-group>
-        </div>
-
-
-      </div>
-    </form>
+          <div class="row">
+            <tc-form-group class="col-12 col-sm-3">
+              <tc-form-label>Num.Historia</tc-form-label>
+              <tc-input formControlName="numeroHistoria" readonly="readonly">
+              </tc-input>
+            </tc-form-group>
+            <tc-form-group class="col-12 col-sm-3">
+              <tc-form-label>DNI</tc-form-label>
+              <tc-input formControlName="dni" readonly="readonly">
+              </tc-input>
+            </tc-form-group>
+            <tc-form-group class="col-12 col-sm-6">
+              <tc-form-label>Nombre</tc-form-label>
+              <tc-input formControlName="nombres" readonly="readonly">
+              </tc-input>
+            </tc-form-group>
+          </div>
+        </form>
 
 
     <form [formGroup]="patientForm2" novalidate class="new-patient-form">

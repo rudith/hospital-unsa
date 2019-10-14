@@ -39,6 +39,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	examen: Examen[];
 	cabecera: Cabeceralab[];
 	verMas:Examen[];
+	rr:number;
 
 	constructor(
 		store: Store<IAppState>,
@@ -52,6 +53,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.tipoExOption = [];
 		this.tipoE = [];
 		this.cabecera = [];
+		this.examen=[];
 		this.pageData = {
 			title: 'Laboratorio',
 			loaded: true,
@@ -78,9 +80,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.verMas=[];
 		this.loadData();
 		this.loadExamen();
-		
-
-
 	}
 	ngOnChanges($event) {
 		console.log();
@@ -88,8 +87,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	loadExamen() {
 		this.httpSv.loadExamen().subscribe(examen => {
-			//this.examenCol = examen
-			this.examen = examen
+			this.examen = examen;
 		});
 	}
 
@@ -110,11 +108,8 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 
 	//MOdal crear cabecera
-	openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null, row: Cabeceralab) {
+	openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
 		this.initPatientForm();
-		//this.idCab=row.id;
-		
-		console.log(row);
 		this.modal.open({
 			body: body,
 			header: header,
@@ -135,8 +130,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			orden: ['', Validators.required],
 			observaciones: ['', Validators.required],
 			tipoExam: ['', Validators.required],
-
-		});
+		});	
 	}
 	// fin modal crear cabecera
 
@@ -148,13 +142,14 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			this.httpSv.createCabecera(newExamen);
 			this.closeModalH();
 		}
-
 	}
 
 
 	//modal crear detalle
-	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null) {
+	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null,row:Examen) {
 		this.initDetalleForm();
+		this.rr=row.id;
+		console.log(this.rr);
 		this.modal.open({
 			body: body,
 			header: header,
@@ -171,12 +166,9 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			resultado_obtenido: ['', Validators.required],
 			unidades: ['', Validators.required],
 			rango_referencia: ['', Validators.required],
-			//codigoExam: [idc.id?idc.id:'',Validators.required],
-			codigoExam:['', Validators.required],
 		});
 		
 	}
-
 	//fin de modal crear detalle
 
 
@@ -184,15 +176,15 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	addDetalle(form: FormGroup) {
 		if (form.valid) {
 			let newDetalle: Detalle = form.value;
-
-			newDetalle.codigoExam = this.idCab;
-
+			newDetalle.descripcion=form.value.descripcion;
+			newDetalle.rango_referencia=form.value.rango_referencia;
+			newDetalle.resultado_obtenido=form.value.resultado_obtenido;
+			newDetalle.unidades=form.value.unidades;
+			newDetalle.codigoExam = this.rr;
 			this.httpSv.createDetalle(newDetalle);
 			this.closeModalD();
 			this.detalleForm.reset();
-
 		}
-
 	}
 
 	loadData() {
@@ -223,7 +215,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	initBusForm() {
 		this.busForm = this.formBuilder.group({
-			opBus: ['', Validators.required],
+			//opBus: ['', Validators.required],
 			datoBus: ['', Validators.required],
 		});
 	}
@@ -231,34 +223,35 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	buscar(busca: FormGroup) {
 		this.datoBus = busca.get('datoBus').value;
-		this.opBus = busca.get('opBus').value;
+		//this.opBus = busca.get('opBus').value;
 		this.onChangeTable();
 	}
 
 	onChangeTable() {
-		if (this.opBus == " ") {
+		if (this.datoBus == "") {
 			this.toastr.warning('Ningun valor ingresado');
 			this.httpSv.loadExamen().subscribe(examen => {
-				this.examen = examen
+				this.examen = examen;
 			});
 		} else if (this.opBus == "1") {
 			this.httpSv.searchLabName(this.datoBus).subscribe(data => {
-				//this.examen = [];
+				this.examen = [];
 				this.examen[0] = data;
 				this.toastr.success('Examen  encontrado');
 				console.log("entro bus " + this.datoBus);
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});;
-		} else if (this.opBus == "2") {
+		} 
+		else if (this.opBus == "2") {
 			this.httpSv.searchLabFecha(this.datoBus).subscribe(data => {
 				this.examen = [];
 				this.examen[0] = data;
 				console.log("entro bus " + this.datoBus);
 			});;
-		} else if (this.opBus == "3") {
+		} else if (this.opBus=="3") {
 			this.httpSv.searchLabDni(this.datoBus).subscribe(data => {
-				//this.examen = [];
+				this.examen = [];
 				this.examen[0] = data;
 				console.log("entro bus " + this.datoBus);
 			});;

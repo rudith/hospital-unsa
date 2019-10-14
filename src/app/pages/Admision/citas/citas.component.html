@@ -3,7 +3,7 @@
 <div class="col-sm-12">
 	<div class="row">
 		<tc-form-group class="col-sm-6 col-lg-10">
-			<tc-input [placeholder]="'Buscar Cita'" type="number" [(ngModel)]="dni"
+			<tc-input [placeholder]="'Ingrese DNI del paciente'" type="number" [(ngModel)]="dni"
 				[suffixIcon]="'icofont-search-document'">
 			</tc-input>
 		</tc-form-group>
@@ -26,7 +26,8 @@
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							DNI
-						</th>						
+						</th>
+
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							F. Atencion
 						</th>
@@ -44,7 +45,6 @@
 						</th>
 					</tr>
 				</thead>
-
 				<tbody>
 					<tr *ngFor="let row of citasEdit">
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
@@ -53,11 +53,16 @@
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.numeroRecibo}}
 						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }" [tcColor]="'#259FD0'">
 							{{row.numeroHistoria.dni}}
 						</td>
+						<!-- 
+							<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.updated_at.substring(0,10)}}
+						</td>
+						-->
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.fechaSeparacion}}
+							{{row.fechaAtencion}}
 						</td>
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.estadoCita}}
@@ -90,10 +95,33 @@
 </div>
 <ng-container>
 	<ng-template #modalBody>
+
+		<form [formGroup]="cabModCita">
+
+			<div class="row">
+				<tc-form-group class="col-12 col-sm-4">
+					<tc-form-label>Numero de Historia</tc-form-label>
+					<tc-input formControlName="numeroHistoria" readonly="readonly">
+					</tc-input>
+				</tc-form-group>
+				<tc-form-group class="col-12 col-sm-4">
+					<tc-form-label>DNI</tc-form-label>
+					<tc-input formControlName="dni" readonly="readonly">
+					</tc-input>
+				</tc-form-group>
+				<tc-form-group class="col-12 col-sm-4">
+					<tc-form-label>Numero de Recibo</tc-form-label>
+					<tc-input formControlName="numeroRecibo" readonly="readonly">
+					</tc-input>
+				</tc-form-group>
+			</div>
+		</form>
+
 		<form [formGroup]="appointmentForm">
 			<tc-form-group>
 				<tc-form-label>Especialidad</tc-form-label>
-				<tc-select [placeholder]="'Especialidad'" type="number" formControlName="especialidad" [options]="espOption">
+				<tc-select [placeholder]="'Especialidad'" type="number" formControlName="especialidad"
+					[options]="espOption">
 				</tc-select>
 				<tc-form-label>Fecha de Separación</tc-form-label>
 				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
@@ -102,10 +130,10 @@
 				</tc-form-description>
 			</tc-form-group>
 			<tc-form-group>
-				<tc-input type="date" formControlName="fechaSeparacion"></tc-input>
+				<tc-input type="date" formControlName="fechaAtencion"></tc-input>
 				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="appointmentForm.controls.fechaSeparacion.touched && appointmentForm.controls.fechaSeparacion.invalid ">
-					Ingrese Fecha de Separación
+					*ngIf="appointmentForm.controls.fechaAtencion.touched && appointmentForm.controls.fechaAtencion.invalid ">
+					Ingrese Fecha de Atencion
 				</tc-form-description>
 			</tc-form-group>
 		</form>

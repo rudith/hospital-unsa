@@ -35,16 +35,17 @@ export class HistorialComponent extends BasePageComponent
 	public gruposang: Grupsang[];
 	public gruposangOption: IOption[];
 	public gradoInstruccionOption: IOption[];
-	public departamentos: Departamento[];
+	public estadoCivilOption:IOption[];
 	public departamentosOption: IOption[];
-	public provincias: Provincia[];
 	public provinciasOption: IOption[];
 	public sexOption: IOption[];
 	public ocupacionOption: IOption[];
-	public distritos: Distrito[];
-	public medicos: Medico[];
 	public distritosOption: IOption[];
 	public medOption: IOption[];
+	public provincias: Provincia[];
+	public departamentos: Departamento[];
+	public distritos: Distrito[];
+	public medicos: Medico[];
 	today: Date;
 	datoBus: string;
 	opBus: string;
@@ -83,6 +84,7 @@ export class HistorialComponent extends BasePageComponent
 		this.distritos = [];
 		this.medOption = [];
 		this.distritosOption = [];
+		this.estadoCivilOption=[];
 		this.medicos = [];
 		this.loadData();
 		this.historiales = [];
@@ -164,7 +166,9 @@ export class HistorialComponent extends BasePageComponent
 
 	closeModalH() {
 		this.modal.close();
+		this.loadHistorias();
 	}
+	
 	initPatientForm() {
 		this.patientForm = this.formBuilder.group({
 			numeroHistoria: ['', [Validators.required,Validators.pattern('[0-9]*')]],
@@ -173,14 +177,14 @@ export class HistorialComponent extends BasePageComponent
 			apellido_paterno: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			apellido_materno: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			sexo: ['', [Validators.required]],
-			fechaNac: ['', Validators.required],
-			celular: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+			fechaNac: ['', [Validators.required]],
+			celular: ['', [ Validators.minLength(9), Validators.maxLength(9)]],
 			telefono: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-			estadoCivil: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
-			gradoInstruccion: ['', [Validators.pattern('[A-Za-z ]*')]],
-			ocupacion: ['', [Validators.pattern('[A-Za-z ]*')]],
+			estadoCivil: ['', [Validators.required]],
+			gradoInstruccion: ['', [Validators.required]],
+			ocupacion: ['', [Validators.required]],
 			direccion: ['', Validators.required],
-			nacionalidad: ['', [Validators.pattern('[A-Za-z ]*')]],
+			nacionalidad: [ 'Peruana', [Validators.pattern('[A-Za-z ]*')]],
 			email: [''],
 			distrito: ['', Validators.required],
 			provincia: ['', Validators.required],
@@ -214,6 +218,19 @@ export class HistorialComponent extends BasePageComponent
 		this.ocupacionOption[4] = { label: "Ingeniero", value: "Ingeniero", };
 		this.ocupacionOption[5] = { label: "Otro", value: "Otro", };
 		this.ocupacionOption[6] = { label: "Independiente", value: "Independiente", };
+
+		//Grado de Instruccion
+		this.gradoInstruccionOption[0]={ label: "Primaria", value: "Primaria", };
+		this.gradoInstruccionOption[1]={ label: "Secundaria", value: "Secundaria", };
+		this.gradoInstruccionOption[2]={ label: "Sup. Tecnico", value: "Sup. Tecnico", };
+		this.gradoInstruccionOption[3]={ label: "Universitario", value: "Universitario", };
+
+		//Estado Civil
+		this.estadoCivilOption[0]={ label: "Soltero(a)", value: "Soltero(a)", };
+		this.estadoCivilOption[1]={ label: "Casado(a)", value: "Casado(a)", };
+		this.estadoCivilOption[2]={ label: "Viudo(a)", value: "Viudo(a)", };
+		this.estadoCivilOption[3]={ label: "Divorciado(a)", value: "Divorciado(a)", };
+		this.estadoCivilOption[4]={ label: "Conviviente", value: "Conviviente", };
 
 
 		this.loadprovincias();
@@ -312,7 +329,7 @@ export class HistorialComponent extends BasePageComponent
 	initAppoForm(data: any) {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
-			numeroRecibo: ['',],
+			numeroRecibo: ['',[Validators.pattern('[0-9]*')]],
 			fechaSeparacion: ['', Validators.required],
 			especialidad: ['', Validators.required],
 			medico: ['', Validators.required],
@@ -355,13 +372,12 @@ export class HistorialComponent extends BasePageComponent
 			newAppointment.numeroHistoria = this.numero;
 			
 			if (newAppointment.responsable == "") {
-				
 				newAppointment.exonerado = false;
-				console.log(newAppointment.exonerado + " entro if ");
+				
 			}
 			else {
+				newAppointment.numeroRecibo=null;
 				newAppointment.exonerado = true;
-				console.log(newAppointment.exonerado + " entro else ");
 			}
 
 			this.httpSv.createCITA(newAppointment);
@@ -380,6 +396,7 @@ export class HistorialComponent extends BasePageComponent
 				
 			});
 		} else if (this.opBus == "1") {
+			
 			this.toastr.warning('Buscando...');
 			this.httpSv.searcHistoriasDNI(this.datoBus).subscribe(data => {
 				this.historiales = [];

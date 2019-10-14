@@ -24,6 +24,7 @@ export interface CitaM {
   numeroRecibo?: number,
   fechaSeparacion?: string,
   fechaAtencion?: string,
+  updated_at?:string,
   estadoCita?: string,
   exonerado?: boolean,
   responsable?: string,

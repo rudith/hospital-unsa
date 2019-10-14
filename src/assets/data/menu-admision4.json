@@ -1,25 +1,5 @@
 [
 	{
-		"title": "Admisión",
-		"groupTitle": true
-	},
-	{
-		"title": "Buscar Historial",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "historial",
-		"layout": "vertical"
-	},
-	{
-		"title": "Buscar Cita",
-		"icon": {
-			"class": "icofont-stethoscope-alt"
-		},
-		"routing": "citas",
-		"layout": "vertical"
-	},
-	{
 		"title": "Administrador",
 		"groupTitle": true
 	},
@@ -61,46 +41,6 @@
 			"class": "icofont-thermometer-alt"
 		},
 		"routing": "personal",
-		"layout": "vertical"
-	},
-	{
-		"title": "Triaje",
-		"groupTitle": true
-	},
-	{
-		"title": "Paciente",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "patients",
-		"layout": "vertical"
-	},
-	{
-		"title": "Laboratorio",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "laboratorio",
-		"layout": "vertical"
-	},
-	{
-		"title": "Consultorio",
-		"groupTitle": true
-	},
-	{
-		"title": "Citas Programadas",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "consultas",
-		"layout": "vertical"
-	},
-	{
-		"title": "Listar Consultas",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "Lconsultas",
 		"layout": "vertical"
 	}
 ]

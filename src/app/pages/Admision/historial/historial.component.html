@@ -1,16 +1,21 @@
-
 <div class="col-sm-12">
 	<form [formGroup]="busForm">
 		<div class="row">
 			<div class="col col-12 ">
 				<div class="row">
+						<div class="col-md-1">
+						<tc-form-group>
+								<button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+									(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
+						</tc-form-group>
+					</div>
 					<div class="col-md-3">
 						<tc-form-group>
 							<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption">
 							</tc-select>
 						</tc-form-group>
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-6">
 						<tc-form-group>
 							<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
@@ -31,11 +36,6 @@
 	<br>
 	<tc-card class="mb-0">
 		<tc-table [rows]="historiales" [hovered]="true" [pagination]="true">
-			<tc-table-col [columnTitle]="'ID'" [columnName]="'id'">
-				<ng-template #tableTDTemplate let-value>
-					<strong>{{ value }}</strong>
-				</ng-template>
-			</tc-table-col>
 			<tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'numeroHistoria'" [enableSorting]="true">
 				<ng-template #tableTDTemplate let-value>
 					<strong>{{ value }}</strong>
@@ -48,15 +48,7 @@
 			<tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'apellido_materno'" [enableSorting]="true">
 			</tc-table-col>
 			
-			<tc-table-col [columnTitle]="'Celular'" [columnName]="'celular'">
-				<ng-template #tableTDTemplate let-value>
-					<span class="d-flex align-items-center nowrap" [tcColor]="'#336cfb'">
-						<tc-icon [iconClass]="'icofont-ui-cell-phone'" [tcFontSize]="16" [padding]="0" class="mr-1">
-						</tc-icon>
-						{{ value }}
-					</span>
-				</ng-template>
-			</tc-table-col>
+			
 			<tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
 				<ng-template #tableTDTemplate let-row="row">
 					<div class="actions">
@@ -88,10 +80,7 @@
 			</tc-table-col>
 		</tc-table>
 	</tc-card>
-	<div class="add-action-box">
-		<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
-			(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
-	</div>
+	
 
 </div>
 <!-- Modal Crear Cita  -->
@@ -110,6 +99,10 @@
 						<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'text'"
 							formControlName="numeroRecibo">
 						</tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="appointmentForm.controls.numeroRecibo.touched && appointmentForm.controls.numeroRecibo.invalid ">
+					Ingrese solo numeros
+				</tc-form-description>
 					</div>
 				</div>
 				<div>
@@ -289,40 +282,28 @@
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-input [placeholder]="'Grado de Instruccion'" formControlName="gradoInstruccion"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.gradoInstruccion.touched && patientForm.controls.gradoInstruccion.invalid ">
-							Este campo solo debe tener letras.
-						</tc-form-description>
-
+						<tc-select [placeholder]="'Grado de Instruccion'" formControlName="gradoInstruccion" [options]="gradoInstruccionOption">
+								</tc-select>
 					</tc-form-group>
 				</div>
 
 
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-form-group>
-							<tc-select [placeholder]="'Ocupacion'" formControlName="ocupacion"
-								[options]="ocupacionOption">
-							</tc-select>
-						</tc-form-group>
+						<tc-select [placeholder]="'Ocupacion'" formControlName="ocupacion" [options]="ocupacionOption"></tc-select>
 					</tc-form-group>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-input [placeholder]="'Estado Civil*'" formControlName="estadoCivil"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.estadoCivil.touched && patientForm.controls.estadoCivil.invalid ">
-							Este campo solo debe tener letras.
-						</tc-form-description>
+						<tc-select [placeholder]="'Estado civil'" formControlName="estadoCivil" [options]="estadoCivilOption"></tc-select>
 					</tc-form-group>
 				</div>
 
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-input [placeholder]="'Nacionalidad*'" formControlName="nacionalidad"></tc-input>
+						<tc-input [placeholder]="'Nacionalidad'"  formControlName="nacionalidad" ></tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.nacionalidad.touched && patientForm.controls.nacionalidad.invalid ">
 							Este campo solo debe tener letras
@@ -420,6 +401,7 @@
 			<div class="row">
 
 				<div class="col-12 col-sm-4">
+					
 					<tc-form-group>
 						<tc-form-label>Estado Civil</tc-form-label>
 						<tc-input [placeholder]="'Estado Civil'" formControlName="estadoCivil" readonly="readonly">

@@ -96,6 +96,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
   //cierra modal
   closeModal() {
     this.modal.close();
+    this.loadEspecialidades();
   }
   //inicia formulario
   initForm() {

@@ -175,6 +175,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
       newTriaje.frecuenciaC = parseInt(form.get('frecuenciaC').value);
       newTriaje.frecuenciaR = parseInt(form.get('frecuenciaR').value);
       newTriaje.temperatura = parseInt(form.get('temperatura').value);
+      
       console.log(newTriaje.talla);
       console.log(newTriaje);
       this.httpSv.crearTriaje(newTriaje);

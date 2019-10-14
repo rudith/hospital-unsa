@@ -3,10 +3,11 @@
 		<div class="row">
 			<div class="col col-12 ">
 				<div class="row">
-						<div class="col-md-1">
+					<div class="col-md-1">
 						<tc-form-group>
-								<button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
-									(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
+							<button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true"
+								[tcShape]="500" [size]="'sm'"
+								(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
 						</tc-form-group>
 					</div>
 					<div class="col-md-3">
@@ -19,9 +20,9 @@
 						<tc-form-group>
 							<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="busForm.controls.datoBus.touched && busForm.controls.datoBus.invalid ">
-					Ingrese solo numeros
-				</tc-form-description>
+								*ngIf="busForm.controls.datoBus.touched && busForm.controls.datoBus.invalid ">
+								Ingrese solo numeros
+							</tc-form-description>
 						</tc-form-group>
 					</div>
 					<div class="col-md-2">
@@ -40,15 +41,16 @@
 				<ng-template #tableTDTemplate let-value>
 					<strong>{{ value }}</strong>
 				</ng-template>
-			
-			<tc-table-col [columnTitle]="'DNI'" [columnName]="'dni'" [enableSorting]="true"></tc-table-col></tc-table-col>
+
+				<tc-table-col [columnTitle]="'DNI'" [columnName]="'dni'" [enableSorting]="true"></tc-table-col>
+			</tc-table-col>
 			<tc-table-col [columnTitle]="'Nombres'" [columnName]="'nombres'" [enableSorting]="true"></tc-table-col>
 			<tc-table-col [columnTitle]="'Apellido Paterno'" [columnName]="'apellido_paterno'" [enableSorting]="true">
 			</tc-table-col>
 			<tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'apellido_materno'" [enableSorting]="true">
 			</tc-table-col>
-			
-			
+
+
 			<tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
 				<ng-template #tableTDTemplate let-row="row">
 					<div class="actions">
@@ -80,7 +82,7 @@
 			</tc-table-col>
 		</tc-table>
 	</tc-card>
-	
+
 
 </div>
 <!-- Modal Crear Cita  -->
@@ -100,9 +102,9 @@
 							formControlName="numeroRecibo">
 						</tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-					*ngIf="appointmentForm.controls.numeroRecibo.touched && appointmentForm.controls.numeroRecibo.invalid ">
-					Ingrese solo numeros
-				</tc-form-description>
+							*ngIf="appointmentForm.controls.numeroRecibo.touched && appointmentForm.controls.numeroRecibo.invalid ">
+							Ingrese solo numeros
+						</tc-form-description>
 					</div>
 				</div>
 				<div>
@@ -213,10 +215,12 @@
 			<div class="row">
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-select [placeholder]="'Distrito'" formControlName="distrito" [options]="distritosOption">
+						<tc-select [placeholder]="'Departamento'" formControlName="departamento"
+							[options]="departamentosOption">
 						</tc-select>
 					</tc-form-group>
 				</div>
+
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
 						<tc-select [placeholder]="'Provincia'" formControlName="provincia" [options]="provinciasOption">
@@ -225,8 +229,7 @@
 				</div>
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-select [placeholder]="'Departamento'" formControlName="departamento"
-							[options]="departamentosOption">
+						<tc-select [placeholder]="'Distrito'" formControlName="distrito" [options]="distritosOption">
 						</tc-select>
 					</tc-form-group>
 				</div>
@@ -246,7 +249,7 @@
 						</tc-form-description>
 					</tc-form-group>
 				</div>
-				
+
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
 						<tc-form-group>
@@ -282,28 +285,31 @@
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-select [placeholder]="'Grado de Instruccion'" formControlName="gradoInstruccion" [options]="gradoInstruccionOption">
-								</tc-select>
+						<tc-select [placeholder]="'Grado de Instruccion'" formControlName="gradoInstruccion"
+							[options]="gradoInstruccionOption">
+						</tc-select>
 					</tc-form-group>
 				</div>
 
 
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-select [placeholder]="'Ocupacion'" formControlName="ocupacion" [options]="ocupacionOption"></tc-select>
+						<tc-select [placeholder]="'Ocupacion'" formControlName="ocupacion" [options]="ocupacionOption">
+						</tc-select>
 					</tc-form-group>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-select [placeholder]="'Estado civil'" formControlName="estadoCivil" [options]="estadoCivilOption"></tc-select>
+						<tc-select [placeholder]="'Estado civil'" formControlName="estadoCivil"
+							[options]="estadoCivilOption"></tc-select>
 					</tc-form-group>
 				</div>
 
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-input [placeholder]="'Nacionalidad'"  formControlName="nacionalidad" ></tc-input>
+						<tc-input [placeholder]="'Nacionalidad'" formControlName="nacionalidad"></tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.nacionalidad.touched && patientForm.controls.nacionalidad.invalid ">
 							Este campo solo debe tener letras
@@ -401,7 +407,7 @@
 			<div class="row">
 
 				<div class="col-12 col-sm-4">
-					
+
 					<tc-form-group>
 						<tc-form-label>Estado Civil</tc-form-label>
 						<tc-input [placeholder]="'Estado Civil'" formControlName="estadoCivil" readonly="readonly">

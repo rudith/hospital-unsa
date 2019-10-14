@@ -61,7 +61,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 			]
 		};
 		this.tableData = [];
-		this.idMedico = 1;
+		this.idMedico = 2;
 		this.CitasC=[];
 		this.loadCitas();
 	}

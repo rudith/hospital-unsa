@@ -8,7 +8,7 @@
 		"icon": {
 			"class": "icofont-thermometer-alt"
 		},
-		"routing": "patients",
+		"routing": "listar-datos",
 		"layout": "vertical"
 	}
 ]

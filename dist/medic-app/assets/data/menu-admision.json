@@ -1,6 +1,6 @@
 [
 	{
-		"title": "asdasdsa",
+		"title": "Admisión",
 		"groupTitle": true
 	},
 	{
@@ -32,14 +32,6 @@
 		"layout": "vertical"
 	},
 	{
-		"title": "Personal",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "personal",
-		"layout": "vertical"
-	},
-	{
 		"title": "Tipo de Usuario",
 		"icon": {
 			"class": "icofont-thermometer-alt"
@@ -61,6 +53,14 @@
 			"class": "icofont-thermometer-alt"
 		},
 		"routing": "especialidad",
+		"layout": "vertical"
+	},
+	{
+		"title": "Personal",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "personal",
 		"layout": "vertical"
 	},
 	{

@@ -1,0 +1,14 @@
+[
+	{
+		"title": "Consultorio",
+		"groupTitle": true
+	},
+	{
+		"title": "Laboratorio",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "laboratorio",
+		"layout": "vertical"
+	}
+]

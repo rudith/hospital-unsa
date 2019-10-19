@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Historial } from '../../interfaces/historial';
@@ -311,14 +311,16 @@ export class HttpService {
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
-	searchLabName(nombre: string): Observable<any> {
-		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
+	/*** Servicio de laboratorio
+	 ***/
+	searchLabName(nombre: string): Observable<Examen[]> {
+		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
 	}
-	searchLabFecha(fecha: string): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
+	searchLabFecha(fecha: string): Observable<Examen[]> {
+		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
 	}
-	searchLabDni(dni:string): Observable<any>{
-		return this.http.get<Examen>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
+	searchLabDni(dni:string): Observable<Examen[]>{
+		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
 	}
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>("http://18.216.2.122:9000/laboratorio/TipoExamen/");
@@ -327,6 +329,18 @@ export class HttpService {
 		return this.http.get<Examen[]> ("http://18.216.2.122:9000/laboratorio/ExamenLabCab/");
 
 	}
+	imprimirExam(idE:number):Observable<any[]>{
+		console.log("ENTRA AL SERVICIO");
+		console.log(idE);
+		let headers = new HttpHeaders();
+		headers = headers.set('Accept', 'application/pdf');
+		return this.http.get<any[]>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ idE +'/', {headers: headers});
+	}
+	loadTabla(idEx:number):Observable<Detalle[]>{
+		console.log("ENTRA AL SERVICIO de tabla");
+		return this.http.get<Detalle[]>('http://18.216.2.122:9000/laboratorio/filtro/Detalles/?id='+ idEx)
+	}
+
 	createDetalle(detalle: Detalle){
 		console.log(detalle);
 		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabDet/',

@@ -23,14 +23,15 @@
 		</tc-table-col>
 		<tc-table-col [columnTitle]="'Numero de Historia'" [columnName]="'numeroRecibo'" [enableSorting]="true">
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Nombre Completo'" [columnName]="'responsable'" ></tc-table-col>
+		<tc-table-col [columnTitle]="'Nombre Completo'" [columnName]="'responsable'"></tc-table-col>
 		<tc-table-col [columnTitle]="'Especialidad'" [columnName]="'fechaAtencion'"></tc-table-col>
 		<tc-table-col [columnTitle]="'Estado de Cita'" [columnName]="'estadoCita'"></tc-table-col>
 		<tc-table-col [columnTitle]="'Atender Paciente'" [columnName]="''">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
 					<button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
-						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'" (click)="atender(row.numeroRecibo,row.id)">Atender</button>
+						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
+						(click)="atender(row.numeroRecibo,row.id)">Atender</button>
 				</div>
 			</ng-template>
 		</tc-table-col>

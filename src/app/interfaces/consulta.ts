@@ -10,5 +10,7 @@ export interface Consulta {
   diagnostico: string,
   tratamiento: string,
   proximaCita: string,
-  triaje: number
+  fechaCreacion:string,
+  triaje: number,
+  especialidad:number,
 }

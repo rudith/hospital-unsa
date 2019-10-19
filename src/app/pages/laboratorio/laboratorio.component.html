@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col col-12 ">
 			<div class="row">
-				
+
 				<tc-form-group class="col-md-1">
 					<div class="add-action-box">
 						<button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500"
@@ -11,8 +11,8 @@
 						</button>
 					</div>
 				</tc-form-group>
-				
-						<div class="col-md-2">
+
+				<div class="col-md-3">
 					<tc-form-group>
 						<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption"></tc-select>
 					</tc-form-group>
@@ -50,7 +50,18 @@
 			</ng-template>
 		</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Ver Mas'" >
+		<tc-table-col [columnTitle]="'Agregar Detalle'">
+			<ng-template #tableTDTemplate let-row="row">
+				<div class="add-action-box">
+					<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
+						[tcBgColor]="'#3f51b5'"
+						(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false })">
+					</button>
+				</div>
+			</ng-template>
+		</tc-table-col>
+
+		<tc-table-col [columnTitle]="'Ver Mas'">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
 					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
@@ -60,18 +71,8 @@
 				</div>
 			</ng-template>
 		</tc-table-col>
-		<tc-table-col [columnTitle]="'Agregar Detalle'" >
-			<ng-template #tableTDTemplate let-row="row">
-			<div class="add-action-box">
-				<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
-					[tcBgColor]="'#3f51b5'"
-					(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)">
-				</button>
-			</div>
-		</ng-template>
-	</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Imprimir'" >
+		<tc-table-col [columnTitle]="'Imprimir'">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions align-items-center ">
 					<button tc-button [afterIcon]="'icofont-print'" [tcColor]="['#795548', '#fff']"
@@ -80,12 +81,29 @@
 				</div>
 			</ng-template>
 		</tc-table-col>
+
+
+
 	</tc-table>
 </tc-card>
 
 
-<!-- Modal Crear cabecera -->
+<div class="add-action-box2">
+	<a href="http://18.216.2.122:9000/laboratorio/reporteMensual">
+		<input type="button" value="Reporte Mensual" name="submit" tc-button [square]="true" [tcShape]="500" />
+	</a>
+</div>
 
+<div class="addlab-action-box">
+	<a href="http://18.216.2.122:9000/laboratorio/reporteSemanal">
+		<input type="button" value="Reporte Semanal" name="submit" tc-button [square]="true" [tcShape]="500" />
+	</a>
+</div>
+
+
+
+
+<!-- Modal Crear cabecera -->
 <ng-container>
 	<ng-template #modalCrearHBody>
 		<form [formGroup]="patientForm" novalidate class="new-patient-form">
@@ -114,7 +132,7 @@
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-input [placeholder]="'Fecha*'" formControlName="fecha"></tc-input>
+						<tc-input type="date" formControlName="fecha"></tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.fecha.touched && patientForm.controls.fecha.invalid ">
 							Ingrese Fecha correcta aaaa-mm-dd
@@ -159,10 +177,6 @@
 	</ng-template>
 </ng-container>
 <!-- end Modal Crear cabecera -->
-
-
-
-
 
 
 <!-- Modal Crear detalle -->
@@ -222,15 +236,7 @@
 		</div>
 	</ng-template>
 </ng-container>
-
-
-
 <!-- end Modal Crear detalle -->
-
-
-
-
-
 
 
 <!-- Open Modal Ver Mas -->
@@ -278,29 +284,34 @@
 					</tc-input>
 				</tc-form-group>
 			</div>
-			<!--<div class="col-12 col-sm-12">
-				<tc-form-group>
-					<tc-form-label>Descripción</tc-form-label>
-					<tc-input [placeholder]="'Descripción'" [type]="'descripción'" formControlName="telefono"
-						readonly="readonly">
-					</tc-input>
-				</tc-form-group>
-			</div>
-			<div class="col-12 col-sm-12">
-				<tc-form-group>
-					<tc-form-label>Resultados obtenidos </tc-form-label>
-					<tc-input [placeholder]="'Resultados obtenidos'" [type]="'number'" formControlName="celular" readonly="readonly">
-					</tc-input>
-				</tc-form-group>
-			</div>
+		
+			<tc-card [title]="'Detalles'" class="mb-0">
+				<tc-table [rows]="detalleT" [hovered]="true" [pagination]="true">
+					<tc-table-col [columnTitle]="'Descripción'" [columnName]="'descripcion'">
+						<ng-template #tableTDTemplate let-value>
+							<strong>{{ value }}</strong>
+						</ng-template>
+					</tc-table-col>
 
-			<div class="col-12 col-sm-12">
-				<tc-form-group>
-					<tc-form-label>Rango de referencia </tc-form-label>
-					<tc-input [placeholder]="'Celular'" [type]="'number'" formControlName="celular" readonly="readonly">
-					</tc-input>
-				</tc-form-group>
-			</div>-->
+					<tc-table-col [columnTitle]="'Resultado'" [columnName]="'resultado_obtenido'">
+						<ng-template #tableTDTemplate let-value>
+							<strong>{{ value }}</strong>
+						</ng-template>
+					</tc-table-col>
+
+					<tc-table-col [columnTitle]="'Unidades'" [columnName]="'unidades'">
+						<ng-template #tableTDTemplate let-value>
+							<strong>{{ value }}</strong>
+						</ng-template>
+					</tc-table-col>
+					
+					<tc-table-col [columnTitle]="'Rango'" [columnName]="'rango_referencia'">
+						<ng-template #tableTDTemplate let-value>
+							<strong>{{ value }}</strong>
+						</ng-template>
+					</tc-table-col>
+				</tc-table>
+			</tc-card>
 
 		</form>
 	</ng-template>
@@ -313,6 +324,3 @@
 	</ng-template>
 </ng-container>
 <!--End Modal Ver Mas-->
-
-
-

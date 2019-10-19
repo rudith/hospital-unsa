@@ -26,7 +26,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	@ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
 	public tipoExOption: IOption[];
 	public tipoE: Tipoexamen[];
-	idCab: number;
 	datoBus: string;
 	opBus: string;
 	estadoBusq: boolean;
@@ -38,8 +37,9 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	public busqOption: IOption[];
 	examen: Examen[];
 	cabecera: Cabeceralab[];
-	verMas:Examen[];
-	rr:number;
+	verMas: Examen[];
+	rr: number;
+	detalleT: Detalle[];
 
 	constructor(
 		store: Store<IAppState>,
@@ -53,7 +53,8 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.tipoExOption = [];
 		this.tipoE = [];
 		this.cabecera = [];
-		this.examen=[];
+		this.examen = [];
+		this.detalleT=[];
 		this.pageData = {
 			title: 'Laboratorio',
 			loaded: true,
@@ -76,15 +77,16 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			]
 		};
 		this.examen = [];
+		this.detalleT=[];
 		this.examenCol = [];
-		this.verMas=[];
-		this.loadData();
+		this.verMas = [];
+		this.loadData(); //tipo examen 
 		this.loadExamen();
 	}
 	ngOnChanges($event) {
 		console.log();
 	}
-
+	//Muestra el listado de exmamenes en la tabla 
 	loadExamen() {
 		this.httpSv.loadExamen().subscribe(examen => {
 			this.examen = examen;
@@ -107,7 +109,9 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		super.ngOnDestroy();
 	}
 
-	//MOdal crear cabecera
+	//Modal crear cabecera: 
+	//openModalH: metodo de apertura del modal con los parametros necesario que recibe
+	//initPatientForm: Form que valida los datos ingresados en el formulario 
 	openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
 		this.initPatientForm();
 		this.modal.open({
@@ -122,6 +126,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 
 	}
+	//Valida los campos del formulario de crear cabecera
 	initPatientForm() {
 		this.patientForm = this.formBuilder.group({
 			dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
@@ -130,36 +135,42 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			orden: ['', Validators.required],
 			observaciones: ['', Validators.required],
 			tipoExam: ['', Validators.required],
-		});	
+		});
 	}
-	// fin modal crear cabecera
+	// Fin Modal crear cabecera
 
-	//Crear cabecera
+	//Metodo de Crear cabecera: llama al servicio de creacion  createCabecera
 	addExamen(form: FormGroup) {
 		if (form.valid) {
 			let newExamen: Cabeceralab = form.value;
 			newExamen.fecha = formatDate(form.value.fecha, 'yyyy-MM-dd', 'en-US', '+0530');
 			this.httpSv.createCabecera(newExamen);
 			this.closeModalH();
+			this.loadExamen();
 		}
 	}
 
 
-	//modal crear detalle
-	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null,row:Examen) {
+	//Modal Crear Detalle:
+	//openModaD: metodo de apertura del modal con los parametros necesario que recibe
+	//initDetalleForm: Form que valida los datos ingresados en el formulario 
+
+	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Examen, options: any = null) {
 		this.initDetalleForm();
-		this.rr=row.id;
+		this.rr = row.id;
 		console.log(this.rr);
 		this.modal.open({
 			body: body,
 			header: header,
 			footer: footer,
+			options: options
 
 		});
 	}
 	closeModalD() {
 		this.modal.close();
 	}
+	//Valida los campos del formulario de crear detalle
 	initDetalleForm() {
 		this.detalleForm = this.formBuilder.group({
 			descripcion: ['', Validators.required],
@@ -167,26 +178,34 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			unidades: ['', Validators.required],
 			rango_referencia: ['', Validators.required],
 		});
-		
+
 	}
-	//fin de modal crear detalle
+	//Fin de Modal Crear Detalle
 
-
-	// crear detalle 
+	// Metodo de Crear detalle: llama al servicio de creacion createDetalle
 	addDetalle(form: FormGroup) {
 		if (form.valid) {
 			let newDetalle: Detalle = form.value;
-			newDetalle.descripcion=form.value.descripcion;
-			newDetalle.rango_referencia=form.value.rango_referencia;
-			newDetalle.resultado_obtenido=form.value.resultado_obtenido;
-			newDetalle.unidades=form.value.unidades;
+			newDetalle.descripcion = form.value.descripcion;
+			newDetalle.rango_referencia = form.value.rango_referencia;
+			newDetalle.resultado_obtenido = form.value.resultado_obtenido;
+			newDetalle.unidades = form.value.unidades;
 			newDetalle.codigoExam = this.rr;
 			this.httpSv.createDetalle(newDetalle);
-			this.closeModalD();
 			this.detalleForm.reset();
 		}
 	}
 
+	//Metodo que llama al serivcio imprimirExam 
+	imprimir(row: Examen) {
+		console.log("IMPRIME" + row.id)
+		this.httpSv.imprimirExam(row.id);
+
+	}
+
+
+
+	//Metodo loadData: muestra en el formulario de crear cabecera el select de TIPO DE EXAMEN 
 	loadData() {
 		this.httpSv.loadTipoEx().subscribe(tipo => {
 			this.tipoE = tipo,
@@ -212,21 +231,21 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		//this.appointmentForm.reset();
 	}
 
-
+	//valida los valores de busqueda 
 	initBusForm() {
 		this.busForm = this.formBuilder.group({
-			//opBus: ['', Validators.required],
+			opBus: ['', Validators.required],
 			datoBus: ['', Validators.required],
 		});
 	}
 
-
+	//metodo que captura valores de busqueda y llama al metodo onChangeTable
 	buscar(busca: FormGroup) {
 		this.datoBus = busca.get('datoBus').value;
-		//this.opBus = busca.get('opBus').value;
+		this.opBus = busca.get('opBus').value;
 		this.onChangeTable();
 	}
-
+	//Metodo que verifica el tipo de busqueda llamando respectivamente segun el tipo de busqueda elejido 
 	onChangeTable() {
 		if (this.datoBus == "") {
 			this.toastr.warning('Ningun valor ingresado');
@@ -236,28 +255,34 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		} else if (this.opBus == "1") {
 			this.httpSv.searchLabName(this.datoBus).subscribe(data => {
 				this.examen = [];
-				this.examen[0] = data;
+				this.examen = data;
+				this.toastr.success('Examen  encontrado');
+				console.log(data);
+			}, error => {
+				this.toastr.warning('No encontrado');
+			});
+		}
+		else if (this.opBus == "2") {
+			this.httpSv.searchLabFecha(this.datoBus).subscribe(data => {
+				this.examen = [];
+				this.examen = data;
 				this.toastr.success('Examen  encontrado');
 				console.log("entro bus " + this.datoBus);
 			}, error => {
 				this.toastr.warning('No encontrado');
-			});;
-		} 
-		else if (this.opBus == "2") {
-			this.httpSv.searchLabFecha(this.datoBus).subscribe(data => {
-				this.examen = [];
-				this.examen[0] = data;
-				console.log("entro bus " + this.datoBus);
-			});;
-		} else if (this.opBus=="3") {
+			});
+		} else if (this.opBus == "3") {
 			this.httpSv.searchLabDni(this.datoBus).subscribe(data => {
+				console.log(data);
 				this.examen = [];
-				this.examen[0] = data;
-				console.log("entro bus " + this.datoBus);
-			});;
+				this.examen = data;
+				this.toastr.success('Examen  encontrado');
+			},error => {
+				this.toastr.warning('No encontrado');
+			});
 		}
 	}
-	
+
 
 	// modal ver mas 
 	openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Examen) {
@@ -268,12 +293,10 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			footer: footer,
 			options: null
 		});
-	}
+		this.loadTabla(row);
 
-	closeModalVH() {
-		this.modal.close();
 	}
-
+	//Valida y muestra los datos del modal ver mas 
 	initExamenForm(data: Examen) {
 		this.examenForm = this.formBuilder.group({
 			nombre: [data.nombre ? data.nombre : '', Validators.required],
@@ -283,6 +306,13 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			observaciones: [data.observaciones ? data.observaciones : '', Validators.required],
 		});
 	}
+	//Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
+	loadTabla(row: Examen) {
+		this.httpSv.loadTabla(row.id).subscribe(detalleT => {
+			this.detalleT = detalleT;
+		})
+	}
+
 
 	// fin modal ver mas 
 

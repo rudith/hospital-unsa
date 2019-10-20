@@ -125,6 +125,10 @@ export class HttpService {
 	loadProvincia(): Observable<Provincia[]> {
 		return this.http.get<Provincia[]>("http://18.216.2.122:9000/admision/provincias/");
 	}
+	loadProvinciaId(id:number): Observable<Provincia[]> {
+		return this.http.get<Provincia[]>("http://18.216.2.122:9000/admision/buscarprovincias/"+id+"/");
+	}
+
 	loadMedicosXesp(): Observable<Provincia[]> {
 		return this.http.get<Provincia[]>("http://18.216.2.122:9000/admision/provincias/");
 	}
@@ -134,16 +138,14 @@ export class HttpService {
 	searchCitasxEsp(id:number): Observable<CitaM[]> {
 		return this.http.get<CitaM[]>("http://18.216.2.122:9000/consultorio/citasporespecialidad/"+id+"/");
 	}
-	searchHistoriaTriaje(dni: string): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citadni/' + dni + "/");
+	searchHistoriaTriaje(dni: string): Observable<CitaM[]> {
+		return this.http.get<CitaM[]>('http://18.216.2.122:9000/consultorio/citadniespera/?dni=' + dni);
 
 	}
 	crearTriaje(newTriaje: Triaje) {
 		console.log('servicio triaje');
 		console.log(newTriaje);
-		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-triaje/',
-			{
-
+		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-triaje/',{
 				talla: newTriaje.talla,
 				peso: newTriaje.peso,
 				temperatura: newTriaje.temperatura,
@@ -154,14 +156,14 @@ export class HttpService {
 				cita: newTriaje.cita,
 				personal: newTriaje.personal,
 
-
 			}).subscribe(
 				data => {
-
+					this.toastr.success('', 'Triaje Creado');
 					console.log('triaje creado completo');
 				},
 				error => {
-					console.log(error.message);
+					this.toastr.error('', 'No se pudo crear el Triaje');
+					console.error(error);
 				}
 			);
 	}
@@ -202,8 +204,11 @@ export class HttpService {
 	searcHistoriasDNI(dni: string): Observable<Historial> {
 		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historiadni/' + dni + "/");
 	}
-	searcHistoriasNroR(nroR: string): Observable<Historial> {
-		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historianumero/?nro=' + nroR);
+	searcHistoriasNroR(nroR: string): Observable<Historial[]> {
+		return this.http.get<Historial[]>('http://18.216.2.122:9000/admision/historianumero/?nro=' + nroR );
+	}
+	searcHistoriasNomAp(name: string): Observable<Historial[]> {
+		return this.http.get<Historial[]>('http://18.216.2.122:9000/admision/historianombre/?nom=' + name);
 	}
 
 	createCITA(newCita: Cita) {
@@ -229,7 +234,6 @@ export class HttpService {
 				error => {
 					console.log(error.message);
 					this.toastr.error("No se pudo agregar la cita");
-					this.toastr.warning("Recuerde que no debe repetirse el Numero de Recibo");
 				}
 			);
 	}
@@ -282,38 +286,34 @@ export class HttpService {
 		);
 	}
 
-	/***  
+	/*  
 	 * autor: Milagros Motta R.
 	 * loadCitasMedico: recibe el id del medico
-	 ***/
-
+	 */
 	loadCitasMedico(nro: number): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/?id=' + nro);
 	}
-	/***  
+	/*  
 	 * autor: Milagros Motta R.
 	 * searcHistoriaCompleta: recibe el nro de historia 
-	 ***/
-
+	 */
 	searcHistoriaCompleta(nro: string): Observable<ConsultaCompleta[]> {
 		return this.http.get<ConsultaCompleta[]>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/?nro=' + nro);
 	}
-
-	/***  
+	/*  
 	 * autor: Milagros Motta R.
 	 * searcTriajeC: recibe el id del medico
-	 ***/
-
+	 */
 	searcTriajeC(nro: number): Observable<Triaje> {
 		return this.http.get<Triaje>('http://18.216.2.122:9000/consultorio/triajeporcita/' + nro + "/");
 	}
-	/***  
+	/*  
 	 * autor: Milagros Motta R.
 	 * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
 	 * en el back correctamente.
-	 ***/
-
+	 */
 	crearConsulta(newConsulta: Consulta) {
+		console.log(JSON.stringify(newConsulta));
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
 				motivoConsulta: newConsulta.motivoConsulta,
@@ -327,6 +327,7 @@ export class HttpService {
 				triaje: newConsulta.triaje,
 				numeroHistoria: newConsulta.numeroHistoria,
 				medico: newConsulta.medico,
+				especialidad:newConsulta.especialidad,
 			}).subscribe(
 				data => {
 					this.toastr.success("Consulta Guardada correctamente");
@@ -337,33 +338,21 @@ export class HttpService {
 					this.toastr.error("No se pudo agregar la Consulta");
 				});
 	}
-	/***  
+	/*  
 	 * autor: Milagros Motta R.
 	 * AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
-	 ***/
-
+	 */
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
-
-	/***  
+	/*  
 	 * autor: Milagros Motta R.
 	 * searchExamenbDni: Busca el listado de examenes por DNI.
-	 ***/
+	 */
 	searchExamenbDni(dni:string): Observable<Examen[]>{
 		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
 	}
-	/***  
-	 * autor: Milagros Motta R.
-	 * imprimirResultados: Busca el resultado del examenes por ID para generar el pdf.
-	 ***/
-	imprimirResultados(id:number):Observable<any>{
-		let headers = new HttpHeaders();
-		headers = headers.set('Accept', 'application/pdf');
-		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ id +'/', {headers: headers});
-	}
-
-	
+		
 	searchLabName(nombre: string): Observable<any> {
 		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
 	}
@@ -380,13 +369,7 @@ export class HttpService {
 		return this.http.get<Examen[]> ("http://18.216.2.122:9000/laboratorio/ExamenLabCab/");
 
 	}
-	imprimirExam(idE:number):Observable<any[]>{
-		console.log("ENTRA AL SERVICIO");
-		console.log(idE);
-		let headers = new HttpHeaders();
-		headers = headers.set('Accept', 'application/pdf');
-		return this.http.get<any[]>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ idE +'/', {headers: headers});
-	}
+	
 	loadTabla(idEx:number):Observable<Detalle[]>{
 		console.log("ENTRA AL SERVICIO de tabla");
 		return this.http.get<Detalle[]>('http://18.216.2.122:9000/laboratorio/filtro/Detalles/?id='+ idEx)
@@ -412,7 +395,7 @@ export class HttpService {
 				});
 
 	}
-	
+	//crear cabecer
 	createCabecera(newCabecera: Cabeceralab) {
 		console.log(newCabecera);
 		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabCab/',
@@ -425,13 +408,12 @@ export class HttpService {
 				tipoExam: newCabecera.tipoExam,
 			}).subscribe(
 				data => {
+					this.toastr.success("","Se ha creado la cabecera");
 					console.log("CREAR Cabecera Completo");
 				},
 				error => {
-					console.log(error.message);
+					this.toastr.error(error);
+					console.log(error);
 				});
 	}
-		});
-	}
-
 }

@@ -25,7 +25,7 @@ import {ToastrModule} from 'ngx-toastr';
     BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      timeOut:9000,
+      timeOut:6000,
       positionClass:'toast-top-right',
       preventDuplicates:false,
     }),

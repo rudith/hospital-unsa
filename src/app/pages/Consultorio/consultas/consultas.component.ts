@@ -77,6 +77,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 		});
 	}
 	ngOnChanges($event) {	}
+	
 	/*** 
 	 * autor: Milagros Motta R.
 	 * LoadCitas: Hace una llamada al servicio Http en el cual le envia el id del medico actual y 

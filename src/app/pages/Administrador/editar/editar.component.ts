@@ -1,11 +1,8 @@
-
 import { Component, OnDestroy, OnInit, OnChanges } from '@angular/core';
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
 import { HttpService } from '../../../services/http/http.service';
-import { IPatient } from '../../../interfaces/patient';
-import { Cita } from '../../../interfaces/cita';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IOption } from '../../../ui/interfaces/option';
 import { Content } from '../../../ui/interfaces/modal';
@@ -13,16 +10,15 @@ import * as PatientsActions from '../../../store/actions/patients.actions';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
-import { Especialidad } from '../../../interfaces/especialidad';
 import { User } from '../../../interfaces/user';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Personal } from '../../../interfaces/personal';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
 	selector: 'app-editar',
 	templateUrl: './editar.component.html',
 	styleUrls: ['./editar.component.scss',
-		// '../../../../../node_modules/primeng/resources/primeng.css'],
 	],
 	providers: [MessageService]
 })
@@ -40,13 +36,13 @@ export class EditarComponent extends BasePageComponent
 	val: number;
 
 	constructor(
+		private toastr: ToastrService,
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
 		httpSv: HttpService,
 		private modal: TCModalService,
 		private fb: FormBuilder,
-		private http: HttpClient,
-		private messageService: MessageService
+		private http: HttpClient
 	) {
 
 		super(store, httpSv);
@@ -86,37 +82,46 @@ export class EditarComponent extends BasePageComponent
 	ngOnDestroy() {
 		super.ngOnDestroy();
 	}
-	// Elimina usuario de se envia el id y retorna un mensaje de confirmacion
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * deleteUser: Elimina un  usuario.,se envia el id y retorna un mensaje de confirmacion
+	 ***/
 	deleteUser(id: string) {
 		this.httpSv.DeleteUser(id).subscribe(
 			data => {
-				this.messageService.add({ severity: 'info', summary: 'Datos Eliminado' });
+				this.toastr.info("Datos Eliminados");
 				this.loadUsers();
 			}
 		);
 	}
-	// Verifica el campo de texto antes de la busqueda  y devuelve un mensaje de confirmacion
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * onChangeTable: Verifica el campo de texto antes de la busqueda  y devuelve un mensaje de confirmacion
+	 ***/
 	onChangeTable() {
 
 		if (this.id == "" || this.id == undefined) {
 			this.httpSv.loadUsers().subscribe(users => {
 				this.users = users;
-				this.messageService.add({ severity: 'info', summary: 'Campo Vacio' });
+				this.toastr.info("Campo vacio");
 			});
 		} else {
 
 			this.httpSv.searchUsers(this.id).subscribe(data => {
-				this.messageService.add({ severity: 'info', summary: 'Datos CArgados' });
+				this.toastr.info("Datos cargados");
 				this.users = []
 				this.users[0] = data;
 				console.log(JSON.stringify(data));
 			});;
 		}
 	}
-	loadOptions() {
-
-	}
-	// abre modal
+	
+	/***  
+	 * autor: Gerson Huarcaya
+	 * openModal: Abre Modal para crear un usuario
+	 ***/
 	openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null) {
 		this.initForm();
 		this.modal.open({
@@ -126,7 +131,11 @@ export class EditarComponent extends BasePageComponent
 			options: null
 		});
 	}
-	// inicia el formulario
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * initForm: Inicializa el formulario para crear usuario
+	 ***/
 	initForm() {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
@@ -135,7 +144,11 @@ export class EditarComponent extends BasePageComponent
 			password: ["", Validators.required],
 		});
 	}
-	// inicia el formulario de edicion
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * openModalEdit: Abre Modal para modificar un usuario
+	 ***/
 	openModalEdit<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: User) {
 		// console.log(JSON.stringify(row));
 		this.initFormEdit(row);
@@ -146,7 +159,11 @@ export class EditarComponent extends BasePageComponent
 			options: null
 		});
 	}
-	// abre el modal de personal
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * openModalPersonal: Abre Modal para crear un personal
+	 ***/
 	openModalPersonal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Personal) {
 		this.initFormPersonal(row);
 		this.modal.open({
@@ -156,7 +173,11 @@ export class EditarComponent extends BasePageComponent
 			options: null
 		});
 	}
-	// init form
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * initFormEdit: Inicializa el formulario para modificar usuario
+	 ***/
 	initFormEdit(data: User) {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
@@ -165,30 +186,55 @@ export class EditarComponent extends BasePageComponent
 			password: [data.password, Validators.required],
 		});
 	}
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * initFormPersonal:
+	 ***/
 	initFormPersonal(row: Personal) {
 		this.PersonalForm = this.formBuilder.group({
 			nombre: ["", Validators.required]
 		});
 	}
-	// cierra modal
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * updateEst:Actualizar el estado
+	 ***/
 	updateEst(bool: boolean) {
 		this.update = bool;
 	}
-	// guarda el usuario para edicion
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * sendUser:guarda el usuario para edicion
+	 ***/
 	sendUser(user: User) {
 		this.user = user;
 	}
-	// cierra modal
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * closeModal:Cierra el Modal
+	 ***/l
 	closeModal() {
 		this.modal.close();
 		this.appointmentForm.reset();
 	}
-	// cierra modal
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * closeModalPersonal:Cierra el Modal
+	 ***/
 	closeModalPersonal() {
 		this.modal.close();
 		this.PersonalForm.reset();
 	}
-	// verifica formulario del modal personal y agregara a la bd, devuelve un mensaje de confirmación
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * addPersonal:verifica formulario del modal personal y agregara a la bd, devuelve un mensaje de confirmación
+	 ***/ 
 	addPersonal(form: FormGroup) {
 		console.log(JSON.stringify(form.value));
 		if (form.valid) {
@@ -198,7 +244,11 @@ export class EditarComponent extends BasePageComponent
 		}
 
 	}
-	// verifica formulario del modal usuario y agregara a la bd, devuelve un mensaje de confirmación
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * addAppointment:verifica formulario del modal usuario y agregara a la bd, devuelve un mensaje de confirmación
+	 ***/ 
 	addAppointment(form: FormGroup) {
 		// console.log(JSON.stringify(form));
 		if (form.valid) {
@@ -228,27 +278,39 @@ export class EditarComponent extends BasePageComponent
 		}
 
 	}
-	// actualiza usuario y devuelve un mensaje de confirmación
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * updateUser:actualiza usuario y devuelve un mensaje de confirmación
+	 ***/ 
 	updateUser(User: User) {
 		this.httpSv.UpdateUser(User).subscribe(
 			data => {
-				this.messageService.add({ severity: 'info', summary: 'Usuario Actualizado' });
+				this.toastr.success("Usuario Actualizado");
 				this.loadUsers();
 				this.closeModal();
 			},
 		);
 	}
-	// actualiza usuario y devuelve un mensaje de confirmación
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * createUser:crea usuario y devuelve un mensaje de confirmación
+	 ***/  
 	createUser(newUser: User) {
 		this.httpSv.CreateUser(newUser).subscribe(
 			data => {
-				this.messageService.add({ severity: 'info', summary: 'Usuario Creado' });
+				this.toastr.success("Usuario Creado");
 				this.loadUsers();
 				this.closeModal();
 			}
 		);
 	}
-	// carga usuarios y devuelve un mensaje de confirmación
+
+	/***  
+	 * autor: Gerson Huarcaya
+	 * loadUsers:carga usuarios y devuelve un mensaje de confirmación
+	 ***/  
 	loadUsers() {
 		this.httpSv.loadUsers().subscribe(users => {
 			this.users = users

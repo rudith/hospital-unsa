@@ -13,6 +13,7 @@ import { Triaje } from '../../../interfaces/triaje';
 import { Consulta } from '../../../interfaces/consulta';
 import { Router } from '@angular/router';
 import { Examen } from '../../../interfaces/examen';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-consultas',
@@ -44,6 +45,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     private modal: TCModalService,
     private http: HttpClient,   
     private router: Router,
+    private toastr: ToastrService
   ) {
 
     super(store, httpSv);
@@ -140,7 +142,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   atenderCita(id: number) {
     this.httpSv.AtenderCita(id).subscribe(cita => {
-      this.httpSv.loadCitasM();
+      this.cargarConsultas();
     });
   }
 
@@ -304,7 +306,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
    * closeModalExamenes: Hace la llamada al servicio para imprimir el resultado del examen por ID 
   ***/
   imprimirEx(Ex:Examen){
-    this.httpSv.imprimirResultados(Ex.id);
-  }
+		document.location.href = 'http://18.216.2.122:9000/laboratorio/resultadoExamen/'+Ex.id+'/';
+		this.toastr.success("Se ha generado el Pdf");
+	}
   //fin de Modal Examenes de Laboratorio
 }

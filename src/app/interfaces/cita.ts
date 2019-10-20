@@ -1,4 +1,5 @@
 import { Especialidad } from './especialidad';
+import{Medico} from './medico';
 
 export interface Cita {
 	id?: number,
@@ -9,7 +10,7 @@ export interface Cita {
 	estReg: boolean,
 	especialidad: Especialidad,
 	numeroHistoria: number,
-	medico: string,
+	medico: number,
 	exonerado: boolean,
 	responsable: string,	
 }

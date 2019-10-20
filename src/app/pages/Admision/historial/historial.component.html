@@ -10,13 +10,13 @@
 								(click)="openModalH(modalCrearHBody, 'Agregar Historial', modalCrearHFooter)"></button>
 						</tc-form-group>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<tc-form-group>
 							<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption">
 							</tc-select>
 						</tc-form-group>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<tc-form-group>
 							<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 							<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
@@ -28,6 +28,11 @@
 					<div class="col-md-2">
 						<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
 							Buscar
+						</button>
+					</div>
+					<div class="col-md-2">
+						<button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="300" (click)="loadHistorias()">
+							Cargar
 						</button>
 					</div>
 				</div>
@@ -61,7 +66,7 @@
 					</div>
 				</ng-template>
 			</tc-table-col>
-			<tc-table-col [columnTitle]="'Agregar Cita'" [columnName]="'numeroHistoria'">
+			<tc-table-col [columnTitle]="'Agregar Cita'" [columnName]="''">
 				<ng-template #tableTDTemplate let-row="row">
 					<div class="actions align-items-center">
 						<button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500"
@@ -71,12 +76,12 @@
 					</div>
 				</ng-template>
 			</tc-table-col>
-			<tc-table-col [columnTitle]="'Imprimir'" [columnName]="'numeroHistoria'">
+			<tc-table-col [columnTitle]="'Imprimir'" [columnName]="'abc'">
 				<ng-template #tableTDTemplate let-row="row">
 					<div class="actions align-items-center ">
 						<button tc-button [afterIcon]="'icofont-print'" [tcColor]="['#795548', '#fff']"
 							[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true"
-							[tcShape]="500" [size]="'sm'" (click)="imprimir(row)"></button>
+							[tcShape]="500" [size]="'sm'" (click)="imprimir1(row)"></button>
 					</div>
 				</ng-template>
 			</tc-table-col>
@@ -98,11 +103,11 @@
 						<span>Recibo </span>
 					</label>
 					<div *ngIf="isSelected('rec')">
-						<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'text'"
+						<tc-input [placeholder]="'Ingrese el Numero de Recibo*'" [type]="'number'"
 							formControlName="numeroRecibo">
 						</tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="appointmentForm.controls.numeroRecibo.touched && appointmentForm.controls.numeroRecibo.invalid ">
+							*ngIf=" appointmentForm.controls.numeroRecibo.invalid ">
 							Ingrese solo numeros
 						</tc-form-description>
 					</div>
@@ -116,6 +121,10 @@
 						<tc-input [placeholder]="'Ingrese el Nombre del Responsable*'" [type]="'text'"
 							formControlName="responsable">
 						</tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+					*ngIf="appointmentForm.controls.responsable.invalid ">
+					Ingrese el nombre del Responsable, solo letras
+				</tc-form-description>
 					</div>
 				</div>
 			</tc-form-group>
@@ -157,17 +166,6 @@
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
-						<tc-input [placeholder]="'Número de Historia*'" [type]="'number'"
-							formControlName="numeroHistoria">
-						</tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.numeroHistoria.touched && patientForm.controls.numeroHistoria.invalid ">
-							Ingrese Numero de Historia
-						</tc-form-description>
-					</tc-form-group>
-				</div>
-				<div class="col-12 col-sm-6">
-					<tc-form-group>
 						<tc-input [placeholder]="'DNI*'" formControlName="dni" [charLimiting]="8"></tc-input>
 						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
 							*ngIf="patientForm.controls.dni.touched && patientForm.controls.dni.invalid ">
@@ -175,7 +173,8 @@
 						</tc-form-description>
 					</tc-form-group>
 				</div>
-			</div>
+			
+			<div class="col-12 col-sm-6">
 			<tc-form-group>
 				<tc-input [placeholder]="'Nombres*'" formControlName="nombres"></tc-input>
 				<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
@@ -183,6 +182,8 @@
 					Ingrese el nombre, este solo debe contener letras
 				</tc-form-description>
 			</tc-form-group>
+		</div>
+	</div>
 			<div class="row">
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
@@ -238,8 +239,17 @@
 
 			<div class="row">
 
-
+					<div class="col-12 col-sm-3">
+							<tc-form-group>
+								<tc-input [placeholder]="'Nacionalidad'" formControlName="nacionalidad"></tc-input>
+								<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+									*ngIf="patientForm.controls.nacionalidad.touched && patientForm.controls.nacionalidad.invalid ">
+									Este campo solo debe tener letras
+								</tc-form-description>
+							</tc-form-group>
+						</div>
 				<div class="col-12 col-sm-5">
+					
 					<tc-form-group>
 						<tc-input type="date" [placeholder]="'Fecha de Nacimiento'" formControlName="fechaNac">
 						</tc-input>
@@ -252,16 +262,21 @@
 
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-form-group>
 							<tc-select [placeholder]="'Sexo'" formControlName="sexo" [options]="sexOption">
 							</tc-select>
 						</tc-form-group>
-					</tc-form-group>
 				</div>
+				
+				
 			</div>
 
-			<div class="row">
-				<div class="col-12 col-sm-6">
+			<div class="row"><div class="col-12 col-sm-4">
+				<tc-form-group>
+					<tc-select [placeholder]="'Estado civil'" formControlName="estadoCivil"
+						[options]="estadoCivilOption"></tc-select>
+				</tc-form-group>
+			</div>
+				<div class="col-12 col-sm-4">
 					<tc-form-group>
 						<tc-input [placeholder]="'Telefono'" [type]="'number'" formControlName="telefono"
 							[charLimiting]="6"></tc-input>
@@ -271,7 +286,7 @@
 						</tc-form-description>
 					</tc-form-group>
 				</div>
-				<div class="col-12 col-sm-6">
+				<div class="col-12 col-sm-4">
 					<tc-form-group>
 						<tc-input [placeholder]="'Celular*'" [type]="'number'" formControlName="celular"
 							[charLimiting]="9"></tc-input>
@@ -300,22 +315,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 col-sm-4">
-					<tc-form-group>
-						<tc-select [placeholder]="'Estado civil'" formControlName="estadoCivil"
-							[options]="estadoCivilOption"></tc-select>
-					</tc-form-group>
-				</div>
+				
 
-				<div class="col-12 col-sm-4">
-					<tc-form-group>
-						<tc-input [placeholder]="'Nacionalidad'" formControlName="nacionalidad"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.nacionalidad.touched && patientForm.controls.nacionalidad.invalid ">
-							Este campo solo debe tener letras
-						</tc-form-description>
-					</tc-form-group>
-				</div>
+				
 			</div>
 
 

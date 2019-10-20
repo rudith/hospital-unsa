@@ -54,7 +54,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.tipoE = [];
 		this.cabecera = [];
 		this.examen = [];
-		this.detalleT=[];
+		this.detalleT = [];
 		this.pageData = {
 			title: 'Laboratorio',
 			loaded: true,
@@ -77,7 +77,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			]
 		};
 		this.examen = [];
-		this.detalleT=[];
+		this.detalleT = [];
 		this.examenCol = [];
 		this.verMas = [];
 		this.loadData(); //tipo examen 
@@ -196,11 +196,10 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		}
 	}
 
-	//Metodo que llama al serivcio imprimirExam 
+	//Metodo que llama al servicio imprimirExam 
 	imprimir(row: Examen) {
-		console.log("IMPRIME" + row.id)
-		this.httpSv.imprimirExam(row.id);
-
+		document.location.href = 'http://18.216.2.122:9000/laboratorio/resultadoExamen/' + row.id;
+		this.toastr.success("Se ha generado el Pdf");
 	}
 
 
@@ -249,35 +248,48 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	onChangeTable() {
 		if (this.datoBus == "") {
 			this.toastr.warning('Ningun valor ingresado');
-			this.httpSv.loadExamen().subscribe(examen => {
-				this.examen = examen;
-			});
+			this.cargarExamn();
 		} else if (this.opBus == "1") {
 			this.httpSv.searchLabName(this.datoBus).subscribe(data => {
-				this.examen = [];
-				this.examen = data;
-				this.toastr.success('Examen  encontrado');
-				console.log(data);
+				if (data[0] == null) {
+					this.toastr.error("No se han encontrado coincidencias");
+					this.cargarExamn();
+				} else {
+					this.toastr.success('Examen  encontrado');
+					this.examen = [];
+					this.examen = data;
+				}
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});
 		}
 		else if (this.opBus == "2") {
 			this.httpSv.searchLabFecha(this.datoBus).subscribe(data => {
-				this.examen = [];
-				this.examen = data;
-				this.toastr.success('Examen  encontrado');
-				console.log("entro bus " + this.datoBus);
+				if (data[0] == null) {
+					this.toastr.error("No se han encontrado coincidencias");
+					this.cargarExamn();
+				} else {
+					this.toastr.success('Examen  encontrado');
+					this.examen = [];
+					this.examen = data;
+				}
+				
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});
 		} else if (this.opBus == "3") {
 			this.httpSv.searchLabDni(this.datoBus).subscribe(data => {
 				console.log(data);
-				this.examen = [];
-				this.examen = data;
-				this.toastr.success('Examen  encontrado');
-			},error => {
+				if (data[0] == null) {
+					this.toastr.error("No se han encontrado coincidencias");
+					this.cargarExamn();
+				} else {
+					this.toastr.success('Examen  encontrado');
+					this.examen = [];
+					this.examen = data;
+				}
+				
+			}, error => {
 				this.toastr.warning('No encontrado');
 			});
 		}
@@ -314,8 +326,10 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 
 
-	// fin modal ver mas 
-
-
+	cargarExamn(){
+		this.httpSv.loadExamen().subscribe(examen => {
+			this.examen = examen;
+		});
+	}
 
 }

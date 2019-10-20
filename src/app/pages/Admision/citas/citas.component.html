@@ -5,7 +5,7 @@
 ></p-confirmDialog>
 <form [formGroup]="busForm" class="col-sm-12">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <tc-form-group>
         <tc-select
           [placeholder]="'Opciones'"
@@ -15,7 +15,7 @@
         </tc-select>
       </tc-form-group>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <tc-form-group>
         <tc-input
           [placeholder]="'Ingrese el dato a buscar'"
@@ -45,6 +45,21 @@
           Buscar
         </button>
       </tc-form-group>
+      
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+        <button
+          tc-button
+          [block]="true"
+          [tcBgColor]="'#3f51b5'"
+          [tcShape]="500"
+          (click)="loadCitas()"
+        >
+          Cargar
+        </button>
+      </tc-form-group>
+      
     </div>
   </div>
   <tc-card class="mb-0">
@@ -63,7 +78,7 @@
             </th>
 
             <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              F. Atencion
+              F. Separación
             </th>
             <th [align]="headerAlign" [tcBgColor]="headerBgColor">
               F. Editado
@@ -102,10 +117,10 @@
 						</td>
 						-->
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.fechaAtencion }}
+              {{ row.fechaSeparacion }}
             </td>
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.updated_at }}
+              {{ row.updated_at.substring(0,10) }}
             </td>
 
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
@@ -117,6 +132,7 @@
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
               <div class="actions">
                 <button
+                [disabled]="row.estadoCita == 'Cancelado' || row.estadoCita=='Atendido'"
                   class="col-6"
                   tc-button
                   [afterIcon]="'icofont-edit-alt'"
@@ -134,7 +150,7 @@
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
               <div class="actions">
                 <button
-                  [disabled]="row.estadoCita == 'Cancelado'"
+                  [disabled]="row.estadoCita == 'Cancelado' || row.estadoCita=='Atendido'"
                   class="col-6"
                   tc-button
                   [afterIcon]="'icofont-ui-delete'"
@@ -191,25 +207,17 @@
           [options]="medOption"
         >
         </tc-select>
-        <tc-form-label>Fecha de Separación</tc-form-label>
-        <tc-form-description
-          [tcColor]="'#e24d4d'"
-          [tcFontSize]="'0.8em'"
-          *ngIf="
-            appointmentForm.controls.especialidad.touched &&
-            appointmentForm.controls.especialidad.invalid
-          "
-        >
-        </tc-form-description>
+        <tc-form-label>Fecha de Separación(A partir del dia Actual)</tc-form-label>
       </tc-form-group>
       <tc-form-group>
-        <tc-input type="date" formControlName="fechaAtencion"></tc-input>
+        <tc-input type="date" formControlName="fechaSeparacion"></tc-input>
         <tc-form-description
           [tcColor]="'#e24d4d'"
           [tcFontSize]="'0.8em'"
+          formControlName="fechaSeparacion"
           *ngIf="
-            appointmentForm.controls.fechaAtencion.touched &&
-            appointmentForm.controls.fechaAtencion.invalid
+            appointmentForm.controls.fechaSeparacion.touched &&
+            appointmentForm.controls.fechaSeparacion.invalid
           "
         >
           Ingrese Fecha de Atencion

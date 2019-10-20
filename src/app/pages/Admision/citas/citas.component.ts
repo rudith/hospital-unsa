@@ -14,7 +14,7 @@ import { Especialidad } from "../../../interfaces/especialidad";
 import { ToastrService } from "ngx-toastr";
 import { ConfirmationService } from "primeng/api";
 import { CitaM } from "../../../interfaces/cita-m";
-import { Medico } from '../../../interfaces/medico';
+import { Medico } from "../../../interfaces/medico";
 
 @Component({
   selector: "app-citas",
@@ -38,7 +38,7 @@ export class CitasComponent extends BasePageComponent
   public espOption: IOption[];
   medOption: IOption[];
   public especialidades: Especialidad[] = [];
-  medicos:Medico[]=[];
+  medicos: Medico[] = [];
   options: IOption[];
   selectedOptions: any;
   multiple: boolean;
@@ -82,16 +82,16 @@ export class CitasComponent extends BasePageComponent
     this.citasEdit = [];
     this.loadCitas();
     this.espOption = [];
-    this.medOption =[];
+    this.medOption = [];
     this.multiple = false;
     this.httpSv.loadEspecialidades().subscribe(especialidades => {
       this.especialidades = especialidades;
+      this.loadOptionsEsp();
     });
     this.httpSv.loadMedico().subscribe(medicos => {
       this.medicos = medicos;
-      this.loadOptions();
+      this.loadOptionsMed();
     });
-    this.loadOptions();
   }
   ngOnInit() {
     super.ngOnInit();
@@ -139,7 +139,7 @@ export class CitasComponent extends BasePageComponent
       this.httpSv.searchCitaEsp(this.dni).subscribe(
         data => {
           this.citasEdit = data.citas;
-          this.toastr.success("NO habilitado","mopdificar modelo back");
+          this.toastr.success("NO habilitado", "mopdificar modelo back");
         },
         error => {
           this.toastr.warning("No encontrado");
@@ -165,13 +165,15 @@ export class CitasComponent extends BasePageComponent
     }
   }
 
-  loadOptions() {
+  loadOptionsEsp() {
     for (let i in this.especialidades) {
       this.espOption[i] = {
         label: this.especialidades[i].nombre,
         value: this.especialidades[i].id.toString()
       };
     }
+  }
+  loadOptionsMed() {
     for (let i in this.medicos) {
       this.medOption[i] = {
         label: this.medicos[i].nombres,
@@ -201,15 +203,15 @@ export class CitasComponent extends BasePageComponent
   }
   initForm(data: CitaM) {
     this.appointmentForm = this.formBuilder.group({
-      fechaAtencion: [
-        data.fechaAtencion ? data.fechaAtencion : "",
+      fechaSeparacion: [
+        data.fechaSeparacion ? data.fechaSeparacion : "",
         Validators.required
       ],
       especialidad: [
         data.especialidad.nombre ? data.especialidad.nombre : "",
         Validators.required
       ],
-      medico:[
+      medico: [
         data.medico.username ? data.medico.username : "",
         Validators.required
       ]
@@ -247,13 +249,14 @@ export class CitasComponent extends BasePageComponent
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
-      newAppointment.fechaAtencion = formatDate(
-        form.value.fechaAtencion,
+      newAppointment.fechaSeparacion = formatDate(
+        form.value.fechaSeparacion,
         "yyyy-MM-dd",
         "en-US",
         "+0530"
       );
-      newAppointment.fechaSeparacion = this.cita.fechaSeparacion;
+      // newAppointment.fechaAtencion = this.cita.fechaAtencion;
+      newAppointment.fechaAtencion = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
       //newAppointment.fechaAtencion = this.cita.fechaAtencion;
       newAppointment.especialidad = form.value.especialidad;
       newAppointment.id = this.cita.id;
@@ -275,6 +278,7 @@ export class CitasComponent extends BasePageComponent
       .put<any>(
         "http://18.216.2.122:9000/consultorio/crear-cita/" + newCita.id + "/",
         {
+          // numero de historia especialidad fecha atenicon
           numeroRecibo: newCita.numeroRecibo,
           fechaSeparacion: newCita.fechaSeparacion,
           fechaAtencion: newCita.fechaAtencion,
@@ -306,7 +310,6 @@ export class CitasComponent extends BasePageComponent
   loadCitas() {
     this.httpSv.loadCitasEdit().subscribe(citas => {
       this.citasEdit = citas;
-      // console.log(JSON.stringify(this.citasEdit));
     });
   }
   CancelarCita(id: number) {

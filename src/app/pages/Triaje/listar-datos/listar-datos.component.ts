@@ -81,15 +81,22 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 
   //Metodo que recibe el dni para buscar los triajes correspondientes a ese dni
   buscartriaje(dni: string) {
-    this.toastr.warning( 'Buscando');
-    console.log("buscando");
+    if(dni==null || dni==""){
+      this.toastr.warning( 'Ingrese un valor');
+    }else{
+      this.toastr.warning( 'Buscando');
     this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
-      this.citasTriaje=data.citas;
+      if(data[0]==null){
+        this.toastr.error("No se encontro ningun triaje con ese dni");
+      }
+      else{
+        this.citasTriaje=data;
+      }
     },
     error => {
       console.log(error.message);
-      this.toastr.error("No se encontro ningun triaje con ese dni");
     });
+  }
   }
 
   //metodo que recibe el formGroup desde el html para poder obtener el dni
@@ -169,19 +176,18 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     if (form.valid) {
       let newTriaje: Triaje = form.value;
       console.log('entra al envio');
-      newTriaje.personal = 2;
+      newTriaje.personal = 8;
       newTriaje.talla = parseInt(form.get('talla').value);
       newTriaje.peso = parseInt(form.get('peso').value);
       newTriaje.frecuenciaC = parseInt(form.get('frecuenciaC').value);
       newTriaje.frecuenciaR = parseInt(form.get('frecuenciaR').value);
       newTriaje.temperatura = parseInt(form.get('temperatura').value);
-      
       console.log(newTriaje.talla);
       console.log(newTriaje);
       this.httpSv.crearTriaje(newTriaje);
       this.TriarCita(this.idCita);
       this.closeModal();
-      this.toastr.success('', 'Triaje Creado');
+      
     }
   }
    //Metodo para cambiar el estado de la cita a Triado

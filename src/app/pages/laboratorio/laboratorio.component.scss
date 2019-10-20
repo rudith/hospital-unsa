@@ -75,6 +75,27 @@ $_shadow: 0 0 10px rgba(#000, 0.5);
       font-size: 18px;
     }
   }
+
+  .add-action-box2 {
+    top: $module-rem * 8;
+    position: fixed;
+    right: $module-rem * 2.5;
+    z-index: 9997;
+    .tc-btn {
+      font-size: 13px;
+    }
+  }
+  .addlab-action-box {
+    top: $module-rem * 8;
+    position: fixed;
+    right: $module-rem * 15;
+    z-index: 9997;
+    .tc-btn {
+      font-size: 13px;
+    }
+  }
+
+
 }//host
 
 tbody {

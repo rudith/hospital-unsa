@@ -14,7 +14,7 @@
         "
       ></button>
     </tc-form-group>
-    <tc-form-group class="col-sm-7 col-lg-9">
+    <tc-form-group class="col-sm-7 col-lg-7">
       <tc-input
         [placeholder]="'Buscar Usuario'"
         [(ngModel)]="id"
@@ -31,6 +31,17 @@
         (click)="onChangeTable()"
       >
         Buscar
+      </button>
+    </tc-form-group>
+    <tc-form-group class="col-sm-4 col-lg-2">
+      <button
+        tc-button
+        [block]="true"
+        [tcBgColor]="'#3f51b5'"
+        [tcShape]="500"
+        (click)="loadUsers()"
+      >
+        Cargar
       </button>
     </tc-form-group>
   </div>
@@ -60,28 +71,7 @@
           </div>
         </ng-template>
       </tc-table-col>
-      <tc-table-col [columnTitle]="'Asignar'" [columnName]="'actions'">
-        <ng-template #tableTDTemplate let-row="row">
-          <div class="actions">
-            <button
-              style="background: rgb(205, 220, 57)"
-              tc-button
-              [afterIcon]="'icofont-medical-sign-alt'"
-              [square]="true"
-              [tcShape]="500"
-              [size]="'sm'"
-              (click)="
-                openModalPersonal(
-                  modalPersonal,
-                  'Aún no hay modelo definido de personal',
-                  modalPersonal2,
-                  row
-                )
-              "
-            ></button>
-          </div>
-        </ng-template>
-      </tc-table-col>
+      
       <tc-table-col [columnTitle]="'Eliminar'" [columnName]="'actions'">
         <ng-template #tableTDTemplate let-row="row">
           <div class="actions">

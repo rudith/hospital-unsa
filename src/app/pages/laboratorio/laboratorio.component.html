@@ -12,12 +12,12 @@
 					</div>
 				</tc-form-group>
 
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<tc-form-group>
 						<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption"></tc-select>
 					</tc-form-group>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<tc-form-group>
 						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 					</tc-form-group>
@@ -25,6 +25,11 @@
 				<div class="col-md-2">
 					<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
 						Buscar
+					</button>
+				</div>
+				<div class="col-md-2">
+					<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="cargarExamn()">
+						Cargar Todo
 					</button>
 				</div>
 			</div>
@@ -90,18 +95,15 @@
 
 <div class="add-action-box2">
 	<a href="http://18.216.2.122:9000/laboratorio/reporteMensual">
-		<input type="button" value="Reporte Mensual" name="submit" tc-button [square]="true" [tcShape]="500" />
+		<input type="button" value="Reporte Mensual" name="submit" tc-button [square]="true" [tcShape]="300" />
 	</a>
 </div>
 
 <div class="addlab-action-box">
 	<a href="http://18.216.2.122:9000/laboratorio/reporteSemanal">
-		<input type="button" value="Reporte Semanal" name="submit" tc-button [square]="true" [tcShape]="500" />
+		<input type="button" value="Reporte Semanal" name="submit" tc-button [square]="true" [tcShape]="300" />
 	</a>
 </div>
-
-
-
 
 <!-- Modal Crear cabecera -->
 <ng-container>

@@ -1,11 +1,11 @@
 export interface Historial {
 	id: number,
 	numeroHistoria: number,
-	dni: number,
+	dni: string,
 	nombres: string,
 	apellido_paterno: string,
 	apellido_materno: string,
-	sexo: number,
+	sexo: string,
 	edad: number,
 	foto: null,
 	fechaNac: String,

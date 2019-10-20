@@ -2,6 +2,7 @@ export interface Examen {
     id?:number,
     nombre?: string,
     dni?: string,
+    fecha?: string,
     tipoExam?: {
         id?: number,
         nombre?: string,
@@ -15,7 +16,6 @@ export interface Examen {
         codigoExam?: number,
     },
     orden?: string,
-    fecha?: string,
     observaciones?: string,
 }
 

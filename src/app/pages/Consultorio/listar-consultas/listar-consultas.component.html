@@ -18,7 +18,7 @@
   </div>
   <div class="row">
     <div class="col-12 col-sm-2">
-      <label>{{numHistRecibido}}</label>
+      <label>{{datoBus}}</label>
     </div>
     <div class="col-12 col-sm-4">
       <label>{{nombreRecibido}}</label>
@@ -34,13 +34,11 @@
     </div>
   </div>
 </tc-card>
-<tc-card class="mb-0">
-  <tc-table [rows]="consultas" [hovered]="true" [pagination]="true">
-    <tc-table-col [columnTitle]="'Consulta'" [columnName]="'id'">
-      <ng-template #tableTDTemplate let-value>
-        <strong>Consulta {{ value }}</strong>
-      </ng-template>
-    </tc-table-col>
+<h5>Listado de Consultas</h5>
+<tc-card>
+  <tc-table [rows]="consultasRecibidas" [hovered]="true">
+    <tc-table-col [columnTitle]="'Especialidad'" [columnName]="'proximaCita'"></tc-table-col>
+    <tc-table-col [columnTitle]="'Fecha de la Consulta'" [columnName]="'fechaCreacion'"></tc-table-col>
     <tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
       <ng-template #tableTDTemplate let-row="row">
         <div class="actions">
@@ -54,17 +52,20 @@
 </tc-card>
 
 <div class="back-action-box">
-  <button tc-button [afterIcon]="'icofont-rounded-left'" [square]="true" [tcShape]="500" (click)="regresar()"></button>
+  <button tc-button [afterIcon]="'icofont-rounded-left'" [square]="true" [tcShape]="500" [tcColor]="['#fff', '#000']"
+    [tcBgColor]="['#000', '#fff']" [tcBorderColor]="'#000'" (click)="regresar()"></button>
 </div>
 
 <div class="add-action-box">
-  <button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'" 
+  <button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500" [tcColor]="['#fff', '#3f51b5']"
+    [tcBgColor]="['#3f51b5', '#fff']" [tcBorderColor]="'#3f51b5'"
     (click)="openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)">Agregar Consulta</button>
 </div>
 
 <div class="addlab-action-box">
-  <button tc-button  [square]="true" [tcShape]="500" 
-  (click)="openModalExamenes(modalBodyVerE, 'Ver listado de Examenes', modalFooterVerE)">Ver Examenes</button>
+  <button tc-button [square]="true" [tcShape]="500" [tcColor]="['#fff', '#000']" [tcBgColor]="['#000', '#fff']"
+    [tcBorderColor]="'#000'" (click)="openModalExamenes(modalBodyVerE, 'Ver listado de Examenes', modalFooterVerE)">Ver
+    Examenes</button>
 </div>
 
 <!-- Modal Crear Consulta -->
@@ -298,9 +299,30 @@
 <!-- Open Modal Ver Examenes -->
 <ng-container>
   <ng-template #modalBodyVerE>
-    
+    <tc-card class="mb-0">
+      <tc-table [rows]="examenesRecibidos" [hovered]="true" [pagination]="true">
+        <tc-table-col [columnTitle]="'Examen'" [columnName]="'nombre'">
+          <ng-template #tableTDTemplate let-value>
+            <strong>{{value}}</strong>
+          </ng-template>
+        </tc-table-col>
+        <tc-table-col [columnTitle]="'Fecha'" [columnName]="'fecha'">
+        </tc-table-col>
+        <tc-table-col [columnTitle]="'Imprimir'" [columnName]="''">
+          <ng-template #tableTDTemplate let-row="row">
+            <div class="actions">
+              <button tc-button [afterIcon]="'icofont-download'" [tcColor]="['#fff', '#009688']"
+                [tcBgColor]="['#009688', '#fff']" [tcBorderColor]="'#009688'" [square]="true" [tcShape]="500"
+                [size]="'sm'" (click)="imprimirEx(row)"></button>
+            </div>
+          </ng-template>
+        </tc-table-col>
+      </tc-table>
+    </tc-card>
+    <tc-card *ngIf="hayEx" class="mb-0">
+      <h6>Esta persona NO posee examenes aun.</h6>
+    </tc-card>
   </ng-template>
-
   <ng-template #modalFooterVerE>
     <div class="actions justify-content-between">
       <button tc-button [type]="'button'" [tcBgColor]="'#009688'" [block]="true"

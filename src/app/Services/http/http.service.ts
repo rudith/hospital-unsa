@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Historial } from '../../interfaces/historial';
@@ -13,7 +13,7 @@ import { Especialidad } from '../../interfaces/especialidad';
 import { Medico } from '../../interfaces/medico';
 import { User } from '../../interfaces/user';
 import { Triaje } from '../../interfaces/triaje';
-import { HistoriaCompleta } from '../../interfaces/historia-completa';
+import { ConsultaCompleta } from '../../interfaces/consulta-c';
 import { Consulta } from '../../interfaces/consulta';
 import { Cabeceralab } from '../../interfaces/cabeceralab';
 import { CitaM } from '../../interfaces/cita-m';
@@ -56,13 +56,26 @@ export class HttpService {
 			catchError(this.handleError)
 		);
 	}
+	/***  
+	 * autor: Milagros Motta R.
+	 * getNroHC: devuelve el Nro de historia, establecido en setNroHC
+	 ***/
 	getNroHC(): string {
 		return this.nroHisCom;
 	}
+	/***  
+	 * autor: Milagros Motta R.
+	 * getIdHC: devuelve el Id de la cita triada en el componente Consultas, establecido en setNroHC
+	 ***/
 	getIdHC(): number {
 		return this.idHisCom;
 	}
+	/***  
+	 * autor: Milagros Motta R.
+	 * getNroHC: establece el Nro de historia y el Id de la cita triada
+	 ***/
 	setNroHC(change: string, cha: number) {
+
 		this.nroHisCom = change;
 		this.idHisCom = cha;
 	}
@@ -190,8 +203,9 @@ export class HttpService {
 		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historiadni/' + dni + "/");
 	}
 	searcHistoriasNroR(nroR: string): Observable<Historial> {
-		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historianumero/' + nroR + "/");
+		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historianumero/?nro=' + nroR);
 	}
+
 	createCITA(newCita: Cita) {
 		this.http
 			.post<any>('http://18.216.2.122:9000/consultorio/crear-cita/', {
@@ -268,24 +282,37 @@ export class HttpService {
 		);
 	}
 
-	/***  loadCitasMedico: recibe el id del medico
+	/***  
+	 * autor: Milagros Motta R.
+	 * loadCitasMedico: recibe el id del medico
 	 ***/
+
 	loadCitasMedico(nro: number): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/?id=' + nro);
 	}
-	/***  searcHistoriaCompleta: recibe el nro de historia 
+	/***  
+	 * autor: Milagros Motta R.
+	 * searcHistoriaCompleta: recibe el nro de historia 
 	 ***/
-	searcHistoriaCompleta(nro: string): Observable<HistoriaCompleta> {
-		return this.http.get<HistoriaCompleta>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/' + nro + "/");
+
+	searcHistoriaCompleta(nro: string): Observable<ConsultaCompleta[]> {
+		return this.http.get<ConsultaCompleta[]>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/?nro=' + nro);
 	}
-	/***  searcTriajeC: recibe el id del medico
+
+	/***  
+	 * autor: Milagros Motta R.
+	 * searcTriajeC: recibe el id del medico
 	 ***/
+
 	searcTriajeC(nro: number): Observable<Triaje> {
 		return this.http.get<Triaje>('http://18.216.2.122:9000/consultorio/triajeporcita/' + nro + "/");
 	}
-	/***  crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
-	 * 	 	en el back correctamente.
+	/***  
+	 * autor: Milagros Motta R.
+	 * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
+	 * en el back correctamente.
 	 ***/
+
 	crearConsulta(newConsulta: Consulta) {
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
@@ -310,11 +337,33 @@ export class HttpService {
 					this.toastr.error("No se pudo agregar la Consulta");
 				});
 	}
-	/***  AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
+	/***  
+	 * autor: Milagros Motta R.
+	 * AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
 	 ***/
+
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
+
+	/***  
+	 * autor: Milagros Motta R.
+	 * searchExamenbDni: Busca el listado de examenes por DNI.
+	 ***/
+	searchExamenbDni(dni:string): Observable<Examen[]>{
+		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
+	}
+	/***  
+	 * autor: Milagros Motta R.
+	 * imprimirResultados: Busca el resultado del examenes por ID para generar el pdf.
+	 ***/
+	imprimirResultados(id:number):Observable<any>{
+		let headers = new HttpHeaders();
+		headers = headers.set('Accept', 'application/pdf');
+		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ id +'/', {headers: headers});
+	}
+
+	
 	searchLabName(nombre: string): Observable<any> {
 		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
 	}

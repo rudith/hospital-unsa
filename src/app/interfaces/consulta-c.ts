@@ -1,0 +1,50 @@
+export interface ConsultaCompleta {
+  triaje?: {
+    id?: number,
+    numeroHistoria?: number,
+    talla?: number,
+    peso?: number,
+    temperatura?: number,
+    frecuenciaR?: number,
+    frecuenciaC?: number,
+    presionArt?: string,
+    fechaReg?: string,
+    personal?: number,
+    cita?: number
+  },
+  numeroHistoria?: {
+    id?: number,
+    numeroHistoria?: string,
+    dni?: string,
+    nombres?: string,
+    apellido_paterno?: string,
+    apellido_materno?: string,
+    sexo?: string,
+    edad?: number,
+  },
+  medico?:{
+    dni: string,
+    nombres: string,
+    apellido_paterno: string,
+    apellido_materno: string,
+    celular: string,
+    user: {
+        id: number,
+        username: string,
+    }
+  },
+  especialidad?:{
+    id: number,
+    nombre: string,
+    descripcion: string,
+  },
+  motivoConsulta: string,
+  apetito: string,
+  orina: string,
+  deposiciones: string,
+  examenFisico: string,
+  diagnostico: string,
+  tratamiento: string,
+  proximaCita: string,
+  fechaCreacion : string,
+}

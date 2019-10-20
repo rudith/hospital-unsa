@@ -75,15 +75,20 @@ export class HttpService {
 	 * getNroHC: establece el Nro de historia y el Id de la cita triada
 	 ***/
 	setNroHC(change: string, cha: number) {
+
 		this.nroHisCom = change;
 		this.idHisCom = cha;
 	}
 	private handleError(error: any) {
 		return observableThrowError(error.error || 'Server error');
 	}
-	searchCita(dni: string): Observable<any> {
+	searchCitaDNI(dni: string): Observable<any> {
 		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citadni/" + dni + "/");
 	}
+	searchCitaEsp(esp: string): Observable<any> {
+		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citasporespecialidad/" + esp + "/");
+	}
+
 	loadEspecialidades(): Observable<Especialidad[]> {
 		return this.http.get<Especialidad[]>("http://18.216.2.122:9000/administrador/especialidad/");
 	}
@@ -200,6 +205,7 @@ export class HttpService {
 	searcHistoriasNroR(nroR: string): Observable<Historial> {
 		return this.http.get<Historial>('http://18.216.2.122:9000/admision/historianumero/?nro=' + nroR);
 	}
+
 	createCITA(newCita: Cita) {
 		this.http
 			.post<any>('http://18.216.2.122:9000/consultorio/crear-cita/', {
@@ -280,6 +286,7 @@ export class HttpService {
 	 * autor: Milagros Motta R.
 	 * loadCitasMedico: recibe el id del medico
 	 ***/
+
 	loadCitasMedico(nro: number): Observable<any> {
 		return this.http.get<any>('http://18.216.2.122:9000/consultorio/citaspormedico/?id=' + nro);
 	}
@@ -287,13 +294,16 @@ export class HttpService {
 	 * autor: Milagros Motta R.
 	 * searcHistoriaCompleta: recibe el nro de historia 
 	 ***/
+
 	searcHistoriaCompleta(nro: string): Observable<ConsultaCompleta[]> {
 		return this.http.get<ConsultaCompleta[]>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/?nro=' + nro);
 	}
+
 	/***  
 	 * autor: Milagros Motta R.
 	 * searcTriajeC: recibe el id del medico
 	 ***/
+
 	searcTriajeC(nro: number): Observable<Triaje> {
 		return this.http.get<Triaje>('http://18.216.2.122:9000/consultorio/triajeporcita/' + nro + "/");
 	}
@@ -302,8 +312,8 @@ export class HttpService {
 	 * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
 	 * en el back correctamente.
 	 ***/
+
 	crearConsulta(newConsulta: Consulta) {
-		console.log(JSON.stringify(newConsulta));
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
 				motivoConsulta: newConsulta.motivoConsulta,
@@ -317,7 +327,6 @@ export class HttpService {
 				triaje: newConsulta.triaje,
 				numeroHistoria: newConsulta.numeroHistoria,
 				medico: newConsulta.medico,
-				especialidad:newConsulta.especialidad,
 			}).subscribe(
 				data => {
 					this.toastr.success("Consulta Guardada correctamente");
@@ -332,9 +341,11 @@ export class HttpService {
 	 * autor: Milagros Motta R.
 	 * AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
 	 ***/
+
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
+
 	/***  
 	 * autor: Milagros Motta R.
 	 * searchExamenbDni: Busca el listado de examenes por DNI.
@@ -352,6 +363,7 @@ export class HttpService {
 		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ id +'/', {headers: headers});
 	}
 
+	
 	searchLabName(nombre: string): Observable<any> {
 		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
 	}
@@ -368,6 +380,18 @@ export class HttpService {
 		return this.http.get<Examen[]> ("http://18.216.2.122:9000/laboratorio/ExamenLabCab/");
 
 	}
+	imprimirExam(idE:number):Observable<any[]>{
+		console.log("ENTRA AL SERVICIO");
+		console.log(idE);
+		let headers = new HttpHeaders();
+		headers = headers.set('Accept', 'application/pdf');
+		return this.http.get<any[]>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ idE +'/', {headers: headers});
+	}
+	loadTabla(idEx:number):Observable<Detalle[]>{
+		console.log("ENTRA AL SERVICIO de tabla");
+		return this.http.get<Detalle[]>('http://18.216.2.122:9000/laboratorio/filtro/Detalles/?id='+ idEx)
+	}
+
 	createDetalle(detalle: Detalle){
 		console.log(detalle);
 		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabDet/',
@@ -406,6 +430,8 @@ export class HttpService {
 				error => {
 					console.log(error.message);
 				});
+	}
+		});
 	}
 
 }

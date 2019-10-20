@@ -69,8 +69,11 @@ export class HttpService {
 	private handleError(error: any) {
 		return observableThrowError(error.error || 'Server error');
 	}
-	searchCita(dni: string): Observable<any> {
+	searchCitaDNI(dni: string): Observable<any> {
 		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citadni/" + dni + "/");
+	}
+	searchCitaEsp(esp: string): Observable<any> {
+		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citasporespecialidad/" + esp + "/");
 	}
 	loadEspecialidades(): Observable<Especialidad[]> {
 		return this.http.get<Especialidad[]>("http://18.216.2.122:9000/administrador/especialidad/");

@@ -75,6 +75,7 @@ export class HttpService {
 	searchCitaEsp(esp: string): Observable<any> {
 		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citasporespecialidad/" + esp + "/");
 	}
+
 	loadEspecialidades(): Observable<Especialidad[]> {
 		return this.http.get<Especialidad[]>("http://18.216.2.122:9000/administrador/especialidad/");
 	}
@@ -330,6 +331,18 @@ export class HttpService {
 		return this.http.get<Examen[]> ("http://18.216.2.122:9000/laboratorio/ExamenLabCab/");
 
 	}
+	imprimirExam(idE:number):Observable<any[]>{
+		console.log("ENTRA AL SERVICIO");
+		console.log(idE);
+		let headers = new HttpHeaders();
+		headers = headers.set('Accept', 'application/pdf');
+		return this.http.get<any[]>('http://18.216.2.122:9000/laboratorio/resultadoExamen/'+ idE +'/', {headers: headers});
+	}
+	loadTabla(idEx:number):Observable<Detalle[]>{
+		console.log("ENTRA AL SERVICIO de tabla");
+		return this.http.get<Detalle[]>('http://18.216.2.122:9000/laboratorio/filtro/Detalles/?id='+ idEx)
+	}
+
 	createDetalle(detalle: Detalle){
 		console.log(detalle);
 		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabDet/',
@@ -368,6 +381,8 @@ export class HttpService {
 				error => {
 					console.log(error.message);
 				});
+	}
+		});
 	}
 
 }

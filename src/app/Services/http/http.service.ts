@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Historial } from '../../interfaces/historial';
@@ -69,9 +69,13 @@ export class HttpService {
 	private handleError(error: any) {
 		return observableThrowError(error.error || 'Server error');
 	}
-	searchCita(dni: string): Observable<any> {
+	searchCitaDNI(dni: string): Observable<any> {
 		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citadni/" + dni + "/");
 	}
+	searchCitaEsp(esp: string): Observable<any> {
+		return this.http.get<any>("http://18.216.2.122:9000/consultorio/citasporespecialidad/" + esp + "/");
+	}
+
 	loadEspecialidades(): Observable<Especialidad[]> {
 		return this.http.get<Especialidad[]>("http://18.216.2.122:9000/administrador/especialidad/");
 	}
@@ -311,16 +315,14 @@ export class HttpService {
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
 	}
-	/*** Servicio de laboratorio
-	 ***/
-	searchLabName(nombre: string): Observable<Examen[]> {
-		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
+	searchLabName(nombre: string): Observable<any> {
+		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
 	}
-	searchLabFecha(fecha: string): Observable<Examen[]> {
-		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
+	searchLabFecha(fecha: string): Observable<any> {
+		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
 	}
-	searchLabDni(dni:string): Observable<Examen[]>{
-		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
+	searchLabDni(dni:string): Observable<any>{
+		return this.http.get<Examen>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
 	}
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>("http://18.216.2.122:9000/laboratorio/TipoExamen/");
@@ -379,6 +381,8 @@ export class HttpService {
 				error => {
 					console.log(error.message);
 				});
+	}
+		});
 	}
 
 }

@@ -12,9 +12,15 @@
             </tc-input>
         </tc-form-group>
         <tc-form-group class="col-sm-4 col-lg-2">
-            <button tc-button [view]="'info'" (click)="buscar()">
+                <button
+                tc-button
+                [block]="true"
+                [view]="'success'"
+                [tcShape]="500"
+                (click)="buscar()"
+              >
                 Buscar
-            </button>
+              </button>
         </tc-form-group>
     </div>
     <tc-card class="mb-0">

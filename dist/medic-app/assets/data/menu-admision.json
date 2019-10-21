@@ -94,13 +94,5 @@
 		},
 		"routing": "consultas",
 		"layout": "vertical"
-	},
-	{
-		"title": "Listar Consultas",
-		"icon": {
-			"class": "icofont-thermometer-alt"
-		},
-		"routing": "Lconsultas",
-		"layout": "vertical"
 	}
 ]

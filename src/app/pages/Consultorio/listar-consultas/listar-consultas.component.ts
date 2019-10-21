@@ -139,16 +139,6 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.router.navigate(['/vertical/consultas']);
   }
 
-  /*** 
-	 * autor: Milagros Motta R.
-	 * atenderCita: Cambia el estado de la cita de Triado -> Atendido 
-	***/
-  atenderCita(id: number) {
-    this.httpSv.AtenderCita(id).subscribe(cita => {
-      this.cargarConsultas();
-    });
-  }
-
   //Modal Crear Consulta
   /*** 
 	 * autor: Milagros Motta R.
@@ -217,11 +207,10 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       let newConsult: Consulta = form.value;
       newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
       newConsult.numeroHistoria=this.idRecibido;
-      newConsult.triaje=this.idCitaRecibida;
+      newConsult.triaje=this.triajeRecibido.id;
       newConsult.medico=1;
       newConsult.especialidad=1;
-      this.httpSv.crearConsulta(newConsult);
-      this.atenderCita(this.idCitaRecibida);
+      this.httpSv.crearConsulta(newConsult,this.idCitaRecibida);
       this.closeModalC();
       this.cargarConsultas();
       this.consultForm.reset();

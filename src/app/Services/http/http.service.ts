@@ -324,7 +324,7 @@ export class HttpService {
 	 * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
 	 * en el back correctamente.
 	 */
-	crearConsulta(newConsulta: Consulta) {
+	crearConsulta(newConsulta: Consulta,id:number) {
 		console.log(JSON.stringify(newConsulta));
 		this.http.post<any>('http://18.216.2.122:9000/consultorio/crear-consulta/',
 			{
@@ -344,6 +344,7 @@ export class HttpService {
 				data => {
 					this.toastr.success("Consulta Guardada correctamente");
 					console.log("Crear Consulta Correcto");
+					this.AtenderCita(id);
 				},
 				error => {
 					console.log(error.message);

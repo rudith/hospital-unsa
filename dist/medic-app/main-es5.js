@@ -5677,16 +5677,6 @@ var ListarConsultasComponent = /** @class */ (function (_super) {
     ListarConsultasComponent.prototype.regresar = function () {
         this.router.navigate(['/vertical/consultas']);
     };
-    /***
-       * autor: Milagros Motta R.
-       * atenderCita: Cambia el estado de la cita de Triado -> Atendido
-      ***/
-    ListarConsultasComponent.prototype.atenderCita = function (id) {
-        var _this = this;
-        this.httpSv.AtenderCita(id).subscribe(function (cita) {
-            _this.cargarConsultas();
-        });
-    };
     //Modal Crear Consulta
     /***
        * autor: Milagros Motta R.
@@ -5752,11 +5742,10 @@ var ListarConsultasComponent = /** @class */ (function (_super) {
             var newConsult = form.value;
             newConsult.proximaCita = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
             newConsult.numeroHistoria = this.idRecibido;
-            newConsult.triaje = this.idCitaRecibida;
+            newConsult.triaje = this.triajeRecibido.id;
             newConsult.medico = 1;
             newConsult.especialidad = 1;
-            this.httpSv.crearConsulta(newConsult);
-            this.atenderCita(this.idCitaRecibida);
+            this.httpSv.crearConsulta(newConsult, this.idCitaRecibida);
             this.closeModalC();
             this.cargarConsultas();
             this.consultForm.reset();
@@ -15075,7 +15064,7 @@ var HttpService = /** @class */ (function () {
      * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
      * en el back correctamente.
      */
-    HttpService.prototype.crearConsulta = function (newConsulta) {
+    HttpService.prototype.crearConsulta = function (newConsulta, id) {
         var _this = this;
         console.log(JSON.stringify(newConsulta));
         this.http.post('http://18.216.2.122:9000/consultorio/crear-consulta/', {
@@ -15094,6 +15083,7 @@ var HttpService = /** @class */ (function () {
         }).subscribe(function (data) {
             _this.toastr.success("Consulta Guardada correctamente");
             console.log("Crear Consulta Correcto");
+            _this.AtenderCita(id);
         }, function (error) {
             console.log(error.message);
             _this.toastr.error("No se pudo agregar la Consulta");

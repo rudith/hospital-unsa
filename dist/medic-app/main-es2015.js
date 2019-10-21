@@ -5505,15 +5505,6 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
     regresar() {
         this.router.navigate(['/vertical/consultas']);
     }
-    /***
-       * autor: Milagros Motta R.
-       * atenderCita: Cambia el estado de la cita de Triado -> Atendido
-      ***/
-    atenderCita(id) {
-        this.httpSv.AtenderCita(id).subscribe(cita => {
-            this.cargarConsultas();
-        });
-    }
     //Modal Crear Consulta
     /***
        * autor: Milagros Motta R.
@@ -5576,11 +5567,10 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
             let newConsult = form.value;
             newConsult.proximaCita = Object(_angular_common__WEBPACK_IMPORTED_MODULE_6__["formatDate"])(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
             newConsult.numeroHistoria = this.idRecibido;
-            newConsult.triaje = this.idCitaRecibida;
+            newConsult.triaje = this.triajeRecibido.id;
             newConsult.medico = 1;
             newConsult.especialidad = 1;
-            this.httpSv.crearConsulta(newConsult);
-            this.atenderCita(this.idCitaRecibida);
+            this.httpSv.crearConsulta(newConsult, this.idCitaRecibida);
             this.closeModalC();
             this.cargarConsultas();
             this.consultForm.reset();
@@ -14657,7 +14647,7 @@ let HttpService = class HttpService {
      * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
      * en el back correctamente.
      */
-    crearConsulta(newConsulta) {
+    crearConsulta(newConsulta, id) {
         console.log(JSON.stringify(newConsulta));
         this.http.post('http://18.216.2.122:9000/consultorio/crear-consulta/', {
             motivoConsulta: newConsulta.motivoConsulta,
@@ -14675,6 +14665,7 @@ let HttpService = class HttpService {
         }).subscribe(data => {
             this.toastr.success("Consulta Guardada correctamente");
             console.log("Crear Consulta Correcto");
+            this.AtenderCita(id);
         }, error => {
             console.log(error.message);
             this.toastr.error("No se pudo agregar la Consulta");

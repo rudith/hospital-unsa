@@ -72,8 +72,8 @@ export class PagePatientsComponent extends BasePageComponent implements OnInit, 
  
   buscartriaje(dni: string){
     this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
-      this.citas = data.citas;
-      this.dni2 =data.dni;
+     // this.citas = data.citas;
+      //this.dni2 =data.dni;
       console.log("entro busqueda"+ dni);
     });;
   }

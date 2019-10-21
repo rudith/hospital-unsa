@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Historial } from '../../../interfaces/historial';
 import { Especialidad } from '../../../interfaces/especialidad';
+import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 
 
 @Component({
@@ -27,12 +28,14 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 	public today: Date;
 	public dni: string;
 	private idMedico: number;
+	private hayCitas:boolean;
 
 
 	constructor(
 		private formBuilder: FormBuilder,
 		store: Store<IAppState>,
 		httpSv: HttpService,
+		private labservice:LaboratorioService,
 		private modal: TCModalService,
 		private http: HttpClient,
 		private router: Router,
@@ -62,6 +65,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 		};
 		this.tableData = [];
 		this.idMedico = 1;
+		this.hayCitas=true;
 		this.CitasC=[];
 		this.loadCitas();
 	}
@@ -88,6 +92,9 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 		this.httpSv.loadCitasMedico(this.idMedico).subscribe(data => {
 			this.CitasC=[];
 			this.CitasC = data;
+			if(this.CitasC.length>0){
+				this.hayCitas=false;
+			}
 			for(let i in this.CitasC){
 				this.CitasC[i].numeroRecibo=this.CitasC[i].numeroHistoria.numeroHistoria;
 				this.CitasC[i].responsable=this.CitasC[i].numeroHistoria.nombres+" "+this.CitasC[i].numeroHistoria.apellido_paterno+" "+this.CitasC[i].numeroHistoria.apellido_materno;

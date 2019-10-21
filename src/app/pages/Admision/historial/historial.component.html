@@ -130,7 +130,7 @@
 			</tc-form-group>
 			<br>
 			<tc-form-group>
-				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption">
+				<tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="espOption" (click)="cargarMedXEsp(appointmentForm.get('especialidad').value)">
 				</tc-select>
 			</tc-form-group>
 			<tc-form-group>
@@ -216,7 +216,7 @@
 			<div class="row">
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-select [placeholder]="'Departamento'" formControlName="departamento"
+						<tc-select [placeholder]="'Departamento'" formControlName="departamento" (click)="cargarProvXDepto(patientForm.get('departamento').value)"
 							[options]="departamentosOption">
 						</tc-select>
 					</tc-form-group>
@@ -224,7 +224,7 @@
 
 				<div class="col-12 col-sm-4">
 					<tc-form-group>
-						<tc-select [placeholder]="'Provincia'" formControlName="provincia" [options]="provinciasOption">
+						<tc-select [placeholder]="'Provincia'" formControlName="provincia" [options]="provinciasOption" (click)="cargarDistXProv(patientForm.get('provincia').value)">
 						</tc-select>
 					</tc-form-group>
 				</div>

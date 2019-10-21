@@ -20,6 +20,7 @@ import { CitaM } from '../../interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
 import {Examen} from '../../interfaces/examen';
 import {Detalle} from '../../interfaces/detalle';
+import { Personal } from 'src/app/interfaces/personal';
 
 @Injectable({
 	providedIn: 'root',
@@ -210,6 +211,17 @@ export class HttpService {
 	searcHistoriasNomAp(name: string): Observable<Historial[]> {
 		return this.http.get<Historial[]>('http://18.216.2.122:9000/admision/historianombre/?nom=' + name);
 	}
+	searcDptoxP(id: number): Observable<any> {
+		
+		return this.http.get<any>('http://18.216.2.122:9000/admision/buscarprovincias/'+id+'/');
+	}
+	searcProxDist(id: number): Observable<any> {
+		return this.http.get<any>('http://18.216.2.122:9000/admision/buscardistritos/'+id+'/');
+	}
+	searcMedxEsp(id: number): Observable<Personal[]> {
+		console.log(id);
+		return this.http.get<Personal[]>('http://18.216.2.122:9000/administrador/personalporespecialidad/?id='+id);
+	}
 
 	createCITA(newCita: Cita) {
 		this.http
@@ -344,76 +356,5 @@ export class HttpService {
 	 */
 	AtenderCita(id: number): Observable<Cita> {
 		return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id + "/");
-	}
-	/*  
-	 * autor: Milagros Motta R.
-	 * searchExamenbDni: Busca el listado de examenes por DNI.
-	 */
-	searchExamenbDni(dni:string): Observable<Examen[]>{
-		return this.http.get<Examen[]>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
-	}
-		
-	searchLabName(nombre: string): Observable<any> {
-		return this.http.get<Cabeceralab>('http://18.216.2.122:9000/laboratorio/filtro/?nombre=' + nombre);
-	}
-	searchLabFecha(fecha: string): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/laboratorio/filtro/fecha/?fecha=' + fecha + "/");
-	}
-	searchLabDni(dni:string): Observable<any>{
-		return this.http.get<Examen>('http://18.216.2.122:9000/laboratorio/filtro/DNI/?dni='+ dni);
-	}
-	loadTipoEx(): Observable<Tipoexamen[]> {
-		return this.http.get<Tipoexamen[]>("http://18.216.2.122:9000/laboratorio/TipoExamen/");
-	}
-	loadExamen():Observable<Examen[]> {
-		return this.http.get<Examen[]> ("http://18.216.2.122:9000/laboratorio/ExamenLabCab/");
-
-	}
-	
-	loadTabla(idEx:number):Observable<Detalle[]>{
-		console.log("ENTRA AL SERVICIO de tabla");
-		return this.http.get<Detalle[]>('http://18.216.2.122:9000/laboratorio/filtro/Detalles/?id='+ idEx)
-	}
-
-	createDetalle(detalle: Detalle){
-		console.log(detalle);
-		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabDet/',
-			{
-				descripcion: detalle.descripcion,
-				resultado_obtenido: detalle.resultado_obtenido,
-				unidades: detalle.unidades,
-				rango_referencia: detalle.rango_referencia,
-				codigoExam: detalle.codigoExam,
-			}).subscribe(
-				data => {
-					this.toastr.success("El detalle ha sido crado con exito");
-					console.log("CREAR detalle Completo");
-				},
-				error => {
-					console.log(error.message);
-					this.toastr.error("El detalle no se ha creado");
-				});
-
-	}
-	//crear cabecer
-	createCabecera(newCabecera: Cabeceralab) {
-		console.log(newCabecera);
-		this.http.post<any>('http://18.216.2.122:9000/laboratorio/ExamenLabCab/',
-			{
-				nombre: newCabecera.nombre,
-				dni: newCabecera.dni,
-				orden: newCabecera.orden,
-				fecha: newCabecera.fecha,
-				observaciones: newCabecera.observaciones,
-				tipoExam: newCabecera.tipoExam,
-			}).subscribe(
-				data => {
-					this.toastr.success("","Se ha creado la cabecera");
-					console.log("CREAR Cabecera Completo");
-				},
-				error => {
-					this.toastr.error(error);
-					console.log(error);
-				});
-	}
+	}	
 }

@@ -8,13 +8,14 @@ import { Area } from "../../interfaces/area";
 import { Especialidad } from "../../interfaces/especialidad";
 import { Tipopersonal } from "../../interfaces/tipopersonal";
 import { PersonalCreate } from "../../interfaces/personalCreate";
-import { Personal } from "../../interfaces/personal";
 import { IOption } from "../../ui/interfaces/option";
 import { User } from '../../interfaces/user';
 import { personalLista } from '../../interfaces/personalLista';
+
 @Injectable({
   providedIn: "root"
 })
+
 export class AdministradorService {
   private url: string = "http://18.216.2.122:9000/administrador";
   medOption: IOption[];

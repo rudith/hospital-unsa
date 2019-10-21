@@ -1,4 +1,3 @@
-import { User } from './../../../interfaces/user';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
@@ -13,7 +12,6 @@ import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { Historial } from '../../../interfaces/historial';
 import { Especialidad } from '../../../interfaces/especialidad';
-import * as jsPDF from 'jspdf';
 import { Grupsang } from '../../../interfaces/grupsang';
 import { Provincia } from '../../../interfaces/provincia';
 import { Departamento } from '../../../interfaces/departamento';
@@ -22,14 +20,14 @@ import { Medico } from '../../../interfaces/medico';
 import {ToastrService} from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { Personal } from 'src/app/interfaces/personal';
 
 @Component({
 	selector: 'app-historial',
 	templateUrl: './historial.component.html',
 	styleUrls: ['./historial.component.scss'],
-	
 })
+
 export class HistorialComponent extends BasePageComponent
 	implements OnInit, OnDestroy, OnChanges {
 	@ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
@@ -48,6 +46,7 @@ export class HistorialComponent extends BasePageComponent
 	public departamentos: Departamento[];
 	public distritos: Distrito[];
 	public medicos: Medico[];
+	public perso:Personal[];
 	today: Date;
 	datoBus: string;
 	opBus: string;
@@ -64,7 +63,6 @@ export class HistorialComponent extends BasePageComponent
 	public espOption: IOption[];
 	public busqOption: IOption[];
 	public especialidades: Especialidad[];
-	public users: User[] = [];
 	
 	constructor(
 		store: Store<IAppState>,
@@ -115,6 +113,7 @@ export class HistorialComponent extends BasePageComponent
 
 			]
 		};
+		this.perso=[];
 		this.tableData = [];
 		this.historiales = [];
 		this.loadHistorias();
@@ -193,11 +192,8 @@ export class HistorialComponent extends BasePageComponent
 			distrito: ['', Validators.required],
 			provincia: ['', Validators.required],
 			departamento: ['', Validators.required],
-			
 		}
 		);
-		
-		
 	}
 
 	addPatient(form: FormGroup) {
@@ -217,9 +213,6 @@ export class HistorialComponent extends BasePageComponent
 	}
 
 	loadData() {
-
-		
-		
 		//Sexo
 		this.sexOption[0] = { label: "Masculino", value: "Masculino", };
 		this.sexOption[1] = { label: "Femenino", value: "Femenino", };
@@ -245,29 +238,13 @@ export class HistorialComponent extends BasePageComponent
 		this.estadoCivilOption[2]={ label: "Viudo(a)", value: "Viudo(a)", };
 		this.estadoCivilOption[3]={ label: "Divorciado(a)", value: "Divorciado(a)", };
 		this.estadoCivilOption[4]={ label: "Conviviente", value: "Conviviente", };
-
-
 		this.loadprovincias();
-		this.httpSv.loadProvincia().subscribe(provincias => {
-			this.provincias = provincias,
-				this.loadprovincias()
-		});
+		
 		this.httpSv.loadDepartamento().subscribe(departamentos => {
 			this.departamentos = departamentos,
 				this.loaddepartamentos()
 		});
-		this.httpSv.loadDistrito().subscribe(distritos => {
-			this.distritos = distritos,
-				this.loaddistritos()
-		});
-		this.httpSv.loadMedico().subscribe(medicos => {
-			this.medicos = medicos,
-				this.loadmedicos()
-		});
-		this.httpSv.loadUsers().subscribe(medicos => {
-			this.users = medicos,
-				this.loadmedicos()
-		});
+		
 
 	}
 
@@ -282,6 +259,7 @@ export class HistorialComponent extends BasePageComponent
 	}
 	loadprovincias() {
 		for (let i in this.provincias) {
+
 			this.provinciasOption[i] =
 				{
 					label: this.provincias[i].nombre,
@@ -309,11 +287,11 @@ export class HistorialComponent extends BasePageComponent
 	}
 
 	loadmedicos() {
-		for (let i in this.users) {
+		for (let i in this.perso) {
 			this.medOption[i] =
 				{
-					label: this.users[i].username,
-					value: this.users[i].id.toString()
+					label: this.perso[i].nombres+" "+this.perso[i].apellido_paterno+" "+this.perso[i].apellido_materno,
+					value: this.perso[i].user.id+""
 				};
 		}
 	}
@@ -500,5 +478,38 @@ export class HistorialComponent extends BasePageComponent
 	imprimir1(data){
 		document.location.href = 'http://18.216.2.122:9000/admision/historiaPDF/'+data.dni;
 		this.toastr.success("Se ha generado el Pdf");
+	}
+	cargarProvXDepto(a:number){
+		this.httpSv.searcDptoxP(a).subscribe(data => {
+			this.provincias=[];
+			this.distritosOption=[];
+			this.provinciasOption=[];
+			this.provincias = data.provincias;
+			this.loadprovincias();
+			
+		}, error => {
+		});
+	}
+	cargarDistXProv(a:number){
+		this.httpSv.searcProxDist(a).subscribe(data => {
+			this.distritos=[];
+			this.distritosOption=[];
+			this.distritos = data.distritos;
+			this.loaddistritos();
+		}, error => {
+		});
+	}
+	cargarMedXEsp(a:number){
+		console.log(a);		
+		this.httpSv.searcMedxEsp(a).subscribe(data => {
+			
+			this.perso=[];
+			this.medOption=[];
+			this.perso = data;
+			console.log(data);
+			console.log(this.perso);
+			this.loadmedicos();
+		}, error => {
+		});
 	}
 }

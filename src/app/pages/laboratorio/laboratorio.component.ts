@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { BasePageComponent } from '../base-page';
-import { ConfirmationService } from 'primeng/api';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../interfaces/app-state';
 import { HttpService } from '../../services/http/http.service';
@@ -10,12 +9,13 @@ import { Content } from '../../ui/interfaces/modal';
 import { TCModalService } from '../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
-import * as jsPDF from 'jspdf';
 import { ToastrService } from 'ngx-toastr';
 import { Examen } from '../../interfaces/examen';
 import { Tipoexamen } from '../../interfaces/tipoexamen';
 import { Cabeceralab } from '../../interfaces/cabeceralab';
 import { Detalle } from '../../interfaces/detalle';
+import { LaboratorioService } from '../../Services/Laboratorio/laboratorio.service';
+
 @Component({
 	selector: 'app-laboratorio',
 	templateUrl: './laboratorio.component.html',
@@ -44,6 +44,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	constructor(
 		store: Store<IAppState>,
 		httpSv: HttpService,
+		private labService: LaboratorioService,
 		private modal: TCModalService,
 		private formBuilder: FormBuilder,
 		private http: HttpClient,
@@ -88,7 +89,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 	//Muestra el listado de exmamenes en la tabla 
 	loadExamen() {
-		this.httpSv.loadExamen().subscribe(examen => {
+		this.labService.loadExamen().subscribe(examen => {
 			this.examen = examen;
 		});
 	}
@@ -144,7 +145,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		if (form.valid) {
 			let newExamen: Cabeceralab = form.value;
 			newExamen.fecha = formatDate(form.value.fecha, 'yyyy-MM-dd', 'en-US', '+0530');
-			this.httpSv.createCabecera(newExamen);
+			this.labService.createCabecera(newExamen);
 			this.closeModalH();
 			this.loadExamen();
 		}
@@ -191,7 +192,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			newDetalle.resultado_obtenido = form.value.resultado_obtenido;
 			newDetalle.unidades = form.value.unidades;
 			newDetalle.codigoExam = this.rr;
-			this.httpSv.createDetalle(newDetalle);
+			this.labService.createDetalle(newDetalle);
 			this.detalleForm.reset();
 		}
 	}
@@ -206,9 +207,9 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	//Metodo loadData: muestra en el formulario de crear cabecera el select de TIPO DE EXAMEN 
 	loadData() {
-		this.httpSv.loadTipoEx().subscribe(tipo => {
+		this.labService.loadTipoEx().subscribe(tipo => {
 			this.tipoE = tipo,
-				this.loadtipoex()
+			this.loadtipoex()
 		});
 
 	}
@@ -250,7 +251,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			this.toastr.warning('Ningun valor ingresado');
 			this.cargarExamn();
 		} else if (this.opBus == "1") {
-			this.httpSv.searchLabName(this.datoBus).subscribe(data => {
+			this.labService.searchLabName(this.datoBus).subscribe(data => {
 				if (data[0] == null) {
 					this.toastr.error("No se han encontrado coincidencias");
 					this.cargarExamn();
@@ -264,7 +265,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			});
 		}
 		else if (this.opBus == "2") {
-			this.httpSv.searchLabFecha(this.datoBus).subscribe(data => {
+			this.labService.searchLabFecha(this.datoBus).subscribe(data => {
 				if (data[0] == null) {
 					this.toastr.error("No se han encontrado coincidencias");
 					this.cargarExamn();
@@ -278,7 +279,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 				this.toastr.warning('No encontrado');
 			});
 		} else if (this.opBus == "3") {
-			this.httpSv.searchLabDni(this.datoBus).subscribe(data => {
+			this.labService.searchLabDni(this.datoBus).subscribe(data => {
 				console.log(data);
 				if (data[0] == null) {
 					this.toastr.error("No se han encontrado coincidencias");
@@ -320,14 +321,14 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 	//Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
 	loadTabla(row: Examen) {
-		this.httpSv.loadTabla(row.id).subscribe(detalleT => {
+		this.labService.loadTabla(row.id).subscribe(detalleT => {
 			this.detalleT = detalleT;
 		})
 	}
 
 
 	cargarExamn(){
-		this.httpSv.loadExamen().subscribe(examen => {
+		this.labService.loadExamen().subscribe(examen => {
 			this.examen = examen;
 		});
 	}

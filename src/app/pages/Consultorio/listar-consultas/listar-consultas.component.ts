@@ -14,6 +14,8 @@ import { Consulta } from '../../../interfaces/consulta';
 import { Router } from '@angular/router';
 import { Examen } from '../../../interfaces/examen';
 import { ToastrService } from 'ngx-toastr';
+import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
+
 
 @Component({
   selector: 'app-consultas',
@@ -42,6 +44,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
+    private labservice:LaboratorioService,
     private modal: TCModalService,
     private http: HttpClient,   
     private router: Router,
@@ -120,7 +123,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * cargarExamenes: Carga los examenes del paciente haciendo una llamata al servicio 
 	***/
   cargarExamenes(dni:string) {
-    this.httpSv.searchExamenbDni(dni).subscribe(data => {
+    this.labservice.searchExamenbDni(dni).subscribe(data => {
       this.examenesRecibidos=data;
       for (let index = 0; index < this.examenesRecibidos.length; index++) {
         this.examenesRecibidos[index].nombre=this.examenesRecibidos[index].tipoExam.nombre;

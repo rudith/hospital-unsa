@@ -20,7 +20,7 @@ import { CitaM } from '../../interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
 import {Examen} from '../../interfaces/examen';
 import {Detalle} from '../../interfaces/detalle';
-import { Personal } from 'src/app/interfaces/personal';
+import { Personal } from '../../interfaces/personal';
 
 @Injectable({
 	providedIn: 'root',

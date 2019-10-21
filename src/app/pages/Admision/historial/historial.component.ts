@@ -20,7 +20,7 @@ import { Medico } from '../../../interfaces/medico';
 import {ToastrService} from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { Personal } from 'src/app/interfaces/personal';
+import { Personal } from '../../../interfaces/personal';
 
 @Component({
 	selector: 'app-historial',

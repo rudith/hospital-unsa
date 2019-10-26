@@ -22,6 +22,9 @@ import { Examen } from "../../interfaces/examen";
 import { Detalle } from "../../interfaces/detalle";
 import { Personal } from "../../interfaces/personal";
 import { citaLista } from '../../interfaces/citaLista';
+import { CitasMPaginadas } from '../../interfaces/citas-mpaginadas';
+import { ConsultasPaginadas } from '../../interfaces/consultas-paginadas';
+
 
 @Injectable({
   providedIn: "root"
@@ -47,6 +50,7 @@ export class HttpService {
   public examen: Examen[] = [];
   private nroHisCom: string;
   private idHisCom: number;
+  private idMedico:number;
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
@@ -70,14 +74,26 @@ export class HttpService {
   getIdHC(): number {
     return this.idHisCom;
   }
+/***  
+   * autor: Milagros Motta R.
+   * getIdMed: devuelve el Id del medico del componente Consultas, establecido en setNroHC
+   ***/
+  getIdMed(): number {
+    console.log(this.idMedico);
+    return this.idMedico;
+  }
+
+
   /***
    * autor: Milagros Motta R.
    * getNroHC: establece el Nro de historia y el Id de la cita triada
    ***/
-  setNroHC(change: string, cha: number) {
+  setNroHC(change: string, cha: number,med:number) {
+    this.idMedico = med;
     this.nroHisCom = change;
     this.idHisCom = cha;
   }
+
   private handleError(error: any) {
     return observableThrowError(error.error || "Server error");
   }
@@ -367,39 +383,44 @@ export class HttpService {
     );
   }
 
-  /*
+  /***
    * autor: Milagros Motta R.
    * loadCitasMedico: recibe el id del medico
-   */
-  loadCitasMedico(nro: number): Observable<any> {
-    return this.http.get<any>(
-      "http://18.216.2.122:9000/consultorio/citaspormedico/?id=" + nro
-    );
+  ***/
+ loadCitasMedico(nro: number): Observable<CitasMPaginadas> {
+    return this.http.get<CitasMPaginadas>('http://18.216.2.122:9000/consultorio/citaspormedico/?id=' + nro);
   }
+
   /*
    * autor: Milagros Motta R.
    * searcHistoriaCompleta: recibe el nro de historia
    */
-  searcHistoriaCompleta(nro: string): Observable<ConsultaCompleta[]> {
-    return this.http.get<ConsultaCompleta[]>(
-      "http://18.216.2.122:9000/consultorio/buscarhistorialclinico/?nro=" + nro
-    );
+  searcHistoriaCompleta(nro: string): Observable<ConsultasPaginadas> {
+    return this.http.get<ConsultasPaginadas>('http://18.216.2.122:9000/consultorio/buscarhistorialclinico/?nro=' + nro);
+/***  
+   * autor: Milagros Motta R.
+   * paginacionConsultasHistoriaC: Recibe la url de la paginación correspondiente, devolviendo así la data organizada con el modelo ConsultasPaginadas.
+  ***/
+  paginacionConsultasHistoriaC(url:string): Observable<ConsultasPaginadas> {
+    return this.http.get<ConsultasPaginadas>(url);
   }
-  /*
+
+  }
+  /***
    * autor: Milagros Motta R.
    * searcTriajeC: recibe el id del medico
-   */
+  ***/
   searcTriajeC(nro: number): Observable<Triaje> {
     return this.http.get<Triaje>(
       "http://18.216.2.122:9000/consultorio/triajeporcita/" + nro + "/"
     );
   }
-  /*
+  /***
    * autor: Milagros Motta R.
    * crearConsulta: recibe un objeto de tipo Consulta y asigna los valores de este a un json para que sea creado
    * en el back correctamente.
-   */
-  crearConsulta(newConsulta: Consulta, id: number) {
+  ***/
+  crearConsulta(newConsulta: Consulta) {
     console.log(JSON.stringify(newConsulta));
     this.http
       .post<any>("http://18.216.2.122:9000/consultorio/crear-consulta/", {
@@ -414,13 +435,12 @@ export class HttpService {
         triaje: newConsulta.triaje,
         numeroHistoria: newConsulta.numeroHistoria,
         medico: newConsulta.medico,
-        especialidad: newConsulta.especialidad
       })
       .subscribe(
         data => {
           this.toastr.success("Consulta Guardada correctamente");
           console.log("Crear Consulta Correcto");
-          this.AtenderCita(id);
+          
         },
         error => {
           console.log(error.message);
@@ -428,13 +448,20 @@ export class HttpService {
         }
       );
   }
-  /*
+  /***
    * autor: Milagros Motta R.
    * AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
-   */
+  ***/
   AtenderCita(id: number): Observable<Cita> {
-    return this.http.get<Cita>(
-      "http://18.216.2.122:9000/consultorio/atendercita/" + id + "/"
-    );
+    return this.http.get<Cita>("http://18.216.2.122:9000/consultorio/atendercita/" + id+"/");
   }
+
+  /***  
+   * autor: Milagros Motta R.
+   * paginacionCitasM: Recibe la url de la paginación correspondiente, devolviendo así la data organizada con el modelo CitasMPaginadas.
+  ***/
+  paginacionCitasM(url:string): Observable<CitasMPaginadas> {
+    return this.http.get<CitasMPaginadas>(url);
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
@@ -8,9 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Historial } from '../../../interfaces/historial';
-import { Especialidad } from '../../../interfaces/especialidad';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
+import { CitasMPaginadas } from '../../../interfaces/citas-mpaginadas';
 
 
 @Component({
@@ -18,18 +17,15 @@ import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.se
 	templateUrl: './consultas.component.html',
 	styleUrls: ['./consultas.component.scss']
 })
-export class ConsultasComponent extends BasePageComponent implements OnInit, OnChanges {
-	tableData: any;
-	cita: CitaM;
+export class ConsultasComponent extends BasePageComponent implements OnInit {
 	CitasC: CitaM[];
-	historialesC: Historial;
-	especialidadesC: Especialidad;
+  data: CitasMPaginadas = <CitasMPaginadas>{};
 	busForm: FormGroup;
-	public today: Date;
-	public dni: string;
+	pages: Array<number>;
+  pagesNumber: number;
+  pageNum: number;
 	private idMedico: number;
 	private hayCitas:boolean;
-
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -63,8 +59,8 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 				}
 			]
 		};
-		this.tableData = [];
-		this.idMedico = 1;
+		this.pageNum = 1;
+		this.idMedico = 5;
 		this.hayCitas=true;
 		this.CitasC=[];
 		this.loadCitas();
@@ -80,7 +76,6 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 			}
 		});
 	}
-	ngOnChanges($event) {	}
 	
 	/*** 
 	 * autor: Milagros Motta R.
@@ -90,8 +85,9 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 	 ***/
 	loadCitas() {
 		this.httpSv.loadCitasMedico(this.idMedico).subscribe(data => {
+			this.data = data;
 			this.CitasC=[];
-			this.CitasC = data;
+			this.CitasC = data.results;
 			if(this.CitasC.length>0){
 				this.hayCitas=false;
 			}
@@ -105,32 +101,50 @@ export class ConsultasComponent extends BasePageComponent implements OnInit, OnC
 	}
 	ngOnDestroy() {
 		super.ngOnDestroy();
-	}/*
-	onChangeTable() {
-		if (this.dni == "" || this.dni == undefined) {
-			this.httpSv.loadCitas().subscribe(citas => {
-				this.citas = citas
-			});
-		} else {
-			this.httpSv.searchCita(this.dni).subscribe(data => {
-				this.citas = data.citas;
-			});;
-		}
 	}
-  initBusForm() {
-    this.busForm = this.formBuilder.group({
-      datoBus: ['', Validators.required],
-    });
-    this.dni=this.busForm.get('datoBus').value;
-	} */
-
 	/*** 
 	 * autor: Milagros Motta R.
-	 * parametros: nro de historia, id de la cita
+	 * parametros: nro de historia, id de la cita, idMedico
 	 * atender: Hace uso de un servicio para pasar los parametros al componente Lconsultas
 	 ***/
 	atender(nro: string, id: number) {
-		this.httpSv.setNroHC(nro, id);
+		this.httpSv.setNroHC(nro, id,this.idMedico);
 		this.router.navigate(['/vertical/Lconsultas']);
 	}
+	/*** 
+	 * autor: Milagros Motta R.
+	 * nextPage: si se hace click en siguiente, se aumenta el contador de la página 'pageNum' y se envia el url al servicio
+	 ***/
+	public nextPage() {
+    if (this.data.next) {
+      this.pageNum++;
+      this.httpSv.paginacionCitasM(this.data.next).subscribe(citasPaginadas => {
+          this.data = citasPaginadas;
+					this.CitasC = this.data.results;
+					for(let i in this.CitasC){
+						this.CitasC[i].numeroRecibo=this.CitasC[i].numeroHistoria.numeroHistoria;
+						this.CitasC[i].responsable=this.CitasC[i].numeroHistoria.nombres+" "+this.CitasC[i].numeroHistoria.apellido_paterno+" "+this.CitasC[i].numeroHistoria.apellido_materno;
+						this.CitasC[i].fechaAtencion=this.CitasC[i].especialidad.nombre;
+					}
+      });
+    }
+  }
+	/*** 
+	 * autor: Milagros Motta R.
+	 * prevPage: si se hace click en anterior, se resta el contador de la página 'pageNum' y se envia el url al servicio
+	 ***/
+  public prevPage() {
+    if (this.pageNum > 1) {
+      this.pageNum--;
+      this.httpSv.paginacionCitasM(this.data.previous).subscribe(citasPaginadas => {
+				this.data = citasPaginadas;
+				this.CitasC = this.data.results;
+				for(let i in this.CitasC){
+					this.CitasC[i].numeroRecibo=this.CitasC[i].numeroHistoria.numeroHistoria;
+					this.CitasC[i].responsable=this.CitasC[i].numeroHistoria.nombres+" "+this.CitasC[i].numeroHistoria.apellido_paterno+" "+this.CitasC[i].numeroHistoria.apellido_materno;
+					this.CitasC[i].fechaAtencion=this.CitasC[i].especialidad.nombre;
+				}
+			});
+    }
+  }
 }

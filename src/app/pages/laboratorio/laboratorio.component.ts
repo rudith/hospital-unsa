@@ -247,10 +247,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 	//Metodo que verifica el tipo de busqueda llamando respectivamente segun el tipo de busqueda elejido 
 	onChangeTable() {
-		if (this.datoBus == "") {
-			this.toastr.warning('Ningun valor ingresado');
-			this.cargarExamn();
-		} else if (this.opBus == "1") {
+		if (this.opBus == "1") {
 			this.labService.searchLabName(this.datoBus).subscribe(data => {
 				if (data[0] == null) {
 					this.toastr.error("No se han encontrado coincidencias");

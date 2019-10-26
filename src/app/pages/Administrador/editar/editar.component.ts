@@ -14,6 +14,7 @@ import { User } from '../../../interfaces/user';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Personal } from '../../../interfaces/personal';
 import { ToastrService } from "ngx-toastr";
+import { AdministradorService } from '../../../services/Administrador/administrador.service';
 
 @Component({
 	selector: 'app-editar',
@@ -42,7 +43,8 @@ export class EditarComponent extends BasePageComponent
 		httpSv: HttpService,
 		private modal: TCModalService,
 		private fb: FormBuilder,
-		private http: HttpClient
+		private http: HttpClient,
+		private admService:AdministradorService
 	) {
 
 		super(store, httpSv);
@@ -312,8 +314,8 @@ export class EditarComponent extends BasePageComponent
 	 * loadUsers:carga usuarios y devuelve un mensaje de confirmación
 	 ***/  
 	loadUsers() {
-		this.httpSv.loadUsers().subscribe(users => {
-			this.users = users
+		this.admService.loadUser().subscribe(users => {
+			this.users = users.results
 		});
 	}
 

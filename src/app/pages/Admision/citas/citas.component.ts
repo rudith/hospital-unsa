@@ -15,6 +15,8 @@ import { ToastrService } from "ngx-toastr";
 import { ConfirmationService } from "primeng/api";
 import { CitaM } from "../../../interfaces/cita-m";
 import { Medico } from "../../../interfaces/medico";
+import { citaLista } from "../../../interfaces/citaLista";
+import { AdministradorService } from '../../../services/Administrador/administrador.service';
 
 @Component({
   selector: "app-citas",
@@ -22,17 +24,18 @@ import { Medico } from "../../../interfaces/medico";
   styleUrls: ["./citas.component.scss"],
   providers: [ConfirmationService]
 })
-export class CitasComponent extends BasePageComponent
-  implements OnInit, OnChanges {
+export class CitasComponent extends BasePageComponent implements OnInit {
+  pageNum: number;
   cita: CitaM;
   citas: Cita[];
-  citasEdit: CitaM[];
+  citasEdit: CitaM[] = [];
   public today: Date;
   tableData: any;
   patientForm: FormGroup;
   gender: IOption[];
   status: IOption[];
-  public dni: string;
+  dni: string;
+  campo: string;
   appointmentForm: FormGroup;
   cabModCita: FormGroup;
   public espOption: IOption[];
@@ -43,8 +46,9 @@ export class CitasComponent extends BasePageComponent
   selectedOptions: any;
   multiple: boolean;
   busqOption: IOption[];
-  opBus: string;
+  opBus: string = "";
   busForm: FormGroup;
+  data: citaLista = <citaLista>{};
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
@@ -53,7 +57,8 @@ export class CitasComponent extends BasePageComponent
     private fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
-    private conf: ConfirmationService
+    private conf: ConfirmationService,
+    private admService:AdministradorService
   ) {
     super(store, httpSv);
 
@@ -79,19 +84,19 @@ export class CitasComponent extends BasePageComponent
     };
     this.tableData = [];
     this.citas = [];
-    this.citasEdit = [];
     this.loadCitas();
     this.espOption = [];
     this.medOption = [];
     this.multiple = false;
     this.httpSv.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades;
-      this.loadOptionsEsp();
+      this.especialidades = especialidades.results;
     });
     this.httpSv.loadMedico().subscribe(medicos => {
-      this.medicos = medicos;
-      this.loadOptionsMed();
+      this.medicos = medicos.results;;
+      this.loadOptions();
     });
+    this.loadOptions();
+    this.pageNum = 1;
   }
   ngOnInit() {
     super.ngOnInit();
@@ -108,21 +113,20 @@ export class CitasComponent extends BasePageComponent
   initBusForm() {
     this.busForm = this.formBuilder.group({
       opBus: ["", Validators.required],
-      dni: ["", [Validators.required, Validators.pattern("[0-9]*")]]
+      campo: ["", Validators.required]
     });
   }
-  ngOnChanges($event) {
-    console.log(this.dni);
+  selectOpt() {
+    this.opBus = this.busForm.get("opBus").value;
   }
   ngOnDestroy() {
     super.ngOnDestroy();
   }
 
   buscar(busca: FormGroup) {
-    this.dni = busca.get("dni").value;
-    this.opBus = busca.get("opBus").value;
+    this.campo = busca.get("campo").value;
 
-    console.log("entra" + this.opBus + " " + this.dni);
+    console.log("entra" + this.opBus + " " + this.campo);
     if (this.opBus == "1") {
       this.buscarDNI();
     }
@@ -131,14 +135,15 @@ export class CitasComponent extends BasePageComponent
     }
   }
   buscarEsp() {
-    console.log(this.dni);
-    if (this.dni === "" || this.dni === undefined) {
+    console.log(this.campo);
+    if (this.campo === "" || this.campo === undefined) {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
-      this.httpSv.searchCitaEsp(this.dni).subscribe(
+      this.httpSv.searchCitaEsp(this.campo).subscribe(
         data => {
-          this.citasEdit = data.citas;
+          this.data = data;
+          this.citasEdit = data.results;
           this.toastr.success("NO habilitado", "mopdificar modelo back");
         },
         error => {
@@ -148,15 +153,17 @@ export class CitasComponent extends BasePageComponent
     }
   }
   buscarDNI() {
-    console.log(this.dni);
-    if (this.dni === "" || this.dni === undefined) {
+    console.log(this.campo);
+    if (this.campo === "" || this.campo === undefined) {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
-      this.httpSv.searchCitaDNI(this.dni).subscribe(
+      this.httpSv.searchCitaDNI(this.campo).subscribe(
         data => {
-          this.citasEdit = data.citas;
-          this.toastr.success("Cita(s) encontrada(s)");
+          this.data = data;
+          this.citasEdit = data.results;
+
+          this.toastr.success("Cita(s) por DNI encontrada(s)");
         },
         error => {
           this.toastr.warning("No encontrado");
@@ -164,16 +171,38 @@ export class CitasComponent extends BasePageComponent
       );
     }
   }
+  public nextPage() {
+    if (this.data.next) {
+      this.pageNum++;
+      console.log(this.pageNum);
+      this.httpSv
+        .loadCitaPagination(this.data.next)
+        .subscribe(citalista => {
+          this.data = citalista;
+          this.citasEdit = this.data.results;
+        });
+    }
+  }
 
-  loadOptionsEsp() {
+  public prevPage() {
+    if (this.pageNum > 1) {
+      this.pageNum--;
+      console.log(this.pageNum);
+      this.httpSv
+        .loadCitaPagination(this.data.previous)
+        .subscribe(citalista => {
+          this.data = citalista;
+          this.citasEdit = this.data.results;
+        });
+    }
+  }
+  loadOptions() {
     for (let i in this.especialidades) {
       this.espOption[i] = {
         label: this.especialidades[i].nombre,
         value: this.especialidades[i].id.toString()
       };
     }
-  }
-  loadOptionsMed() {
     for (let i in this.medicos) {
       this.medOption[i] = {
         label: this.medicos[i].nombres,
@@ -203,8 +232,8 @@ export class CitasComponent extends BasePageComponent
   }
   initForm(data: CitaM) {
     this.appointmentForm = this.formBuilder.group({
-      fechaSeparacion: [
-        data.fechaSeparacion ? data.fechaSeparacion : "",
+      fechaAtencion: [
+        data.fechaAtencion ? data.fechaAtencion : "",
         Validators.required
       ],
       especialidad: [
@@ -249,14 +278,13 @@ export class CitasComponent extends BasePageComponent
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
-      newAppointment.fechaSeparacion = formatDate(
-        form.value.fechaSeparacion,
+      newAppointment.fechaAtencion = formatDate(
+        form.value.fechaAtencion,
         "yyyy-MM-dd",
         "en-US",
         "+0530"
       );
-      // newAppointment.fechaAtencion = this.cita.fechaAtencion;
-      newAppointment.fechaAtencion = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+      newAppointment.fechaSeparacion = this.cita.fechaSeparacion;
       //newAppointment.fechaAtencion = this.cita.fechaAtencion;
       newAppointment.especialidad = form.value.especialidad;
       newAppointment.id = this.cita.id;
@@ -278,7 +306,6 @@ export class CitasComponent extends BasePageComponent
       .put<any>(
         "http://18.216.2.122:9000/consultorio/crear-cita/" + newCita.id + "/",
         {
-          // numero de historia especialidad fecha atenicon
           numeroRecibo: newCita.numeroRecibo,
           fechaSeparacion: newCita.fechaSeparacion,
           fechaAtencion: newCita.fechaAtencion,
@@ -308,13 +335,14 @@ export class CitasComponent extends BasePageComponent
   // init form
 
   loadCitas() {
-    this.httpSv.loadCitasEdit().subscribe(citas => {
-      this.citasEdit = citas;
+    this.httpSv.loadCitasEdit().subscribe(data => {
+      this.data = data;
+      this.citasEdit = data.results;
     });
   }
   CancelarCita(id: number) {
     this.conf.confirm({
-      message: "¿Esta seguro de cancelar la cita?",
+      message: "¿Continuar con esta acción?",
       accept: () => {
         this.httpSv.CancelarCita(id).subscribe(
           cita => {

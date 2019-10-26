@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from '../../../services/http/http.service';
+import { AdministradorService } from '../../../services/Administrador/administrador.service';
 
 @Component({
   selector: 'login-form',
@@ -11,7 +12,9 @@ import { HttpService } from '../../../services/http/http.service';
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpService) { }
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpService) { 
+    
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({

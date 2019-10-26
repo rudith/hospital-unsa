@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ToastrService } from "ngx-toastr";
 
@@ -9,16 +9,17 @@ import { Especialidad } from "../../interfaces/especialidad";
 import { Tipopersonal } from "../../interfaces/tipopersonal";
 import { PersonalCreate } from "../../interfaces/personalCreate";
 import { IOption } from "../../ui/interfaces/option";
-import { User } from '../../interfaces/user';
-import { personalLista } from '../../interfaces/personalLista';
+import { User } from "../../interfaces/user";
+import { personalLista } from "../../interfaces/personalLista";
 
 @Injectable({
   providedIn: "root"
 })
-
 export class AdministradorService {
   private url: string = "http://18.216.2.122:9000/administrador";
   medOption: IOption[];
+  username: string = "admin";
+  password: string = "admin";
   constructor(private http: HttpClient, private toastr: ToastrService) {}
   //Areas
   loadAreas(): Observable<Area[]> {
@@ -88,18 +89,45 @@ export class AdministradorService {
         }
       );
   }
-  // Personal
-  loadPersonal(): Observable<personalLista> {
-    return this.http.get<personalLista>(this.url + "/ver-personales/");
+  //o gettoken, despues de implementarse en el login se cambiaran estos metodos
+  getToken() {
+    return this.http.post<any>("http://18.216.2.122:9000/custom-url/login/", {
+      username: this.username,
+      password: this.password
+    });
   }
-  loadPersonalPagination(url:string): Observable<personalLista> {
+  // let headers = new Headers({
+  //   'Content-Type': 'application/json',
+  //   'Authorization': 'Bearer '
+  // });
+  getHeader() {
+    let token = new HttpHeaders({ "Content-Type": "application/json" });
+    token = token.append(
+      "Authorization",
+      "Bearer" + localStorage.getItem("token")
+    );
+    console.log(
+      "entro" + JSON.stringify(token) + " " + localStorage.getItem("token")
+    );
+    return token;
+  }
+  // Personal
+  loadPersonal(): Observable<any> {
+    return this.http.get<any>(this.url + "/ver-personales/", {
+      headers: this.getHeader()
+    });
+  }
+  loadPersonalPagination(url: string): Observable<personalLista> {
     return this.http.get<personalLista>(url);
   }
-  searchPersonal(id: number): Observable<any> {
+  searchPersonal(id: string): Observable<any> {
     return this.http.get<any>(this.url + "/ver-personales/" + id + "/");
   }
+  searchPersonalDNI(dni: string): Observable<any> {
+    return this.http.get<any>(this.url + "/personaldni/" + dni + "/");
+  }
   createPersonal(tipo: PersonalCreate) {
-    console.log(JSON.stringify(tipo));
+    // console.log(JSON.stringify(tipo));
     this.http
       .post<any>(this.url + "/crear-personal/", {
         user: tipo.user,

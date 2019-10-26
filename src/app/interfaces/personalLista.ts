@@ -2,7 +2,7 @@ import { Personal } from './personal';
 
 export interface personalLista {
   count?: number,
-  next?: string
+  next?: string,
   previous?: string,
   results?:Personal[]
 }

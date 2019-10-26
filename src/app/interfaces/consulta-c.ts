@@ -23,20 +23,20 @@ export interface ConsultaCompleta {
     edad?: number,
   },
   medico?:{
-    dni: string,
-    nombres: string,
-    apellido_paterno: string,
-    apellido_materno: string,
-    celular: string,
-    user: {
-        id: number,
-        username: string,
-    }
-  },
-  especialidad?:{
-    id: number,
-    nombre: string,
-    descripcion: string,
+    dni?: string,
+    nombres?: string,
+    apellido_paterno?: string,
+    apellido_materno?: string,
+    celular?: string,
+    user?: {
+        id?: number,
+        username?: string,
+    },
+    especialidad?:{
+      id?: number,
+      nombre?: string,
+      descripcion?: string,
+    },
   },
   motivoConsulta: string,
   apetito: string,

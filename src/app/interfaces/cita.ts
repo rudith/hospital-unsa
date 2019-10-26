@@ -8,7 +8,7 @@ export interface Cita {
 	fechaAtencion: string,
 	estadoCita: string,
 	estReg: boolean,
-	especialidad: Especialidad,
+	especialidad: number,
 	numeroHistoria: number,
 	medico: number,
 	exonerado: boolean,

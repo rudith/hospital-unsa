@@ -18,8 +18,10 @@ export interface CitaM {
     descripcion?: string
   },
   medico?: {
-    id?: 1,
-    username?: string
+    dni?: number;
+    nombres?: string;
+    apellido_paterno?: string;
+    apellido_materno?: string;
   },
   numeroRecibo?: number,
   fechaSeparacion?: string,

@@ -90,7 +90,7 @@
           </th>
 
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            F. Separación
+            F. Atención
           </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             F. Editado
@@ -129,7 +129,7 @@
 						</td>
 						-->
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.fechaSeparacion }}
+            {{ row.fechaAtencion }}
           </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.updated_at.substring(0, 10) }}
@@ -218,13 +218,12 @@
         </tc-form-group>
       </div>
     </form>
-
+    <!-- (click)="loadOptionsMedEsp(appointmentForm.get('especialidad').value)"  [selected]="espSelected"-->
     <form [formGroup]="appointmentForm">
       <tc-form-group>
         <tc-form-label>Especialidad</tc-form-label>
         <tc-select
-          [placeholder]="'Especialidad'"
-          type="number"
+          [placeholder]="espSelectedName"
           formControlName="especialidad"
           [options]="espOption"
           (click)="loadOptionsMedEsp(appointmentForm.get('especialidad').value)"
@@ -232,8 +231,7 @@
         </tc-select>
         <tc-form-label>Médico</tc-form-label>
         <tc-select
-          [placeholder]="'Médico'"
-          type="number"
+          [placeholder]="medSelectedName"
           formControlName="medico"
           [options]="medOption"
         >
@@ -243,14 +241,14 @@
         >
       </tc-form-group>
       <tc-form-group>
-        <tc-input type="date" formControlName="fechaSeparacion"></tc-input>
+        <tc-input type="date" formControlName="fechaAtencion"></tc-input>
         <tc-form-description
           [tcColor]="'#e24d4d'"
           [tcFontSize]="'0.8em'"
-          formControlName="fechaSeparacion"
+          formControlName="fechaAtencion"
           *ngIf="
-            appointmentForm.controls.fechaSeparacion.touched &&
-            appointmentForm.controls.fechaSeparacion.invalid
+            appointmentForm.controls.fechaAtencion.touched &&
+            appointmentForm.controls.fechaAtencion.invalid
           "
         >
           Ingrese Fecha de Atencion

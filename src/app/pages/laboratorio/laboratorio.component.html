@@ -5,7 +5,8 @@
 
 				<tc-form-group class="col-md-1">
 					<div class="add-action-box">
-						<button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'"
+						<button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500"
+							[tcBgColor]="'#3f51b5'"
 							(click)="openModalH(modalCrearHBody, 'Agregar Cabecera',modalCrearHFooter)">
 						</button>
 					</div>
@@ -57,7 +58,8 @@
 		<tc-table-col [columnTitle]="'Agregar Detalle'">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="add-action-box">
-					<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500" [tcBgColor]="'#3f51b5'"
+					<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
+						[tcBgColor]="'#3f51b5'"
 						(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false })">
 					</button>
 				</div>
@@ -79,8 +81,8 @@
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions align-items-center ">
 					<button tc-button [afterIcon]="'icofont-print'" [tcColor]="['#795548', '#fff']"
-						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true" [tcShape]="500"
-						[size]="'sm'" (click)="imprimir(row)"></button>
+						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true"
+						[tcShape]="500" [size]="'sm'" (click)="imprimir(row)"></button>
 				</div>
 			</ng-template>
 		</tc-table-col>
@@ -92,13 +94,13 @@
 
 
 <div class="add-action-box2">
-	<a href="http://18.216.2.122:7000/laboratorio/reporteMensual">
+	<a href="http://18.216.2.122:9000/laboratorio/reporteMensual">
 		<input type="button" value="Reporte Mensual" name="submit" tc-button [square]="true" [tcShape]="300" />
 	</a>
 </div>
 
 <div class="addlab-action-box">
-	<a href="http://18.216.2.122:7000/laboratorio/reporteSemanal">
+	<a href="http://18.216.2.122:9000/laboratorio/reporteSemanal">
 		<input type="button" value="Reporte Semanal" name="submit" tc-button [square]="true" [tcShape]="300" />
 	</a>
 </div>
@@ -284,7 +286,7 @@
 					</tc-input>
 				</tc-form-group>
 			</div>
-
+		
 			<tc-card [title]="'Detalles'" class="mb-0">
 				<tc-table [rows]="detalleT" [hovered]="true" [pagination]="true">
 					<tc-table-col [columnTitle]="'Descripción'" [columnName]="'descripcion'">
@@ -304,7 +306,7 @@
 							<strong>{{ value }}</strong>
 						</ng-template>
 					</tc-table-col>
-
+					
 					<tc-table-col [columnTitle]="'Rango'" [columnName]="'rango_referencia'">
 						<ng-template #tableTDTemplate let-value>
 							<strong>{{ value }}</strong>

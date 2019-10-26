@@ -199,7 +199,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	//Metodo que llama al servicio imprimirExam 
 	imprimir(row: Examen) {
-		document.location.href = 'http://18.216.2.122:7000/laboratorio/resultadoExamen/' + row.id;
+		document.location.href = 'http://18.216.2.122:9000/laboratorio/resultadoExamen/' + row.id;
 		this.toastr.success("Se ha generado el Pdf");
 	}
 
@@ -209,7 +209,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	loadData() {
 		this.labService.loadTipoEx().subscribe(tipo => {
 			this.tipoE = tipo,
-				this.loadtipoex()
+			this.loadtipoex()
 		});
 
 	}
@@ -274,7 +274,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.examen = [];
 					this.examen = data;
 				}
-
+				
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});
@@ -289,7 +289,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.examen = [];
 					this.examen = data;
 				}
-
+				
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});
@@ -327,7 +327,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 
 
-	cargarExamn() {
+	cargarExamn(){
 		this.labService.loadExamen().subscribe(examen => {
 			this.examen = examen;
 		});

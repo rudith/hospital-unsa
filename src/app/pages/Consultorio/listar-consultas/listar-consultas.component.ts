@@ -22,31 +22,31 @@ import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.se
   templateUrl: './listar-consultas.component.html',
   styleUrls: ['./listar-consultas.component.scss'],
 })
-export class ListarConsultasComponent extends BasePageComponent implements OnInit, OnChanges {
+export class ListarConsultasComponent extends BasePageComponent implements OnInit, OnChanges{
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
   @ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
   consultForm: FormGroup;
   verMasCForm: FormGroup;
-  verTriajeForm: FormGroup;
+  verTriajeForm:FormGroup;
   consultasRecibidas: ConsultaCompleta[];
-  examenesRecibidos: Examen[];
-  triajeRecibido: Triaje;
+  examenesRecibidos:Examen[];
+  triajeRecibido:Triaje;
   datoBus: string;
-  private idRecibido: number;
-  private nombreRecibido: string;
+  private idRecibido:number;
+  private nombreRecibido:string;
   private numHistRecibido: string;
-  private dniRecibido: string;
-  private edadRecibido: number;
-  private sexoRecibido: string;
-  private idCitaRecibida: number;
-  private hayEx: boolean;
+  private dniRecibido:string;
+  private edadRecibido:number;
+  private sexoRecibido:string;
+  private idCitaRecibida:number;
+  private hayEx :boolean;
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
-    private labservice: LaboratorioService,
+    private labservice:LaboratorioService,
     private modal: TCModalService,
-    private http: HttpClient,
+    private http: HttpClient,   
     private router: Router,
     private toastr: ToastrService
   ) {
@@ -69,14 +69,14 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
         }
       ]
     };
-    this.hayEx = true;
+    this.hayEx=true;
     this.consultasRecibidas = [];
     this.examenesRecibidos = [];
-    this.datoBus = this.httpSv.getNroHC();
-    this.idCitaRecibida = this.httpSv.getIdHC();
-    this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data => {
-      this.triajeRecibido = data;
-    });
+    this.datoBus=this.httpSv.getNroHC();
+    this.idCitaRecibida=this.httpSv.getIdHC();
+    this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data =>{
+      this.triajeRecibido=data;
+    }); 
     this.cargarDatos();
     this.cargarConsultas();
   }
@@ -84,7 +84,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     super.ngOnInit();
   }
   ngOnChanges($event) {
-    console.log();
+		console.log();
   }
   ngOnDestroy() {
     super.ngOnDestroy();
@@ -94,13 +94,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * cargarDatos: Carga lo datos del paciente haciendo una llamata al servicio
 	***/
-  cargarDatos() {
-    this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data => {
-      this.idRecibido = data[0].id;
-      this.dniRecibido = data[0].dni;
-      this.nombreRecibido = data[0].nombres + " " + data[0].apellido_paterno + " " + data[0].apellido_materno;
-      this.edadRecibido = data[0].edad;
-      this.sexoRecibido = data[0].sexo;
+  cargarDatos(){
+    this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data=>{
+      this.idRecibido=data[0].id;
+      this.dniRecibido=data[0].dni;
+      this.nombreRecibido=data[0].nombres+" "+data[0].apellido_paterno+" "+data[0].apellido_materno;
+      this.edadRecibido=data[0].edad;
+      this.sexoRecibido=data[0].sexo;
       this.cargarExamenes(data[0].dni);
     });
   }
@@ -111,9 +111,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   cargarConsultas() {
     this.httpSv.searcHistoriaCompleta(this.datoBus).subscribe(data => {
-      this.consultasRecibidas = data;
+      this.consultasRecibidas=data;
       for (let index = 0; index < this.consultasRecibidas.length; index++) {
-        this.consultasRecibidas[index].proximaCita = this.consultasRecibidas[index].especialidad.nombre;
+        this.consultasRecibidas[index].proximaCita=this.consultasRecibidas[index].especialidad.nombre;
       }
     });
   }
@@ -122,11 +122,11 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * cargarExamenes: Carga los examenes del paciente haciendo una llamata al servicio 
 	***/
-  cargarExamenes(dni: string) {
+  cargarExamenes(dni:string) {
     this.labservice.searchExamenbDni(dni).subscribe(data => {
-      this.examenesRecibidos = data;
+      this.examenesRecibidos=data;
       for (let index = 0; index < this.examenesRecibidos.length; index++) {
-        this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+        this.examenesRecibidos[index].nombre=this.examenesRecibidos[index].tipoExam.nombre;
       }
     });
   }
@@ -135,7 +135,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * regresar: Retorna al componente consultas que muestra las citas Pendientes 
 	***/
-  regresar() {
+  regresar(){
     this.router.navigate(['/vertical/consultas']);
   }
 
@@ -170,12 +170,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   initverTriajeForm() {
     this.verTriajeForm = this.formBuilder.group({
-      talla: [this.triajeRecibido.talla ? this.triajeRecibido.talla : '', Validators.required],
-      peso: [this.triajeRecibido.peso ? this.triajeRecibido.peso : '', Validators.required],
-      temperatura: [this.triajeRecibido.temperatura ? this.triajeRecibido.temperatura : '', Validators.required],
-      frecuenciaR: [this.triajeRecibido.frecuenciaR ? this.triajeRecibido.frecuenciaR : '', Validators.required],
-      frecuenciaC: [this.triajeRecibido.frecuenciaC ? this.triajeRecibido.frecuenciaC : '', Validators.required],
-      presionArt: [this.triajeRecibido.presionArt ? this.triajeRecibido.presionArt : '', Validators.required]
+      talla: [this.triajeRecibido.talla ? this.triajeRecibido.talla: '', Validators.required],
+      peso: [this.triajeRecibido.peso ? this.triajeRecibido.peso: '', Validators.required],
+      temperatura: [this.triajeRecibido.temperatura ? this.triajeRecibido.temperatura: '', Validators.required],
+      frecuenciaR: [this.triajeRecibido.frecuenciaR ? this.triajeRecibido.frecuenciaR: '', Validators.required],
+      frecuenciaC: [this.triajeRecibido.frecuenciaC ? this.triajeRecibido.frecuenciaC: '', Validators.required],
+      presionArt:[this.triajeRecibido.presionArt ? this.triajeRecibido.presionArt: '', Validators.required]
     });
 
   }
@@ -193,7 +193,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       tratamiento: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
-      proximaCita: [null]
+      proximaCita:[null]
     });
 
   }
@@ -206,15 +206,15 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     if (form.valid) {
       let newConsult: Consulta = form.value;
       newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
-      newConsult.numeroHistoria = this.idRecibido;
-      newConsult.triaje = this.triajeRecibido.id;
-      newConsult.medico = 1;
-      newConsult.especialidad = 1;
-      this.httpSv.crearConsulta(newConsult, this.idCitaRecibida);
+      newConsult.numeroHistoria=this.idRecibido;
+      newConsult.triaje=this.triajeRecibido.id;
+      newConsult.medico=1;
+      newConsult.especialidad=1;
+      this.httpSv.crearConsulta(newConsult,this.idCitaRecibida);
       this.closeModalC();
       this.cargarConsultas();
       this.consultForm.reset();
-      //this.router.navigate(['/vertical/consultas']);   
+    //this.router.navigate(['/vertical/consultas']);   
     }
   }
   //fin de Modal Crear Consulta
@@ -250,19 +250,19 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   initVerMasForm(data: any) {
     this.verMasCForm = this.formBuilder.group({
-      talla: [data.triaje.talla ? data.triaje.talla : '', Validators.required],
-      peso: [data.triaje.peso ? data.triaje.peso : '', Validators.required],
-      temperatura: [data.triaje.temperatura ? data.triaje.temperatura : '', Validators.required],
-      frecuenciaR: [data.triaje.frecuenciaR ? data.triaje.frecuenciaR : '', Validators.required],
-      frecuenciaC: [data.triaje.frecuenciaC ? data.triaje.frecuenciaC : '', Validators.required],
-      presionArt: [data.triaje.presionArt ? data.triaje.presionArt : '', Validators.required],
-      motivo: [data.motivoConsulta ? data.motivoConsulta : '', Validators.required],
-      apetito: [data.apetito ? data.apetito : '', Validators.required],
-      orina: [data.orina ? data.orina : '', Validators.required],
-      deposiciones: [data.deposiciones ? data.deposiciones : '', Validators.required],
-      exaFis: [data.examenFisico ? data.examenFisico : '', Validators.required],
-      diagnostico: [data.diagnostico ? data.diagnostico : '', Validators.required],
-      tratamiento: [data.tratamiento ? data.tratamiento : '', Validators.required],
+      talla: [data.triaje.talla ? data.triaje.talla: '', Validators.required],
+      peso: [data.triaje.peso ? data.triaje.peso: '', Validators.required],
+      temperatura: [data.triaje.temperatura ? data.triaje.temperatura: '', Validators.required],
+      frecuenciaR: [data.triaje.frecuenciaR ? data.triaje.frecuenciaR: '', Validators.required],
+      frecuenciaC: [data.triaje.frecuenciaC ? data.triaje.frecuenciaC: '', Validators.required],
+      presionArt:[data.triaje.presionArt ? data.triaje.presionArt: '', Validators.required],
+      motivo: [data.motivoConsulta ? data.motivoConsulta: '', Validators.required],
+      apetito: [data.apetito ? data.apetito: '', Validators.required],
+      orina: [data.orina ? data.orina: '', Validators.required],
+      deposiciones: [data.deposiciones ? data.deposiciones: '', Validators.required],
+      exaFis: [data.examenFisico ? data.examenFisico: '', Validators.required],
+      diagnostico: [data.diagnostico ? data.diagnostico: '', Validators.required],
+      tratamiento: [data.tratamiento ? data.tratamiento: '', Validators.required],
     });
 
   }
@@ -274,8 +274,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * openModalExamenes: Abre el modal e inicializa sus formGroups 
 	***/
   openModalExamenes<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any) {
-    if (this.examenesRecibidos.length > 0) {
-      this.hayEx = false;
+    if(this.examenesRecibidos.length>0){
+      this.hayEx=false;
     }
     this.modal.open({
       body: body,
@@ -297,9 +297,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
    * autor: Milagros Motta R.
    * closeModalExamenes: Hace la llamada al servicio para imprimir el resultado del examen por ID 
   ***/
-  imprimirEx(Ex: Examen) {
-    document.location.href = 'http://18.216.2.122:7000/laboratorio/resultadoExamen/' + Ex.id + '/';
-    this.toastr.success("Se ha generado el Pdf");
-  }
+  imprimirEx(Ex:Examen){
+		document.location.href = 'http://18.216.2.122:9000/laboratorio/resultadoExamen/'+Ex.id+'/';
+		this.toastr.success("Se ha generado el Pdf");
+	}
   //fin de Modal Examenes de Laboratorio
 }

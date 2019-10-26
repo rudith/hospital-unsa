@@ -17,9 +17,9 @@ import { personalLista } from '../../interfaces/personalLista';
 })
 
 export class AdministradorService {
-  private url: string = "http://18.216.2.122:7000/administrador";
+  private url: string = "http://18.216.2.122:9000/administrador";
   medOption: IOption[];
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
   //Areas
   loadAreas(): Observable<Area[]> {
     return this.http.get<Area[]>(this.url + "/areas/");
@@ -92,7 +92,7 @@ export class AdministradorService {
   loadPersonal(): Observable<personalLista> {
     return this.http.get<personalLista>(this.url + "/ver-personales/");
   }
-  loadPersonalPagination(url: string): Observable<personalLista> {
+  loadPersonalPagination(url:string): Observable<personalLista> {
     return this.http.get<personalLista>(url);
   }
   searchPersonal(id: number): Observable<any> {

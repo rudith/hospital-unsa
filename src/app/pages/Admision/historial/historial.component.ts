@@ -17,7 +17,7 @@ import { Provincia } from '../../../interfaces/provincia';
 import { Departamento } from '../../../interfaces/departamento';
 import { Distrito } from '../../../interfaces/distrito';
 import { Medico } from '../../../interfaces/medico';
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Personal } from '../../../interfaces/personal';
@@ -35,7 +35,7 @@ export class HistorialComponent extends BasePageComponent
 	public gruposang: Grupsang[];
 	public gruposangOption: IOption[];
 	public gradoInstruccionOption: IOption[];
-	public estadoCivilOption: IOption[];
+	public estadoCivilOption:IOption[];
 	public departamentosOption: IOption[];
 	public provinciasOption: IOption[];
 	public sexOption: IOption[];
@@ -46,7 +46,7 @@ export class HistorialComponent extends BasePageComponent
 	public departamentos: Departamento[];
 	public distritos: Distrito[];
 	public medicos: Medico[];
-	public perso: Personal[];
+	public perso:Personal[];
 	today: Date;
 	datoBus: string;
 	opBus: string;
@@ -63,14 +63,14 @@ export class HistorialComponent extends BasePageComponent
 	public espOption: IOption[];
 	public busqOption: IOption[];
 	public especialidades: Especialidad[];
-
+	
 	constructor(
 		store: Store<IAppState>,
 		httpSv: HttpService,
 		private modal: TCModalService,
 		private formBuilder: FormBuilder,
 		private http: HttpClient,
-		private toastr: ToastrService,
+		private toastr:ToastrService,
 		private router: Router,
 	) {
 		super(store, httpSv);
@@ -86,7 +86,7 @@ export class HistorialComponent extends BasePageComponent
 		this.distritos = [];
 		this.medOption = [];
 		this.distritosOption = [];
-		this.estadoCivilOption = [];
+		this.estadoCivilOption=[];
 		this.medicos = [];
 		this.loadData();
 		this.historiales = [];
@@ -113,7 +113,7 @@ export class HistorialComponent extends BasePageComponent
 
 			]
 		};
-		this.perso = [];
+		this.perso=[];
 		this.tableData = [];
 		this.historiales = [];
 		this.loadHistorias();
@@ -129,7 +129,7 @@ export class HistorialComponent extends BasePageComponent
 	loadHistorias() {
 		this.httpSv.loadHistorias().subscribe(historiales => {
 			this.historiales = historiales;
-
+			
 		});
 
 	}
@@ -172,7 +172,7 @@ export class HistorialComponent extends BasePageComponent
 		this.modal.close();
 		this.loadHistorias();
 	}
-
+	
 	initPatientForm() {
 		this.patientForm = this.formBuilder.group({
 			dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
@@ -181,13 +181,13 @@ export class HistorialComponent extends BasePageComponent
 			apellido_materno: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
 			sexo: ['', [Validators.required]],
 			fechaNac: ['', [Validators.required]],
-			celular: ['', [Validators.minLength(9), Validators.maxLength(9)]],
+			celular: ['', [ Validators.minLength(9), Validators.maxLength(9)]],
 			telefono: ['', [Validators.minLength(6), Validators.maxLength(6)]],
 			estadoCivil: ['', [Validators.required]],
 			gradoInstruccion: ['', [Validators.required]],
 			ocupacion: ['', [Validators.required]],
 			direccion: ['', Validators.required],
-			nacionalidad: ['Peruana', [Validators.pattern('[A-Za-z ]*')]],
+			nacionalidad: [ 'Peruana', [Validators.pattern('[A-Za-z ]*')]],
 			email: [''],
 			distrito: ['', Validators.required],
 			provincia: ['', Validators.required],
@@ -227,24 +227,24 @@ export class HistorialComponent extends BasePageComponent
 		this.ocupacionOption[6] = { label: "Independiente", value: "Independiente", };
 
 		//Grado de Instruccion
-		this.gradoInstruccionOption[0] = { label: "Primaria", value: "Primaria", };
-		this.gradoInstruccionOption[1] = { label: "Secundaria", value: "Secundaria", };
-		this.gradoInstruccionOption[2] = { label: "Sup. Tecnico", value: "Sup. Tecnico", };
-		this.gradoInstruccionOption[3] = { label: "Universitario", value: "Universitario", };
+		this.gradoInstruccionOption[0]={ label: "Primaria", value: "Primaria", };
+		this.gradoInstruccionOption[1]={ label: "Secundaria", value: "Secundaria", };
+		this.gradoInstruccionOption[2]={ label: "Sup. Tecnico", value: "Sup. Tecnico", };
+		this.gradoInstruccionOption[3]={ label: "Universitario", value: "Universitario", };
 
 		//Estado Civil
-		this.estadoCivilOption[0] = { label: "Soltero(a)", value: "Soltero(a)", };
-		this.estadoCivilOption[1] = { label: "Casado(a)", value: "Casado(a)", };
-		this.estadoCivilOption[2] = { label: "Viudo(a)", value: "Viudo(a)", };
-		this.estadoCivilOption[3] = { label: "Divorciado(a)", value: "Divorciado(a)", };
-		this.estadoCivilOption[4] = { label: "Conviviente", value: "Conviviente", };
+		this.estadoCivilOption[0]={ label: "Soltero(a)", value: "Soltero(a)", };
+		this.estadoCivilOption[1]={ label: "Casado(a)", value: "Casado(a)", };
+		this.estadoCivilOption[2]={ label: "Viudo(a)", value: "Viudo(a)", };
+		this.estadoCivilOption[3]={ label: "Divorciado(a)", value: "Divorciado(a)", };
+		this.estadoCivilOption[4]={ label: "Conviviente", value: "Conviviente", };
 		this.loadprovincias();
-
+		
 		this.httpSv.loadDepartamento().subscribe(departamentos => {
 			this.departamentos = departamentos,
 				this.loaddepartamentos()
 		});
-
+		
 
 	}
 
@@ -290,8 +290,8 @@ export class HistorialComponent extends BasePageComponent
 		for (let i in this.perso) {
 			this.medOption[i] =
 				{
-					label: this.perso[i].nombres + " " + this.perso[i].apellido_paterno + " " + this.perso[i].apellido_materno,
-					value: this.perso[i].user.id + ""
+					label: this.perso[i].nombres+" "+this.perso[i].apellido_paterno+" "+this.perso[i].apellido_materno,
+					value: this.perso[i].user.id+""
 				};
 		}
 	}
@@ -321,11 +321,11 @@ export class HistorialComponent extends BasePageComponent
 	initAppoForm(data: any) {
 		// this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
 		this.appointmentForm = this.formBuilder.group({
-			numeroRecibo: ['', [Validators.pattern('[0-9]*')]],
+			numeroRecibo: ['',[Validators.pattern('[0-9]*')]],
 			fechaSeparacion: ['', Validators.required],
 			especialidad: ['', Validators.required],
 			medico: ['', Validators.required],
-			responsable: ['', [Validators.pattern('[A-Za-z]*')]],
+			responsable: ['',[ Validators.pattern('[A-Za-z]*')]],
 			eleccion: ['',],
 		});
 	}
@@ -362,13 +362,13 @@ export class HistorialComponent extends BasePageComponent
 			newAppointment.estadoCita = 'Espera';
 			newAppointment.estReg = true;
 			newAppointment.numeroHistoria = this.numero;
-
+			
 			if (newAppointment.responsable == "") {
 				newAppointment.exonerado = false;
-
+				
 			}
 			else {
-				newAppointment.numeroRecibo = null;
+				newAppointment.numeroRecibo=null;
 				newAppointment.exonerado = true;
 			}
 
@@ -380,7 +380,7 @@ export class HistorialComponent extends BasePageComponent
 
 
 	onChangeTable() {
-
+		
 		if (this.datoBus == "") {
 			this.toastr.warning('Ningun valor ingresado');
 			this.httpSv.loadHistorias().subscribe(historiales => {
@@ -395,7 +395,7 @@ export class HistorialComponent extends BasePageComponent
 			}, error => {
 				this.toastr.error('No encontrado');
 			});
-
+		
 		} else if (this.opBus == "2") {
 			this.toastr.warning('Buscando...');
 			this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data => {
@@ -475,36 +475,36 @@ export class HistorialComponent extends BasePageComponent
 	/* Encargado: Shirley Romero
 	   Descripcion: Metodo que se encarga de generar el pdf de la historia clinica seleccionada, este metodo necesita el dni de la historia para generarlo
 	*/
-	imprimir1(data) {
-		document.location.href = 'http://18.216.2.122:7000/admision/historiaPDF/' + data.dni;
+	imprimir1(data){
+		document.location.href = 'http://18.216.2.122:9000/admision/historiaPDF/'+data.dni;
 		this.toastr.success("Se ha generado el Pdf");
 	}
-	cargarProvXDepto(a: number) {
+	cargarProvXDepto(a:number){
 		this.httpSv.searcDptoxP(a).subscribe(data => {
-			this.provincias = [];
-			this.distritosOption = [];
-			this.provinciasOption = [];
+			this.provincias=[];
+			this.distritosOption=[];
+			this.provinciasOption=[];
 			this.provincias = data.provincias;
 			this.loadprovincias();
-
+			
 		}, error => {
 		});
 	}
-	cargarDistXProv(a: number) {
+	cargarDistXProv(a:number){
 		this.httpSv.searcProxDist(a).subscribe(data => {
-			this.distritos = [];
-			this.distritosOption = [];
+			this.distritos=[];
+			this.distritosOption=[];
 			this.distritos = data.distritos;
 			this.loaddistritos();
 		}, error => {
 		});
 	}
-	cargarMedXEsp(a: number) {
-		console.log(a);
+	cargarMedXEsp(a:number){
+		console.log(a);		
 		this.httpSv.searcMedxEsp(a).subscribe(data => {
-
-			this.perso = [];
-			this.medOption = [];
+			
+			this.perso=[];
+			this.medOption=[];
 			this.perso = data;
 			console.log(data);
 			console.log(this.perso);

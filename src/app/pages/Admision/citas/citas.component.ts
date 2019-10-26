@@ -276,7 +276,7 @@ export class CitasComponent extends BasePageComponent
     console.log(JSON.stringify(newCita));
     this.http
       .put<any>(
-        "http://18.216.2.122:7000/consultorio/crear-cita/" + newCita.id + "/",
+        "http://18.216.2.122:9000/consultorio/crear-cita/" + newCita.id + "/",
         {
           // numero de historia especialidad fecha atenicon
           numeroRecibo: newCita.numeroRecibo,

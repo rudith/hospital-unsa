@@ -1,138 +1,177 @@
 <!-- <p-confirmDialog [style]="{background: '#70B1C9',opacity: '0.8'}" header="Confirmation"
     icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
-<div class="col-sm-12">
+
+<form [formGroup]="busForm" class="col-sm-12">
   <div class="row">
-    <tc-form-group class="col-sm-1 col-lg-1">
-      <button
-        tc-button
-        [afterIcon]="'icofont-plus'"
-        [view]="'info'"
-        [square]="true"
-        [tcShape]="500"
-        [size]="'sm'"
-        (click)="openModal(modalPersonal, 'Agregar Area', modalActions)"
-      ></button>
-    </tc-form-group>
-    <tc-form-group class="col-sm-7 col-lg-9">
-      <tc-input
-        [placeholder]="'Buscar Personal por Id'"
-        type="number"
-        [(ngModel)]="id"
-        [suffixIcon]="'icofont-search-document'"
-      >
-      </tc-input>
-    </tc-form-group>
-    <tc-form-group class="col-sm-4 col-lg-2">
+    <div class="col-md-1">
+      <tc-form-group>
+        <button
+          tc-button
+          [afterIcon]="'icofont-plus'"
+          [view]="'info'"
+          [square]="true"
+          [tcShape]="500"
+          [size]="'sm'"
+          (click)="openModal(modalPersonal, 'Agregar Personal', modalActions)"
+        ></button>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+        <tc-select
+          [placeholder]="'Opciones'"
+          formControlName="opBus"
+          [options]="busqOption"
+        >
+        </tc-select>
+      </tc-form-group>
+    </div>
+    <div class="col-md-7">
+      <tc-form-group>
+        <tc-input
+          [placeholder]="'Ingrese el dato a buscar'"
+          type="number"
+          [suffixIcon]="'icofont-search-document'"
+          formControlName="campo"
+        >
+        </tc-input>
+        <tc-form-description
+          [tcColor]="'#e24d4d'"
+          [tcFontSize]="'0.8em'"
+          *ngIf="busForm.controls.campo.touched && busForm.controls.campo.invalid"
+        >
+          Ingrese solo numeros
+        </tc-form-description>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
       <button
         tc-button
         [block]="true"
         [view]="'success'"
         [tcShape]="500"
-        (click)="buscar()"
+        (click)="buscar(busForm)"
       >
         Buscar
       </button>
-    </tc-form-group>
-  </div>
-  <tc-card class="mb-0">
-    <div class="table-wrap">
-      <table class="table-box">
-        <thead>
-          <tr>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              User
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Nombres y Apellidos
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Celular
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Dirección
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              F. Edición
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Area
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Tipo Personal
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Especialidad
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-              Editar
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let row of personales">
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.telefono }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.nombres }}<br />{{ row.apellido_paterno }}<br />{{
-                row.apellido_materno
-              }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.celular }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.direccion }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.updated_at }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.area.nombre }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.tipo_personal.nombre }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.especialidad.nombre }}
-            </td>
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              <div class="actions">
-                <button
-                  class="col-6"
-                  tc-button
-                  [afterIcon]="'icofont-edit-alt'"
-                  [view]="'info'"
-                  [square]="true"
-                  [tcShape]="500"
-                  [size]="'sm'"
-                ></button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <ul class="pagination-ul">
-        <li class="pagination-li prev">
-          <a
-            class="pagination-link"
-            (click)="prevPage()"
-            [ngClass]="{ disabled: pageNum == 1 }"
-          >
-            <i class="icofont-simple-left"></i>
-          </a>
-        </li>
-
-        <li class="pagination-li next">
-          <a class="pagination-link" (click)="nextPage()">
-            <i class="icofont-simple-right"></i>
-          </a>
-        </li>
-      </ul>
     </div>
-  </tc-card>
-</div>
+  </div>
+</form>
+<br />
+<tc-card *ngIf="personales?.length" class="mb-0">
+  <div class="table-wrap">
+    <table class="table-box">
+      <thead>
+        <tr>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Nombres
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            DNI
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Area
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Tipo Personal
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Especialidad
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Editar
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Ver más
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of personales">
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.nombres }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.dni }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.area.nombre }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.tipo_personal.nombre }}
+          </td>
+          <td
+            *ngIf="!row.especialidad"
+            [ngStyle]="{ background: contentBgColor, color: 'red' }"
+          >
+            Sin Especialidad
+          </td>
+          <td
+            *ngIf="row.especialidad"
+            [ngStyle]="{ background: contentBgColor, color: contentColor }"
+          >
+            {{ row.especialidad.nombre }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            <div class="actions">
+              <button
+                class="col-6"
+                tc-button
+                [afterIcon]="'icofont-edit-alt'"
+                [view]="'info'"
+                [square]="true"
+                [tcShape]="500"
+                [size]="'sm'"
+              ></button>
+            </div>
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            <div class="actions">
+              <button
+                tc-button
+                tc-button
+                [tcColor]="['#fff', '#3f51b5']"
+                [tcBgColor]="['#3f51b5', '#fff']"
+                [tcBorderColor]="'#3f51b5'"
+                [square]="true"
+                [tcShape]="500"
+                [size]="'sm'"
+                (click)="
+                  openModalVerMas(
+                    modalBodyH,
+                    'Ver Personal Completo',
+                    modalFooterH,
+                    row
+                  )
+                "
+              >
+                Ver Mas
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul class="pagination-ul">
+      <li class="pagination-li prev">
+        <a
+          class="pagination-link"
+          (click)="prevPage()"
+          [ngClass]="{ disabled: pageNum == 1 }"
+        >
+          <i class="icofont-simple-left"></i>
+        </a>
+      </li>
+
+      <li class="pagination-li next">
+        <a class="pagination-link" (click)="nextPage()">
+          <i class="icofont-simple-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</tc-card>
 
 <ng-container>
   <ng-template #modalPersonal>
@@ -336,6 +375,134 @@
         (click)="addAppointment(appointmentForm)"
       >
         Crear Usuario
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+<!-- Open Modal Ver Mas -->
+<ng-container>
+  <ng-template #modalBodyH>
+    <form [formGroup]="personalForm">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Usuario</tc-form-label>
+            <tc-input formControlName="user" readonly="readonly"> </tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Area</tc-form-label>
+            <tc-input formControlName="area" readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Tipo personal</tc-form-label>
+            <tc-input
+              formControlName="tipo_personal"
+              readonly="readonly"
+            ></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label> Especialidad</tc-form-label>
+            <tc-input formControlName="especialidad" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>DNI</tc-form-label>
+            <tc-input formControlName="dni" readonly="readonly"> </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Nombres</tc-form-label>
+            <tc-input formControlName="nombres" readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label> Apellido Paterno</tc-form-label>
+            <tc-input formControlName="apellido_paterno" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Apellido Materno</tc-form-label>
+            <tc-input formControlName="apellido_materno" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Celular</tc-form-label>
+            <tc-input formControlName="celular" readonly="readonly"> </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Telefono</tc-form-label>
+            <tc-input formControlName="telefono" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Direccion</tc-form-label>
+            <tc-input formControlName="direccion" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>Fecha Reg</tc-form-label>
+            <tc-input formControlName="fechaReg" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>F. Actualizado</tc-form-label>
+            <tc-input formControlName="updated_at" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-4">
+          <tc-form-group>
+            <tc-form-label>estReg</tc-form-label>
+            <tc-input formControlName="estReg" readonly="readonly"> </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooterH>
+    <div class="actions justify-content-between">
+      <button
+        tc-button
+        [type]="'button'"
+        [tcBgColor]="'#009688'"
+        [block]="true"
+        (click)="closeModalP()"
+      >
+        ACEPTAR
       </button>
     </div>
   </ng-template>

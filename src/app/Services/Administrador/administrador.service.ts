@@ -22,8 +22,8 @@ export class AdministradorService {
   password: string = "admin";
   constructor(private http: HttpClient, private toastr: ToastrService) {}
   //Areas
-  loadAreas(): Observable<Area[]> {
-    return this.http.get<Area[]>(this.url + "/areas/");
+  loadAreas(): Observable<any> {
+    return this.http.get<any>(this.url + "/areas/");
   }
   searchArea(id: number): Observable<any> {
     return this.http.get<any>(this.url + "/areas/" + id + "/");
@@ -45,8 +45,8 @@ export class AdministradorService {
   }
 
   //Especialidades
-  loadEspecialidades(): Observable<Especialidad[]> {
-    return this.http.get<Especialidad[]>(this.url + "/especialidad/");
+  loadEspecialidades(): Observable<any> {
+    return this.http.get<any>(this.url + "/especialidad/");
   }
   searchEspecialidad(id: number): Observable<any> {
     return this.http.get<any>(this.url + "/especialidad/" + id + "/");
@@ -68,8 +68,8 @@ export class AdministradorService {
       );
   }
   //TipoPersonal
-  loadTPersonal(): Observable<Tipopersonal[]> {
-    return this.http.get<Tipopersonal[]>(this.url + "/tipo-personal/");
+  loadTPersonal(): Observable<any> {
+    return this.http.get<any>(this.url + "/tipo-personal/");
   }
   searchTPersonal(id: number): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personal/" + id + "/");
@@ -113,7 +113,7 @@ export class AdministradorService {
   }
   // Personal
   loadPersonal(): Observable<any> {
-    return this.http.get<any>(this.url + "/ver-personales/", {
+    return this.http.get<any>(this.url + "/ver-personal/", {
       headers: this.getHeader()
     });
   }
@@ -121,7 +121,7 @@ export class AdministradorService {
     return this.http.get<personalLista>(url);
   }
   searchPersonal(id: string): Observable<any> {
-    return this.http.get<any>(this.url + "/ver-personales/" + id + "/");
+    return this.http.get<any>(this.url + "/ver-personal/" + id + "/");
   }
   searchPersonalDNI(dni: string): Observable<any> {
     return this.http.get<any>(this.url + "/personaldni/" + dni + "/");
@@ -153,7 +153,7 @@ export class AdministradorService {
       );
   }
   //user
-  loadUser(): Observable<User[]> {
-    return this.http.get<User[]>(this.url + "/usuarios/");
+  loadUser(): Observable<any> {
+    return this.http.get<any>(this.url + "/usuarios/");
   }
 }

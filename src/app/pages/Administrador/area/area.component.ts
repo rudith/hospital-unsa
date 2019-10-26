@@ -65,7 +65,7 @@ export class AreaComponent extends BasePageComponent implements OnInit {
   // carga areas
   loadAreas() {
     this.admService.loadAreas().subscribe(areas => {
-      this.areas = areas;
+      this.areas = areas.results;
     });
   }
     //busca segun el input y devuelve un mensaje de confirmación

@@ -80,19 +80,19 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     this.especialidades = [];
     this.tipos = [];
     this.admService.loadUser().subscribe(users => {
-      this.users = users;
+      this.users = users.results;
       this.loadOptionsUsers();
     });
     this.admService.loadAreas().subscribe(areas => {
-      this.areas = areas;
+      this.areas = areas.results;
       this.loadOptionsAreas();
     });
     this.admService.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades;
+      this.especialidades = especialidades.results;
       this.loadOptionsEsp();
     });
     this.admService.loadTPersonal().subscribe(tipos => {
-      this.tipos = tipos;
+      this.tipos = tipos.results;
       this.loadOptionsTipos();
     });
     this.pageNum = 1;
@@ -181,7 +181,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     });
   }
   buscar(busca: FormGroup) {
-    this.campo = busca.get("dni").value;
+    this.campo = busca.get("campo").value;
     this.opBus = busca.get("opBus").value;
 
     console.log("entra" + this.opBus + " " + this.campo);
@@ -216,7 +216,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       this.loadPersonal();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
-      this.httpSv.searchCitaDNI(this.campo).subscribe(
+      this.admService.searchPersonalDNI(this.campo).subscribe(
         data => {
           this.personales = [];
           this.personales[0] = data;
@@ -228,7 +228,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       );
     }
   }
-  // abre modal
+  // abre modal crear personal
   openModal<T>(
     body: Content<T>,
     header: Content<T> = null,
@@ -268,6 +268,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   addAppointment(form: FormGroup) {
     if (form.valid) {
       let newAppointment: PersonalCreate = form.value;
+      console.log(JSON.stringify(newAppointment));
       this.admService.createPersonal(newAppointment);
       this.closeModal();
       this.appointmentForm.reset();

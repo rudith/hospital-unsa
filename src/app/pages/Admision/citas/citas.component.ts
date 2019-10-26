@@ -89,10 +89,10 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     this.medOption = [];
     this.multiple = false;
     this.httpSv.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades;
+      this.especialidades = especialidades.results;
     });
     this.httpSv.loadMedico().subscribe(medicos => {
-      this.medicos = medicos;
+      this.medicos = medicos.results;;
       this.loadOptions();
     });
     this.loadOptions();

@@ -65,7 +65,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
   //carga especialidades 
   loadEspecialidades() {
     this.admService.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades;
+      this.especialidades = especialidades.results;
     });
   }
   //buscara segun el campo de texto y devuelve un mensaje de confirmación

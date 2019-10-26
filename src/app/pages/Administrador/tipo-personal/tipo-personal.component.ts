@@ -64,7 +64,7 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   //carga lisata de tipos
   loadTipopersonal() {
     this.admService.loadTPersonal().subscribe(tipopersonal => {
-      this.tipopersonal = tipopersonal;
+      this.tipopersonal = tipopersonal.results;
     });
   }
   //busca segun el input y devuelve un mensaje de confirmación

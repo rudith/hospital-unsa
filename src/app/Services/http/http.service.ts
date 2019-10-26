@@ -92,18 +92,18 @@ export class HttpService {
     );
   }
 
-  loadEspecialidades(): Observable<Especialidad[]> {
-    return this.http.get<Especialidad[]>(
+  loadEspecialidades(): Observable<any> {
+    return this.http.get<any>(
       "http://18.216.2.122:9000/administrador/especialidad/"
     );
   }
-  loadMedico(): Observable<Medico[]> {
-    return this.http.get<Medico[]>(
+  loadMedico(): Observable<any> {
+    return this.http.get<any>(
       "http://18.216.2.122:9000/administrador/ver-personal/"
     );
   }
-  loadMedicoEsp(id: string): Observable<Medico[]> {
-    return this.http.get<Medico[]>(
+  loadMedicoEsp(id: string): Observable<any> {
+    return this.http.get<any>(
       "http://18.216.2.122:9000/administrador/personalporespecialidad/?" +
         id +
         "=idEspecialidad"
@@ -310,8 +310,8 @@ export class HttpService {
       );
   }
 
-  loadUsers(): Observable<User[]> {
-    return this.http.get<User[]>(
+  loadUsers(): Observable<any> {
+    return this.http.get<any>(
       "http://18.216.2.122:9000/administrador/usuarios/"
     );
   }

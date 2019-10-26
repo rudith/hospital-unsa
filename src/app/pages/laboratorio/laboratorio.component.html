@@ -15,6 +15,7 @@
 				<div class="col-md-2">
 					<tc-form-group>
 						<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption"></tc-select>
+						
 					</tc-form-group>
 				</div>
 				<div class="col-md-5">
@@ -22,6 +23,8 @@
 						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 					</tc-form-group>
 				</div>
+
+
 				<div class="col-md-2">
 					<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
 						Buscar

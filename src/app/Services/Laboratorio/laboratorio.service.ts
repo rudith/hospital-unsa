@@ -20,6 +20,8 @@ export class LaboratorioService {
 	public detalle:Detalle[]=[];
 	public cita: Cita[]=[];
 	public examen:Examen[]=[];
+	fi:string;
+	ff:string;
   
   constructor(private http: HttpClient, private toastr: ToastrService) { 
 
@@ -47,7 +49,9 @@ export class LaboratorioService {
 		return this.http.get<Cabeceralab>(this.url+'/filtro/?nombre=' + nombre);
 	}
 	searchLabFecha(fecha: string): Observable<any> {
-		return this.http.get<any>(this.url+'/filtro/fecha/?fecha=' + fecha + "/");
+		this.fi=fecha.substring(0,10);
+		this.ff=fecha.substring(11,22);
+		return this.http.get<any>(this.url+'/filtro/fecha/?fecha_inicio=' + this.fi +"&fecha_final=" +this.ff);
 	}
 	searchLabDni(dni:string): Observable<any>{
 		return this.http.get<Examen>(this.url+'/filtro/DNI/?dni='+ dni);

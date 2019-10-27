@@ -20,6 +20,13 @@
     </div>
     <div class="col-md-6">
       <tc-form-group>
+        <tc-input 
+          *ngIf="opBus == 0"
+          [type]="'number'"
+          [suffixIcon]="'icofont-search-document'"
+          [placeholder]="'Seleccione una opcion'"
+          formControlName="campo"
+        ></tc-input>
         <tc-input
           *ngIf="opBus == 1"
           [type]="'number'"
@@ -129,7 +136,7 @@
 						</td>
 						-->
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.fechaSeparacion }}
+            {{row.fechaSeparacion}}
           </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.updated_at.substring(0, 10) }}
@@ -164,7 +171,7 @@
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             <div class="actions">
               <button
-                [disabled]="row.estadoCita == 'Cancelado'"
+                [disabled]="row.estadoCita == 'Cancelado'  || row.estadoCita == 'Atendido'"
                 class="col-6"
                 tc-button
                 [afterIcon]="'icofont-ui-delete'"
@@ -247,7 +254,6 @@
         <tc-form-description
           [tcColor]="'#e24d4d'"
           [tcFontSize]="'0.8em'"
-          formControlName="fechaSeparacion"
           *ngIf="
             appointmentForm.controls.fechaSeparacion.touched &&
             appointmentForm.controls.fechaSeparacion.invalid

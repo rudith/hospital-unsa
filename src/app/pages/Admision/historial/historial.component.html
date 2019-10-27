@@ -177,6 +177,23 @@
         </ng-template>
       </tc-table-col>
     </tc-table>
+    <ul class="pagination-ul">
+      <li class="pagination-li prev">
+        <a
+          class="pagination-link"
+          (click)="prevPage()"
+          [ngClass]="{ disabled: pageNum == 1 }"
+        >
+          <i class="icofont-simple-left"></i>
+        </a>
+      </li>
+
+      <li class="pagination-li next">
+        <a class="pagination-link" (click)="nextPage()">
+          <i class="icofont-simple-right"></i>
+        </a>
+      </li>
+    </ul>
   </tc-card>
 </div>
 <!-- Modal Crear Cita  -->
@@ -594,6 +611,9 @@
           <tc-form-group>
             <tc-form-label>Numero de Historia</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'name'"
               formControlName="numeroHistoria"
               readonly="readonly"
@@ -606,6 +626,9 @@
           <tc-form-group>
             <tc-form-label>DNI</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'DNI'"
               formControlName="dni"
               readonly="readonly"
@@ -618,6 +641,9 @@
           <tc-form-group>
             <tc-form-label>Nombre</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Nombre'"
               formControlName="nombres"
               readonly="readonly"
@@ -629,6 +655,9 @@
           <tc-form-group>
             <tc-form-label>Apellido Paterno</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Apellido Paterno'"
               formControlName="apellido_paterno"
               readonly="readonly"
@@ -641,6 +670,9 @@
           <tc-form-group>
             <tc-form-label>Apellido Materno</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Apellido Materno'"
               formControlName="apellido_materno"
               readonly="readonly"
@@ -654,6 +686,9 @@
           <tc-form-group>
             <tc-form-label>Fecha Nacimiento </tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Edad'"
               formControlName="fechaNac"
               readonly="readonly"
@@ -664,6 +699,9 @@
           <tc-form-group>
             <tc-form-label>Telefono</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Telefono'"
               [type]="'number'"
               formControlName="telefono"
@@ -676,6 +714,9 @@
           <tc-form-group>
             <tc-form-label>Celular</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Celular'"
               [type]="'number'"
               formControlName="celular"
@@ -690,6 +731,9 @@
           <tc-form-group>
             <tc-form-label>Estado Civil</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Estado Civil'"
               formControlName="estadoCivil"
               readonly="readonly"
@@ -701,6 +745,9 @@
           <tc-form-group>
             <tc-form-label>Grado de Instruccion</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Grado de Instruccion'"
               formControlName="gradoInstruccion"
               readonly="readonly"
@@ -712,6 +759,9 @@
           <tc-form-group>
             <tc-form-label>Ocupacion</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Ocupacion'"
               formControlName="ocupacion"
               readonly="readonly"
@@ -725,6 +775,9 @@
           <tc-form-group>
             <tc-form-label>edad</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Edad'"
               formControlName="edad"
               readonly="readonly"
@@ -736,6 +789,9 @@
           <tc-form-group>
             <tc-form-label>Direccion</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Direccion'"
               formControlName="direccion"
               readonly="readonly"
@@ -747,6 +803,9 @@
           <tc-form-group>
             <tc-form-label>Nacionalidad</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Nacionalidad'"
               formControlName="nacionalidad"
               readonly="readonly"
@@ -760,6 +819,9 @@
           <tc-form-group>
             <tc-form-label>Distrito</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Distrito'"
               formControlName="distrito"
               readonly="readonly"
@@ -770,6 +832,9 @@
           <tc-form-group>
             <tc-form-label>Provincia</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Provincia'"
               formControlName="provincia"
               readonly="readonly"
@@ -781,6 +846,9 @@
           <tc-form-group>
             <tc-form-label>Departamento</tc-form-label>
             <tc-input
+              [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
               [placeholder]="'Departamento'"
               formControlName="departamento"
               readonly="readonly"

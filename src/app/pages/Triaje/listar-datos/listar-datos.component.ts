@@ -13,6 +13,7 @@ import { Triaje } from '../../../../app/interfaces/triaje';
 import { Cita } from '../../../../app/interfaces/cita';
 import { CitaM } from '../../../../app/interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
+import { citaLista } from '../../../../app/interfaces/citaLista';
 
 @Component({
   selector: 'app-listar-datos',
@@ -35,6 +36,8 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   idCita:number;
   cabTri:FormGroup;
   n:string;
+  pageNum:number;
+  triaj:citaLista;
 
   constructor(
     store: Store<IAppState>,
@@ -64,6 +67,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 
       ]
     };
+    this.pageNum=1;
     this.citasTriaje=[];
     this.patients = [];
     this.triaje = [];
@@ -74,9 +78,29 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   //Metodo que carga todas las citas que esten con el estado de cita 'Espera'
   //a traves del servicio : loadCitasT()
   cargarCitas() {
-    this.httpSv.loadCitasT().subscribe(citas => {
-      this.citasTriaje = citas
+    this.httpSv.loadCitasT ().subscribe(citas => {
+      this.triaj=citas;
+      this.citasTriaje = citas.results
     });
+  }
+  public nextPage() {
+    if (this.triaj.next) {
+      this.pageNum++;
+      this.httpSv.loadCitasTPag(this.triaj.next).subscribe(hist => {
+          this.triaj = hist;
+					this.citasTriaje = hist.results;
+      });
+    }
+  }
+
+  public prevPage() {
+    if (this.pageNum > 1) {
+      this.pageNum--;
+      this.httpSv.loadCitasTPag(this.triaj.previous).subscribe(hist => {
+        this.triaj = hist;
+        this.citasTriaje = hist.results;
+    });
+    }
   }
 
   //Metodo que recibe el dni para buscar los triajes correspondientes a ese dni
@@ -176,7 +200,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     if (form.valid) {
       let newTriaje: Triaje = form.value;
       console.log('entra al envio');
-      newTriaje.personal = 8;
+      newTriaje.personal = 3;
       newTriaje.talla = parseInt(form.get('talla').value);
       newTriaje.peso = parseInt(form.get('peso').value);
       newTriaje.frecuenciaC = parseInt(form.get('frecuenciaC').value);

@@ -87,7 +87,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	ngOnChanges($event) {
 		console.log();
 	}
-	//Muestra el listado de exmamenes en la tabla 
+	//Muestra el listado de exmenes en la tabla 
 	loadExamen() {
 		this.labService.loadExamen().subscribe(examen => {
 			this.examen = examen;
@@ -223,7 +223,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 				};
 		}
 	}
-
 
 	// close modal window
 	closeModal() {

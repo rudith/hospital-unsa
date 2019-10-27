@@ -82,6 +82,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         }
       ]
     };
+    this.opBus="0";
     this.tableData = [];
     this.citas = [];
     this.loadCitas();
@@ -145,11 +146,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.data = data;
           this.citasEdit = data.results;
           this.toastr.success("NO habilitado", "mopdificar modelo back");
-        },
-        error => {
-          this.toastr.warning("No encontrado");
-        }
-      );
+        },);
     }
   }
   buscarDNI() {
@@ -160,14 +157,17 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     } else {
       this.httpSv.searchCitaDNI(this.campo).subscribe(
         data => {
-          this.data = data;
-          this.citasEdit = data.results;
-
-          this.toastr.success("Cita(s) por DNI encontrada(s)");
+          
+          if(this.data.results[0]==null){
+            this.toastr.info("No se encontraron coincidencias");
+            this.loadCitas();
+          }
+          else{
+            this.data = data;
+            this.citasEdit = data.results;
+            this.toastr.success("Se encontro lo siguiente");
+          }
         },
-        error => {
-          this.toastr.warning("No encontrado");
-        }
       );
     }
   }

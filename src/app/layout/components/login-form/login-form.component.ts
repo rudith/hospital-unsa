@@ -12,8 +12,14 @@ import { AdministradorService } from '../../../services/Administrador/administra
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private http: HttpService) { 
-    
+  constructor(private fb: FormBuilder, private router: Router, private http: HttpService,private adminSV:AdministradorService) { 
+    http.loadCitas();
+    http.loadHistorias();
+    http.loadDepartamento();
+    adminSV.loadAreas();
+    adminSV.loadEspecialidades();
+    adminSV.loadPersonal();
+    adminSV.loadUser();
   }
 
   ngOnInit() {
@@ -29,20 +35,23 @@ export class LoginFormComponent implements OnInit {
       this.http.admis = false;
       this.http.consultorio = false;
       this.http.triaje = false;
+      this.http.laboratorio = false;
       this.router.navigate(['/vertical/adminUser']);
     }
     if (lg.get('login').value === "admis" && lg.get('pass').value === "admis") {
       this.http.admin = false;
       this.http.admis = true;
       this.http.consultorio = false;
-      this.http.triaje = false;
+      this.http.triaje = false;      
+      this.http.laboratorio = false;
       this.router.navigate(['/vertical/historial']);
     }
     if (lg.get('login').value === "cons" && lg.get('pass').value === "cons") {
       this.http.admin = false;
       this.http.admis = false;
       this.http.consultorio = true;
-      this.http.triaje = false;
+      this.http.triaje = false;      
+      this.http.laboratorio = false;
       this.router.navigate(['/vertical/consultas']);
     }
     if (lg.get('login').value === "triaje" && lg.get('pass').value === "triaje") {
@@ -50,13 +59,15 @@ export class LoginFormComponent implements OnInit {
       this.http.admis = false;
       this.http.consultorio = false;
       this.http.triaje = true;
+      this.http.laboratorio = false;
       this.router.navigate(['/vertical/listar-datos']);
     }
     if (lg.get('login').value === "lab" && lg.get('pass').value === "lab") {
       this.http.admin = false;
       this.http.admis = false;
       this.http.consultorio = false;
-      this.http.triaje = true;
+      this.http.triaje = false;          
+      this.http.laboratorio = true;
       this.router.navigate(['/vertical/laboratorio']);
     }
   }

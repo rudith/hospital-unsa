@@ -9,7 +9,7 @@ import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
-import { CitasMPaginadas } from '../../../interfaces/citas-mpaginadas';
+import { citaLista } from '../../../interfaces/citaLista';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { CitasMPaginadas } from '../../../interfaces/citas-mpaginadas';
 })
 export class ConsultasComponent extends BasePageComponent implements OnInit {
 	CitasC: CitaM[];
-  data: CitasMPaginadas = <CitasMPaginadas>{};
+    data: citaLista = <citaLista>{};
 	busForm: FormGroup;
 	pages: Array<number>;
   pagesNumber: number;

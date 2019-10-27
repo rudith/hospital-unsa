@@ -102,11 +102,13 @@ export class HttpService {
   private handleError(error: any) {
     return observableThrowError(error.error || "Server error");
   }
+
   searchCitaDNI(dni: string): Observable<any> {
     return this.http.get<any>(
       "http://18.216.2.122:9000/consultorio/citadni/?dni=" + dni
     );
   }
+
   searchCitaEsp(esp: string): Observable<any> {
     return this.http.get<any>(
       "http://18.216.2.122:9000/consultorio/citasporespecialidad2/?esp=" + esp
@@ -215,8 +217,8 @@ export class HttpService {
       "http://18.216.2.122:9000/consultorio/citasporespecialidad/" + id + "/"
     );
   }
-  searchHistoriaTriaje(dni: string): Observable<CitaM[]> {
-    return this.http.get<CitaM[]>(
+  searchHistoriaTriaje(dni: string): Observable<citaLista> {
+    return this.http.get<citaLista>(
       "http://18.216.2.122:9000/consultorio/citadniespera/?dni=" + dni
     );
   }

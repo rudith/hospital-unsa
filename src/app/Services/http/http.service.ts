@@ -21,6 +21,7 @@ import { ToastrService } from "ngx-toastr";
 import { Examen } from "../../interfaces/examen";
 import { Detalle } from "../../interfaces/detalle";
 import { Personal } from "../../interfaces/personal";
+import { citaLista } from "../../interfaces/citaLista";
 import { citaLista } from '../../interfaces/citaLista';
 import { ConsultasPaginadas } from '../../interfaces/consultas-paginadas';
 import { HistorialLista } from '../../interfaces/historial-lista';
@@ -109,7 +110,7 @@ export class HttpService {
   }
   searchCitaEsp(esp: string): Observable<any> {
     return this.http.get<any>(
-      "http://18.216.2.122:9000/consultorio/citasporespecialidad/?esp=" + esp
+      "http://18.216.2.122:9000/consultorio/citasporespecialidad2/?esp=" + esp
     );
   }
 
@@ -315,12 +316,20 @@ export class HttpService {
       "http://18.216.2.122:9000/administrador/personalporespecialidad/?id=" + id
     );
   }
+
+  searchMedicoporEsp(id: string): Observable<any> {
+    return this.http.get<any>(
+      "http://18.216.2.122:9000/administrador/personalporespecialidad/?id=" + id
+    );
+  }
+
   searcMedxEspPag(id: number): Observable<personalLista> {
     console.log(id);
     return this.http.get<personalLista>(
       "http://18.216.2.122:9000/administrador/personalporespecialidad/?id=" + id
     );
   }
+
 
   createCITA(newCita: Cita) {
     this.http

@@ -16,7 +16,7 @@ import { ConfirmationService } from "primeng/api";
 import { CitaM } from "../../../interfaces/cita-m";
 import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
-import { AdministradorService } from '../../../services/Administrador/administrador.service';
+import { AdministradorService } from "../../../services/Administrador/administrador.service";
 
 @Component({
   selector: "app-citas",
@@ -26,7 +26,9 @@ import { AdministradorService } from '../../../services/Administrador/administra
 })
 export class CitasComponent extends BasePageComponent implements OnInit {
   pageNum: number;
-  cita: CitaM;
+  medSelectedName: string = <string>{};
+  espSelectedName: string = <string>{};
+  cita: CitaM = <CitaM>{};
   citas: Cita[];
   citasEdit: CitaM[] = [];
   public today: Date;
@@ -58,7 +60,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     private http: HttpClient,
     private toastr: ToastrService,
     private conf: ConfirmationService,
-    private admService:AdministradorService
+    private admService: AdministradorService
   ) {
     super(store, httpSv);
 
@@ -91,12 +93,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     this.multiple = false;
     this.httpSv.loadEspecialidades().subscribe(especialidades => {
       this.especialidades = especialidades.results;
+      this.loadOptionsEsp();
     });
     this.httpSv.loadMedico().subscribe(medicos => {
-      this.medicos = medicos.results;;
-      this.loadOptions();
+      this.medicos = medicos.results;
+      this.loadOptionsMed();
     });
-    this.loadOptions();
     this.pageNum = 1;
   }
   ngOnInit() {
@@ -127,7 +129,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   buscar(busca: FormGroup) {
     this.campo = busca.get("campo").value;
 
-    console.log("entra" + this.opBus + " " + this.campo);
+    // console.log("entra" + this.opBus + " " + this.campo);
     if (this.opBus == "1") {
       this.buscarDNI();
     }
@@ -136,7 +138,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     }
   }
   buscarEsp() {
-    console.log(this.campo);
+    // console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
@@ -175,12 +177,10 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     if (this.data.next) {
       this.pageNum++;
       console.log(this.pageNum);
-      this.httpSv
-        .loadCitaPagination(this.data.next)
-        .subscribe(citalista => {
-          this.data = citalista;
-          this.citasEdit = this.data.results;
-        });
+      this.httpSv.loadCitaPagination(this.data.next).subscribe(citalista => {
+        this.data = citalista;
+        this.citasEdit = this.data.results;
+      });
     }
   }
 
@@ -196,21 +196,38 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         });
     }
   }
-  loadOptions() {
+  loadOptionsEsp() {
     for (let i in this.especialidades) {
       this.espOption[i] = {
         label: this.especialidades[i].nombre,
         value: this.especialidades[i].id.toString()
       };
     }
+  }
+  loadOptionsMed() {
     for (let i in this.medicos) {
       this.medOption[i] = {
-        label: this.medicos[i].nombres,
+        label:
+          this.medicos[i].nombres +
+          " " +
+          this.medicos[i].apellido_paterno +
+          " " +
+          this.medicos[i].apellido_materno,
         value: this.medicos[i].user.id.toString()
       };
     }
   }
-
+  loadOptionsMedEsp(a: string) {
+    this.httpSv.searchMedicoporEsp(a).subscribe(
+      data => {
+        this.medicos = [];
+        this.medOption = [];
+        this.medicos = data.results;
+        this.loadOptionsMed();
+      },
+      error => {}
+    );
+  }
   // open modal window
   openModal<T>(
     body: Content<T>,
@@ -231,19 +248,14 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     // console.log("Cita obtenida" + JSON.stringify(row));
   }
   initForm(data: CitaM) {
+    // console.log(JSON.stringify(data));
     this.appointmentForm = this.formBuilder.group({
       fechaAtencion: [
         data.fechaAtencion ? data.fechaAtencion : "",
         Validators.required
       ],
-      especialidad: [
-        data.especialidad.nombre ? data.especialidad.nombre : "",
-        Validators.required
-      ],
-      medico: [
-        data.medico.username ? data.medico.username : "",
-        Validators.required
-      ]
+      especialidad: ["", [Validators.required]],
+      medico: ["", [Validators.required]]
     });
   }
 
@@ -272,9 +284,17 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   }
   sendCita(cita: CitaM) {
     this.cita = cita;
+    this.medSelectedName =
+      cita.medico.nombres +
+      " " +
+      cita.medico.apellido_paterno +
+      " " +
+      cita.medico.apellido_materno;
+    this.espSelectedName = cita.especialidad.nombre;
+    console.log(this.medSelectedName + "\n" + this.espSelectedName);
   }
   addAppointment(form: FormGroup) {
-    console.log(JSON.stringify(+form.value.especialidad));
+    // console.log(JSON.stringify(+form.value.especialidad));
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
@@ -284,7 +304,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         "en-US",
         "+0530"
       );
-      newAppointment.fechaSeparacion = this.cita.fechaSeparacion;
+      newAppointment.fechaSeparacion = formatDate(
+        this.today,
+        "yyyy-MM-dd",
+        "en-US",
+        "+0530"
+      );
       //newAppointment.fechaAtencion = this.cita.fechaAtencion;
       newAppointment.especialidad = form.value.especialidad;
       newAppointment.id = this.cita.id;

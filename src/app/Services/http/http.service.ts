@@ -22,7 +22,6 @@ import { Examen } from "../../interfaces/examen";
 import { Detalle } from "../../interfaces/detalle";
 import { Personal } from "../../interfaces/personal";
 import { citaLista } from "../../interfaces/citaLista";
-import { citaLista } from '../../interfaces/citaLista';
 import { ConsultasPaginadas } from '../../interfaces/consultas-paginadas';
 import { HistorialLista } from '../../interfaces/historial-lista';
 import { EspecialidadLista } from '../../interfaces/especialidad-lista';

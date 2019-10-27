@@ -50,7 +50,7 @@ export class BaseLayoutComponent implements OnInit {
       settings ? (this.appSettings = settings) : null;
     });
 
-    this.getSearchData('assets/data/menu-admision.json');
+    this.getSearchData('assets/data/menu-admision5.json');
     this.getData('assets/data/patients.json', 'patients', 'setPatients');
     this.initSearchForm();
     this.scrollToTop();
@@ -87,6 +87,7 @@ export class BaseLayoutComponent implements OnInit {
       }
     );
   }
+  
 
   getItemsRouters(data: IMenuItem[]) {
     let links: any[] = [];

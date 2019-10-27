@@ -8,7 +8,7 @@ import { BaseLayoutComponent } from "../base-layout/base-layout.component";
 import { HttpService } from "../../services/http/http.service";
 import { TCModalService } from "../../ui/services/modal/modal.service";
 import * as SettingsActions from "../../store/actions/app-settings.actions";
-import { AdministradorService } from "../../services/Administrador/administrador.service";
+import { AdministradorService } from "../../Services/Administrador/administrador.service";
 
 @Component({
   selector: "vertical-layout",

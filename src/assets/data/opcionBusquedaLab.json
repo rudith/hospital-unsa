@@ -3,16 +3,13 @@
     "label": "Nombre",
     "value": "1"
   },
-    {
-        "label" : "Fecha",
-        "value" : "2"
-    },
+    
     {
       "label" : "DNI",
       "value" : "3"
   },
-    {
-        "label" : "Cargar Todo",
-        "value" : " "
-    }
+  {
+    "label" : "Fecha",
+    "value" : "2"
+}
 ]

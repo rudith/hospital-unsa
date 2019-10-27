@@ -87,7 +87,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	ngOnChanges($event) {
 		console.log();
 	}
-	//Muestra el listado de exmamenes en la tabla 
+	//Muestra el listado de exmenes en la tabla 
 	loadExamen() {
 		this.labService.loadExamen().subscribe(examen => {
 			this.examen = examen;
@@ -224,7 +224,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		}
 	}
 
-
 	// close modal window
 	closeModal() {
 		this.modal.close();
@@ -247,10 +246,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 	//Metodo que verifica el tipo de busqueda llamando respectivamente segun el tipo de busqueda elejido 
 	onChangeTable() {
-		if (this.datoBus == "") {
-			this.toastr.warning('Ningun valor ingresado');
-			this.cargarExamn();
-		} else if (this.opBus == "1") {
+		if (this.opBus == "1") {
 			this.labService.searchLabName(this.datoBus).subscribe(data => {
 				if (data[0] == null) {
 					this.toastr.error("No se han encontrado coincidencias");

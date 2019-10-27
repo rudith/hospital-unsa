@@ -25,9 +25,9 @@ import { Departamento } from "../../../interfaces/departamento";
 import { Distrito } from "../../../interfaces/distrito";
 import { Medico } from "../../../interfaces/medico";
 import { ToastrService } from "ngx-toastr";
-import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { Personal } from "../../../interfaces/personal";
+import { HistorialLista } from '../../../interfaces/historial-lista';
 
 @Component({
   selector: "app-historial",
@@ -60,11 +60,17 @@ export class HistorialComponent extends BasePageComponent
   tableData: any[];
   appointmentForm: FormGroup;
   historiaForm: FormGroup;
+  historiaLis:HistorialLista;
   historiales: Historial[];
   numero: number;
   busForm: FormGroup;
   patientForm: FormGroup;
   depa: number;
+  data: HistorialLista = <HistorialLista>{};
+  histTotal:HistorialLista
+	pages: Array<number>;
+  pagesNumber: number;
+  pageNum: number;
   public newCita: Cita;
   public espOption: IOption[];
   public busqOption: IOption[];
@@ -74,6 +80,7 @@ export class HistorialComponent extends BasePageComponent
     store: Store<IAppState>,
     httpSv: HttpService,
     private modal: TCModalService,
+    private modalCita:TCModalService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
@@ -89,6 +96,7 @@ export class HistorialComponent extends BasePageComponent
     this.provinciasOption = [];
     this.sexOption = [];
     this.ocupacionOption = [];
+ 
     this.distritos = [];
     this.medOption = [];
     this.distritosOption = [];
@@ -118,22 +126,43 @@ export class HistorialComponent extends BasePageComponent
         }
       ]
     };
+    this.pageNum = 1;
     this.perso = [];
     this.tableData = [];
     this.historiales = [];
     this.loadHistorias();
     this.loadData();
-    this.httpSv.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades;
+    this.httpSv.loadEspecialidadesPag().subscribe(especialidades => {
+      this.especialidades = especialidades.results;
       this.loadOptions();
     });
   }
   ngOnChanges($event) {
     console.log();
   }
+  public nextPage() {
+    if (this.data.next) {
+      this.pageNum++;
+      this.httpSv.loadHistoriaPagination(this.data.next).subscribe(hist => {
+          this.data = hist;
+					this.historiales = hist.results;
+      });
+    }
+  }
+
+  public prevPage() {
+    if (this.pageNum > 1) {
+      this.pageNum--;
+      this.httpSv.loadHistoriaPagination(this.data.previous).subscribe(hist => {
+        this.data = hist;
+        this.historiales = hist.results;
+    });
+    }
+  }
   loadHistorias() {
-    this.httpSv.loadHistorias().subscribe(historiales => {
-      this.historiales = historiales;
+    this.httpSv.loadHistorias().subscribe(hist => {
+      this.data = hist;
+      this.historiales = hist.results;
     });
   }
   ngOnInit() {
@@ -231,11 +260,14 @@ export class HistorialComponent extends BasePageComponent
       newPatient.departamento = parseInt(form.get("departamento").value);
       newPatient.provincia = parseInt(form.get("distrito").value);
       newPatient.provincia = parseInt(form.get("distrito").value);
-      this.httpSv.createHISTORIAL(newPatient);
-      this.closeModalH();
+      
+      this.httpSv.createHISTORIAL(newPatient,this.modal);
+      this.modal.close();
       this.loadHistorias();
-      this.patientForm.reset();
     }
+  }
+  closeModal(){
+    this.modal.close();
   }
 
   loadData() {
@@ -322,12 +354,7 @@ export class HistorialComponent extends BasePageComponent
   loadmedicos() {
     for (let i in this.perso) {
       this.medOption[i] = {
-        label:
-          this.perso[i].nombres +
-          " " +
-          this.perso[i].apellido_paterno +
-          " " +
-          this.perso[i].apellido_materno,
+        label:this.perso[i].nombres + " " + this.perso[i].apellido_paterno + " " +  this.perso[i].apellido_materno,
         value: this.perso[i].user.id + ""
       };
     }
@@ -349,12 +376,6 @@ export class HistorialComponent extends BasePageComponent
     });
   }
 
-  // close modal window
-  closeModal() {
-    this.modal.close();
-    this.appointmentForm.reset();
-  }
-
   // init form
   initAppoForm(data: any) {
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
@@ -363,7 +384,7 @@ export class HistorialComponent extends BasePageComponent
       fechaSeparacion: ["", Validators.required],
       especialidad: ["", Validators.required],
       medico: ["", Validators.required],
-      responsable: ["", [Validators.pattern("[A-Za-z]*")]],
+      responsable: ["", [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],
       eleccion: [""]
     });
   }
@@ -409,8 +430,7 @@ export class HistorialComponent extends BasePageComponent
       }
 
       this.httpSv.createCITA(newAppointment);
-      this.closeModal();
-      this.appointmentForm.reset();
+      
     }
   }
 
@@ -418,13 +438,14 @@ export class HistorialComponent extends BasePageComponent
     if (this.datoBus == "") {
       this.toastr.warning("Ningun valor ingresado");
       this.httpSv.loadHistorias().subscribe(historiales => {
-        this.historiales = historiales;
+        this.historiales=[]
+        this.historiales = historiales.results;
       });
     } else if (this.opBus == "1") {
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasDNI(this.datoBus).subscribe(
         data => {
-          this.historiales = [];
+          this.historiales=[]
           this.historiales[0] = data;
           console.log("entro bus" + this.datoBus);
         },
@@ -436,7 +457,8 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(
         data => {
-          this.historiales = data;
+        this.historiales=[]
+        this.historiales = data;
           console.log("entro bus" + this.datoBus);
         },
         error => {
@@ -447,7 +469,8 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNomAp(this.datoBus).subscribe(
         data => {
-          this.historiales = data;
+          this.historiales=[];
+          this.historiales = data.results;
           console.log("entro bus" + this.datoBus);
         },
         error => {
@@ -573,11 +596,11 @@ export class HistorialComponent extends BasePageComponent
   }
   cargarMedXEsp(a: number) {
     console.log(a);
-    this.httpSv.searcMedxEsp(a).subscribe(
+    this.httpSv.searcMedxEspPag(a).subscribe(
       data => {
         this.perso = [];
         this.medOption = [];
-        this.perso = data;
+        this.perso = data.results;
         console.log(data);
         console.log(this.perso);
         this.loadmedicos();

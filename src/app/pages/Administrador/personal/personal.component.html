@@ -26,7 +26,7 @@
         </tc-select>
       </tc-form-group>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-5">
       <tc-form-group>
         <tc-input
           [placeholder]="'Ingrese el dato a buscar'"
@@ -35,11 +35,8 @@
           formControlName="campo"
         >
         </tc-input>
-        <tc-form-description
-          [tcColor]="'#e24d4d'"
-          [tcFontSize]="'0.8em'"
-          *ngIf="busForm.controls.campo.touched && busForm.controls.campo.invalid"
-        >
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+          *ngIf="busForm.controls.campo.touched && busForm.controls.campo.invalid">
           Ingrese solo numeros
         </tc-form-description>
       </tc-form-group>
@@ -49,10 +46,21 @@
         tc-button
         [block]="true"
         [view]="'success'"
-        [tcShape]="500"
+        [tcShape]="300"
         (click)="buscar(busForm)"
       >
         Buscar
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        tc-button
+        [block]="true"
+        [tcShape]="300"
+        [tcBgColor]="'#3f51b5'"
+        (click)="loadPersonal()"
+      >
+        Cargar
       </button>
     </div>
   </div>
@@ -78,9 +86,7 @@
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Especialidad
           </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Editar
-          </th>
+          
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Ver más
           </th>
@@ -112,19 +118,6 @@
             [ngStyle]="{ background: contentBgColor, color: contentColor }"
           >
             {{ row.especialidad.nombre }}
-          </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            <div class="actions">
-              <button
-                class="col-6"
-                tc-button
-                [afterIcon]="'icofont-edit-alt'"
-                [view]="'info'"
-                [square]="true"
-                [tcShape]="500"
-                [size]="'sm'"
-              ></button>
-            </div>
           </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             <div class="actions">

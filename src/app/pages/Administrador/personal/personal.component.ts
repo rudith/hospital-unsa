@@ -177,7 +177,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   initBusForm() {
     this.busForm = this.formBuilder.group({
       opBus: ["", Validators.required],
-      campo: ["", [Validators.required, Validators.pattern("[0-9]*")]]
+      campo: ["", [Validators.required, Validators.pattern("[0-9]*"),Validators.minLength(1),Validators.maxLength(8)]]
     });
   }
   buscar(busca: FormGroup) {
@@ -305,7 +305,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         Validators.required
       ],
       especialidad: [
-        data.especialidad.nombre ? data.especialidad.nombre : "",
+        data.especialidad.nombre ? data.especialidad.nombre : "Ninguna",
         Validators.required
       ],
       dni: [

@@ -6457,12 +6457,10 @@ var ListarDatosComponent = /** @class */ (function (_super) {
         else {
             this.toastr.warning('Buscando');
             this.httpSv.searchHistoriaTriaje(dni).subscribe(function (data) {
-                if (data[0] == null) {
-                    _this.toastr.error("No se encontro ningun triaje con ese dni");
-                }
-                else {
-                    _this.citasTriaje = data;
-                }
+                console.log("Entro al servicio");
+                _this.triaj = data;
+                _this.citasTriaje = data.results;
+                console.log(_this.citasTriaje);
             }, function (error) {
                 console.log(error.message);
             });

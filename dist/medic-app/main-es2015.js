@@ -6253,12 +6253,10 @@ let ListarDatosComponent = class ListarDatosComponent extends _base_page__WEBPAC
         else {
             this.toastr.warning('Buscando');
             this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
-                if (data[0] == null) {
-                    this.toastr.error("No se encontro ningun triaje con ese dni");
-                }
-                else {
-                    this.citasTriaje = data;
-                }
+                console.log("Entro al servicio");
+                this.triaj = data;
+                this.citasTriaje = data.results;
+                console.log(this.citasTriaje);
             }, error => {
                 console.log(error.message);
             });

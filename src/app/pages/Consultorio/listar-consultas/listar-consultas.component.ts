@@ -88,8 +88,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.idCitaRecibida=this.httpSv.getIdHC();
     this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data =>{
       this.triajeRecibido=data;
-    }); 
-    console.log(this.idMedRecibido);
+    });
     this.cargarDatos();
     this.cargarConsultas();
   }
@@ -97,7 +96,6 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     super.ngOnInit();
   }
   ngOnChanges($event) {
-		console.log();
   }
   ngOnDestroy() {
     super.ngOnDestroy();
@@ -245,6 +243,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       tratamiento: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
+      ordenExam:['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       proximaCita:[null]
     });
 

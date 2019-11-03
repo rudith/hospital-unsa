@@ -2,28 +2,16 @@
 	<div class="row">
 		<div class="col col-12 ">
 			<div class="row">
-
-				<tc-form-group class="col-md-1">
-					<div class="add-action-box">
-						<button tc-button [afterIcon]="'icofont-plus'" [square]="true" [tcShape]="500"
-							[tcBgColor]="'#3f51b5'"
-							(click)="openModalH(modalCrearHBody, 'Agregar Cabecera',modalCrearHFooter)">
-						</button>
-					</div>
-				</tc-form-group>
-
 				<div class="col-md-2">
 					<tc-form-group>
 						<tc-select [placeholder]="'Opcion'" formControlName="opBus" [options]="busqOption"></tc-select>
-						
 					</tc-form-group>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<tc-form-group>
 						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
 					</tc-form-group>
 				</div>
-
 
 				<div class="col-md-2">
 					<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
@@ -89,10 +77,21 @@
 				</div>
 			</ng-template>
 		</tc-table-col>
-
-
-
 	</tc-table>
+
+	<ul class="pagination-ul">
+		<li class="pagination-li prev">
+			<a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
+				<i class="icofont-simple-left"></i>
+			</a>
+		</li>
+
+		<li class="pagination-li next">
+			<a class="pagination-link" (click)="nextPage()">
+				<i class="icofont-simple-right"></i>
+			</a>
+		</li>
+	</ul>
 </tc-card>
 
 
@@ -108,80 +107,6 @@
 	</a>
 </div>
 
-<!-- Modal Crear cabecera -->
-<ng-container>
-	<ng-template #modalCrearHBody>
-		<form [formGroup]="patientForm" novalidate class="new-patient-form">
-			<div class="row">
-				<div class="col-12 col-sm-6">
-					<tc-form-group>
-						<tc-input [placeholder]="'Nombres*'" formControlName="nombre"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.nombre.touched && patientForm.controls.nombre.invalid ">
-							Ingrese el nombre, este solo debe contener letras.
-						</tc-form-description>
-					</tc-form-group>
-				</div>
-
-				<div class="col-12 col-sm-6">
-					<tc-form-group>
-						<tc-input [placeholder]="'DNI*'" formControlName="dni" [charLimiting]="8"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.dni.touched && patientForm.controls.dni.invalid ">
-							Ingrese DNI, debe contener 8 digitos
-						</tc-form-description>
-					</tc-form-group>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-12 col-sm-6">
-					<tc-form-group>
-						<tc-input type="date" formControlName="fecha"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.fecha.touched && patientForm.controls.fecha.invalid ">
-							Ingrese Fecha correcta aaaa-mm-dd
-						</tc-form-description>
-					</tc-form-group>
-				</div>
-
-				<div class="col-12 col-sm-6">
-					<tc-form-group>
-						<tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
-						</tc-select>
-					</tc-form-group>
-				</div>
-			</div>
-
-			<tc-form-group>
-				<tc-input [placeholder]="'Orden*'" formControlName="orden">
-				</tc-input>
-				<tc-form-description [tcColor]="'#e24d4d'"
-					*ngIf="patientForm.controls.orden.touched && patientForm.controls.orden.invalid ">
-					Este campo solo debe tener letras
-				</tc-form-description>
-			</tc-form-group>
-
-			<tc-form-group>
-				<tc-input [placeholder]="'Observaciones*'" formControlName="observaciones"></tc-input>
-				<tc-form-description [tcColor]="'#e24d4d'"
-					*ngIf="patientForm.controls.observaciones.touched && patientForm.controls.observaciones.invalid ">
-					Este campo solo debe tener letras
-				</tc-form-description>
-			</tc-form-group>
-		</form>
-
-	</ng-template>
-	<ng-template #modalCrearHFooter>
-		<div class="actions justify-content-between">
-			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">Cancelar</button>
-			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm)">
-				Agregar
-			</button>
-		</div>
-	</ng-template>
-</ng-container>
-<!-- end Modal Crear cabecera -->
 
 
 <!-- Modal Crear detalle -->
@@ -289,7 +214,7 @@
 					</tc-input>
 				</tc-form-group>
 			</div>
-		
+
 			<tc-card [title]="'Detalles'" class="mb-0">
 				<tc-table [rows]="detalleT" [hovered]="true" [pagination]="true">
 					<tc-table-col [columnTitle]="'Descripción'" [columnName]="'descripcion'">
@@ -309,7 +234,7 @@
 							<strong>{{ value }}</strong>
 						</ng-template>
 					</tc-table-col>
-					
+
 					<tc-table-col [columnTitle]="'Rango'" [columnName]="'rango_referencia'">
 						<ng-template #tableTDTemplate let-value>
 							<strong>{{ value }}</strong>

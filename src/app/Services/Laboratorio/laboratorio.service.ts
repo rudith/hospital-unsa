@@ -9,6 +9,8 @@ import { Cabeceralab } from '../../interfaces/cabeceralab';
 import { ToastrService } from 'ngx-toastr';
 import {Examen} from '../../interfaces/examen';
 import {Detalle} from '../../interfaces/detalle';
+import {Orden	} from '../../interfaces/orden';
+import {ExamenLista} from '../../interfaces/examen-lista';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +22,7 @@ export class LaboratorioService {
 	public detalle:Detalle[]=[];
 	public cita: Cita[]=[];
 	public examen:Examen[]=[];
+	public examneLis:ExamenLista[]=[];
 	fi:string;
 	ff:string;
   
@@ -59,9 +62,14 @@ export class LaboratorioService {
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>(this.url+"/TipoExamen/");
 	}
-	loadExamen():Observable<Examen[]> {
-		return this.http.get<Examen[]> (this.url+"/ExamenLabCab/");
-
+	loadExamen():Observable<ExamenLista> {
+		return this.http.get<ExamenLista> (this.url+"/ExamenLabCab/");
+	}
+	loadExamenPagination(url: string): Observable<ExamenLista> {
+		return this.http.get<ExamenLista>(url);
+	  }
+	loadOrden():Observable<Orden[]>{
+		return this.http.get<Orden[]>("http://18.216.2.122:9000/consultorio/ver-orden/");
 	}
 	
 	loadTabla(idEx:number):Observable<Detalle[]>{

@@ -75,12 +75,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastModule} from 'primeng/toast';
 import { ConsultasComponent } from './Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from './Consultorio/listar-consultas/listar-consultas.component';
-import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component';
+import { LaboratorioComponent } from './Lab/laboratorio/laboratorio.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { PersonalComponent } from './Administrador/personal/personal.component';
 import { AreaComponent } from './Administrador/area/area.component';
 import { EspecialidadComponent } from './Administrador/especialidad/especialidad.component';
 import { TipoPersonalComponent } from './Administrador/tipo-personal/tipo-personal.component';
+import { OrdenesComponent } from './Lab/ordenes/ordenes.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -165,7 +166,8 @@ import { TipoPersonalComponent } from './Administrador/tipo-personal/tipo-person
     PersonalComponent,
     AreaComponent,
     EspecialidadComponent,
-    TipoPersonalComponent
+    TipoPersonalComponent,
+    OrdenesComponent
   ],
   exports: [],
   entryComponents: []

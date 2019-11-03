@@ -3,6 +3,15 @@
 		"title": "Laboratorio",
 		"groupTitle": true
 	},
+	
+	{
+		"title": "Ordenes",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "ordenes",
+		"layout": "vertical"
+	},
 	{
 		"title": "Laboratorio",
 		"icon": {
@@ -11,4 +20,5 @@
 		"routing": "laboratorio",
 		"layout": "vertical"
 	}
+
 ]

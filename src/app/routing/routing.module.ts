@@ -63,11 +63,13 @@ import { EditarComponent } from '../pages/Administrador/editar/editar.component'
 import {ListarDatosComponent} from '../pages/Triaje/listar-datos/listar-datos.component';
 import { ConsultasComponent } from '../pages/Consultorio/consultas/consultas.component';
 import { ListarConsultasComponent } from '../pages/Consultorio/listar-consultas/listar-consultas.component';
-import { LaboratorioComponent } from '../pages/laboratorio/laboratorio.component';
+import { LaboratorioComponent } from '../pages/Lab/laboratorio/laboratorio.component';
+import { OrdenesComponent} from '../pages/Lab/ordenes/ordenes.component';
 import { PersonalComponent } from '../pages/Administrador/personal/personal.component';
 import { AreaComponent } from '../pages/Administrador/area/area.component';
 import { EspecialidadComponent } from '../pages/Administrador/especialidad/especialidad.component';
 import { TipoPersonalComponent } from '../pages/Administrador/tipo-personal/tipo-personal.component';
+
 
 const VERTICAL_ROUTES: Routes = [
   { path: 'default-dashboard', component: PageDashboardComponent },
@@ -132,6 +134,7 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'consultas', component: ConsultasComponent },
   { path: 'Lconsultas', component: ListarConsultasComponent },
   { path: 'laboratorio', component: LaboratorioComponent },
+  { path: 'ordenes', component:OrdenesComponent},
   { path: '**', component: Page404Component }
 ];
 

@@ -1,22 +1,24 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild, OnChanges } from '@angular/core';
-import { BasePageComponent } from '../base-page';
+import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../../interfaces/app-state';
-import { HttpService } from '../../services/http/http.service';
+import { IAppState } from '../../../interfaces/app-state';
+import { HttpService } from '../../../services/http/http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IOption } from './../../ui/interfaces/option';
-import { Content } from '../../ui/interfaces/modal';
-import { TCModalService } from '../../ui/services/modal/modal.service';
+import { IOption } from './../../../ui/interfaces/option';
+import { Content } from '../../../ui/interfaces/modal';
+import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { Examen } from '../../interfaces/examen';
-import { Tipoexamen } from '../../interfaces/tipoexamen';
-import { Cabeceralab } from '../../interfaces/cabeceralab';
-import { Detalle } from '../../interfaces/detalle';
-import { LaboratorioService } from '../../Services/Laboratorio/laboratorio.service';
+import { Examen } from '../../../interfaces/examen';
+import { Tipoexamen } from '../../../interfaces/tipoexamen';
+import { Cabeceralab } from '../../../interfaces/cabeceralab';
+import { Detalle } from '../../../interfaces/detalle';
+import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
+import { ExamenLista } from '../../../interfaces/examen-lista';
 
 @Component({
+
 	selector: 'app-laboratorio',
 	templateUrl: './laboratorio.component.html',
 	styleUrls: ['./laboratorio.component.scss']
@@ -40,6 +42,10 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	verMas: Examen[];
 	rr: number;
 	detalleT: Detalle[];
+	examenLista: ExamenLista;
+	data: ExamenLista = <ExamenLista>{};
+	pageNum: number;
+	exa: Examen[];
 
 	constructor(
 		store: Store<IAppState>,
@@ -55,6 +61,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.tipoE = [];
 		this.cabecera = [];
 		this.examen = [];
+		this.exa = [];
 		this.detalleT = [];
 		this.pageData = {
 			title: 'Laboratorio',
@@ -77,22 +84,54 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 				}
 			]
 		};
+		this.pageNum = 1;
 		this.examen = [];
+		this.exa = [];
 		this.detalleT = [];
 		this.examenCol = [];
 		this.verMas = [];
-		this.loadData(); //tipo examen 
 		this.loadExamen();
 	}
 	ngOnChanges($event) {
 		console.log();
 	}
+	public nextPage() {
+		if (this.data.next) {
+			this.pageNum++;
+			this.labService.loadExamenPagination(this.data.next).subscribe(exam => {
+				this.data = exam;
+				this.examen = exam.results;
+			});
+		}
+	}
+
+	public prevPage() {
+		if (this.pageNum > 1) {
+			this.pageNum--;
+			this.labService.loadExamenPagination(this.data.previous).subscribe(exam => {
+				this.data = exam;
+				this.examen = exam.results;
+			});
+		}
+	}
 	//Muestra el listado de exmenes en la tabla 
 	loadExamen() {
-		this.labService.loadExamen().subscribe(examen => {
-			this.examen = examen;
+		this.labService.loadExamen().subscribe(exam => {
+
+			this.data = exam;
+			this.examen = exam.results;
+
 		});
 	}
+
+	cargarExamn() {
+		this.labService.loadExamen().subscribe(exam => {
+			this.data = exam;
+			this.examen = exam.results;
+		});
+	}
+
+
 
 	ngOnInit() {
 		super.ngOnInit();
@@ -108,47 +147,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	}
 	ngOnDestroy() {
 		super.ngOnDestroy();
-	}
-
-	//Modal crear cabecera: 
-	//openModalH: metodo de apertura del modal con los parametros necesario que recibe
-	//initPatientForm: Form que valida los datos ingresados en el formulario 
-	openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
-		this.initPatientForm();
-		this.modal.open({
-			body: body,
-			header: header,
-			footer: footer,
-			options: options
-		});
-	}
-	closeModalH() {
-		this.modal.close();
-
-
-	}
-	//Valida los campos del formulario de crear cabecera
-	initPatientForm() {
-		this.patientForm = this.formBuilder.group({
-			dni: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern('[0-9]*')]],
-			nombre: ['', [Validators.required, Validators.pattern('[A-Za-z ]*')]],
-			fecha: ['', Validators.required],
-			orden: ['', Validators.required],
-			observaciones: ['', Validators.required],
-			tipoExam: ['', Validators.required],
-		});
-	}
-	// Fin Modal crear cabecera
-
-	//Metodo de Crear cabecera: llama al servicio de creacion  createCabecera
-	addExamen(form: FormGroup) {
-		if (form.valid) {
-			let newExamen: Cabeceralab = form.value;
-			newExamen.fecha = formatDate(form.value.fecha, 'yyyy-MM-dd', 'en-US', '+0530');
-			this.labService.createCabecera(newExamen);
-			this.closeModalH();
-			this.loadExamen();
-		}
 	}
 
 
@@ -205,25 +203,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 
 
-	//Metodo loadData: muestra en el formulario de crear cabecera el select de TIPO DE EXAMEN 
-	loadData() {
-		this.labService.loadTipoEx().subscribe(tipo => {
-			this.tipoE = tipo,
-			this.loadtipoex()
-		});
-
-	}
-	//tipo de examen
-	loadtipoex() {
-		for (let i in this.tipoE) {
-			this.tipoExOption[i] =
-				{
-					label: this.tipoE[i].nombre,
-					value: this.tipoE[i].id.toString()
-				};
-		}
-	}
-
 	// close modal window
 	closeModal() {
 		this.modal.close();
@@ -270,7 +249,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.examen = [];
 					this.examen = data;
 				}
-				
+
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});
@@ -285,12 +264,13 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.examen = [];
 					this.examen = data;
 				}
-				
+
 			}, error => {
 				this.toastr.warning('No encontrado');
 			});
 		}
 	}
+	
 
 
 	// modal ver mas 
@@ -321,12 +301,11 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			this.detalleT = detalleT;
 		})
 	}
-
-
-	cargarExamn(){
-		this.labService.loadExamen().subscribe(examen => {
-			this.examen = examen;
-		});
+	closeModalH() {
+		this.modal.close();
 	}
+
+
+
 
 }

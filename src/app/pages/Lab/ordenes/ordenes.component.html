@@ -1,0 +1,101 @@
+<tc-card class="mb-0">
+    <tc-table [rows]="ordenes" [hovered]="true" [pagination]="true">
+        
+        <tc-table-col [columnTitle]="'Nombre'" [columnName]="'nombre'">
+            <ng-template #tableTDTemplate let-value>
+                <strong>{{ value }}</strong>
+            </ng-template>
+        </tc-table-col>
+
+        <tc-table-col [columnTitle]="'DNI'" [columnName]="'dni'">
+            <ng-template #tableTDTemplate let-value>
+                <strong>{{ value }}</strong>
+            </ng-template>
+        </tc-table-col>
+         
+        <tc-table-col [columnTitle]="'Orden'" [columnName]="'orden'">
+            <ng-template #tableTDTemplate let-value>
+                <strong>{{ value }}</strong>
+            </ng-template>
+        </tc-table-col>
+
+        <tc-table-col [columnTitle]="'Fecha'" [columnName]="'fecha'">
+            <ng-template #tableTDTemplate let-value>
+                <strong>{{ value }}</strong>
+            </ng-template>
+        </tc-table-col>
+
+        <tc-table-col [columnTitle]="'Atender'">
+            <ng-template #tableTDTemplate let-row="row">
+                <div class="actions">
+                    <button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
+                        [tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
+                        (click)="openModalH(modalCrearHBody, 'Cabecera', modalCrearHFooter,row)">Atender</button>
+                </div>
+            </ng-template>
+        </tc-table-col>
+
+    </tc-table>
+</tc-card>
+
+<!-- Modal Crear cabecera -->
+<ng-container>
+	<ng-template #modalCrearHBody>
+		<form [formGroup]="patientForm" novalidate class="new-patient-form">
+			<div class="row">
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-form-label>Nombre</tc-form-label>
+						<tc-input [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
+						</tc-input>
+					</tc-form-group>
+				</div>
+
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+						<tc-form-label>DNI</tc-form-label>
+						<tc-input [placeholder]="'DNI'" formControlName="dni" readonly="readonly"></tc-input>
+					</tc-form-group>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 col-sm-6">
+					<tc-form-group>
+                        <tc-form-label>Fecha</tc-form-label>
+						<tc-input type="date" formControlName="fecha"></tc-input>
+						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+							*ngIf="patientForm.controls.fecha.touched && patientForm.controls.fecha.invalid ">
+							Ingrese Fecha de hoy aaaa-mm-dd
+						</tc-form-description>
+					</tc-form-group>
+				</div>
+			</div>
+
+            <tc-form-group>
+                <tc-form-label>Orden</tc-form-label>
+                <tc-input [placeholder]="'Orden'" formControlName="orden" readonly="readonly"></tc-input>
+            </tc-form-group>
+
+
+			<tc-form-group>
+                <tc-form-label>Observaciones</tc-form-label>
+				<tc-input [placeholder]="'Agregar Observaciones*'" formControlName="observaciones"></tc-input>
+				<tc-form-description [tcColor]="'#e24d4d'"
+					*ngIf="patientForm.controls.observaciones.touched && patientForm.controls.observaciones.invalid ">
+					Este campo solo debe tener letras
+				</tc-form-description>
+			</tc-form-group>
+		</form>
+
+	</ng-template>
+	<ng-template #modalCrearHFooter>
+		<div class="actions justify-content-between">
+			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">Cancelar</button>
+			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm)">
+				Agregar Cabecera
+			</button>
+		</div>
+	</ng-template>
+</ng-container>
+<!-- end Modal Crear cabecera -->

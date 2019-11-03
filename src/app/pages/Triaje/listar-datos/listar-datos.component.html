@@ -36,9 +36,6 @@
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							Nombres
-						</th>						
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Apellido Paterno
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							Especialidad
@@ -48,9 +45,12 @@
             </th>
             <th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							Estado
+						</th>					
+						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
+							Fecha
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Actualizar Datos
+							Registrar Triaje
 						</th>
 					</tr>
 				</thead>
@@ -64,10 +64,7 @@
 							{{row.numeroHistoria.dni}}
 						</td>
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.numeroHistoria.nombres}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.numeroHistoria.apellido_paterno}}
+							{{row.numeroHistoria.nombres}} {{row.numeroHistoria.apellido_paterno}} {{row.numeroHistoria.apellido_materno}}
 						</td>
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.especialidad.nombre}}
@@ -77,10 +74,12 @@
             </td>
             <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.estadoCita}}
+						</td><td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+							{{row.fechaAtencion}}
 						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }" [align]="center">
 							<div class="actions">
-                <button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'info'" [square]="true" [tcShape]="500"
+                <button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'info'" [square]="true" [tcShape]="500" 
                   [size]="'sm'" (click)="openModal(modalBody, 'Agregar Datos de Triaje', modalFooter, row)">
                 </button>
               </div>
@@ -120,19 +119,33 @@
       <form [formGroup]="cabTri">
 
           <div class="row">
-            <tc-form-group class="col-12 col-sm-3">
-              <tc-form-label>Num.Historia</tc-form-label>
-              <tc-input formControlName="numeroHistoria" readonly="readonly">
-              </tc-input>
-            </tc-form-group>
-            <tc-form-group class="col-12 col-sm-3">
-              <tc-form-label>DNI</tc-form-label>
-              <tc-input formControlName="dni" readonly="readonly">
+            <tc-form-group class="col-12 col-sm-6">
+              <tc-form-label>Numero de Historia</tc-form-label>
+              <tc-input [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
+              formControlName="numeroHistoria" 
+              readonly="readonly">
               </tc-input>
             </tc-form-group>
             <tc-form-group class="col-12 col-sm-6">
-              <tc-form-label>Nombre</tc-form-label>
-              <tc-input formControlName="nombres" readonly="readonly">
+              <tc-form-label>DNI</tc-form-label>
+              <tc-input [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
+              formControlName="dni" 
+              readonly="readonly">
+              </tc-input>
+            </tc-form-group>
+          </div>
+          <div class="row">
+            <tc-form-group class="col-12 col-sm-12">
+              <tc-form-label>Nombre Completo</tc-form-label>
+              <tc-input [bgColor]="'#fff'"
+              [borderColor]="'#3f51b5'"
+              [color]="'#3f51b5'"
+              formControlName="nombres" 
+              readonly="readonly">
               </tc-input>
             </tc-form-group>
           </div>
@@ -143,8 +156,8 @@
       <div class="row">
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Talla</tc-form-label>
-            <tc-input [placeholder]="'talla metros'" [type]="'number'" formControlName="talla"></tc-input>
+            <tc-form-label>Talla (m)</tc-form-label>
+            <tc-input [placeholder]="'Talla (m)'" formControlName="talla"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
               Debe ingresar un numero positivo
@@ -155,8 +168,8 @@
 
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Peso</tc-form-label>
-            <tc-input [placeholder]="'peso Kg'" [type]="'number'" formControlName="peso"></tc-input>
+            <tc-form-label>Peso (Kg)</tc-form-label>
+            <tc-input [placeholder]="'Peso (Kg)'"  formControlName="peso"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
               Debe ingresar un numero positivo
@@ -166,8 +179,8 @@
 
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Temperatura</tc-form-label>
-            <tc-input [placeholder]="'temperatura °C '" [type]="'number'" formControlName="temperatura"></tc-input>
+            <tc-form-label>Temperatura (°C)</tc-form-label>
+            <tc-input [placeholder]="'temperatura (°C) '" formControlName="temperatura"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
               Debe ingresar un numero positivo
@@ -178,7 +191,7 @@
         <div class="col-12 col-sm-4">
           <tc-form-group>
             <tc-form-label>Frecuencia Resp.</tc-form-label>
-            <tc-input [placeholder]="'frecuencia Resp'" [type]="'number'" formControlName="frecuenciaR"></tc-input>
+            <tc-input [placeholder]="'frecuencia Resp'" formControlName="frecuenciaR"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
               Debe ingresar un numero positivo
@@ -189,7 +202,11 @@
         <div class="col-12 col-sm-4">
           <tc-form-group>
             <tc-form-label>Frecuencia Cardiaca</tc-form-label>
-            <tc-input [placeholder]="'Frecuencia Cardiaca'" [type]="'number'" formControlName="frecuenciaC"></tc-input>
+            <tc-input [placeholder]="'Frecuencia Cardiaca'"  formControlName="frecuenciaC"></tc-input>
+            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+              *ngIf="patientForm2.controls.frecuenciaC.touched && patientForm2.controls.frecuenciaC.invalid ">
+              Debe ingresar un numero positivo
+            </tc-form-description>
           </tc-form-group>
         </div>
 
@@ -210,7 +227,7 @@
   <ng-template #modalFooter>
     <div class="actions justify-content-between">
       <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
-      <button tc-button [view]="'info'" (click)="CreateTriaje(patientForm2)">
+      <button tc-button [view]="'info'" [disabled]="patientForm2.invalid" (click)="CreateTriaje(patientForm2)">
         Crear Triaje
       </button>
     </div>

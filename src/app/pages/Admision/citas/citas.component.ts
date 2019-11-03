@@ -12,7 +12,7 @@ import { HttpClient } from "@angular/common/http";
 import { formatDate } from "@angular/common";
 import { Especialidad } from "../../../interfaces/especialidad";
 import { ToastrService } from "ngx-toastr";
-import { ConfirmationService } from "primeng/api";
+// import { ConfirmationService } from "primeng/api";
 import { CitaM } from "../../../interfaces/cita-m";
 import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
@@ -21,10 +21,11 @@ import { AdministradorService } from "../../../services/Administrador/administra
 @Component({
   selector: "app-citas",
   templateUrl: "./citas.component.html",
-  styleUrls: ["./citas.component.scss"],
-  providers: [ConfirmationService]
+  styleUrls: ["./citas.component.scss"]
+  // providers: [ConfirmationService]
 })
 export class CitasComponent extends BasePageComponent implements OnInit {
+  idCita: string;
   pageNum: number;
   medSelectedName: string = <string>{};
   espSelectedName: string = <string>{};
@@ -59,7 +60,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
-    private conf: ConfirmationService,
+    // private conf: ConfirmationService,
     private admService: AdministradorService
   ) {
     super(store, httpSv);
@@ -84,19 +85,19 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         }
       ]
     };
-    this.opBus="0";
+    this.opBus = "0";
     this.tableData = [];
     this.citas = [];
     this.loadCitas();
     this.espOption = [];
     this.medOption = [];
     this.multiple = false;
-    this.httpSv.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades.results;
+    this.httpSv.loadEspecialidadesSP().subscribe(especialidades => {
+      this.especialidades = especialidades;
       this.loadOptionsEsp();
     });
-    this.httpSv.loadMedico().subscribe(medicos => {
-      this.medicos = medicos.results;
+    this.httpSv.loadMedicoSP().subscribe(medicos => {
+      this.medicos = medicos;
       this.loadOptionsMed();
     });
     this.pageNum = 1;
@@ -131,46 +132,41 @@ export class CitasComponent extends BasePageComponent implements OnInit {
 
     // console.log("entra" + this.opBus + " " + this.campo);
     if (this.opBus == "1") {
-      this.buscarDNI();
+      this.buscarDNI(this.campo);
     }
     if (this.opBus == "2") {
-      this.buscarEsp();
+      this.buscarEsp(this.campo);
     }
   }
-  buscarEsp() {
+  buscarEsp(valor: string) {
     // console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
-      this.httpSv.searchCitaEsp(this.campo).subscribe(
-        data => {
-          this.data = data;
-          this.citasEdit = data.results;
-          this.toastr.success("NO habilitado", "mopdificar modelo back");
-        },);
+      this.httpSv.searchCitaEsp(this.campo).subscribe(data => {
+        this.data = data;
+        this.citasEdit = data.results;
+        this.toastr.warning("Buscando Citas", "Especialidad: " + valor);
+      });
     }
   }
-  buscarDNI() {
+  buscarDNI(valor: string) {
     console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
-      this.httpSv.searchCitaDNI(this.campo).subscribe(
-        data => {
-          
-          if(this.data.results[0]==null){
-            this.toastr.info("No se encontraron coincidencias");
-            this.loadCitas();
-          }
-          else{
-            this.data = data;
-            this.citasEdit = data.results;
-            this.toastr.success("Se encontro lo siguiente");
-          }
-        },
-      );
+      this.httpSv.searchCitaDNI(this.campo).subscribe(data => {
+        if (this.data.results[0] == null) {
+          this.toastr.info("No se encontraron coincidencias");
+          this.loadCitas();
+        } else {
+          this.data = data;
+          this.citasEdit = data.results;
+          this.toastr.warning("Buscando Citas", "DNI: " + valor);
+        }
+      });
     }
   }
   public nextPage() {
@@ -222,7 +218,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       data => {
         this.medicos = [];
         this.medOption = [];
-        this.medicos = data.results;
+        this.medicos = data;
         this.loadOptionsMed();
       },
       error => {}
@@ -281,6 +277,9 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   closeModal() {
     this.modal.close();
     this.appointmentForm.reset();
+  }
+  closeModalConf() {
+    this.modal.close();
   }
   sendCita(cita: CitaM) {
     this.cita = cita;
@@ -365,20 +364,32 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.citasEdit = data.results;
     });
   }
-  CancelarCita(id: number) {
-    this.conf.confirm({
-      message: "¿Continuar con esta acción?",
-      accept: () => {
-        this.httpSv.CancelarCita(id).subscribe(
-          cita => {
-            this.loadCitas();
-            this.toastr.success("", "Cita Cancelada");
-          },
-          error => {
-            this.toastr.warning("Error Cita no cancelada");
-          }
-        );
-      }
+  openModalCancelar<T>(
+    body: Content<T>,
+    header: Content<T> = null,
+    footer: Content<T> = null,
+    id: string,
+    options: any = null
+  ) {
+    this.idCita = id;
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: options
     });
+  }
+  CancelarCita() {
+    this.httpSv.CancelarCita(this.idCita).subscribe(
+      cita => {
+        this.loadCitas();
+        this.toastr.success("", "Cita Cancelada");
+        this.closeModalConf();
+      },
+      error => {
+        this.toastr.warning("Error Cita no cancelada");
+        this.closeModalConf();
+      }
+    );
   }
 }

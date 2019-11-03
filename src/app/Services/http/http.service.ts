@@ -114,7 +114,11 @@ export class HttpService {
       "http://18.216.2.122:9000/consultorio/citasporespecialidad2/?esp=" + esp
     );
   }
-
+  loadEspecialidadesSP(): Observable<any> {
+    return this.http.get<any>(
+      "http://18.216.2.122:9000/administrador/especialidadSP/"
+    );
+  }
   loadEspecialidades(): Observable<any> {
     return this.http.get<any>(
       "http://18.216.2.122:9000/administrador/especialidad/"
@@ -123,6 +127,11 @@ export class HttpService {
   loadEspecialidadesPag(): Observable<EspecialidadLista> {
     return this.http.get<EspecialidadLista>(
       "http://18.216.2.122:9000/administrador/especialidad/"
+    );
+  }
+  loadMedicoSP(): Observable<any> {
+    return this.http.get<any>(
+      "http://18.216.2.122:9000/administrador/ver-personalSP/"
     );
   }
   loadMedico(): Observable<any> {
@@ -171,7 +180,7 @@ export class HttpService {
   loadCitaPagination(url: string): Observable<citaLista> {
     return this.http.get<citaLista>(url);
   }
-  CancelarCita(id: number): Observable<Cita> {
+  CancelarCita(id: string): Observable<Cita> {
     return this.http.get<Cita>(
       "http://18.216.2.122:9000/consultorio/cancelarcita/" + id + "/"
     );

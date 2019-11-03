@@ -25,6 +25,9 @@ export class AdministradorService {
   loadAreas(): Observable<any> {
     return this.http.get<any>(this.url + "/areas/");
   }
+  loadAreasSP(): Observable<any> {
+    return this.http.get<any>(this.url + "/areasSP/");
+  }
   searchArea(id: number): Observable<any> {
     return this.http.get<any>(this.url + "/areas/" + id + "/");
   }
@@ -48,6 +51,9 @@ export class AdministradorService {
   loadEspecialidades(): Observable<any> {
     return this.http.get<any>(this.url + "/especialidad/");
   }
+  loadEspecialidadesSP(): Observable<any> {
+    return this.http.get<any>(this.url + "/especialidadSP/");
+  }
   searchEspecialidad(id: number): Observable<any> {
     return this.http.get<any>(this.url + "/especialidad/" + id + "/");
   }
@@ -70,6 +76,9 @@ export class AdministradorService {
   //TipoPersonal
   loadTPersonal(): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personal/");
+  }
+  loadTPersonalSP(): Observable<any> {
+    return this.http.get<any>(this.url + "/tipo-personalSP/");
   }
   searchTPersonal(id: number): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personal/" + id + "/");
@@ -96,26 +105,35 @@ export class AdministradorService {
       password: this.password
     });
   }
-  // let headers = new Headers({
-  //   'Content-Type': 'application/json',
-  //   'Authorization': 'Bearer '
-  // });
+
   getHeader() {
-    let token = new HttpHeaders({ "Content-Type": "application/json" });
-    token = token.append(
-      "Authorization",
-      "Bearer" + localStorage.getItem("token")
-    );
+    var headers_object = new HttpHeaders({
+      Authorization: "token " + localStorage.getItem("token")
+    });
+
+    var httpOptions = {
+      headers: headers_object
+    };
     console.log(
-      "entro" + JSON.stringify(token) + " " + localStorage.getItem("token")
+      "entro" + JSON.stringify(headers_object) + localStorage.getItem("token")
     );
-    return token;
+    return httpOptions;
   }
+  // getHeader() {
+  //   let token = new HttpHeaders({ "Content-Type": "application/json" });
+  //   token = token.append(
+  //     "Authorization",
+  //     "Bearer" + localStorage.getItem("token")
+  //   );
+  //   console.log(
+  //     "entro" + JSON.stringify(token) + " " + localStorage.getItem("token")
+  //   );
+  //   return token;
+  // }
   // Personal
   loadPersonal(): Observable<any> {
-    return this.http.get<any>(this.url + "/ver-personal/", {
-      headers: this.getHeader()
-    });
+    return this.http.get<any>(this.url + "/ver-personales/",this.getHeader()
+    );
   }
   loadPersonalPagination(url: string): Observable<personalLista> {
     return this.http.get<personalLista>(url);
@@ -155,5 +173,8 @@ export class AdministradorService {
   //user
   loadUser(): Observable<any> {
     return this.http.get<any>(this.url + "/usuarios/");
+  }
+  loadUserSP(): Observable<any> {
+    return this.http.get<any>(this.url + "/usuariosSP/");
   }
 }

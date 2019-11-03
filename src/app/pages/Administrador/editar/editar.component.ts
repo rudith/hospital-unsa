@@ -50,7 +50,7 @@ export class EditarComponent extends BasePageComponent
 		super(store, httpSv);
 
 		this.pageData = {
-			title: 'Editar',
+			title: 'Usuarios',
 			loaded: true,
 			breadcrumbs: [
 				{

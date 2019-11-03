@@ -79,20 +79,20 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     this.areas = [];
     this.especialidades = [];
     this.tipos = [];
-    this.admService.loadUser().subscribe(users => {
-      this.users = users.results;
+    this.admService.loadUserSP().subscribe(users => {
+      this.users = users;
       this.loadOptionsUsers();
     });
-    this.admService.loadAreas().subscribe(areas => {
-      this.areas = areas.results;
+    this.admService.loadAreasSP().subscribe(areas => {
+      this.areas = areas;
       this.loadOptionsAreas();
     });
-    this.admService.loadEspecialidades().subscribe(especialidades => {
-      this.especialidades = especialidades.results;
+    this.admService.loadEspecialidadesSP().subscribe(especialidades => {
+      this.especialidades = especialidades;
       this.loadOptionsEsp();
     });
-    this.admService.loadTPersonal().subscribe(tipos => {
-      this.tipos = tipos.results;
+    this.admService.loadTPersonalSP().subscribe(tipos => {
+      this.tipos = tipos;
       this.loadOptionsTipos();
     });
     this.pageNum = 1;
@@ -177,7 +177,15 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   initBusForm() {
     this.busForm = this.formBuilder.group({
       opBus: ["", Validators.required],
-      campo: ["", [Validators.required, Validators.pattern("[0-9]*"),Validators.minLength(1),Validators.maxLength(8)]]
+      campo: [
+        "",
+        [
+          Validators.required,
+          Validators.pattern("[0-9]*"),
+          Validators.minLength(1),
+          Validators.maxLength(8)
+        ]
+      ]
     });
   }
   buscar(busca: FormGroup) {
@@ -261,7 +269,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       direccion: ["", Validators.required],
       area: ["", Validators.required],
       tipo_personal: ["", Validators.required],
-      especialidad: ["", Validators.required]
+      especialidad: [""]
     });
   }
   //agrega area a la bd
@@ -284,7 +292,11 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     footer: Content<T> = null,
     row: Personal
   ) {
-    this.initPersonalForm(row);
+    if (row.especialidad) {
+      this.initPersonalForm(row, row.especialidad.nombre);
+    } else {
+      this.initPersonalForm(row, "Ninguna");
+    }
     this.modal.open({
       body: body,
       header: header,
@@ -296,7 +308,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     this.modal.close();
   }
 
-  initPersonalForm(data: Personal) {
+  initPersonalForm(data: Personal, especialidad: string) {
     this.personalForm = this.formBuilder.group({
       user: [data.user.username ? data.user.username : "", Validators.required],
       area: [data.area.nombre ? data.area.nombre : "", Validators.required],
@@ -304,10 +316,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         data.tipo_personal.nombre ? data.tipo_personal.nombre : "",
         Validators.required
       ],
-      especialidad: [
-        data.especialidad.nombre ? data.especialidad.nombre : "Ninguna",
-        Validators.required
-      ],
+      especialidad: [(especialidad)],
       dni: [
         data.apellido_materno ? data.apellido_materno : "",
         Validators.required

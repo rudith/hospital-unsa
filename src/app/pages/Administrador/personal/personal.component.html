@@ -35,8 +35,13 @@
           formControlName="campo"
         >
         </tc-input>
-        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-          *ngIf="busForm.controls.campo.touched && busForm.controls.campo.invalid">
+        <tc-form-description
+          [tcColor]="'#e24d4d'"
+          [tcFontSize]="'0.8em'"
+          *ngIf="
+            busForm.controls.campo.touched && busForm.controls.campo.invalid
+          "
+        >
           Ingrese solo numeros
         </tc-form-description>
       </tc-form-group>
@@ -86,7 +91,7 @@
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Especialidad
           </th>
-          
+
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Ver más
           </th>
@@ -183,10 +188,12 @@
           </div>
 
           <div class=" col-sm-6">
-            <tc-form-label class="mb-md-0">nombres:</tc-form-label>
+            <tc-form-label class="mb-md-0">Nombres:</tc-form-label>
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="nombres"
+              [charLimiting]="20"
+              pattern="[a-zA-Z]*"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -196,16 +203,18 @@
                 appointmentForm.controls.nombres.invalid
               "
             >
-              Error!
+              Ingrese Nombre del personal
             </tc-form-description>
           </div>
         </div>
         <div class="row">
           <div class=" col-sm-4">
-            <tc-form-label class="mb-md-0">apellido Paterno:</tc-form-label>
+            <tc-form-label class="mb-md-0">Apellido Paterno:</tc-form-label>
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="apellido_paterno"
+              [charLimiting]="20"
+              pattern="[a-zA-Z]*"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -215,7 +224,7 @@
                 appointmentForm.controls.apellido_paterno.invalid
               "
             >
-              Error!
+              Ingrese Apellido Paterno del personal
             </tc-form-description>
           </div>
           <div class=" col-sm-4">
@@ -223,6 +232,8 @@
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="apellido_materno"
+              [charLimiting]="20"
+              pattern="[a-zA-Z]*"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -232,7 +243,7 @@
                 appointmentForm.controls.apellido_materno.invalid
               "
             >
-              Error!
+              Ingrese Apellido Materno del personal
             </tc-form-description>
           </div>
           <div class=" col-sm-4">
@@ -240,6 +251,9 @@
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="dni"
+              [type]="'number'"
+              [charLimiting]="8"
+              pattern="[0-9]{8}"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -249,16 +263,19 @@
                 appointmentForm.controls.dni.invalid
               "
             >
-              Error!
+              Ingrese DNI del personal
             </tc-form-description>
           </div>
         </div>
         <div class="row">
           <div class=" col-sm-6    ">
-            <tc-form-label class="mb-md-0">celular:</tc-form-label>
+            <tc-form-label class="mb-md-0">Celular:</tc-form-label>
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="celular"
+              [type]="'number'"
+              [charLimiting]="6"
+              pattern="[0-9]{6}"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -268,15 +285,18 @@
                 appointmentForm.controls.celular.invalid
               "
             >
-              Error!
+              Ingrese celular del personal
             </tc-form-description>
           </div>
 
           <div class=" col-sm-6">
-            <tc-form-label class="mb-md-0">telefono:</tc-form-label>
+            <tc-form-label class="mb-md-0">Teléfono:</tc-form-label>
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="telefono"
+              [type]="'number'"
+              [charLimiting]="9"
+              pattern="[0-9]{9}"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -286,7 +306,7 @@
                 appointmentForm.controls.telefono.invalid
               "
             >
-              Error!
+              Ingrese telefono del personal
             </tc-form-description>
           </div>
         </div>
@@ -305,7 +325,7 @@
                 appointmentForm.controls.direccion.invalid
               "
             >
-              Error!
+              Ingrese dirección del personal
             </tc-form-description>
           </div>
         </div>

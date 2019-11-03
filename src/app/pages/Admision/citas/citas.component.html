@@ -1,9 +1,33 @@
-<p-confirmDialog
-  [style]="{ background: 'rgb(255, 190, 50)', opacity: '0.8' }"
-  acceptLabel="Si"
-  header="Cancelar Cita"
-  icon="pi pi-exclamation-triangle"
-></p-confirmDialog>
+<ng-container>
+  <ng-template #modalConf1>
+    <p>¿Continuar con esta acción?</p>
+  </ng-template>
+
+  <ng-template #modalConf2>
+    <h5>Cancelar Cita</h5>
+  </ng-template>
+
+  <ng-template #modalConf3>
+    <div class="row actions justify-content-between">
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'success'"
+        (click)="CancelarCita()"
+      >
+        Si
+      </button>
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'error'"
+        (click)="closeModalConf()"
+      >
+        No
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
 <form [formGroup]="busForm" class="col-sm-12">
   <div class="row">
     <div class="col-md-2">
@@ -20,7 +44,7 @@
     </div>
     <div class="col-md-6">
       <tc-form-group>
-        <tc-input 
+        <tc-input
           *ngIf="opBus == 0"
           [type]="'number'"
           [suffixIcon]="'icofont-search-document'"
@@ -30,6 +54,8 @@
         <tc-input
           *ngIf="opBus == 1"
           [type]="'number'"
+          [charLimiting]="8"
+          pattern="[0-9]{8}"
           [suffixIcon]="'icofont-search-document'"
           [placeholder]="'DNI (8 digitos)'"
           formControlName="campo"
@@ -38,7 +64,7 @@
           *ngIf="opBus == 2"
           [placeholder]="'Ingrese especialidad a buscar'"
           [charLimiting]="20"
-          type="text"
+          pattern="[a-zA-Z]*"
           [suffixIcon]="'icofont-search-document'"
           formControlName="campo"
         >
@@ -136,7 +162,7 @@
 						</td>
 						-->
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{row.fechaSeparacion}}
+            {{ row.fechaSeparacion }}
           </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.updated_at.substring(0, 10) }}
@@ -171,7 +197,9 @@
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             <div class="actions">
               <button
-                [disabled]="row.estadoCita == 'Cancelado'  || row.estadoCita == 'Atendido'"
+                [disabled]="
+                  row.estadoCita == 'Cancelado' || row.estadoCita == 'Atendido'
+                "
                 class="col-6"
                 tc-button
                 [afterIcon]="'icofont-ui-delete'"
@@ -179,7 +207,9 @@
                 [square]="true"
                 [tcShape]="500"
                 [size]="'sm'"
-                (click)="CancelarCita(row.id)"
+                (click)="
+                  openModalCancelar(modalConf1, modalConf2, modalConf3, row.id)
+                "
               ></button>
             </div>
           </td>
@@ -236,6 +266,16 @@
           (click)="loadOptionsMedEsp(appointmentForm.get('especialidad').value)"
         >
         </tc-select>
+        <tc-form-description
+        [tcColor]="'#e24d4d'"
+        [tcFontSize]="'0.8em'"
+        *ngIf="
+          appointmentForm.controls.especialidad.untouched &&
+          appointmentForm.controls.especialidad.invalid
+        "
+      >
+        Seleccione una especialidad
+      </tc-form-description>
         <tc-form-label>Médico</tc-form-label>
         <tc-select
           [placeholder]="medSelectedName"
@@ -243,6 +283,16 @@
           [options]="medOption"
         >
         </tc-select>
+        <tc-form-description
+        [tcColor]="'#e24d4d'"
+        [tcFontSize]="'0.8em'"
+        *ngIf="
+          appointmentForm.controls.medico.untouched &&
+          appointmentForm.controls.medico.invalid
+        "
+      >
+        Seleccione un Médico
+      </tc-form-description>
         <tc-form-label
           >Fecha de Separación(A partir del dia Actual)</tc-form-label
         >

@@ -171,12 +171,11 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   }
 
   //Metodo para inicializar el form que mostrara datos del paciente en el modal
-  initFormModCita(data:any ) {
+  initFormModCita(data:any) {
     this.n=data.numeroHistoria.nombres+" "+data.numeroHistoria.apellido_paterno+" "+data.numeroHistoria.apellido_materno;
 		this.cabTri = this.formBuilder.group({
 			numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria:'', Validators.required],
-      dni: [data.numeroHistoria.dni ?data.numeroHistoria.dni : '', Validators.required],
-      nombres:[this.n ? this.n:'', Validators.required]
+      dni: [data.numeroHistoria.dni ?data.numeroHistoria.dni : '', Validators.required]
 		});
 	}
   

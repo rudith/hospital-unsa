@@ -183,15 +183,13 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   public prevPage() {
     if (this.pageNum > 1) {
       this.pageNum--;
-      console.log(this.pageNum);
-      this.httpSv
-        .loadCitaPagination(this.data.previous)
-        .subscribe(citalista => {
+      this.httpSv.loadCitaPagination(this.data.previous).subscribe(citalista => {
           this.data = citalista;
           this.citasEdit = this.data.results;
         });
     }
   }
+
   loadOptionsEsp() {
     for (let i in this.especialidades) {
       this.espOption[i] = {
@@ -300,14 +298,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       newAppointment.fechaAtencion = formatDate(
         form.value.fechaAtencion,
         "yyyy-MM-dd",
-        "en-US",
-        "+0530"
+        "en-US",'+0530'
       );
       newAppointment.fechaSeparacion = formatDate(
         this.today,
         "yyyy-MM-dd",
-        "en-US",
-        "+0530"
+        "en-US",'+0530'
       );
       //newAppointment.fechaAtencion = this.cita.fechaAtencion;
       newAppointment.especialidad = form.value.especialidad;

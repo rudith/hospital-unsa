@@ -23,6 +23,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   ordenes:Orden[];
   patientForm: FormGroup;
   cabecera: Cabeceralab[];
+  today:Date;
 
   constructor(
 		store: Store<IAppState>,
@@ -85,21 +86,23 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 	initPatientForm(data:Orden) {
 		this.patientForm = this.formBuilder.group({
-      nombre: [data.nombre?data.nombre: '', Validators.required],
-      dni: [ data.dni?data.dni:'', Validators.required],
-			fecha: ['', Validators.required],
-			orden: [data.orden?data.orden:'', Validators.required],
+			nombre: [data.nombre?data.nombre: '', Validators.required],
+     		dni: [ data.dni?data.dni:'', Validators.required],
+			orden: [data.orden?data.orden:'', ],
 			observaciones: ['', Validators.required],
-      tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required],
+     		tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required],
 		});
   }
 
   addExamen(form: FormGroup) {
-		if (form.valid) {
+	
+	if (form.valid) {
+			this.today = new Date();
       let newCabecera: Cabeceralab = form.value;
       newCabecera.nombre= form.value.nombre;
       newCabecera.dni=form.value.dni;
-      newCabecera.fecha= formatDate(form.value.fecha, 'yyyy-MM-dd', 'en-US', '+0530');
+	  newCabecera.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US','+0530');
+	  console.log(newCabecera.fecha);
       newCabecera.tipoExam=form.value.tipoExam;
       newCabecera.orden=form.value.orden;
       newCabecera.observaciones=form.value.observaciones;

@@ -256,10 +256,11 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   addConsult(form: FormGroup) {
     if (form.valid) {
       let newConsult: Consulta = form.value;
-      newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US', '+0530');
+      newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US');
       newConsult.numeroHistoria=this.idRecibido;
       newConsult.triaje=this.triajeRecibido.id;
       newConsult.medico=this.idMedRecibido;
+      console.log(newConsult.ordenExam);
       this.httpSv.crearConsulta(newConsult);
       this.Atender(this.idCitaRecibida);
       this.closeModalC();

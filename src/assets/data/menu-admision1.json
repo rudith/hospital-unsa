@@ -18,5 +18,13 @@
 		},
 		"routing": "citas",
 		"layout": "vertical"
+	},
+	{
+		"title": "Solicitudes de Laboratorio",
+		"icon": {
+			"class": "icofont-stethoscope-alt"
+		},
+		"routing": "conex-lab",
+		"layout": "vertical"
 	}
 ]

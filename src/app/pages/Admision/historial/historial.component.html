@@ -28,16 +28,47 @@
                 [placeholder]="'Opcion'"
                 formControlName="opBus"
                 [options]="busqOption"
+                (click)="selectOpt()"
               >
               </tc-select>
             </tc-form-group>
           </div>
           <div class="col-md-5">
             <tc-form-group>
-              <tc-input
-                [placeholder]="'Ingrese Dato a buscar*'"
-                formControlName="datoBus"
-              ></tc-input>
+              <tc-input 
+          *ngIf="opBus == 0"
+          [type]="'number'"
+          [suffixIcon]="'icofont-search-document'"
+          [placeholder]="'Seleccione una opcion'"
+          formControlName="datoBus"
+        ></tc-input>
+        <tc-input
+          *ngIf="opBus == 1"
+
+          [type]="'number'"
+          [suffixIcon]="'icofont-search-document'"
+          [placeholder]="'DNI (8 digitos)'"
+          formControlName="datoBus"
+          [charLimiting]="8"
+        ></tc-input>
+        <tc-input
+          *ngIf="opBus == 2"
+          [placeholder]="'Ingrese el Número de Historia'"
+          [charLimiting]="15"
+          type="text"
+          [suffixIcon]="'icofont-search-document'"
+          formControlName="datoBus"
+        >
+        </tc-input>
+        <tc-input
+          *ngIf="opBus == 3"
+          [placeholder]="'Ingrese el nombre o apellido'"
+          [charLimiting]="25"
+          type="text"
+          [suffixIcon]="'icofont-search-document'"
+          formControlName="datoBus"
+        >
+        </tc-input>
               <tc-form-description
                 [tcColor]="'#e24d4d'"
                 [tcFontSize]="'0.8em'"
@@ -152,7 +183,7 @@
               [tcBorderColor]="'#3f51b5'"
               [size]="'sm'"
               (click)="
-                openModal(modalCrearCBody, 'Agregar cita', modalCrearCFooter);
+              openModal(modalCrearCBody, 'Agregar cita', modalCrearCFooter);
                 getHistoria(row.id)
               "
             ></button>

@@ -13,9 +13,7 @@ import { Especialidad } from "../../interfaces/especialidad";
 import { Medico } from "../../interfaces/medico";
 import { User } from "../../interfaces/user";
 import { Triaje } from "../../interfaces/triaje";
-import { ConsultaCompleta } from "../../interfaces/consulta-c";
 import { Consulta } from "../../interfaces/consulta";
-import { Cabeceralab } from "../../interfaces/cabeceralab";
 import { CitaM } from "../../interfaces/cita-m";
 import { ToastrService } from "ngx-toastr";
 import { Examen } from "../../interfaces/examen";
@@ -25,8 +23,10 @@ import { citaLista } from "../../interfaces/citaLista";
 import { ConsultasPaginadas } from '../../interfaces/consultas-paginadas';
 import { HistorialLista } from '../../interfaces/historial-lista';
 import { EspecialidadLista } from '../../interfaces/especialidad-lista';
-import { personalLista } from '../../interfaces/personalLista';
 import { TCModalService } from '../../ui/services/modal/modal.service';
+import { SolicitudLista } from '../../interfaces/solicitud-lista';
+import { Orden } from '../../interfaces/orden';
+
 
 
 @Injectable({
@@ -49,7 +49,6 @@ export class HttpService {
   public MedicoGetUpdate: Medico[] = [];
   public historia: Historial;
   public historiaLis:HistorialLista;
-  public cabecera: Cabeceralab[] = [];
   public detalle: Detalle[] = [];
   public cita: Cita[] = [];
   public examen: Examen[] = [];
@@ -169,8 +168,17 @@ export class HttpService {
       "http://18.216.2.122:9000/consultorio/citasenespera/"
     );
   }
+  loadSolicitudes():Observable<SolicitudLista>{
+    return this.http.get<SolicitudLista>(
+      "http://18.216.2.122:9000/consultorio/ver-solicitudes/"
+    );
+  }
+  loadSolicitudesPag(url:string):Observable<SolicitudLista>{
+    return this.http.get<SolicitudLista>(url );
+  }
+
   loadCitasTPag(url:string): Observable<citaLista> {
-    return this.http.get<citaLista>(url );
+    return this.http.get<citaLista>(url);
   }
   loadCitasEdit(): Observable<any> {
     return this.http.get<any>(
@@ -195,6 +203,7 @@ export class HttpService {
       "http://18.216.2.122:9000/admision/grupo-sangre/"
     );
   }
+  
   loadDistrito(): Observable<Distrito[]> {
     return this.http.get<Distrito[]>(
       "http://18.216.2.122:9000/admision/distritos/"
@@ -208,12 +217,6 @@ export class HttpService {
   loadProvinciaId(id: number): Observable<Provincia[]> {
     return this.http.get<Provincia[]>(
       "http://18.216.2.122:9000/admision/buscarprovincias/" + id + "/"
-    );
-  }
-
-  loadMedicosXesp(): Observable<Provincia[]> {
-    return this.http.get<Provincia[]>(
-      "http://18.216.2.122:9000/admision/provincias/"
     );
   }
   loadDepartamento(): Observable<Departamento[]> {
@@ -257,6 +260,30 @@ export class HttpService {
         }
       );
   }
+  createOrden(newOrden:Orden,modal:TCModalService){
+    console.log(newOrden);    
+    this.http
+      .post<any>("http://18.216.2.122:9000/consultorio/crear-orden/", {
+        numeroHistoria: newOrden.numeroHistoria,
+        dni: newOrden.dni,
+        nombre: newOrden.nombre,
+        medico: newOrden.medico,
+        orden : newOrden.orden,
+        tipoExam: newOrden.tipoExam,
+        fecha: newOrden.fecha,
+      })
+      .subscribe(
+        data => {
+          this.toastr.success("Orden Creada correctamente");
+          console.log("CREAR Historial Completo");
+          modal.close();
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo crear la Orden");
+        }
+      );
+  }
   createHISTORIAL(newHistoria: Historial,modal:TCModalService) {
     console.log(newHistoria);
     this.http
@@ -291,7 +318,6 @@ export class HttpService {
         error => {
           console.log(error.message);
           this.toastr.error("No se pudo crear el Historial");
-          this.toastr.warning("Recuerde que no debe repetirse el DNI");
         }
       );
   }
@@ -333,15 +359,16 @@ export class HttpService {
     );
   }
 
-  searcMedxEspPag(id: number): Observable<personalLista> {
+ 
+
+  searcMedxEspPag(id: number): Observable<Personal[]> {
     console.log(id);
-    return this.http.get<personalLista>(
-      "http://18.216.2.122:9000/administrador/personalporespecialidad/?id=" + id
+    return this.http.get<Personal[]>("http://18.216.2.122:9000/administrador/personalporespecialidad/?id="+id
     );
   }
 
 
-  createCITA(newCita: Cita) {
+  createCITA(newCita: Cita,modal:TCModalService) {
     this.http
       .post<any>("http://18.216.2.122:9000/consultorio/crear-cita/", {
         numeroRecibo: newCita.numeroRecibo,
@@ -359,6 +386,7 @@ export class HttpService {
         data => {
           newCita = <Cita>{};
           console.log("CITA Completo");
+          modal.close();
           this.toastr.success("Cita Agregada correctamente");},
         error => {
           console.log(error.message);
@@ -475,6 +503,7 @@ export class HttpService {
         tratamiento: newConsulta.tratamiento,
         proximaCita: newConsulta.proximaCita,
         triaje: newConsulta.triaje,
+        ordenExam:newConsulta.ordenExam,
         numeroHistoria: newConsulta.numeroHistoria,
         medico: newConsulta.medico,
       })

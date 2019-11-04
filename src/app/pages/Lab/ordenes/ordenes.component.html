@@ -25,12 +25,12 @@
             </ng-template>
         </tc-table-col>
 
-        <tc-table-col [columnTitle]="'Atender'">
+        <tc-table-col [columnTitle]="'Agregar Cabecera'">
             <ng-template #tableTDTemplate let-row="row">
                 <div class="actions">
                     <button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
                         [tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
-                        (click)="openModalH(modalCrearHBody, 'Cabecera', modalCrearHFooter,row)">Atender</button>
+                        (click)="openModalH(modalCrearHBody, 'Cabecera', modalCrearHFooter,row)">Agregar</button>
                 </div>
             </ng-template>
         </tc-table-col>
@@ -46,7 +46,9 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Nombre</tc-form-label>
-						<tc-input [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
+						<tc-input [bgColor]="'#fff'"
+						[borderColor]="'#3f51b5'"
+						[color]="'#3f51b5'" [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>
@@ -54,33 +56,25 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>DNI</tc-form-label>
-						<tc-input [placeholder]="'DNI'" formControlName="dni" readonly="readonly"></tc-input>
+						<tc-input [bgColor]="'#fff'"
+						[borderColor]="'#3f51b5'"
+						[color]="'#3f51b5'" [placeholder]="'DNI'" formControlName="dni" readonly="readonly"></tc-input>
 					</tc-form-group>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-12 col-sm-6">
-					<tc-form-group>
-                        <tc-form-label>Fecha</tc-form-label>
-						<tc-input type="date" formControlName="fecha"></tc-input>
-						<tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-							*ngIf="patientForm.controls.fecha.touched && patientForm.controls.fecha.invalid ">
-							Ingrese Fecha de hoy aaaa-mm-dd
-						</tc-form-description>
-					</tc-form-group>
-				</div>
-			</div>
 
             <tc-form-group>
                 <tc-form-label>Orden</tc-form-label>
-                <tc-input [placeholder]="'Orden'" formControlName="orden" readonly="readonly"></tc-input>
+                <tc-input [bgColor]="'#fff'"
+				[borderColor]="'#3f51b5'"
+				[color]="'#3f51b5'" [placeholder]="'Orden'" formControlName="orden" readonly="readonly"></tc-input>
             </tc-form-group>
 
 
 			<tc-form-group>
                 <tc-form-label>Observaciones</tc-form-label>
-				<tc-input [placeholder]="'Agregar Observaciones*'" formControlName="observaciones"></tc-input>
+				<tc-input  [placeholder]="'Agregar Observaciones*'" formControlName="observaciones"></tc-input>
 				<tc-form-description [tcColor]="'#e24d4d'"
 					*ngIf="patientForm.controls.observaciones.touched && patientForm.controls.observaciones.invalid ">
 					Este campo solo debe tener letras

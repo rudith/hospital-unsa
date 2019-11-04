@@ -1,0 +1,234 @@
+<div class="row">
+  <div class="col col-12 ">
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <button tc-button [afterIcon]="'icofont-plus'" [block]="true" [view]="'info'" [tcShape]="20"
+          (click)="openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)">
+          Agregar Orden
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-12">
+  <br />
+  <tc-card *ngIf="solicitudes?.length" class="mb-0">
+    <div class="table-wrap">
+      <table class="table-box">
+        <thead>
+          <tr>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Numero de Historia
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Nombre del Paciente
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Origen
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Medico
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Tipo de Examen
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Fecha
+            </th>
+
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Crear Orden
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of solicitudes">
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.numeroHistoria.numeroHistoria }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.numeroHistoria.nombres.concat(" ",row.numeroHistoria.apellido_paterno)}}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.medico.especialidad }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.medico.nombres.concat(" ",row.medico.apellido_paterno) }}
+            </td>
+
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.ordenExam }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.fechaCreacion }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              <div class="actions">
+                <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500"
+                  [tcColor]="['#3f51b5', '#fff']" [tcBgColor]="['transparent', '#3f51b5']" [tcBorderColor]="'#3f51b5'"
+                  [size]="'sm'" (click)="openModalVerMas(modalBodyH,'Crear Orden',modalFooterH,row)"></button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination-ul">
+        <li class="pagination-li prev">
+          <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
+            <i class="icofont-simple-left"></i>
+          </a>
+        </li>
+
+        <li class="pagination-li next">
+          <a class="pagination-link" (click)="nextPage()">
+            <i class="icofont-simple-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </tc-card>
+</div>
+
+
+<ng-container>
+  <ng-template #modalBodyH>
+    <form [formGroup]="historiaForm" novalidate class="new-patient-form">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Numero de Historia</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'name'"
+              formControlName="numeroHistoria" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>DNI</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'DNI'"
+              formControlName="dni" readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Nombre</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Nombre'"
+              formControlName="nombre" readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Medico</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'"
+              [placeholder]="'Apellido Paterno'" formControlName="medico" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12">
+          <tc-form-group>
+            <tc-form-label>Orden</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'"
+              [placeholder]="'Apellido Materno'" formControlName="orden" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Fecha </tc-form-label>
+            <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Edad'"
+              formControlName="fecha" readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+        <div class="col-12 col-sm-6">
+          <tc-form-label>Tipo de Examen </tc-form-label>
+          <tc-form-group>
+            <tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
+            </tc-select>
+          </tc-form-group>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooterH>
+    <div class="actions justify-content-between">
+      <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">
+        Cancelar
+      </button>
+      <button tc-button [view]="'info'" [disabled]="historiaForm.invalid" (click)="crearOrden(historiaForm)">
+        ACEPTAR
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+<!--End Modal Crear orden Mas-->
+
+<ng-container>
+    <ng-template #modalBodyE>
+      <form [formGroup]="historiaFormE" novalidate class="new-patient-form">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <tc-form-group>
+                  <tc-form-label>Fecha </tc-form-label>
+                  <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Fecha'"
+                    formControlName="fecha" readonly="readonly"></tc-input>
+                </tc-form-group>
+              </div>
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+              <tc-form-label>DNI</tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'DNI'"
+                formControlName="dni" ></tc-input>
+            </tc-form-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <tc-form-group>
+              <tc-form-label>Nombre</tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Nombre'"
+                formControlName="nombre" ></tc-input>
+            </tc-form-group>
+          </div>
+
+  
+  
+        </div>
+        
+        <div class="row">
+          
+          <div class="col-12 col-sm-6">
+            <tc-form-label>Tipo de Examen </tc-form-label>
+            <tc-form-group>
+              <tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
+              </tc-select>
+            </tc-form-group>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #modalFooterE>
+      <div class="actions justify-content-between">
+        <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">
+          Cancelar
+        </button>
+        <button tc-button [view]="'info'" [disabled]="historiaFormE.invalid" (click)="crearOrdenE(historiaFormE)">
+          ACEPTAR
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+  <!--End Modal Ver Mas-->

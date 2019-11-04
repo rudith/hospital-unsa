@@ -69,6 +69,7 @@ import { PersonalComponent } from '../pages/Administrador/personal/personal.comp
 import { AreaComponent } from '../pages/Administrador/area/area.component';
 import { EspecialidadComponent } from '../pages/Administrador/especialidad/especialidad.component';
 import { TipoPersonalComponent } from '../pages/Administrador/tipo-personal/tipo-personal.component';
+import { ConexionLaboratorioComponent } from '../pages/Admision/conexion-laboratorio/conexion-laboratorio.component';
 
 
 const VERTICAL_ROUTES: Routes = [
@@ -135,6 +136,7 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'Lconsultas', component: ListarConsultasComponent },
   { path: 'laboratorio', component: LaboratorioComponent },
   { path: 'ordenes', component:OrdenesComponent},
+  { path:'conex-lab',component:ConexionLaboratorioComponent},
   { path: '**', component: Page404Component }
 ];
 

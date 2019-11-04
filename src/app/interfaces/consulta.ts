@@ -12,4 +12,5 @@ export interface Consulta {
   proximaCita: string,
   fechaCreacion:string,
   triaje: number,
+  ordenExam:string,
 }

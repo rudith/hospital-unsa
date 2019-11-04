@@ -85,6 +85,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     });
     this.admService.loadAreasSP().subscribe(areas => {
       this.areas = areas;
+      console.log(areas);
       this.loadOptionsAreas();
     });
     this.admService.loadEspecialidadesSP().subscribe(especialidades => {

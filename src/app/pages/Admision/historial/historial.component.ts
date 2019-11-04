@@ -96,13 +96,13 @@ export class HistorialComponent extends BasePageComponent
     this.provinciasOption = [];
     this.sexOption = [];
     this.ocupacionOption = [];
- 
     this.distritos = [];
     this.medOption = [];
     this.distritosOption = [];
     this.estadoCivilOption = [];
     this.medicos = [];
     this.loadData();
+    this.opBus="0";
     this.historiales = [];
     this.espOption = [];
     this.newCita = <Cita>{};
@@ -252,8 +252,7 @@ export class HistorialComponent extends BasePageComponent
       newPatient.fechaNac = formatDate(
         form.value.fechaNac,
         "yyyy-MM-dd",
-        "en-US",
-        "+0530"
+        "en-US"
       );
       newPatient.estReg = true;
       newPatient.distrito = parseInt(form.get("distrito").value);
@@ -262,12 +261,15 @@ export class HistorialComponent extends BasePageComponent
       newPatient.provincia = parseInt(form.get("distrito").value);
       
       this.httpSv.createHISTORIAL(newPatient,this.modal);
-      this.modal.close();
       this.loadHistorias();
     }
   }
   closeModal(){
     this.modal.close();
+  }
+
+  selectOpt() {
+    this.opBus = this.busForm.get("opBus").value;
   }
 
   loadData() {
@@ -276,12 +278,13 @@ export class HistorialComponent extends BasePageComponent
     this.sexOption[1] = { label: "Femenino", value: "Femenino" };
 
     //Ocupacion
-    this.ocupacionOption[0] = { label: "Profesor", value: "Profesor" };
+    this.ocupacionOption[7] = { label: "Profesor", value: "Profesor" };
     this.ocupacionOption[1] = { label: "Doctor", value: "Doctor" };
     this.ocupacionOption[2] = { label: "Licenciado", value: "Licenciado" };
     this.ocupacionOption[3] = { label: "Medico", value: "Medico" };
     this.ocupacionOption[4] = { label: "Ingeniero", value: "Ingeniero" };
     this.ocupacionOption[5] = { label: "Otro", value: "Otro" };
+    this.ocupacionOption[0] = { label: "No tiene", value: "No tiene" };
     this.ocupacionOption[6] = {
       label: "Independiente",
       value: "Independiente"
@@ -318,14 +321,7 @@ export class HistorialComponent extends BasePageComponent
     });
   }
 
-  loadSangre() {
-    for (let i in this.gruposang) {
-      this.gruposangOption[i] = {
-        label: this.gruposang[i].descripcion,
-        value: this.gruposang[i].id.toString()
-      };
-    }
-  }
+  
   loadprovincias() {
     for (let i in this.provincias) {
       this.provinciasOption[i] = {
@@ -399,25 +395,22 @@ export class HistorialComponent extends BasePageComponent
     this.numero = n;
     console.log(this.numero);
   }
+
   // add new appointment
   addAppointment(form: FormGroup) {
-    // console.log(JSON.stringify(form));
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
       newAppointment.fechaAtencion = formatDate(
         form.value.fechaSeparacion,
         "yyyy-MM-dd",
-        "en-US",
-        "+0530"
+        "en-US"
       );
       newAppointment.fechaSeparacion = formatDate(
         this.today,
         "yyyy-MM-dd",
-        "en-US",
-        "+0530"
+        "en-US"
       );
-
       newAppointment.estadoCita = "Espera";
       newAppointment.estReg = true;
       newAppointment.numeroHistoria = this.numero;
@@ -429,7 +422,7 @@ export class HistorialComponent extends BasePageComponent
         newAppointment.exonerado = true;
       }
 
-      this.httpSv.createCITA(newAppointment);
+      this.httpSv.createCITA(newAppointment,this.modal);
       
     }
   }
@@ -451,6 +444,10 @@ export class HistorialComponent extends BasePageComponent
         },
         error => {
           this.toastr.error("No encontrado");
+          this.httpSv.loadHistorias().subscribe(historiales => {
+            this.historiales=[]
+            this.historiales = historiales.results;
+          });
         }
       );
     } else if (this.opBus == "2") {
@@ -463,6 +460,10 @@ export class HistorialComponent extends BasePageComponent
         },
         error => {
           this.toastr.error("No encontrado");
+          this.httpSv.loadHistorias().subscribe(historiales => {
+            this.historiales=[]
+            this.historiales = historiales.results;
+          });
         }
       );
     } else if (this.opBus == "3") {
@@ -475,6 +476,10 @@ export class HistorialComponent extends BasePageComponent
         },
         error => {
           this.toastr.warning("No encontrado");
+          this.httpSv.loadHistorias().subscribe(historiales => {
+            this.historiales=[]
+            this.historiales = historiales.results;
+          });
         }
       );
     }
@@ -600,9 +605,9 @@ export class HistorialComponent extends BasePageComponent
       data => {
         this.perso = [];
         this.medOption = [];
-        this.perso = data.results;
-        console.log(data);
-        console.log(this.perso);
+        this.perso = data;
+        //console.log(data);
+        //console.log(this.perso);
         this.loadmedicos();
       },
       error => {}

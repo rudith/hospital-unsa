@@ -82,6 +82,7 @@ import { AreaComponent } from './Administrador/area/area.component';
 import { EspecialidadComponent } from './Administrador/especialidad/especialidad.component';
 import { TipoPersonalComponent } from './Administrador/tipo-personal/tipo-personal.component';
 import { OrdenesComponent } from './Lab/ordenes/ordenes.component';
+import { ConexionLaboratorioComponent } from './Admision/conexion-laboratorio/conexion-laboratorio.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -167,7 +168,8 @@ import { OrdenesComponent } from './Lab/ordenes/ordenes.component';
     AreaComponent,
     EspecialidadComponent,
     TipoPersonalComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    ConexionLaboratorioComponent
   ],
   exports: [],
   entryComponents: []

@@ -25,6 +25,9 @@ export class AdministradorService {
   loadAreas(): Observable<any> {
     return this.http.get<any>(this.url + "/areas/");
   }
+  loadAreasPagination(pag:string): Observable<any> {
+    return this.http.get<any>(pag);
+  }
   loadAreasSP(): Observable<any> {
     return this.http.get<any>(this.url + "/areasSP/");
   }
@@ -51,6 +54,9 @@ export class AdministradorService {
   loadEspecialidades(): Observable<any> {
     return this.http.get<any>(this.url + "/especialidad/");
   }
+  loadEspecialidadesPagination(pag:string): Observable<any> {
+    return this.http.get<any>(pag);
+  }
   loadEspecialidadesSP(): Observable<any> {
     return this.http.get<any>(this.url + "/especialidadSP/");
   }
@@ -76,6 +82,9 @@ export class AdministradorService {
   //TipoPersonal
   loadTPersonal(): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personal/");
+  }
+  loadTPersonalPagination(pag:string): Observable<any> {
+    return this.http.get<any>(pag);
   }
   loadTPersonalSP(): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personalSP/");
@@ -173,6 +182,9 @@ export class AdministradorService {
   //user
   loadUser(): Observable<any> {
     return this.http.get<any>(this.url + "/usuarios/");
+  }
+  loadUserPagination(pag:string): Observable<any> {
+    return this.http.get<any>(pag);
   }
   loadUserSP(): Observable<any> {
     return this.http.get<any>(this.url + "/usuariosSP/");

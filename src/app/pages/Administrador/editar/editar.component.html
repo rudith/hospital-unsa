@@ -71,7 +71,7 @@
           </div>
         </ng-template>
       </tc-table-col>
-      
+
       <tc-table-col [columnTitle]="'Eliminar'" [columnName]="'actions'">
         <ng-template #tableTDTemplate let-row="row">
           <div class="actions">
@@ -88,6 +88,23 @@
         </ng-template>
       </tc-table-col>
     </tc-table>
+    <ul class="pagination-ul">
+      <li class="pagination-li prev">
+        <a
+          class="pagination-link"
+          (click)="prevPage()"
+          [ngClass]="{ disabled: pageNum == 1 }"
+        >
+          <i class="icofont-simple-left"></i>
+        </a>
+      </li>
+
+      <li class="pagination-li next">
+        <a class="pagination-link" (click)="nextPage()">
+          <i class="icofont-simple-right"></i>
+        </a>
+      </li>
+    </ul>
   </tc-card>
 </div>
 

@@ -171,24 +171,24 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   }
 
   //Metodo para inicializar el form que mostrara datos del paciente en el modal
-  initFormModCita(data:any ) {
-    this.n=data.numeroHistoria.nombres+" "+data.numeroHistoria.apellido_paterno;
+  initFormModCita(data:any) {
+    this.n=data.numeroHistoria.nombres+" "+data.numeroHistoria.apellido_paterno+" "+data.numeroHistoria.apellido_materno;
 		this.cabTri = this.formBuilder.group({
 			numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria:'', Validators.required],
-            dni: [data.numeroHistoria.dni ?data.numeroHistoria.dni : '', Validators.required],
-            nombres:[this.n ? this.n:'', Validators.required]
+      dni: [data.numeroHistoria.dni ?data.numeroHistoria.dni : '', Validators.required],
+      nombres:[this.n ? this.n:'', Validators.required]
 		});
 	}
   
   //Metodo para inicializar el form en donde se llenaran los datos a actualizar
   initPatientForm2(ci: Cita) {
     this.patientForm2 = this.fb.group({
-      talla: ['', [Validators.required, Validators.pattern('[0-9].[0-9]*')]],
-      peso: ['', [Validators.required, Validators.pattern('[0-9].[0-9]')]],
-      temperatura: ['', [Validators.required, Validators.pattern('[0-9].[0-9]')]],
-      frecuenciaR: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      frecuenciaC: ['', [Validators.required, Validators.pattern('[0-9]*')]],
-      presionArt: ['', [Validators.required, Validators.pattern('[0-9]/[0-9]')]],
+      talla: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
+      peso: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
+      temperatura: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
+      frecuenciaR: ['', [Validators.required, Validators.pattern('^[0-9]+')]],
+      frecuenciaC: ['', [Validators.required, Validators.pattern('^[0-9]+')]],
+      presionArt: ['', [Validators.required, Validators.pattern('^([0-9]+[/][0-9]+)?$')]],
       numeroHistoria: [ci.numeroHistoria ? ci.numeroHistoria : '', Validators.required],//capturara el id de historial
       cita: [ci.id ? ci.id : '', Validators.required],   //ID de la cita
     });

@@ -7232,7 +7232,7 @@ let ListarDatosComponent = class ListarDatosComponent extends _base_page__WEBPAC
     }
     //Metodo para inicializar el form que mostrara datos del paciente en el modal
     initFormModCita(data) {
-        this.n = data.numeroHistoria.nombres + " " + data.numeroHistoria.apellido_paterno;
+        this.n = data.numeroHistoria.nombres + " " + data.numeroHistoria.apellido_paterno + " " + data.numeroHistoria.apellido_materno;
         this.cabTri = this.formBuilder.group({
             numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             dni: [data.numeroHistoria.dni ? data.numeroHistoria.dni : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
@@ -7242,12 +7242,12 @@ let ListarDatosComponent = class ListarDatosComponent extends _base_page__WEBPAC
     //Metodo para inicializar el form en donde se llenaran los datos a actualizar
     initPatientForm2(ci) {
         this.patientForm2 = this.fb.group({
-            talla: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[0-9].[0-9]*')]],
-            peso: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[0-9].[0-9]')]],
-            temperatura: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[0-9].[0-9]')]],
-            frecuenciaR: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[0-9]*')]],
-            frecuenciaC: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[0-9]*')]],
-            presionArt: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[0-9]/[0-9]')]],
+            talla: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+([.][0-9]+)?$')]],
+            peso: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+([.][0-9]+)?$')]],
+            temperatura: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+([.][0-9]+)?$')]],
+            frecuenciaR: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+')]],
+            frecuenciaC: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^[0-9]+')]],
+            presionArt: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('^([0-9]+[/][0-9]+)?$')]],
             numeroHistoria: [ci.numeroHistoria ? ci.numeroHistoria : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             cita: [ci.id ? ci.id : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
         });

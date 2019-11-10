@@ -117,7 +117,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	//Muestra el listado de exmenes en la tabla 
 	loadExamen() {
 		this.labService.loadExamen().subscribe(exam => {
-
 			this.data = exam;
 			this.examen = exam.results;
 

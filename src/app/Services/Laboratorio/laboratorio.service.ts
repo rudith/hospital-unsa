@@ -11,6 +11,7 @@ import {Examen} from '../../interfaces/examen';
 import {Detalle} from '../../interfaces/detalle';
 import {Orden	} from '../../interfaces/orden';
 import {ExamenLista} from '../../interfaces/examen-lista';
+import { OrdenLista } from '../../interfaces/orden-lista';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class LaboratorioService {
 	public cita: Cita[]=[];
 	public examen:Examen[]=[];
 	public examneLis:ExamenLista[]=[];
+	public ordenlis:OrdenLista[]=[];
 	fi:string;
 	ff:string;
   
@@ -40,10 +42,7 @@ export class LaboratorioService {
   private handleError(error: any) {
 		return observableThrowError(error.error || 'Server error');
   }
-  /*  
-	 * autor: Milagros Motta R.
-	 * searchExamenbDni: Busca el listado de examenes por DNI.
-	 */
+ 
 	searchExamenbDni(dni:string): Observable<Examen[]>{
 		return this.http.get<Examen[]>(this.url+'/filtro/DNI/?dni='+ dni);
 	}
@@ -62,19 +61,26 @@ export class LaboratorioService {
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>(this.url+"/TipoExamen/");
 	}
-	loadExamen():Observable<ExamenLista> {
-		return this.http.get<ExamenLista> (this.url+"/ExamenLabCab/");
-	}
+	
 	loadExamenPagination(url: string): Observable<ExamenLista> {
 		return this.http.get<ExamenLista>(url);
 	  }
-	loadOrden():Observable<Orden[]>{
-		return this.http.get<Orden[]>("http://18.216.2.122:9000/consultorio/ver-orden/");
+	loadOrdenPAgination(url:string): Observable<OrdenLista>{
+		return this.http.get<OrdenLista>(url)
+	}
+	loadOrden():Observable<OrdenLista>{
+		return this.http.get<OrdenLista>("http://18.216.2.122:9000/consultorio/ver-orden/");
+	}
+	loadExamen():Observable<ExamenLista> {
+		return this.http.get<ExamenLista> (this.url+"/ExamenLabCab/");
 	}
 	
 	loadTabla(idEx:number):Observable<Detalle[]>{
 		console.log("ENTRA AL SERVICIO de tabla");
 		return this.http.get<Detalle[]>(this.url+'/filtro/Detalles/?id='+ idEx)
+	}
+	cambioEstado(id:number):Observable<Orden>{
+		return this.http.get<Orden>('http://18.216.2.122:9000/consultorio/atenderOrden/'+id);
 	}
 
 	createDetalle(detalle: Detalle){
@@ -100,14 +106,16 @@ export class LaboratorioService {
 	//crear cabecer
 	createCabecera(newCabecera: Cabeceralab) {
 		console.log(newCabecera);
+
 		this.http.post<any>(this.url+'/ExamenLabCab/',
+		
 			{
 				nombre: newCabecera.nombre,
 				dni: newCabecera.dni,
 				orden: newCabecera.orden,
 				fecha: newCabecera.fecha,
 				observaciones: newCabecera.observaciones,
-				tipoExam: newCabecera.tipoExam,
+				tipoExam: newCabecera.tipoExam.id,
 			}).subscribe(
 				data => {
 					this.toastr.success("","Se ha creado la cabecera");

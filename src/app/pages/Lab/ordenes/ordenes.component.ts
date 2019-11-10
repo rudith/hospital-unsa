@@ -11,7 +11,11 @@ import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.se
 import {Orden } from '../../../interfaces/orden';
 import { Content } from '../../../ui/interfaces/modal';
 import { Cabeceralab } from '../../../interfaces/cabeceralab';
+import {OrdenLista} from '../../../interfaces/orden-lista';
 import { formatDate } from '@angular/common';
+import {Examen} from '../../../interfaces/examen';
+import { Detalle } from '../../../interfaces/detalle'; 
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-ordenes',
@@ -24,6 +28,11 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   patientForm: FormGroup;
   cabecera: Cabeceralab[];
   today:Date;
+  ordenLista:OrdenLista;
+  data:OrdenLista = <OrdenLista>{};
+  pageNum: number;
+  rr: number;
+  detalleForm: FormGroup;
 
   constructor(
 		store: Store<IAppState>,
@@ -57,7 +66,8 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 				}
 			]
     };
-    this.ordenes=[];
+	this.pageNum = 1;
+	this.ordenes=[];
     this.loadOrdenes();
 	}
   ngOnInit() {
@@ -66,9 +76,32 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   ngOnChanges($event) {
 		console.log();
   }
+
+  public nextPage() {
+	if (this.data.next) {
+		this.pageNum++;
+		this.labService.loadOrdenPAgination(this.data.next).subscribe(ord => {
+			this.data = ord;
+			this.ordenes = ord.results;
+		});
+	}
+}
+
+  public prevPage() {
+	if (this.pageNum > 1) {
+		this.pageNum--;
+		this.labService.loadOrdenPAgination(this.data.previous).subscribe(ord => {
+			this.data = ord;
+			this.ordenes = ord.results;
+		});
+	}
+}
+
+
   loadOrdenes() {
 		this.labService.loadOrden().subscribe(ord => {
-			this.ordenes = ord;
+			this.data=ord;
+			this.ordenes=ord.results;
 		});
   }
   
@@ -90,8 +123,10 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
      		dni: [ data.dni?data.dni:'', Validators.required],
 			orden: [data.orden?data.orden:'', ],
 			observaciones: ['', Validators.required],
-     		tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required],
+			tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required],
+			fecha:['',Validators.required], 
 		});
+		console.log("fecha de orden"+data.tipoExam);
   }
 
   addExamen(form: FormGroup) {
@@ -103,13 +138,60 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
       newCabecera.dni=form.value.dni;
 	  newCabecera.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US','+0530');
 	  console.log(newCabecera.fecha);
-      newCabecera.tipoExam=form.value.tipoExam;
+	  newCabecera.tipoExam=form.value.tipoExam;
+	  console.log("tipo examencabecera"+ newCabecera.tipoExam)
       newCabecera.orden=form.value.orden;
       newCabecera.observaciones=form.value.observaciones;
 			this.labService.createCabecera(newCabecera);
 			this.closeModalH();
 		}
 	}
+
+	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Examen, options: any = null) {
+		this.initDetalleForm();
+		this.rr = row.id;
+		console.log(this.rr);
+		this.modal.open({
+			body: body,
+			header: header,
+			footer: footer,
+			options: options
+
+		});
+	}
+	closeModalD() {
+		this.modal.close();
+	}
+	//Valida los campos del formulario de crear detalle
+	initDetalleForm() {
+		this.detalleForm = this.formBuilder.group({
+			descripcion: ['', Validators.required],
+			resultado_obtenido: ['', Validators.required],
+			unidades: ['', Validators.required],
+			rango_referencia: ['', Validators.required],
+		});
+
+	}
+
+	addDetalle(form: FormGroup) {
+		if (form.valid) {
+			let newDetalle: Detalle = form.value;
+			newDetalle.descripcion = form.value.descripcion;
+			newDetalle.rango_referencia = form.value.rango_referencia;
+			newDetalle.resultado_obtenido = form.value.resultado_obtenido;
+			newDetalle.unidades = form.value.unidades;
+			newDetalle.codigoExam = this.rr;
+			this.labService.createDetalle(newDetalle);
+			this.detalleForm.reset();
+		}
+	}
+
+	estado(row: Orden) {
+
+		this.labService.cambioEstado(row.id);
+		this.toastr.success("Se ha cambiado de estado");
+	}
+
 }
 
 

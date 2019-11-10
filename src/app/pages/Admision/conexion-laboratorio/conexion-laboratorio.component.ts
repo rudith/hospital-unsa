@@ -223,7 +223,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.nombre = form.get('nombre').value;
       newOrden.medico = form.get('medico').value;
       newOrden.orden = form.get('orden').value;
-      newOrden.fecha = form.get('fecha').value;
+      newOrden.fechaA = form.get('fecha').value;
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
       this.httpSv.createOrden(newOrden, this.modal);
     }
@@ -272,7 +272,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       let newOrden: Orden = form.value;
       newOrden.dni = form.get('dni').value;
       newOrden.nombre = form.get('nombre').value;
-      newOrden.fecha = form.get('fecha').value;
+      newOrden.fechaA = form.get('fecha').value;
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
       this.httpSv.createOrden(newOrden, this.modal);
     }

@@ -267,7 +267,7 @@ export class HttpService {
         medico: newOrden.medico,
         orden: newOrden.orden,
         tipoExam: newOrden.tipoExam,
-        fecha: newOrden.fecha
+        fechaA: newOrden.fechaA,
       })
       .subscribe(
         data => {

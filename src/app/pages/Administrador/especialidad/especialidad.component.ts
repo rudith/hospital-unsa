@@ -20,7 +20,7 @@ import { Especialidad } from "../../../interfaces/especialidad";
 export class EspecialidadComponent extends BasePageComponent implements OnInit {
   data: any = <any>{};
   pageNum: number;
-  id: number;
+  id: string;
   especialidades: Especialidad[];
   appointmentForm: FormGroup;
   constructor(
@@ -99,7 +99,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
   }
   //buscara segun el campo de texto y devuelve un mensaje de confirmación
   buscar() {
-    if (this.id == 0 || this.id == undefined) {
+    if (this.id == "" || this.id == undefined) {
       this.loadEspecialidades();
       this.toastr.warning(
         "Todas las Especialidades cargadas",
@@ -109,8 +109,8 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       this.admService.searchEspecialidad(this.id).subscribe(
         especialidad => {
           this.especialidades = [];
-          this.especialidades[0] = especialidad;
-          this.toastr.success("Especialidad(s) encontrada(s)");
+          this.especialidades = especialidad;
+          this.toastr.info("Especialidades con: "+this.id,"Buscando...");
         },
         error => {
           this.toastr.warning("No encontrado");
@@ -142,7 +142,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
       nombre: ["", Validators.required],
-      descripcion: ["", Validators.required]
+      descripcion: [""]
     });
   }
   // crea especialidad y devuelve un mensaje de confirmación

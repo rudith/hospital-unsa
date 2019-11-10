@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { HttpService } from '../../../services/http/http.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'actions',
@@ -16,6 +17,7 @@ export class ActionsComponent implements OnInit {
   @Input() layout: string;
 
   constructor(
+    private toastr: ToastrService,
     private httpSv: HttpService,
     private router: Router
   ) {
@@ -53,6 +55,8 @@ export class ActionsComponent implements OnInit {
     this.onCloseDropdown();
 
     setTimeout(() => {
+      localStorage.removeItem("token");
+      this.toastr.info("Token eliminado","Hasta luego");
       this.router.navigate([layout ? layout : this.layout, link]);
     });
   }

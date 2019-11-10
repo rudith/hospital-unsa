@@ -31,9 +31,7 @@ export class VerticalLayoutComponent extends BaseLayoutComponent
     private admService: AdministradorService
   ) {
     super(store, fb, httpSv, router, elRef);
-    this.admService.getToken().subscribe(data => {
-      localStorage.setItem("token", data.token);
-    });
+
   }
 
   ngOnInit() {

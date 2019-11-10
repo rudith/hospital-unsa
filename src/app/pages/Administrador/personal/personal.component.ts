@@ -85,7 +85,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     });
     this.admService.loadAreasSP().subscribe(areas => {
       this.areas = areas;
-      console.log(areas);
+      console.log(JSON.stringify(areas));
       this.loadOptionsAreas();
     });
     this.admService.loadEspecialidadesSP().subscribe(especialidades => {
@@ -211,7 +211,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         data => {
           this.personales = [];
           this.personales[0] = data;
-          this.toastr.success("Personal(es) encontrado(s)");
+          this.toastr.info("Personal con: "+this.id,"Buscando...");
         },
         error => {
           this.toastr.warning("No encontrado");

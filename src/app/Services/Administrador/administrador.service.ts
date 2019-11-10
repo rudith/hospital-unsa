@@ -18,21 +18,23 @@ import { personalLista } from "../../interfaces/personalLista";
 export class AdministradorService {
   private url: string = "http://18.216.2.122:9000/administrador";
   medOption: IOption[];
-  username: string = "admin";
+  username: string = "adminq";
   password: string = "admin";
   constructor(private http: HttpClient, private toastr: ToastrService) {}
   //Areas
   loadAreas(): Observable<any> {
     return this.http.get<any>(this.url + "/areas/");
   }
-  loadAreasPagination(pag:string): Observable<any> {
+  loadAreasPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadAreasSP(): Observable<any> {
     return this.http.get<any>(this.url + "/areasSP/");
   }
-  searchArea(id: number): Observable<any> {
-    return this.http.get<any>(this.url + "/areas/" + id + "/");
+  searchArea(id: string): Observable<any> {
+    return this.http.get<any>(
+      "http://18.216.2.122:9000/administrador/buscararea/?ar=" + id
+    );
   }
   createArea(area: Area) {
     this.http
@@ -54,14 +56,14 @@ export class AdministradorService {
   loadEspecialidades(): Observable<any> {
     return this.http.get<any>(this.url + "/especialidad/");
   }
-  loadEspecialidadesPagination(pag:string): Observable<any> {
+  loadEspecialidadesPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadEspecialidadesSP(): Observable<any> {
     return this.http.get<any>(this.url + "/especialidadSP/");
   }
-  searchEspecialidad(id: number): Observable<any> {
-    return this.http.get<any>(this.url + "/especialidad/" + id + "/");
+  searchEspecialidad(id: string): Observable<any> {
+    return this.http.get<any>("http://18.216.2.122:9000/administrador/buscarespecialidad/?esp=" + id);
   }
   createEspecialidad(especialidad: Especialidad) {
     this.http
@@ -83,14 +85,14 @@ export class AdministradorService {
   loadTPersonal(): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personal/");
   }
-  loadTPersonalPagination(pag:string): Observable<any> {
+  loadTPersonalPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadTPersonalSP(): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personalSP/");
   }
-  searchTPersonal(id: number): Observable<any> {
-    return this.http.get<any>(this.url + "/tipo-personal/" + id + "/");
+  searchTPersonal(id: string): Observable<any> {
+    return this.http.get<any>("http://18.216.2.122:9000/administrador/buscartipousuario/?tip=" + id);
   }
   createTPersonal(tipo: Tipopersonal) {
     this.http
@@ -141,11 +143,10 @@ export class AdministradorService {
   // }
   // Personal
   loadPersonal(): Observable<any> {
-    return this.http.get<any>(this.url + "/ver-personales/",this.getHeader()
-    );
+    return this.http.get<any>(this.url + "/ver-personales/", this.getHeader());
   }
   loadPersonalPagination(url: string): Observable<personalLista> {
-    return this.http.get<personalLista>(url);
+    return this.http.get<personalLista>(url, this.getHeader());
   }
   searchPersonal(id: string): Observable<any> {
     return this.http.get<any>(this.url + "/ver-personal/" + id + "/");
@@ -183,7 +184,7 @@ export class AdministradorService {
   loadUser(): Observable<any> {
     return this.http.get<any>(this.url + "/usuarios/");
   }
-  loadUserPagination(pag:string): Observable<any> {
+  loadUserPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadUserSP(): Observable<any> {

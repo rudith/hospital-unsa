@@ -19,7 +19,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   data: any = <any>{};
   pageNum: number;
-  id: number;
+  id: string;
   tipopersonal: Tipopersonal[];
   appointmentForm: FormGroup;
   constructor(
@@ -98,15 +98,15 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   }
   //busca segun el input y devuelve un mensaje de confirmación
   buscar() {
-    if (this.id == 0 || this.id == undefined) {
+    if (this.id == "" || this.id == undefined) {
       this.loadTipopersonal();
       this.toastr.warning("Todas los Tipos cargados", "Ningun valor ingresado");
     } else {
       this.admService.searchTPersonal(this.id).subscribe(
         area => {
           this.tipopersonal = [];
-          this.tipopersonal[0] = area;
-          this.toastr.success("Tipo(s) personal(s) encontrada(s)");
+          this.tipopersonal = area;
+          this.toastr.info("Tipos de usuarios con: "+this.id,"Buscando...");
         },
         error => {
           this.toastr.warning("No encontrado");

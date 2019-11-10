@@ -36,6 +36,8 @@ export class EditarComponent extends BasePageComponent
   PersonalForm: FormGroup;
   public update: boolean = false;
   val: number;
+  opBus: string;
+  busqOption: IOption[];
 
   constructor(
     private toastr: ToastrService,
@@ -77,30 +79,30 @@ export class EditarComponent extends BasePageComponent
       }
     });
   }
-    //Paginacion
-    public nextPage() {
-      if (this.data.next) {
-        this.pageNum++;
-        this.admService
-          .loadUserPagination(this.data.next)
-          .subscribe(personalLista => {
-            this.data = personalLista;
-            this.users = this.data.results;
-          });
-      }
+  //Paginacion
+  public nextPage() {
+    if (this.data.next) {
+      this.pageNum++;
+      this.admService
+        .loadUserPagination(this.data.next)
+        .subscribe(personalLista => {
+          this.data = personalLista;
+          this.users = this.data.results;
+        });
     }
-  
-    public prevPage() {
-      if (this.pageNum > 1) {
-        this.pageNum--;
-        this.admService
-          .loadUserPagination(this.data.previous)
-          .subscribe(personalLista => {
-            this.data = personalLista;
-            this.users = this.data.results;
-          });
-      }
+  }
+
+  public prevPage() {
+    if (this.pageNum > 1) {
+      this.pageNum--;
+      this.admService
+        .loadUserPagination(this.data.previous)
+        .subscribe(personalLista => {
+          this.data = personalLista;
+          this.users = this.data.results;
+        });
     }
+  }
   ngOnChanges($event) {
     console.log(this.id);
   }
@@ -131,9 +133,9 @@ export class EditarComponent extends BasePageComponent
       });
     } else {
       this.httpSv.searchUsers(this.id).subscribe(data => {
-        this.toastr.info("Datos cargados");
+        this.toastr.info("Usuarios con: "+this.id,"Buscando...");
         this.users = [];
-        this.users[0] = data;
+        this.users = data;
         console.log(JSON.stringify(data));
       });
     }
@@ -346,7 +348,7 @@ export class EditarComponent extends BasePageComponent
 
   loadUsers() {
     this.admService.loadUser().subscribe(users => {
-      this.data=users;
+      this.data = users;
       this.users = users.results;
     });
   }

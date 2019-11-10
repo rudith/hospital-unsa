@@ -1,7 +1,7 @@
 <p-toast [style]="{ background: '#F9F7AE', opacity: '0.8' }"></p-toast>
 <div class="col-sm-12">
   <div class="row">
-    <tc-form-group class="col-sm-1 col-lg-1">
+    <tc-form-group class="col-md-1">
       <button
         tc-button
         [afterIcon]="'icofont-plus'"
@@ -10,19 +10,19 @@
         [tcShape]="500"
         [size]="'sm'"
         (click)="
-          openModal(modalUser, 'Agregar User', modalUser2); updateEst(false)
+          openModal(modalUser, 'Agregar Usuario', modalUser2); updateEst(false)
         "
       ></button>
     </tc-form-group>
-    <tc-form-group class="col-sm-7 col-lg-7">
+    <tc-form-group class="col-md-7">
       <tc-input
-        [placeholder]="'Buscar Usuario por id o DNI'"
+        [placeholder]="'Buscar Usuario por nombre'"
         [(ngModel)]="id"
         [suffixIcon]="'icofont-search-document'"
       >
       </tc-input>
     </tc-form-group>
-    <tc-form-group class="col-sm-2 col-lg-2">
+    <tc-form-group class="col-md-2">
       <button
         tc-button
         [block]="true"
@@ -159,9 +159,20 @@
   </ng-template>
 
   <ng-template #modalUser2>
-    <div class="actions justify-content-between">
+    <div class="actions justify-content-between row">
+      <button
+        class="col"
+        tc-button
+        [type]="'button'"
+        [view]="'error'"
+        [tcShape]="500"
+        (click)="closeModal()"
+      >
+        Cancelar
+      </button>
       <button
         *ngIf="!update"
+        class="col"
         tc-button
         [block]="true"
         [outline]="true"
@@ -175,6 +186,7 @@
       </button>
       <button
         *ngIf="update"
+        class="col"
         tc-button
         [block]="true"
         [outline]="true"

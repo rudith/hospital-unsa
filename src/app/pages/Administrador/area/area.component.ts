@@ -18,7 +18,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   // providers: [ConfirmationService]
 })
 export class AreaComponent extends BasePageComponent implements OnInit {
-  id: number;
+  id: string;
   data: any = <any>{};
   pageNum: number;
   areas: Area[];
@@ -99,15 +99,15 @@ export class AreaComponent extends BasePageComponent implements OnInit {
   }
   //busca segun el input y devuelve un mensaje de confirmación
   buscar() {
-    if (this.id == 0 || this.id == undefined) {
+    if (this.id == "" || this.id == undefined) {
       this.loadAreas();
-      this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
+      this.toastr.warning("Todas las áreas cargadas", "Ningún valor ingresado");
     } else {
       this.admService.searchArea(this.id).subscribe(
         area => {
           this.areas = [];
-          this.areas[0] = area;
-          this.toastr.success("Area(s) encontrada(s)");
+          this.areas = area;
+          this.toastr.info("Areas con: "+this.id,"Buscando...");
         },
         error => {
           this.toastr.warning("No encontrado");

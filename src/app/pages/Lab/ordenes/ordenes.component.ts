@@ -15,6 +15,7 @@ import {OrdenLista} from '../../../interfaces/orden-lista';
 import { formatDate } from '@angular/common';
 import {Examen} from '../../../interfaces/examen';
 import { Detalle } from '../../../interfaces/detalle'; 
+import {Cabcrear} from '../../../interfaces/cabcrear';
 import { from } from 'rxjs';
 
 @Component({
@@ -27,12 +28,14 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   ordenes:Orden[];
   patientForm: FormGroup;
   cabecera: Cabeceralab[];
+  cabcrear:Cabcrear[];
   today:Date;
   ordenLista:OrdenLista;
   data:OrdenLista = <OrdenLista>{};
   pageNum: number;
   rr: number;
   detalleForm: FormGroup;
+
 
   constructor(
 		store: Store<IAppState>,
@@ -42,6 +45,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 		private formBuilder: FormBuilder,
 		private http: HttpClient,
 		private toastr: ToastrService,
+		private modaH:TCModalService,
 	) {
     super(store, httpSv);
     this.ordenes=[];
@@ -107,16 +111,20 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   
   openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Orden) {
 		this.initPatientForm(row);
+		this.rr = row.id;
+		console.log("ID ROW"+this.rr);
 		this.modal.open({
 			body: body,
 			header: header,
-      footer: footer,
-      options: null
+      		footer: footer,
+      		options: null
 		});
   }
   closeModalH() {
-		this.modal.close();
+		this.modaH.close();
+		
 	}
+	
 	initPatientForm(data:Orden) {
 		this.patientForm = this.formBuilder.group({
 			nombre: [data.nombre?data.nombre: '', Validators.required],
@@ -126,31 +134,29 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required],
 			fecha:['',Validators.required], 
 		});
-		console.log("fecha de orden"+data.tipoExam);
+		
   }
 
   addExamen(form: FormGroup) {
 	
 	if (form.valid) {
 			this.today = new Date();
-      let newCabecera: Cabeceralab = form.value;
+      let newCabecera: Cabcrear = form.value;
       newCabecera.nombre= form.value.nombre;
       newCabecera.dni=form.value.dni;
 	  newCabecera.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US','+0530');
-	  console.log(newCabecera.fecha);
 	  newCabecera.tipoExam=form.value.tipoExam;
-	  console.log("tipo examencabecera"+ newCabecera.tipoExam)
       newCabecera.orden=form.value.orden;
       newCabecera.observaciones=form.value.observaciones;
-			this.labService.createCabecera(newCabecera);
-			this.closeModalH();
+			this.labService.createCabecera(newCabecera);	
 		}
+		this.openModaD;
+			
+		
 	}
 
-	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Examen, options: any = null) {
+	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Orden, options: any = null) {
 		this.initDetalleForm();
-		this.rr = row.id;
-		console.log(this.rr);
 		this.modal.open({
 			body: body,
 			header: header,
@@ -158,6 +164,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			options: options
 
 		});
+		
 	}
 	closeModalD() {
 		this.modal.close();
@@ -187,9 +194,10 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 
 	estado(row: Orden) {
-
 		this.labService.cambioEstado(row.id);
+		console.log("ID de row"+row.id);
 		this.toastr.success("Se ha cambiado de estado");
+		
 	}
 
 }

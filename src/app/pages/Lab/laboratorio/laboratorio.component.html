@@ -46,17 +46,6 @@
 			</ng-template>
 		</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Agregar Detalle'">
-			<ng-template #tableTDTemplate let-row="row">
-				<div class="add-action-box">
-					<button tc-button [afterIcon]="'icofont-contact-add'" [square]="true" [tcShape]="500"
-						[tcBgColor]="'#3f51b5'"
-						(click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false })">
-					</button>
-				</div>
-			</ng-template>
-		</tc-table-col>
-
 		<tc-table-col [columnTitle]="'Ver Mas'">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">

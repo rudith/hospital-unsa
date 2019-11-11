@@ -37,7 +37,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   iniciosesion(lg: FormGroup) {
-    if (lg.get("login").value === "adminq" && lg.get("pass").value === "admin") {
+    if (lg.get("login").value === "admin" && lg.get("pass").value === "admin") {
       this.http.admin = true;
       this.http.admis = false;
       this.http.consultorio = false;
@@ -81,7 +81,7 @@ export class LoginFormComponent implements OnInit {
       this.router.navigate(["/vertical/laboratorio"]);
     }
 
-    this.adminSV.getToken().subscribe(data => {
+    this.adminSV.getToken(lg.get("login").value,lg.get("pass").value).subscribe(data => {
       this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
       localStorage.setItem("token", data.token);
     });

@@ -110,10 +110,11 @@ export class AdministradorService {
       );
   }
   //o gettoken, despues de implementarse en el login se cambiaran estos metodos
-  getToken() {
-    return this.http.post<any>("http://18.216.2.122:9000/custom-url/login/", {
-      username: this.username,
-      password: this.password
+  getToken(user:string,pass:string) {
+    console.log(user+pass);
+    return this.http.post<any>("http://18.216.2.122:9000/administrador/login/", {
+      username: user,
+      password: pass
     });
   }
 

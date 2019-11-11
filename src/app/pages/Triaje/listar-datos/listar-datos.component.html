@@ -35,7 +35,7 @@
 							DNI
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Nombres
+							Nombre Completo
 						</th>
 						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
 							Especialidad
@@ -70,7 +70,7 @@
 							{{row.especialidad.nombre}}
 						</td>
 						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.medico.user.username}}
+               {{row.medico.nombres}} {{row.medico.apellido_paterno}}
             </td>
             <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.estadoCita}}
@@ -122,7 +122,6 @@
             <tc-form-group class="col-12 col-sm-6">
               <tc-form-label>Numero de Historia</tc-form-label>
               <tc-input [bgColor]="'#fff'"
-              [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
               formControlName="numeroHistoria" 
               readonly="readonly">
@@ -131,7 +130,6 @@
             <tc-form-group class="col-12 col-sm-6">
               <tc-form-label>DNI</tc-form-label>
               <tc-input [bgColor]="'#fff'"
-              [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
               formControlName="dni" 
               readonly="readonly">
@@ -142,7 +140,6 @@
             <tc-form-group class="col-12 col-sm-12">
               <tc-form-label>Nombre Completo</tc-form-label>
               <tc-input [bgColor]="'#fff'"
-              [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
               formControlName="nombres" 
               readonly="readonly">
@@ -156,11 +153,11 @@
       <div class="row">
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Talla (m)</tc-form-label>
-            <tc-input [placeholder]="'Talla (m)'" formControlName="talla"></tc-input>
+            <tc-form-label>Talla (cm)</tc-form-label>
+            <tc-input [placeholder]="'Talla (cm)'" formControlName="talla"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
-              Debe ingresar un numero positivo
+              La talla debe ser en 'cm' y un numero positivo
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -172,7 +169,7 @@
             <tc-input [placeholder]="'Peso (Kg)'"  formControlName="peso"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
-              Debe ingresar un numero positivo
+              El peso debe ser en 'Kg' y un numero positivo
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -183,7 +180,7 @@
             <tc-input [placeholder]="'temperatura (°C) '" formControlName="temperatura"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
-              Debe ingresar un numero positivo
+              Se debe ingresar un numero positivo
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -194,7 +191,7 @@
             <tc-input [placeholder]="'frecuencia Resp'" formControlName="frecuenciaR"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
-              Debe ingresar un numero positivo
+              Se debe ingresar un numero entero positivo
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -205,7 +202,7 @@
             <tc-input [placeholder]="'Frecuencia Cardiaca'"  formControlName="frecuenciaC"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.frecuenciaC.touched && patientForm2.controls.frecuenciaC.invalid ">
-              Debe ingresar un numero positivo
+              Se debe ingresar un numero entero positivo
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -216,7 +213,7 @@
             <tc-input [placeholder]="'Presion Arterial'" formControlName="presionArt"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid ">
-              Ingrese el siguiente formato "##/##"
+              Se debe ingresar numeros enteros positivos con el siguiente formato "##/##"
             </tc-form-description>
           </tc-form-group>
         </div>

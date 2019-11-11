@@ -83,9 +83,9 @@ export class LaboratorioService {
 		return this.http.get<Detalle[]>(this.url + '/filtro/Detalles/?id=' + idEx)
 	}
 	cambioEstado(id: number): Observable<Orden> {
-		return this.http.get<Orden>('http://18.216.2.122:9000/consultorio/atenderOrden/' + id);
+		console.log("Entra al servicio");
+		return this.http.get<Orden>("http://18.216.2.122:9000/consultorio/atenderOrden/" + id);
 	}
-
 
 
 
@@ -111,9 +111,8 @@ export class LaboratorioService {
 	}
 	//crear cabecer
 	createCabecera(newCabecera: Cabcrear) {
-		console.log("ENTRA A SERVICIO ");
-		this.http.post<Cabcrear>(this.url + '/CrearExamenLabCab/',
-			{
+		console.log(newCabecera);
+		this.http.post<Cabcrear>(this.url + '/CrearExamenLabCab/',{
 				nombre: newCabecera.nombre,
 				dni: newCabecera.dni,
 				orden: newCabecera.orden,

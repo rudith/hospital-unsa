@@ -46,6 +46,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	data: ExamenLista = <ExamenLista>{};
 	pageNum: number;
 	exa: Examen[];
+	tipo: string;
 
 	constructor(
 		store: Store<IAppState>,
@@ -130,8 +131,6 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		});
 	}
 
-
-
 	ngOnInit() {
 		super.ngOnInit();
 		this.estadoBusq = false;
@@ -144,6 +143,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			}
 		});
 	}
+
 	ngOnDestroy() {
 		super.ngOnDestroy();
 	}
@@ -275,6 +275,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	// modal ver mas 
 	openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Examen) {
 		this.initExamenForm(row);
+		this.tipo = row.tipoExam.nombre;
 		this.modal.open({
 			body: body,
 			header: header,
@@ -289,7 +290,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.examenForm = this.formBuilder.group({
 			nombre: [data.nombre ? data.nombre : '', Validators.required],
 			dni: [data.dni ? data.dni : '', Validators.required],
-			tipoExam: [data.tipoExam ? data.tipoExam : '', Validators.required],
+			tipoExam: [this.tipo ? this.tipo : '',Validators.required],
 			fecha: [data.fecha ? data.fecha : '', Validators.required],
 			observaciones: [data.observaciones ? data.observaciones : '', Validators.required],
 		});

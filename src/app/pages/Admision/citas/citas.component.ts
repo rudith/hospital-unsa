@@ -158,7 +158,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
       this.httpSv.searchCitaDNI(this.campo).subscribe(data => {
-        if (this.data.results[0] == null) {
+        if (this.data.results == null) {
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {

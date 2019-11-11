@@ -32,6 +32,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   busForm: FormGroup;
   dni2: string;
   historial: Historial[];
+  personId:number;
   idT: number;
   idCita:number;
   cabTri:FormGroup;
@@ -72,7 +73,9 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     this.patients = [];
     this.triaje = [];
     this.citas = [];
+    this.personId=this.httpSv.getIdUs();
     this.cargarCitas();
+
   }
 
   //Metodo que carga todas las citas que esten con el estado de cita 'Espera'
@@ -199,16 +202,14 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   CreateTriaje(form: FormGroup,) {
     if (form.valid) {
       let newTriaje: Triaje = form.value;
-      console.log('entra al envio');
-      newTriaje.personal = 3;
+      newTriaje.personal = this.personId;
       newTriaje.talla = parseInt(form.get('talla').value);
       newTriaje.peso = parseInt(form.get('peso').value);
       newTriaje.frecuenciaC = parseInt(form.get('frecuenciaC').value);
       newTriaje.frecuenciaR = parseInt(form.get('frecuenciaR').value);
       newTriaje.temperatura = parseInt(form.get('temperatura').value);
-      console.log(newTriaje.talla);
-      console.log(newTriaje);
       this.httpSv.crearTriaje(newTriaje);
+      console.log();
       this.TriarCita(this.idCita);
       this.closeModal();
       

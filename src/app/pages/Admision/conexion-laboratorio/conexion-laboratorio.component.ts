@@ -202,7 +202,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
         data.medico.nombres + " " + data.medico.apellido_paterno + " " + data.medico.apellido_materno ? data.medico.nombres + " " + data.medico.apellido_paterno + " " + data.medico.apellido_materno : "",
         Validators.required
       ],
-      orden: [data.ordenExam ? data.ordenExam : "", Validators.required],
+      orden: [data.ordenExam ? data.ordenExam : ""],
       fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
       tipoExam: ["", Validators.required],
 
@@ -212,7 +212,6 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   }
   closeModalH() {
     this.modal.close();
-    //this.loadHistorias();
   }
 
   crearOrden(form: FormGroup) {

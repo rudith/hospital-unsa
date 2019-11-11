@@ -121,13 +121,13 @@
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             DNI
           </th>
-
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            F. Atención
-          </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             F. Editado
           </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            F. Atención
+          </th>
+          
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Estado
           </th>
@@ -160,13 +160,14 @@
 							<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
 							{{row.updated_at.substring(0,10)}}
 						</td>
-						-->
+            -->
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.updated_at.substring(0, 10) }}
+            </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.fechaSeparacion }}
+            {{ row.fechaAtencion }}
           </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.updated_at.substring(0, 10) }}
-          </td>
+          
 
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.estadoCita }}

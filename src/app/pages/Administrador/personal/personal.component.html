@@ -207,6 +207,7 @@
             </tc-form-description>
           </div>
         </div>
+        <br>
         <div class="row">
           <div class=" col-sm-4">
             <tc-form-label class="mb-md-0">Apellido Paterno:</tc-form-label>
@@ -267,6 +268,7 @@
             </tc-form-description>
           </div>
         </div>
+        <br>
         <div class="row">
           <div class=" col-sm-6    ">
             <tc-form-label class="mb-md-0">Celular:</tc-form-label>
@@ -274,8 +276,8 @@
               [prefixIcon]="'icofont-id'"
               formControlName="celular"
               [type]="'number'"
-              [charLimiting]="6"
-              pattern="[0-9]{6}"
+              [charLimiting]="9"
+              pattern="[0-9]{9}"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -295,8 +297,8 @@
               [prefixIcon]="'icofont-id'"
               formControlName="telefono"
               [type]="'number'"
-              [charLimiting]="9"
-              pattern="[0-9]{9}"
+              [charLimiting]="6"
+              pattern="[0-9]{6}"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -329,7 +331,7 @@
             </tc-form-description>
           </div>
         </div>
-
+        <br>
         <div class="row">
           <div class=" col-sm-4">
             <tc-form-label>area</tc-form-label>

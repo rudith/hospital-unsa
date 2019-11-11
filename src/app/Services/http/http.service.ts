@@ -53,6 +53,7 @@ export class HttpService {
   private nroHisCom: string;
   private idHisCom: number;
   private idMedico: number;
+  private idUser: number;
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
@@ -83,6 +84,23 @@ export class HttpService {
   getIdMed(): number {
     return this.idMedico;
   }
+  
+  /***
+   * autor: Shirley Romero.
+   * setIdMedico: establece el  id del usuario logeado
+   ***/
+  setIdUs(us: number) {
+    this.idUser = us;
+  }
+
+    /***
+   * autor: Milagros Motta R.
+   * getIdMed: devuelve el Id del medico del componente Consultas, establecido en setNroHC
+   ***/
+  getIdUs(): number {
+    return this.idUser;
+  }
+  
   /***
    * autor: Milagros Motta R.
    * setIdMedico: establece el del medico logueado
@@ -90,7 +108,6 @@ export class HttpService {
   setIdMedico(med: number) {
     this.idMedico = med;
   }
-
   /***
    * autor: Milagros Motta R.
    * getNroHC: establece el Nro de historia y el Id de la cita triada
@@ -273,6 +290,7 @@ export class HttpService {
         orden: newOrden.orden,
         tipoExam: newOrden.tipoExam,
         fechaA: newOrden.fechaA,
+        estadoOrden:"Creada",
       })
       .subscribe(
         data => {
@@ -318,7 +336,7 @@ export class HttpService {
           modal.close();
         },
         error => {
-          console.log(error.message);
+          console.error(error.message);
           this.toastr.error("No se pudo crear el Historial");
         }
       );
@@ -391,7 +409,7 @@ export class HttpService {
         },
         error => {
           console.log(error.message);
-          this.toastr.error("No se pudo agregar la cita");
+          this.toastr.error("No se pudo agregar la cita,no ingrese fechas pasadas");
         }
       );
   }
@@ -435,22 +453,22 @@ export class HttpService {
   }
   CreateUser(user: User): Observable<any> {
     return this.http.post<any>(
-      "http://18.216.2.122:9000/administrador/usuarios/",
+      "http://18.216.2.122:9000/api/rest-auth/registration/",
       {
-        password: user.password,
-        last_login: user.last_login,
-        is_superuser: user.is_superuser,
         username: user.username,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
+        password1: user.password,
+        password2: user.password,
+        is_superuser: user.is_superuser,
+        //email: user.email,
         is_staff: user.is_staff,
-        is_active: user.is_active,
-        date_joined: user.date_joined,
-        groups: user.groups,
-        user_permissions: user.user_permissions
       }
-    );
+    ,this.getHeaderUser());
+  }
+
+  getHeaderUser() {
+    var headers_object = new HttpHeaders({ "Content-Type": "application/json" });
+    var httpOptions = { headers: headers_object };   
+    return httpOptions;
   }
 
   /***

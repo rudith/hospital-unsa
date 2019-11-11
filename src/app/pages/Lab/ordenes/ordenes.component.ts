@@ -29,14 +29,14 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   patientForm: FormGroup;
   cabecera: Cabeceralab[];
   cabcrear:Cabcrear[];
+  
   today:Date;
   ordenLista:OrdenLista;
   data:OrdenLista = <OrdenLista>{};
   pageNum: number;
   rr: number;
   detalleForm: FormGroup;
-
-
+  public cab:Cabcrear;
   constructor(
 		store: Store<IAppState>,
 		httpSv: HttpService,
@@ -111,9 +111,9 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   
   openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Orden) {
 		this.initPatientForm(row);
+		this.initDetalleForm();
 		this.rr = row.id;
-		console.log("ID ROW"+this.rr);
-		this.modal.open({
+		this.modaH.open({
 			body: body,
 			header: header,
       		footer: footer,
@@ -122,35 +122,47 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   }
   closeModalH() {
 		this.modaH.close();
-		
+		this.modal.close();
 	}
 	
 	initPatientForm(data:Orden) {
+		
 		this.patientForm = this.formBuilder.group({
 			nombre: [data.nombre?data.nombre: '', Validators.required],
      		dni: [ data.dni?data.dni:'', Validators.required],
 			orden: [data.orden?data.orden:'', ],
 			observaciones: ['', Validators.required],
-			tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required],
-			fecha:['',Validators.required], 
+			tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required], 
 		});
+		let newCab:Cabcrear=this.patientForm.value;
+		this.today = new Date();	  
+		newCab.nombre=data.nombre;
+		newCab.dni=data.dni;
+		newCab.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US');
+		newCab.tipoExam=data.tipoExam;
+		newCab.orden=data.orden;
+		newCab.observaciones="";
+		console.log(this.cab);
+		this.labService.createCabecera(newCab);
+
 		
   }
 
+
   addExamen(form: FormGroup) {
-	
 	if (form.valid) {
-			this.today = new Date();
-      let newCabecera: Cabcrear = form.value;
+	  this.today = new Date();	  
+	  let newCabecera: Cabcrear = form.value;
+	  console.log(newCabecera.dni);
       newCabecera.nombre= form.value.nombre;
       newCabecera.dni=form.value.dni;
-	  newCabecera.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US','+0530');
+	  newCabecera.fecha=  formatDate(this.today, 'yyyy-MM-dd', 'en-US');
 	  newCabecera.tipoExam=form.value.tipoExam;
       newCabecera.orden=form.value.orden;
-      newCabecera.observaciones=form.value.observaciones;
-			this.labService.createCabecera(newCabecera);	
-		}
-		this.openModaD;
+	  newCabecera.observaciones=form.value.observaciones;
+	  console.log(newCabecera.dni);
+	  this.labService.createCabecera(newCabecera);	
+	}
 			
 		
 	}
@@ -168,6 +180,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 	closeModalD() {
 		this.modal.close();
+		this.modaH.close();
 	}
 	//Valida los campos del formulario de crear detalle
 	initDetalleForm() {
@@ -193,10 +206,13 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 		}
 	}
 
-	estado(row: Orden) {
-		this.labService.cambioEstado(row.id);
-		console.log("ID de row"+row.id);
-		this.toastr.success("Se ha cambiado de estado");
+	estado(row: number) {
+		this.labService.cambioEstado(row).subscribe(ord => {
+			this.loadOrdenes();
+		});;
+		console.log("ID de row"+row);
+		
+		
 		
 	}
 

@@ -167,7 +167,6 @@ export class EditarComponent extends BasePageComponent
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
       username: ["", Validators.required],
-      email: ["", Validators.required],
       password: ["", Validators.required]
     });
   }
@@ -219,7 +218,6 @@ export class EditarComponent extends BasePageComponent
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
       username: [data.username, Validators.required],
-      email: [data.email, Validators.required],
       password: [data.password, Validators.required]
     });
   }

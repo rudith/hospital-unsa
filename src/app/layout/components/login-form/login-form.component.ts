@@ -37,52 +37,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   iniciosesion(lg: FormGroup) {
-    /*
-    if (lg.get("login").value === "adminq" && lg.get("pass").value === "admin") {
-      this.http.admin = true;
-      this.http.admis = false;
-      this.http.consultorio = false;
-      this.http.triaje = false;
-      this.http.laboratorio = false;
-      this.router.navigate(["/vertical/adminUser"]);
-    }
-    if (lg.get("login").value === "admis" && lg.get("pass").value === "admis") {
-      this.http.admin = false;
-      this.http.admis = true;
-      this.http.consultorio = false;
-      this.http.triaje = false;
-      this.http.laboratorio = false;
-      this.router.navigate(["/vertical/historial"]);
-    }
-    if (lg.get("login").value === "cons" && lg.get("pass").value === "cons") {
-      this.http.admin = false;
-      this.http.admis = false;
-      this.http.consultorio = true;
-      this.http.triaje = false;
-      this.http.laboratorio = false;
-      this.router.navigate(["/vertical/consultas"]);
-    }
-    if (
-      lg.get("login").value === "triaje" &&
-      lg.get("pass").value === "triaje"
-    ) {
-      this.http.admin = false;
-      this.http.admis = false;
-      this.http.consultorio = false;
-      this.http.triaje = true;
-      this.http.laboratorio = false;
-      this.router.navigate(["/vertical/listar-datos"]);
-    }
-    if (lg.get("login").value === "lab" && lg.get("pass").value === "lab") {
-      this.http.admin = false;
-      this.http.admis = false;
-      this.http.consultorio = false;
-      this.http.triaje = false;
-      this.http.laboratorio = true;
-      this.router.navigate(["/vertical/laboratorio"]);
-    }
-    */
-
+   //usar el servicio debusqueda y compararlo con el area 
     this.adminSV.getToken(lg.get("login").value,lg.get("pass").value).subscribe(data => {
       //this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
       localStorage.setItem("token", data.token);
@@ -92,7 +47,9 @@ export class LoginFormComponent implements OnInit {
         this.http.consultorio = false;
         this.http.triaje = false;
         this.http.laboratorio = false;
+        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/adminUser"]);
+        
       }
       if(data.tipoUser=="Admision"){
         this.http.admin = false;
@@ -100,31 +57,38 @@ export class LoginFormComponent implements OnInit {
         this.http.consultorio = false;
         this.http.triaje = false;
         this.http.laboratorio = false;
+        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/historial"]);
       }
-      if(data.tipoUser=="Medico"){
+      if(data.tipoUser=="Consultorio"){
         this.http.admin = false;
         this.http.admis = false;
         this.http.consultorio = true;
         this.http.triaje = false;
         this.http.laboratorio = false;
         this.http.setIdMedico(data.id);
+        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/consultas"]);
       }
-      if(data.tipoUser=="Triaje"){
+     if(data.tipoUser=="Triaje"){
         this.http.admin = false;
         this.http.admis = false;
         this.http.consultorio = false;
         this.http.triaje = true;
         this.http.laboratorio = false;
+        this.http.setIdUs(data.id);
+        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/listar-datos"]);
       }
-      if(data.tipoUser=="Laboratorio"){
+     if(data.tipoUser=="Laboratorio"){
         this.http.admin = false;
         this.http.admis = false;
         this.http.consultorio = false;
         this.http.triaje = false;
         this.http.laboratorio = true;
+        this.http.setIdUs(data.id);
+        console.log(data.id);
+        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/ordenes"]);
       }
       console.log(data.tipoUser)

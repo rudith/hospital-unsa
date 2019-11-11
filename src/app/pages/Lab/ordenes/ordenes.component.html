@@ -30,7 +30,7 @@
 				<div class="actions">
 					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
 						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
-						(click)="openModalH(modalCrearHBody, 'Cabecera', modalCrearHFooter,row)">Agregar</button>
+						(click)="openModalH(modalCrearHBody, 'Cabecera', modalCrearHFooter,row,{ closeButton: true, overlayClose: false })">Agregar</button>
 				</div>
 			</ng-template>
 		</tc-table-col>
@@ -38,8 +38,8 @@
 		<tc-table-col [columnTitle]="'Atendido'">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
-					<button tc-button [afterIcon]="'icofont-tick-boxe'" [tcColor]="['#795548', '#fff']"
-						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true"
+					<button tc-button [afterIcon]="'icofont-ui-check'" [view]="'info'"[tcColor]="['#3f51b5', '#fff']"
+					[tcBgColor]="['transparent', '#3f51b5']" [tcBorderColor]="'#3f51b5'" [square]="true"
 						[tcShape]="500" [size]="'sm'" (click)="estado(row)"></button>
 				</div>
 			</ng-template>
@@ -114,13 +114,16 @@
 		</form>
 
 	</ng-template>
-	<ng-template #modalCrearHFooter>
+	<ng-template #modalCrearHFooter >
 		<div class="actions justify-content-between">
 			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">Cancelar</button>
 			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm);
 			openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false })">
 				Agregar Cabecera 	
 			</button>
+			<!--<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false });closeModalH()">
+				Agregar Detalle 	
+			</button>	-->
 		</div>
 	</ng-template>
 </ng-container>

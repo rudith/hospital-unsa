@@ -81,16 +81,21 @@ export class HttpService {
    * getIdMed: devuelve el Id del medico del componente Consultas, establecido en setNroHC
    ***/
   getIdMed(): number {
-    console.log(this.idMedico);
     return this.idMedico;
+  }
+  /***
+   * autor: Milagros Motta R.
+   * setIdMedico: establece el del medico logueado
+   ***/
+  setIdMedico(med: number) {
+    this.idMedico = med;
   }
 
   /***
    * autor: Milagros Motta R.
    * getNroHC: establece el Nro de historia y el Id de la cita triada
    ***/
-  setNroHC(change: string, cha: number, med: number) {
-    this.idMedico = med;
+  setNroHC(change: string, cha: number) {
     this.nroHisCom = change;
     this.idHisCom = cha;
   }
@@ -490,7 +495,6 @@ export class HttpService {
    * en el back correctamente.
    ***/
   crearConsulta(newConsulta: Consulta) {
-    console.log(JSON.stringify(newConsulta));
     this.http
       .post<any>("http://18.216.2.122:9000/consultorio/crear-consulta/", {
         motivoConsulta: newConsulta.motivoConsulta,

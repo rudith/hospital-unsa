@@ -16,6 +16,7 @@ import { Examen } from '../../../interfaces/examen';
 import { ToastrService } from 'ngx-toastr';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { ConsultasPaginadas } from '../../../interfaces/consultas-paginadas';
+import { IOption } from "./../../../ui/interfaces/option";
  
 @Component({
   selector: 'app-consultas',
@@ -38,6 +39,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   examenesRecibidos:Examen[];
   triajeRecibido:Triaje;
   datoBus: string;
+  apetitoOption: IOption[];
+
   private idRecibido:number;
   private nombreRecibido:string;
   private numHistRecibido: string;
@@ -82,6 +85,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.pageNum=1;
     this.hayEx=true;
     this.hayConsultas=true;
+    this.apetitoOption=[];
     this.consultasRecibidas = [];
     this.examenesRecibidos = [];
     this.datoBus=this.httpSv.getNroHC();
@@ -195,6 +199,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * openModalC: Abre el modal e inicializa sus formGroups 
 	***/
   openModalC<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any = null) {
+    this.apetitoOption[0] = { label: "SI", value: "Normal" };
+    this.apetitoOption[1] = { label: "NO", value: "Sin apetito" };
     this.initverTriajeForm();
     this.initConsultForm();
     this.modal.open({
@@ -256,11 +262,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   addConsult(form: FormGroup) {
     if (form.valid) {
       let newConsult: Consulta = form.value;
-      newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US');
+      if(form.value.proximaCita!=null){
+        newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US');
+      }
       newConsult.numeroHistoria=this.idRecibido;
-      newConsult.triaje=this.triajeRecibido.id;
       newConsult.medico=this.idMedRecibido;
-      console.log(newConsult.ordenExam);
+      newConsult.triaje=this.triajeRecibido.id;
       this.httpSv.crearConsulta(newConsult);
       this.Atender(this.idCitaRecibida);
       this.closeModalC();

@@ -60,7 +60,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit {
 			]
 		};
 		this.pageNum = 1;
-		this.idMedico = 5;
+		this.idMedico = this.httpSv.getIdMed();
 		this.hayCitas=true;
 		this.CitasC=[];
 		this.loadCitas();
@@ -108,7 +108,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit {
 	 * atender: Hace uso de un servicio para pasar los parametros al componente Lconsultas
 	 ***/
 	atender(nro: string, id: number) {
-		this.httpSv.setNroHC(nro, id,this.idMedico);
+		this.httpSv.setNroHC(nro, id);
 		this.router.navigate(['/vertical/Lconsultas']);
 	}
 	/*** 

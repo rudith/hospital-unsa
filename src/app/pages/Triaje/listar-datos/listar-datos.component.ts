@@ -183,7 +183,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   //Metodo para inicializar el form en donde se llenaran los datos a actualizar
   initPatientForm2(ci: Cita) {
     this.patientForm2 = this.fb.group({
-      talla: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
+      talla: ['', [Validators.required, Validators.pattern('^[0-9]+')]],
       peso: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
       temperatura: ['', [Validators.required, Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
       frecuenciaR: ['', [Validators.required, Validators.pattern('^[0-9]+')]],

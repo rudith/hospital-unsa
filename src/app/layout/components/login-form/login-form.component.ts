@@ -104,11 +104,12 @@ export class LoginFormComponent implements OnInit {
       }
       if(data.tipoUser=="Medico"){
         this.http.admin = false;
-      this.http.admis = false;
-      this.http.consultorio = true;
-      this.http.triaje = false;
-      this.http.laboratorio = false;
-      this.router.navigate(["/vertical/consultas"]);
+        this.http.admis = false;
+        this.http.consultorio = true;
+        this.http.triaje = false;
+        this.http.laboratorio = false;
+        this.http.setIdMedico(data.id);
+        this.router.navigate(["/vertical/consultas"]);
       }
       if(data.tipoUser=="Triaje"){
         this.http.admin = false;
@@ -120,11 +121,11 @@ export class LoginFormComponent implements OnInit {
       }
       if(data.tipoUser=="Laboratorio"){
         this.http.admin = false;
-      this.http.admis = false;
-      this.http.consultorio = false;
-      this.http.triaje = false;
-      this.http.laboratorio = true;
-      this.router.navigate(["/vertical/ordenes"]);
+        this.http.admis = false;
+        this.http.consultorio = false;
+        this.http.triaje = false;
+        this.http.laboratorio = true;
+        this.router.navigate(["/vertical/ordenes"]);
       }
       console.log(data.tipoUser)
     });

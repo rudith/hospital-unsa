@@ -37,6 +37,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   iniciosesion(lg: FormGroup) {
+    /*
     if (lg.get("login").value === "adminq" && lg.get("pass").value === "admin") {
       this.http.admin = true;
       this.http.admis = false;
@@ -80,10 +81,52 @@ export class LoginFormComponent implements OnInit {
       this.http.laboratorio = true;
       this.router.navigate(["/vertical/laboratorio"]);
     }
+    */
 
-    this.adminSV.getToken().subscribe(data => {
-      this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+    this.adminSV.getToken(lg.get("login").value,lg.get("pass").value).subscribe(data => {
+      //this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
       localStorage.setItem("token", data.token);
+      if(data.tipoUser=="Administrador"){
+        this.http.admin = true;
+        this.http.admis = false;
+        this.http.consultorio = false;
+        this.http.triaje = false;
+        this.http.laboratorio = false;
+        this.router.navigate(["/vertical/adminUser"]);
+      }
+      if(data.tipoUser=="Admision"){
+        this.http.admin = false;
+        this.http.admis = true;
+        this.http.consultorio = false;
+        this.http.triaje = false;
+        this.http.laboratorio = false;
+        this.router.navigate(["/vertical/historial"]);
+      }
+      if(data.tipoUser=="Medico"){
+        this.http.admin = false;
+      this.http.admis = false;
+      this.http.consultorio = true;
+      this.http.triaje = false;
+      this.http.laboratorio = false;
+      this.router.navigate(["/vertical/consultas"]);
+      }
+      if(data.tipoUser=="Triaje"){
+        this.http.admin = false;
+        this.http.admis = false;
+        this.http.consultorio = false;
+        this.http.triaje = true;
+        this.http.laboratorio = false;
+        this.router.navigate(["/vertical/listar-datos"]);
+      }
+      if(data.tipoUser=="Laboratorio"){
+        this.http.admin = false;
+      this.http.admis = false;
+      this.http.consultorio = false;
+      this.http.triaje = false;
+      this.http.laboratorio = true;
+      this.router.navigate(["/vertical/ordenes"]);
+      }
+      console.log(data.tipoUser)
     });
   }
 }

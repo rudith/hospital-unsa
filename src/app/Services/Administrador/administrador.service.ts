@@ -18,8 +18,8 @@ import { personalLista } from "../../interfaces/personalLista";
 export class AdministradorService {
   private url: string = "http://18.216.2.122:9000/administrador";
   medOption: IOption[];
-  username: string = "adminq";
-  password: string = "admin";
+  //username: string = "adminq";
+  //password: string = "admin";
   constructor(private http: HttpClient, private toastr: ToastrService) {}
   //Areas
   loadAreas(): Observable<any> {
@@ -110,10 +110,10 @@ export class AdministradorService {
       );
   }
   //o gettoken, despues de implementarse en el login se cambiaran estos metodos
-  getToken() {
-    return this.http.post<any>("http://18.216.2.122:9000/custom-url/login/", {
-      username: this.username,
-      password: this.password
+  getToken(user:string,pass:string) {
+    return this.http.post<any>("http://18.216.2.122:9000/administrador/login/", {
+      username: user,
+      password: pass
     });
   }
 

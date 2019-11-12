@@ -17,6 +17,9 @@ import { Detalle } from '../../../interfaces/detalle';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { ExamenLista } from '../../../interfaces/examen-lista';
 
+// BASE_API_URL
+import { BASE_API_URL } from "../../../config/API";
+
 @Component({
 
 	selector: 'app-laboratorio',
@@ -196,7 +199,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	//Metodo que llama al servicio imprimirExam 
 	imprimir(row: Examen) {
-		document.location.href = 'http://18.216.2.122:9000/laboratorio/resultadoExamen/' + row.id;
+		document.location.href = BASE_API_URL + '/laboratorio/resultadoExamen/' + row.id;
 		this.toastr.success("Se ha generado el Pdf");
 	}
 
@@ -269,7 +272,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 			});
 		}
 	}
-	
+
 
 
 	// modal ver mas 
@@ -290,7 +293,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.examenForm = this.formBuilder.group({
 			nombre: [data.nombre ? data.nombre : '', Validators.required],
 			dni: [data.dni ? data.dni : '', Validators.required],
-			tipoExam: [this.tipo ? this.tipo : '',Validators.required],
+			tipoExam: [this.tipo ? this.tipo : '', Validators.required],
 			fecha: [data.fecha ? data.fecha : '', Validators.required],
 			observaciones: [data.observaciones ? data.observaciones : '', Validators.required],
 		});

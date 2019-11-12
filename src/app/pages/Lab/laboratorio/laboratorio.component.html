@@ -29,7 +29,7 @@
 </form>
 <br>
 <tc-card class="mb-0">
-	<tc-table [rows]="examen" [hovered]="true" >
+	<tc-table [rows]="examen" [hovered]="true">
 		<tc-table-col [columnTitle]="'Nombre'" [columnName]="'nombre'">
 			<ng-template #tableTDTemplate let-value>
 				<strong>{{ value }}</strong>
@@ -61,8 +61,8 @@
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions align-items-center ">
 					<button tc-button [afterIcon]="'icofont-print'" [tcColor]="['#795548', '#fff']"
-						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true"
-						[tcShape]="500" [size]="'sm'" (click)="imprimir(row)"></button>
+						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true" [tcShape]="500"
+						[size]="'sm'" (click)="imprimir(row)"></button>
 				</div>
 			</ng-template>
 		</tc-table-col>

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, ɵConsole } from '@angular/core';
 import { BasePageComponent } from '../../base-page';
 import { Store } from '@ngrx/store';
-import { IAppState } from '../../../interfaces/app-state'; 
+import { IAppState } from '../../../interfaces/app-state';
 import { HttpService } from '../../../services/http/http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
@@ -17,48 +17,51 @@ import { ToastrService } from 'ngx-toastr';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { ConsultasPaginadas } from '../../../interfaces/consultas-paginadas';
 import { IOption } from "./../../../ui/interfaces/option";
- 
+
+// BASE_API_URL
+import { BASE_API_URL } from "../../../config/API";
+
 @Component({
   selector: 'app-consultas',
   templateUrl: './listar-consultas.component.html',
   styleUrls: ['./listar-consultas.component.scss'],
 })
-export class ListarConsultasComponent extends BasePageComponent implements OnInit, OnChanges{
+export class ListarConsultasComponent extends BasePageComponent implements OnInit, OnChanges {
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
   @ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
   data: ConsultasPaginadas = <ConsultasPaginadas>{};
-	busForm: FormGroup;
-	pages: Array<number>;
+  busForm: FormGroup;
+  pages: Array<number>;
   pagesNumber: number;
   pageNum: number;
 
   consultForm: FormGroup;
   verMasCForm: FormGroup;
-  verTriajeForm:FormGroup;
+  verTriajeForm: FormGroup;
   consultasRecibidas: ConsultaCompleta[];
-  examenesRecibidos:Examen[];
-  triajeRecibido:Triaje;
+  examenesRecibidos: Examen[];
+  triajeRecibido: Triaje;
   datoBus: string;
   apetitoOption: IOption[];
 
-  private idRecibido:number;
-  private nombreRecibido:string;
+  private idRecibido: number;
+  private nombreRecibido: string;
   private numHistRecibido: string;
-  private dniRecibido:string;
-  private edadRecibido:number;
-  private sexoRecibido:string;
-  private idCitaRecibida:number;
-  private idMedRecibido:number;
-  private hayEx :boolean;
-  private hayConsultas:boolean;
+  private dniRecibido: string;
+  private edadRecibido: number;
+  private sexoRecibido: string;
+  private idCitaRecibida: number;
+  private idMedRecibido: number;
+  private hayEx: boolean;
+  private hayConsultas: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
-    private labservice:LaboratorioService,
+    private labservice: LaboratorioService,
     private modal: TCModalService,
-    private http: HttpClient,   
+    private http: HttpClient,
     private router: Router,
     private toastr: ToastrService
   ) {
@@ -81,17 +84,17 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
         }
       ]
     };
-    this.idMedRecibido=this.httpSv.getIdMed();
-    this.pageNum=1;
-    this.hayEx=true;
-    this.hayConsultas=true;
-    this.apetitoOption=[];
+    this.idMedRecibido = this.httpSv.getIdMed();
+    this.pageNum = 1;
+    this.hayEx = true;
+    this.hayConsultas = true;
+    this.apetitoOption = [];
     this.consultasRecibidas = [];
     this.examenesRecibidos = [];
-    this.datoBus=this.httpSv.getNroHC();
-    this.idCitaRecibida=this.httpSv.getIdHC();
-    this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data =>{
-      this.triajeRecibido=data;
+    this.datoBus = this.httpSv.getNroHC();
+    this.idCitaRecibida = this.httpSv.getIdHC();
+    this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data => {
+      this.triajeRecibido = data;
     });
     this.cargarDatos();
     this.cargarConsultas();
@@ -109,13 +112,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * cargarDatos: Carga lo datos del paciente haciendo una llamata al servicio
 	***/
-  cargarDatos(){
-    this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data=>{
-      this.idRecibido=data[0].id;
-      this.dniRecibido=data[0].dni;
-      this.nombreRecibido=data[0].nombres+" "+data[0].apellido_paterno+" "+data[0].apellido_materno;
-      this.edadRecibido=data[0].edad;
-      this.sexoRecibido=data[0].sexo;
+  cargarDatos() {
+    this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data => {
+      this.idRecibido = data[0].id;
+      this.dniRecibido = data[0].dni;
+      this.nombreRecibido = data[0].nombres + " " + data[0].apellido_paterno + " " + data[0].apellido_materno;
+      this.edadRecibido = data[0].edad;
+      this.sexoRecibido = data[0].sexo;
       this.cargarExamenes(data[0].dni);
     });
   }
@@ -126,14 +129,14 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   cargarConsultas() {
     this.httpSv.searcHistoriaCompleta(this.datoBus).subscribe(data => {
-      this.data=data;
-      this.consultasRecibidas=[];
-      this.consultasRecibidas=data.results;
-      if(this.consultasRecibidas.length>0){
-				this.hayConsultas=false;
-			}
-     for (let index = 0; index < this.consultasRecibidas.length; index++) {
-        this.consultasRecibidas[index].proximaCita=this.consultasRecibidas[index].medico.especialidad.nombre;
+      this.data = data;
+      this.consultasRecibidas = [];
+      this.consultasRecibidas = data.results;
+      if (this.consultasRecibidas.length > 0) {
+        this.hayConsultas = false;
+      }
+      for (let index = 0; index < this.consultasRecibidas.length; index++) {
+        this.consultasRecibidas[index].proximaCita = this.consultasRecibidas[index].medico.especialidad.nombre;
       }
     });
   }
@@ -142,14 +145,14 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * nextPage: si se hace click en siguiente, se aumenta el contador de la página 'pageNum' y se envia el url al servicio
 	 ***/
-	public nextPage() {
+  public nextPage() {
     if (this.data.next) {
       this.pageNum++;
       this.httpSv.paginacionConsultasHistoriaC(this.data.next).subscribe(data => {
-        this.data=data;
-        this.consultasRecibidas=data.results;
+        this.data = data;
+        this.consultasRecibidas = data.results;
         for (let index = 0; index < this.consultasRecibidas.length; index++) {
-          this.consultasRecibidas[index].proximaCita=this.consultasRecibidas[index].medico.especialidad.nombre;
+          this.consultasRecibidas[index].proximaCita = this.consultasRecibidas[index].medico.especialidad.nombre;
         }
       });
     }
@@ -162,25 +165,25 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     if (this.pageNum > 1) {
       this.pageNum--;
       this.httpSv.paginacionConsultasHistoriaC(this.data.previous).subscribe(data => {
-        this.data=data;
-        this.consultasRecibidas=data.results;
+        this.data = data;
+        this.consultasRecibidas = data.results;
         for (let index = 0; index < this.consultasRecibidas.length; index++) {
-          this.consultasRecibidas[index].proximaCita=this.consultasRecibidas[index].medico.especialidad.nombre;
+          this.consultasRecibidas[index].proximaCita = this.consultasRecibidas[index].medico.especialidad.nombre;
         }
-			});
+      });
     }
   }
-  
+
 
   /*** 
 	 * autor: Milagros Motta R.
 	 * cargarExamenes: Carga los examenes del paciente haciendo una llamata al servicio 
 	***/
-  cargarExamenes(dni:string) {
+  cargarExamenes(dni: string) {
     this.labservice.searchExamenbDni(dni).subscribe(data => {
-      this.examenesRecibidos=data;
+      this.examenesRecibidos = data;
       for (let index = 0; index < this.examenesRecibidos.length; index++) {
-        this.examenesRecibidos[index].nombre=this.examenesRecibidos[index].tipoExam.nombre;
+        this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
       }
     });
   }
@@ -189,7 +192,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * regresar: Retorna al componente consultas que muestra las citas Pendientes 
 	***/
-  regresar(){
+  regresar() {
     this.router.navigate(['/vertical/consultas']);
   }
 
@@ -226,12 +229,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   initverTriajeForm() {
     this.verTriajeForm = this.formBuilder.group({
-      talla: [this.triajeRecibido.talla ? this.triajeRecibido.talla: '', Validators.required],
-      peso: [this.triajeRecibido.peso ? this.triajeRecibido.peso: '', Validators.required],
-      temperatura: [this.triajeRecibido.temperatura ? this.triajeRecibido.temperatura: '', Validators.required],
-      frecuenciaR: [this.triajeRecibido.frecuenciaR ? this.triajeRecibido.frecuenciaR: '', Validators.required],
-      frecuenciaC: [this.triajeRecibido.frecuenciaC ? this.triajeRecibido.frecuenciaC: '', Validators.required],
-      presionArt:[this.triajeRecibido.presionArt ? this.triajeRecibido.presionArt: '', Validators.required]
+      talla: [this.triajeRecibido.talla ? this.triajeRecibido.talla : '', Validators.required],
+      peso: [this.triajeRecibido.peso ? this.triajeRecibido.peso : '', Validators.required],
+      temperatura: [this.triajeRecibido.temperatura ? this.triajeRecibido.temperatura : '', Validators.required],
+      frecuenciaR: [this.triajeRecibido.frecuenciaR ? this.triajeRecibido.frecuenciaR : '', Validators.required],
+      frecuenciaC: [this.triajeRecibido.frecuenciaC ? this.triajeRecibido.frecuenciaC : '', Validators.required],
+      presionArt: [this.triajeRecibido.presionArt ? this.triajeRecibido.presionArt : '', Validators.required]
     });
 
   }
@@ -249,8 +252,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       tratamiento: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
-      ordenExam:['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
-      proximaCita:[null]
+      ordenExam: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
+      proximaCita: [null]
     });
 
   }
@@ -262,17 +265,17 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   addConsult(form: FormGroup) {
     if (form.valid) {
       let newConsult: Consulta = form.value;
-      if(form.value.proximaCita!=null){
+      if (form.value.proximaCita != null) {
         newConsult.proximaCita = formatDate(form.value.proximaCita, 'yyyy-MM-dd', 'en-US');
       }
-      newConsult.numeroHistoria=this.idRecibido;
-      newConsult.medico=this.idMedRecibido;
-      newConsult.triaje=this.triajeRecibido.id;
+      newConsult.numeroHistoria = this.idRecibido;
+      newConsult.medico = this.idMedRecibido;
+      newConsult.triaje = this.triajeRecibido.id;
       this.httpSv.crearConsulta(newConsult);
       this.Atender(this.idCitaRecibida);
       this.closeModalC();
       this.consultForm.reset();
-    //this.router.navigate(['/vertical/consultas']);   
+      //this.router.navigate(['/vertical/consultas']);   
     }
   }
   //fin de Modal Crear Consulta
@@ -308,19 +311,19 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   initVerMasForm(data: any) {
     this.verMasCForm = this.formBuilder.group({
-      talla: [data.triaje.talla ? data.triaje.talla: '', Validators.required],
-      peso: [data.triaje.peso ? data.triaje.peso: '', Validators.required],
-      temperatura: [data.triaje.temperatura ? data.triaje.temperatura: '', Validators.required],
-      frecuenciaR: [data.triaje.frecuenciaR ? data.triaje.frecuenciaR: '', Validators.required],
-      frecuenciaC: [data.triaje.frecuenciaC ? data.triaje.frecuenciaC: '', Validators.required],
-      presionArt:[data.triaje.presionArt ? data.triaje.presionArt: '', Validators.required],
-      motivo: [data.motivoConsulta ? data.motivoConsulta: '', Validators.required],
-      apetito: [data.apetito ? data.apetito: '', Validators.required],
-      orina: [data.orina ? data.orina: '', Validators.required],
-      deposiciones: [data.deposiciones ? data.deposiciones: '', Validators.required],
-      exaFis: [data.examenFisico ? data.examenFisico: '', Validators.required],
-      diagnostico: [data.diagnostico ? data.diagnostico: '', Validators.required],
-      tratamiento: [data.tratamiento ? data.tratamiento: '', Validators.required],
+      talla: [data.triaje.talla ? data.triaje.talla : '', Validators.required],
+      peso: [data.triaje.peso ? data.triaje.peso : '', Validators.required],
+      temperatura: [data.triaje.temperatura ? data.triaje.temperatura : '', Validators.required],
+      frecuenciaR: [data.triaje.frecuenciaR ? data.triaje.frecuenciaR : '', Validators.required],
+      frecuenciaC: [data.triaje.frecuenciaC ? data.triaje.frecuenciaC : '', Validators.required],
+      presionArt: [data.triaje.presionArt ? data.triaje.presionArt : '', Validators.required],
+      motivo: [data.motivoConsulta ? data.motivoConsulta : '', Validators.required],
+      apetito: [data.apetito ? data.apetito : '', Validators.required],
+      orina: [data.orina ? data.orina : '', Validators.required],
+      deposiciones: [data.deposiciones ? data.deposiciones : '', Validators.required],
+      exaFis: [data.examenFisico ? data.examenFisico : '', Validators.required],
+      diagnostico: [data.diagnostico ? data.diagnostico : '', Validators.required],
+      tratamiento: [data.tratamiento ? data.tratamiento : '', Validators.required],
     });
 
   }
@@ -332,8 +335,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * openModalExamenes: Abre el modal e inicializa sus formGroups 
 	***/
   openModalExamenes<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any) {
-    if(this.examenesRecibidos.length>0){
-      this.hayEx=false;
+    if (this.examenesRecibidos.length > 0) {
+      this.hayEx = false;
     }
     this.modal.open({
       body: body,
@@ -355,9 +358,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
    * autor: Milagros Motta R.
    * closeModalExamenes: Hace la llamada al servicio para imprimir el resultado del examen por ID 
   ***/
-  imprimirEx(Ex:Examen){
-		document.location.href = 'http://18.216.2.122:9000/laboratorio/resultadoExamen/'+Ex.id+'/';
-		this.toastr.success("Se ha generado el Pdf");
+  imprimirEx(Ex: Examen) {
+    document.location.href = BASE_API_URL + '/laboratorio/resultadoExamen/' + Ex.id + '/';
+    this.toastr.success("Se ha generado el Pdf");
   }
   //fin de Modal Examenes de Laboratorio
 

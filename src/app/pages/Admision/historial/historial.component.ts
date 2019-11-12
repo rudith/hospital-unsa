@@ -29,6 +29,9 @@ import { Router } from "@angular/router";
 import { Personal } from "../../../interfaces/personal";
 import { HistorialLista } from '../../../interfaces/historial-lista';
 
+// BASE_API_URL
+import { BASE_API_URL } from "../../../config/API";
+
 @Component({
   selector: "app-historial",
   templateUrl: "./historial.component.html",
@@ -60,15 +63,15 @@ export class HistorialComponent extends BasePageComponent
   tableData: any[];
   appointmentForm: FormGroup;
   historiaForm: FormGroup;
-  historiaLis:HistorialLista;
+  historiaLis: HistorialLista;
   historiales: Historial[];
   numero: number;
   busForm: FormGroup;
   patientForm: FormGroup;
   depa: number;
   data: HistorialLista = <HistorialLista>{};
-  histTotal:HistorialLista
-	pages: Array<number>;
+  histTotal: HistorialLista
+  pages: Array<number>;
   pagesNumber: number;
   pageNum: number;
   public newCita: Cita;
@@ -80,7 +83,7 @@ export class HistorialComponent extends BasePageComponent
     store: Store<IAppState>,
     httpSv: HttpService,
     private modal: TCModalService,
-    private modalCita:TCModalService,
+    private modalCita: TCModalService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
@@ -102,7 +105,7 @@ export class HistorialComponent extends BasePageComponent
     this.estadoCivilOption = [];
     this.medicos = [];
     this.loadData();
-    this.opBus="0";
+    this.opBus = "0";
     this.historiales = [];
     this.espOption = [];
     this.newCita = <Cita>{};
@@ -144,8 +147,8 @@ export class HistorialComponent extends BasePageComponent
     if (this.data.next) {
       this.pageNum++;
       this.httpSv.loadHistoriaPagination(this.data.next).subscribe(hist => {
-          this.data = hist;
-					this.historiales = hist.results;
+        this.data = hist;
+        this.historiales = hist.results;
       });
     }
   }
@@ -156,7 +159,7 @@ export class HistorialComponent extends BasePageComponent
       this.httpSv.loadHistoriaPagination(this.data.previous).subscribe(hist => {
         this.data = hist;
         this.historiales = hist.results;
-    });
+      });
     }
   }
   loadHistorias() {
@@ -259,12 +262,12 @@ export class HistorialComponent extends BasePageComponent
       newPatient.departamento = parseInt(form.get("departamento").value);
       newPatient.provincia = parseInt(form.get("distrito").value);
       newPatient.provincia = parseInt(form.get("distrito").value);
-      
-      this.httpSv.createHISTORIAL(newPatient,this.modal);
+
+      this.httpSv.createHISTORIAL(newPatient, this.modal);
       this.loadHistorias();
     }
   }
-  closeModal(){
+  closeModal() {
     this.modal.close();
   }
 
@@ -321,7 +324,7 @@ export class HistorialComponent extends BasePageComponent
     });
   }
 
-  
+
   loadprovincias() {
     for (let i in this.provincias) {
       this.provinciasOption[i] = {
@@ -350,7 +353,7 @@ export class HistorialComponent extends BasePageComponent
   loadmedicos() {
     for (let i in this.perso) {
       this.medOption[i] = {
-        label:this.perso[i].nombres + " " + this.perso[i].apellido_paterno + " " +  this.perso[i].apellido_materno,
+        label: this.perso[i].nombres + " " + this.perso[i].apellido_paterno + " " + this.perso[i].apellido_materno,
         value: this.perso[i].user.id + ""
       };
     }
@@ -422,8 +425,8 @@ export class HistorialComponent extends BasePageComponent
         newAppointment.exonerado = true;
       }
 
-      this.httpSv.createCITA(newAppointment,this.modal);
-      
+      this.httpSv.createCITA(newAppointment, this.modal);
+
     }
   }
 
@@ -431,21 +434,21 @@ export class HistorialComponent extends BasePageComponent
     if (this.datoBus == "") {
       this.toastr.warning("Ningun valor ingresado");
       this.httpSv.loadHistorias().subscribe(historiales => {
-        this.historiales=[]
+        this.historiales = []
         this.historiales = historiales.results;
       });
     } else if (this.opBus == "1") {
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasDNI(this.datoBus).subscribe(
         data => {
-          this.historiales=[]
+          this.historiales = []
           this.historiales[0] = data;
           console.log("entro bus" + this.datoBus);
         },
         error => {
           this.toastr.error("No encontrado");
           this.httpSv.loadHistorias().subscribe(historiales => {
-            this.historiales=[]
+            this.historiales = []
             this.historiales = historiales.results;
           });
         }
@@ -454,14 +457,14 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(
         data => {
-        this.historiales=[]
-        this.historiales = data;
+          this.historiales = []
+          this.historiales = data;
           console.log("entro bus" + this.datoBus);
         },
         error => {
           this.toastr.error("No encontrado");
           this.httpSv.loadHistorias().subscribe(historiales => {
-            this.historiales=[]
+            this.historiales = []
             this.historiales = historiales.results;
           });
         }
@@ -470,14 +473,14 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNomAp(this.datoBus).subscribe(
         data => {
-          this.historiales=[];
+          this.historiales = [];
           this.historiales = data.results;
           console.log("entro bus" + this.datoBus);
         },
         error => {
           this.toastr.warning("No encontrado");
           this.httpSv.loadHistorias().subscribe(historiales => {
-            this.historiales=[]
+            this.historiales = []
             this.historiales = historiales.results;
           });
         }
@@ -573,7 +576,7 @@ export class HistorialComponent extends BasePageComponent
 	*/
   imprimir1(data) {
     document.location.href =
-      "http://18.216.2.122:9000/admision/historiaPDF/" + data.dni;
+      BASE_API_URL + "/admision/historiaPDF/" + data.dni;
     this.toastr.success("Se ha generado el Pdf");
   }
   cargarProvXDepto(a: number) {
@@ -585,7 +588,7 @@ export class HistorialComponent extends BasePageComponent
         this.provincias = data.provincias;
         this.loadprovincias();
       },
-      error => {}
+      error => { }
     );
   }
   cargarDistXProv(a: number) {
@@ -596,7 +599,7 @@ export class HistorialComponent extends BasePageComponent
         this.distritos = data.distritos;
         this.loaddistritos();
       },
-      error => {}
+      error => { }
     );
   }
   cargarMedXEsp(a: number) {
@@ -610,7 +613,7 @@ export class HistorialComponent extends BasePageComponent
         //console.log(this.perso);
         this.loadmedicos();
       },
-      error => {}
+      error => { }
     );
   }
 }

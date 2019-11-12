@@ -18,6 +18,9 @@ import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
 
+// BASE_API_URL
+import { BASE_API_URL } from "../../../config/API";
+
 @Component({
   selector: "app-citas",
   templateUrl: "./citas.component.html",
@@ -185,9 +188,9 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     if (this.pageNum > 1) {
       this.pageNum--;
       this.httpSv.loadCitaPagination(this.data.previous).subscribe(citalista => {
-          this.data = citalista;
-          this.citasEdit = this.data.results;
-        });
+        this.data = citalista;
+        this.citasEdit = this.data.results;
+      });
     }
   }
 
@@ -220,7 +223,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         this.medicos = data;
         this.loadOptionsMed();
       },
-      error => {}
+      error => { }
     );
   }
   // open modal window
@@ -299,12 +302,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       newAppointment.fechaAtencion = formatDate(
         form.value.fechaAtencion,
         "yyyy-MM-dd",
-        "en-US",'+0530'
+        "en-US", '+0530'
       );
       newAppointment.fechaSeparacion = formatDate(
         this.today,
         "yyyy-MM-dd",
-        "en-US",'+0530'
+        "en-US", '+0530'
       );
       //newAppointment.fechaAtencion = this.cita.fechaAtencion;
       newAppointment.especialidad = form.value.especialidad;
@@ -325,7 +328,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     console.log(JSON.stringify(newCita));
     this.http
       .put<any>(
-        "http://18.216.2.122:9000/consultorio/crear-cita/" + newCita.id + "/",
+        BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/",
         {
           numeroRecibo: newCita.numeroRecibo,
           fechaSeparacion: newCita.fechaSeparacion,

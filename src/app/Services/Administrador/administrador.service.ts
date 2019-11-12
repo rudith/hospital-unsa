@@ -12,15 +12,18 @@ import { IOption } from "../../ui/interfaces/option";
 import { User } from "../../interfaces/user";
 import { personalLista } from "../../interfaces/personalLista";
 
+// BASE_API_URL
+import { BASE_API_URL } from "../../config/API";
+
 @Injectable({
   providedIn: "root"
 })
 export class AdministradorService {
-  private url: string = "http://18.216.2.122:9000/administrador";
+  private url: string = BASE_API_URL + "/administrador";
   medOption: IOption[];
   //username: string = "adminq";
   //password: string = "admin";
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
   //Areas
   loadAreas(): Observable<any> {
     return this.http.get<any>(this.url + "/areas/");
@@ -33,7 +36,7 @@ export class AdministradorService {
   }
   searchArea(id: string): Observable<any> {
     return this.http.get<any>(
-      "http://18.216.2.122:9000/administrador/buscararea/?ar=" + id
+      BASE_API_URL + "/administrador/buscararea/?ar=" + id
     );
   }
   createArea(area: Area) {
@@ -63,7 +66,7 @@ export class AdministradorService {
     return this.http.get<any>(this.url + "/especialidadSP/");
   }
   searchEspecialidad(id: string): Observable<any> {
-    return this.http.get<any>("http://18.216.2.122:9000/administrador/buscarespecialidad/?esp=" + id);
+    return this.http.get<any>(BASE_API_URL + "/administrador/buscarespecialidad/?esp=" + id);
   }
   createEspecialidad(especialidad: Especialidad) {
     this.http
@@ -92,7 +95,7 @@ export class AdministradorService {
     return this.http.get<any>(this.url + "/tipo-personalSP/");
   }
   searchTPersonal(id: string): Observable<any> {
-    return this.http.get<any>("http://18.216.2.122:9000/administrador/buscartipousuario/?tip=" + id);
+    return this.http.get<any>(BASE_API_URL + "/administrador/buscartipousuario/?tip=" + id);
   }
   createTPersonal(tipo: Tipopersonal) {
     this.http
@@ -110,8 +113,8 @@ export class AdministradorService {
       );
   }
   //o gettoken, despues de implementarse en el login se cambiaran estos metodos
-  getToken(user:string,pass:string) {
-    return this.http.post<any>("http://18.216.2.122:9000/administrador/login/", {
+  getToken(user: string, pass: string) {
+    return this.http.post<any>(BASE_API_URL + "/administrador/login/", {
       username: user,
       password: pass
     });

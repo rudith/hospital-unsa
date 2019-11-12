@@ -14,12 +14,14 @@ import { ExamenLista } from '../../interfaces/examen-lista';
 import { OrdenLista } from '../../interfaces/orden-lista';
 import { Cabcrear } from '../../interfaces/cabcrear';
 
+// BASE_API_URL
+import { BASE_API_URL } from "../../config/API";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class LaboratorioService {
-	private url: string = "http://18.216.2.122:9000/laboratorio";
+	private url: string = BASE_API_URL + "/laboratorio";
 	public historia: Historial;
 	public cabecera: Cabeceralab[] = [];
 	public cabcrear: Cabcrear[] = [];
@@ -30,7 +32,7 @@ export class LaboratorioService {
 	public ordenlis: OrdenLista[] = [];
 	fi: string;
 	ff: string;
-	private tipo:number;
+	private tipo: number;
 
 	constructor(private http: HttpClient, private toastr: ToastrService) {
 
@@ -73,7 +75,7 @@ export class LaboratorioService {
 		return this.http.get<OrdenLista>(url)
 	}
 	loadOrden(): Observable<OrdenLista> {
-		return this.http.get<OrdenLista>("http://18.216.2.122:9000/consultorio/ver-orden/");
+		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-orden/");
 	}
 	loadExamen(): Observable<ExamenLista> {
 		return this.http.get<ExamenLista>(this.url + "/ExamenLabCab/");
@@ -85,7 +87,7 @@ export class LaboratorioService {
 	}
 	cambioEstado(id: number): Observable<Orden> {
 		console.log("Entra al servicio");
-		return this.http.get<Orden>("http://18.216.2.122:9000/consultorio/atenderOrden/" + id);
+		return this.http.get<Orden>(BASE_API_URL + "/consultorio/atenderOrden/" + id);
 	}
 
 
@@ -101,7 +103,7 @@ export class LaboratorioService {
 				codigoExam: detalle.codigoExam,
 			}).subscribe(
 				data => {
-					
+
 					this.toastr.success("El detalle ha sido crado con exito");
 					console.log("CREAR detalle Completo");
 				},
@@ -111,34 +113,34 @@ export class LaboratorioService {
 				});
 
 	}
-	getIdCabecera():number{
+	getIdCabecera(): number {
 		return this.tipo;
 	}
 
-	
+
 	//crear cabecer
 	createCabecera(newCabecera: Cabcrear) {
 		console.log(newCabecera);
-		this.http.post<Cabcrear>(this.url + '/CrearExamenLabCab/',{
-				nombre: newCabecera.nombre,
-				dni: newCabecera.dni,
-				orden: newCabecera.orden,
-				fecha: newCabecera.fecha,
-				tipoExam: newCabecera.tipoExam,
-				observaciones: newCabecera.observaciones,
-			}).subscribe(
-				data => {					
-					this.tipo=data.id;
-					console.log("servicio"+data.id);
-					console.log(this.tipo);
-					this.toastr.success("", "Se ha creado la cabecera");
-					console.log("CREAR Cabecera Completo");
-				},
-				error => {
-					this.toastr.error(error);
-					console.log(error);
-		});
-		
-		
+		this.http.post<Cabcrear>(this.url + '/CrearExamenLabCab/', {
+			nombre: newCabecera.nombre,
+			dni: newCabecera.dni,
+			orden: newCabecera.orden,
+			fecha: newCabecera.fecha,
+			tipoExam: newCabecera.tipoExam,
+			observaciones: newCabecera.observaciones,
+		}).subscribe(
+			data => {
+				this.tipo = data.id;
+				console.log("servicio" + data.id);
+				console.log(this.tipo);
+				this.toastr.success("", "Se ha creado la cabecera");
+				console.log("CREAR Cabecera Completo");
+			},
+			error => {
+				this.toastr.error(error);
+				console.log(error);
+			});
+
+
 	}
 }

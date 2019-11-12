@@ -169,17 +169,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 		
 	}
 
-	openModaD<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Orden, options: any = null) {
-		this.initDetalleForm();
-		this.modal.open({
-			body: body,
-			header: header,
-			footer: footer,
-			options: options
-
-		});
-		
-	}
+	
 	closeModalD() {
 		this.modal.close();
 		this.modaH.close();

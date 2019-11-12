@@ -29,7 +29,7 @@
 </form>
 <br>
 <tc-card class="mb-0">
-	<tc-table [rows]="examen" [hovered]="true" [pagination]="true">
+	<tc-table [rows]="examen" [hovered]="true" >
 		<tc-table-col [columnTitle]="'Nombre'" [columnName]="'nombre'">
 			<ng-template #tableTDTemplate let-value>
 				<strong>{{ value }}</strong>

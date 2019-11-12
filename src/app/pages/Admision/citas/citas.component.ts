@@ -101,6 +101,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.loadOptionsMed();
     });
     this.pageNum = 1;
+    this.httpSv.cancelarCitasPasadas();
   }
   ngOnInit() {
     super.ngOnInit();

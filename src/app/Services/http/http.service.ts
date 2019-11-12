@@ -248,6 +248,11 @@ export class HttpService {
       "http://18.216.2.122:9000/consultorio/citasporespecialidad/" + id + "/"
     );
   }
+  cancelarCitasPasadas(): Observable<any> {
+      return this.http.post<any>(
+      "http://18.216.2.122:9000/admision/cancelarCitasFecha/","");
+  }
+
   searchHistoriaTriaje(dni: string): Observable<citaLista> {
     return this.http.get<citaLista>(
       "http://18.216.2.122:9000/consultorio/citadniespera/?dni=" + dni

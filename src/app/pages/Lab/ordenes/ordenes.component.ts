@@ -112,7 +112,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
   openModalH<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Orden) {
 		this.initPatientForm(row);
 		this.initDetalleForm();
-		this.rr = row.id;
+		//this.rr = row.id;
 		this.modaH.open({
 			body: body,
 			header: header,
@@ -126,7 +126,6 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 	
 	initPatientForm(data:Orden) {
-		
 		this.patientForm = this.formBuilder.group({
 			nombre: [data.nombre?data.nombre: '', Validators.required],
      		dni: [ data.dni?data.dni:'', Validators.required],
@@ -134,16 +133,19 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			observaciones: ['', Validators.required],
 			tipoExam: [data.tipoExam?data.tipoExam:'', Validators.required], 
 		});
+		
 		let newCab:Cabcrear=this.patientForm.value;
 		this.today = new Date();	  
 		newCab.nombre=data.nombre;
 		newCab.dni=data.dni;
-		newCab.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US');
+		newCab.fecha= formatDate(this.today, 'yyyy-MM-dd', 'en-US','+0530');
 		newCab.tipoExam=data.tipoExam;
 		newCab.orden=data.orden;
 		newCab.observaciones="";
-		console.log(this.cab);
 		this.labService.createCabecera(newCab);
+		this.rr=this.labService.getIdCabecera();
+		this.rr++;
+		console.log("cxc"+this.rr);
 
 		
   }
@@ -211,9 +213,6 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			this.loadOrdenes();
 		});;
 		console.log("ID de row"+row);
-		
-		
-		
 	}
 
 }

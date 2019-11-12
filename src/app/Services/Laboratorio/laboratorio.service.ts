@@ -30,6 +30,7 @@ export class LaboratorioService {
 	public ordenlis: OrdenLista[] = [];
 	fi: string;
 	ff: string;
+	private tipo:number;
 
 	constructor(private http: HttpClient, private toastr: ToastrService) {
 
@@ -100,6 +101,7 @@ export class LaboratorioService {
 				codigoExam: detalle.codigoExam,
 			}).subscribe(
 				data => {
+					
 					this.toastr.success("El detalle ha sido crado con exito");
 					console.log("CREAR detalle Completo");
 				},
@@ -109,6 +111,11 @@ export class LaboratorioService {
 				});
 
 	}
+	getIdCabecera():number{
+		return this.tipo;
+	}
+
+	
 	//crear cabecer
 	createCabecera(newCabecera: Cabcrear) {
 		console.log(newCabecera);
@@ -120,14 +127,18 @@ export class LaboratorioService {
 				tipoExam: newCabecera.tipoExam,
 				observaciones: newCabecera.observaciones,
 			}).subscribe(
-				data => {
+				data => {					
+					this.tipo=data.id;
+					console.log("servicio"+data.id);
+					console.log(this.tipo);
 					this.toastr.success("", "Se ha creado la cabecera");
 					console.log("CREAR Cabecera Completo");
-
 				},
 				error => {
 					this.toastr.error(error);
 					console.log(error);
-				});
+		});
+		
+		
 	}
 }

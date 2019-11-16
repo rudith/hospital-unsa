@@ -15,35 +15,42 @@ import { personalLista } from "../../interfaces/personalLista";
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
 
+
 @Injectable({
   providedIn: "root"
 })
 export class AdministradorService {
+  bool: boolean;
   private url: string = BASE_API_URL + "/administrador";
   medOption: IOption[];
   //username: string = "adminq";
   //password: string = "admin";
-  constructor(private http: HttpClient, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
   //Areas
   loadAreas(): Observable<any> {
-    return this.http.get<any>(this.url + "/areas/");
+    return this.http.get<any>(this.url + "/areas/", this.getHeader());
   }
   loadAreasPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadAreasSP(): Observable<any> {
-    return this.http.get<any>(this.url + "/areasSP/");
+    return this.http.get<any>(this.url + "/areasSP/", this.getHeader());
   }
   searchArea(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/buscararea/?ar=" + id
+      BASE_API_URL + "/administrador/buscararea/?ar=" + id,
+      this.getHeader()
     );
   }
   createArea(area: Area) {
     this.http
-      .post<any>(this.url + "/areas/", {
-        nombre: area.nombre
-      })
+      .post<any>(
+        this.url + "/areas/",
+        {
+          nombre: area.nombre
+        },
+        this.getHeader()
+      )
       .subscribe(
         data => {
           this.toastr.success("Area Creada correctamente");
@@ -57,23 +64,30 @@ export class AdministradorService {
 
   //Especialidades
   loadEspecialidades(): Observable<any> {
-    return this.http.get<any>(this.url + "/especialidad/");
+    return this.http.get<any>(this.url + "/especialidad/", this.getHeader());
   }
   loadEspecialidadesPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadEspecialidadesSP(): Observable<any> {
-    return this.http.get<any>(this.url + "/especialidadSP/");
+    return this.http.get<any>(this.url + "/especialidadSP/", this.getHeader());
   }
   searchEspecialidad(id: string): Observable<any> {
-    return this.http.get<any>(BASE_API_URL + "/administrador/buscarespecialidad/?esp=" + id);
+    return this.http.get<any>(
+      BASE_API_URL + "/administrador/buscarespecialidad/?esp=" + id,
+      this.getHeader()
+    );
   }
   createEspecialidad(especialidad: Especialidad) {
     this.http
-      .post<any>(this.url + "/especialidad/", {
-        nombre: especialidad.nombre,
-        descripcion: especialidad.descripcion
-      })
+      .post<any>(
+        this.url + "/especialidad/",
+        {
+          nombre: especialidad.nombre,
+          descripcion: especialidad.descripcion
+        },
+        this.getHeader()
+      )
       .subscribe(
         data => {
           this.toastr.success("Especialidad Creada correctamente");
@@ -86,22 +100,29 @@ export class AdministradorService {
   }
   //TipoPersonal
   loadTPersonal(): Observable<any> {
-    return this.http.get<any>(this.url + "/tipo-personal/");
+    return this.http.get<any>(this.url + "/tipo-personal/", this.getHeader());
   }
   loadTPersonalPagination(pag: string): Observable<any> {
     return this.http.get<any>(pag);
   }
   loadTPersonalSP(): Observable<any> {
-    return this.http.get<any>(this.url + "/tipo-personalSP/");
+    return this.http.get<any>(this.url + "/tipo-personalSP/", this.getHeader());
   }
   searchTPersonal(id: string): Observable<any> {
-    return this.http.get<any>(BASE_API_URL + "/administrador/buscartipousuario/?tip=" + id);
+    return this.http.get<any>(
+      BASE_API_URL + "/administrador/buscartipousuario/?tip=" + id,
+      this.getHeader()
+    );
   }
   createTPersonal(tipo: Tipopersonal) {
     this.http
-      .post<any>(this.url + "/tipo-personal/", {
-        nombre: tipo.nombre
-      })
+      .post<any>(
+        this.url + "/tipo-personal/",
+        {
+          nombre: tipo.nombre
+        },
+        this.getHeader()
+      )
       .subscribe(
         data => {
           this.toastr.success("Tipo personal Creado correctamente");
@@ -152,10 +173,10 @@ export class AdministradorService {
     return this.http.get<personalLista>(url, this.getHeader());
   }
   searchPersonal(id: string): Observable<any> {
-    return this.http.get<any>(this.url + "/ver-personal/" + id + "/");
+    return this.http.get<any>(this.url + "/ver-personal/" + id + "/", this.getHeader());
   }
   searchPersonalDNI(dni: string): Observable<any> {
-    return this.http.get<any>(this.url + "/personaldni/" + dni + "/");
+    return this.http.get<any>(this.url + "/personaldni/" + dni + "/", this.getHeader());
   }
   createPersonal(tipo: PersonalCreate) {
     // console.log(JSON.stringify(tipo));
@@ -172,25 +193,28 @@ export class AdministradorService {
         area: tipo.area,
         tipo_personal: tipo.tipo_personal,
         especialidad: tipo.especialidad
-      })
+      }, this.getHeader())
       .subscribe(
         data => {
           this.toastr.success("personal Creado correctamente");
+          this.bool = true;
         },
         error => {
           console.log(error.message);
           this.toastr.error("No se pudo crear personal");
+          this.bool = false;
         }
       );
+    return this.bool;
   }
   //user
   loadUser(): Observable<any> {
-    return this.http.get<any>(this.url + "/usuarios/");
+    return this.http.get<any>(this.url + "/usuarios/", this.getHeader());
   }
   loadUserPagination(pag: string): Observable<any> {
-    return this.http.get<any>(pag);
+    return this.http.get<any>(pag, this.getHeader());
   }
   loadUserSP(): Observable<any> {
-    return this.http.get<any>(this.url + "/usuariosSP/");
+    return this.http.get<any>(this.url + "/usuariosSP/", this.getHeader());
   }
 }

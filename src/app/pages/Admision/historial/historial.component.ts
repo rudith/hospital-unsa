@@ -260,9 +260,7 @@ export class HistorialComponent extends BasePageComponent
       newPatient.estReg = true;
       newPatient.distrito = parseInt(form.get("distrito").value);
       newPatient.departamento = parseInt(form.get("departamento").value);
-      newPatient.provincia = parseInt(form.get("distrito").value);
-      newPatient.provincia = parseInt(form.get("distrito").value);
-
+      newPatient.provincia = parseInt(form.get("provincia").value);
       this.httpSv.createHISTORIAL(newPatient, this.modal);
       this.loadHistorias();
     }

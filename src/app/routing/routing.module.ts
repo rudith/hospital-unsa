@@ -70,6 +70,7 @@ import { AreaComponent } from '../pages/Administrador/area/area.component';
 import { EspecialidadComponent } from '../pages/Administrador/especialidad/especialidad.component';
 import { TipoPersonalComponent } from '../pages/Administrador/tipo-personal/tipo-personal.component';
 import { ConexionLaboratorioComponent } from '../pages/Admision/conexion-laboratorio/conexion-laboratorio.component';
+import {HistorialCitasComponent} from '../pages/Admision/historial-citas/historial-citas.component';
 
 
 const VERTICAL_ROUTES: Routes = [
@@ -137,6 +138,7 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'laboratorio', component: LaboratorioComponent },
   { path: 'ordenes', component:OrdenesComponent},
   { path:'conex-lab',component:ConexionLaboratorioComponent},
+  {path:'hist-citas',component:HistorialCitasComponent},
   { path: '**', component: Page404Component }
 ];
 

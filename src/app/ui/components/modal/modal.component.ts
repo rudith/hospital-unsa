@@ -39,9 +39,10 @@ export class TCModalComponent implements OnInit, OnDestroy {
     this.defaultOtions = {
       height: 'auto',
       width: 500,
-      closeButton: false,
+      closeButton: true,
       overlay: true,
-      overlayClose: true
+      overlayClose: true,
+      escapeToClose:true,
     };
     this.close = new EventEmitter();
   }

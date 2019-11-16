@@ -56,7 +56,7 @@ export class ActionsComponent implements OnInit {
 
     setTimeout(() => {
       localStorage.removeItem("token");
-      this.toastr.info("Token eliminado","Hasta luego");
+      this.toastr.info("","Se ha cerrado Sesion");
       this.router.navigate([layout ? layout : this.layout, link]);
     });
   }

@@ -34,7 +34,7 @@ export class AreaComponent extends BasePageComponent implements OnInit {
   {
     super(store, httpSv);
     this.pageData = {
-      title: "Areas",
+      title: "ÁREAS",
       loaded: true,
       breadcrumbs: [
         {

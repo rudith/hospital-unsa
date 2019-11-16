@@ -105,7 +105,7 @@ export class HistorialComponent extends BasePageComponent
     this.estadoCivilOption = [];
     this.medicos = [];
     this.loadData();
-    this.opBus = "0";
+    this.opBus = "1";
     this.historiales = [];
     this.espOption = [];
     this.newCita = <Cita>{};
@@ -215,15 +215,7 @@ export class HistorialComponent extends BasePageComponent
 
   initPatientForm() {
     this.patientForm = this.formBuilder.group({
-      dni: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(8),
-          Validators.pattern("[0-9]*")
-        ]
-      ],
+      dni: ["",[Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
       nombres: ["", [Validators.required, Validators.pattern("[A-Za-z ]*")]],
       apellido_paterno: [
         "",
@@ -261,6 +253,7 @@ export class HistorialComponent extends BasePageComponent
       newPatient.distrito = parseInt(form.get("distrito").value);
       newPatient.departamento = parseInt(form.get("departamento").value);
       newPatient.provincia = parseInt(form.get("provincia").value);
+
       this.httpSv.createHISTORIAL(newPatient, this.modal);
       this.loadHistorias();
     }
@@ -375,10 +368,11 @@ export class HistorialComponent extends BasePageComponent
 
   // init form
   initAppoForm(data: any) {
+    this.today = new Date();
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
       numeroRecibo: ["", [Validators.pattern("[0-9]*")]],
-      fechaSeparacion: ["", Validators.required],
+      fechaSeparacion: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
       especialidad: ["", Validators.required],
       medico: ["", Validators.required],
       responsable: ["", [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],

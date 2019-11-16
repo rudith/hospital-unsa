@@ -25,9 +25,10 @@
           <div class="col-md-2">
             <tc-form-group>
               <tc-select
-                [placeholder]="'Opcion'"
+                [placeholder]="'Opción'"
                 formControlName="opBus"
                 [options]="busqOption"
+                [selected]="'1'"
                 (click)="selectOpt()"
               >
               </tc-select>
@@ -39,7 +40,7 @@
           *ngIf="opBus == 0"
           [type]="'number'"
           [suffixIcon]="'icofont-search-document'"
-          [placeholder]="'Seleccione una opcion'"
+          [placeholder]="'Seleccione una opción'"
           formControlName="datoBus"
         ></tc-input>
         <tc-input
@@ -429,7 +430,7 @@
       </div>
       <tc-form-group>
         <tc-input
-          [placeholder]="'Direccion'"
+          [placeholder]="'Dirección'"
           formControlName="direccion"
         ></tc-input>
         <tc-form-description
@@ -515,7 +516,7 @@
                 patientForm.controls.fechaNac.invalid
               "
             >
-              Ingrese Fecha de Nacimiento correcta aaaa-mm-dd
+              Ingrese Fecha de Nacimiento correcta dd-mm-aaaa
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -545,7 +546,7 @@
         <div class="col-12 col-sm-4">
           <tc-form-group>
             <tc-input
-              [placeholder]="'Telefono'"
+              [placeholder]="'Teléfono'"
               [type]="'number'"
               formControlName="telefono"
               [charLimiting]="6"
@@ -558,7 +559,7 @@
                 patientForm.controls.telefono.invalid
               "
             >
-              Ingrese el numero de telefono, este solo debe contener 6 digitos
+              Ingrese el numero de teléfono, este solo debe contener 6 digitos
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -587,7 +588,7 @@
         <div class="col-12 col-sm-6">
           <tc-form-group>
             <tc-select
-              [placeholder]="'Grado de Instruccion'"
+              [placeholder]="'Grado de Instrucción'"
               formControlName="gradoInstruccion"
               [options]="gradoInstruccionOption"
             >
@@ -598,7 +599,7 @@
         <div class="col-12 col-sm-6">
           <tc-form-group>
             <tc-select
-              [placeholder]="'Ocupacion'"
+              [placeholder]="'Ocupación'"
               formControlName="ocupacion"
               [options]="ocupacionOption"
             >
@@ -728,12 +729,12 @@
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Telefono</tc-form-label>
+            <tc-form-label>Teléfono</tc-form-label>
             <tc-input
               [bgColor]="'#fff'"
               [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
-              [placeholder]="'Telefono'"
+              [placeholder]="'Teléfono'"
               [type]="'number'"
               formControlName="telefono"
               readonly="readonly"
@@ -774,12 +775,12 @@
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Grado de Instruccion</tc-form-label>
+            <tc-form-label>Grado de Instrucción</tc-form-label>
             <tc-input
               [bgColor]="'#fff'"
               [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
-              [placeholder]="'Grado de Instruccion'"
+              [placeholder]="'Grado de Instrucción'"
               formControlName="gradoInstruccion"
               readonly="readonly"
             >
@@ -788,12 +789,12 @@
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Ocupacion</tc-form-label>
+            <tc-form-label>Ocupación</tc-form-label>
             <tc-input
               [bgColor]="'#fff'"
               [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
-              [placeholder]="'Ocupacion'"
+              [placeholder]="'Ocupación'"
               formControlName="ocupacion"
               readonly="readonly"
             >
@@ -818,12 +819,12 @@
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
-            <tc-form-label>Direccion</tc-form-label>
+            <tc-form-label>Dirección</tc-form-label>
             <tc-input
               [bgColor]="'#fff'"
               [borderColor]="'#3f51b5'"
               [color]="'#3f51b5'"
-              [placeholder]="'Direccion'"
+              [placeholder]="'Dirección'"
               formControlName="direccion"
               readonly="readonly"
             >

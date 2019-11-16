@@ -13,6 +13,7 @@ export interface IModalOptions {
   closeButton: boolean;
   overlay: boolean;
   overlayClose: boolean;
+  escapeToClose:boolean;
 }
 
 type Tpl = string | TemplateRef<any> | Type<any>;

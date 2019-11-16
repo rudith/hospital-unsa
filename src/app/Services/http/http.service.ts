@@ -313,7 +313,7 @@ export class HttpService {
       );
   }
   createHISTORIAL(newHistoria: Historial, modal: TCModalService) {
-    console.log(newHistoria);
+    
     this.http
       .post<any>(BASE_API_URL + "/admision/crear-historia/", {
         numeroHistoria: newHistoria.numeroHistoria,
@@ -344,7 +344,7 @@ export class HttpService {
           modal.close();
         },
         error => {
-          console.error(error.message);
+          console.error("Leer errores de back",error)
           this.toastr.error("No se pudo crear el Historial");
         }
       );

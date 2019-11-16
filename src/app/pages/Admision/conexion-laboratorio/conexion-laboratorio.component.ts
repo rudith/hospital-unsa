@@ -260,8 +260,8 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   initHistoriaFormExtra() {
     this.today = new Date();
     this.historiaFormE = this.formBuilder.group({
-      dni: ["", Validators.required],
-      nombre: ["", Validators.required],
+      dni: ["",[Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      nombre: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
       tipoExam: ["", Validators.required],
     });

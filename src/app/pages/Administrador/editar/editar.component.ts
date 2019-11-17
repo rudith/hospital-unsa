@@ -52,7 +52,7 @@ export class EditarComponent extends BasePageComponent
     super(store, httpSv);
 
     this.pageData = {
-      title: "Usuarios",
+      title: "",
       loaded: true,
       breadcrumbs: [
         {

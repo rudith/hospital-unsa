@@ -15,8 +15,10 @@ import { Router } from '@angular/router';
 import { Examen } from '../../../interfaces/examen';
 import { ToastrService } from 'ngx-toastr';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
+import { Detalle } from '../../../interfaces/detalle';
 import { ConsultasPaginadas } from '../../../interfaces/consultas-paginadas';
 import { IOption } from "./../../../ui/interfaces/option";
+import { HostListener } from '@angular/core'; 
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -35,6 +37,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   pagesNumber: number;
   pageNum: number;
 
+  examenForm: FormGroup;
   consultForm: FormGroup;
   verMasCForm: FormGroup;
   verTriajeForm: FormGroup;
@@ -43,6 +46,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   triajeRecibido: Triaje;
   datoBus: string;
   apetitoOption: IOption[];
+  detalleT: Detalle[];
 
   private idRecibido: number;
   private nombreRecibido: string;
@@ -91,6 +95,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.apetitoOption = [];
     this.consultasRecibidas = [];
     this.examenesRecibidos = [];
+    this.detalleT=[];
     this.datoBus = this.httpSv.getNroHC();
     this.idCitaRecibida = this.httpSv.getIdHC();
     this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data => {
@@ -98,6 +103,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     });
     this.cargarDatos();
     this.cargarConsultas();
+    this.cargarExamenes(this.dniRecibido);
   }
   ngOnInit() {
     super.ngOnInit();
@@ -174,6 +180,38 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     }
   }
 
+  
+  /*** 
+	 * autor: Milagros Motta R.
+	 * nextPageE: si se hace click en siguiente, se aumenta el contador de la página 'pageNum' y se envia el url al servicio
+	 ***/
+  /*public nextPageE() {
+    if (this.data.next) {
+      this.pageNum++;
+      this.labservice.loadExamenPagination(this.data.next).subscribe(data => {
+        this.examenesRecibidos = data.results;
+        for (let index = 0; index < this.examenesRecibidos.length; index++) {
+          this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+        }
+      });
+    }
+  }
+	/*** 
+	 * autor: Milagros Motta R.
+	 * prevPageE: si se hace click en anterior, se resta el contador de la página 'pageNum' y se envia el url al servicio
+	 ***/
+  /*public prevPageE() {
+    if (this.pageNum > 1) {
+      this.pageNum--;
+      this.labservice.loadExamenPagination(this.data.previous).subscribe(data => {
+        this.examenesRecibidos = data.results;
+        for (let index = 0; index < this.examenesRecibidos.length; index++) {
+          this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+        }
+      });
+    }
+  }
+
 
   /*** 
 	 * autor: Milagros Motta R.
@@ -181,9 +219,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   cargarExamenes(dni: string) {
     this.labservice.searchExamenbDni(dni).subscribe(data => {
+      console.log(data);
       this.examenesRecibidos = data;
       for (let index = 0; index < this.examenesRecibidos.length; index++) {
         this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+      }
+      if (this.examenesRecibidos.length > 0) {
+        this.hayEx = false;
       }
     });
   }
@@ -245,12 +287,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   initConsultForm() {
     this.consultForm = this.formBuilder.group({
-      motivoConsulta: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],
+      motivoConsulta: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       apetito: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       orina: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       deposiciones: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
-      examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
-      diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
+      examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
+      diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       tratamiento: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       ordenExam: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       proximaCita: [null]
@@ -335,9 +377,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * openModalExamenes: Abre el modal e inicializa sus formGroups 
 	***/
   openModalExamenes<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, options: any) {
-    if (this.examenesRecibidos.length > 0) {
-      this.hayEx = false;
-    }
+    this.initExamenForm(options);
+    this.loadTabla(options);
     this.modal.open({
       body: body,
       header: header,
@@ -345,6 +386,22 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       options: options
     });
   }
+
+//Valida y muestra los datos del modal ver mas 
+initExamenForm(data: Examen) {
+  this.examenForm = this.formBuilder.group({
+    tipoExam: [data.tipoExam.nombre ? data.tipoExam.nombre : '', Validators.required],
+    fecha: [data.fecha ? data.fecha : '', Validators.required],
+    observaciones: [data.observaciones ? data.observaciones : '', Validators.required],
+  });
+}
+//Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
+loadTabla(row: Examen) {
+  this.labservice.loadTabla(row.id).subscribe(detalleT => {
+    this.detalleT = detalleT;
+  })
+}
+
 
   /*** 
 	 * autor: Milagros Motta R.
@@ -354,6 +411,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.modal.close();
   }
 
+
+
+  
   /*** 
    * autor: Milagros Motta R.
    * closeModalExamenes: Hace la llamada al servicio para imprimir el resultado del examen por ID 
@@ -364,9 +424,26 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   }
   //fin de Modal Examenes de Laboratorio
 
+  /*** 
+   * autor: Milagros Motta R.
+   * Atender: Hace una llamada al servicio para cambiar el estado de la cita
+  ***/
   Atender(id: number) {
     this.httpSv.AtenderCita(id).subscribe(cita => {
       this.cargarConsultas();
     });
+  }
+  /*** 
+   * autor: Milagros Motta R.
+   * onKeydownHandler: Asigna acciones para cada vez que las teclas 'esc' y 'enter' sean presionadas
+  ***/
+
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModalExamenes();
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 }

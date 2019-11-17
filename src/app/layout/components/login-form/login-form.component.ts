@@ -54,7 +54,7 @@ export class LoginFormComponent implements OnInit {
         this.http.triaje = false;
         this.http.laboratorio = false;
         this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
-        this.router.navigate(["/vertical/adminUser"]);
+        this.router.navigate(["/vertical/personalAdm"]);
         
       }
       if(data.tipoUser=="Admision"){

@@ -49,7 +49,9 @@
       </ng-template>
     </tc-table-col>
   </tc-table>
-
+  <tc-card *ngIf="hayConsultas" class="mb-0">
+    <h6 [align]="center">No posee Consultas registradas por el momento</h6>
+  </tc-card>
   <ul class="pagination-ul">
     <li class="pagination-li prev">
       <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
@@ -64,9 +66,55 @@
     </li>
   </ul>
 </tc-card>
-<tc-card *ngIf="hayConsultas" class="mb-0">
-  <h6 [align]="center">No posee Consultas registradas por el momento</h6>
+
+<h5>Listado de Examenes</h5>
+<tc-card>
+  <tc-table [rows]="examenesRecibidos" [hovered]="true">
+    <tc-table-col [columnTitle]="'Examen'" [columnName]="'nombre'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{value}}</strong>
+      </ng-template>
+    </tc-table-col>
+    <tc-table-col [columnTitle]="'Fecha'" [columnName]="'fecha'">
+    </tc-table-col>
+    <tc-table-col [columnTitle]="'VerMas'" [columnName]="''">
+      <ng-template #tableTDTemplate let-row="row">
+        <div class="actions">
+          <button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
+            [tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
+            (click)="openModalExamenes(modalBodyVerUE, 'Ver Resultados', modalFooterVerUE, row)">VerMas</button>
+        </div>
+      </ng-template>
+    </tc-table-col>
+    <tc-table-col [columnTitle]="'Imprimir'" [columnName]="''">
+      <ng-template #tableTDTemplate let-row="row">
+        <div class="actions">
+          <button tc-button [afterIcon]="'icofont-download'" [tcColor]="['#fff', '#009688']"
+            [tcBgColor]="['#009688', '#fff']" [tcBorderColor]="'#009688'" [square]="true" [tcShape]="500" [size]="'sm'"
+            (click)="imprimirEx(row)"></button>
+        </div>
+      </ng-template>
+    </tc-table-col>
+  </tc-table>
 </tc-card>
+<tc-card *ngIf="hayEx" class="mb-0">
+  <h6>Esta persona NO posee examenes aun.</h6>
+</tc-card>
+<!--
+<ul class="pagination-ul">
+  <li class="pagination-li prev">
+    <a class="pagination-link" (click)="prevPageE()" [ngClass]="{ disabled: pageNum == 1 }">
+      <i class="icofont-simple-left"></i>
+    </a>
+  </li>
+
+  <li class="pagination-li next">
+    <a class="pagination-link" (click)="nextPageE()">
+      <i class="icofont-simple-right"></i>
+    </a>
+  </li>
+</ul>
+-->
 <div class="back-action-box">
   <button tc-button [afterIcon]="'icofont-rounded-left'" [square]="true" [tcShape]="500" [tcColor]="['#fff', '#000']"
     [tcBgColor]="['#000', '#fff']" [tcBorderColor]="'#000'" (click)="regresar()"></button>
@@ -77,13 +125,6 @@
     [tcBgColor]="['#3f51b5', '#fff']" [tcBorderColor]="'#3f51b5'"
     (click)="openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)">Agregar Consulta</button>
 </div>
-
-<div class="addlab-action-box">
-  <button tc-button [square]="true" [tcShape]="500" [tcColor]="['#fff', '#000']" [tcBgColor]="['#000', '#fff']"
-    [tcBorderColor]="'#000'" (click)="openModalExamenes(modalBodyVerE, 'Ver listado de Examenes', modalFooterVerE)">Ver
-    Examenes</button>
-</div>
-
 <!-- Modal Crear Consulta -->
 <ng-container>
   <ng-template #modalCrearCBody>
@@ -332,39 +373,76 @@
 </ng-container>
 <!--End Modal Ver Mas-->
 
-
-<!-- Open Modal Ver Examenes -->
+<!-- Open Modal Ver Un Examenes -->
 <ng-container>
-  <ng-template #modalBodyVerE>
-    <tc-card class="mb-0">
-      <tc-table [rows]="examenesRecibidos" [hovered]="true" [pagination]="true">
-        <tc-table-col [columnTitle]="'Examen'" [columnName]="'nombre'">
-          <ng-template #tableTDTemplate let-value>
-            <strong>{{value}}</strong>
-          </ng-template>
-        </tc-table-col>
-        <tc-table-col [columnTitle]="'Fecha'" [columnName]="'fecha'">
-        </tc-table-col>
-        <tc-table-col [columnTitle]="'Imprimir'" [columnName]="''">
-          <ng-template #tableTDTemplate let-row="row">
-            <div class="actions">
-              <button tc-button [afterIcon]="'icofont-download'" [tcColor]="['#fff', '#009688']"
-                [tcBgColor]="['#009688', '#fff']" [tcBorderColor]="'#009688'" [square]="true" [tcShape]="500"
-                [size]="'sm'" (click)="imprimirEx(row)"></button>
-            </div>
-          </ng-template>
-        </tc-table-col>
-      </tc-table>
-    </tc-card>
-    <tc-card *ngIf="hayEx" class="mb-0">
-      <h6>Esta persona NO posee examenes aun.</h6>
-    </tc-card>
+  <ng-template #modalBodyVerUE>
+    <form [formGroup]="examenForm" novalidate class="new-patient-form">
+
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Tipo de Examen</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Tipo de Examen'" formControlName="tipoExam"
+              readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-form-label>Fecha</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="fecha"
+              readonly="readonly"></tc-input>
+          </tc-form-group>
+        </div>
+
+      </div>
+
+      <div class="col-12 col-sm-12">
+        <tc-form-group>
+          <tc-form-label> Observaciones </tc-form-label>
+          <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Ninguna '" formControlName="observaciones"
+            readonly="readonly">
+          </tc-input>
+        </tc-form-group>
+      </div>
+
+      <tc-card [title]="'Detalles'" class="mb-0">
+        <tc-table [rows]="detalleT" [hovered]="true" [pagination]="true">
+          <tc-table-col [columnTitle]="'Descripción'" [columnName]="'descripcion'">
+            <ng-template #tableTDTemplate let-value>
+              <strong>{{ value }}</strong>
+            </ng-template>
+          </tc-table-col>
+
+          <tc-table-col [columnTitle]="'Resultado'" [columnName]="'resultado_obtenido'">
+            <ng-template #tableTDTemplate let-value>
+              <strong>{{ value }}</strong>
+            </ng-template>
+          </tc-table-col>
+
+          <tc-table-col [columnTitle]="'Unidades'" [columnName]="'unidades'">
+            <ng-template #tableTDTemplate let-value>
+              <strong>{{ value }}</strong>
+            </ng-template>
+          </tc-table-col>
+
+          <tc-table-col [columnTitle]="'Rango'" [columnName]="'rango_referencia'">
+            <ng-template #tableTDTemplate let-value>
+              <strong>{{ value }}</strong>
+            </ng-template>
+          </tc-table-col>
+        </tc-table>
+      </tc-card>
+
+    </form>
   </ng-template>
-  <ng-template #modalFooterVerE>
+
+  <ng-template #modalFooterVerUE>
     <div class="actions justify-content-between">
       <button tc-button [type]="'button'" [tcBgColor]="'#009688'" [block]="true"
-        (click)="closeModalExamenes()">Aceptar</button>
+        (click)="closeModalExamenes()">ACEPTAR</button>
     </div>
   </ng-template>
 </ng-container>
-<!--End Modal Ver Examenes-->
+<!--End Modal Ver Un Examen-->

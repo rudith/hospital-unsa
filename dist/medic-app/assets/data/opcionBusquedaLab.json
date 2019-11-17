@@ -1,15 +1,16 @@
 [
   {
-    "label": "Nombre",
+    "label": "Nombre Completo",
     "value": "1"
   },
-    
-    {
-      "label" : "DNI",
-      "value" : "3"
-  },
   {
-    "label" : "Fecha",
+    "label" : "DNI",
+    "value" : "3"
+  },
+    
+  {
+    "label" : "Rango de Fecha",
     "value" : "2"
 }
+
 ]

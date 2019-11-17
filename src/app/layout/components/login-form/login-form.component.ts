@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { HttpService } from "../../../services/http/http.service";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
+import {LaboratorioService} from "../../../Services/Laboratorio/laboratorio.service";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginFormComponent implements OnInit {
     private router: Router,
     private http: HttpService,
     private toastr: ToastrService,
-    private adminSV: AdministradorService
+    private adminSV: AdministradorService,
+    private labSV: LaboratorioService
   ) {
     http.loadCitas();
     http.loadHistorias();
@@ -27,6 +29,10 @@ export class LoginFormComponent implements OnInit {
     adminSV.loadEspecialidades();
     adminSV.loadPersonal();
     adminSV.loadUser();
+    labSV.loadExamen();
+    labSV.loadOrden();
+   
+
   }
 
   ngOnInit() {
@@ -80,6 +86,7 @@ export class LoginFormComponent implements OnInit {
         this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/listar-datos"]);
       }
+      
      if(data.tipoUser=="Laboratorio"){
         this.http.admin = false;
         this.http.admis = false;
@@ -91,6 +98,7 @@ export class LoginFormComponent implements OnInit {
         this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/ordenes"]);
       }
+    
       console.log(data.tipoUser)
     });
   }

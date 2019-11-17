@@ -1,6 +1,6 @@
 [
   {
-    "label": "Nombre",
+    "label": "Nombre Completo",
     "value": "1"
   },
     
@@ -9,7 +9,7 @@
       "value" : "3"
   },
   {
-    "label" : "Fecha",
+    "label" : "Rango de Fecha",
     "value" : "2"
 }
 ]

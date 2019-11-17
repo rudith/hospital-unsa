@@ -84,6 +84,7 @@ import { TipoPersonalComponent } from './Administrador/tipo-personal/tipo-person
 import { OrdenesComponent } from './Lab/ordenes/ordenes.component';
 import { ConexionLaboratorioComponent } from './Admision/conexion-laboratorio/conexion-laboratorio.component';
 import { HistorialCitasComponent } from './Admision/historial-citas/historial-citas.component';
+import { AtenderComponent } from './Lab/atender/atender.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -171,7 +172,8 @@ import { HistorialCitasComponent } from './Admision/historial-citas/historial-ci
     TipoPersonalComponent,
     OrdenesComponent,
     ConexionLaboratorioComponent,
-    HistorialCitasComponent
+    HistorialCitasComponent,
+    AtenderComponent
   ],
   exports: [],
   entryComponents: []

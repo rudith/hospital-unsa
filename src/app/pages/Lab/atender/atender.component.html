@@ -1,0 +1,141 @@
+<tc-card [tcGradient]="['#fff', '#fbfbfb']">
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <tc-form-label>Nombre del Paciente</tc-form-label>
+        </div>
+        <div class="col-12 col-sm-6">
+            <tc-form-label>DNI</tc-form-label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <label>{{datoBus}} </label>
+        </div>
+        <div class="col-12 col-sm-6">
+            <label>{{dniR}}</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <tc-form-label>Tipo de Examen</tc-form-label>
+        </div>
+        <div class="col-12 col-sm-4">
+            <tc-form-label>Orden</tc-form-label>
+        </div>
+        <div class="col-12 col-sm-4">
+            <tc-form-label>Fecha</tc-form-label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-sm-4">
+            <label>{{tipoEr}}</label>
+        </div>
+        <div class="col-12 col-sm-4">
+            <label>{{ordenR}}</label>
+        </div>
+        <div class="col-12 col-sm-4">
+            <label>{{fechaR}}</label>
+        </div>
+    </div>
+</tc-card>
+
+<h5>Agregar Detalle</h5>
+<tc-card [tcGradient]="['#fff', '#fbfbfb']">
+    <form [formGroup]="detalleForm" novalidate class="new-patient-form">
+        <DIV class="row">
+            <div class="col-md-3">
+                <tc-form-group>
+                    <tc-input [placeholder]="'Descripcion*'" formControlName="descripcion"></tc-input>
+                    <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                        *ngIf="detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid ">
+                        Ingrese la descripcion, este solo debe contener letras.
+                    </tc-form-description>
+                </tc-form-group>
+
+            </div>
+            <div class="col-md-3">
+                <tc-form-group>
+                    <tc-input [placeholder]="'Resultado Obtenido*'" formControlName="resultado_obtenido"></tc-input>
+                    <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                        *ngIf="detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid ">
+                        Ingrese Resultado Obtenido, este solo debe contener letras.
+                    </tc-form-description>
+                </tc-form-group>
+            </div>
+
+
+            <div class="col-md-2">
+                <tc-form-group>
+                    <tc-input [placeholder]="'Unidades*'" formControlName="unidades"></tc-input>
+                    <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                        *ngIf="detalleForm.controls.unidades.touched && detalleForm.controls.unidades.invalid ">
+                        Ingrese unidades.
+                    </tc-form-description>
+                </tc-form-group>
+            </div>
+
+            <div class="col-md-3">
+                <tc-form-group>
+                    <tc-input [placeholder]="'Rango de Referencia*'" formControlName="rango_referencia"></tc-input>
+                    <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                        *ngIf="detalleForm.controls.rango_referencia.touched && detalleForm.controls.rango_referencia.invalid ">
+                        Ingrese Rango de referencia.
+                    </tc-form-description>
+                </tc-form-group>
+            </div>
+
+            <tc-form-group class="col-md-1">
+                <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500"
+                    [size]="'sm'" (click)=" addDetalle(detalleForm)">
+                </button>
+            </tc-form-group>
+        </DIV>
+    
+    <tc-card [title]="'Detalles'" class="mb-0">
+        <tc-table [rows]="detalleT" [hovered]="true" [pagination]="true">
+            <tc-table-col [columnTitle]="'Descripción'" [columnName]="'descripcion'">
+                <ng-template #tableTDTemplate let-value>
+                    <strong>{{ value }}</strong>
+                </ng-template>
+            </tc-table-col>
+
+            <tc-table-col [columnTitle]="'Resultado'" [columnName]="'resultado_obtenido'">
+                <ng-template #tableTDTemplate let-value>
+                    <strong>{{ value }}</strong>
+                </ng-template>
+            </tc-table-col>
+
+            <tc-table-col [columnTitle]="'Unidades'" [columnName]="'unidades'">
+                <ng-template #tableTDTemplate let-value>
+                    <strong>{{ value }}</strong>
+                </ng-template>
+            </tc-table-col>
+
+            <tc-table-col [columnTitle]="'Rango'" [columnName]="'rango_referencia'">
+                <ng-template #tableTDTemplate let-value>
+                    <strong>{{ value }}</strong>
+                </ng-template>
+            </tc-table-col>
+        </tc-table>
+    </tc-card>
+
+    <tc-form-group>
+        <tc-form-label>Observaciones</tc-form-label>
+        <tc-input [placeholder]="'Agregar Observaciones*'"></tc-input>
+    </tc-form-group>
+
+    <div class="row">
+        <div class="col-12 col-sm-6">
+        <button tc-button [ngStyle]="{ 'width': '45%' }" [view]="'error'" (click)="cancelar()">Cancelar</button>
+        </div>
+        <div class="col-12 col-sm-6">
+        <button tc-button [ngStyle]="{ 'width': '45%' }"[view]="'info'" (click)="estado(row)">Agregar</button>
+        </div>
+    </div>
+
+
+    
+</form>
+</tc-card>

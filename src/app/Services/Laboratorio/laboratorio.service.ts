@@ -13,6 +13,7 @@ import { Orden } from '../../interfaces/orden';
 import { ExamenLista } from '../../interfaces/examen-lista';
 import { OrdenLista } from '../../interfaces/orden-lista';
 import { Cabcrear } from '../../interfaces/cabcrear';
+import { AdministradorService } from "../Administrador/administrador.service";
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
@@ -33,8 +34,11 @@ export class LaboratorioService {
 	fi: string;
 	ff: string;
 	private tipo: number;
+	private dni: string;
+	private ido:number;
 
-	constructor(private http: HttpClient, private toastr: ToastrService) {
+
+	constructor(private http: HttpClient, private toastr: ToastrService, private adminSv: AdministradorService) {
 
 
 	}
@@ -49,49 +53,93 @@ export class LaboratorioService {
 		return observableThrowError(error.error || 'Server error');
 	}
 
+
+
 	searchExamenbDni(dni: string): Observable<Examen[]> {
-		return this.http.get<Examen[]>(this.url + '/filtro/DNI/?dni=' + dni);
+		return this.http.get<Examen[]>(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
+	}
+	searchExamenbName(nombre: string): Observable<Examen[]> {
+		return this.http.get<Examen[]>(this.url + '/filtro/?nombre=' + nombre, this.adminSv.getHeader());
 	}
 
 	searchLabName(nombre: string): Observable<any> {
-		return this.http.get<Cabeceralab>(this.url + '/filtro/?nombre=' + nombre);
+		return this.http.get<Cabeceralab>(this.url + '/filtro/?nombre=' + nombre, this.adminSv.getHeader());
 	}
 	searchLabFecha(fecha: string): Observable<any> {
 		this.fi = fecha.substring(0, 10);
 		this.ff = fecha.substring(11, 22);
-		return this.http.get<any>(this.url + '/filtro/fecha/?fecha_inicio=' + this.fi + "&fecha_final=" + this.ff);
+		return this.http.get<any>(this.url + '/filtro/fecha/?fecha_inicio=' + this.fi + "&fecha_final=" + this.ff, this.adminSv.getHeader());
 	}
 	searchLabDni(dni: string): Observable<any> {
-		return this.http.get<Examen>(this.url + '/filtro/DNI/?dni=' + dni);
+		return this.http.get<Examen>(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
+	}
+	searchOrdenDni(dni: string): Observable<any> {
+		return this.http.get<any>('http://18.216.2.122:9000/consultorio/buscarOrden/?dni=DNI' + dni, this.adminSv.getHeader());
 	}
 	loadTipoEx(): Observable<Tipoexamen[]> {
-		return this.http.get<Tipoexamen[]>(this.url + "/TipoExamen/");
+		return this.http.get<Tipoexamen[]>(this.url + "/TipoExamen/", this.adminSv.getHeader());
 	}
 
 	loadExamenPagination(url: string): Observable<ExamenLista> {
-		return this.http.get<ExamenLista>(url);
+		return this.http.get<ExamenLista>(url, this.adminSv.getHeader());
 	}
 	loadOrdenPAgination(url: string): Observable<OrdenLista> {
-		return this.http.get<OrdenLista>(url)
+		return this.http.get<OrdenLista>(url, this.adminSv.getHeader())
 	}
 	loadOrden(): Observable<OrdenLista> {
-		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-orden/");
+		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-orden/", this.adminSv.getHeader());
 	}
 	loadExamen(): Observable<ExamenLista> {
-		return this.http.get<ExamenLista>(this.url + "/ExamenLabCab/");
+		return this.http.get<ExamenLista>(this.url + "/ExamenLabCab/", this.adminSv.getHeader());
 	}
 
 	loadTabla(idEx: number): Observable<Detalle[]> {
 		console.log("ENTRA AL SERVICIO de tabla");
-		return this.http.get<Detalle[]>(this.url + '/filtro/Detalles/?id=' + idEx)
+		return this.http.get<Detalle[]>(this.url + '/filtro/Detalles/?id=' + idEx, this.adminSv.getHeader())
 	}
 	cambioEstado(id: number): Observable<Orden> {
-		console.log("Entra al servicio");
-		return this.http.get<Orden>(BASE_API_URL + "/consultorio/atenderOrden/" + id);
+		console.log("Entra al servicio=" + id);
+		return this.http.get<Orden>(BASE_API_URL + "/consultorio/atenderOrden/" + id, this.adminSv.getHeader());
 	}
+	setDni(dnir: string) {
+		this.dni = dnir;
+	}
+	getDni(): string {
+		return this.dni;
+	}
+	//crear cabecer
+	createCabecera(newCabecera: Cabcrear) {
+		console.log(newCabecera);
+		this.http.post<Cabcrear>(this.url + '/CrearExamenLabCab/', {
+			nombre: newCabecera.nombre,
+			dni: newCabecera.dni,
+			orden: newCabecera.orden,
+			fecha: newCabecera.fecha,
+			tipoExam: newCabecera.tipoExam,
+			observaciones: newCabecera.observaciones,
+		}, this.adminSv.getHeader())
+			.subscribe(
+				data => {
+					this.tipo = data.id;
+					console.log("SERVICIO=" + data.id);
+					console.log("CREAR Cabecera Completo");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
 
 
-
+	}
+	getIdCabecera(): number {
+		return this.tipo;
+	}
+	setIdo(ido: number) {
+		this.ido = ido;
+	}
+	getIdOrden(): number{
+		return this.ido;
+	}
 	createDetalle(detalle: Detalle) {
 		console.log(detalle);
 		this.http.post<any>(this.url + '/ExamenLabDet/',
@@ -101,7 +149,8 @@ export class LaboratorioService {
 				unidades: detalle.unidades,
 				rango_referencia: detalle.rango_referencia,
 				codigoExam: detalle.codigoExam,
-			}).subscribe(
+			}, this.adminSv.getHeader())
+			.subscribe(
 				data => {
 
 					this.toastr.success("El detalle ha sido crado con exito");
@@ -113,34 +162,9 @@ export class LaboratorioService {
 				});
 
 	}
-	getIdCabecera(): number {
-		return this.tipo;
-	}
+	
+	
 
 
-	//crear cabecer
-	createCabecera(newCabecera: Cabcrear) {
-		console.log(newCabecera);
-		this.http.post<Cabcrear>(this.url + '/CrearExamenLabCab/', {
-			nombre: newCabecera.nombre,
-			dni: newCabecera.dni,
-			orden: newCabecera.orden,
-			fecha: newCabecera.fecha,
-			tipoExam: newCabecera.tipoExam,
-			observaciones: newCabecera.observaciones,
-		}).subscribe(
-			data => {
-				this.tipo = data.id;
-				console.log("servicio" + data.id);
-				console.log(this.tipo);
-				this.toastr.success("", "Se ha creado la cabecera");
-				console.log("CREAR Cabecera Completo");
-			},
-			error => {
-				this.toastr.error(error);
-				console.log(error);
-			});
 
-
-	}
 }

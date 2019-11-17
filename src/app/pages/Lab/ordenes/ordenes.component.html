@@ -1,3 +1,21 @@
+<form [formGroup]="busForm">
+	<div class="row">
+		<div class="col col-12 ">
+			<div class="row">
+				<div class="col-md-8">
+					<tc-form-group>
+						<tc-input [placeholder]="'Ingrese numero de DNI*'" formControlName="datoBus"></tc-input>
+					</tc-form-group>
+				</div>
+				<div class="col-md-2">
+					<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
+						Buscar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
 <tc-card class="mb-0">
 	<tc-table [rows]="ordenes" [hovered]="true" [pagination]="true">
 
@@ -25,25 +43,17 @@
 			</ng-template>
 		</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Agregar Cabecera'">
+		<tc-table-col [columnTitle]="'Atender'">
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions">
 					<button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
 						[tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="500" [size]="'sm'"
-						(click)="openModalH(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)">Agregar</button>
+						(click)="atender(row.nombre, row)">Atender</button>
 				</div>
 			</ng-template>
 		</tc-table-col>
 
-		<tc-table-col [columnTitle]="'Atendido'">
-			<ng-template #tableTDTemplate let-row="row">
-				<div class="actions">
-					<button tc-button [afterIcon]="'icofont-ui-check'" [view]="'info'"[tcColor]="['#3f51b5', '#fff']"
-					[tcBgColor]="['transparent', '#3f51b5']" [tcBorderColor]="'#3f51b5'" [square]="true"
-						[tcShape]="500" [size]="'sm'" (click)="estado(row.id)"></button>
-				</div>
-			</ng-template>
-		</tc-table-col>
+
 
 	</tc-table>
 
@@ -84,7 +94,7 @@
 					</tc-form-group>
 				</div>
 			</div>
-			
+
 
 
 			<tc-form-group>
@@ -105,17 +115,13 @@
 		</form>
 
 	</ng-template>
-	<ng-template #modalCrearHFooter >
+	<ng-template #modalCrearHFooter>
 		<div class="actions justify-content-between">
 			<button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH();closeModalD()">Cancelar</button>
 			<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="addExamen(patientForm);openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)	
 			">
-				Agregar Cabecera 	
+				Agregar Cabecera
 			</button>
-			<!--<button tc-button [view]="'info'" [disabled]="patientForm.invalid" (click)="openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false });closeModalH()">
-				Agregar Detalle 
-				
-			</button>	-->
 		</div>
 	</ng-template>
 </ng-container>

@@ -1,51 +1,53 @@
-<p-toast [style]="{ background: '#F9F7AE', opacity: '0.8' }"></p-toast>
-<div class="col-sm-12">
-  <div class="row">
-    <tc-form-group class="col-md-1">
-      <button
-        tc-button
-        [afterIcon]="'icofont-plus'"
-        [view]="'info'"
-        [square]="true"
-        [tcShape]="500"
-        [size]="'sm'"
-        (click)="
-          openModal(modalUser, 'Agregar Usuario', modalUser2); updateEst(false)
-        "
-      ></button>
-    </tc-form-group>
-    <tc-form-group class="col-md-7">
-      <tc-input
-        [placeholder]="'Buscar Usuario por nombre'"
-        [(ngModel)]="id"
-        [suffixIcon]="'icofont-search-document'"
-      >
-      </tc-input>
-    </tc-form-group>
-    <tc-form-group class="col-md-2">
-      <button
-        tc-button
-        [block]="true"
-        [view]="'success'"
-        [tcShape]="500"
-        (click)="onChangeTable()"
-      >
-        Buscar
-      </button>
-    </tc-form-group>
-    <tc-form-group class="col-sm-2 col-lg-2">
-      <button
-        tc-button
-        [block]="true"
-        [tcBgColor]="'#3f51b5'"
-        [tcShape]="500"
-        (click)="loadUsers()"
-      >
-        Cargar
-      </button>
-    </tc-form-group>
+<!-- <p-toast [style]="{ background: '#F9F7AE', opacity: '0.8' }"></p-toast> -->
+<h3>Usuarios</h3>
+
+<div class="row">
+  <div class="col-md-2">
+    <button
+      tc-button
+      [afterIcon]="'icofont-plus'"
+      [view]="'info'"
+      [square]="true"
+      [tcShape]="500"
+      [size]="'sm'"
+      (click)="
+        openModal(modalUser, 'Agregar Usuario', modalUser2); updateEst(false)
+      "
+    >
+      Agregar
+    </button>
   </div>
-  <tc-card class="mb-0">
+  <div class="col-md-6">
+    <tc-input
+      [placeholder]="'Buscar Usuario por nombre'"
+      [(ngModel)]="id"
+      [suffixIcon]="'icofont-search-document'"
+    >
+    </tc-input>
+  </div>
+  <div class="col-md-2">
+    <button
+      tc-button
+      [block]="true"
+      [view]="'success'"
+      [tcShape]="500"
+      (click)="onChangeTable()"
+    >
+      Buscar
+    </button>
+  </div>
+  <div class="col-md-2">
+    <button
+      tc-button
+      [block]="true"
+      [tcBgColor]="'#3f51b5'"
+      [tcShape]="500"
+      (click)="loadUsers()"
+    >
+      Cargar
+    </button>
+  </div>
+  <tc-card class="col-md-12 mt-2">
     <tc-table [rows]="users" [hovered]="true">
       <tc-table-col [columnTitle]="'Id'" [columnName]="'id'"> </tc-table-col>
       <tc-table-col [columnTitle]="'UserName'" [columnName]="'username'">
@@ -125,7 +127,7 @@
           </div>
         </div>
       </tc-form-group>
-      
+
       <tc-form-group>
         <div class="row align-items-center">
           <div class="col-12 col-md-4 text-md-right">

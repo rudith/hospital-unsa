@@ -17,6 +17,7 @@ import { User } from "../../../interfaces/user";
 import { Tipopersonal } from "../../../interfaces/tipopersonal";
 import { Especialidad } from "../../../interfaces/especialidad";
 import { personalLista } from "../../../interfaces/personalLista";
+import { HttpClient } from "@angular/common/http";
 @Component({
   selector: "app-personal",
   templateUrl: "./personal.component.html",
@@ -46,6 +47,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   campo: string;
   constructor(
     httpSv: HttpService,
+    private http: HttpClient,
     private admService: AdministradorService,
     private toastr: ToastrService,
     store: Store<IAppState>,
@@ -54,7 +56,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   ) {
     super(store, httpSv);
     this.pageData = {
-      title: "Personal",
+      title: "",
       loaded: true,
       breadcrumbs: [
         {
@@ -141,6 +143,13 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       // console.log(JSON.stringify(this.personales));
     });
   }
+
+  updateEst() {
+    this.admService.loadUserSP().subscribe(users => {
+      this.users = users;
+      this.loadOptionsUsers();
+    });
+  }
   loadOptionsUsers() {
     for (let i in this.users) {
       this.usersOpt[i] = {
@@ -211,7 +220,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         data => {
           this.personales = [];
           this.personales[0] = data;
-          this.toastr.info("Personal con: "+this.id,"Buscando...");
+          this.toastr.info("Personal con: " + this.id, "Buscando...");
         },
         error => {
           this.toastr.warning("No encontrado");
@@ -273,14 +282,18 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       especialidad: [""]
     });
   }
-  //agrega area a la bd
-  addAppointment(form: FormGroup) {
+  async addAppointment(form: FormGroup) {
     if (form.valid) {
       let newAppointment: PersonalCreate = form.value;
-      console.log(JSON.stringify(newAppointment));
-      this.admService.createPersonal(newAppointment);
-      this.closeModal();
-      this.appointmentForm.reset();
+      // console.log(JSON.stringify(newAppointment));
+
+      setTimeout(() => {
+        if (this.admService.createPersonal(newAppointment)) {
+          this.closeModal();
+          this.appointmentForm.reset();
+          this.loadPersonal();
+        }
+      }, 2000);
       this.loadPersonal();
     }
   }
@@ -317,7 +330,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         data.tipo_personal.nombre ? data.tipo_personal.nombre : "",
         Validators.required
       ],
-      especialidad: [(especialidad)],
+      especialidad: [especialidad],
       dni: [
         data.apellido_materno ? data.apellido_materno : "",
         Validators.required

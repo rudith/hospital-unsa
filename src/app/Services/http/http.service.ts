@@ -59,7 +59,19 @@ export class HttpService {
   private idUser: number;
 
   constructor(private http: HttpClient, private toastr: ToastrService) { }
+  getHeader() {
+    var headers_object = new HttpHeaders({
+      Authorization: "token " + localStorage.getItem("token")
+    });
 
+    var httpOptions = {
+      headers: headers_object
+    };
+    console.log(
+      "entro" + JSON.stringify(headers_object) + localStorage.getItem("token")
+    );
+    return httpOptions;
+  }
   getData(source: string) {
     return this.http.get(source).pipe(
       tap((res: any) => res),
@@ -126,18 +138,18 @@ export class HttpService {
 
   searchCitaDNI(dni: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/consultorio/citadni/?dni=" + dni
+      BASE_API_URL + "/consultorio/citadni/?dni=" + dni,this.getHeader()
     );
   }
 
   searchCitaEsp(esp: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/consultorio/citasporespecialidad2/?esp=" + esp
+      BASE_API_URL + "/consultorio/citasporespecialidad2/?esp=" + esp,this.getHeader()
     );
   }
   loadEspecialidadesSP(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/especialidadSP/"
+      BASE_API_URL + "/administrador/especialidadSP/",this.getHeader()
     );
   }
   loadEspecialidades(): Observable<any> {
@@ -152,7 +164,7 @@ export class HttpService {
   }
   loadMedicoSP(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/ver-personalSP/"
+      BASE_API_URL + "/administrador/ver-personalSP/",this.getHeader()
     );
   }
   loadMedico(): Observable<any> {
@@ -204,15 +216,15 @@ export class HttpService {
   }
   loadCitasEdit(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/consultorio/ver-citas/"
+      BASE_API_URL + "/consultorio/ver-citas/",this.getHeader()
     );
   }
   loadCitaPagination(url: string): Observable<citaLista> {
-    return this.http.get<citaLista>(url);
+    return this.http.get<citaLista>(url,this.getHeader());
   }
   CancelarCita(id: string): Observable<Cita> {
     return this.http.get<Cita>(
-      BASE_API_URL + "/consultorio/cancelarcita/" + id + "/"
+      BASE_API_URL + "/consultorio/cancelarcita/" + id + "/",this.getHeader()
     );
   }
   TriarCita(id: number): Observable<Cita> {
@@ -253,7 +265,7 @@ export class HttpService {
   }
   cancelarCitasPasadas(): Observable<any> {
     return this.http.post<any>(
-      BASE_API_URL + "/admision/cancelarCitasFecha/", "");
+      BASE_API_URL + "/admision/cancelarCitasFecha/",this.getHeader());
   }
 
   searchHistoriaTriaje(dni: string): Observable<citaLista> {
@@ -383,7 +395,7 @@ export class HttpService {
 
   searchMedicoporEsp(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id
+      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id,this.getHeader()
     );
   }
 
@@ -424,18 +436,18 @@ export class HttpService {
 
   loadUsers(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/usuarios/"
+      BASE_API_URL + "/administrador/usuarios/",this.getHeader()
     );
   }
   searchUsers(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/buscarusuario/?us=" + id
+      BASE_API_URL + "/administrador/buscarusuario/?us=" + id,this.getHeader()
     );
   }
 
   DeleteUser(id: string) {
     return this.http.delete<any>(
-      BASE_API_URL + "/administrador/usuarios/" + id + "/"
+      BASE_API_URL + "/administrador/usuarios/" + id + "/",this.getHeader()
     );
   }
   UpdateUser(user: User): Observable<User> {
@@ -456,7 +468,7 @@ export class HttpService {
         date_joined: user.date_joined,
         groups: user.groups,
         user_permissions: user.user_permissions
-      }
+      },this.getHeader()
     );
   }
   CreateUser(user: User): Observable<any> {

@@ -1,21 +1,20 @@
 <!-- <p-confirmDialog [style]="{background: '#70B1C9',opacity: '0.8'}" header="Confirmation"
     icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
-
-<form [formGroup]="busForm" class="col-sm-12">
-  <div class="row">
-    <div class="col-md-1">
-      <tc-form-group>
-        <button
-          tc-button
-          [afterIcon]="'icofont-plus'"
-          [view]="'info'"
-          [square]="true"
-          [tcShape]="500"
-          [size]="'sm'"
-          (click)="openModal(modalPersonal, 'Agregar Personal', modalActions)"
-        ></button>
-      </tc-form-group>
-    </div>
+<h3>Personal</h3>
+<div class="row">
+  <div class="col-md-2">
+    <button
+      tc-button
+      [view]="'info'"
+      [afterIcon]="'icofont-plus'"
+      [tcShape]="500"
+      [size]="'sm'"
+      (click)="openModal(modalPersonal, 'Agregar Personal', modalActions); updateEst()"
+    >
+      Agregar
+    </button>
+  </div>
+  <form [formGroup]="busForm" class="col-md-10 row">
     <div class="col-md-2">
       <tc-form-group>
         <tc-select
@@ -26,7 +25,7 @@
         </tc-select>
       </tc-form-group>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <tc-form-group>
         <tc-input
           [placeholder]="'Ingrese el dato a buscar'"
@@ -47,15 +46,18 @@
       </tc-form-group>
     </div>
     <div class="col-md-2">
-      <button
-        tc-button
-        [block]="true"
-        [view]="'success'"
-        [tcShape]="300"
-        (click)="buscar(busForm)"
-      >
-        Buscar
-      </button>
+      <tc-form-group>
+        <button
+          tc-button
+          type="submit"
+          [block]="true"
+          [view]="'success'"
+          [tcShape]="300"
+          (click)="buscar(busForm)"
+        >
+          Buscar
+        </button>
+      </tc-form-group>
     </div>
     <div class="col-md-2">
       <button
@@ -68,108 +70,111 @@
         Cargar
       </button>
     </div>
-  </div>
-</form>
-<br />
-<tc-card *ngIf="personales?.length" class="mb-0">
-  <div class="table-wrap">
-    <table class="table-box">
-      <thead>
-        <tr>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Nombres
-          </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            DNI
-          </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Area
-          </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Tipo Personal
-          </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Especialidad
-          </th>
+  </form>
+  <br />
+  <tc-card *ngIf="personales?.length" class="col-md-12">
+    <div class="table-wrap">
+      <table class="table-box">
+        <thead>
+          <tr>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Nombres
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              DNI
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Area
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Tipo Personal
+            </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Especialidad
+            </th>
 
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Ver más
-          </th>
-        </tr>
-      </thead>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Ver más
+            </th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <tr *ngFor="let row of personales">
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.nombres }}
-          </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.dni }}
-          </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.area.nombre }}
-          </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.tipo_personal.nombre }}
-          </td>
-          <td
-            *ngIf="!row.especialidad"
-            [ngStyle]="{ background: contentBgColor, color: 'contentColor' }"
+        <tbody>
+          <tr *ngFor="let row of personales">
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.nombres }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.dni }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.area.nombre }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.tipo_personal.nombre }}
+            </td>
+            <td
+              *ngIf="!row.especialidad"
+              [ngStyle]="{
+                background: contentBgColor,
+                color: 'contentColor'
+              }"
+            >
+              Administrativo
+            </td>
+            <td
+              *ngIf="row.especialidad"
+              [ngStyle]="{ background: contentBgColor, color: contentColor }"
+            >
+              {{ row.especialidad.nombre }}
+            </td>
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              <div class="actions">
+                <button
+                  tc-button
+                  tc-button
+                  [tcColor]="['#fff', '#3f51b5']"
+                  [tcBgColor]="['#3f51b5', '#fff']"
+                  [tcBorderColor]="'#3f51b5'"
+                  [square]="true"
+                  [tcShape]="500"
+                  [size]="'sm'"
+                  (click)="
+                    openModalVerMas(
+                      modalBodyH,
+                      'Ver Personal Completo',
+                      modalFooterH,
+                      row
+                    )
+                  "
+                >
+                  Ver Mas
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination-ul">
+        <li class="pagination-li prev">
+          <a
+            class="pagination-link"
+            (click)="prevPage()"
+            [ngClass]="{ disabled: pageNum == 1 }"
           >
-            Administrativo
-          </td>
-          <td
-            *ngIf="row.especialidad"
-            [ngStyle]="{ background: contentBgColor, color: contentColor }"
-          >
-            {{ row.especialidad.nombre }}
-          </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            <div class="actions">
-              <button
-                tc-button
-                tc-button
-                [tcColor]="['#fff', '#3f51b5']"
-                [tcBgColor]="['#3f51b5', '#fff']"
-                [tcBorderColor]="'#3f51b5'"
-                [square]="true"
-                [tcShape]="500"
-                [size]="'sm'"
-                (click)="
-                  openModalVerMas(
-                    modalBodyH,
-                    'Ver Personal Completo',
-                    modalFooterH,
-                    row
-                  )
-                "
-              >
-                Ver Mas
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <ul class="pagination-ul">
-      <li class="pagination-li prev">
-        <a
-          class="pagination-link"
-          (click)="prevPage()"
-          [ngClass]="{ disabled: pageNum == 1 }"
-        >
-          <i class="icofont-simple-left"></i>
-        </a>
-      </li>
+            <i class="icofont-simple-left"></i>
+          </a>
+        </li>
 
-      <li class="pagination-li next">
-        <a class="pagination-link" (click)="nextPage()">
-          <i class="icofont-simple-right"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-</tc-card>
+        <li class="pagination-li next">
+          <a class="pagination-link" (click)="nextPage()">
+            <i class="icofont-simple-right"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </tc-card>
+</div>
 
 <ng-container>
   <ng-template #modalPersonal>
@@ -207,7 +212,7 @@
             </tc-form-description>
           </div>
         </div>
-        <br>
+        <br />
         <div class="row">
           <div class=" col-sm-4">
             <tc-form-label class="mb-md-0">Apellido Paterno:</tc-form-label>
@@ -268,7 +273,7 @@
             </tc-form-description>
           </div>
         </div>
-        <br>
+        <br />
         <div class="row">
           <div class=" col-sm-6    ">
             <tc-form-label class="mb-md-0">Celular:</tc-form-label>
@@ -331,7 +336,7 @@
             </tc-form-description>
           </div>
         </div>
-        <br>
+        <br />
         <div class="row">
           <div class=" col-sm-4">
             <tc-form-label>Area</tc-form-label>
@@ -389,7 +394,7 @@
         [disabled]="appointmentForm.invalid"
         (click)="addAppointment(appointmentForm)"
       >
-        Crear Usuario
+        Crear Personal
       </button>
     </div>
   </ng-template>

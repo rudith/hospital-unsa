@@ -304,7 +304,7 @@ module.exports = "<p>\r\n  base-layout works!\r\n</p>\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<tc-dropdown class=\"item\">\r\n  <tc-dropdown-button>\r\n    <tc-icon [iconClass]=\"'icofont icofont-notification'\" [tcFontSize]=\"26\"></tc-icon>\r\n    <tc-badge *ngIf=\"notifications && notifications.length\" [view]=\"'error'\" [size]=\"'sm'\">\r\n      {{ notifications.length }}\r\n    </tc-badge>\r\n  </tc-dropdown-button>\r\n\r\n  <tc-dropdown-content [align]=\"'right'\" [animation]=\"'fadeInUp'\" [offset]=\"[10, 0]\">\r\n    <div class=\"menu-header\">\r\n      <h4 class=\"h5 menu-title mt-0 mb-0\">Notifications</h4>\r\n\r\n      <a href=\"#\" (click)=\"$event.preventDefault(); notifications = []\" [tcColor]=\"['#ed5564', '#8E333C']\">Clear All</a>\r\n    </div>\r\n\r\n    <ul class=\"list\">\r\n      <ng-container *ngIf=\"notifications && notifications.length\">\r\n        <li *ngFor=\"let item of notifications\">\r\n          <a href=\"#\">\r\n            <span class=\"icon {{ item.icon }}\"></span>\r\n\r\n            <div class=\"content\">\r\n              <span class=\"desc\">{{ item.title }}</span>\r\n\r\n              <span class=\"date\">{{ item.date }}</span>\r\n            </div>\r\n          </a>\r\n        </li>\r\n      </ng-container>\r\n\r\n      <li *ngIf=\"!notifications || (notifications.length === 0)\">\r\n        <span class=\"empty-item\">No notifications</span>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"menu-footer\" *ngIf=\"notifications && notifications.length\">\r\n      <a\r\n        tc-button\r\n        href=\"#\"\r\n        (click)=\"$event.preventDefault()\"\r\n        [view]=\"'accent'\"\r\n        [block]=\"true\"\r\n        [afterIcon]=\"'icofont-tasks-alt'\"\r\n      >\r\n        View all notifications\r\n      </a>\r\n    </div>\r\n  </tc-dropdown-content>\r\n</tc-dropdown>\r\n\r\n<tc-dropdown class=\"item\" [close]=\"closeDropdown\">\r\n  <tc-dropdown-button>\r\n    <div class=\"d-flex align-items-center\">\r\n      <tc-avatar [src]=\"'/assets/content/user-400-1.jpg'\" class=\"mr-1\"></tc-avatar>\r\n      <i class=\"icofont-simple-down\"></i>\r\n    </div>\r\n  </tc-dropdown-button>\r\n\r\n  <tc-dropdown-content [align]=\"'right'\" [animation]=\"'fadeInUp'\" [offset]=\"[10, 0]\" [width]=\"180\">\r\n    <ul class=\"list\">\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'edit-account')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-home\"></span>\r\n          Edit account\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'user-profile')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-user\"></span>\r\n          User profile\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'events-calendar')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-calendar\"></span>\r\n          Calendar\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'settings')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-settings\"></span>\r\n          Settings\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'sign-in', '../public/')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-logout\"></span>\r\n          Log Out\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </tc-dropdown-content>\r\n</tc-dropdown>\r\n"
+module.exports = "<tc-dropdown class=\"item\">\r\n  <tc-dropdown-button>\r\n    <tc-icon [iconClass]=\"'icofont icofont-notification'\" [tcFontSize]=\"26\"></tc-icon>\r\n    <tc-badge *ngIf=\"notifications && notifications.length\" [view]=\"'error'\" [size]=\"'sm'\">\r\n      {{ notifications.length }}\r\n    </tc-badge>\r\n  </tc-dropdown-button>\r\n\r\n  <tc-dropdown-content [align]=\"'right'\" [animation]=\"'fadeInUp'\" [offset]=\"[10, 0]\">\r\n    <div class=\"menu-header\">\r\n      <h4 class=\"h5 menu-title mt-0 mb-0\">Notifications</h4>\r\n\r\n      <a href=\"#\" (click)=\"$event.preventDefault(); notifications = []\" [tcColor]=\"['#ed5564', '#8E333C']\">Clear All</a>\r\n    </div>\r\n\r\n    <ul class=\"list\">\r\n      <ng-container *ngIf=\"notifications && notifications.length\">\r\n        <li *ngFor=\"let item of notifications\">\r\n          <a href=\"#\">\r\n            <span class=\"icon {{ item.icon }}\"></span>\r\n\r\n            <div class=\"content\">\r\n              <span class=\"desc\">{{ item.title }}</span>\r\n\r\n              <span class=\"date\">{{ item.date }}</span>\r\n            </div>\r\n          </a>\r\n        </li>\r\n      </ng-container>\r\n\r\n      <li *ngIf=\"!notifications || (notifications.length === 0)\">\r\n        <span class=\"empty-item\">No notifications</span>\r\n      </li>\r\n    </ul>\r\n\r\n    <div class=\"menu-footer\" *ngIf=\"notifications && notifications.length\">\r\n      <a\r\n        tc-button\r\n        href=\"#\"\r\n        (click)=\"$event.preventDefault()\"\r\n        [view]=\"'accent'\"\r\n        [block]=\"true\"\r\n        [afterIcon]=\"'icofont-tasks-alt'\"\r\n      >\r\n        View all notifications\r\n      </a>\r\n    </div>\r\n  </tc-dropdown-content>\r\n</tc-dropdown>\r\n\r\n<tc-dropdown class=\"item\" [close]=\"closeDropdown\">\r\n  <tc-dropdown-button>\r\n    <div class=\"d-flex align-items-center\">\r\n      <tc-avatar [src]=\"'/assets/content/user-400-1.jpg'\" class=\"mr-1\"></tc-avatar>\r\n      <i class=\"icofont-simple-down\"></i>\r\n    </div>\r\n  </tc-dropdown-button>\r\n\r\n  <tc-dropdown-content [align]=\"'right'\" [animation]=\"'fadeInUp'\" [offset]=\"[10, 0]\" [width]=\"180\">\r\n    <ul class=\"list\">\r\n      <!--\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'edit-account')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-home\"></span>\r\n          Edit account\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'user-profile')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-user\"></span>\r\n          User profile\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'events-calendar')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-calendar\"></span>\r\n          Calendar\r\n        </a>\r\n      </li>\r\n\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'settings')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-ui-settings\"></span>\r\n          Settings\r\n        </a>\r\n      </li>\r\n      -->\r\n      <li>\r\n        <a href=\"#\" (click)=\"goTo($event, 'sign-in', '../public/')\" class=\"align-items-center\">\r\n          <span class=\"icon icofont-logout\"></span>\r\n          Log Out\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </tc-dropdown-content>\r\n</tc-dropdown>\r\n"
 
 /***/ }),
 
@@ -447,7 +447,7 @@ module.exports = "<div class=\"app-container\" [ngClass]=\"{ 'boxed': appSetting
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<div class=\"col-sm-12\">\r\n    <div class=\"row\">\r\n        <tc-form-group class=\"col-sm-1 col-lg-1\">\r\n            <button tc-button [afterIcon]=\"'icofont-plus'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n                (click)=\"openModal(modalArea, 'Agregar Area', modalActions)\"></button>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-sm-7 col-lg-9\">\r\n            <tc-input [placeholder]=\"'Buscar Area por Nombre'\" [(ngModel)]=\"id\"\r\n                [suffixIcon]=\"'icofont-search-document'\">\r\n            </tc-input>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n                <button\r\n                tc-button\r\n                [block]=\"true\"\r\n                [view]=\"'success'\"\r\n                [tcShape]=\"500\"\r\n                (click)=\"buscar()\"\r\n              >\r\n                Buscar\r\n              </button>\r\n        </tc-form-group>\r\n    </div>\r\n    <tc-card class=\"mb-0\">\r\n        <div class=\"table-wrap\">\r\n            <table class=\"table-box\">\r\n                <thead>\r\n                    <tr>\r\n                        <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                            Id\r\n                        </th>\r\n                        <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                            Nombre\r\n                        </th>\r\n                    </tr>\r\n                </thead>\r\n\r\n                <tbody>\r\n                    <tr *ngFor=\"let row of areas\">\r\n                        <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                            {{row.id}}\r\n                        </td>\r\n                        <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                            {{row.nombre}}\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <ul class=\"pagination-ul\">\r\n                <li class=\"pagination-li prev\">\r\n                  <a\r\n                    class=\"pagination-link\"\r\n                    (click)=\"prevPage()\"\r\n                    [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n                  >\r\n                    <i class=\"icofont-simple-left\"></i>\r\n                  </a>\r\n                </li>\r\n          \r\n                <li class=\"pagination-li next\">\r\n                  <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n                    <i class=\"icofont-simple-right\"></i>\r\n                  </a>\r\n                </li>\r\n              </ul>\r\n        </div>\r\n\r\n    </tc-card>\r\n</div>\r\n<ng-container>\r\n    <ng-template #modalArea>\r\n        <form [formGroup]=\"appointmentForm\">\r\n            <tc-form-group>\r\n                <tc-form-label class=\"mb-md-0\">Nombre:</tc-form-label>\r\n                <tc-input [prefixIcon]=\"'icofont-id'\" formControlName=\"nombre\"></tc-input>\r\n                <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                    *ngIf=\"appointmentForm.controls.nombre.touched && appointmentForm.controls.nombre.invalid \">\r\n                    Ingrese nombre de área correcto\r\n                </tc-form-description>\r\n            </tc-form-group>\r\n        </form>\r\n    </ng-template>\r\n\r\n    <ng-template #modalActions>\r\n        <div class=\"actions justify-content-between row\">\r\n            <button class=\"col\" tc-button [type]=\"'button'\" [view]=\"'error'\" [tcShape]=\"500\" (click)=\"closeModal()\">Cancelar</button>\r\n            <button class=\"col\" tc-button [view]=\"'success'\" [tcShape]=\"500\"\r\n                [afterIcon]=\"'icofont-save'\" [disabled]=\"appointmentForm.invalid\"\r\n                (click)=\"addAppointment(appointmentForm)\">\r\n                Crear Area\r\n            </button>\r\n        </div>\r\n    </ng-template>\r\n</ng-container>"
+module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<div class=\"col-sm-12\">\r\n    <div class=\"row\">\r\n        <tc-form-group class=\"col-sm-1 col-lg-1\">\r\n            <button tc-button [afterIcon]=\"'icofont-plus'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n                (click)=\"openModal(modalArea, 'Agregar Area', modalActions)\"></button>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-sm-7 col-lg-7\">\r\n            <tc-input [placeholder]=\"'Buscar Area por Nombre'\" [(ngModel)]=\"id\"\r\n                [suffixIcon]=\"'icofont-search-document'\">\r\n            </tc-input>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n                <button\r\n                tc-button\r\n                [block]=\"true\"\r\n                [view]=\"'success'\"\r\n                [tcShape]=\"500\"\r\n                (click)=\"buscar()\"\r\n              >\r\n                Buscar\r\n              </button>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n                <button\r\n                tc-button\r\n                [block]=\"true\"\r\n                [tcBgColor]=\"'#3f51b5'\"\r\n                [tcShape]=\"300\"\r\n                (click)=\"loadAreas()\"\r\n              >\r\n                Cargar\r\n              </button>\r\n        </tc-form-group>\r\n    </div>\r\n    <tc-card class=\"mb-0\">\r\n        <div class=\"table-wrap\">\r\n            <table class=\"table-box\">\r\n                <thead>\r\n                    <tr>\r\n                        <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                            Id\r\n                        </th>\r\n                        <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                            Nombre\r\n                        </th>\r\n                    </tr>\r\n                </thead>\r\n\r\n                <tbody>\r\n                    <tr *ngFor=\"let row of areas\">\r\n                        <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                            {{row.id}}\r\n                        </td>\r\n                        <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                            {{row.nombre}}\r\n                        </td>\r\n                    </tr>\r\n                </tbody>\r\n            </table>\r\n            <ul class=\"pagination-ul\">\r\n                <li class=\"pagination-li prev\">\r\n                  <a\r\n                    class=\"pagination-link\"\r\n                    (click)=\"prevPage()\"\r\n                    [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n                  >\r\n                    <i class=\"icofont-simple-left\"></i>\r\n                  </a>\r\n                </li>\r\n          \r\n                <li class=\"pagination-li next\">\r\n                  <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n                    <i class=\"icofont-simple-right\"></i>\r\n                  </a>\r\n                </li>\r\n              </ul>\r\n        </div>\r\n\r\n    </tc-card>\r\n</div>\r\n<ng-container>\r\n    <ng-template #modalArea>\r\n        <form [formGroup]=\"appointmentForm\">\r\n            <tc-form-group>\r\n                <tc-form-label class=\"mb-md-0\">Nombre:</tc-form-label>\r\n                <tc-input [prefixIcon]=\"'icofont-id'\" formControlName=\"nombre\"></tc-input>\r\n                <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                    *ngIf=\"appointmentForm.controls.nombre.touched && appointmentForm.controls.nombre.invalid \">\r\n                    Ingrese nombre de área correcto\r\n                </tc-form-description>\r\n            </tc-form-group>\r\n        </form>\r\n    </ng-template>\r\n\r\n    <ng-template #modalActions>\r\n        <div class=\"actions justify-content-between row\">\r\n            <button class=\"col\" tc-button [type]=\"'button'\" [view]=\"'error'\" [tcShape]=\"500\" (click)=\"closeModal()\">Cancelar</button>\r\n            <button class=\"col\" tc-button [view]=\"'success'\" [tcShape]=\"500\"\r\n                [afterIcon]=\"'icofont-save'\" [disabled]=\"appointmentForm.invalid\"\r\n                (click)=\"addAppointment(appointmentForm)\">\r\n                Crear Area\r\n            </button>\r\n        </div>\r\n    </ng-template>\r\n</ng-container>"
 
 /***/ }),
 
@@ -458,7 +458,7 @@ module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p-toast [style]=\"{ background: '#F9F7AE', opacity: '0.8' }\"></p-toast>\r\n<div class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <tc-form-group class=\"col-md-1\">\r\n      <button\r\n        tc-button\r\n        [afterIcon]=\"'icofont-plus'\"\r\n        [view]=\"'info'\"\r\n        [square]=\"true\"\r\n        [tcShape]=\"500\"\r\n        [size]=\"'sm'\"\r\n        (click)=\"\r\n          openModal(modalUser, 'Agregar Usuario', modalUser2); updateEst(false)\r\n        \"\r\n      ></button>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-md-7\">\r\n      <tc-input\r\n        [placeholder]=\"'Buscar Usuario por nombre'\"\r\n        [(ngModel)]=\"id\"\r\n        [suffixIcon]=\"'icofont-search-document'\"\r\n      >\r\n      </tc-input>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"onChangeTable()\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-2 col-lg-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"loadUsers()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n    </tc-form-group>\r\n  </div>\r\n  <tc-card class=\"mb-0\">\r\n    <tc-table [rows]=\"users\" [hovered]=\"true\">\r\n      <tc-table-col [columnTitle]=\"'Id'\" [columnName]=\"'id'\"> </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'UserName'\" [columnName]=\"'username'\">\r\n      </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'Email'\" [columnName]=\"'email'\">\r\n      </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'Modificar'\" [columnName]=\"'actions'\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions\">\r\n            <button\r\n              tc-button\r\n              [afterIcon]=\"'icofont-edit-alt'\"\r\n              [view]=\"'info'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"\r\n                openModalEdit(modalUser, 'Editar User', modalUser2, row);\r\n                sendUser(row);\r\n                updateEst(true)\r\n              \"\r\n            ></button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n\r\n      <tc-table-col [columnTitle]=\"'Eliminar'\" [columnName]=\"'actions'\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions\">\r\n            <button\r\n              tc-button\r\n              [afterIcon]=\"'icofont-ui-delete'\"\r\n              [view]=\"'error'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"deleteUser(row.id)\"\r\n            ></button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n    </tc-table>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n\r\n      <li class=\"pagination-li next\">\r\n        <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </tc-card>\r\n</div>\r\n\r\n<!-- Modal User -->\r\n<ng-container>\r\n  <ng-template #modalUser>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col-12 col-md-4 text-md-right\">\r\n            <tc-form-label class=\"mb-md-0\">UserName:</tc-form-label>\r\n          </div>\r\n          <div class=\"col-12 col-md-8\">\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"username\"\r\n            ></tc-input>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n      \r\n      <tc-form-group>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col-12 col-md-4 text-md-right\">\r\n            <tc-form-label class=\"mb-md-0\">Password:</tc-form-label>\r\n          </div>\r\n          <div class=\"col-12 col-md-8\">\r\n            <tc-input\r\n              [type]=\"'password'\"\r\n              [prefixIcon]=\"'icofont-key'\"\r\n              formControlName=\"password\"\r\n            >\r\n            </tc-input>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalUser2>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        *ngIf=\"!update\"\r\n        class=\"col\"\r\n        tc-button\r\n        [block]=\"true\"\r\n        [outline]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Usuario\r\n      </button>\r\n      <button\r\n        *ngIf=\"update\"\r\n        class=\"col\"\r\n        tc-button\r\n        [block]=\"true\"\r\n        [outline]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-pixels'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Guardar\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n\r\n<!-- Modal Personal -->\r\n<ng-container>\r\n  <ng-template #modalPersonal>\r\n    <form [formGroup]=\"PersonalForm\">\r\n      <tc-form-group>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col-12 col-md-4 text-md-right\">\r\n            <tc-form-label class=\"mb-md-0\">Personal:</tc-form-label>\r\n          </div>\r\n          <div class=\"col-12 col-md-8\">\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"nombre\"\r\n            ></tc-input>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalPersonal2>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModalPersonal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"PersonalForm.invalid\"\r\n        (click)=\"addPersonal(PersonalForm)\"\r\n      >\r\n        Crear Area\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
+module.exports = "<!-- <p-toast [style]=\"{ background: '#F9F7AE', opacity: '0.8' }\"></p-toast> -->\r\n<h3>Usuarios</h3>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col-md-2\">\r\n    <button\r\n      tc-button\r\n      [afterIcon]=\"'icofont-plus'\"\r\n      [view]=\"'info'\"\r\n      [square]=\"true\"\r\n      [tcShape]=\"500\"\r\n      [size]=\"'sm'\"\r\n      (click)=\"\r\n        openModal(modalUser, 'Agregar Usuario', modalUser2); updateEst(false)\r\n      \"\r\n    >\r\n      Agregar\r\n    </button>\r\n  </div>\r\n  <div class=\"col-md-6\">\r\n    <tc-input\r\n      [placeholder]=\"'Buscar Usuario por nombre'\"\r\n      [(ngModel)]=\"id\"\r\n      [suffixIcon]=\"'icofont-search-document'\"\r\n    >\r\n    </tc-input>\r\n  </div>\r\n  <div class=\"col-md-2\">\r\n    <button\r\n      tc-button\r\n      [block]=\"true\"\r\n      [view]=\"'success'\"\r\n      [tcShape]=\"500\"\r\n      (click)=\"onChangeTable()\"\r\n    >\r\n      Buscar\r\n    </button>\r\n  </div>\r\n  <div class=\"col-md-2\">\r\n    <button\r\n      tc-button\r\n      [block]=\"true\"\r\n      [tcBgColor]=\"'#3f51b5'\"\r\n      [tcShape]=\"500\"\r\n      (click)=\"loadUsers()\"\r\n    >\r\n      Cargar\r\n    </button>\r\n  </div>\r\n  <tc-card class=\"col-md-12 mt-2\">\r\n    <tc-table [rows]=\"users\" [hovered]=\"true\">\r\n      <tc-table-col [columnTitle]=\"'Id'\" [columnName]=\"'id'\"> </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'UserName'\" [columnName]=\"'username'\">\r\n      </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'Email'\" [columnName]=\"'email'\">\r\n      </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'Modificar'\" [columnName]=\"'actions'\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions\">\r\n            <button\r\n              tc-button\r\n              [afterIcon]=\"'icofont-edit-alt'\"\r\n              [view]=\"'info'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"\r\n                openModalEdit(modalUser, 'Editar User', modalUser2, row);\r\n                sendUser(row);\r\n                updateEst(true)\r\n              \"\r\n            ></button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n\r\n      <tc-table-col [columnTitle]=\"'Eliminar'\" [columnName]=\"'actions'\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions\">\r\n            <button\r\n              tc-button\r\n              [afterIcon]=\"'icofont-ui-delete'\"\r\n              [view]=\"'error'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"deleteUser(row.id)\"\r\n            ></button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n    </tc-table>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n\r\n      <li class=\"pagination-li next\">\r\n        <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </tc-card>\r\n</div>\r\n\r\n<!-- Modal User -->\r\n<ng-container>\r\n  <ng-template #modalUser>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col-12 col-md-4 text-md-right\">\r\n            <tc-form-label class=\"mb-md-0\">UserName:</tc-form-label>\r\n          </div>\r\n          <div class=\"col-12 col-md-8\">\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"username\"\r\n            ></tc-input>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n\r\n      <tc-form-group>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col-12 col-md-4 text-md-right\">\r\n            <tc-form-label class=\"mb-md-0\">Password:</tc-form-label>\r\n          </div>\r\n          <div class=\"col-12 col-md-8\">\r\n            <tc-input\r\n              [type]=\"'password'\"\r\n              [prefixIcon]=\"'icofont-key'\"\r\n              formControlName=\"password\"\r\n            >\r\n            </tc-input>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalUser2>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        *ngIf=\"!update\"\r\n        class=\"col\"\r\n        tc-button\r\n        [block]=\"true\"\r\n        [outline]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Usuario\r\n      </button>\r\n      <button\r\n        *ngIf=\"update\"\r\n        class=\"col\"\r\n        tc-button\r\n        [block]=\"true\"\r\n        [outline]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-pixels'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Guardar\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n\r\n<!-- Modal Personal -->\r\n<ng-container>\r\n  <ng-template #modalPersonal>\r\n    <form [formGroup]=\"PersonalForm\">\r\n      <tc-form-group>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col-12 col-md-4 text-md-right\">\r\n            <tc-form-label class=\"mb-md-0\">Personal:</tc-form-label>\r\n          </div>\r\n          <div class=\"col-12 col-md-8\">\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"nombre\"\r\n            ></tc-input>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalPersonal2>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModalPersonal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"PersonalForm.invalid\"\r\n        (click)=\"addPersonal(PersonalForm)\"\r\n      >\r\n        Crear Area\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
 
 /***/ }),
 
@@ -469,7 +469,18 @@ module.exports = "<p-toast [style]=\"{ background: '#F9F7AE', opacity: '0.8' }\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<div class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <tc-form-group class=\"col-sm-1 col-lg-1\">\r\n      <button\r\n        tc-button\r\n        [afterIcon]=\"'icofont-plus'\"\r\n        [view]=\"'info'\"\r\n        [square]=\"true\"\r\n        [tcShape]=\"500\"\r\n        [size]=\"'sm'\"\r\n        (click)=\"openModal(modalArea, 'Agregar Especialidad', modalActions)\"\r\n      ></button>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-7 col-lg-9\">\r\n      <tc-input\r\n        [placeholder]=\"'Buscar Especialidad por Nombre'\"\r\n        [(ngModel)]=\"id\"\r\n        [suffixIcon]=\"'icofont-search-document'\"\r\n      >\r\n      </tc-input>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"buscar()\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </tc-form-group>\r\n  </div>\r\n  <tc-card class=\"mb-0\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Id\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombre\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Descripción\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr *ngFor=\"let row of especialidades\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.id }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.nombre }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.descripcion }}\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a\r\n            class=\"pagination-link\"\r\n            (click)=\"prevPage()\"\r\n            [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n          >\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n  \r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n<ng-container>\r\n  <ng-template #modalArea>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label class=\"mb-md-0\">Nombre:</tc-form-label>\r\n        <tc-input\r\n          [prefixIcon]=\"'icofont-id'\"\r\n          formControlName=\"nombre\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.nombre.touched &&\r\n            appointmentForm.controls.nombre.invalid\r\n          \"\r\n        >\r\n          Ingrese nombre de especialidad correcto\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label class=\"mb-md-0\">Descripción:</tc-form-label>\r\n        <tc-input\r\n          [prefixIcon]=\"'icofont-id'\"\r\n          formControlName=\"descripcion\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.descripcion.touched &&\r\n            appointmentForm.controls.descripcion.invalid\r\n          \"\r\n        >\r\n          Ingrese una descripción de especialidad correcto\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalActions>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Especialidad\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
+module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<div class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-1\">\r\n    <tc-form-group >\r\n      <button\r\n        tc-button\r\n        [afterIcon]=\"'icofont-plus'\"\r\n        [view]=\"'info'\"\r\n        [square]=\"true\"\r\n        [tcShape]=\"500\"\r\n        [size]=\"'sm'\"\r\n        (click)=\"openModal(modalArea, 'Agregar Especialidad', modalActions)\"\r\n      ></button>\r\n    </tc-form-group>\r\n  </div>\r\n  <div class=\"col-md-7\">\r\n    <tc-form-group >\r\n      <tc-input\r\n        [placeholder]=\"'Buscar Especialidad por Nombre'\"\r\n        [(ngModel)]=\"id\"\r\n        [suffixIcon]=\"'icofont-search-document'\"\r\n      >\r\n      </tc-input>\r\n    </tc-form-group>\r\n  </div>\r\n  <div class=\"col-md-2\">\r\n    <tc-form-group >\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"buscar()\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </tc-form-group>\r\n  </div>\r\n  <div class=\"col-md-2\">\r\n    <tc-form-group >\r\n        <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        [tcShape]=\"300\"\r\n        (click)=\"loadEspecialidades()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n</tc-form-group>\r\n</div>\r\n  </div>\r\n  <tc-card class=\"mb-0\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Id\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombre\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Descripción\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr *ngFor=\"let row of especialidades\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.id }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.nombre }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.descripcion }}\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a\r\n            class=\"pagination-link\"\r\n            (click)=\"prevPage()\"\r\n            [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n          >\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n  \r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n<ng-container>\r\n  <ng-template #modalArea>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label class=\"mb-md-0\">Nombre:</tc-form-label>\r\n        <tc-input\r\n          [prefixIcon]=\"'icofont-id'\"\r\n          formControlName=\"nombre\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.nombre.touched &&\r\n            appointmentForm.controls.nombre.invalid\r\n          \"\r\n        >\r\n          Ingrese nombre de especialidad correcto\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label class=\"mb-md-0\">Descripción:</tc-form-label>\r\n        <tc-input\r\n          [prefixIcon]=\"'icofont-id'\"\r\n          formControlName=\"descripcion\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.descripcion.touched &&\r\n            appointmentForm.controls.descripcion.invalid\r\n          \"\r\n        >\r\n          Ingrese una descripción de especialidad correcto\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalActions>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Especialidad\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/pages/Administrador/personal-adm/personal-adm.component.html":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/pages/Administrador/personal-adm/personal-adm.component.html ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-md-12\">\r\n  <app-editar></app-editar>\r\n  <app-personal></app-personal>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -480,7 +491,7 @@ module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n\r\n<form [formGroup]=\"busForm\" class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-1\">\r\n      <tc-form-group>\r\n        <button\r\n          tc-button\r\n          [afterIcon]=\"'icofont-plus'\"\r\n          [view]=\"'info'\"\r\n          [square]=\"true\"\r\n          [tcShape]=\"500\"\r\n          [size]=\"'sm'\"\r\n          (click)=\"openModal(modalPersonal, 'Agregar Personal', modalActions)\"\r\n        ></button>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <tc-form-group>\r\n        <tc-select\r\n          [placeholder]=\"'Opciones'\"\r\n          formControlName=\"opBus\"\r\n          [options]=\"busqOption\"\r\n        >\r\n        </tc-select>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-5\">\r\n      <tc-form-group>\r\n        <tc-input\r\n          [placeholder]=\"'Ingrese el dato a buscar'\"\r\n          type=\"number\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          formControlName=\"campo\"\r\n        >\r\n        </tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            busForm.controls.campo.touched && busForm.controls.campo.invalid\r\n          \"\r\n        >\r\n          Ingrese solo numeros\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"300\"\r\n        (click)=\"buscar(busForm)\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcShape]=\"300\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        (click)=\"loadPersonal()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n    </div>\r\n  </div>\r\n</form>\r\n<br />\r\n<tc-card *ngIf=\"personales?.length\" class=\"mb-0\">\r\n  <div class=\"table-wrap\">\r\n    <table class=\"table-box\">\r\n      <thead>\r\n        <tr>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Nombres\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            DNI\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Area\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Tipo Personal\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Especialidad\r\n          </th>\r\n\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Ver más\r\n          </th>\r\n        </tr>\r\n      </thead>\r\n\r\n      <tbody>\r\n        <tr *ngFor=\"let row of personales\">\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.nombres }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.dni }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.area.nombre }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.tipo_personal.nombre }}\r\n          </td>\r\n          <td\r\n            *ngIf=\"!row.especialidad\"\r\n            [ngStyle]=\"{ background: contentBgColor, color: 'red' }\"\r\n          >\r\n            Sin Especialidad\r\n          </td>\r\n          <td\r\n            *ngIf=\"row.especialidad\"\r\n            [ngStyle]=\"{ background: contentBgColor, color: contentColor }\"\r\n          >\r\n            {{ row.especialidad.nombre }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            <div class=\"actions\">\r\n              <button\r\n                tc-button\r\n                tc-button\r\n                [tcColor]=\"['#fff', '#3f51b5']\"\r\n                [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n                [tcBorderColor]=\"'#3f51b5'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModalVerMas(\r\n                    modalBodyH,\r\n                    'Ver Personal Completo',\r\n                    modalFooterH,\r\n                    row\r\n                  )\r\n                \"\r\n              >\r\n                Ver Mas\r\n              </button>\r\n            </div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n\r\n      <li class=\"pagination-li next\">\r\n        <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</tc-card>\r\n\r\n<ng-container>\r\n  <ng-template #modalPersonal>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-6  \">\r\n            <tc-form-label>Usuario</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'user'\"\r\n              type=\"number\"\r\n              formControlName=\"user\"\r\n              [options]=\"usersOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n\r\n          <div class=\" col-sm-6\">\r\n            <tc-form-label class=\"mb-md-0\">Nombres:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"nombres\"\r\n              [charLimiting]=\"20\"\r\n              pattern=\"[a-zA-Z]*\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.nombres.touched &&\r\n                appointmentForm.controls.nombres.invalid\r\n              \"\r\n            >\r\n              Ingrese Nombre del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label class=\"mb-md-0\">Apellido Paterno:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"apellido_paterno\"\r\n              [charLimiting]=\"20\"\r\n              pattern=\"[a-zA-Z]*\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.apellido_paterno.touched &&\r\n                appointmentForm.controls.apellido_paterno.invalid\r\n              \"\r\n            >\r\n              Ingrese Apellido Paterno del personal\r\n            </tc-form-description>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label class=\"mb-md-0\">apellido Materno:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"apellido_materno\"\r\n              [charLimiting]=\"20\"\r\n              pattern=\"[a-zA-Z]*\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.apellido_materno.touched &&\r\n                appointmentForm.controls.apellido_materno.invalid\r\n              \"\r\n            >\r\n              Ingrese Apellido Materno del personal\r\n            </tc-form-description>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label class=\"mb-md-0\">DNI:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"dni\"\r\n              [type]=\"'number'\"\r\n              [charLimiting]=\"8\"\r\n              pattern=\"[0-9]{8}\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.dni.touched &&\r\n                appointmentForm.controls.dni.invalid\r\n              \"\r\n            >\r\n              Ingrese DNI del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-6    \">\r\n            <tc-form-label class=\"mb-md-0\">Celular:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"celular\"\r\n              [type]=\"'number'\"\r\n              [charLimiting]=\"9\"\r\n              pattern=\"[0-9]{9}\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.celular.touched &&\r\n                appointmentForm.controls.celular.invalid\r\n              \"\r\n            >\r\n              Ingrese celular del personal\r\n            </tc-form-description>\r\n          </div>\r\n\r\n          <div class=\" col-sm-6\">\r\n            <tc-form-label class=\"mb-md-0\">Teléfono:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"telefono\"\r\n              [type]=\"'number'\"\r\n              [charLimiting]=\"6\"\r\n              pattern=\"[0-9]{6}\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.telefono.touched &&\r\n                appointmentForm.controls.telefono.invalid\r\n              \"\r\n            >\r\n              Ingrese telefono del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-12 \">\r\n            <tc-form-label class=\"mb-md-0\">Direccion:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"direccion\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.direccion.touched &&\r\n                appointmentForm.controls.direccion.invalid\r\n              \"\r\n            >\r\n              Ingrese dirección del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <br>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label>Area</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'area'\"\r\n              type=\"number\"\r\n              formControlName=\"area\"\r\n              [options]=\"areasOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label>Tipo</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'tipo personal'\"\r\n              type=\"number\"\r\n              formControlName=\"tipo_personal\"\r\n              [options]=\"tiposOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label>Especialidad</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'especialidad'\"\r\n              type=\"number\"\r\n              formControlName=\"especialidad\"\r\n              [options]=\"especialidadesOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalActions>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Usuario\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- Open Modal Ver Mas -->\r\n<ng-container>\r\n  <ng-template #modalBodyH>\r\n    <form [formGroup]=\"personalForm\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Usuario</tc-form-label>\r\n            <tc-input formControlName=\"user\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Area</tc-form-label>\r\n            <tc-input formControlName=\"area\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Tipo personal</tc-form-label>\r\n            <tc-input\r\n              formControlName=\"tipo_personal\"\r\n              readonly=\"readonly\"\r\n            ></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label> Especialidad</tc-form-label>\r\n            <tc-input formControlName=\"especialidad\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>DNI</tc-form-label>\r\n            <tc-input formControlName=\"dni\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Nombres</tc-form-label>\r\n            <tc-input formControlName=\"nombres\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label> Apellido Paterno</tc-form-label>\r\n            <tc-input formControlName=\"apellido_paterno\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Apellido Materno</tc-form-label>\r\n            <tc-input formControlName=\"apellido_materno\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Celular</tc-form-label>\r\n            <tc-input formControlName=\"celular\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Telefono</tc-form-label>\r\n            <tc-input formControlName=\"telefono\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Direccion</tc-form-label>\r\n            <tc-input formControlName=\"direccion\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Fecha Reg</tc-form-label>\r\n            <tc-input formControlName=\"fechaReg\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>F. Actualizado</tc-form-label>\r\n            <tc-input formControlName=\"updated_at\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>estReg</tc-form-label>\r\n            <tc-input formControlName=\"estReg\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterH>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [tcBgColor]=\"'#009688'\"\r\n        [block]=\"true\"\r\n        (click)=\"closeModalP()\"\r\n      >\r\n        ACEPTAR\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
+module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<h3>Personal</h3>\r\n<div class=\"row\">\r\n  <div class=\"col-md-1\">\r\n    <button\r\n      tc-button\r\n      [view]=\"'info'\"\r\n      [afterIcon]=\"'icofont-plus'\"\r\n      [tcShape]=\"500\"\r\n      [size]=\"'sm'\"\r\n      (click)=\"openModal(modalPersonal, 'Agregar Personal', modalActions); updateEst()\"\r\n    >\r\n      Agregar\r\n    </button>\r\n  </div>\r\n  <form [formGroup]=\"busForm\" class=\"col-md-11 row\">\r\n    <div class=\"col-md-2\">\r\n      <tc-form-group>\r\n        <tc-select\r\n          [placeholder]=\"'Opciones'\"\r\n          formControlName=\"opBus\"\r\n          [options]=\"busqOption\"\r\n        >\r\n        </tc-select>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-5\">\r\n      <tc-form-group>\r\n        <tc-input\r\n          [placeholder]=\"'Ingrese el dato a buscar'\"\r\n          type=\"number\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          formControlName=\"campo\"\r\n        >\r\n        </tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            busForm.controls.campo.touched && busForm.controls.campo.invalid\r\n          \"\r\n        >\r\n          Ingrese solo numeros\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <tc-form-group>\r\n        <button\r\n          tc-button\r\n          type=\"submit\"\r\n          [block]=\"true\"\r\n          [view]=\"'success'\"\r\n          [tcShape]=\"300\"\r\n          (click)=\"buscar(busForm)\"\r\n        >\r\n          Buscar\r\n        </button>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcShape]=\"300\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        (click)=\"loadPersonal()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n    </div>\r\n  </form>\r\n  <br />\r\n  <tc-card *ngIf=\"personales?.length\" class=\"col-md-12\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombres\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              DNI\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Area\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Tipo Personal\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Especialidad\r\n            </th>\r\n\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Ver más\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr *ngFor=\"let row of personales\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.nombres }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.dni }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.area.nombre }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.tipo_personal.nombre }}\r\n            </td>\r\n            <td\r\n              *ngIf=\"!row.especialidad\"\r\n              [ngStyle]=\"{\r\n                background: contentBgColor,\r\n                color: 'contentColor'\r\n              }\"\r\n            >\r\n              Administrativo\r\n            </td>\r\n            <td\r\n              *ngIf=\"row.especialidad\"\r\n              [ngStyle]=\"{ background: contentBgColor, color: contentColor }\"\r\n            >\r\n              {{ row.especialidad.nombre }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              <div class=\"actions\">\r\n                <button\r\n                  tc-button\r\n                  tc-button\r\n                  [tcColor]=\"['#fff', '#3f51b5']\"\r\n                  [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n                  [tcBorderColor]=\"'#3f51b5'\"\r\n                  [square]=\"true\"\r\n                  [tcShape]=\"500\"\r\n                  [size]=\"'sm'\"\r\n                  (click)=\"\r\n                    openModalVerMas(\r\n                      modalBodyH,\r\n                      'Ver Personal Completo',\r\n                      modalFooterH,\r\n                      row\r\n                    )\r\n                  \"\r\n                >\r\n                  Ver Mas\r\n                </button>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a\r\n            class=\"pagination-link\"\r\n            (click)=\"prevPage()\"\r\n            [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n          >\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n\r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n\r\n<ng-container>\r\n  <ng-template #modalPersonal>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-6  \">\r\n            <tc-form-label>Usuario</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'user'\"\r\n              type=\"number\"\r\n              formControlName=\"user\"\r\n              [options]=\"usersOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n\r\n          <div class=\" col-sm-6\">\r\n            <tc-form-label class=\"mb-md-0\">Nombres:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"nombres\"\r\n              [charLimiting]=\"23\"\r\n              pattern=\"[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s ]+\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.nombres.touched &&\r\n                appointmentForm.controls.nombres.invalid\r\n              \"\r\n            >\r\n              Ingrese Nombre del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <br />\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label class=\"mb-md-0\">Apellido Paterno:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"apellido_paterno\"\r\n              [charLimiting]=\"20\"\r\n              pattern=\"[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s ]+\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.apellido_paterno.touched &&\r\n                appointmentForm.controls.apellido_paterno.invalid\r\n              \"\r\n            >\r\n              Ingrese Apellido Paterno del personal\r\n            </tc-form-description>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label class=\"mb-md-0\">apellido Materno:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"apellido_materno\"\r\n              [charLimiting]=\"20\"\r\n              pattern=\"[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s ]+\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.apellido_materno.touched &&\r\n                appointmentForm.controls.apellido_materno.invalid\r\n              \"\r\n            >\r\n              Ingrese Apellido Materno del personal\r\n            </tc-form-description>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label class=\"mb-md-0\">DNI:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"dni\"\r\n              [type]=\"'number'\"\r\n              [charLimiting]=\"8\"\r\n              pattern=\"[0-9]{8}\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.dni.touched &&\r\n                appointmentForm.controls.dni.invalid\r\n              \"\r\n            >\r\n              Ingrese DNI del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <br />\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-6    \">\r\n            <tc-form-label class=\"mb-md-0\">Celular:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"celular\"\r\n              [type]=\"'number'\"\r\n              [charLimiting]=\"9\"\r\n              pattern=\"[0-9]{9}\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.celular.touched &&\r\n                appointmentForm.controls.celular.invalid\r\n              \"\r\n            >\r\n              Ingrese celular del personal\r\n            </tc-form-description>\r\n          </div>\r\n\r\n          <div class=\" col-sm-6\">\r\n            <tc-form-label class=\"mb-md-0\">Teléfono:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"telefono\"\r\n              [type]=\"'number'\"\r\n              [charLimiting]=\"6\"\r\n              pattern=\"[0-9]{6}\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.telefono.touched &&\r\n                appointmentForm.controls.telefono.invalid\r\n              \"\r\n            >\r\n              Ingrese telefono del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-12 \">\r\n            <tc-form-label class=\"mb-md-0\">Direccion:</tc-form-label>\r\n            <tc-input\r\n              [prefixIcon]=\"'icofont-id'\"\r\n              formControlName=\"direccion\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                appointmentForm.controls.direccion.touched &&\r\n                appointmentForm.controls.direccion.invalid\r\n              \"\r\n            >\r\n              Ingrese dirección del personal\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <br />\r\n        <div class=\"row\">\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label>Area</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'area'\"\r\n              type=\"number\"\r\n              formControlName=\"area\"\r\n              [options]=\"areasOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label>Tipo</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'tipo personal'\"\r\n              type=\"number\"\r\n              formControlName=\"tipo_personal\"\r\n              [options]=\"tiposOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n          <div class=\" col-sm-4\">\r\n            <tc-form-label>Especialidad</tc-form-label>\r\n            <tc-select\r\n              [placeholder]=\"'especialidad'\"\r\n              type=\"number\"\r\n              formControlName=\"especialidad\"\r\n              [options]=\"especialidadesOpt\"\r\n            >\r\n            </tc-select>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalActions>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Personal\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- Open Modal Ver Mas -->\r\n<ng-container>\r\n  <ng-template #modalBodyH>\r\n    <form [formGroup]=\"personalForm\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Usuario</tc-form-label>\r\n            <tc-input formControlName=\"user\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Area</tc-form-label>\r\n            <tc-input formControlName=\"area\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Tipo personal</tc-form-label>\r\n            <tc-input\r\n              formControlName=\"tipo_personal\"\r\n              readonly=\"readonly\"\r\n            ></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label> Especialidad</tc-form-label>\r\n            <tc-input formControlName=\"especialidad\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>DNI</tc-form-label>\r\n            <tc-input formControlName=\"dni\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Nombres</tc-form-label>\r\n            <tc-input formControlName=\"nombres\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label> Apellido Paterno</tc-form-label>\r\n            <tc-input formControlName=\"apellido_paterno\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Apellido Materno</tc-form-label>\r\n            <tc-input formControlName=\"apellido_materno\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Celular</tc-form-label>\r\n            <tc-input formControlName=\"celular\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Telefono</tc-form-label>\r\n            <tc-input formControlName=\"telefono\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Direccion</tc-form-label>\r\n            <tc-input formControlName=\"direccion\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Fecha Reg</tc-form-label>\r\n            <tc-input formControlName=\"fechaReg\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>F. Actualizado</tc-form-label>\r\n            <tc-input formControlName=\"updated_at\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>estReg</tc-form-label>\r\n            <tc-input formControlName=\"estReg\" readonly=\"readonly\"> </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterH>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [tcBgColor]=\"'#009688'\"\r\n        [block]=\"true\"\r\n        (click)=\"closeModalP()\"\r\n      >\r\n        ACEPTAR\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
 
 /***/ }),
 
@@ -491,7 +502,7 @@ module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<div class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <tc-form-group class=\"col-sm-1 col-lg-1\">\r\n      <button\r\n        tc-button\r\n        [afterIcon]=\"'icofont-plus'\"\r\n        [view]=\"'info'\"\r\n        [square]=\"true\"\r\n        [tcShape]=\"500\"\r\n        [size]=\"'sm'\"\r\n        (click)=\"openModal(modalArea, 'Agregar tipo personal', modalActions)\"\r\n      ></button>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-7 col-lg-9\">\r\n      <tc-input\r\n        [placeholder]=\"'Buscar Tipo Personal por Nombre'\"\r\n        [(ngModel)]=\"id\"\r\n        [suffixIcon]=\"'icofont-search-document'\"\r\n      >\r\n      </tc-input>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"buscar()\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </tc-form-group>\r\n  </div>\r\n  <tc-card class=\"mb-0\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Id\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombre\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr *ngFor=\"let row of tipopersonal\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.id }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.nombre }}\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a\r\n            class=\"pagination-link\"\r\n            (click)=\"prevPage()\"\r\n            [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n          >\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n  \r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n<ng-container>\r\n  <ng-template #modalArea>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label class=\"mb-md-0\">Nombre:</tc-form-label>\r\n        <tc-input\r\n          [prefixIcon]=\"'icofont-id'\"\r\n          formControlName=\"nombre\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.nombre.touched &&\r\n            appointmentForm.controls.nombre.invalid\r\n          \"\r\n        >\r\n          Ingrese nombre de tipo personal correcto\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalActions>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Tipo\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
+module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity: '0.8'}\" header=\"Confirmation\"\r\n    icon=\"pi pi-exclamation-triangle\"></p-confirmDialog> -->\r\n<div class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <tc-form-group class=\"col-sm-1 col-lg-1\">\r\n      <button\r\n        tc-button\r\n        [afterIcon]=\"'icofont-plus'\"\r\n        [view]=\"'info'\"\r\n        [square]=\"true\"\r\n        [tcShape]=\"500\"\r\n        [size]=\"'sm'\"\r\n        (click)=\"openModal(modalArea, 'Agregar tipo personal', modalActions)\"\r\n      ></button>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-7 col-lg-7\">\r\n      <tc-input\r\n        [placeholder]=\"'Buscar Tipo Personal por Nombre'\"\r\n        [(ngModel)]=\"id\"\r\n        [suffixIcon]=\"'icofont-search-document'\"\r\n      >\r\n      </tc-input>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"buscar()\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </tc-form-group>\r\n    <tc-form-group class=\"col-sm-4 col-lg-2\">\r\n        <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"loadTipopersonal()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n      \r\n      </tc-form-group>\r\n  </div>\r\n  <tc-card class=\"mb-0\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Id\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombre\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n\r\n        <tbody>\r\n          <tr *ngFor=\"let row of tipopersonal\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.id }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.nombre }}\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a\r\n            class=\"pagination-link\"\r\n            (click)=\"prevPage()\"\r\n            [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n          >\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n  \r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n<ng-container>\r\n  <ng-template #modalArea>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label class=\"mb-md-0\">Nombre:</tc-form-label>\r\n        <tc-input\r\n          [prefixIcon]=\"'icofont-id'\"\r\n          formControlName=\"nombre\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.nombre.touched &&\r\n            appointmentForm.controls.nombre.invalid\r\n          \"\r\n        >\r\n          Ingrese nombre de tipo personal correcto, solo incluir letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalActions>\r\n    <div class=\"actions justify-content-between row\">\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        class=\"col\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        [afterIcon]=\"'icofont-save'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Crear Tipo\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
 
 /***/ }),
 
@@ -502,7 +513,7 @@ module.exports = "<!-- <p-confirmDialog [style]=\"{background: '#70B1C9',opacity
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-container>\r\n  <ng-template #modalConf1>\r\n    <p>¿Continuar con esta acción?</p>\r\n  </ng-template>\r\n\r\n  <ng-template #modalConf2>\r\n    <h5>Cancelar Cita</h5>\r\n  </ng-template>\r\n\r\n  <ng-template #modalConf3>\r\n    <div class=\"row actions justify-content-between\">\r\n      <button\r\n        class=\"col-sm-3\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        (click)=\"CancelarCita()\"\r\n      >\r\n        Si\r\n      </button>\r\n      <button\r\n        class=\"col-sm-3\"\r\n        tc-button\r\n        [view]=\"'error'\"\r\n        (click)=\"closeModalConf()\"\r\n      >\r\n        No\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<form [formGroup]=\"busForm\" class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-2\">\r\n      <tc-form-group>\r\n        <!-- [charLimiting]=\"8\" -->\r\n        <tc-select\r\n          [placeholder]=\"'Opciones'\"\r\n          formControlName=\"opBus\"\r\n          [options]=\"busqOption\"\r\n          (click)=\"selectOpt()\"\r\n        >\r\n        </tc-select>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n      <tc-form-group>\r\n        <tc-input\r\n          *ngIf=\"opBus == 0\"\r\n          [type]=\"'number'\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          [placeholder]=\"'Seleccione una opcion'\"\r\n          formControlName=\"campo\"\r\n        ></tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 1\"\r\n          [type]=\"'number'\"\r\n          [charLimiting]=\"8\"\r\n          pattern=\"[0-9]{8}\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          [placeholder]=\"'DNI (8 digitos)'\"\r\n          formControlName=\"campo\"\r\n        ></tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 2\"\r\n          [placeholder]=\"'Ingrese especialidad a buscar'\"\r\n          [charLimiting]=\"20\"\r\n          pattern=\"[a-zA-Z]*\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          formControlName=\"campo\"\r\n        >\r\n        </tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            busForm.controls.campo.touched && busForm.controls.campo.invalid\r\n          \"\r\n        >\r\n          Datos incorrectos DNI (Ejemplo:74256985), Especialidad\r\n          (Ejemplo:Odontologia)\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"buscar(busForm)\"\r\n        [disabled]=\"busForm.invalid\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"loadCitas()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n    </div>\r\n  </div>\r\n</form>\r\n<br />\r\n<tc-card *ngIf=\"citasEdit?.length\" class=\"mb-0\">\r\n  <div class=\"table-wrap\">\r\n    <table class=\"table-box\">\r\n      <thead>\r\n        <tr>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Numero de Historia\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            N° Recibo\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            DNI\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            F. Editado\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            F. Atención\r\n          </th>\r\n          \r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Estado\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Especialidad\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Modificar\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Cancelar\r\n          </th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let row of citasEdit\">\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.numeroHistoria.numeroHistoria }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.numeroRecibo }}\r\n          </td>\r\n          <td\r\n            [ngStyle]=\"{ background: contentBgColor, color: contentColor }\"\r\n            [tcColor]=\"'#259FD0'\"\r\n          >\r\n            {{ row.numeroHistoria.dni }}\r\n          </td>\r\n          <!-- \r\n\t\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.updated_at.substring(0,10)}}\r\n\t\t\t\t\t\t</td>\r\n            -->\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.updated_at.substring(0, 10) }}\r\n            </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.fechaAtencion }}\r\n          </td>\r\n          \r\n\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.estadoCita }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.especialidad.nombre }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            <div class=\"actions\">\r\n              <button\r\n                [disabled]=\"\r\n                  row.estadoCita == 'Cancelado' || row.estadoCita == 'Atendido'\r\n                \"\r\n                class=\"col-6\"\r\n                tc-button\r\n                [afterIcon]=\"'icofont-edit-alt'\"\r\n                [view]=\"'info'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModal(modalBody, 'Editar Cita', modalFooter, row);\r\n                  sendCita(row)\r\n                \"\r\n              ></button>\r\n            </div>\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            <div class=\"actions\">\r\n              <button\r\n                [disabled]=\"\r\n                  row.estadoCita == 'Cancelado' || row.estadoCita == 'Atendido'\r\n                \"\r\n                class=\"col-6\"\r\n                tc-button\r\n                [afterIcon]=\"'icofont-ui-delete'\"\r\n                [view]=\"'error'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModalCancelar(modalConf1, modalConf2, modalConf3, row.id)\r\n                \"\r\n              ></button>\r\n            </div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n\r\n      <li class=\"pagination-li next\">\r\n        <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</tc-card>\r\n<ng-container>\r\n  <ng-template #modalBody>\r\n    <form [formGroup]=\"cabModCita\">\r\n      <div class=\"row\">\r\n        <tc-form-group class=\"col-12 col-sm-4\">\r\n          <tc-form-label>Numero de Historia</tc-form-label>\r\n          <tc-input formControlName=\"numeroHistoria\" readonly=\"readonly\">\r\n          </tc-input>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-12 col-sm-4\">\r\n          <tc-form-label>DNI</tc-form-label>\r\n          <tc-input formControlName=\"dni\" readonly=\"readonly\"> </tc-input>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-12 col-sm-4\">\r\n          <tc-form-label>Numero de Recibo</tc-form-label>\r\n          <tc-input formControlName=\"numeroRecibo\" readonly=\"readonly\">\r\n          </tc-input>\r\n        </tc-form-group>\r\n      </div>\r\n    </form>\r\n    <!-- (click)=\"loadOptionsMedEsp(appointmentForm.get('especialidad').value)\"  [selected]=\"espSelected\"-->\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label>Especialidad</tc-form-label>\r\n        <tc-select\r\n          [placeholder]=\"espSelectedName\"\r\n          formControlName=\"especialidad\"\r\n          [options]=\"espOption\"\r\n          (click)=\"loadOptionsMedEsp(appointmentForm.get('especialidad').value)\"\r\n        >\r\n        </tc-select>\r\n        <tc-form-description\r\n        [tcColor]=\"'#e24d4d'\"\r\n        [tcFontSize]=\"'0.8em'\"\r\n        *ngIf=\"\r\n          appointmentForm.controls.especialidad.untouched &&\r\n          appointmentForm.controls.especialidad.invalid\r\n        \"\r\n      >\r\n        Seleccione una especialidad\r\n      </tc-form-description>\r\n        <tc-form-label>Médico</tc-form-label>\r\n        <tc-select\r\n          [placeholder]=\"medSelectedName\"\r\n          formControlName=\"medico\"\r\n          [options]=\"medOption\"\r\n        >\r\n        </tc-select>\r\n        <tc-form-description\r\n        [tcColor]=\"'#e24d4d'\"\r\n        [tcFontSize]=\"'0.8em'\"\r\n        *ngIf=\"\r\n          appointmentForm.controls.medico.untouched &&\r\n          appointmentForm.controls.medico.invalid\r\n        \"\r\n      >\r\n        Seleccione un Médico\r\n      </tc-form-description>\r\n        <tc-form-label\r\n          >Fecha de Separación(A partir del dia Actual)</tc-form-label\r\n        >\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-input type=\"date\" formControlName=\"fechaAtencion\"></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.fechaAtencion.touched &&\r\n            appointmentForm.controls.fechaAtencion.invalid\r\n          \"\r\n        >\r\n          Ingrese Fecha de Atencion\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        tc-button\r\n        [view]=\"'info'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Guardar\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
+module.exports = "<ng-container>\r\n  <ng-template #modalConf1>\r\n    <p>¿Continuar con esta acción?</p>\r\n  </ng-template>\r\n\r\n  <ng-template #modalConf2>\r\n    <h5>Cancelar Cita</h5>\r\n  </ng-template>\r\n\r\n  <ng-template #modalConf3>\r\n    <div class=\"row actions justify-content-between\">\r\n      <button\r\n        class=\"col-sm-3\"\r\n        tc-button\r\n        [view]=\"'success'\"\r\n        (click)=\"CancelarCita()\"\r\n      >\r\n        Si\r\n      </button>\r\n      <button\r\n        class=\"col-sm-3\"\r\n        tc-button\r\n        [view]=\"'error'\"\r\n        (click)=\"closeModalConf()\"\r\n      >\r\n        No\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<form [formGroup]=\"busForm\" class=\"col-sm-12\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-2\">\r\n      <tc-form-group>\r\n        <!-- [charLimiting]=\"8\" -->\r\n        <tc-select\r\n          [placeholder]=\"'Opciones'\"\r\n          formControlName=\"opBus\"\r\n          [options]=\"busqOption\"\r\n          (click)=\"selectOpt()\"\r\n        >\r\n        </tc-select>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-6\">\r\n      <tc-form-group>\r\n        <tc-input\r\n          *ngIf=\"opBus == 0\"\r\n          [type]=\"'number'\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          [placeholder]=\"'Seleccione una opcion'\"\r\n          formControlName=\"campo\"\r\n        ></tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 1\"\r\n          [type]=\"'number'\"\r\n          [charLimiting]=\"8\"\r\n          pattern=\"[0-9]{8}\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          [placeholder]=\"'DNI (8 digitos)'\"\r\n          formControlName=\"campo\"\r\n        ></tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 2\"\r\n          [placeholder]=\"'Ingrese especialidad a buscar'\"\r\n          [type]=\"'text'\"\r\n          [charLimiting]=\"20\"\r\n          pattern=\"[a-zA-Z]*\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          formControlName=\"campo\"\r\n        >\r\n        </tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#1666B3'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"busForm.controls.campo.invalid\" >\r\n          Ingrese DNI (Ejemplo:74256985), Especialidad\r\n          (Ejemplo:Odontologia)\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [view]=\"'success'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"buscar(busForm)\"\r\n      >\r\n        Buscar\r\n      </button>\r\n    </div>\r\n    <div class=\"col-md-2\">\r\n      <button\r\n        tc-button\r\n        [block]=\"true\"\r\n        [tcBgColor]=\"'#3f51b5'\"\r\n        [tcShape]=\"500\"\r\n        (click)=\"loadCitas()\"\r\n      >\r\n        Cargar\r\n      </button>\r\n    </div>\r\n  </div>\r\n</form>\r\n<br />\r\n<tc-card *ngIf=\"citasEdit?.length\" class=\"mb-0\">\r\n  <div class=\"table-wrap\">\r\n    <table class=\"table-box\">\r\n      <thead>\r\n        <tr>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Numero de Historia\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            N° Recibo\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            DNI\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            F. Editado\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            F. Atención\r\n          </th>\r\n          \r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Estado\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Especialidad\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Modificar\r\n          </th>\r\n          <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n            Cancelar\r\n          </th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let row of citasEdit\">\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.numeroHistoria.numeroHistoria }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.numeroRecibo }}\r\n          </td>\r\n          <td\r\n            [ngStyle]=\"{ background: contentBgColor, color: contentColor }\"\r\n            [tcColor]=\"'#259FD0'\"\r\n          >\r\n            {{ row.numeroHistoria.dni }}\r\n          </td>\r\n          <!-- \r\n\t\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.updated_at.substring(0,10)}}\r\n\t\t\t\t\t\t</td>\r\n            -->\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.updated_at.substring(0, 10) }}\r\n            </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.fechaAtencion }}\r\n          </td>\r\n          \r\n\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.estadoCita }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            {{ row.especialidad.nombre }}\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            <div class=\"actions\">\r\n              <button\r\n                [disabled]=\"\r\n                  row.estadoCita == 'Cancelado' || row.estadoCita == 'Atendido'\r\n                \"\r\n                class=\"col-6\"\r\n                tc-button\r\n                [afterIcon]=\"'icofont-edit-alt'\"\r\n                [view]=\"'info'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModal(modalBody, 'Editar Cita', modalFooter, row);\r\n                  sendCita(row)\r\n                \"\r\n              ></button>\r\n            </div>\r\n          </td>\r\n          <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n            <div class=\"actions\">\r\n              <button\r\n                [disabled]=\"\r\n                  row.estadoCita == 'Cancelado' || row.estadoCita == 'Atendido'\r\n                \"\r\n                class=\"col-6\"\r\n                tc-button\r\n                [afterIcon]=\"'icofont-ui-delete'\"\r\n                [view]=\"'error'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModalCancelar(modalConf1, modalConf2, modalConf3, row.id)\r\n                \"\r\n              ></button>\r\n            </div>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n\r\n      <li class=\"pagination-li next\">\r\n        <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</tc-card>\r\n<ng-container>\r\n  <ng-template #modalBody>\r\n    <form [formGroup]=\"cabModCita\">\r\n      <div class=\"row\">\r\n        <tc-form-group class=\"col-12 col-sm-4\">\r\n          <tc-form-label>Numero de Historia</tc-form-label>\r\n          <tc-input formControlName=\"numeroHistoria\" readonly=\"readonly\">\r\n          </tc-input>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-12 col-sm-4\">\r\n          <tc-form-label>DNI</tc-form-label>\r\n          <tc-input formControlName=\"dni\" readonly=\"readonly\"> </tc-input>\r\n        </tc-form-group>\r\n        <tc-form-group class=\"col-12 col-sm-4\">\r\n          <tc-form-label>Numero de Recibo</tc-form-label>\r\n          <tc-input formControlName=\"numeroRecibo\" readonly=\"readonly\">\r\n          </tc-input>\r\n        </tc-form-group>\r\n      </div>\r\n    </form>\r\n    <!-- (click)=\"loadOptionsMedEsp(appointmentForm.get('especialidad').value)\"  [selected]=\"espSelected\"-->\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label>Especialidad</tc-form-label>\r\n        <tc-select\r\n          [placeholder]=\"espSelectedName\"\r\n          formControlName=\"especialidad\"\r\n          [options]=\"espOption\"\r\n          (click)=\"loadOptionsMedEsp(appointmentForm.get('especialidad').value)\"\r\n        >\r\n        </tc-select>\r\n        <tc-form-description\r\n        [tcColor]=\"'#e24d4d'\"\r\n        [tcFontSize]=\"'0.8em'\"\r\n        *ngIf=\"\r\n          appointmentForm.controls.especialidad.untouched &&\r\n          appointmentForm.controls.especialidad.invalid\r\n        \"\r\n      >\r\n        Seleccione una especialidad\r\n      </tc-form-description>\r\n        <tc-form-label>Médico</tc-form-label>\r\n        <tc-select\r\n          [placeholder]=\"medSelectedName\"\r\n          formControlName=\"medico\"\r\n          [options]=\"medOption\"\r\n        >\r\n        </tc-select>\r\n        <tc-form-description\r\n        [tcColor]=\"'#e24d4d'\"\r\n        [tcFontSize]=\"'0.8em'\"\r\n        *ngIf=\"\r\n          appointmentForm.controls.medico.untouched &&\r\n          appointmentForm.controls.medico.invalid\r\n        \"\r\n      >\r\n        Seleccione un Médico\r\n      </tc-form-description>\r\n        <tc-form-label\r\n          >Fecha de Separación(A partir del dia Actual)</tc-form-label\r\n        >\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-input type=\"date\" formControlName=\"fechaAtencion\"></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.fechaAtencion.touched &&\r\n            appointmentForm.controls.fechaAtencion.invalid\r\n          \"\r\n        >\r\n          Ingrese Fecha de Atencion\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        tc-button\r\n        [view]=\"'info'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Guardar\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n"
 
 /***/ }),
 
@@ -513,7 +524,18 @@ module.exports = "<ng-container>\r\n  <ng-template #modalConf1>\r\n    <p>¿Cont
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col col-12 \">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-10\"></div>\r\n      <div class=\"col-md-2\">\r\n        <button tc-button [afterIcon]=\"'icofont-plus'\" [block]=\"true\" [view]=\"'info'\" [tcShape]=\"20\"\r\n          (click)=\"openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)\">\r\n          Agregar Orden\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"col-sm-12\">\r\n  <br />\r\n  <tc-card *ngIf=\"solicitudes?.length\" class=\"mb-0\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Numero de Historia\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombre del Paciente\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Origen\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Medico\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Tipo de Examen\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Fecha\r\n            </th>\r\n\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Crear Orden\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let row of solicitudes\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.numeroHistoria.numeroHistoria }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.numeroHistoria.nombres.concat(\" \",row.numeroHistoria.apellido_paterno)}}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.medico.especialidad }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.medico.nombres.concat(\" \",row.medico.apellido_paterno) }}\r\n            </td>\r\n\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.ordenExam }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.fechaCreacion }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              <div class=\"actions\">\r\n                <button tc-button [afterIcon]=\"'icofont-plus'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\"\r\n                  [tcColor]=\"['#3f51b5', '#fff']\" [tcBgColor]=\"['transparent', '#3f51b5']\" [tcBorderColor]=\"'#3f51b5'\"\r\n                  [size]=\"'sm'\" (click)=\"openModalVerMas(modalBodyH,'Crear Orden',modalFooterH,row)\"></button>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n\r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n\r\n\r\n<ng-container>\r\n  <ng-template #modalBodyH>\r\n    <form [formGroup]=\"historiaForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Numero de Historia</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'name'\"\r\n              formControlName=\"numeroHistoria\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>DNI</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'DNI'\"\r\n              formControlName=\"dni\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Nombre</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Nombre'\"\r\n              formControlName=\"nombre\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Medico</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Apellido Paterno'\" formControlName=\"medico\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-12\">\r\n          <tc-form-group>\r\n            <tc-form-label>Orden</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Orden enviada'\" formControlName=\"orden\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Fecha </tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Edad'\"\r\n              formControlName=\"fecha\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-label>Tipo de Examen </tc-form-label>\r\n          <tc-form-group>\r\n            <tc-select [placeholder]=\"'Tipo de Examen'\" formControlName=\"tipoExam\" [options]=\"tipoExOption\">\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterH>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalH()\">\r\n        Cancelar\r\n      </button>\r\n      <button tc-button [view]=\"'info'\" [disabled]=\"historiaForm.invalid\" (click)=\"crearOrden(historiaForm)\">\r\n        ACEPTAR\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Crear orden Mas-->\r\n\r\n<ng-container>\r\n    <ng-template #modalBodyE>\r\n      <form [formGroup]=\"historiaFormE\" novalidate class=\"new-patient-form\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 col-sm-6\">\r\n                <tc-form-group>\r\n                  <tc-form-label>Fecha </tc-form-label>\r\n                  <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Fecha'\"\r\n                    formControlName=\"fecha\" readonly=\"readonly\"></tc-input>\r\n                </tc-form-group>\r\n              </div>\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-form-label>DNI</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'DNI'\"\r\n                formControlName=\"dni\" ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-12\">\r\n            <tc-form-group>\r\n              <tc-form-label>Nombre</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Nombre'\"\r\n                formControlName=\"nombre\" ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n\r\n  \r\n  \r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n          \r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-label>Tipo de Examen </tc-form-label>\r\n            <tc-form-group>\r\n              <tc-select [placeholder]=\"'Tipo de Examen'\" formControlName=\"tipoExam\" [options]=\"tipoExOption\">\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalFooterE>\r\n      <div class=\"actions justify-content-between\">\r\n        <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalH()\">\r\n          Cancelar\r\n        </button>\r\n        <button tc-button [view]=\"'info'\" [disabled]=\"historiaFormE.invalid\" (click)=\"crearOrdenE(historiaFormE)\">\r\n          ACEPTAR\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!--End Modal Ver Mas-->"
+module.exports = "\r\n        \r\n<div class=\"col col-12 \">\r\n    <form [formGroup]=\"busForm\">\r\n    <div class=\"row\">\r\n      <div class=\"col col-12 \">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-1\">\r\n            <tc-form-group>\r\n              <button tc-button [afterIcon]=\"'icofont-plus'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n                (click)=\"openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)\"></button>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-7\">\r\n            <tc-form-group>\r\n                <tc-input [placeholder]=\"'Ingrese el nombre y/o apellido'\" type=\"text\" [suffixIcon]=\"'icofont-search-document'\"\r\n                formControlName=\"datoBus\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          \r\n          <div class=\"col-md-2\">\r\n            <button tc-button [view]=\"'success'\" [tcShape]=\"500\" (click)=\"buscar(busForm)\" >\r\n              Buscar\r\n            </button>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <button\r\n              tc-button\r\n              [block]=\"true\"\r\n              [tcBgColor]=\"'#3f51b5'\"\r\n              [tcShape]=\"300\"\r\n              (click)=\"loadSolici()\"\r\n            >\r\n              Cargar\r\n            </button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n   \r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n<div class=\"col-sm-12\">\r\n  <br />\r\n  <tc-card *ngIf=\"solicitudes?.length\" class=\"mb-0\">\r\n    <div class=\"table-wrap\">\r\n      <table class=\"table-box\">\r\n        <thead>\r\n          <tr>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Numero de Historia\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Nombre del Paciente\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Origen\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Medico\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Tipo de Examen\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Fecha\r\n            </th>\r\n\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n              Crear Orden\r\n            </th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let row of solicitudes\">\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.numeroHistoria.numeroHistoria }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.numeroHistoria.nombres.concat(\" \",row.numeroHistoria.apellido_paterno)}}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.medico.especialidad }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.medico.nombres.concat(\" \",row.medico.apellido_paterno) }}\r\n            </td>\r\n\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.ordenExam }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              {{ row.fechaCreacion }}\r\n            </td>\r\n            <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n              <div class=\"actions\">\r\n                <button tc-button [afterIcon]=\"'icofont-plus'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\"\r\n                  [tcColor]=\"['#3f51b5', '#fff']\" [tcBgColor]=\"['transparent', '#3f51b5']\" [tcBorderColor]=\"'#3f51b5'\"\r\n                  [size]=\"'sm'\" (click)=\"openModalVerMas(modalBodyH,'Crear Orden',modalFooterH,row)\"></button>\r\n              </div>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n\r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </tc-card>\r\n</div>\r\n\r\n\r\n<ng-container>\r\n  <ng-template #modalBodyH>\r\n    <form [formGroup]=\"historiaForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Numero de Historia</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'name'\"\r\n              formControlName=\"numeroHistoria\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>DNI</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'DNI'\"\r\n              formControlName=\"dni\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n          \r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Nombre</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Nombre'\"\r\n              formControlName=\"nombre\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Medico</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Apellido Paterno'\" formControlName=\"medico\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-12\">\r\n          <tc-form-group>\r\n            <tc-form-label>Orden</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Orden enviada'\" formControlName=\"orden\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Fecha </tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Fecha'\"\r\n              formControlName=\"fecha\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-label>Tipo de Examen </tc-form-label>\r\n          <tc-form-group>\r\n            <tc-select [placeholder]=\"'Tipo de Examen'\" formControlName=\"tipoExam\" [options]=\"tipoExOption\">\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterH>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalH()\">\r\n        Cancelar\r\n      </button>\r\n      <button tc-button [view]=\"'info'\" [disabled]=\"historiaForm.invalid\" (click)=\"crearOrden(historiaForm)\">\r\n        ACEPTAR\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Crear orden Mas-->\r\n\r\n<ng-container>\r\n    <ng-template #modalBodyE>\r\n      <form [formGroup]=\"historiaFormE\" novalidate class=\"new-patient-form\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12 col-sm-6\">\r\n                <tc-form-group>\r\n                  <tc-form-label>Fecha </tc-form-label>\r\n                  <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Fecha'\"\r\n                    formControlName=\"fecha\" readonly=\"readonly\"></tc-input>\r\n                </tc-form-group>\r\n              </div>\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-form-label>DNI</tc-form-label>\r\n              <tc-input  [placeholder]=\"'DNI'\"\r\n                formControlName=\"dni\" ></tc-input>\r\n                <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\" *ngIf=\"historiaFormE.controls.dni.invalid\">\r\n              Ingrese solo numeros\r\n            </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-12\">\r\n            <tc-form-group>\r\n              <tc-form-label>Nombre</tc-form-label>\r\n              <tc-input  [placeholder]=\"'Nombre'\"\r\n                formControlName=\"nombre\" ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n\r\n  \r\n  \r\n        </div>\r\n        \r\n        <div class=\"row\">\r\n          \r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-label>Tipo de Examen </tc-form-label>\r\n            <tc-form-group>\r\n              <tc-select [placeholder]=\"'Tipo de Examen'\" formControlName=\"tipoExam\" [options]=\"tipoExOption\">\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalFooterE>\r\n      <div class=\"actions justify-content-between\">\r\n        <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalH()\">\r\n          Cancelar\r\n        </button>\r\n        <button tc-button [view]=\"'info'\" [disabled]=\"historiaFormE.invalid\" (click)=\"crearOrdenE(historiaFormE)\">\r\n          ACEPTAR\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!--End Modal Ver Mas-->"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/pages/Admision/historial-citas/historial-citas.component.html":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/pages/Admision/historial-citas/historial-citas.component.html ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<form [formGroup]=\"busForm\" class=\"col-sm-12\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-2\">\r\n            <tc-form-group>\r\n              <!-- [charLimiting]=\"8\" -->\r\n              <tc-select\r\n                [placeholder]=\"'Opciones'\"\r\n                formControlName=\"opBus\"\r\n                [options]=\"busqOption\"\r\n                (click)=\"selectOpt()\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-6\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                *ngIf=\"opBus == 0\"\r\n                [type]=\"'number'\"\r\n                [suffixIcon]=\"'icofont-search-document'\"\r\n                [placeholder]=\"'Seleccione una opcion'\"\r\n                formControlName=\"campo\"\r\n              ></tc-input>\r\n              <tc-input\r\n                *ngIf=\"opBus == 1\"\r\n                [type]=\"'number'\"\r\n                [charLimiting]=\"8\"\r\n                pattern=\"[0-9]{8}\"\r\n                [suffixIcon]=\"'icofont-search-document'\"\r\n                [placeholder]=\"'DNI (8 digitos)'\"\r\n                formControlName=\"campo\"\r\n              ></tc-input>\r\n              <tc-input\r\n                *ngIf=\"opBus == 2\"\r\n                [placeholder]=\"'Ingrese especialidad a buscar'\"\r\n                [charLimiting]=\"20\"\r\n                pattern=\"[a-zA-Z]*\"\r\n                [suffixIcon]=\"'icofont-search-document'\"\r\n                formControlName=\"campo\"\r\n              >\r\n              </tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#1666B3'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  busForm.controls.campo.invalid\r\n                \"\r\n              >\r\n                Datos incorrectos DNI (Ejemplo:74256985), Especialidad\r\n                (Ejemplo:Odontologia)\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <button\r\n              tc-button\r\n              [block]=\"true\"\r\n              [view]=\"'success'\"\r\n              [tcShape]=\"500\"\r\n              (click)=\"buscar(busForm)\"\r\n            >\r\n              Buscar\r\n            </button>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <button\r\n              tc-button\r\n              [block]=\"true\"\r\n              [tcBgColor]=\"'#3f51b5'\"\r\n              [tcShape]=\"500\"\r\n              (click)=\"loadCitas()\"\r\n            >\r\n              Cargar\r\n            </button>\r\n          </div>\r\n         \r\n        </div>\r\n      </form>\r\n      <br />\r\n      <tc-card *ngIf=\"citasEdit?.length\" class=\"mb-0\">\r\n        <div class=\"table-wrap\">\r\n          <table class=\"table-box\">\r\n            <thead>\r\n              <tr>\r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  Numero de Historia\r\n                </th>\r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  N° Recibo\r\n                </th>\r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  DNI\r\n                </th>\r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  F. Editado\r\n                </th>\r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  F. Atención\r\n                </th>\r\n                \r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  Estado\r\n                </th>\r\n                <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                  Especialidad\r\n                </th>\r\n                \r\n              </tr>\r\n            </thead>\r\n            <tbody>\r\n              <tr *ngFor=\"let row of citasEdit\">\r\n                <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n                  {{ row.numeroHistoria.numeroHistoria }}\r\n                </td>\r\n                <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n                  {{ row.numeroRecibo }}\r\n                </td>\r\n                <td\r\n                  [ngStyle]=\"{ background: contentBgColor, color: contentColor }\"\r\n                  [tcColor]=\"'#259FD0'\"\r\n                >\r\n                  {{ row.numeroHistoria.dni }}\r\n                </td>\r\n                <!-- \r\n                                  <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                                  {{row.updated_at.substring(0,10)}}\r\n                              </td>\r\n                  -->\r\n                  <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n                    {{ row.updated_at.substring(0, 10) }}\r\n                  </td>\r\n                <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n                  {{ row.fechaAtencion }}\r\n                </td>\r\n      \r\n                <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n                  {{ row.estadoCita }}\r\n                </td>\r\n                <td [ngStyle]=\"{ background: contentBgColor, color: contentColor }\">\r\n                  {{ row.especialidad.nombre }}\r\n                </td>\r\n                \r\n                \r\n              </tr>\r\n            </tbody>\r\n          </table>\r\n          <ul class=\"pagination-ul\">\r\n            <li class=\"pagination-li prev\">\r\n              <a\r\n                class=\"pagination-link\"\r\n                (click)=\"prevPage()\"\r\n                [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n              >\r\n                <i class=\"icofont-simple-left\"></i>\r\n              </a>\r\n            </li>\r\n      \r\n            <li class=\"pagination-li next\">\r\n              <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n                <i class=\"icofont-simple-right\"></i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </tc-card>\r\n\r\n      <!--Modal-->\r\n      <ng-container>\r\n        <ng-template #modalBody>\r\n          <!-- (click)=\"loadOptionsMedEsp(appointmentForm.get('especialidad').value)\"  [selected]=\"espSelected\"-->\r\n          <form [formGroup]=\"appointmentForm\">\r\n            <tc-form-group>\r\n              <tc-form-label\r\n                >Fecha de Separación(A partir del dia Actual)</tc-form-label\r\n              >\r\n            </tc-form-group>\r\n            <tc-form-group>\r\n              <tc-input type=\"date\" formControlName=\"fechaAtencion1\"></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  appointmentForm.controls.fechaAtencion1.touched &&\r\n                  appointmentForm.controls.fechaAtencion1.invalid\r\n                \"\r\n              >\r\n                Ingrese Fecha de Atencion\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n            <tc-form-group>\r\n                <tc-input type=\"date\" formControlName=\"fechaAtencion2\"></tc-input>\r\n                <tc-form-description\r\n                  [tcColor]=\"'#e24d4d'\"\r\n                  [tcFontSize]=\"'0.8em'\"\r\n                  *ngIf=\"\r\n                    appointmentForm.controls.fechaAtencion2.touched &&\r\n                    appointmentForm.controls.fechaAtencion2.invalid\r\n                  \"\r\n                >\r\n                  Ingrese Fecha de Atencion\r\n                </tc-form-description>\r\n              </tc-form-group>\r\n          </form>\r\n        </ng-template>\r\n        <ng-template #modalFooter>\r\n            <div class=\"actions justify-content-between\">\r\n              <button\r\n                tc-button\r\n                [type]=\"'button'\"\r\n                [view]=\"'error'\"\r\n                (click)=\"closeModal()\"\r\n              >\r\n                Cancelar\r\n              </button>\r\n              <button\r\n                tc-button\r\n                [view]=\"'info'\"\r\n                [disabled]=\"appointmentForm.invalid\"\r\n                (click)=\"reporteRango(appointmentForm)\"\r\n              >\r\n                Generar\r\n              </button>\r\n            </div>\r\n          </ng-template>\r\n        \r\n      </ng-container>\r\n      <div class=\"add-action-box\">\r\n          <button\r\n            tc-button\r\n            [square]=\"true\"\r\n            [tcShape]=\"500\"\r\n            (click)=\"reporteDiario()\"\r\n          >Reporte Diario</button>\r\n        </div>\r\n\r\n        <div class=\"add-action-box1\">\r\n            <button\r\n              tc-button\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              (click)=\"openModal(modalBody, 'Generar Reporte', modalFooter)\"\r\n            >Reporte por Fecha</button>\r\n          </div>\r\n      "
 
 /***/ }),
 
@@ -524,7 +546,7 @@ module.exports = "<div class=\"row\">\r\n  <div class=\"col col-12 \">\r\n    <d
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-12\">\r\n  <form [formGroup]=\"busForm\">\r\n    <div class=\"row\">\r\n      <div class=\"col col-12 \">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-1\">\r\n            <tc-form-group>\r\n              <button\r\n                tc-button\r\n                [afterIcon]=\"'icofont-plus'\"\r\n                [view]=\"'info'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModalH(\r\n                    modalCrearHBody,\r\n                    'Agregar Historial',\r\n                    modalCrearHFooter\r\n                  )\r\n                \"\r\n              ></button>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Opcion'\"\r\n                formControlName=\"opBus\"\r\n                [options]=\"busqOption\"\r\n                (click)=\"selectOpt()\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-5\">\r\n            <tc-form-group>\r\n              <tc-input \r\n          *ngIf=\"opBus == 0\"\r\n          [type]=\"'number'\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          [placeholder]=\"'Seleccione una opcion'\"\r\n          formControlName=\"datoBus\"\r\n        ></tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 1\"\r\n\r\n          [type]=\"'number'\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          [placeholder]=\"'DNI (8 digitos)'\"\r\n          formControlName=\"datoBus\"\r\n          [charLimiting]=\"8\"\r\n        ></tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 2\"\r\n          [placeholder]=\"'Ingrese el Número de Historia'\"\r\n          [charLimiting]=\"15\"\r\n          type=\"text\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          formControlName=\"datoBus\"\r\n        >\r\n        </tc-input>\r\n        <tc-input\r\n          *ngIf=\"opBus == 3\"\r\n          [placeholder]=\"'Ingrese el nombre o apellido'\"\r\n          [charLimiting]=\"25\"\r\n          type=\"text\"\r\n          [suffixIcon]=\"'icofont-search-document'\"\r\n          formControlName=\"datoBus\"\r\n        >\r\n        </tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  busForm.controls.datoBus.touched &&\r\n                  busForm.controls.datoBus.invalid\r\n                \"\r\n              >\r\n                Ingrese solo numeros\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <button\r\n              tc-button\r\n              [block]=\"true\"\r\n              [view]=\"'success'\"\r\n              [tcShape]=\"500\"\r\n              (click)=\"buscar(busForm)\"\r\n            >\r\n              Buscar\r\n            </button>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <button\r\n              tc-button\r\n              [block]=\"true\"\r\n              [tcBgColor]=\"'#3f51b5'\"\r\n              [tcShape]=\"300\"\r\n              (click)=\"loadHistorias()\"\r\n            >\r\n              Cargar\r\n            </button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n  <br />\r\n  <tc-card class=\"mb-0\">\r\n    <tc-table [rows]=\"historiales\" [hovered]=\"true\" [pagination]=\"true\">\r\n      <tc-table-col\r\n        [columnTitle]=\"'Numero de Historia'\"\r\n        [columnName]=\"'numeroHistoria'\"\r\n        [enableSorting]=\"true\"\r\n      >\r\n        <ng-template #tableTDTemplate let-value>\r\n          <strong>{{ value }}</strong>\r\n        </ng-template>\r\n\r\n        <tc-table-col\r\n          [columnTitle]=\"'DNI'\"\r\n          [columnName]=\"'dni'\"\r\n          [enableSorting]=\"true\"\r\n        ></tc-table-col>\r\n      </tc-table-col>\r\n      <tc-table-col\r\n        [columnTitle]=\"'Nombres'\"\r\n        [columnName]=\"'nombres'\"\r\n        [enableSorting]=\"true\"\r\n      ></tc-table-col>\r\n      <tc-table-col\r\n        [columnTitle]=\"'Apellido Paterno'\"\r\n        [columnName]=\"'apellido_paterno'\"\r\n        [enableSorting]=\"true\"\r\n      >\r\n      </tc-table-col>\r\n      <tc-table-col\r\n        [columnTitle]=\"'Apellido Materno'\"\r\n        [columnName]=\"'apellido_materno'\"\r\n        [enableSorting]=\"true\"\r\n      >\r\n      </tc-table-col>\r\n\r\n      <tc-table-col [columnTitle]=\"'Ver Mas'\" [columnName]=\"''\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions\">\r\n            <button\r\n              tc-button\r\n              tc-button\r\n              [tcColor]=\"['#fff', '#3f51b5']\"\r\n              [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n              [tcBorderColor]=\"'#3f51b5'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"\r\n                openModalVerMas(\r\n                  modalBodyH,\r\n                  'Ver HistorialCompleto',\r\n                  modalFooterH,\r\n                  row\r\n                )\r\n              \"\r\n            >\r\n              Ver Mas\r\n            </button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'Agregar Cita'\" [columnName]=\"''\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions align-items-center\">\r\n            <button\r\n              tc-button\r\n              [afterIcon]=\"'icofont-plus'\"\r\n              [view]=\"'info'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [tcColor]=\"['#3f51b5', '#fff']\"\r\n              [tcBgColor]=\"['transparent', '#3f51b5']\"\r\n              [tcBorderColor]=\"'#3f51b5'\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"\r\n              openModal(modalCrearCBody, 'Agregar cita', modalCrearCFooter);\r\n                getHistoria(row.id)\r\n              \"\r\n            ></button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n      <tc-table-col [columnTitle]=\"'Imprimir'\" [columnName]=\"'abc'\">\r\n        <ng-template #tableTDTemplate let-row=\"row\">\r\n          <div class=\"actions align-items-center \">\r\n            <button\r\n              tc-button\r\n              [afterIcon]=\"'icofont-print'\"\r\n              [tcColor]=\"['#795548', '#fff']\"\r\n              [tcBgColor]=\"['transparent', '#795548']\"\r\n              [tcBorderColor]=\"'#795548'\"\r\n              [square]=\"true\"\r\n              [tcShape]=\"500\"\r\n              [size]=\"'sm'\"\r\n              (click)=\"imprimir1(row)\"\r\n            ></button>\r\n          </div>\r\n        </ng-template>\r\n      </tc-table-col>\r\n    </tc-table>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n\r\n      <li class=\"pagination-li next\">\r\n        <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n  </tc-card>\r\n</div>\r\n<!-- Modal Crear Cita  -->\r\n<ng-container>\r\n  <ng-template #modalCrearCBody>\r\n    <form [formGroup]=\"appointmentForm\">\r\n      <tc-form-group>\r\n        <tc-form-label>Seleccione lo siguiente:</tc-form-label>\r\n        <div>\r\n          <label class=\"radio\">\r\n            <input\r\n              type=\"radio\"\r\n              formControlName=\"eleccion\"\r\n              value=\"rec\"\r\n              (click)=\"setradio('rec')\"\r\n              [checked]=\"true\"\r\n              ngModel\r\n            />\r\n            <span>Recibo </span>\r\n          </label>\r\n          <div *ngIf=\"isSelected('rec')\">\r\n            <tc-input\r\n              [placeholder]=\"'Ingrese el Numero de Recibo*'\"\r\n              [type]=\"'number'\"\r\n              formControlName=\"numeroRecibo\"\r\n            >\r\n            </tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"appointmentForm.controls.numeroRecibo.invalid\"\r\n            >\r\n              Ingrese solo numeros\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n        <div>\r\n          <label class=\"radio\">\r\n            <input\r\n              type=\"radio\"\r\n              formControlName=\"eleccion\"\r\n              value=\"res\"\r\n              (click)=\"setradio('res')\"\r\n              ngModel\r\n            />\r\n            <span>Exonerado </span>\r\n          </label>\r\n          <div *ngIf=\"isSelected('res')\">\r\n            <tc-input\r\n              [placeholder]=\"'Ingrese el Nombre del Responsable*'\"\r\n              [type]=\"'text'\"\r\n              formControlName=\"responsable\"\r\n            >\r\n            </tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"appointmentForm.controls.responsable.invalid\"\r\n            >\r\n              Ingrese el nombre del Responsable, solo letras\r\n            </tc-form-description>\r\n          </div>\r\n        </div>\r\n      </tc-form-group>\r\n      <br />\r\n      <tc-form-group>\r\n        <tc-select\r\n          [placeholder]=\"'Especialidad'\"\r\n          formControlName=\"especialidad\"\r\n          [options]=\"espOption\"\r\n          (click)=\"cargarMedXEsp(appointmentForm.get('especialidad').value)\"\r\n        >\r\n        </tc-select>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-select\r\n          [placeholder]=\"'Medico'\"\r\n          formControlName=\"medico\"\r\n          [options]=\"medOption\"\r\n        >\r\n        </tc-select>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-input type=\"date\" formControlName=\"fechaSeparacion\"></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            appointmentForm.controls.fechaSeparacion.touched &&\r\n            appointmentForm.controls.fechaSeparacion.invalid\r\n          \"\r\n        >\r\n          Ingrese Fecha de Separacion\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalCrearCFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        (click)=\"closeModal()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        tc-button\r\n        [view]=\"'info'\"\r\n        [disabled]=\"appointmentForm.invalid\"\r\n        (click)=\"addAppointment(appointmentForm)\"\r\n      >\r\n        Agregar Cita\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear Cita -->\r\n<!-- Modal Crear Historial -->\r\n<ng-container>\r\n  <ng-template #modalCrearHBody>\r\n    <form [formGroup]=\"patientForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'DNI*'\"\r\n              formControlName=\"dni\"\r\n              [charLimiting]=\"8\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.dni.touched &&\r\n                patientForm.controls.dni.invalid\r\n              \"\r\n            >\r\n              Ingrese DNI, debe contener solo 8 digitos.\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'Nombres*'\"\r\n              formControlName=\"nombres\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.nombres.touched &&\r\n                patientForm.controls.nombres.invalid\r\n              \"\r\n            >\r\n              Ingrese el nombre, este solo debe contener letras\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'Apellido Paterno*'\"\r\n              formControlName=\"apellido_paterno\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.apellido_paterno.touched &&\r\n                patientForm.controls.apellido_paterno.invalid\r\n              \"\r\n            >\r\n              Ingrese el apellido paterno, este solo debe contener letras.\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'Apellido Materno*'\"\r\n              formControlName=\"apellido_materno\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.apellido_materno.touched &&\r\n                patientForm.controls.apellido_materno.invalid\r\n              \"\r\n            >\r\n              Ingrese el apellido materno, este solo debe contener letras.\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-input\r\n          [placeholder]=\"'Direccion'\"\r\n          formControlName=\"direccion\"\r\n        ></tc-input>\r\n        <tc-form-description\r\n          [tcColor]=\"'#e24d4d'\"\r\n          [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"\r\n            patientForm.controls.direccion.touched &&\r\n            patientForm.controls.direccion.invalid\r\n          \"\r\n        >\r\n          Ingrese la direccion\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Departamento'\"\r\n              formControlName=\"departamento\"\r\n              (click)=\"cargarProvXDepto(patientForm.get('departamento').value)\"\r\n              [options]=\"departamentosOption\"\r\n            >\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Provincia'\"\r\n              formControlName=\"provincia\"\r\n              [options]=\"provinciasOption\"\r\n              (click)=\"cargarDistXProv(patientForm.get('provincia').value)\"\r\n            >\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Distrito'\"\r\n              formControlName=\"distrito\"\r\n              [options]=\"distritosOption\"\r\n            >\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-3\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'Nacionalidad'\"\r\n              formControlName=\"nacionalidad\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.nacionalidad.touched &&\r\n                patientForm.controls.nacionalidad.invalid\r\n              \"\r\n            >\r\n              Este campo solo debe tener letras\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-5\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              type=\"date\"\r\n              [placeholder]=\"'Fecha de Nacimiento'\"\r\n              formControlName=\"fechaNac\"\r\n            >\r\n            </tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.fechaNac.touched &&\r\n                patientForm.controls.fechaNac.invalid\r\n              \"\r\n            >\r\n              Ingrese Fecha de Nacimiento correcta aaaa-mm-dd\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Sexo'\"\r\n              formControlName=\"sexo\"\r\n              [options]=\"sexOption\"\r\n            >\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Estado civil'\"\r\n              formControlName=\"estadoCivil\"\r\n              [options]=\"estadoCivilOption\"\r\n            ></tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'Telefono'\"\r\n              [type]=\"'number'\"\r\n              formControlName=\"telefono\"\r\n              [charLimiting]=\"6\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.telefono.touched &&\r\n                patientForm.controls.telefono.invalid\r\n              \"\r\n            >\r\n              Ingrese el numero de telefono, este solo debe contener 6 digitos\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-input\r\n              [placeholder]=\"'Celular*'\"\r\n              [type]=\"'number'\"\r\n              formControlName=\"celular\"\r\n              [charLimiting]=\"9\"\r\n            ></tc-input>\r\n            <tc-form-description\r\n              [tcColor]=\"'#e24d4d'\"\r\n              [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"\r\n                patientForm.controls.celular.touched &&\r\n                patientForm.controls.celular.invalid\r\n              \"\r\n            >\r\n              Ingrese el numero de celular, este solo debe contener 9 digitos\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Grado de Instruccion'\"\r\n              formControlName=\"gradoInstruccion\"\r\n              [options]=\"gradoInstruccionOption\"\r\n            >\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-select\r\n              [placeholder]=\"'Ocupacion'\"\r\n              formControlName=\"ocupacion\"\r\n              [options]=\"ocupacionOption\"\r\n            >\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\"></div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalCrearHFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [view]=\"'error'\"\r\n        (click)=\"closeModalH()\"\r\n      >\r\n        Cancelar\r\n      </button>\r\n      <button\r\n        tc-button\r\n        [view]=\"'info'\"\r\n        [disabled]=\"patientForm.invalid\"\r\n        (click)=\"addPatient(patientForm)\"\r\n      >\r\n        Agregar Historial\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear Historial -->\r\n\r\n<!-- Open Modal Ver Mas -->\r\n<ng-container>\r\n  <ng-template #modalBodyH>\r\n    <form [formGroup]=\"historiaForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Numero de Historia</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'name'\"\r\n              formControlName=\"numeroHistoria\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>DNI</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'DNI'\"\r\n              formControlName=\"dni\"\r\n              readonly=\"readonly\"\r\n            ></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Nombre</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Nombre'\"\r\n              formControlName=\"nombres\"\r\n              readonly=\"readonly\"\r\n            ></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Apellido Paterno</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Apellido Paterno'\"\r\n              formControlName=\"apellido_paterno\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Apellido Materno</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Apellido Materno'\"\r\n              formControlName=\"apellido_materno\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Fecha Nacimiento </tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Edad'\"\r\n              formControlName=\"fechaNac\"\r\n              readonly=\"readonly\"\r\n            ></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Telefono</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Telefono'\"\r\n              [type]=\"'number'\"\r\n              formControlName=\"telefono\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Celular</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Celular'\"\r\n              [type]=\"'number'\"\r\n              formControlName=\"celular\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Estado Civil</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Estado Civil'\"\r\n              formControlName=\"estadoCivil\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Grado de Instruccion</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Grado de Instruccion'\"\r\n              formControlName=\"gradoInstruccion\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Ocupacion</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Ocupacion'\"\r\n              formControlName=\"ocupacion\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>edad</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Edad'\"\r\n              formControlName=\"edad\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Direccion</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Direccion'\"\r\n              formControlName=\"direccion\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Nacionalidad</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Nacionalidad'\"\r\n              formControlName=\"nacionalidad\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Distrito</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Distrito'\"\r\n              formControlName=\"distrito\"\r\n              readonly=\"readonly\"\r\n            ></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Provincia</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Provincia'\"\r\n              formControlName=\"provincia\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Departamento</tc-form-label>\r\n            <tc-input\r\n              [bgColor]=\"'#fff'\"\r\n              [borderColor]=\"'#3f51b5'\"\r\n              [color]=\"'#3f51b5'\"\r\n              [placeholder]=\"'Departamento'\"\r\n              formControlName=\"departamento\"\r\n              readonly=\"readonly\"\r\n            >\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterH>\r\n    <div class=\"actions justify-content-between\">\r\n      <button\r\n        tc-button\r\n        [type]=\"'button'\"\r\n        [tcBgColor]=\"'#009688'\"\r\n        [block]=\"true\"\r\n        (click)=\"closeModalH()\"\r\n      >\r\n        ACEPTAR\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Ver Mas-->\r\n"
+module.exports = "<div class=\"col-sm-12\">\r\n    <form [formGroup]=\"busForm\">\r\n      <div class=\"row\">\r\n        <div class=\"col col-12 \">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-1\">\r\n              <tc-form-group>\r\n                <button\r\n                  tc-button\r\n                  [afterIcon]=\"'icofont-plus'\"\r\n                  [view]=\"'info'\"\r\n                  [square]=\"true\"\r\n                  [tcShape]=\"500\"\r\n                  [size]=\"'sm'\"\r\n                  (click)=\"\r\n                    openModalH(\r\n                      modalCrearHBody,\r\n                      'Agregar Historial',\r\n                      modalCrearHFooter\r\n                    )\r\n                  \"\r\n                ></button>\r\n              </tc-form-group>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <tc-form-group>\r\n                <tc-select\r\n                  [placeholder]=\"'Opción'\"\r\n                  formControlName=\"opBus\"\r\n                  [options]=\"busqOption\"\r\n                  \r\n                  (click)=\"selectOpt()\"\r\n                  [selected]=\"'1'\"\r\n                >\r\n                </tc-select>\r\n              </tc-form-group>\r\n            </div>\r\n            <div class=\"col-md-5\">\r\n              <tc-form-group>\r\n                <tc-input \r\n            *ngIf=\"opBus == 0\"\r\n            [type]=\"'number'\"\r\n            [suffixIcon]=\"'icofont-search-document'\"\r\n            [placeholder]=\"'Seleccione una opción'\"\r\n            formControlName=\"datoBus\"\r\n          ></tc-input>\r\n          <tc-input\r\n            *ngIf=\"opBus == 1\"\r\n            [type]=\"'number'\"\r\n            [suffixIcon]=\"'icofont-search-document'\"\r\n            [placeholder]=\"'DNI (8 digitos)'\"\r\n            formControlName=\"datoBus\"\r\n            [charLimiting]=\"8\"\r\n          ></tc-input>\r\n          <tc-input\r\n            *ngIf=\"opBus == 2\"\r\n            [placeholder]=\"'Ingrese el Número de Historia'\"\r\n            [charLimiting]=\"15\"\r\n            type=\"text\"\r\n            [suffixIcon]=\"'icofont-search-document'\"\r\n            formControlName=\"datoBus\"\r\n          >\r\n          </tc-input>\r\n          <tc-input\r\n            *ngIf=\"opBus == 3\"\r\n            [placeholder]=\"'Ingrese el nombre o apellido'\"\r\n            [charLimiting]=\"25\"\r\n            type=\"text\"\r\n            [suffixIcon]=\"'icofont-search-document'\"\r\n            formControlName=\"datoBus\"\r\n          >\r\n          </tc-input>\r\n                <tc-form-description\r\n                  [tcColor]=\"'#e24d4d'\"\r\n                  [tcFontSize]=\"'0.8em'\"\r\n                  *ngIf=\"\r\n                    busForm.controls.datoBus.touched &&\r\n                    busForm.controls.datoBus.invalid\r\n                  \"\r\n                >\r\n                  Ingrese solo numeros\r\n                </tc-form-description>\r\n              </tc-form-group>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <button\r\n                tc-button\r\n                [block]=\"true\"\r\n                [view]=\"'success'\"\r\n                [tcShape]=\"500\"\r\n                (click)=\"buscar(busForm)\"\r\n              >\r\n                Buscar\r\n              </button>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <button\r\n                tc-button\r\n                [block]=\"true\"\r\n                [tcBgColor]=\"'#3f51b5'\"\r\n                [tcShape]=\"300\"\r\n                (click)=\"loadHistorias()\"\r\n              >\r\n                Cargar\r\n              </button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <br />\r\n    <tc-card class=\"mb-0\">\r\n      <tc-table [rows]=\"historiales\" [hovered]=\"true\" [pagination]=\"true\">\r\n        <tc-table-col\r\n          [columnTitle]=\"'Numero de Historia'\"\r\n          [columnName]=\"'numeroHistoria'\"\r\n          [enableSorting]=\"true\"\r\n        >\r\n          <ng-template #tableTDTemplate let-value>\r\n            <strong>{{ value }}</strong>\r\n          </ng-template>\r\n  \r\n          <tc-table-col\r\n            [columnTitle]=\"'DNI'\"\r\n            [columnName]=\"'dni'\"\r\n            [enableSorting]=\"true\"\r\n          ></tc-table-col>\r\n        </tc-table-col>\r\n        <tc-table-col\r\n          [columnTitle]=\"'Nombres'\"\r\n          [columnName]=\"'nombres'\"\r\n          [enableSorting]=\"true\"\r\n        ></tc-table-col>\r\n        <tc-table-col\r\n          [columnTitle]=\"'Apellido Paterno'\"\r\n          [columnName]=\"'apellido_paterno'\"\r\n          [enableSorting]=\"true\"\r\n        >\r\n        </tc-table-col>\r\n        <tc-table-col\r\n          [columnTitle]=\"'Apellido Materno'\"\r\n          [columnName]=\"'apellido_materno'\"\r\n          [enableSorting]=\"true\"\r\n        >\r\n        </tc-table-col>\r\n  \r\n        <tc-table-col [columnTitle]=\"'Ver Mas'\" [columnName]=\"''\">\r\n          <ng-template #tableTDTemplate let-row=\"row\">\r\n            <div class=\"actions\">\r\n              <button\r\n                tc-button\r\n                tc-button\r\n                [tcColor]=\"['#fff', '#3f51b5']\"\r\n                [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n                [tcBorderColor]=\"'#3f51b5'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                  openModalVerMas(\r\n                    modalBodyH,\r\n                    'Ver HistorialCompleto',\r\n                    modalFooterH,\r\n                    row\r\n                  )\r\n                \"\r\n              >\r\n                Ver Mas\r\n              </button>\r\n            </div>\r\n          </ng-template>\r\n        </tc-table-col>\r\n        <tc-table-col [columnTitle]=\"'Agregar Cita'\" [columnName]=\"''\">\r\n          <ng-template #tableTDTemplate let-row=\"row\">\r\n            <div class=\"actions align-items-center\">\r\n              <button\r\n                tc-button\r\n                [afterIcon]=\"'icofont-plus'\"\r\n                [view]=\"'info'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [tcColor]=\"['#3f51b5', '#fff']\"\r\n                [tcBgColor]=\"['transparent', '#3f51b5']\"\r\n                [tcBorderColor]=\"'#3f51b5'\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"\r\n                openModal(modalCrearCBody, 'Agregar cita', modalCrearCFooter);\r\n                  getHistoria(row.id)\r\n                \"\r\n              ></button>\r\n            </div>\r\n          </ng-template>\r\n        </tc-table-col>\r\n        <tc-table-col [columnTitle]=\"'Imprimir'\" [columnName]=\"'abc'\">\r\n          <ng-template #tableTDTemplate let-row=\"row\">\r\n            <div class=\"actions align-items-center \">\r\n              <button\r\n                tc-button\r\n                [afterIcon]=\"'icofont-print'\"\r\n                [tcColor]=\"['#795548', '#fff']\"\r\n                [tcBgColor]=\"['transparent', '#795548']\"\r\n                [tcBorderColor]=\"'#795548'\"\r\n                [square]=\"true\"\r\n                [tcShape]=\"500\"\r\n                [size]=\"'sm'\"\r\n                (click)=\"imprimir1(row)\"\r\n              ></button>\r\n            </div>\r\n          </ng-template>\r\n        </tc-table-col>\r\n      </tc-table>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a\r\n            class=\"pagination-link\"\r\n            (click)=\"prevPage()\"\r\n            [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n          >\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n  \r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </tc-card>\r\n  </div>\r\n  <!-- Modal Crear Cita  -->\r\n  <ng-container>\r\n    <ng-template #modalCrearCBody>\r\n      <form [formGroup]=\"appointmentForm\">\r\n        <tc-form-group>\r\n          <tc-form-label>Seleccione lo siguiente:</tc-form-label>\r\n          <div>\r\n            <label class=\"radio\">\r\n              <input\r\n                type=\"radio\"\r\n                formControlName=\"eleccion\"\r\n                value=\"rec\"\r\n                (click)=\"setradio('rec')\"\r\n                [checked]=\"true\"\r\n                ngModel\r\n              />\r\n              <span>Recibo </span>\r\n            </label>\r\n            <div *ngIf=\"isSelected('rec')\">\r\n              <tc-input\r\n                [placeholder]=\"'Ingrese el Numero de Recibo*'\"\r\n                [type]=\"'number'\"\r\n                formControlName=\"numeroRecibo\"\r\n              >\r\n              </tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"appointmentForm.controls.numeroRecibo.invalid\"\r\n              >\r\n                Ingrese solo numeros\r\n              </tc-form-description>\r\n            </div>\r\n          </div>\r\n          <div>\r\n            <label class=\"radio\">\r\n              <input\r\n                type=\"radio\"\r\n                formControlName=\"eleccion\"\r\n                value=\"res\"\r\n                (click)=\"setradio('res')\"\r\n                ngModel\r\n              />\r\n              <span>Exonerado </span>\r\n            </label>\r\n            <div *ngIf=\"isSelected('res')\">\r\n              <tc-input\r\n                [placeholder]=\"'Ingrese el Nombre del Responsable*'\"\r\n                [type]=\"'text'\"\r\n                formControlName=\"responsable\"\r\n              >\r\n              </tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"appointmentForm.controls.responsable.invalid\"\r\n              >\r\n                Ingrese el nombre del Responsable, solo letras\r\n              </tc-form-description>\r\n            </div>\r\n          </div>\r\n        </tc-form-group>\r\n        <br />\r\n        <tc-form-group>\r\n          <tc-select\r\n            [placeholder]=\"'Especialidad'\"\r\n            formControlName=\"especialidad\"\r\n            [options]=\"espOption\"\r\n            (click)=\"cargarMedXEsp(appointmentForm.get('especialidad').value)\"\r\n          >\r\n          </tc-select>\r\n        </tc-form-group>\r\n        <tc-form-group>\r\n          <tc-select\r\n            [placeholder]=\"'Medico'\"\r\n            formControlName=\"medico\"\r\n            [options]=\"medOption\"\r\n          >\r\n          </tc-select>\r\n        </tc-form-group>\r\n        <tc-form-group>\r\n          <tc-input type=\"date\" formControlName=\"fechaSeparacion\"></tc-input>\r\n          <tc-form-description\r\n            [tcColor]=\"'#e24d4d'\"\r\n            [tcFontSize]=\"'0.8em'\"\r\n            *ngIf=\"\r\n              appointmentForm.controls.fechaSeparacion.touched &&\r\n              appointmentForm.controls.fechaSeparacion.invalid\r\n            \"\r\n          >\r\n            Ingrese Fecha de Separacion\r\n          </tc-form-description>\r\n        </tc-form-group>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalCrearCFooter>\r\n      <div class=\"actions justify-content-between\">\r\n        <button\r\n          tc-button\r\n          [type]=\"'button'\"\r\n          [view]=\"'error'\"\r\n          (click)=\"closeModal()\"\r\n        >\r\n          Cancelar\r\n        </button>\r\n        <button\r\n          tc-button\r\n          [view]=\"'info'\"\r\n          [disabled]=\"appointmentForm.invalid\"\r\n          (click)=\"addAppointment(appointmentForm)\"\r\n        >\r\n          Agregar Cita\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!-- end Modal Crear Cita -->\r\n  <!-- Modal Crear Historial -->\r\n  <ng-container>\r\n    <ng-template #modalCrearHBody>\r\n      <form [formGroup]=\"patientForm\" novalidate class=\"new-patient-form\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'DNI*'\"\r\n                formControlName=\"dni\"\r\n                [charLimiting]=\"8\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  patientForm.controls.dni.touched &&\r\n                  patientForm.controls.dni.invalid\r\n                \"\r\n              >\r\n                Ingrese DNI, debe contener solo 8 digitos.\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'Nombres*'\"\r\n                formControlName=\"nombres\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  patientForm.controls.nombres.touched &&\r\n                  patientForm.controls.nombres.invalid\r\n                \"\r\n              >\r\n                Ingrese el nombre, este solo debe contener letras\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'Apellido Paterno*'\"\r\n                formControlName=\"apellido_paterno\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  patientForm.controls.apellido_paterno.touched &&\r\n                  patientForm.controls.apellido_paterno.invalid\r\n                \"\r\n              >\r\n                Ingrese el apellido paterno, este solo debe contener letras.\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'Apellido Materno*'\"\r\n                formControlName=\"apellido_materno\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  patientForm.controls.apellido_materno.touched &&\r\n                  patientForm.controls.apellido_materno.invalid\r\n                \"\r\n              >\r\n                Ingrese el apellido materno, este solo debe contener letras.\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <tc-form-group>\r\n          <tc-input\r\n            [placeholder]=\"'Dirección'\"\r\n            formControlName=\"direccion\"\r\n          ></tc-input>\r\n          <tc-form-description\r\n            [tcColor]=\"'#e24d4d'\"\r\n            [tcFontSize]=\"'0.8em'\"\r\n            *ngIf=\"\r\n              patientForm.controls.direccion.touched &&\r\n              patientForm.controls.direccion.invalid\r\n            \"\r\n          >\r\n            Ingrese la direccion\r\n          </tc-form-description>\r\n        </tc-form-group>\r\n  \r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Departamento'\"\r\n                formControlName=\"departamento\"\r\n                (click)=\"cargarProvXDepto(patientForm.get('departamento').value)\"\r\n                [options]=\"departamentosOption\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Provincia'\"\r\n                formControlName=\"provincia\"\r\n                [options]=\"provinciasOption\"\r\n                (click)=\"cargarDistXProv(patientForm.get('provincia').value)\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Distrito'\"\r\n                formControlName=\"distrito\"\r\n                [options]=\"distritosOption\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n  \r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-3\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'Nacionalidad'\"\r\n                formControlName=\"nacionalidad\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"\r\n                  patientForm.controls.nacionalidad.touched &&\r\n                  patientForm.controls.nacionalidad.invalid\r\n                \"\r\n              >\r\n                Este campo solo debe tener letras\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-5\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                type=\"date\"\r\n                [placeholder]=\"'Fecha de Nacimiento'\"\r\n                formControlName=\"fechaNac\"\r\n              >\r\n              </tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm.controls.fechaNac.touched &&  patientForm.controls.fechaNac.invalid \" >\r\n                Ingrese Fecha de Nacimiento correcta dd-mm-aaaa\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Sexo'\"\r\n                formControlName=\"sexo\"\r\n                [options]=\"sexOption\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n  \r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Estado civil'\"\r\n                formControlName=\"estadoCivil\"\r\n                [options]=\"estadoCivilOption\"\r\n              ></tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'Teléfono'\"\r\n                [type]=\"'number'\"\r\n                formControlName=\"telefono\"\r\n                [charLimiting]=\"6\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm.controls.telefono.invalid\"\r\n              >\r\n                Ingrese el numero de teléfono, este solo debe contener 6 digitos\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-input\r\n                [placeholder]=\"'Celular*'\"\r\n                [type]=\"'number'\"\r\n                formControlName=\"celular\"\r\n                [charLimiting]=\"9\"\r\n              ></tc-input>\r\n              <tc-form-description\r\n                [tcColor]=\"'#e24d4d'\"\r\n                [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm.controls.celular.invalid\"\r\n              >\r\n                Ingrese el numero de celular, este solo debe contener 9 digitos\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Grado de Instrucción'\"\r\n                formControlName=\"gradoInstruccion\"\r\n                [options]=\"gradoInstruccionOption\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-select\r\n                [placeholder]=\"'Ocupación'\"\r\n                formControlName=\"ocupacion\"\r\n                [options]=\"ocupacionOption\"\r\n              >\r\n              </tc-select>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\"></div>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalCrearHFooter>\r\n      <div class=\"actions justify-content-between\">\r\n        <button\r\n          tc-button\r\n          [type]=\"'button'\"\r\n          [view]=\"'error'\"\r\n          (click)=\"closeModalH()\"\r\n        >\r\n          Cancelar\r\n        </button>\r\n        <button\r\n          tc-button\r\n          [view]=\"'info'\"\r\n          [disabled]=\"patientForm.invalid\"\r\n          (click)=\"addPatient(patientForm)\"\r\n        >\r\n          Agregar Historial\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!-- end Modal Crear Historial -->\r\n  \r\n  <!-- Open Modal Ver Mas -->\r\n  <ng-container>\r\n    <ng-template #modalBodyH>\r\n      <form [formGroup]=\"historiaForm\" novalidate class=\"new-patient-form\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-form-label>Numero de Historia</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'name'\"\r\n                formControlName=\"numeroHistoria\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-6\">\r\n            <tc-form-group>\r\n              <tc-form-label>DNI</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'DNI'\"\r\n                formControlName=\"dni\"\r\n                readonly=\"readonly\"\r\n              ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Nombre</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Nombre'\"\r\n                formControlName=\"nombres\"\r\n                readonly=\"readonly\"\r\n              ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Apellido Paterno</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Apellido Paterno'\"\r\n                formControlName=\"apellido_paterno\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Apellido Materno</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Apellido Materno'\"\r\n                formControlName=\"apellido_materno\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Fecha Nacimiento </tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Edad'\"\r\n                formControlName=\"fechaNac\"\r\n                readonly=\"readonly\"\r\n              ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Teléfono</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Teléfono'\"\r\n                [type]=\"'number'\"\r\n                formControlName=\"telefono\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Celular</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Celular'\"\r\n                [type]=\"'number'\"\r\n                formControlName=\"celular\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Estado Civil</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Estado Civil'\"\r\n                formControlName=\"estadoCivil\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Grado de Instrucción</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Grado de Instrucción'\"\r\n                formControlName=\"gradoInstruccion\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Ocupación</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Ocupación'\"\r\n                formControlName=\"ocupacion\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Edad</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Edad'\"\r\n                formControlName=\"edad\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Dirección</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Dirección'\"\r\n                formControlName=\"direccion\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Nacionalidad</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Nacionalidad'\"\r\n                formControlName=\"nacionalidad\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Distrito</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Distrito'\"\r\n                formControlName=\"distrito\"\r\n                readonly=\"readonly\"\r\n              ></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Provincia</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Provincia'\"\r\n                formControlName=\"provincia\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Departamento</tc-form-label>\r\n              <tc-input\r\n                [bgColor]=\"'#fff'\"\r\n                [borderColor]=\"'#3f51b5'\"\r\n                [color]=\"'#3f51b5'\"\r\n                [placeholder]=\"'Departamento'\"\r\n                formControlName=\"departamento\"\r\n                readonly=\"readonly\"\r\n              >\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalFooterH>\r\n      <div class=\"actions justify-content-between\">\r\n        <button\r\n          tc-button\r\n          [type]=\"'button'\"\r\n          [tcBgColor]=\"'#009688'\"\r\n          [block]=\"true\"\r\n          (click)=\"closeModalH()\"\r\n        >\r\n          ACEPTAR\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!--End Modal Ver Mas-->\r\n  "
 
 /***/ }),
 
@@ -546,7 +568,18 @@ module.exports = "<!--\r\n<form [formGroup]=\"busForm\">\r\n\t<div class=\"row\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<tc-card [tcGradient]=\"['#fff', '#fbfbfb']\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>Numero de Historia</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-4\">\r\n      <tc-form-label>Nombre del Paciente</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>DNI</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>Edad</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>Sexo</tc-form-label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{datoBus}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-4\">\r\n      <label>{{nombreRecibido}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{dniRecibido}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{edadRecibido}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{sexoRecibido}}</label>\r\n    </div>\r\n  </div>\r\n</tc-card>\r\n<h5>Listado de Consultas</h5>\r\n<tc-card>\r\n  <tc-table [rows]=\"consultasRecibidas\" [hovered]=\"true\">\r\n    <tc-table-col [columnTitle]=\"'Especialidad'\" [columnName]=\"'proximaCita'\"></tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'Fecha de la Consulta'\" [columnName]=\"'fechaCreacion'\"></tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'Ver Mas'\" [columnName]=\"''\">\r\n      <ng-template #tableTDTemplate let-row=\"row\">\r\n        <div class=\"actions\">\r\n          <button tc-button tc-button [tcColor]=\"['#fff', '#3f51b5']\" [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n            [tcBorderColor]=\"'#3f51b5'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n            (click)=\"openModalVerC(modalBodyVerC, 'Ver Consulta', modalFooterVerC, row)\">VerMas</button>\r\n        </div>\r\n      </ng-template>\r\n    </tc-table-col>\r\n  </tc-table>\r\n\r\n  <ul class=\"pagination-ul\">\r\n    <li class=\"pagination-li prev\">\r\n      <a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n        <i class=\"icofont-simple-left\"></i>\r\n      </a>\r\n    </li>\r\n\r\n    <li class=\"pagination-li next\">\r\n      <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n        <i class=\"icofont-simple-right\"></i>\r\n      </a>\r\n    </li>\r\n  </ul>\r\n</tc-card>\r\n<tc-card *ngIf=\"hayConsultas\" class=\"mb-0\">\r\n  <h6 [align]=\"center\">No posee Consultas registradas por el momento</h6>\r\n</tc-card>\r\n<div class=\"back-action-box\">\r\n  <button tc-button [afterIcon]=\"'icofont-rounded-left'\" [square]=\"true\" [tcShape]=\"500\" [tcColor]=\"['#fff', '#000']\"\r\n    [tcBgColor]=\"['#000', '#fff']\" [tcBorderColor]=\"'#000'\" (click)=\"regresar()\"></button>\r\n</div>\r\n\r\n<div class=\"add-action-box\">\r\n  <button tc-button [afterIcon]=\"'icofont-plus'\" [square]=\"true\" [tcShape]=\"500\" [tcColor]=\"['#fff', '#3f51b5']\"\r\n    [tcBgColor]=\"['#3f51b5', '#fff']\" [tcBorderColor]=\"'#3f51b5'\"\r\n    (click)=\"openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)\">Agregar Consulta</button>\r\n</div>\r\n\r\n<div class=\"addlab-action-box\">\r\n  <button tc-button [square]=\"true\" [tcShape]=\"500\" [tcColor]=\"['#fff', '#000']\" [tcBgColor]=\"['#000', '#fff']\"\r\n    [tcBorderColor]=\"'#000'\" (click)=\"openModalExamenes(modalBodyVerE, 'Ver listado de Examenes', modalFooterVerE)\">Ver\r\n    Examenes</button>\r\n</div>\r\n\r\n<!-- Modal Crear Consulta -->\r\n<ng-container>\r\n  <ng-template #modalCrearCBody>\r\n    <form [formGroup]=\"verTriajeForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Talla</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Talla'\" formControlName=\"talla\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Peso</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Peso'\" formControlName=\"peso\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Temp</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Temp'\" formControlName=\"temperatura\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. R.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec R'\" formControlName=\"frecuenciaR\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. C.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec C'\" formControlName=\"frecuenciaC\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Pres. Art.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Pres Art'\" formControlName=\"presionArt\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <form [formGroup]=\"consultForm\" novalidate class=\"new-patient-form\">\r\n      <label>Llene los campos con letras, no utilice números ni caracteres especiales </label>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Motivo de Consulta*'\" formControlName=\"motivoConsulta\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.motivoConsulta.touched && consultForm.controls.motivoConsulta.invalid \">\r\n          Ingrese el Motivo de Consulta, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select [placeholder]=\"'Apetito'\" formControlName=\"apetito\" [options]=\"apetitoOption\">\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-input [placeholder]=\"'Orina*'\" formControlName=\"orina\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"consultForm.controls.orina.touched && consultForm.controls.orina.invalid \">\r\n              Ingrese el Orina, este solo debe contener letras\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-input [placeholder]=\"'Deposiciones*'\" formControlName=\"deposiciones\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"consultForm.controls.deposiciones.touched && consultForm.controls.deposiciones.invalid \">\r\n              Ingrese el Deposiciones, este solo debe contener letras\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Sintomas*'\" formControlName=\"examenFisico\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.examenFisico.touched && consultForm.controls.examenFisico.invalid \">\r\n          Ingrese el Sintomas, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Diagnostico*'\" formControlName=\"diagnostico\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.diagnostico.touched && consultForm.controls.diagnostico.invalid \">\r\n          Ingrese el Diagnostico, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Tratamiento*'\" formControlName=\"tratamiento\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.tratamiento.touched && consultForm.controls.tratamiento.invalid \">\r\n          Ingrese el Tratamiento, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Orden de Examen</tc-form-label><label>En caso se requiera, escriba la orden para realizar un\r\n          examen al laboratorio</label>\r\n        <tc-input [placeholder]=\"'Examen de ****** '\" formControlName=\"ordenExam\"></tc-input>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Proxima Cita</tc-form-label>\r\n        <tc-input type=\"date\" formControlName=\"proximaCita\"></tc-input>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalCrearCFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalC()\">Cancelar</button>\r\n      <button tc-button [view]=\"'info'\" [disabled]=\"consultForm.invalid\" (click)=\"addConsult(consultForm)\">\r\n        Agregar Consulta\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear Consulta -->\r\n\r\n<!-- Open Modal Ver Mas -->\r\n<ng-container>\r\n  <ng-template #modalBodyVerC>\r\n    <form [formGroup]=\"verMasCForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Talla</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Talla'\" formControlName=\"talla\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Peso</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'peso'\" formControlName=\"peso\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Temp</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Temp'\" formControlName=\"temperatura\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. R.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec R'\" formControlName=\"frecuenciaR\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. C.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec C'\" formControlName=\"frecuenciaC\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Pres. Art.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Pres Art'\" formControlName=\"presionArt\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-form-label>Motivo de Consulta</tc-form-label>\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Motivo'\" formControlName=\"motivo\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Apetito</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Apetito'\" formControlName=\"apetito\"\r\n              readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Orina</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Orina*'\" formControlName=\"orina\"\r\n              readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Deposiciones</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Deposiciones*'\"\r\n              formControlName=\"deposiciones\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-form-label>Sintomas</tc-form-label>\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Sintomas'\" formControlName=\"exaFis\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Diagnostico</tc-form-label>\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Diagnostico'\" formControlName=\"diagnostico\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Tratamiento</tc-form-label>\r\n\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Tratamiento'\" formControlName=\"tratamiento\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterVerC>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [tcBgColor]=\"'#009688'\" [block]=\"true\"\r\n        (click)=\"closeModalVerC()\">Aceptar</button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Ver Mas-->\r\n\r\n\r\n<!-- Open Modal Ver Examenes -->\r\n<ng-container>\r\n  <ng-template #modalBodyVerE>\r\n    <tc-card class=\"mb-0\">\r\n      <tc-table [rows]=\"examenesRecibidos\" [hovered]=\"true\" [pagination]=\"true\">\r\n        <tc-table-col [columnTitle]=\"'Examen'\" [columnName]=\"'nombre'\">\r\n          <ng-template #tableTDTemplate let-value>\r\n            <strong>{{value}}</strong>\r\n          </ng-template>\r\n        </tc-table-col>\r\n        <tc-table-col [columnTitle]=\"'Fecha'\" [columnName]=\"'fecha'\">\r\n        </tc-table-col>\r\n        <tc-table-col [columnTitle]=\"'Imprimir'\" [columnName]=\"''\">\r\n          <ng-template #tableTDTemplate let-row=\"row\">\r\n            <div class=\"actions\">\r\n              <button tc-button [afterIcon]=\"'icofont-download'\" [tcColor]=\"['#fff', '#009688']\"\r\n                [tcBgColor]=\"['#009688', '#fff']\" [tcBorderColor]=\"'#009688'\" [square]=\"true\" [tcShape]=\"500\"\r\n                [size]=\"'sm'\" (click)=\"imprimirEx(row)\"></button>\r\n            </div>\r\n          </ng-template>\r\n        </tc-table-col>\r\n      </tc-table>\r\n    </tc-card>\r\n    <tc-card *ngIf=\"hayEx\" class=\"mb-0\">\r\n      <h6>Esta persona NO posee examenes aun.</h6>\r\n    </tc-card>\r\n  </ng-template>\r\n  <ng-template #modalFooterVerE>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [tcBgColor]=\"'#009688'\" [block]=\"true\"\r\n        (click)=\"closeModalExamenes()\">Aceptar</button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Ver Examenes-->"
+module.exports = "<tc-card [tcGradient]=\"['#fff', '#fbfbfb']\">\r\n  <div class=\"row\">\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>Numero de Historia</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-4\">\r\n      <tc-form-label>Nombre del Paciente</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>DNI</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>Edad</tc-form-label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <tc-form-label>Sexo</tc-form-label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{datoBus}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-4\">\r\n      <label>{{nombreRecibido}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{dniRecibido}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{edadRecibido}}</label>\r\n    </div>\r\n    <div class=\"col-12 col-sm-2\">\r\n      <label>{{sexoRecibido}}</label>\r\n    </div>\r\n  </div>\r\n</tc-card>\r\n<h5>Listado de Consultas</h5>\r\n<tc-card>\r\n  <tc-table [rows]=\"consultasRecibidas\" [hovered]=\"true\">\r\n    <tc-table-col [columnTitle]=\"'Especialidad'\" [columnName]=\"'proximaCita'\"></tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'Fecha de la Consulta'\" [columnName]=\"'fechaCreacion'\"></tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'Ver Mas'\" [columnName]=\"''\">\r\n      <ng-template #tableTDTemplate let-row=\"row\">\r\n        <div class=\"actions\">\r\n          <button tc-button tc-button [tcColor]=\"['#fff', '#3f51b5']\" [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n            [tcBorderColor]=\"'#3f51b5'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n            (click)=\"openModalVerC(modalBodyVerC, 'Ver Consulta', modalFooterVerC, row)\">VerMas</button>\r\n        </div>\r\n      </ng-template>\r\n    </tc-table-col>\r\n  </tc-table>\r\n  <tc-card *ngIf=\"hayConsultas\" class=\"mb-0\">\r\n    <h6 [align]=\"center\">No posee Consultas registradas por el momento</h6>\r\n  </tc-card>\r\n  <ul class=\"pagination-ul\">\r\n    <li class=\"pagination-li prev\">\r\n      <a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n        <i class=\"icofont-simple-left\"></i>\r\n      </a>\r\n    </li>\r\n\r\n    <li class=\"pagination-li next\">\r\n      <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n        <i class=\"icofont-simple-right\"></i>\r\n      </a>\r\n    </li>\r\n  </ul>\r\n</tc-card>\r\n\r\n<h5>Listado de Examenes</h5>\r\n<tc-card>\r\n  <tc-table [rows]=\"examenesRecibidos\" [hovered]=\"true\">\r\n    <tc-table-col [columnTitle]=\"'Examen'\" [columnName]=\"'nombre'\">\r\n      <ng-template #tableTDTemplate let-value>\r\n        <strong>{{value}}</strong>\r\n      </ng-template>\r\n    </tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'Fecha'\" [columnName]=\"'fecha'\">\r\n    </tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'VerMas'\" [columnName]=\"''\">\r\n      <ng-template #tableTDTemplate let-row=\"row\">\r\n        <div class=\"actions\">\r\n          <button tc-button tc-button [tcColor]=\"['#fff', '#3f51b5']\" [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n            [tcBorderColor]=\"'#3f51b5'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n            (click)=\"openModalExamenes(modalBodyVerUE, 'Ver Resultados', modalFooterVerUE, row)\">VerMas</button>\r\n        </div>\r\n      </ng-template>\r\n    </tc-table-col>\r\n    <tc-table-col [columnTitle]=\"'Imprimir'\" [columnName]=\"''\">\r\n      <ng-template #tableTDTemplate let-row=\"row\">\r\n        <div class=\"actions\">\r\n          <button tc-button [afterIcon]=\"'icofont-download'\" [tcColor]=\"['#fff', '#009688']\"\r\n            [tcBgColor]=\"['#009688', '#fff']\" [tcBorderColor]=\"'#009688'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n            (click)=\"imprimirEx(row)\"></button>\r\n        </div>\r\n      </ng-template>\r\n    </tc-table-col>\r\n  </tc-table>\r\n</tc-card>\r\n<tc-card *ngIf=\"hayEx\" class=\"mb-0\">\r\n  <h6>Esta persona NO posee examenes aun.</h6>\r\n</tc-card>\r\n<!--\r\n<ul class=\"pagination-ul\">\r\n  <li class=\"pagination-li prev\">\r\n    <a class=\"pagination-link\" (click)=\"prevPageE()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n      <i class=\"icofont-simple-left\"></i>\r\n    </a>\r\n  </li>\r\n\r\n  <li class=\"pagination-li next\">\r\n    <a class=\"pagination-link\" (click)=\"nextPageE()\">\r\n      <i class=\"icofont-simple-right\"></i>\r\n    </a>\r\n  </li>\r\n</ul>\r\n-->\r\n<div class=\"back-action-box\">\r\n  <button tc-button [afterIcon]=\"'icofont-rounded-left'\" [square]=\"true\" [tcShape]=\"500\" [tcColor]=\"['#fff', '#000']\"\r\n    [tcBgColor]=\"['#000', '#fff']\" [tcBorderColor]=\"'#000'\" (click)=\"regresar()\"></button>\r\n</div>\r\n\r\n<div class=\"add-action-box\">\r\n  <button tc-button [afterIcon]=\"'icofont-plus'\" [square]=\"true\" [tcShape]=\"500\" [tcColor]=\"['#fff', '#3f51b5']\"\r\n    [tcBgColor]=\"['#3f51b5', '#fff']\" [tcBorderColor]=\"'#3f51b5'\"\r\n    (click)=\"openModalC(modalCrearCBody, 'Agregar Consulta', modalCrearCFooter)\">Agregar Consulta</button>\r\n</div>\r\n<!-- Modal Crear Consulta -->\r\n<ng-container>\r\n  <ng-template #modalCrearCBody>\r\n    <form [formGroup]=\"verTriajeForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Talla</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Talla'\" formControlName=\"talla\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Peso</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Peso'\" formControlName=\"peso\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Temp</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Temp'\" formControlName=\"temperatura\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. R.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec R'\" formControlName=\"frecuenciaR\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. C.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec C'\" formControlName=\"frecuenciaC\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Pres. Art.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Pres Art'\" formControlName=\"presionArt\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n    <form [formGroup]=\"consultForm\" novalidate class=\"new-patient-form\">\r\n      <label>Llene los campos con letras, no utilice números ni caracteres especiales </label>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Motivo de Consulta*'\" formControlName=\"motivoConsulta\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.motivoConsulta.touched && consultForm.controls.motivoConsulta.invalid \">\r\n          Ingrese el Motivo de Consulta, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-select [placeholder]=\"'Apetito'\" formControlName=\"apetito\" [options]=\"apetitoOption\">\r\n            </tc-select>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-input [placeholder]=\"'Orina*'\" formControlName=\"orina\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"consultForm.controls.orina.touched && consultForm.controls.orina.invalid \">\r\n              Ingrese el Orina, este solo debe contener letras\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-input [placeholder]=\"'Deposiciones*'\" formControlName=\"deposiciones\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"consultForm.controls.deposiciones.touched && consultForm.controls.deposiciones.invalid \">\r\n              Ingrese el Deposiciones, este solo debe contener letras\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Sintomas*'\" formControlName=\"examenFisico\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.examenFisico.touched && consultForm.controls.examenFisico.invalid \">\r\n          Ingrese el Sintomas, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Diagnostico*'\" formControlName=\"diagnostico\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.diagnostico.touched && consultForm.controls.diagnostico.invalid \">\r\n          Ingrese el Diagnostico, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-textarea [placeholder]=\"'Tratamiento*'\" formControlName=\"tratamiento\"></tc-textarea>\r\n        <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n          *ngIf=\"consultForm.controls.tratamiento.touched && consultForm.controls.tratamiento.invalid \">\r\n          Ingrese el Tratamiento, este solo debe contener letras\r\n        </tc-form-description>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Orden de Examen</tc-form-label><label>En caso se requiera, escriba la orden para realizar un\r\n          examen al laboratorio</label>\r\n        <tc-input [placeholder]=\"'Examen de ****** '\" formControlName=\"ordenExam\"></tc-input>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Proxima Cita</tc-form-label>\r\n        <tc-input type=\"date\" formControlName=\"proximaCita\"></tc-input>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalCrearCFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalC()\">Cancelar</button>\r\n      <button tc-button [view]=\"'info'\" [disabled]=\"consultForm.invalid\" (click)=\"addConsult(consultForm)\">\r\n        Agregar Consulta\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear Consulta -->\r\n\r\n<!-- Open Modal Ver Mas -->\r\n<ng-container>\r\n  <ng-template #modalBodyVerC>\r\n    <form [formGroup]=\"verMasCForm\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Talla</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Talla'\" formControlName=\"talla\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Peso</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'peso'\" formControlName=\"peso\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Temp</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Temp'\" formControlName=\"temperatura\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. R.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec R'\" formControlName=\"frecuenciaR\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frec. C.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Frec C'\" formControlName=\"frecuenciaC\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Pres. Art.</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Pres Art'\" formControlName=\"presionArt\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-form-label>Motivo de Consulta</tc-form-label>\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Motivo'\" formControlName=\"motivo\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Apetito</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Apetito'\" formControlName=\"apetito\"\r\n              readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Orina</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Orina*'\" formControlName=\"orina\"\r\n              readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Deposiciones</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Deposiciones*'\"\r\n              formControlName=\"deposiciones\" readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n      <tc-form-group>\r\n        <tc-form-label>Sintomas</tc-form-label>\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Sintomas'\" formControlName=\"exaFis\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Diagnostico</tc-form-label>\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Diagnostico'\" formControlName=\"diagnostico\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n      <tc-form-group>\r\n        <tc-form-label>Tratamiento</tc-form-label>\r\n\r\n        <tc-textarea [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Tratamiento'\" formControlName=\"tratamiento\"\r\n          readonly=\"readonly\"></tc-textarea>\r\n      </tc-form-group>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterVerC>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [tcBgColor]=\"'#009688'\" [block]=\"true\"\r\n        (click)=\"closeModalVerC()\">Aceptar</button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Ver Mas-->\r\n\r\n<!-- Open Modal Ver Un Examenes -->\r\n<ng-container>\r\n  <ng-template #modalBodyVerUE>\r\n    <form [formGroup]=\"examenForm\" novalidate class=\"new-patient-form\">\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Tipo de Examen</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Tipo de Examen'\" formControlName=\"tipoExam\"\r\n              readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-6\">\r\n          <tc-form-group>\r\n            <tc-form-label>Fecha</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Fecha'\" formControlName=\"fecha\"\r\n              readonly=\"readonly\"></tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n      </div>\r\n\r\n      <div class=\"col-12 col-sm-12\">\r\n        <tc-form-group>\r\n          <tc-form-label> Observaciones </tc-form-label>\r\n          <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Ninguna '\" formControlName=\"observaciones\"\r\n            readonly=\"readonly\">\r\n          </tc-input>\r\n        </tc-form-group>\r\n      </div>\r\n\r\n      <tc-card [title]=\"'Detalles'\" class=\"mb-0\">\r\n        <tc-table [rows]=\"detalleT\" [hovered]=\"true\" [pagination]=\"true\">\r\n          <tc-table-col [columnTitle]=\"'Descripción'\" [columnName]=\"'descripcion'\">\r\n            <ng-template #tableTDTemplate let-value>\r\n              <strong>{{ value }}</strong>\r\n            </ng-template>\r\n          </tc-table-col>\r\n\r\n          <tc-table-col [columnTitle]=\"'Resultado'\" [columnName]=\"'resultado_obtenido'\">\r\n            <ng-template #tableTDTemplate let-value>\r\n              <strong>{{ value }}</strong>\r\n            </ng-template>\r\n          </tc-table-col>\r\n\r\n          <tc-table-col [columnTitle]=\"'Unidades'\" [columnName]=\"'unidades'\">\r\n            <ng-template #tableTDTemplate let-value>\r\n              <strong>{{ value }}</strong>\r\n            </ng-template>\r\n          </tc-table-col>\r\n\r\n          <tc-table-col [columnTitle]=\"'Rango'\" [columnName]=\"'rango_referencia'\">\r\n            <ng-template #tableTDTemplate let-value>\r\n              <strong>{{ value }}</strong>\r\n            </ng-template>\r\n          </tc-table-col>\r\n        </tc-table>\r\n      </tc-card>\r\n\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooterVerUE>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [tcBgColor]=\"'#009688'\" [block]=\"true\"\r\n        (click)=\"closeModalExamenes()\">ACEPTAR</button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!--End Modal Ver Un Examen-->"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/pages/Lab/atender/atender.component.html":
+/*!************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/pages/Lab/atender/atender.component.html ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<tc-card [tcGradient]=\"['#fff', '#fbfbfb']\">\r\n\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n            <tc-form-label>Nombre del Paciente</tc-form-label>\r\n        </div>\r\n        <div class=\"col-12 col-sm-6\">\r\n            <tc-form-label>DNI</tc-form-label>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n            <label>{{datoBus}} </label>\r\n        </div>\r\n        <div class=\"col-12 col-sm-6\">\r\n            <label>{{dniR}}</label>\r\n        </div>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n            <tc-form-label>Tipo de Examen</tc-form-label>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n            <tc-form-label>Orden</tc-form-label>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n            <tc-form-label>Fecha</tc-form-label>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n            <label>{{tipoEr}}</label>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n            <label>{{ordenR}}</label>\r\n        </div>\r\n        <div class=\"col-12 col-sm-4\">\r\n            <label>{{fechaR}}</label>\r\n        </div>\r\n    </div>\r\n</tc-card>\r\n\r\n<h5>Agregar Detalle</h5>\r\n<tc-card [tcGradient]=\"['#fff', '#fbfbfb']\">\r\n    <form [formGroup]=\"detalleForm\" novalidate class=\"new-patient-form\">\r\n        <DIV class=\"row\">\r\n            <div class=\"col-md-3\">\r\n                <tc-form-group>\r\n                    <tc-input [placeholder]=\"'Descripcion*'\" formControlName=\"descripcion\"></tc-input>\r\n                    <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                        *ngIf=\"detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid \">\r\n                        Ingrese la descripcion, este solo debe contener letras.\r\n                    </tc-form-description>\r\n                </tc-form-group>\r\n\r\n            </div>\r\n            <div class=\"col-md-3\">\r\n                <tc-form-group>\r\n                    <tc-input [placeholder]=\"'Resultado Obtenido*'\" formControlName=\"resultado_obtenido\"></tc-input>\r\n                    <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                        *ngIf=\"detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid \">\r\n                        Ingrese Resultado Obtenido, este solo debe contener letras.\r\n                    </tc-form-description>\r\n                </tc-form-group>\r\n            </div>\r\n\r\n\r\n            <div class=\"col-md-2\">\r\n                <tc-form-group>\r\n                    <tc-input [placeholder]=\"'Unidades*'\" formControlName=\"unidades\"></tc-input>\r\n                    <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                        *ngIf=\"detalleForm.controls.unidades.touched && detalleForm.controls.unidades.invalid \">\r\n                        Ingrese unidades.\r\n                    </tc-form-description>\r\n                </tc-form-group>\r\n            </div>\r\n\r\n            <div class=\"col-md-3\">\r\n                <tc-form-group>\r\n                    <tc-input [placeholder]=\"'Rango de Referencia*'\" formControlName=\"rango_referencia\"></tc-input>\r\n                    <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                        *ngIf=\"detalleForm.controls.rango_referencia.touched && detalleForm.controls.rango_referencia.invalid \">\r\n                        Ingrese Rango de referencia.\r\n                    </tc-form-description>\r\n                </tc-form-group>\r\n            </div>\r\n\r\n            <tc-form-group class=\"col-md-1\">\r\n                <button tc-button [afterIcon]=\"'icofont-plus'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\"\r\n                    [size]=\"'sm'\" (click)=\" addDetalle(detalleForm)\">\r\n                </button>\r\n            </tc-form-group>\r\n        </DIV>\r\n    \r\n    <tc-card [title]=\"'Detalles'\" class=\"mb-0\">\r\n        <tc-table [rows]=\"detalleT\" [hovered]=\"true\" [pagination]=\"true\">\r\n            <tc-table-col [columnTitle]=\"'Descripción'\" [columnName]=\"'descripcion'\">\r\n                <ng-template #tableTDTemplate let-value>\r\n                    <strong>{{ value }}</strong>\r\n                </ng-template>\r\n            </tc-table-col>\r\n\r\n            <tc-table-col [columnTitle]=\"'Resultado'\" [columnName]=\"'resultado_obtenido'\">\r\n                <ng-template #tableTDTemplate let-value>\r\n                    <strong>{{ value }}</strong>\r\n                </ng-template>\r\n            </tc-table-col>\r\n\r\n            <tc-table-col [columnTitle]=\"'Unidades'\" [columnName]=\"'unidades'\">\r\n                <ng-template #tableTDTemplate let-value>\r\n                    <strong>{{ value }}</strong>\r\n                </ng-template>\r\n            </tc-table-col>\r\n\r\n            <tc-table-col [columnTitle]=\"'Rango'\" [columnName]=\"'rango_referencia'\">\r\n                <ng-template #tableTDTemplate let-value>\r\n                    <strong>{{ value }}</strong>\r\n                </ng-template>\r\n            </tc-table-col>\r\n        </tc-table>\r\n    </tc-card>\r\n\r\n    <tc-form-group>\r\n        <tc-form-label>Observaciones</tc-form-label>\r\n        <tc-input [placeholder]=\"'Agregar Observaciones*'\"></tc-input>\r\n    </tc-form-group>\r\n\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-sm-6\">\r\n        <button tc-button [ngStyle]=\"{ 'width': '45%' }\" [view]=\"'error'\" (click)=\"cancelar()\">Cancelar</button>\r\n        </div>\r\n        <div class=\"col-12 col-sm-6\">\r\n        <button tc-button [ngStyle]=\"{ 'width': '45%' }\"[view]=\"'info'\" (click)=\"estado(row)\">Agregar</button>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    \r\n</form>\r\n</tc-card>"
 
 /***/ }),
 
@@ -568,7 +601,7 @@ module.exports = "<form [formGroup]=\"busForm\">\r\n\t<div class=\"row\">\r\n\t\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<tc-card class=\"mb-0\">\r\n\t<tc-table [rows]=\"ordenes\" [hovered]=\"true\" [pagination]=\"true\">\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Nombre'\" [columnName]=\"'nombre'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'DNI'\" [columnName]=\"'dni'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Orden'\" [columnName]=\"'orden'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Fecha'\" [columnName]=\"'fechaA'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Agregar Cabecera'\">\r\n\t\t\t<ng-template #tableTDTemplate let-row=\"row\">\r\n\t\t\t\t<div class=\"actions\">\r\n\t\t\t\t\t<button tc-button tc-button [tcColor]=\"['#fff', '#3f51b5']\" [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n\t\t\t\t\t\t[tcBorderColor]=\"'#3f51b5'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n\t\t\t\t\t\t(click)=\"openModalH(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)\">Agregar</button>\r\n\t\t\t\t</div>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Atendido'\">\r\n\t\t\t<ng-template #tableTDTemplate let-row=\"row\">\r\n\t\t\t\t<div class=\"actions\">\r\n\t\t\t\t\t<button tc-button [afterIcon]=\"'icofont-ui-check'\" [view]=\"'info'\"[tcColor]=\"['#3f51b5', '#fff']\"\r\n\t\t\t\t\t[tcBgColor]=\"['transparent', '#3f51b5']\" [tcBorderColor]=\"'#3f51b5'\" [square]=\"true\"\r\n\t\t\t\t\t\t[tcShape]=\"500\" [size]=\"'sm'\" (click)=\"estado(row.id)\"></button>\r\n\t\t\t\t</div>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t</tc-table>\r\n\r\n\t<ul class=\"pagination-ul\">\r\n\t\t<li class=\"pagination-li prev\">\r\n\t\t\t<a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n\t\t\t\t<i class=\"icofont-simple-left\"></i>\r\n\t\t\t</a>\r\n\t\t</li>\r\n\r\n\t\t<li class=\"pagination-li next\">\r\n\t\t\t<a class=\"pagination-link\" (click)=\"nextPage()\">\r\n\t\t\t\t<i class=\"icofont-simple-right\"></i>\r\n\t\t\t</a>\r\n\t\t</li>\r\n\t</ul>\r\n</tc-card>\r\n\r\n<!-- Modal Crear cabecera -->\r\n<ng-container>\r\n\t<ng-template #modalCrearHBody>\r\n\t\t<form [formGroup]=\"patientForm\" novalidate class=\"new-patient-form\">\r\n\t\t\t<div class=\"row\">\r\n\t\t\t\t<div class=\"col-12 col-sm-6\">\r\n\t\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t\t<tc-form-label>Nombre</tc-form-label>\r\n\t\t\t\t\t\t<tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\"\r\n\t\t\t\t\t\t\t[placeholder]=\"'Nombre'\" formControlName=\"nombre\" readonly=\"readonly\">\r\n\t\t\t\t\t\t</tc-input>\r\n\t\t\t\t\t</tc-form-group>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"col-12 col-sm-6\">\r\n\t\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t\t<tc-form-label>DNI</tc-form-label>\r\n\t\t\t\t\t\t<tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'DNI'\"\r\n\t\t\t\t\t\t\tformControlName=\"dni\" readonly=\"readonly\"></tc-input>\r\n\t\t\t\t\t</tc-form-group>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t\r\n\r\n\r\n\t\t\t<tc-form-group>\r\n\t\t\t\t<tc-form-label>Orden</tc-form-label>\r\n\t\t\t\t<tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Orden'\"\r\n\t\t\t\t\tformControlName=\"orden\" readonly=\"readonly\"></tc-input>\r\n\t\t\t</tc-form-group>\r\n\r\n\r\n\t\t\t<tc-form-group>\r\n\t\t\t\t<tc-form-label>Observaciones</tc-form-label>\r\n\t\t\t\t<tc-input [placeholder]=\"'Agregar Observaciones*'\" formControlName=\"observaciones\"></tc-input>\r\n\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\"\r\n\t\t\t\t\t*ngIf=\"patientForm.controls.observaciones.touched && patientForm.controls.observaciones.invalid \">\r\n\t\t\t\t\tEste campo solo debe tener letras\r\n\t\t\t\t</tc-form-description>\r\n\t\t\t</tc-form-group>\r\n\t\t</form>\r\n\r\n\t</ng-template>\r\n\t<ng-template #modalCrearHFooter >\r\n\t\t<div class=\"actions justify-content-between\">\r\n\t\t\t<button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalH();closeModalD()\">Cancelar</button>\r\n\t\t\t<button tc-button [view]=\"'info'\" [disabled]=\"patientForm.invalid\" (click)=\"addExamen(patientForm);openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)\t\r\n\t\t\t\">\r\n\t\t\t\tAgregar Cabecera \t\r\n\t\t\t</button>\r\n\t\t\t<!--<button tc-button [view]=\"'info'\" [disabled]=\"patientForm.invalid\" (click)=\"openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row,{ closeButton: true, overlayClose: false });closeModalH()\">\r\n\t\t\t\tAgregar Detalle \r\n\t\t\t\t\r\n\t\t\t</button>\t-->\r\n\t\t</div>\r\n\t</ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear cabecera -->\r\n\r\n<!-- Modal Crear detalle -->\r\n<ng-container>\r\n\t<ng-template #modalCrearDBody>\r\n\t\t<form [formGroup]=\"detalleForm\" novalidate class=\"new-patient-form\">\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Descripcion*'\" formControlName=\"descripcion\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid \">\r\n\t\t\t\t\t\tIngrese la descripcion, este solo debe contener letras.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Resultado Obtenido*'\" formControlName=\"resultado_obtenido\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid \">\r\n\t\t\t\t\t\tIngrese Resultado Obtenido, este solo debe contener letras.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\t\t\t</div>\r\n\r\n\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Unidades*'\" formControlName=\"unidades\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.unidades.touched && detalleForm.controls.unidades.invalid \">\r\n\t\t\t\t\t\tIngrese unidades.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\t\t\t</div>\r\n\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Rango de Referencia*'\" formControlName=\"rango_referencia\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.rango_referencia.touched && detalleForm.controls.rango_referencia.invalid \">\r\n\t\t\t\t\t\tIngrese Rango de referencia.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\t\t\t</div>\r\n\r\n\t\t</form>\r\n\t</ng-template>\r\n\r\n\t<ng-template #modalCrearDFooter>\r\n\t\t<div class=\"actions justify-content-between\">\r\n\t\t\t<button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalD()\">Cancelar</button>\r\n\t\t\t<button tc-button [view]=\"'info'\" [disabled]=\"detalleForm.invalid\" (click)=\"addDetalle(detalleForm)\">\r\n\t\t\t\tAgregar\r\n\t\t\t</button>\r\n\t\t</div>\r\n\t</ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear detalle -->\r\n"
+module.exports = "<form [formGroup]=\"busForm\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col col-12 \">\r\n\t\t\t<div class=\"row\">\r\n\t\t\t\t<div class=\"col-md-8\">\r\n\t\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t\t<tc-input [placeholder]=\"'Ingrese numero de DNI*'\" formControlName=\"datoBus\"></tc-input>\r\n\t\t\t\t\t</tc-form-group>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"col-md-2\">\r\n\t\t\t\t\t<button tc-button [block]=\"true\" [view]=\"'success'\" [tcShape]=\"500\" (click)=\"buscar(busForm)\">\r\n\t\t\t\t\t\tBuscar\r\n\t\t\t\t\t</button>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"col-md-2\">\r\n\t\t\t\t\t\t<button tc-button [block]=\"true\" [tcBgColor]=\"'#3f51b5'\" [tcShape]=\"500\" (click)=\"loadOrdenes()\">\r\n\t\t\t\t\t\t\tCargar\r\n\t\t\t\t\t\t</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t</div>\r\n</form>\r\n<tc-card class=\"mb-0\">\r\n\t<tc-table [rows]=\"ordenes\" [hovered]=\"true\" [pagination]=\"true\">\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Nombre'\" [columnName]=\"'nombre'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'DNI'\" [columnName]=\"'dni'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Orden'\" [columnName]=\"'orden'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Fecha'\" [columnName]=\"'fechaA'\">\r\n\t\t\t<ng-template #tableTDTemplate let-value>\r\n\t\t\t\t<strong>{{ value }}</strong>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\t\t<tc-table-col [columnTitle]=\"'Atender'\">\r\n\t\t\t<ng-template #tableTDTemplate let-row=\"row\">\r\n\t\t\t\t<div class=\"actions\">\r\n\t\t\t\t\t<button tc-button tc-button [tcColor]=\"['#fff', '#3f51b5']\" [tcBgColor]=\"['#3f51b5', '#fff']\"\r\n\t\t\t\t\t\t[tcBorderColor]=\"'#3f51b5'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n\t\t\t\t\t\t(click)=\"atender(row.nombre, row)\">Atender</button>\r\n\t\t\t\t</div>\r\n\t\t\t</ng-template>\r\n\t\t</tc-table-col>\r\n\r\n\r\n\r\n\t</tc-table>\r\n\r\n\t<ul class=\"pagination-ul\">\r\n\t\t<li class=\"pagination-li prev\">\r\n\t\t\t<a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n\t\t\t\t<i class=\"icofont-simple-left\"></i>\r\n\t\t\t</a>\r\n\t\t</li>\r\n\r\n\t\t<li class=\"pagination-li next\">\r\n\t\t\t<a class=\"pagination-link\" (click)=\"nextPage()\">\r\n\t\t\t\t<i class=\"icofont-simple-right\"></i>\r\n\t\t\t</a>\r\n\t\t</li>\r\n\t</ul>\r\n</tc-card>\r\n\r\n<!-- Modal Crear cabecera -->\r\n<ng-container>\r\n\t<ng-template #modalCrearHBody>\r\n\t\t<form [formGroup]=\"patientForm\" novalidate class=\"new-patient-form\">\r\n\t\t\t<div class=\"row\">\r\n\t\t\t\t<div class=\"col-12 col-sm-6\">\r\n\t\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t\t<tc-form-label>Nombre</tc-form-label>\r\n\t\t\t\t\t\t<tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\"\r\n\t\t\t\t\t\t\t[placeholder]=\"'Nombre'\" formControlName=\"nombre\" readonly=\"readonly\">\r\n\t\t\t\t\t\t</tc-input>\r\n\t\t\t\t\t</tc-form-group>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"col-12 col-sm-6\">\r\n\t\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t\t<tc-form-label>DNI</tc-form-label>\r\n\t\t\t\t\t\t<tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'DNI'\"\r\n\t\t\t\t\t\t\tformControlName=\"dni\" readonly=\"readonly\"></tc-input>\r\n\t\t\t\t\t</tc-form-group>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\r\n\r\n\r\n\t\t\t<tc-form-group>\r\n\t\t\t\t<tc-form-label>Orden</tc-form-label>\r\n\t\t\t\t<tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Orden'\"\r\n\t\t\t\t\tformControlName=\"orden\" readonly=\"readonly\"></tc-input>\r\n\t\t\t</tc-form-group>\r\n\r\n\r\n\t\t\t<tc-form-group>\r\n\t\t\t\t<tc-form-label>Observaciones</tc-form-label>\r\n\t\t\t\t<tc-input [placeholder]=\"'Agregar Observaciones*'\" formControlName=\"observaciones\"></tc-input>\r\n\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\"\r\n\t\t\t\t\t*ngIf=\"patientForm.controls.observaciones.touched && patientForm.controls.observaciones.invalid \">\r\n\t\t\t\t\tEste campo solo debe tener letras\r\n\t\t\t\t</tc-form-description>\r\n\t\t\t</tc-form-group>\r\n\t\t</form>\r\n\r\n\t</ng-template>\r\n\t<ng-template #modalCrearHFooter>\r\n\t\t<div class=\"actions justify-content-between\">\r\n\t\t\t<button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalH();closeModalD()\">Cancelar</button>\r\n\t\t\t<button tc-button [view]=\"'info'\" [disabled]=\"patientForm.invalid\" (click)=\"addExamen(patientForm);openModaD(modalCrearDBody, 'Agregar Detalle',modalCrearDFooter,row)\t\r\n\t\t\t\">\r\n\t\t\t\tAgregar Cabecera\r\n\t\t\t</button>\r\n\t\t</div>\r\n\t</ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear cabecera -->\r\n\r\n<!-- Modal Crear detalle -->\r\n<ng-container>\r\n\t<ng-template #modalCrearDBody>\r\n\t\t<form [formGroup]=\"detalleForm\" novalidate class=\"new-patient-form\">\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Descripcion*'\" formControlName=\"descripcion\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid \">\r\n\t\t\t\t\t\tIngrese la descripcion, este solo debe contener letras.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Resultado Obtenido*'\" formControlName=\"resultado_obtenido\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid \">\r\n\t\t\t\t\t\tIngrese Resultado Obtenido, este solo debe contener letras.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\t\t\t</div>\r\n\r\n\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Unidades*'\" formControlName=\"unidades\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.unidades.touched && detalleForm.controls.unidades.invalid \">\r\n\t\t\t\t\t\tIngrese unidades.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\t\t\t</div>\r\n\r\n\t\t\t<div class=\"col-md-12\">\r\n\t\t\t\t<tc-form-group>\r\n\t\t\t\t\t<tc-input [placeholder]=\"'Rango de Referencia*'\" formControlName=\"rango_referencia\"></tc-input>\r\n\t\t\t\t\t<tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n\t\t\t\t\t\t*ngIf=\"detalleForm.controls.rango_referencia.touched && detalleForm.controls.rango_referencia.invalid \">\r\n\t\t\t\t\t\tIngrese Rango de referencia.\r\n\t\t\t\t\t</tc-form-description>\r\n\t\t\t\t</tc-form-group>\r\n\t\t\t</div>\r\n\r\n\t\t</form>\r\n\t</ng-template>\r\n\r\n\t<ng-template #modalCrearDFooter>\r\n\t\t<div class=\"actions justify-content-between\">\r\n\t\t\t<button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModalD()\">Cancelar</button>\r\n\t\t\t<button tc-button [view]=\"'info'\" [disabled]=\"detalleForm.invalid\" (click)=\"addDetalle(detalleForm)\">\r\n\t\t\t\tAgregar\r\n\t\t\t</button>\r\n\t\t</div>\r\n\t</ng-template>\r\n</ng-container>\r\n<!-- end Modal Crear detalle -->"
 
 /***/ }),
 
@@ -579,7 +612,7 @@ module.exports = "<tc-card class=\"mb-0\">\r\n\t<tc-table [rows]=\"ordenes\" [ho
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-sm-12\">\r\n  <form [formGroup]=\"busForm\">\r\n    <div class=\"row\">\r\n      <div class=\"col col-12 \">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-8\">\r\n            <tc-form-group>\r\n              <tc-input type =\"number\" [placeholder]=\"'Ingrese numero de DNI*'\" formControlName=\"datoBus\"></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n            <button tc-button [block]=\"true\" [view]=\"'success'\" [tcShape]=\"500\" (click)=\"buscar(busForm)\">\r\n              Buscar\r\n            </button>\r\n          </div>\r\n          <div class=\"col-md-2\">\r\n              <button tc-button [block]=\"true\" [tcBgColor]=\"'#3f51b5'\" [tcShape]=\"200\" (click)=\"cargarCitas()\">\r\n              Cargar \r\n              </button>\r\n            </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </form>\r\n  \r\n  <tc-card class=\"mb-0\">\r\n\t\t<div class=\"table-wrap\">\r\n\t\t\t<table class=\"table-box\">\r\n\t\t\t\t<thead>\r\n\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tNumero de Historia\r\n\t\t\t\t\t\t</th>\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tDNI\r\n\t\t\t\t\t\t</th>\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tNombre Completo\r\n\t\t\t\t\t\t</th>\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tEspecialidad\r\n\t\t\t\t\t\t</th>\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tMedico\r\n            </th>\r\n            <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tEstado\r\n\t\t\t\t\t\t</th>\t\t\t\t\t\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tFecha\r\n\t\t\t\t\t\t</th>\r\n\t\t\t\t\t\t<th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n\t\t\t\t\t\t\tRegistrar Triaje\r\n\t\t\t\t\t\t</th>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</thead>\r\n\r\n\t\t\t\t<tbody>\r\n\t\t\t\t\t<tr *ngFor=\"let row of citasTriaje\">\r\n\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.numeroHistoria.numeroHistoria}}\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.numeroHistoria.dni}}\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.numeroHistoria.nombres}} {{row.numeroHistoria.apellido_paterno}} {{row.numeroHistoria.apellido_materno}}\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.especialidad.nombre}}\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n               {{row.medico.nombres}} {{row.medico.apellido_paterno}}\r\n            </td>\r\n            <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.estadoCita}}\r\n\t\t\t\t\t\t</td><td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n\t\t\t\t\t\t\t{{row.fechaAtencion}}\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t<td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\" [align]=\"center\">\r\n\t\t\t\t\t\t\t<div class=\"actions\">\r\n                <button tc-button [afterIcon]=\"'icofont-ui-edit'\" [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\" \r\n                  [size]=\"'sm'\" (click)=\"openModal(modalBody, 'Agregar Datos de Triaje', modalFooter, row)\">\r\n                </button>\r\n              </div>\r\n\r\n\t\t\t\t\t\t</td>\r\n\t\t\t\t\t</tr>\r\n\t\t\t\t</tbody>\r\n\t\t\t</table>\r\n\t\t</div>\r\n    <ul class=\"pagination-ul\">\r\n      <li class=\"pagination-li prev\">\r\n        <a\r\n          class=\"pagination-link\"\r\n          (click)=\"prevPage()\"\r\n          [ngClass]=\"{ disabled: pageNum == 1 }\"\r\n        >\r\n          <i class=\"icofont-simple-left\"></i>\r\n        </a>\r\n      </li>\r\n  \r\n      <li class=\"pagination-li next\">\r\n        <a \r\n          class=\"pagination-link\" \r\n          (click)=\"nextPage()\">\r\n          <i class=\"icofont-simple-right\"></i>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n\t</tc-card>\r\n\r\n\r\n\r\n</div>\r\n<!-- edit patient Modal window -->\r\n<ng-container>\r\n  <ng-template #modalBody>\r\n      <form [formGroup]=\"cabTri\">\r\n\r\n          <div class=\"row\">\r\n            <tc-form-group class=\"col-12 col-sm-6\">\r\n              <tc-form-label>Numero de Historia</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\"\r\n              [color]=\"'#3f51b5'\"\r\n              formControlName=\"numeroHistoria\" \r\n              readonly=\"readonly\">\r\n              </tc-input>\r\n            </tc-form-group>\r\n            <tc-form-group class=\"col-12 col-sm-6\">\r\n              <tc-form-label>DNI</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\"\r\n              [color]=\"'#3f51b5'\"\r\n              formControlName=\"dni\" \r\n              readonly=\"readonly\">\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"row\">\r\n            <tc-form-group class=\"col-12 col-sm-12\">\r\n              <tc-form-label>Nombre Completo</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\"\r\n              [color]=\"'#3f51b5'\"\r\n              formControlName=\"nombres\" \r\n              readonly=\"readonly\">\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </form>\r\n\r\n\r\n    <form [formGroup]=\"patientForm2\" novalidate class=\"new-patient-form\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Talla (cm)</tc-form-label>\r\n            <tc-input [placeholder]=\"'Talla (cm)'\" formControlName=\"talla\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid \">\r\n              La talla debe ser en 'cm' y un numero positivo\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Peso (Kg)</tc-form-label>\r\n            <tc-input [placeholder]=\"'Peso (Kg)'\"  formControlName=\"peso\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid \">\r\n              El peso debe ser en 'Kg' y un numero positivo\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Temperatura (°C)</tc-form-label>\r\n            <tc-input [placeholder]=\"'temperatura (°C) '\" formControlName=\"temperatura\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid \">\r\n              Se debe ingresar un numero positivo\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frecuencia Resp.</tc-form-label>\r\n            <tc-input [placeholder]=\"'frecuencia Resp'\" formControlName=\"frecuenciaR\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid \">\r\n              Se debe ingresar un numero entero positivo\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Frecuencia Cardiaca</tc-form-label>\r\n            <tc-input [placeholder]=\"'Frecuencia Cardiaca'\"  formControlName=\"frecuenciaC\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"patientForm2.controls.frecuenciaC.touched && patientForm2.controls.frecuenciaC.invalid \">\r\n              Se debe ingresar un numero entero positivo\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n\r\n        <div class=\"col-12 col-sm-4\">\r\n          <tc-form-group>\r\n            <tc-form-label>Presión Arterial</tc-form-label>\r\n            <tc-input [placeholder]=\"'Presion Arterial'\" formControlName=\"presionArt\"></tc-input>\r\n            <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n              *ngIf=\"patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid \">\r\n              Se debe ingresar numeros enteros positivos con el siguiente formato \"##/##\"\r\n            </tc-form-description>\r\n          </tc-form-group>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  </ng-template>\r\n\r\n  <ng-template #modalFooter>\r\n    <div class=\"actions justify-content-between\">\r\n      <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModal()\">Cancelar</button>\r\n      <button tc-button [view]=\"'info'\" [disabled]=\"patientForm2.invalid\" (click)=\"CreateTriaje(patientForm2)\">\r\n        Crear Triaje\r\n      </button>\r\n    </div>\r\n  </ng-template>\r\n</ng-container>\r\n<!-- end Modal window -->"
+module.exports = "<div class=\"col-sm-12\">\r\n    <form [formGroup]=\"busForm\">\r\n      <div class=\"row\">\r\n        <div class=\"col col-12 \">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-8\">\r\n              <tc-form-group>\r\n                <tc-input type=\"number\" [placeholder]=\"'Ingrese numero de DNI*'\" formControlName=\"datoBus\"></tc-input>\r\n              </tc-form-group>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <button tc-button [block]=\"true\" [view]=\"'success'\" [tcShape]=\"500\" (click)=\"buscar(busForm)\">\r\n                Buscar\r\n              </button>\r\n            </div>\r\n            <div class=\"col-md-2\">\r\n              <button tc-button [block]=\"true\" [tcBgColor]=\"'#3f51b5'\" [tcShape]=\"200\" (click)=\"cargarCitas()\">\r\n                Cargar\r\n              </button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </form>\r\n  \r\n    <tc-card class=\"mb-0\">\r\n      <div class=\"table-wrap\">\r\n        <table class=\"table-box\">\r\n          <thead>\r\n            <tr>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Numero de Historia\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                DNI\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Nombre Completo\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Especialidad\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Medico\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Estado\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Actualizar\r\n              </th>\r\n              <th [align]=\"headerAlign\" [tcBgColor]=\"headerBgColor\">\r\n                Ver Triaje\r\n              </th>\r\n            </tr>\r\n          </thead>\r\n  \r\n          <tbody>\r\n            <tr *ngFor=\"let row of citasTriaje\">\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                {{row.numeroHistoria.numeroHistoria}}\r\n              </td>\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                {{row.numeroHistoria.dni}}\r\n              </td>\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                {{row.numeroHistoria.nombres}} {{row.numeroHistoria.apellido_paterno}}\r\n                {{row.numeroHistoria.apellido_materno}}\r\n              </td>\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                {{row.especialidad.nombre}}\r\n              </td>\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                {{row.medico.nombres}} {{row.medico.apellido_paterno}}\r\n              </td>\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\">\r\n                {{row.estadoCita}}\r\n              </td>\r\n              <td [ngStyle]=\"{ 'background': contentBgColor, 'color': contentColor }\" [align]=\"center\">\r\n                <div class=\"actions\">\r\n                  <button tc-button [disabled]=\" row.estadoCita == 'Triado' \" [afterIcon]=\"'icofont-ui-edit'\"\r\n                    [view]=\"'info'\" [square]=\"true\" [tcShape]=\"500\" [size]=\"'sm'\"\r\n                    (click)=\"openModal(modalBody, 'Agregar Datos de Triaje', modalFooter, row)\">\r\n                  </button>\r\n                </div>\r\n              </td>\r\n              <td>\r\n                <div class=\"actions\">\r\n                  <button tc-button [disabled]=\" row.estadoCita == 'Espera' \" [tcColor]=\"['#fff', '#3f51b5']\"\r\n                    [tcBgColor]=\"['#3f51b5', '#fff']\" [tcBorderColor]=\"'#3f51b5'\" [square]=\"true\" [tcShape]=\"300\"\r\n                    [size]=\"'sm'\" (click)=\"\r\n                  openModalVerMas(\r\n                    modalBodyH,\r\n                    'Ver Historial Completo',\r\n                    modalFooterH,\r\n                    row\r\n                  )\r\n                \">Ver Triaje\r\n                  </button>\r\n                </div>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n      <ul class=\"pagination-ul\">\r\n        <li class=\"pagination-li prev\">\r\n          <a class=\"pagination-link\" (click)=\"prevPage()\" [ngClass]=\"{ disabled: pageNum == 1 }\">\r\n            <i class=\"icofont-simple-left\"></i>\r\n          </a>\r\n        </li>\r\n  \r\n        <li class=\"pagination-li next\">\r\n          <a class=\"pagination-link\" (click)=\"nextPage()\">\r\n            <i class=\"icofont-simple-right\"></i>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </tc-card>\r\n  \r\n  \r\n  \r\n  </div>\r\n  <!-- edit patient Modal window -->\r\n  <ng-container>\r\n    <ng-template #modalBody>\r\n      <form [formGroup]=\"cabTri\">\r\n  \r\n        <div class=\"row\">\r\n          <tc-form-group class=\"col-12 col-sm-6\">\r\n            <tc-form-label>Numero de Historia</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" formControlName=\"numeroHistoria\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n          <tc-form-group class=\"col-12 col-sm-6\">\r\n            <tc-form-label>DNI</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" formControlName=\"dni\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n        <div class=\"row\">\r\n          <tc-form-group class=\"col-12 col-sm-12\">\r\n            <tc-form-label>Nombre Completo</tc-form-label>\r\n            <tc-input [bgColor]=\"'#fff'\" [color]=\"'#3f51b5'\" formControlName=\"nombres\" readonly=\"readonly\">\r\n            </tc-input>\r\n          </tc-form-group>\r\n        </div>\r\n      </form>\r\n  \r\n  \r\n      <form [formGroup]=\"patientForm2\" novalidate class=\"new-patient-form\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Talla (cm)</tc-form-label>\r\n              <tc-input [placeholder]=\"'Talla (cm)'\" formControlName=\"talla\"></tc-input>\r\n              <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid \">\r\n                La talla debe ser en 'cm' y un numero positivo\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Peso (Kg)</tc-form-label>\r\n              <tc-input [placeholder]=\"'Peso (Kg)'\" formControlName=\"peso\"></tc-input>\r\n              <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid \">\r\n                El peso debe ser en 'Kg' y un numero positivo\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Temperatura (°C)</tc-form-label>\r\n              <tc-input [placeholder]=\"'temperatura (°C) '\" formControlName=\"temperatura\"></tc-input>\r\n              <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid \">\r\n                Se debe ingresar un numero positivo\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Frecuencia Resp.</tc-form-label>\r\n              <tc-input [placeholder]=\"'frecuencia Resp'\" formControlName=\"frecuenciaR\"></tc-input>\r\n              <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid \">\r\n                Se debe ingresar un numero entero positivo\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Frecuencia Cardiaca</tc-form-label>\r\n              <tc-input [placeholder]=\"'Frecuencia Cardiaca'\" formControlName=\"frecuenciaC\"></tc-input>\r\n              <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm2.controls.frecuenciaC.touched && patientForm2.controls.frecuenciaC.invalid \">\r\n                Se debe ingresar un numero entero positivo\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Presión Arterial</tc-form-label>\r\n              <tc-input [placeholder]=\"'Presion Arterial'\" formControlName=\"presionArt\"></tc-input>\r\n              <tc-form-description [tcColor]=\"'#e24d4d'\" [tcFontSize]=\"'0.8em'\"\r\n                *ngIf=\"patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid \">\r\n                Se debe ingresar numeros enteros positivos con el siguiente formato \"##/##\"\r\n              </tc-form-description>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalFooter>\r\n      <div class=\"actions justify-content-between\">\r\n        <button tc-button [type]=\"'button'\" [view]=\"'error'\" (click)=\"closeModal()\">Cancelar</button>\r\n        <button tc-button [view]=\"'info'\" [disabled]=\"patientForm2.invalid\" (click)=\"CreateTriaje(patientForm2)\">\r\n          Crear Triaje\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!-- end Modal window -->\r\n  \r\n  <ng-container>\r\n    <ng-template #modalBodyH>\r\n      <form [formGroup]=\"historiaForm\" novalidate class=\"new-patient-form\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-12\">\r\n            <tc-form-group>\r\n              <tc-form-label>Numero de Historia</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'name'\"\r\n                formControlName=\"numeroHistoria\" readonly=\"readonly\">\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Talla (cm)</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'DNI'\"\r\n                formControlName=\"talla\" readonly=\"readonly\"></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n              <tc-form-group>\r\n                <tc-form-label>Peso (kg)</tc-form-label>\r\n                <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'Peso'\"\r\n                  formControlName=\"peso\" readonly=\"readonly\"></tc-input>\r\n              </tc-form-group>\r\n            </div>\r\n            <div class=\"col-12 col-sm-4\">\r\n              <tc-form-group>\r\n                <tc-form-label>Temperatura (°C)</tc-form-label>\r\n                <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'temperatura'\"\r\n                  formControlName=\"temperatura\" readonly=\"readonly\">\r\n                </tc-input>\r\n              </tc-form-group>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Frec. Cardiaca </tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'frecuenciaC'\"\r\n                formControlName=\"frecuenciaC\" readonly=\"readonly\"></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Frec. Respiratoria </tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'frecuenciaR'\"\r\n                formControlName=\"frecuenciaR\" readonly=\"readonly\"></tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n  \r\n          <div class=\"col-12 col-sm-4\">\r\n            <tc-form-group>\r\n              <tc-form-label>Presion Arterial</tc-form-label>\r\n              <tc-input [bgColor]=\"'#fff'\" [borderColor]=\"'#3f51b5'\" [color]=\"'#3f51b5'\" [placeholder]=\"'presionArt'\"\r\n                formControlName=\"presionArt\" readonly=\"readonly\">\r\n              </tc-input>\r\n            </tc-form-group>\r\n          </div>\r\n        </div>\r\n      </form>\r\n    </ng-template>\r\n  \r\n    <ng-template #modalFooterH>\r\n      <div class=\"actions justify-content-between\">\r\n        <button tc-button [type]=\"'button'\" [tcBgColor]=\"'#009688'\" [block]=\"true\" (click)=\"closeModalH()\">\r\n          ACEPTAR\r\n        </button>\r\n      </div>\r\n    </ng-template>\r\n  </ng-container>\r\n  <!--End Modal Ver Mas-->"
 
 /***/ }),
 
@@ -1508,6 +1541,50 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/Guards/login.guard.ts":
+/*!***************************************!*\
+  !*** ./src/app/Guards/login.guard.ts ***!
+  \***************************************/
+/*! exports provided: LoginGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginGuard", function() { return LoginGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+let LoginGuard = class LoginGuard {
+    constructor(router) {
+        this.router = router;
+    }
+    canActivate(next, state) {
+        if (localStorage.getItem("token")) {
+            return true;
+        }
+        else {
+            // this.router.navigate(['/**']);
+            return false;
+        }
+    }
+};
+LoginGuard.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+LoginGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: "root"
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+], LoginGuard);
+
+
+
+/***/ }),
+
 /***/ "./src/app/Services/Administrador/administrador.service.ts":
 /*!*****************************************************************!*\
   !*** ./src/app/Services/Administrador/administrador.service.ts ***!
@@ -1539,22 +1616,22 @@ let AdministradorService = class AdministradorService {
     }
     //Areas
     loadAreas() {
-        return this.http.get(this.url + "/areas/");
+        return this.http.get(this.url + "/areas/", this.getHeader());
     }
     loadAreasPagination(pag) {
         return this.http.get(pag);
     }
     loadAreasSP() {
-        return this.http.get(this.url + "/areasSP/");
+        return this.http.get(this.url + "/areasSP/", this.getHeader());
     }
     searchArea(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscararea/?ar=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscararea/?ar=" + id, this.getHeader());
     }
     createArea(area) {
         this.http
             .post(this.url + "/areas/", {
             nombre: area.nombre
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("Area Creada correctamente");
         }, error => {
@@ -1564,23 +1641,23 @@ let AdministradorService = class AdministradorService {
     }
     //Especialidades
     loadEspecialidades() {
-        return this.http.get(this.url + "/especialidad/");
+        return this.http.get(this.url + "/especialidad/", this.getHeader());
     }
     loadEspecialidadesPagination(pag) {
         return this.http.get(pag);
     }
     loadEspecialidadesSP() {
-        return this.http.get(this.url + "/especialidadSP/");
+        return this.http.get(this.url + "/especialidadSP/", this.getHeader());
     }
     searchEspecialidad(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscarespecialidad/?esp=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscarespecialidad/?esp=" + id, this.getHeader());
     }
     createEspecialidad(especialidad) {
         this.http
             .post(this.url + "/especialidad/", {
             nombre: especialidad.nombre,
             descripcion: especialidad.descripcion
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("Especialidad Creada correctamente");
         }, error => {
@@ -1590,22 +1667,22 @@ let AdministradorService = class AdministradorService {
     }
     //TipoPersonal
     loadTPersonal() {
-        return this.http.get(this.url + "/tipo-personal/");
+        return this.http.get(this.url + "/tipo-personal/", this.getHeader());
     }
     loadTPersonalPagination(pag) {
         return this.http.get(pag);
     }
     loadTPersonalSP() {
-        return this.http.get(this.url + "/tipo-personalSP/");
+        return this.http.get(this.url + "/tipo-personalSP/", this.getHeader());
     }
     searchTPersonal(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscartipousuario/?tip=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscartipousuario/?tip=" + id, this.getHeader());
     }
     createTPersonal(tipo) {
         this.http
             .post(this.url + "/tipo-personal/", {
             nombre: tipo.nombre
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("Tipo personal Creado correctamente");
         }, error => {
@@ -1649,10 +1726,10 @@ let AdministradorService = class AdministradorService {
         return this.http.get(url, this.getHeader());
     }
     searchPersonal(id) {
-        return this.http.get(this.url + "/ver-personal/" + id + "/");
+        return this.http.get(this.url + "/ver-personal/" + id + "/", this.getHeader());
     }
     searchPersonalDNI(dni) {
-        return this.http.get(this.url + "/personaldni/" + dni + "/");
+        return this.http.get(this.url + "/personaldni/" + dni + "/", this.getHeader());
     }
     createPersonal(tipo) {
         // console.log(JSON.stringify(tipo));
@@ -1669,23 +1746,26 @@ let AdministradorService = class AdministradorService {
             area: tipo.area,
             tipo_personal: tipo.tipo_personal,
             especialidad: tipo.especialidad
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("personal Creado correctamente");
+            this.bool = true;
         }, error => {
             console.log(error.message);
             this.toastr.error("No se pudo crear personal");
+            this.bool = false;
         });
+        return this.bool;
     }
     //user
     loadUser() {
-        return this.http.get(this.url + "/usuarios/");
+        return this.http.get(this.url + "/usuarios/", this.getHeader());
     }
     loadUserPagination(pag) {
-        return this.http.get(pag);
+        return this.http.get(pag, this.getHeader());
     }
     loadUserSP() {
-        return this.http.get(this.url + "/usuariosSP/");
+        return this.http.get(this.url + "/usuariosSP/", this.getHeader());
     }
 };
 AdministradorService.ctorParameters = () => [
@@ -1719,7 +1799,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
-/* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../config/API */ "./src/app/config/API.ts");
+/* harmony import */ var _Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Administrador/administrador.service */ "./src/app/Services/Administrador/administrador.service.ts");
+/* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../config/API */ "./src/app/config/API.ts");
+
 
 
 
@@ -1729,10 +1811,11 @@ __webpack_require__.r(__webpack_exports__);
 // BASE_API_URL
 
 let LaboratorioService = class LaboratorioService {
-    constructor(http, toastr) {
+    constructor(http, toastr, adminSv) {
         this.http = http;
         this.toastr = toastr;
-        this.url = _config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/laboratorio";
+        this.adminSv = adminSv;
+        this.url = _config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/laboratorio";
         this.cabecera = [];
         this.cabcrear = [];
         this.detalle = [];
@@ -1748,60 +1831,53 @@ let LaboratorioService = class LaboratorioService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error.error || 'Server error');
     }
     searchExamenbDni(dni) {
-        return this.http.get(this.url + '/filtro/DNI/?dni=' + dni);
+        return this.http.get(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
+    }
+    searchExamenbName(nombre) {
+        return this.http.get(this.url + '/filtro/?nombre=' + nombre, this.adminSv.getHeader());
     }
     searchLabName(nombre) {
-        return this.http.get(this.url + '/filtro/?nombre=' + nombre);
+        return this.http.get(this.url + '/filtro/?nombre=' + nombre, this.adminSv.getHeader());
     }
     searchLabFecha(fecha) {
         this.fi = fecha.substring(0, 10);
         this.ff = fecha.substring(11, 22);
-        return this.http.get(this.url + '/filtro/fecha/?fecha_inicio=' + this.fi + "&fecha_final=" + this.ff);
+        return this.http.get(this.url + '/filtro/fecha/?fecha_inicio=' + this.fi + "&fecha_final=" + this.ff, this.adminSv.getHeader());
     }
     searchLabDni(dni) {
-        return this.http.get(this.url + '/filtro/DNI/?dni=' + dni);
+        return this.http.get(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
+    }
+    searchOrdenDni(dni) {
+        return this.http.get('http://18.216.2.122:9000/consultorio/buscarOrden/?dni=' + dni, this.adminSv.getHeader());
     }
     loadTipoEx() {
-        return this.http.get(this.url + "/TipoExamen/");
+        return this.http.get(this.url + "/TipoExamen/", this.adminSv.getHeader());
     }
     loadExamenPagination(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminSv.getHeader());
     }
     loadOrdenPAgination(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminSv.getHeader());
     }
     loadOrden() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/ver-orden/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/ver-orden/", this.adminSv.getHeader());
     }
     loadExamen() {
-        return this.http.get(this.url + "/ExamenLabCab/");
+        return this.http.get(this.url + "/ExamenLabCab/", this.adminSv.getHeader());
     }
     loadTabla(idEx) {
         console.log("ENTRA AL SERVICIO de tabla");
-        return this.http.get(this.url + '/filtro/Detalles/?id=' + idEx);
+        return this.http.get(this.url + '/filtro/Detalles/?id=' + idEx, this.adminSv.getHeader());
     }
     cambioEstado(id) {
-        console.log("Entra al servicio");
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/atenderOrden/" + id);
+        console.log("Entra al servicio=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/atenderOrden/" + id, this.adminSv.getHeader());
     }
-    createDetalle(detalle) {
-        console.log(detalle);
-        this.http.post(this.url + '/ExamenLabDet/', {
-            descripcion: detalle.descripcion,
-            resultado_obtenido: detalle.resultado_obtenido,
-            unidades: detalle.unidades,
-            rango_referencia: detalle.rango_referencia,
-            codigoExam: detalle.codigoExam,
-        }).subscribe(data => {
-            this.toastr.success("El detalle ha sido crado con exito");
-            console.log("CREAR detalle Completo");
-        }, error => {
-            console.log(error.message);
-            this.toastr.error("El detalle no se ha creado");
-        });
+    setDni(dnir) {
+        this.dni = dnir;
     }
-    getIdCabecera() {
-        return this.tipo;
+    getDni() {
+        return this.dni;
     }
     //crear cabecer
     createCabecera(newCabecera) {
@@ -1813,27 +1889,57 @@ let LaboratorioService = class LaboratorioService {
             fecha: newCabecera.fecha,
             tipoExam: newCabecera.tipoExam,
             observaciones: newCabecera.observaciones,
-        }).subscribe(data => {
+        }, this.adminSv.getHeader())
+            .subscribe(data => {
             this.tipo = data.id;
-            console.log("servicio" + data.id);
-            console.log(this.tipo);
-            this.toastr.success("", "Se ha creado la cabecera");
+            console.log("SERVICIO=" + data.id);
             console.log("CREAR Cabecera Completo");
         }, error => {
             this.toastr.error(error);
             console.log(error);
         });
     }
+    getIdCabecera() {
+        return this.tipo;
+    }
+    setIdo(ido) {
+        this.ido = ido;
+    }
+    getIdOrden() {
+        return this.ido;
+    }
+    createDetalle(detalle) {
+        console.log(detalle);
+        this.http.post(this.url + '/ExamenLabDet/', {
+            descripcion: detalle.descripcion,
+            resultado_obtenido: detalle.resultado_obtenido,
+            unidades: detalle.unidades,
+            rango_referencia: detalle.rango_referencia,
+            codigoExam: detalle.codigoExam,
+        }, this.adminSv.getHeader())
+            .subscribe(data => {
+            this.toastr.success("El detalle ha sido crado con exito");
+            console.log("CREAR detalle Completo");
+        }, error => {
+            console.log(error.message);
+            this.toastr.error("El detalle no se ha creado");
+        });
+    }
+    eliminarCabecera(a) {
+        console.log("vino al servicio");
+        return this.http.get(this.url + "/eliminarExamenCompleto/" + a);
+    }
 };
 LaboratorioService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] },
+    { type: _Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_6__["AdministradorService"] }
 ];
 LaboratorioService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"], _Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_6__["AdministradorService"]])
 ], LaboratorioService);
 
 
@@ -2208,7 +2314,7 @@ let ActionsComponent = class ActionsComponent {
         this.onCloseDropdown();
         setTimeout(() => {
             localStorage.removeItem("token");
-            this.toastr.info("Token eliminado", "Hasta luego");
+            this.toastr.info("", "Se ha cerrado Sesion");
             this.router.navigate([layout ? layout : this.layout, link]);
         });
     }
@@ -2389,7 +2495,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/http/http.service */ "./src/app/services/http/http.service.ts");
 /* harmony import */ var _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../services/Administrador/administrador.service */ "./src/app/services/Administrador/administrador.service.ts");
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
+/* harmony import */ var _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../Services/Laboratorio/laboratorio.service */ "./src/app/Services/Laboratorio/laboratorio.service.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
+
 
 
 
@@ -2398,12 +2506,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginFormComponent = class LoginFormComponent {
-    constructor(fb, router, http, toastr, adminSV) {
+    constructor(fb, router, http, toastr, adminSV, labSV) {
         this.fb = fb;
         this.router = router;
         this.http = http;
         this.toastr = toastr;
         this.adminSV = adminSV;
+        this.labSV = labSV;
         http.loadCitas();
         http.loadHistorias();
         http.loadDepartamento();
@@ -2411,6 +2520,8 @@ let LoginFormComponent = class LoginFormComponent {
         adminSV.loadEspecialidades();
         adminSV.loadPersonal();
         adminSV.loadUser();
+        labSV.loadExamen();
+        labSV.loadOrden();
     }
     ngOnInit() {
         this.loginForm = this.fb.group({
@@ -2430,7 +2541,7 @@ let LoginFormComponent = class LoginFormComponent {
                 this.http.triaje = false;
                 this.http.laboratorio = false;
                 this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
-                this.router.navigate(["/vertical/adminUser"]);
+                this.router.navigate(["/vertical/personalAdm"]);
             }
             if (data.tipoUser == "Admision") {
                 this.http.admin = false;
@@ -2441,7 +2552,7 @@ let LoginFormComponent = class LoginFormComponent {
                 this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
                 this.router.navigate(["/vertical/historial"]);
             }
-            if (data.tipoUser == "Consultorio") {
+            if (data.tipoUser == "Consultorio" || data.tipoUser == "Medico") {
                 this.http.admin = false;
                 this.http.admis = false;
                 this.http.consultorio = true;
@@ -2472,6 +2583,9 @@ let LoginFormComponent = class LoginFormComponent {
                 this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
                 this.router.navigate(["/vertical/ordenes"]);
             }
+            if (data.tipoUser != "Laboratorio" && data.tipoUser != "Triaje" && data.tipoUser != "Consultorio" && data.tipoUser != "Medico" && data.tipoUser != "Administrador" && data.tipoUser != "Admision") {
+                this.toastr.error("Usuario:" + lg.get("login").value, "Usuario no registrado");
+            }
             console.log(data.tipoUser);
         });
     }
@@ -2480,8 +2594,9 @@ LoginFormComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"] },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"] },
-    { type: _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_5__["AdministradorService"] }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrService"] },
+    { type: _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_5__["AdministradorService"] },
+    { type: _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_6__["LaboratorioService"] }
 ];
 LoginFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2492,8 +2607,9 @@ LoginFormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
         _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"],
-        ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"],
-        _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_5__["AdministradorService"]])
+        ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrService"],
+        _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_5__["AdministradorService"],
+        _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_6__["LaboratorioService"]])
 ], LoginFormComponent);
 
 
@@ -3698,6 +3814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AreaComponent = class AreaComponent extends _base_page__WEBPACK_IMPORTED_MODULE_1__["BasePageComponent"] {
     constructor(httpSv, admService, toastr, store, modal, formBuilder) {
         super(store, httpSv);
@@ -3707,7 +3824,7 @@ let AreaComponent = class AreaComponent extends _base_page__WEBPACK_IMPORTED_MOD
         this.formBuilder = formBuilder;
         this.data = {};
         this.pageData = {
-            title: "Areas",
+            title: "ÁREAS",
             loaded: true,
             breadcrumbs: [
                 {
@@ -3818,6 +3935,14 @@ let AreaComponent = class AreaComponent extends _base_page__WEBPACK_IMPORTED_MOD
             this.loadAreas();
         }
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 AreaComponent.ctorParameters = () => [
     { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"] },
@@ -3827,6 +3952,12 @@ AreaComponent.ctorParameters = () => [
     { type: _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_7__["TCModalService"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], AreaComponent.prototype, "onKeydownHandler", null);
 AreaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: "app-area",
@@ -3889,6 +4020,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let EditarComponent = class EditarComponent extends _base_page__WEBPACK_IMPORTED_MODULE_2__["BasePageComponent"] {
     constructor(toastr, formBuilder, store, httpSv, modal, fb, http, admService) {
         super(store, httpSv);
@@ -3901,7 +4033,7 @@ let EditarComponent = class EditarComponent extends _base_page__WEBPACK_IMPORTED
         this.data = {};
         this.update = false;
         this.pageData = {
-            title: "Usuarios",
+            title: "",
             loaded: true,
             breadcrumbs: [
                 {
@@ -3978,11 +4110,19 @@ let EditarComponent = class EditarComponent extends _base_page__WEBPACK_IMPORTED
             });
         }
         else {
+            this.toastr.info("Usuarios con: " + this.id, "Buscando...");
             this.httpSv.searchUsers(this.id).subscribe(data => {
-                this.toastr.info("Usuarios con: " + this.id, "Buscando...");
-                this.users = [];
-                this.users = data;
-                console.log(JSON.stringify(data));
+                if (data.length == 0) {
+                    this.toastr.error("No encontrado");
+                    this.loadUsers();
+                }
+                else {
+                    this.users = [];
+                    this.users = data;
+                    this.toastr.success("Encontrado");
+                }
+            }, error => {
+                this.toastr.warning("No encontrado");
             });
         }
     }
@@ -4158,6 +4298,15 @@ let EditarComponent = class EditarComponent extends _base_page__WEBPACK_IMPORTED
             this.users = users.results;
         });
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+            this.closeModalPersonal();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 EditarComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_9__["ToastrService"] },
@@ -4169,6 +4318,12 @@ EditarComponent.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
     { type: _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_10__["AdministradorService"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], EditarComponent.prototype, "onKeydownHandler", null);
 EditarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: "app-editar",
@@ -4226,6 +4381,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import { ConfirmationService } from 'primeng/api';
+
 
 
 
@@ -4353,6 +4509,14 @@ let EspecialidadComponent = class EspecialidadComponent extends _base_page__WEBP
             this.loadEspecialidades();
         }
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 EspecialidadComponent.ctorParameters = () => [
     { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"] },
@@ -4363,6 +4527,12 @@ EspecialidadComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] // private conf: ConfirmationService
      }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], EspecialidadComponent.prototype, "onKeydownHandler", null);
 EspecialidadComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: "app-especialidad",
@@ -4377,6 +4547,49 @@ EspecialidadComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] // private conf: ConfirmationService
     ])
 ], EspecialidadComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/Administrador/personal-adm/personal-adm.component.scss":
+/*!******************************************************************************!*\
+  !*** ./src/app/pages/Administrador/personal-adm/personal-adm.component.scss ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL0FkbWluaXN0cmFkb3IvcGVyc29uYWwtYWRtL3BlcnNvbmFsLWFkbS5jb21wb25lbnQuc2NzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/pages/Administrador/personal-adm/personal-adm.component.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/pages/Administrador/personal-adm/personal-adm.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: PersonalAdmComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PersonalAdmComponent", function() { return PersonalAdmComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let PersonalAdmComponent = class PersonalAdmComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+};
+PersonalAdmComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-personal-adm',
+        template: __webpack_require__(/*! raw-loader!./personal-adm.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/Administrador/personal-adm/personal-adm.component.html"),
+        styles: [__webpack_require__(/*! ./personal-adm.component.scss */ "./src/app/pages/Administrador/personal-adm/personal-adm.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+], PersonalAdmComponent);
 
 
 
@@ -4412,6 +4625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_http_http_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/http/http.service */ "./src/app/services/http/http.service.ts");
 /* harmony import */ var _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../ui/services/modal/modal.service */ "./src/app/ui/services/modal/modal.service.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 
 
 
@@ -4422,10 +4636,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 let PersonalComponent = class PersonalComponent extends _base_page__WEBPACK_IMPORTED_MODULE_1__["BasePageComponent"] {
-    constructor(httpSv, admService, toastr, store, modal, formBuilder // private conf: ConfirmationService
+    constructor(httpSv, http, admService, toastr, store, modal, formBuilder // private conf: ConfirmationService
     ) {
         super(store, httpSv);
+        this.http = http;
         this.admService = admService;
         this.toastr = toastr;
         this.modal = modal;
@@ -4438,7 +4655,7 @@ let PersonalComponent = class PersonalComponent extends _base_page__WEBPACK_IMPO
         this.especialidadesOpt = [];
         this.goToPage = new _angular_core__WEBPACK_IMPORTED_MODULE_3__["EventEmitter"]();
         this.pageData = {
-            title: "Personal",
+            title: "",
             loaded: true,
             breadcrumbs: [
                 {
@@ -4520,6 +4737,12 @@ let PersonalComponent = class PersonalComponent extends _base_page__WEBPACK_IMPO
             this.data = personalLista;
             this.personales = this.data.results;
             // console.log(JSON.stringify(this.personales));
+        });
+    }
+    updateEst() {
+        this.admService.loadUserSP().subscribe(users => {
+            this.users = users;
+            this.loadOptionsUsers();
         });
     }
     loadOptionsUsers() {
@@ -4643,16 +4866,21 @@ let PersonalComponent = class PersonalComponent extends _base_page__WEBPACK_IMPO
             especialidad: [""]
         });
     }
-    //agrega area a la bd
     addAppointment(form) {
-        if (form.valid) {
-            let newAppointment = form.value;
-            console.log(JSON.stringify(newAppointment));
-            this.admService.createPersonal(newAppointment);
-            this.closeModal();
-            this.appointmentForm.reset();
-            this.loadPersonal();
-        }
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (form.valid) {
+                let newAppointment = form.value;
+                // console.log(JSON.stringify(newAppointment));
+                setTimeout(() => {
+                    if (this.admService.createPersonal(newAppointment)) {
+                        this.closeModal();
+                        this.appointmentForm.reset();
+                        this.loadPersonal();
+                    }
+                }, 2000);
+                this.loadPersonal();
+            }
+        });
     }
     //modal vermas
     openModalVerMas(body, header = null, footer = null, row) {
@@ -4680,7 +4908,7 @@ let PersonalComponent = class PersonalComponent extends _base_page__WEBPACK_IMPO
                 data.tipo_personal.nombre ? data.tipo_personal.nombre : "",
                 _angular_forms__WEBPACK_IMPORTED_MODULE_8__["Validators"].required
             ],
-            especialidad: [(especialidad)],
+            especialidad: [especialidad],
             dni: [
                 data.apellido_materno ? data.apellido_materno : "",
                 _angular_forms__WEBPACK_IMPORTED_MODULE_8__["Validators"].required
@@ -4702,9 +4930,19 @@ let PersonalComponent = class PersonalComponent extends _base_page__WEBPACK_IMPO
             estReg: [data.estReg ? data.estReg : "", _angular_forms__WEBPACK_IMPORTED_MODULE_8__["Validators"].required]
         });
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+            this.closeModalP();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 PersonalComponent.ctorParameters = () => [
     { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClient"] },
     { type: _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_4__["AdministradorService"] },
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] },
     { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_2__["Store"] },
@@ -4712,6 +4950,12 @@ PersonalComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] // private conf: ConfirmationService
      }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], PersonalComponent.prototype, "onKeydownHandler", null);
 PersonalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: "app-personal",
@@ -4719,6 +4963,7 @@ PersonalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./personal.component.scss */ "./src/app/pages/Administrador/personal/personal.component.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_http_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClient"],
         _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_4__["AdministradorService"],
         ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"],
         _ngrx_store__WEBPACK_IMPORTED_MODULE_2__["Store"],
@@ -4771,6 +5016,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let TipoPersonalComponent = class TipoPersonalComponent extends _base_page__WEBPACK_IMPORTED_MODULE_1__["BasePageComponent"] {
     constructor(httpSv, admService, toastr, store, modal, formBuilder) {
         super(store, httpSv);
@@ -4780,7 +5026,7 @@ let TipoPersonalComponent = class TipoPersonalComponent extends _base_page__WEBP
         this.formBuilder = formBuilder;
         this.data = {};
         this.pageData = {
-            title: "Tipo Personal",
+            title: "Tipo Usuario",
             loaded: true,
             breadcrumbs: [
                 {
@@ -4876,7 +5122,7 @@ let TipoPersonalComponent = class TipoPersonalComponent extends _base_page__WEBP
     initForm() {
         // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
         this.appointmentForm = this.formBuilder.group({
-            nombre: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_8__["Validators"].required]
+            nombre: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_8__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_8__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]]
         });
     }
     // Agrega un tipo a la bd
@@ -4891,6 +5137,14 @@ let TipoPersonalComponent = class TipoPersonalComponent extends _base_page__WEBP
             this.loadTipopersonal();
         }
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 TipoPersonalComponent.ctorParameters = () => [
     { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_6__["HttpService"] },
@@ -4900,6 +5154,12 @@ TipoPersonalComponent.ctorParameters = () => [
     { type: _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_7__["TCModalService"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], TipoPersonalComponent.prototype, "onKeydownHandler", null);
 TipoPersonalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: "app-tipo-personal",
@@ -4951,6 +5211,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
 /* harmony import */ var _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../services/Administrador/administrador.service */ "./src/app/services/Administrador/administrador.service.ts");
 /* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../config/API */ "./src/app/config/API.ts");
+
 
 
 
@@ -5062,9 +5323,14 @@ let CitasComponent = class CitasComponent extends _base_page__WEBPACK_IMPORTED_M
         }
         else {
             this.httpSv.searchCitaEsp(this.campo).subscribe(data => {
-                this.data = data;
-                this.citasEdit = data.results;
-                this.toastr.warning("Buscando Citas", "Especialidad: " + valor);
+                if (data.results.length == 0) {
+                    this.toastr.error("No se han encontrado coincidencias");
+                }
+                else {
+                    this.data = data;
+                    this.citasEdit = data.results;
+                    this.toastr.success("Datos encontrados");
+                }
             });
         }
     }
@@ -5075,15 +5341,16 @@ let CitasComponent = class CitasComponent extends _base_page__WEBPACK_IMPORTED_M
             this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
         }
         else {
+            this.toastr.warning("Buscando Citas", "DNI: " + valor);
             this.httpSv.searchCitaDNI(this.campo).subscribe(data => {
-                if (this.data.results == null) {
+                if (this.data.results.length == 0) {
                     this.toastr.info("No se encontraron coincidencias");
                     this.loadCitas();
                 }
                 else {
                     this.data = data;
                     this.citasEdit = data.results;
-                    this.toastr.warning("Buscando Citas", "DNI: " + valor);
+                    this.toastr.warning("Datos encontrados");
                 }
             });
         }
@@ -5270,6 +5537,15 @@ let CitasComponent = class CitasComponent extends _base_page__WEBPACK_IMPORTED_M
             this.closeModalConf();
         });
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+            this.closeModalConf();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 CitasComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
@@ -5281,6 +5557,12 @@ CitasComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_9__["ToastrService"] },
     { type: _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_10__["AdministradorService"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], CitasComponent.prototype, "onKeydownHandler", null);
 CitasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: "app-citas",
@@ -5346,6 +5628,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let ConexionLaboratorioComponent = class ConexionLaboratorioComponent extends _base_page__WEBPACK_IMPORTED_MODULE_2__["BasePageComponent"] {
     constructor(store, httpSv, labService, modal, modalCita, formBuilder, http, toastr, router) {
         super(store, httpSv);
@@ -5395,7 +5678,7 @@ let ConexionLaboratorioComponent = class ConexionLaboratorioComponent extends _b
         this.solicitudes = [];
         this.loadSolici();
         this.loadData();
-        // this.loadData();
+        this.initBusForm();
     }
     ngOnChanges(changes) {
         throw new Error("Method not implemented.");
@@ -5513,8 +5796,8 @@ let ConexionLaboratorioComponent = class ConexionLaboratorioComponent extends _b
     initHistoriaFormExtra() {
         this.today = new Date();
         this.historiaFormE = this.formBuilder.group({
-            dni: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
-            nombre: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            dni: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern("[0-9]*")]],
+            nombre: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
             fecha: [Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             tipoExam: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
         });
@@ -5527,6 +5810,39 @@ let ConexionLaboratorioComponent = class ConexionLaboratorioComponent extends _b
             newOrden.fechaA = form.get('fecha').value;
             newOrden.tipoExam = parseInt(form.get('tipoExam').value);
             this.httpSv.createOrden(newOrden, this.modal);
+        }
+    }
+    initBusForm() {
+        this.busForm = this.formBuilder.group({
+            datoBus: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]]
+        });
+    }
+    buscar(ab) {
+        this.bus = ab.get("datoBus").value;
+        console.log(this.bus);
+        this.httpSv.searchSol(this.bus).subscribe(data => {
+            if (this.bus == "") {
+                this.toastr.info("No se ha ingresado ningun texto");
+            }
+            else {
+                if (data.results[0] == null) {
+                    this.toastr.error("No se han encontrado coincidencias");
+                    this.loadSolici();
+                }
+                else {
+                    this.solicitudes = [];
+                    this.solicitudes = data.results;
+                    this.toastr.info("Mostrando resultados");
+                }
+            }
+        });
+    }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModalH();
+        }
+        if (event.key === "Enter") {
+            return false;
         }
     }
 };
@@ -5549,6 +5865,12 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("modalFooter", { static: true }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
 ], ConexionLaboratorioComponent.prototype, "modalFooter", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], ConexionLaboratorioComponent.prototype, "onKeydownHandler", null);
 ConexionLaboratorioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-conexion-laboratorio',
@@ -5565,6 +5887,389 @@ ConexionLaboratorioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"](
         ngx_toastr__WEBPACK_IMPORTED_MODULE_9__["ToastrService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"]])
 ], ConexionLaboratorioComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/Admision/historial-citas/historial-citas.component.scss":
+/*!*******************************************************************************!*\
+  !*** ./src/app/pages/Admision/historial-citas/historial-citas.component.scss ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ":root {\n  --main-color: main-palette(500);\n  --main-bg: #fff;\n  --boxed-width: 1140px; }\n\n:host {\n  display: block;\n  margin: 0;\n  padding: 0; }\n\n:host .table-wrap {\n    display: block;\n    margin: -10px;\n    overflow: auto;\n    padding: 10px; }\n\n:host .table-wrap .table-box {\n      border-color: #fff;\n      border-radius: 6px;\n      overflow: auto;\n      width: 100%; }\n\n:host .table-wrap .table-box tr {\n        transition: background 0.2s ease-in-out, border 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;\n        will-change: background, border, box-shadow, color;\n        width: 100%; }\n\n:host .table-wrap .table-box tr th,\n        :host .table-wrap .table-box tr td {\n          text-align: center;\n          border: 0;\n          border-bottom: 2px solid #fff;\n          padding: 0.71428571rem; }\n\n:host .table-wrap .table-box tr th:first-child,\n          :host .table-wrap .table-box tr td:first-child {\n            padding-left: 1.42857143rem; }\n\n:host .table-wrap .table-box tr th:last-child,\n          :host .table-wrap .table-box tr td:last-child {\n            padding-right: 1.42857143rem; }\n\n:host .table-wrap .table-box tr th {\n          background: rgba(31, 32, 34, 0.1);\n          color: #1f2022;\n          position: relative; }\n\n:host .table-wrap .table-box tr td {\n          background: rgba(235, 235, 235, 0.3); }\n\n:host .table-wrap .table-box tbody tr:last-child th,\n      :host .table-wrap .table-box tbody tr:last-child td {\n        border-bottom: none; }\n\ntbody tr:hover {\n  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);\n  transform: scale(1);\n  z-index: 1; }\n\n:host {\n  display: block;\n  margin-top: 1.42857143rem;\n  padding: 0; }\n\n:host .pagination-ul {\n    list-style-type: none;\n    display: flex;\n    margin: 0 -0.17857143rem;\n    padding: 0; }\n\n:host .pagination-ul .pagination-li {\n      margin: 0 0.17857143rem; }\n\n:host .pagination-ul .pagination-li .pagination-link {\n        background: #d4d3d3;\n        border-radius: 500px;\n        color: #fff;\n        cursor: pointer;\n        display: block;\n        min-width: 2.14285714rem;\n        padding: 0.35714286rem;\n        text-align: center;\n        text-decoration: none;\n        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; }\n\n:host .pagination-ul .pagination-li .pagination-link:hover, :host .pagination-ul .pagination-li .pagination-link.active {\n          background: #336cfb;\n          color: #ffffff; }\n\n:host .pagination-ul .pagination-li .pagination-link.disabled {\n          background: rgba(212, 211, 211, 0.6);\n          color: #fff;\n          pointer-events: none; }\n\n:host .add-action-box {\n  bottom: 38.57142857rem;\n  position: fixed;\n  right: 2.85714286rem;\n  z-index: 9997; }\n\n:host .add-action-box .tc-btn {\n    font-size: 14px; }\n\n:host .add-action-box1 {\n  bottom: 38.57142857rem;\n  position: fixed;\n  right: 12.85714286rem;\n  z-index: 9997; }\n\n:host .add-action-box1 .tc-btn {\n    font-size: 14px; }\n\n.new-doctor-form .avatar-box {\n  align-items: center;\n  display: flex; }\n\n.new-doctor-form .social-list .social-item {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvQWRtaXNpb24vaGlzdG9yaWFsLWNpdGFzL0Q6XFxQcm95ZWN0b3NcXEhvc3BpdGFsXFxIb3NwaXRhbEFwcFxcaG9zcGl0YWwtdW5zYS1mcm9udGVuZC9zcmNcXGFzc2V0c1xcc2Fzc1xcX3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9wYWdlcy9BZG1pc2lvbi9oaXN0b3JpYWwtY2l0YXMvRDpcXFByb3llY3Rvc1xcSG9zcGl0YWxcXEhvc3BpdGFsQXBwXFxob3NwaXRhbC11bnNhLWZyb250ZW5kL3NyY1xcYXBwXFxwYWdlc1xcQWRtaXNpb25cXGhpc3RvcmlhbC1jaXRhc1xcaGlzdG9yaWFsLWNpdGFzLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQWtGQTtFQUNFLCtCQUFhO0VBQ2IsZUFBVTtFQUNWLHFCQUFjLEVBQUE7O0FDcEVoQjtFQUNFLGNBQWM7RUFDZCxTQUFTO0VBQ1QsVUFBVSxFQUFBOztBQUhaO0lBTUksY0FBYztJQUNkLGFBQWE7SUFDYixjQUFjO0lBQ2QsYUFBYSxFQUFBOztBQVRqQjtNQVlNLGtCQXJCaUI7TUFzQmpCLGtCRDZFSztNQzVFTCxjQUFjO01BQ2QsV0FBVyxFQUFBOztBQWZqQjtRQWlCUSxxSEQ0RWU7UUMxRWYsa0RBQWtEO1FBQ2xELFdBQVcsRUFBQTs7QUFwQm5COztVQXdCVSxrQkFBa0I7VUFDbEIsU0FBUztVQUNULDZCQW5DYTtVQW9DYixzQkQ4RDhCLEVBQUE7O0FDekZ4Qzs7WUE4QlksMkJBQThCLEVBQUE7O0FBOUIxQzs7WUFpQ1ksNEJBQStCLEVBQUE7O0FBakMzQztVQXFDVSxpQ0Q3Q0s7VUM4Q0wsY0Q5Q0s7VUMrQ0wsa0JBQWtCLEVBQUE7O0FBdkM1QjtVQTBDVSxvQ0F0RFEsRUFBQTs7QUFZbEI7O1FBa0RjLG1CQUFtQixFQUFBOztBQVFqQztFQUVJLHVDQTdEd0I7RUE4RHhCLG1CQUFtQjtFQUNuQixVQUFVLEVBQUE7O0FBYWQ7RUFDRSxjQUFjO0VBQ2QseUJBQTRCO0VBQzVCLFVBQVUsRUFBQTs7QUFIWjtJQU1JLHFCQUFxQjtJQUNyQixhQUFhO0lBQ2Isd0JBQTZCO0lBQzdCLFVBQVUsRUFBQTs7QUFUZDtNQVlNLHVCQUE0QixFQUFBOztBQVpsQztRQWVRLG1CQXpCSztRQTBCTCxvQkFuQk07UUFvQk4sV0ExQks7UUEyQkwsZUFBZTtRQUNmLGNBQWM7UUFDZCx3QkFBMkI7UUFDM0Isc0JBQTJCO1FBQzNCLGtCQUFrQjtRQUNsQixxQkFBcUI7UUFDckIscUVETmUsRUFBQTs7QUNsQnZCO1VBNkJVLG1CRHhFSztVQ3lFTCxjRDFETyxFQUFBOztBQzRCakI7VUFpQ1Usb0NBM0NHO1VBNENILFdBM0NHO1VBNENILG9CQUFvQixFQUFBOztBQU05QjtFQUVJLHNCQUF3QjtFQUN4QixlQUFlO0VBQ2Ysb0JBQXNCO0VBQ3RCLGFBQWEsRUFBQTs7QUFMakI7SUFRTSxlQUFlLEVBQUE7O0FBUnJCO0VBWUksc0JBQXdCO0VBQ3hCLGVBQWU7RUFDZixxQkFBdUI7RUFDdkIsYUFBYSxFQUFBOztBQWZqQjtJQWtCTSxlQUFlLEVBQUE7O0FBSXJCO0VBRUksbUJBQW1CO0VBQ25CLGFBQWEsRUFBQTs7QUFIakI7RUFPTSwyQ0FBa0MsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL0FkbWlzaW9uL2hpc3RvcmlhbC1jaXRhcy9oaXN0b3JpYWwtY2l0YXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuL21peGlucyc7XHJcblxyXG4vL01haW4gcGFsZXR0ZVxyXG4kcGFsZXR0ZTogKFxyXG4gIDUwIDogI2U0ZTRlNCxcclxuICAxMDAgOiAjYmNiY2JkLFxyXG4gIDIwMCA6ICM4ZjkwOTEsXHJcbiAgMzAwIDogIzYyNjM2NCxcclxuICA0MDAgOiAjNDE0MTQzLFxyXG4gIDUwMCA6ICMxZjIwMjIsXHJcbiAgNjAwIDogIzFiMWMxZSxcclxuICA3MDAgOiAjMTcxODE5LFxyXG4gIDgwMCA6ICMxMjEzMTQsXHJcbiAgOTAwIDogIzBhMGIwYyxcclxuICBBMTAwIDogIzUyZmZmZixcclxuICBBMjAwIDogIzFmZmZmZixcclxuICBBNDAwIDogIzAwZWJlYixcclxuICBBNzAwIDogIzAwZDJkMixcclxuICBjb250cmFzdDogKFxyXG4gICAgNTAgOiAjMDAwMDAwLFxyXG4gICAgMTAwIDogIzAwMDAwMCxcclxuICAgIDIwMCA6ICMwMDAwMDAsXHJcbiAgICAzMDAgOiAjZmZmZmZmLFxyXG4gICAgNDAwIDogI2ZmZmZmZixcclxuICAgIDUwMCA6ICNmZmZmZmYsXHJcbiAgICA2MDAgOiAjZmZmZmZmLFxyXG4gICAgNzAwIDogI2ZmZmZmZixcclxuICAgIDgwMCA6ICNmZmZmZmYsXHJcbiAgICA5MDAgOiAjZmZmZmZmLFxyXG4gICAgQTEwMCA6ICMwMDAwMDAsXHJcbiAgICBBMjAwIDogIzAwMDAwMCxcclxuICAgIEE0MDAgOiAjMDAwMDAwLFxyXG4gICAgQTcwMCA6ICMwMDAwMDAsXHJcbiAgKVxyXG4pO1xyXG5AZnVuY3Rpb24gbWFpbi1wYWxldHRlKCRrZXk6ICRwYWxldHRlKSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRwYWxldHRlLCAka2V5KTtcclxufVxyXG5AZnVuY3Rpb24gbWFpbi1jb250cmFzdCgka2V5OiAkcGFsZXR0ZSkge1xyXG4gIEByZXR1cm4gbWFwLWdldChtYXAtZ2V0KCRwYWxldHRlLCBjb250cmFzdCksICRrZXkpO1xyXG59XHJcblxyXG4vL0FjY2VudCBwYWxldHRlXHJcbiRhY2NlbnQtcGFsZXR0ZTogKFxyXG4gIDUwIDogI2U3ZWRmZixcclxuICAxMDAgOiAjYzJkM2ZlLFxyXG4gIDIwMCA6ICM5OWI2ZmQsXHJcbiAgMzAwIDogIzcwOThmYyxcclxuICA0MDAgOiAjNTI4MmZjLFxyXG4gIDUwMCA6ICMzMzZjZmIsXHJcbiAgNjAwIDogIzJlNjRmYSxcclxuICA3MDAgOiAjMjc1OWZhLFxyXG4gIDgwMCA6ICMyMDRmZjksXHJcbiAgOTAwIDogIzE0M2RmOCxcclxuICBBMTAwIDogI2ZmZmZmZixcclxuICBBMjAwIDogI2Y0ZjZmZixcclxuICBBNDAwIDogI2MxY2FmZixcclxuICBBNzAwIDogI2E3YjRmZixcclxuICBjb250cmFzdDogKFxyXG4gICAgNTAgOiAjMDAwMDAwLFxyXG4gICAgMTAwIDogIzAwMDAwMCxcclxuICAgIDIwMCA6ICMwMDAwMDAsXHJcbiAgICAzMDAgOiAjMDAwMDAwLFxyXG4gICAgNDAwIDogIzAwMDAwMCxcclxuICAgIDUwMCA6ICNmZmZmZmYsXHJcbiAgICA2MDAgOiAjZmZmZmZmLFxyXG4gICAgNzAwIDogI2ZmZmZmZixcclxuICAgIDgwMCA6ICNmZmZmZmYsXHJcbiAgICA5MDAgOiAjZmZmZmZmLFxyXG4gICAgQTEwMCA6ICMwMDAwMDAsXHJcbiAgICBBMjAwIDogIzAwMDAwMCxcclxuICAgIEE0MDAgOiAjMDAwMDAwLFxyXG4gICAgQTcwMCA6ICMwMDAwMDAsXHJcbiAgKVxyXG4pO1xyXG5AZnVuY3Rpb24gYWNjZW50LXBhbGV0dGUoJGtleTogJGFjY2VudC1wYWxldHRlKSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRhY2NlbnQtcGFsZXR0ZSwgJGtleSk7XHJcbn1cclxuQGZ1bmN0aW9uIGFjY2VudC1jb250cmFzdCgka2V5OiAkYWNjZW50LXBhbGV0dGUpIHtcclxuICBAcmV0dXJuIG1hcC1nZXQobWFwLWdldCgkYWNjZW50LXBhbGV0dGUsIGNvbnRyYXN0KSwgJGtleSk7XHJcbn1cclxuXHJcbjpyb290IHtcclxuICAtLW1haW4tY29sb3I6IG1haW4tcGFsZXR0ZSg1MDApO1xyXG4gIC0tbWFpbi1iZzogI2ZmZjtcclxuICAtLWJveGVkLXdpZHRoOiAxMTQwcHg7XHJcbn1cclxuJG1haW4tY29sb3I6IG1haW4tcGFsZXR0ZSg1MDApO1xyXG4kbWFpbi1iZzogI2ZmZjtcclxuJGJveGVkLXdpZHRoOiAxMTQwcHg7XHJcblxyXG4kc3VjY2Vzcy1jb2xvcjogI2I3Y2U2MztcclxuJHN1Y2Nlc3MtY29udHJhc3Q6ICMwMDA7XHJcbiRpbmZvLWNvbG9yOiAjNjRCNUY2O1xyXG4kaW5mby1jb250cmFzdDogIzAwMDtcclxuJHdhcm5pbmctY29sb3I6ICNlOWUxNjU7XHJcbiR3YXJuaW5nLWNvbnRyYXN0OiAjMDAwO1xyXG4kZXJyb3ItY29sb3I6ICNlZDU1NjQ7XHJcbiRlcnJvci1jb250cmFzdDogI2ZmZjtcclxuXHJcbi8vTWFpblxyXG4kbWFpbi1mczogMTRweDtcclxuJG1haW4tZmY6ICdMYXRvJywgc2Fucy1zZXJpZjtcclxuJG1haW4tZnc6IDQwMDtcclxuJG1vZHVsZTogMTBweDtcclxuJG1haW4tbGg6ICgkbW9kdWxlICogMiAvICRtYWluLWZzKTtcclxuJG1vZHVsZS1yZW06ICgkbW9kdWxlIC8gJG1haW4tZnMpICogMXJlbTtcclxuJHNoYXBlOiA2cHg7XHJcbiRzaGFkb3c6IDAgMThweCAyNHB4IHJnYmEoIzAwMCwuMTIpO1xyXG4kc2hhZG93LWhvdmVyOiAwcHggOHB4IDI0cHggcmdiYSgjMDAwLC4xMik7XHJcbiRhbmltYXRpb246IGVhc2UtaW4tb3V0O1xyXG5cclxuLy9TZWNvbmRcclxuJHNlY29uZC1mZjogJG1haW4tZmY7XHJcblxyXG5cclxuLy9NZWRpYVxyXG4kbWF4NTQzIDogb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDU0M3B4KTtcclxuJG1pbjU0NCA6IG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA1NDRweCk7XHJcbiRtYXg3NjcgOiBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3cHgpO1xyXG4kbWluNzY4IDogb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KTtcclxuJG1heDk5MSA6IG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA5OTFweCk7XHJcbiRtaW45OTIgOiBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTkycHgpO1xyXG4kbWF4MTE5OSA6IG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAxMTk5cHgpO1xyXG4kbWluMTIwMCA6IG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMjAwcHgpO1xyXG5cclxuLy9IZWFkZXJzXHJcbiRoZWFkZXJzLWZmOiAkc2Vjb25kLWZmO1xyXG4kaGVhZGVycy1mdzogNzAwO1xyXG5cclxuLy9OYXZiYXJcclxuJG5hdmJhci1iZzogI2VlZWVlZjtcclxuJG5hdmJhci1jb2xvcjogcmdiYShtYWluLXBhbGV0dGUoNTAwKSwuNSk7XHJcbiR2ZXJ0aWNhbC1uYXZiYXItd2lkdGg6ICRtb2R1bGUtcmVtICogMjQ7XHJcblxyXG4vL0Zvb3RlclxyXG4kZm9vdGVyLWhlaWdodDogJG1vZHVsZS1yZW0gKiA2O1xyXG5cclxuLy9QcmVsb2FkZXJcclxuJGxvYWRlci1vdmVybGF5LWJnOiAjZmZmO1xyXG4kbG9hZGVyLWNvbG9yOiBhY2NlbnQtcGFsZXR0ZSg1MDApO1xyXG5cclxuIiwiLy8gQGltcG9ydCAnLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3ByaW1lbmcvcmVzb3VyY2VzL3ByaW1lbmcuY3NzJztcclxuLy8gQGltcG9ydCAnLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3ByaW1laWNvbnMvcHJpbWVpY29ucy5jc3MnO1xyXG5AaW1wb3J0IFwifmFzc2V0cy9zYXNzL3ZhcmlhYmxlc1wiO1xyXG5cclxuJF9tb2R1bGUtcmVtOiAkbW9kdWxlLXJlbTtcclxuJF9iZzogcmdiYSgjZWJlYmViLCAwLjMpO1xyXG4kX2JvcmRlci1jb2xvcjogI2ViZWJlYjtcclxuJF9ib3JkZXItd2lkdGg6IDJweDtcclxuJF90ZC1ib3JkZXItY29sb3I6ICNmZmY7XHJcbiRfdGQtYm9yZGVyLXdpZHRoOiAycHg7XHJcbiRfaGVhZGVyLWJnOiByZ2JhKG1haW4tcGFsZXR0ZSg1MDApLCAwLjEpO1xyXG4kX2hlYWRlci1jb2xvcjogbWFpbi1wYWxldHRlKDUwMCk7XHJcbiRfc3RyaXBlZC1iZzogcmdiYShtYWluLXBhbGV0dGUoNTAwKSwgMC4wOCk7XHJcblxyXG4kX3NoYXBlOiAkc2hhcGU7XHJcbiRfYW5pbWF0aW9uOiAkYW5pbWF0aW9uO1xyXG4kX3NoYWRvdzogMCAwIDEwcHggcmdiYSgjMDAwLCAwLjUpO1xyXG46aG9zdCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luOiAwO1xyXG4gIHBhZGRpbmc6IDA7XHJcblxyXG4gIC50YWJsZS13cmFwIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgbWFyZ2luOiAtMTBweDtcclxuICAgIG92ZXJmbG93OiBhdXRvO1xyXG4gICAgcGFkZGluZzogMTBweDtcclxuXHJcbiAgICAudGFibGUtYm94IHtcclxuICAgICAgYm9yZGVyLWNvbG9yOiAkX3RkLWJvcmRlci1jb2xvcjtcclxuICAgICAgYm9yZGVyLXJhZGl1czogJF9zaGFwZTtcclxuICAgICAgb3ZlcmZsb3c6IGF1dG87XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICB0ciB7XHJcbiAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZCAwLjJzICRfYW5pbWF0aW9uLCBib3JkZXIgMC4ycyAkX2FuaW1hdGlvbiwgYm94LXNoYWRvdyAwLjJzICRfYW5pbWF0aW9uLFxyXG4gICAgICAgICAgY29sb3IgMC4ycyAkX2FuaW1hdGlvbjtcclxuICAgICAgICB3aWxsLWNoYW5nZTogYmFja2dyb3VuZCwgYm9yZGVyLCBib3gtc2hhZG93LCBjb2xvcjtcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuXHJcbiAgICAgICAgdGgsXHJcbiAgICAgICAgdGQge1xyXG4gICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgICAgICAgYm9yZGVyOiAwO1xyXG4gICAgICAgICAgYm9yZGVyLWJvdHRvbTogJF90ZC1ib3JkZXItd2lkdGggc29saWQgJF90ZC1ib3JkZXItY29sb3I7XHJcbiAgICAgICAgICBwYWRkaW5nOiAkX21vZHVsZS1yZW07XHJcblxyXG4gICAgICAgICAgJjpmaXJzdC1jaGlsZCB7XHJcbiAgICAgICAgICAgIHBhZGRpbmctbGVmdDogJF9tb2R1bGUtcmVtICogMjtcclxuICAgICAgICAgIH1cclxuICAgICAgICAgICY6bGFzdC1jaGlsZCB7XHJcbiAgICAgICAgICAgIHBhZGRpbmctcmlnaHQ6ICRfbW9kdWxlLXJlbSAqIDI7XHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgfVxyXG4gICAgICAgIHRoIHtcclxuICAgICAgICAgIGJhY2tncm91bmQ6ICRfaGVhZGVyLWJnO1xyXG4gICAgICAgICAgY29sb3I6ICRfaGVhZGVyLWNvbG9yO1xyXG4gICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICAgIH1cclxuICAgICAgICB0ZCB7XHJcbiAgICAgICAgICBiYWNrZ3JvdW5kOiAkX2JnO1xyXG4gICAgICAgIH1cclxuICAgICAgfVxyXG4gICAgICB0Ym9keSB7XHJcbiAgICAgICAgdHIge1xyXG4gICAgICAgICAgJjpsYXN0LWNoaWxkIHtcclxuICAgICAgICAgICAgdGgsXHJcbiAgICAgICAgICAgIHRkIHtcclxuICAgICAgICAgICAgICBib3JkZXItYm90dG9tOiBub25lO1xyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgICB9XHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbnRib2R5IHtcclxuICB0cjpob3ZlciB7XHJcbiAgICBib3gtc2hhZG93OiAkX3NoYWRvdztcclxuICAgIHRyYW5zZm9ybTogc2NhbGUoMSk7XHJcbiAgICB6LWluZGV4OiAxO1xyXG4gIH1cclxufVxyXG4kX2JnOiAjZDRkM2QzO1xyXG4kX2NvbG9yOiAjZmZmO1xyXG4kX2JnLWFjdGl2ZTogYWNjZW50LXBhbGV0dGUoNTAwKTtcclxuJF9jb2xvci1hY2xpdmU6IGFjY2VudC1jb250cmFzdCg1MDApO1xyXG4kX2JnLWRpc2FibGVkOiByZ2JhKCRfYmcsIDAuNik7XHJcbiRfY29sb3ItZGlzYWJsZWQ6ICRfY29sb3I7XHJcbiRfbW9kdWxlLXJlbTogJG1vZHVsZS1yZW07XHJcbiRfc2hhcGU6IDUwMHB4O1xyXG4kX2FuaW1hdGlvbjogJGFuaW1hdGlvbjtcclxuXHJcbjpob3N0IHtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBtYXJnaW4tdG9wOiAkX21vZHVsZS1yZW0gKiAyO1xyXG4gIHBhZGRpbmc6IDA7XHJcblxyXG4gIC5wYWdpbmF0aW9uLXVsIHtcclxuICAgIGxpc3Qtc3R5bGUtdHlwZTogbm9uZTtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBtYXJnaW46IDAgKC0kX21vZHVsZS1yZW0gLyA0KTtcclxuICAgIHBhZGRpbmc6IDA7XHJcblxyXG4gICAgLnBhZ2luYXRpb24tbGkge1xyXG4gICAgICBtYXJnaW46IDAgKCRfbW9kdWxlLXJlbSAvIDQpO1xyXG5cclxuICAgICAgLnBhZ2luYXRpb24tbGluayB7XHJcbiAgICAgICAgYmFja2dyb3VuZDogJF9iZztcclxuICAgICAgICBib3JkZXItcmFkaXVzOiAkX3NoYXBlO1xyXG4gICAgICAgIGNvbG9yOiAkX2NvbG9yO1xyXG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgICAgICBtaW4td2lkdGg6ICRfbW9kdWxlLXJlbSAqIDM7XHJcbiAgICAgICAgcGFkZGluZzogKCRfbW9kdWxlLXJlbSAvIDIpO1xyXG4gICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICAgICAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZC1jb2xvciAwLjJzICRfYW5pbWF0aW9uLCBjb2xvciAwLjJzICRfYW5pbWF0aW9uO1xyXG5cclxuICAgICAgICAmOmhvdmVyLFxyXG4gICAgICAgICYuYWN0aXZlIHtcclxuICAgICAgICAgIC8vIGJhY2tncm91bmQ6IHJnYigyNTUsIDE5MCwgNTApO1xyXG4gICAgICAgICAgYmFja2dyb3VuZDogJF9iZy1hY3RpdmU7XHJcbiAgICAgICAgICBjb2xvcjogJF9jb2xvci1hY2xpdmU7XHJcbiAgICAgICAgfVxyXG4gICAgICAgICYuZGlzYWJsZWQge1xyXG4gICAgICAgICAgYmFja2dyb3VuZDogJF9iZy1kaXNhYmxlZDtcclxuICAgICAgICAgIGNvbG9yOiAkX2NvbG9yLWRpc2FibGVkO1xyXG4gICAgICAgICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbjpob3N0IHtcclxuICAuYWRkLWFjdGlvbi1ib3gge1xyXG4gICAgYm90dG9tOiAkbW9kdWxlLXJlbSAqIDU0O1xyXG4gICAgcG9zaXRpb246IGZpeGVkO1xyXG4gICAgcmlnaHQ6ICRtb2R1bGUtcmVtICogNDtcclxuICAgIHotaW5kZXg6IDk5OTc7XHJcblxyXG4gICAgLnRjLWJ0biB7XHJcbiAgICAgIGZvbnQtc2l6ZTogMTRweDtcclxuICAgIH1cclxuICB9XHJcbiAgLmFkZC1hY3Rpb24tYm94MSB7XHJcbiAgICBib3R0b206ICRtb2R1bGUtcmVtICogNTQ7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICByaWdodDogJG1vZHVsZS1yZW0gKiAxODtcclxuICAgIHotaW5kZXg6IDk5OTc7XHJcblxyXG4gICAgLnRjLWJ0biB7XHJcbiAgICAgIGZvbnQtc2l6ZTogMTRweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuLm5ldy1kb2N0b3ItZm9ybSB7XHJcbiAgLmF2YXRhci1ib3gge1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgfVxyXG4gIC5zb2NpYWwtbGlzdCB7XHJcbiAgICAuc29jaWFsLWl0ZW0ge1xyXG4gICAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgcmdiYSgjMDAwLC4xKTtcclxuICAgIH1cclxuICB9XHJcbn1cclxuXHJcbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/pages/Admision/historial-citas/historial-citas.component.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/app/pages/Admision/historial-citas/historial-citas.component.ts ***!
+  \*****************************************************************************/
+/*! exports provided: HistorialCitasComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HistorialCitasComponent", function() { return HistorialCitasComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _base_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../base-page */ "./src/app/pages/base-page/index.ts");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm2015/store.js");
+/* harmony import */ var _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/http/http.service */ "./src/app/services/http/http.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../ui/services/modal/modal.service */ "./src/app/ui/services/modal/modal.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
+/* harmony import */ var _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../services/Administrador/administrador.service */ "./src/app/services/Administrador/administrador.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../config/API */ "./src/app/config/API.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let HistorialCitasComponent = class HistorialCitasComponent extends _base_page__WEBPACK_IMPORTED_MODULE_2__["BasePageComponent"] {
+    constructor(formBuilder, store, httpSv, modal, fb, http, toastr, 
+    // private conf: ConfirmationService,
+    admService, router) {
+        super(store, httpSv);
+        this.formBuilder = formBuilder;
+        this.modal = modal;
+        this.fb = fb;
+        this.http = http;
+        this.toastr = toastr;
+        this.admService = admService;
+        this.router = router;
+        this.medSelectedName = {};
+        this.espSelectedName = {};
+        this.cita = {};
+        this.citasEdit = [];
+        this.especialidades = [];
+        this.medicos = [];
+        this.opBus = "";
+        this.data = {};
+        this.pageData = {
+            title: "Historial de Citas",
+            loaded: true,
+            breadcrumbs: [
+                {
+                    title: "UI Kit",
+                    route: "default-dashboard"
+                },
+                {
+                    title: "Tables",
+                    route: "default-dashboard"
+                },
+                {
+                    title: "Historial de Citas"
+                },
+                {
+                    title: "Search"
+                }
+            ]
+        };
+        this.opBus = "0";
+        this.tableData = [];
+        this.citas = [];
+        this.loadCitas();
+        this.espOption = [];
+        this.medOption = [];
+        this.multiple = false;
+        this.httpSv.loadEspecialidadesSP().subscribe(especialidades => {
+            this.especialidades = especialidades;
+            this.loadOptionsEsp();
+        });
+        this.httpSv.loadMedicoSP().subscribe(medicos => {
+            this.medicos = medicos;
+            this.loadOptionsMed();
+        });
+        this.pageNum = 1;
+        this.httpSv.cancelarCitasPasadas();
+    }
+    ngOnChanges(changes) {
+        throw new Error("Method not implemented.");
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        this.store.select("citas").subscribe(citas => {
+            if (citas && citas.length) {
+                this.citas = citas;
+                !this.pageData.loaded ? this.setLoaded() : null;
+            }
+        });
+        this.getData("assets/data/opcionBusquedaCita.json", "busqOption");
+        this.initBusForm();
+    }
+    initBusForm() {
+        this.busForm = this.formBuilder.group({
+            opBus: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            campo: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]
+        });
+    }
+    selectOpt() {
+        this.opBus = this.busForm.get("opBus").value;
+    }
+    ngOnDestroy() {
+        super.ngOnDestroy();
+    }
+    buscar(busca) {
+        this.campo = busca.get("campo").value;
+        // console.log("entra" + this.opBus + " " + this.campo);
+        if (this.opBus == "1") {
+            this.buscarDNI(this.campo);
+        }
+        if (this.opBus == "2") {
+            this.buscarEsp(this.campo);
+        }
+    }
+    buscarEsp(valor) {
+        // console.log(this.campo);
+        if (this.campo === "" || this.campo === undefined) {
+            this.loadCitas();
+            this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
+        }
+        else {
+            this.httpSv.searchCitaEsp(this.campo).subscribe(data => {
+                this.data = data;
+                this.citasEdit = data.results;
+                this.toastr.warning("Buscando Citas", "Especialidad: " + valor);
+            });
+        }
+    }
+    buscarDNI(valor) {
+        console.log(this.campo);
+        if (this.campo === "" || this.campo === undefined) {
+            this.loadCitas();
+            this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
+        }
+        else {
+            this.httpSv.searchCitaDNI(this.campo).subscribe(data => {
+                if (this.data.results == null) {
+                    this.toastr.info("No se encontraron coincidencias");
+                    this.loadCitas();
+                }
+                else {
+                    this.data = data;
+                    this.citasEdit = data.results;
+                    this.toastr.warning("Buscando Citas", "DNI: " + valor);
+                }
+            });
+        }
+    }
+    nextPage() {
+        if (this.data.next) {
+            this.pageNum++;
+            console.log(this.pageNum);
+            this.httpSv.loadCitaPagination(this.data.next).subscribe(citalista => {
+                this.data = citalista;
+                this.citasEdit = this.data.results;
+            });
+        }
+    }
+    prevPage() {
+        if (this.pageNum > 1) {
+            this.pageNum--;
+            this.httpSv.loadCitaPagination(this.data.previous).subscribe(citalista => {
+                this.data = citalista;
+                this.citasEdit = this.data.results;
+            });
+        }
+    }
+    loadOptionsEsp() {
+        for (let i in this.especialidades) {
+            this.espOption[i] = {
+                label: this.especialidades[i].nombre,
+                value: this.especialidades[i].id.toString()
+            };
+        }
+    }
+    loadOptionsMed() {
+        for (let i in this.medicos) {
+            this.medOption[i] = {
+                label: this.medicos[i].nombres +
+                    " " +
+                    this.medicos[i].apellido_paterno +
+                    " " +
+                    this.medicos[i].apellido_materno,
+                value: this.medicos[i].user.id.toString()
+            };
+        }
+    }
+    loadOptionsMedEsp(a) {
+        this.httpSv.searchMedicoporEsp(a).subscribe(data => {
+            this.medicos = [];
+            this.medOption = [];
+            this.medicos = data;
+            this.loadOptionsMed();
+        }, error => { });
+    }
+    // open modal window
+    openModal(body, header = null, footer = null) {
+        // console.log(JSON.stringify(row));
+        this.initForm();
+        //this.initFormCabecera(row.numeroHistoria.numeroHistoria,row.);
+        this.modal.open({
+            body: body,
+            header: header,
+            footer: footer,
+            options: null
+        });
+        // console.log("Cita obtenida" + JSON.stringify(row));
+    }
+    initForm() {
+        // console.log(JSON.stringify(data));
+        this.today = new Date();
+        this.appointmentForm = this.formBuilder.group({
+            fechaAtencion1: [
+                Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "",
+                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required
+            ],
+            fechaAtencion2: [
+                Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "",
+                _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required
+            ],
+        });
+    }
+    // close modal window
+    closeModal() {
+        this.modal.close();
+        this.appointmentForm.reset();
+    }
+    closeModalConf() {
+        this.modal.close();
+    }
+    sendCita(cita) {
+        this.cita = cita;
+        this.medSelectedName =
+            cita.medico.nombres +
+                " " +
+                cita.medico.apellido_paterno +
+                " " +
+                cita.medico.apellido_materno;
+        this.espSelectedName = cita.especialidad.nombre;
+        console.log(this.medSelectedName + "\n" + this.espSelectedName);
+    }
+    addAppointment(form) {
+        // console.log(JSON.stringify(+form.value.especialidad));
+        if (form.valid) {
+            this.today = new Date();
+            let newAppointment = form.value;
+            newAppointment.fechaAtencion = Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(form.value.fechaAtencion, "yyyy-MM-dd", "en-US", '+0530');
+            newAppointment.fechaSeparacion = Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, "yyyy-MM-dd", "en-US", '+0530');
+            //newAppointment.fechaAtencion = this.cita.fechaAtencion;
+            newAppointment.especialidad = form.value.especialidad;
+            newAppointment.id = this.cita.id;
+            newAppointment.numeroRecibo = this.cita.numeroRecibo;
+            newAppointment.estadoCita = this.cita.estadoCita;
+            newAppointment.estReg = this.cita.estReg;
+            newAppointment.numeroHistoria = this.cita.numeroHistoria.id;
+            newAppointment.exonerado = this.cita.exonerado;
+            newAppointment.responsable = this.cita.responsable;
+            // newAppointment.medico = this.cita.medico.id.toString();
+            this.updateCita(newAppointment);
+            this.closeModal();
+            this.appointmentForm.reset();
+        }
+    }
+    updateCita(newCita) {
+        console.log(JSON.stringify(newCita));
+        this.http
+            .put(_config_API__WEBPACK_IMPORTED_MODULE_12__["BASE_API_URL"] + "/consultorio/crear-cita/" + newCita.id + "/", {
+            numeroRecibo: newCita.numeroRecibo,
+            fechaSeparacion: newCita.fechaSeparacion,
+            fechaAtencion: newCita.fechaAtencion,
+            estadoCita: newCita.estadoCita,
+            exonerado: newCita.exonerado,
+            responsable: newCita.responsable,
+            estReg: newCita.estReg,
+            especialidad: newCita.especialidad,
+            numeroHistoria: newCita.numeroHistoria,
+            medico: newCita.medico
+        })
+            .subscribe(data => {
+            this.toastr.success("", "Cita ACtualizada");
+            // this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
+            newCita = {};
+            this.loadCitas();
+        }, error => {
+            this.toastr.warning("Error Cita no Actualizada");
+        });
+        // console.log(JSON.stringify(this.newHistoria));
+    }
+    // init form
+    loadCitas() {
+        this.httpSv.loadHistorialCitas().subscribe(data => {
+            this.data = data;
+            this.citasEdit = data.results;
+        });
+    }
+    /*Problema en reportes*/
+    reporteDiario() {
+        document.location.href = "http://18.216.2.122:9000/admision/reporteDiarioCitas";
+        //this.router.navigate(['/vertical/citas'])
+        this.toastr.success("Se ha generado el Pdf");
+    }
+    reporteRango(ab) {
+        this.a = ab.get('fechaAtencion1').value;
+        this.b = ab.get('fechaAtencion2').value;
+        document.location.href = _config_API__WEBPACK_IMPORTED_MODULE_12__["BASE_API_URL"] + "/admision/reporteCitasRangoFecha/" + this.a + "/" + this.b;
+        this.toastr.success("Se ha generado el Pdf");
+    }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+            this.closeModalConf();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
+};
+HistorialCitasComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
+    { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"] },
+    { type: _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_9__["ToastrService"] },
+    { type: _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_10__["AdministradorService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], HistorialCitasComponent.prototype, "onKeydownHandler", null);
+HistorialCitasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-historial-citas',
+        template: __webpack_require__(/*! raw-loader!./historial-citas.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/Admision/historial-citas/historial-citas.component.html"),
+        styles: [__webpack_require__(/*! ./historial-citas.component.scss */ "./src/app/pages/Admision/historial-citas/historial-citas.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"],
+        _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"],
+        _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"],
+        ngx_toastr__WEBPACK_IMPORTED_MODULE_9__["ToastrService"],
+        _services_Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_10__["AdministradorService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"]])
+], HistorialCitasComponent);
 
 
 
@@ -5603,6 +6308,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../config/API */ "./src/app/config/API.ts");
+
 
 
 
@@ -5744,15 +6450,7 @@ let HistorialComponent = class HistorialComponent extends _base_page__WEBPACK_IM
     }
     initPatientForm() {
         this.patientForm = this.formBuilder.group({
-            dni: [
-                "",
-                [
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required,
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(8),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(8),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern("[0-9]*")
-                ]
-            ],
+            dni: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern("[0-9]*")]],
             nombres: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern("[A-Za-z ]*")]],
             apellido_paterno: [
                 "",
@@ -5784,8 +6482,7 @@ let HistorialComponent = class HistorialComponent extends _base_page__WEBPACK_IM
             newPatient.estReg = true;
             newPatient.distrito = parseInt(form.get("distrito").value);
             newPatient.departamento = parseInt(form.get("departamento").value);
-            newPatient.provincia = parseInt(form.get("distrito").value);
-            newPatient.provincia = parseInt(form.get("distrito").value);
+            newPatient.provincia = parseInt(form.get("provincia").value);
             this.httpSv.createHISTORIAL(newPatient, this.modal);
             this.loadHistorias();
         }
@@ -5883,10 +6580,11 @@ let HistorialComponent = class HistorialComponent extends _base_page__WEBPACK_IM
     }
     // init form
     initAppoForm(data) {
+        this.today = new Date();
         // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
         this.appointmentForm = this.formBuilder.group({
             numeroRecibo: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern("[0-9]*")]],
-            fechaSeparacion: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            fechaSeparacion: [Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? Object(_angular_common__WEBPACK_IMPORTED_MODULE_8__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             especialidad: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             medico: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             responsable: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],
@@ -5948,9 +6646,19 @@ let HistorialComponent = class HistorialComponent extends _base_page__WEBPACK_IM
         else if (this.opBus == "2") {
             this.toastr.warning("Buscando...");
             this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(data => {
-                this.historiales = [];
-                this.historiales = data;
-                console.log("entro bus" + this.datoBus);
+                if (data.length == 0) {
+                    this.toastr.error("No se han encontrado coincidencias");
+                    this.httpSv.loadHistorias().subscribe(historiales => {
+                        this.historiales = [];
+                        this.historiales = historiales.results;
+                    });
+                }
+                else {
+                    this.toastr.success("Mostrando resultados");
+                    this.historiales = [];
+                    this.historiales = data;
+                    console.log("entro bus" + this.datoBus);
+                }
             }, error => {
                 this.toastr.error("No encontrado");
                 this.httpSv.loadHistorias().subscribe(historiales => {
@@ -5962,9 +6670,19 @@ let HistorialComponent = class HistorialComponent extends _base_page__WEBPACK_IM
         else if (this.opBus == "3") {
             this.toastr.warning("Buscando...");
             this.httpSv.searcHistoriasNomAp(this.datoBus).subscribe(data => {
-                this.historiales = [];
-                this.historiales = data.results;
-                console.log("entro bus" + this.datoBus);
+                if (data.results.length == 0) {
+                    this.toastr.error("No se han encontrado coincidencias");
+                    this.httpSv.loadHistorias().subscribe(historiales => {
+                        this.historiales = [];
+                        this.historiales = historiales.results;
+                    });
+                }
+                else {
+                    this.toastr.success("Mostrando resultados");
+                    this.historiales = [];
+                    this.historiales = data.results;
+                    console.log("entro bus" + this.datoBus);
+                }
             }, error => {
                 this.toastr.warning("No encontrado");
                 this.httpSv.loadHistorias().subscribe(historiales => {
@@ -6083,6 +6801,16 @@ let HistorialComponent = class HistorialComponent extends _base_page__WEBPACK_IM
             this.loadmedicos();
         }, error => { });
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+            this.closeModalH();
+            this.closeModalVH();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 HistorialComponent.ctorParameters = () => [
     { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
@@ -6102,6 +6830,12 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("modalFooter", { static: true }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
 ], HistorialComponent.prototype, "modalFooter", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], HistorialComponent.prototype, "onKeydownHandler", null);
 HistorialComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: "app-historial",
@@ -6153,6 +6887,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../Services/Laboratorio/laboratorio.service */ "./src/app/Services/Laboratorio/laboratorio.service.ts");
+
 
 
 
@@ -6277,6 +7012,11 @@ let ConsultasComponent = class ConsultasComponent extends _base_page__WEBPACK_IM
             });
         }
     }
+    onKeydownHandler(event) {
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 ConsultasComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
@@ -6287,6 +7027,12 @@ ConsultasComponent.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], ConsultasComponent.prototype, "onKeydownHandler", null);
 ConsultasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-consultas',
@@ -6313,7 +7059,7 @@ ConsultasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":root {\n  --main-color: main-palette(500);\n  --main-bg: #fff;\n  --boxed-width: 1140px; }\n\n:host .add-action-box {\n  top: 5.71428571rem;\n  position: fixed;\n  right: 5.71428571rem;\n  z-index: 9997; }\n\n:host .add-action-box .tc-btn {\n    font-size: 15px; }\n\n:host .addlab-action-box {\n  top: 5.71428571rem;\n  position: fixed;\n  right: 21.42857143rem;\n  z-index: 9997; }\n\n:host .addlab-action-box .tc-btn {\n    font-size: 15px; }\n\n:host .back-action-box {\n  bottom: 5.71428571rem;\n  position: fixed;\n  left: 1.42857143rem;\n  z-index: 9997; }\n\n:host .back-action-box .tc-btn {\n    font-size: 20px; }\n\n:host {\n  display: block;\n  margin-top: 1.42857143rem;\n  padding: 0; }\n\n:host .pagination-ul {\n    list-style-type: none;\n    display: flex;\n    margin: 0 -0.17857143rem;\n    padding: 0; }\n\n:host .pagination-ul .pagination-li {\n      margin: 0 0.17857143rem; }\n\n:host .pagination-ul .pagination-li .pagination-link {\n        background: #d4d3d3;\n        border-radius: 500px;\n        color: #fff;\n        cursor: pointer;\n        display: block;\n        min-width: 2.14285714rem;\n        padding: 0.35714286rem;\n        text-align: center;\n        text-decoration: none;\n        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; }\n\n:host .pagination-ul .pagination-li .pagination-link:hover, :host .pagination-ul .pagination-li .pagination-link.active {\n          background: #336cfb;\n          color: #ffffff; }\n\n:host .pagination-ul .pagination-li .pagination-link.disabled {\n          background: rgba(212, 211, 211, 0.6);\n          color: #fff;\n          pointer-events: none; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvQ29uc3VsdG9yaW8vbGlzdGFyLWNvbnN1bHRhcy9EOlxcUHJveWVjdG9zXFxIb3NwaXRhbFxcSG9zcGl0YWxBcHBcXGhvc3BpdGFsLXVuc2EtZnJvbnRlbmQvc3JjXFxhc3NldHNcXHNhc3NcXF92YXJpYWJsZXMuc2NzcyIsInNyYy9hcHAvcGFnZXMvQ29uc3VsdG9yaW8vbGlzdGFyLWNvbnN1bHRhcy9EOlxcUHJveWVjdG9zXFxIb3NwaXRhbFxcSG9zcGl0YWxBcHBcXGhvc3BpdGFsLXVuc2EtZnJvbnRlbmQvc3JjXFxhcHBcXHBhZ2VzXFxDb25zdWx0b3Jpb1xcbGlzdGFyLWNvbnN1bHRhc1xcbGlzdGFyLWNvbnN1bHRhcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFrRkE7RUFDRSwrQkFBYTtFQUNiLGVBQVU7RUFDVixxQkFBYyxFQUFBOztBQ25GaEI7RUFFSSxrQkFBb0I7RUFDcEIsZUFBZTtFQUNmLG9CQUFzQjtFQUN0QixhQUFhLEVBQUE7O0FBTGpCO0lBT00sZUFBZSxFQUFBOztBQVByQjtFQVdJLGtCQUFvQjtFQUNwQixlQUFlO0VBQ2YscUJBQXVCO0VBQ3ZCLGFBQWEsRUFBQTs7QUFkakI7SUFnQk0sZUFBZSxFQUFBOztBQWhCckI7RUFvQkkscUJBQXVCO0VBQ3ZCLGVBQWU7RUFDZixtQkFBcUI7RUFDckIsYUFBYSxFQUFBOztBQXZCakI7SUF5Qk0sZUFBZSxFQUFBOztBQWNyQjtFQUNFLGNBQWM7RUFDZCx5QkFBNEI7RUFDNUIsVUFBVSxFQUFBOztBQUhaO0lBTUkscUJBQXFCO0lBQ3JCLGFBQWE7SUFDYix3QkFBNkI7SUFDN0IsVUFBVSxFQUFBOztBQVRkO01BWU0sdUJBQTRCLEVBQUE7O0FBWmxDO1FBZVEsbUJBekJLO1FBMEJMLG9CQW5CTTtRQW9CTixXQTFCSztRQTJCTCxlQUFlO1FBQ2YsY0FBYztRQUNkLHdCQUEyQjtRQUMzQixzQkFBMkI7UUFDM0Isa0JBQWtCO1FBQ2xCLHFCQUFxQjtRQUNyQixxRUQ2Q2UsRUFBQTs7QUNyRXZCO1VBNEJVLG1CRHBCSztVQ3FCTCxjRE5PLEVBQUE7O0FDdkJqQjtVQWdDVSxvQ0ExQ0c7VUEyQ0gsV0ExQ0c7VUEyQ0gsb0JBQW9CLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9Db25zdWx0b3Jpby9saXN0YXItY29uc3VsdGFzL2xpc3Rhci1jb25zdWx0YXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuL21peGlucyc7XHJcblxyXG4vL01haW4gcGFsZXR0ZVxyXG4kcGFsZXR0ZTogKFxyXG4gIDUwIDogI2U0ZTRlNCxcclxuICAxMDAgOiAjYmNiY2JkLFxyXG4gIDIwMCA6ICM4ZjkwOTEsXHJcbiAgMzAwIDogIzYyNjM2NCxcclxuICA0MDAgOiAjNDE0MTQzLFxyXG4gIDUwMCA6ICMxZjIwMjIsXHJcbiAgNjAwIDogIzFiMWMxZSxcclxuICA3MDAgOiAjMTcxODE5LFxyXG4gIDgwMCA6ICMxMjEzMTQsXHJcbiAgOTAwIDogIzBhMGIwYyxcclxuICBBMTAwIDogIzUyZmZmZixcclxuICBBMjAwIDogIzFmZmZmZixcclxuICBBNDAwIDogIzAwZWJlYixcclxuICBBNzAwIDogIzAwZDJkMixcclxuICBjb250cmFzdDogKFxyXG4gICAgNTAgOiAjMDAwMDAwLFxyXG4gICAgMTAwIDogIzAwMDAwMCxcclxuICAgIDIwMCA6ICMwMDAwMDAsXHJcbiAgICAzMDAgOiAjZmZmZmZmLFxyXG4gICAgNDAwIDogI2ZmZmZmZixcclxuICAgIDUwMCA6ICNmZmZmZmYsXHJcbiAgICA2MDAgOiAjZmZmZmZmLFxyXG4gICAgNzAwIDogI2ZmZmZmZixcclxuICAgIDgwMCA6ICNmZmZmZmYsXHJcbiAgICA5MDAgOiAjZmZmZmZmLFxyXG4gICAgQTEwMCA6ICMwMDAwMDAsXHJcbiAgICBBMjAwIDogIzAwMDAwMCxcclxuICAgIEE0MDAgOiAjMDAwMDAwLFxyXG4gICAgQTcwMCA6ICMwMDAwMDAsXHJcbiAgKVxyXG4pO1xyXG5AZnVuY3Rpb24gbWFpbi1wYWxldHRlKCRrZXk6ICRwYWxldHRlKSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRwYWxldHRlLCAka2V5KTtcclxufVxyXG5AZnVuY3Rpb24gbWFpbi1jb250cmFzdCgka2V5OiAkcGFsZXR0ZSkge1xyXG4gIEByZXR1cm4gbWFwLWdldChtYXAtZ2V0KCRwYWxldHRlLCBjb250cmFzdCksICRrZXkpO1xyXG59XHJcblxyXG4vL0FjY2VudCBwYWxldHRlXHJcbiRhY2NlbnQtcGFsZXR0ZTogKFxyXG4gIDUwIDogI2U3ZWRmZixcclxuICAxMDAgOiAjYzJkM2ZlLFxyXG4gIDIwMCA6ICM5OWI2ZmQsXHJcbiAgMzAwIDogIzcwOThmYyxcclxuICA0MDAgOiAjNTI4MmZjLFxyXG4gIDUwMCA6ICMzMzZjZmIsXHJcbiAgNjAwIDogIzJlNjRmYSxcclxuICA3MDAgOiAjMjc1OWZhLFxyXG4gIDgwMCA6ICMyMDRmZjksXHJcbiAgOTAwIDogIzE0M2RmOCxcclxuICBBMTAwIDogI2ZmZmZmZixcclxuICBBMjAwIDogI2Y0ZjZmZixcclxuICBBNDAwIDogI2MxY2FmZixcclxuICBBNzAwIDogI2E3YjRmZixcclxuICBjb250cmFzdDogKFxyXG4gICAgNTAgOiAjMDAwMDAwLFxyXG4gICAgMTAwIDogIzAwMDAwMCxcclxuICAgIDIwMCA6ICMwMDAwMDAsXHJcbiAgICAzMDAgOiAjMDAwMDAwLFxyXG4gICAgNDAwIDogIzAwMDAwMCxcclxuICAgIDUwMCA6ICNmZmZmZmYsXHJcbiAgICA2MDAgOiAjZmZmZmZmLFxyXG4gICAgNzAwIDogI2ZmZmZmZixcclxuICAgIDgwMCA6ICNmZmZmZmYsXHJcbiAgICA5MDAgOiAjZmZmZmZmLFxyXG4gICAgQTEwMCA6ICMwMDAwMDAsXHJcbiAgICBBMjAwIDogIzAwMDAwMCxcclxuICAgIEE0MDAgOiAjMDAwMDAwLFxyXG4gICAgQTcwMCA6ICMwMDAwMDAsXHJcbiAgKVxyXG4pO1xyXG5AZnVuY3Rpb24gYWNjZW50LXBhbGV0dGUoJGtleTogJGFjY2VudC1wYWxldHRlKSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRhY2NlbnQtcGFsZXR0ZSwgJGtleSk7XHJcbn1cclxuQGZ1bmN0aW9uIGFjY2VudC1jb250cmFzdCgka2V5OiAkYWNjZW50LXBhbGV0dGUpIHtcclxuICBAcmV0dXJuIG1hcC1nZXQobWFwLWdldCgkYWNjZW50LXBhbGV0dGUsIGNvbnRyYXN0KSwgJGtleSk7XHJcbn1cclxuXHJcbjpyb290IHtcclxuICAtLW1haW4tY29sb3I6IG1haW4tcGFsZXR0ZSg1MDApO1xyXG4gIC0tbWFpbi1iZzogI2ZmZjtcclxuICAtLWJveGVkLXdpZHRoOiAxMTQwcHg7XHJcbn1cclxuJG1haW4tY29sb3I6IG1haW4tcGFsZXR0ZSg1MDApO1xyXG4kbWFpbi1iZzogI2ZmZjtcclxuJGJveGVkLXdpZHRoOiAxMTQwcHg7XHJcblxyXG4kc3VjY2Vzcy1jb2xvcjogI2I3Y2U2MztcclxuJHN1Y2Nlc3MtY29udHJhc3Q6ICMwMDA7XHJcbiRpbmZvLWNvbG9yOiAjNjRCNUY2O1xyXG4kaW5mby1jb250cmFzdDogIzAwMDtcclxuJHdhcm5pbmctY29sb3I6ICNlOWUxNjU7XHJcbiR3YXJuaW5nLWNvbnRyYXN0OiAjMDAwO1xyXG4kZXJyb3ItY29sb3I6ICNlZDU1NjQ7XHJcbiRlcnJvci1jb250cmFzdDogI2ZmZjtcclxuXHJcbi8vTWFpblxyXG4kbWFpbi1mczogMTRweDtcclxuJG1haW4tZmY6ICdMYXRvJywgc2Fucy1zZXJpZjtcclxuJG1haW4tZnc6IDQwMDtcclxuJG1vZHVsZTogMTBweDtcclxuJG1haW4tbGg6ICgkbW9kdWxlICogMiAvICRtYWluLWZzKTtcclxuJG1vZHVsZS1yZW06ICgkbW9kdWxlIC8gJG1haW4tZnMpICogMXJlbTtcclxuJHNoYXBlOiA2cHg7XHJcbiRzaGFkb3c6IDAgMThweCAyNHB4IHJnYmEoIzAwMCwuMTIpO1xyXG4kc2hhZG93LWhvdmVyOiAwcHggOHB4IDI0cHggcmdiYSgjMDAwLC4xMik7XHJcbiRhbmltYXRpb246IGVhc2UtaW4tb3V0O1xyXG5cclxuLy9TZWNvbmRcclxuJHNlY29uZC1mZjogJG1haW4tZmY7XHJcblxyXG5cclxuLy9NZWRpYVxyXG4kbWF4NTQzIDogb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDU0M3B4KTtcclxuJG1pbjU0NCA6IG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA1NDRweCk7XHJcbiRtYXg3NjcgOiBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3cHgpO1xyXG4kbWluNzY4IDogb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KTtcclxuJG1heDk5MSA6IG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA5OTFweCk7XHJcbiRtaW45OTIgOiBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTkycHgpO1xyXG4kbWF4MTE5OSA6IG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAxMTk5cHgpO1xyXG4kbWluMTIwMCA6IG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMjAwcHgpO1xyXG5cclxuLy9IZWFkZXJzXHJcbiRoZWFkZXJzLWZmOiAkc2Vjb25kLWZmO1xyXG4kaGVhZGVycy1mdzogNzAwO1xyXG5cclxuLy9OYXZiYXJcclxuJG5hdmJhci1iZzogI2VlZWVlZjtcclxuJG5hdmJhci1jb2xvcjogcmdiYShtYWluLXBhbGV0dGUoNTAwKSwuNSk7XHJcbiR2ZXJ0aWNhbC1uYXZiYXItd2lkdGg6ICRtb2R1bGUtcmVtICogMjQ7XHJcblxyXG4vL0Zvb3RlclxyXG4kZm9vdGVyLWhlaWdodDogJG1vZHVsZS1yZW0gKiA2O1xyXG5cclxuLy9QcmVsb2FkZXJcclxuJGxvYWRlci1vdmVybGF5LWJnOiAjZmZmO1xyXG4kbG9hZGVyLWNvbG9yOiBhY2NlbnQtcGFsZXR0ZSg1MDApO1xyXG5cclxuIiwiQGltcG9ydCAnfmFzc2V0cy9zYXNzL3ZhcmlhYmxlcyc7XHJcblxyXG46aG9zdCB7XHJcbiAgLmFkZC1hY3Rpb24tYm94IHtcclxuICAgIHRvcDogJG1vZHVsZS1yZW0gKiA4O1xyXG4gICAgcG9zaXRpb246IGZpeGVkO1xyXG4gICAgcmlnaHQ6ICRtb2R1bGUtcmVtICogODtcclxuICAgIHotaW5kZXg6IDk5OTc7XHJcbiAgICAudGMtYnRuIHtcclxuICAgICAgZm9udC1zaXplOiAxNXB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAuYWRkbGFiLWFjdGlvbi1ib3gge1xyXG4gICAgdG9wOiAkbW9kdWxlLXJlbSAqIDg7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICByaWdodDogJG1vZHVsZS1yZW0gKiAzMDtcclxuICAgIHotaW5kZXg6IDk5OTc7XHJcbiAgICAudGMtYnRuIHtcclxuICAgICAgZm9udC1zaXplOiAxNXB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAuYmFjay1hY3Rpb24tYm94IHtcclxuICAgIGJvdHRvbTogJG1vZHVsZS1yZW0gKiA4O1xyXG4gICAgcG9zaXRpb246IGZpeGVkO1xyXG4gICAgbGVmdDogJG1vZHVsZS1yZW0gKiAyO1xyXG4gICAgei1pbmRleDogOTk5NztcclxuICAgIC50Yy1idG4ge1xyXG4gICAgICBmb250LXNpemU6IDIwcHg7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbiRfYmc6ICNkNGQzZDM7XHJcbiRfY29sb3I6ICNmZmY7XHJcbiRfYmctYWN0aXZlOiBhY2NlbnQtcGFsZXR0ZSg1MDApO1xyXG4kX2NvbG9yLWFjbGl2ZTogYWNjZW50LWNvbnRyYXN0KDUwMCk7XHJcbiRfYmctZGlzYWJsZWQ6IHJnYmEoJF9iZywgMC42KTtcclxuJF9jb2xvci1kaXNhYmxlZDogJF9jb2xvcjtcclxuJF9tb2R1bGUtcmVtOiAkbW9kdWxlLXJlbTtcclxuJF9zaGFwZTogNTAwcHg7XHJcbiRfYW5pbWF0aW9uOiAkYW5pbWF0aW9uO1xyXG5cclxuOmhvc3Qge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIG1hcmdpbi10b3A6ICRfbW9kdWxlLXJlbSAqIDI7XHJcbiAgcGFkZGluZzogMDtcclxuXHJcbiAgLnBhZ2luYXRpb24tdWwge1xyXG4gICAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIG1hcmdpbjogMCAoLSRfbW9kdWxlLXJlbSAvIDQpO1xyXG4gICAgcGFkZGluZzogMDtcclxuXHJcbiAgICAucGFnaW5hdGlvbi1saSB7XHJcbiAgICAgIG1hcmdpbjogMCAoJF9tb2R1bGUtcmVtIC8gNCk7XHJcblxyXG4gICAgICAucGFnaW5hdGlvbi1saW5rIHtcclxuICAgICAgICBiYWNrZ3JvdW5kOiAkX2JnO1xyXG4gICAgICAgIGJvcmRlci1yYWRpdXM6ICRfc2hhcGU7XHJcbiAgICAgICAgY29sb3I6ICRfY29sb3I7XHJcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICAgIG1pbi13aWR0aDogJF9tb2R1bGUtcmVtICogMztcclxuICAgICAgICBwYWRkaW5nOiAoJF9tb2R1bGUtcmVtIC8gMik7XHJcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcclxuICAgICAgICB0cmFuc2l0aW9uOiBiYWNrZ3JvdW5kLWNvbG9yIDAuMnMgJF9hbmltYXRpb24sIGNvbG9yIDAuMnMgJF9hbmltYXRpb247XHJcblxyXG4gICAgICAgICY6aG92ZXIsXHJcbiAgICAgICAgJi5hY3RpdmUge1xyXG4gICAgICAgICAgYmFja2dyb3VuZDogJF9iZy1hY3RpdmU7XHJcbiAgICAgICAgICBjb2xvcjogJF9jb2xvci1hY2xpdmU7XHJcbiAgICAgICAgfVxyXG4gICAgICAgICYuZGlzYWJsZWQge1xyXG4gICAgICAgICAgYmFja2dyb3VuZDogJF9iZy1kaXNhYmxlZDtcclxuICAgICAgICAgIGNvbG9yOiAkX2NvbG9yLWRpc2FibGVkO1xyXG4gICAgICAgICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XHJcbiAgICAgICAgfVxyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbiJdfQ== */"
+module.exports = ":root {\n  --main-color: main-palette(500);\n  --main-bg: #fff;\n  --boxed-width: 1140px; }\n\n:host .add-action-box {\n  top: 5.71428571rem;\n  position: fixed;\n  right: 5.71428571rem;\n  z-index: 9997; }\n\n:host .add-action-box .tc-btn {\n    font-size: 15px; }\n\n:host .addlab-action-box {\n  top: 5.71428571rem;\n  position: fixed;\n  right: 21.42857143rem;\n  z-index: 9997; }\n\n:host .addlab-action-box .tc-btn {\n    font-size: 15px; }\n\n:host .back-action-box {\n  bottom: 5.71428571rem;\n  position: fixed;\n  left: 1.42857143rem;\n  z-index: 9997; }\n\n:host .back-action-box .tc-btn {\n    font-size: 20px; }\n\n:host {\n  display: block;\n  margin-top: 1.42857143rem;\n  padding: 0; }\n\n:host .pagination-ul {\n    list-style-type: none;\n    display: flex;\n    margin: 0 -0.17857143rem;\n    padding: 0; }\n\n:host .pagination-ul .pagination-li {\n      margin: 0 0.17857143rem; }\n\n:host .pagination-ul .pagination-li .pagination-link {\n        background: #d4d3d3;\n        border-radius: 500px;\n        color: #fff;\n        cursor: pointer;\n        display: block;\n        min-width: 2.14285714rem;\n        padding: 0.35714286rem;\n        text-align: center;\n        text-decoration: none;\n        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; }\n\n:host .pagination-ul .pagination-li .pagination-link:hover, :host .pagination-ul .pagination-li .pagination-link.active {\n          background: #336cfb;\n          color: #ffffff; }\n\n:host .pagination-ul .pagination-li .pagination-link.disabled {\n          background: rgba(212, 211, 211, 0.6);\n          color: #fff;\n          pointer-events: none; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvQ29uc3VsdG9yaW8vbGlzdGFyLWNvbnN1bHRhcy9EOlxcUHJveWVjdG9zXFxIb3NwaXRhbFxcSG9zcGl0YWxBcHBcXGhvc3BpdGFsLXVuc2EtZnJvbnRlbmQvc3JjXFxhc3NldHNcXHNhc3NcXF92YXJpYWJsZXMuc2NzcyIsInNyYy9hcHAvcGFnZXMvQ29uc3VsdG9yaW8vbGlzdGFyLWNvbnN1bHRhcy9EOlxcUHJveWVjdG9zXFxIb3NwaXRhbFxcSG9zcGl0YWxBcHBcXGhvc3BpdGFsLXVuc2EtZnJvbnRlbmQvc3JjXFxhcHBcXHBhZ2VzXFxDb25zdWx0b3Jpb1xcbGlzdGFyLWNvbnN1bHRhc1xcbGlzdGFyLWNvbnN1bHRhcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFrRkE7RUFDRSwrQkFBYTtFQUNiLGVBQVU7RUFDVixxQkFBYyxFQUFBOztBQ3BGaEI7RUFFSSxrQkFBb0I7RUFDcEIsZUFBZTtFQUNmLG9CQUFzQjtFQUN0QixhQUFhLEVBQUE7O0FBTGpCO0lBT00sZUFBZSxFQUFBOztBQVByQjtFQVdJLGtCQUFvQjtFQUNwQixlQUFlO0VBQ2YscUJBQXVCO0VBQ3ZCLGFBQWEsRUFBQTs7QUFkakI7SUFnQk0sZUFBZSxFQUFBOztBQWhCckI7RUFvQkkscUJBQXVCO0VBQ3ZCLGVBQWU7RUFDZixtQkFBcUI7RUFDckIsYUFBYSxFQUFBOztBQXZCakI7SUF5Qk0sZUFBZSxFQUFBOztBQWNyQjtFQUNFLGNBQWM7RUFDZCx5QkFBNEI7RUFDNUIsVUFBVSxFQUFBOztBQUhaO0lBTUkscUJBQXFCO0lBQ3JCLGFBQWE7SUFDYix3QkFBNkI7SUFDN0IsVUFBVSxFQUFBOztBQVRkO01BWU0sdUJBQTRCLEVBQUE7O0FBWmxDO1FBZVEsbUJBekJLO1FBMEJMLG9CQW5CTTtRQW9CTixXQTFCSztRQTJCTCxlQUFlO1FBQ2YsY0FBYztRQUNkLHdCQUEyQjtRQUMzQixzQkFBMkI7UUFDM0Isa0JBQWtCO1FBQ2xCLHFCQUFxQjtRQUNyQixxRUQ4Q2UsRUFBQTs7QUN0RXZCO1VBNEJVLG1CRG5CSztVQ29CTCxjRExPLEVBQUE7O0FDeEJqQjtVQWdDVSxvQ0ExQ0c7VUEyQ0gsV0ExQ0c7VUEyQ0gsb0JBQW9CLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wYWdlcy9Db25zdWx0b3Jpby9saXN0YXItY29uc3VsdGFzL2xpc3Rhci1jb25zdWx0YXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuL21peGlucyc7XHJcblxyXG4vL01haW4gcGFsZXR0ZVxyXG4kcGFsZXR0ZTogKFxyXG4gIDUwIDogI2U0ZTRlNCxcclxuICAxMDAgOiAjYmNiY2JkLFxyXG4gIDIwMCA6ICM4ZjkwOTEsXHJcbiAgMzAwIDogIzYyNjM2NCxcclxuICA0MDAgOiAjNDE0MTQzLFxyXG4gIDUwMCA6ICMxZjIwMjIsXHJcbiAgNjAwIDogIzFiMWMxZSxcclxuICA3MDAgOiAjMTcxODE5LFxyXG4gIDgwMCA6ICMxMjEzMTQsXHJcbiAgOTAwIDogIzBhMGIwYyxcclxuICBBMTAwIDogIzUyZmZmZixcclxuICBBMjAwIDogIzFmZmZmZixcclxuICBBNDAwIDogIzAwZWJlYixcclxuICBBNzAwIDogIzAwZDJkMixcclxuICBjb250cmFzdDogKFxyXG4gICAgNTAgOiAjMDAwMDAwLFxyXG4gICAgMTAwIDogIzAwMDAwMCxcclxuICAgIDIwMCA6ICMwMDAwMDAsXHJcbiAgICAzMDAgOiAjZmZmZmZmLFxyXG4gICAgNDAwIDogI2ZmZmZmZixcclxuICAgIDUwMCA6ICNmZmZmZmYsXHJcbiAgICA2MDAgOiAjZmZmZmZmLFxyXG4gICAgNzAwIDogI2ZmZmZmZixcclxuICAgIDgwMCA6ICNmZmZmZmYsXHJcbiAgICA5MDAgOiAjZmZmZmZmLFxyXG4gICAgQTEwMCA6ICMwMDAwMDAsXHJcbiAgICBBMjAwIDogIzAwMDAwMCxcclxuICAgIEE0MDAgOiAjMDAwMDAwLFxyXG4gICAgQTcwMCA6ICMwMDAwMDAsXHJcbiAgKVxyXG4pO1xyXG5AZnVuY3Rpb24gbWFpbi1wYWxldHRlKCRrZXk6ICRwYWxldHRlKSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRwYWxldHRlLCAka2V5KTtcclxufVxyXG5AZnVuY3Rpb24gbWFpbi1jb250cmFzdCgka2V5OiAkcGFsZXR0ZSkge1xyXG4gIEByZXR1cm4gbWFwLWdldChtYXAtZ2V0KCRwYWxldHRlLCBjb250cmFzdCksICRrZXkpO1xyXG59XHJcblxyXG4vL0FjY2VudCBwYWxldHRlXHJcbiRhY2NlbnQtcGFsZXR0ZTogKFxyXG4gIDUwIDogI2U3ZWRmZixcclxuICAxMDAgOiAjYzJkM2ZlLFxyXG4gIDIwMCA6ICM5OWI2ZmQsXHJcbiAgMzAwIDogIzcwOThmYyxcclxuICA0MDAgOiAjNTI4MmZjLFxyXG4gIDUwMCA6ICMzMzZjZmIsXHJcbiAgNjAwIDogIzJlNjRmYSxcclxuICA3MDAgOiAjMjc1OWZhLFxyXG4gIDgwMCA6ICMyMDRmZjksXHJcbiAgOTAwIDogIzE0M2RmOCxcclxuICBBMTAwIDogI2ZmZmZmZixcclxuICBBMjAwIDogI2Y0ZjZmZixcclxuICBBNDAwIDogI2MxY2FmZixcclxuICBBNzAwIDogI2E3YjRmZixcclxuICBjb250cmFzdDogKFxyXG4gICAgNTAgOiAjMDAwMDAwLFxyXG4gICAgMTAwIDogIzAwMDAwMCxcclxuICAgIDIwMCA6ICMwMDAwMDAsXHJcbiAgICAzMDAgOiAjMDAwMDAwLFxyXG4gICAgNDAwIDogIzAwMDAwMCxcclxuICAgIDUwMCA6ICNmZmZmZmYsXHJcbiAgICA2MDAgOiAjZmZmZmZmLFxyXG4gICAgNzAwIDogI2ZmZmZmZixcclxuICAgIDgwMCA6ICNmZmZmZmYsXHJcbiAgICA5MDAgOiAjZmZmZmZmLFxyXG4gICAgQTEwMCA6ICMwMDAwMDAsXHJcbiAgICBBMjAwIDogIzAwMDAwMCxcclxuICAgIEE0MDAgOiAjMDAwMDAwLFxyXG4gICAgQTcwMCA6ICMwMDAwMDAsXHJcbiAgKVxyXG4pO1xyXG5AZnVuY3Rpb24gYWNjZW50LXBhbGV0dGUoJGtleTogJGFjY2VudC1wYWxldHRlKSB7XHJcbiAgQHJldHVybiBtYXAtZ2V0KCRhY2NlbnQtcGFsZXR0ZSwgJGtleSk7XHJcbn1cclxuQGZ1bmN0aW9uIGFjY2VudC1jb250cmFzdCgka2V5OiAkYWNjZW50LXBhbGV0dGUpIHtcclxuICBAcmV0dXJuIG1hcC1nZXQobWFwLWdldCgkYWNjZW50LXBhbGV0dGUsIGNvbnRyYXN0KSwgJGtleSk7XHJcbn1cclxuXHJcbjpyb290IHtcclxuICAtLW1haW4tY29sb3I6IG1haW4tcGFsZXR0ZSg1MDApO1xyXG4gIC0tbWFpbi1iZzogI2ZmZjtcclxuICAtLWJveGVkLXdpZHRoOiAxMTQwcHg7XHJcbn1cclxuJG1haW4tY29sb3I6IG1haW4tcGFsZXR0ZSg1MDApO1xyXG4kbWFpbi1iZzogI2ZmZjtcclxuJGJveGVkLXdpZHRoOiAxMTQwcHg7XHJcblxyXG4kc3VjY2Vzcy1jb2xvcjogI2I3Y2U2MztcclxuJHN1Y2Nlc3MtY29udHJhc3Q6ICMwMDA7XHJcbiRpbmZvLWNvbG9yOiAjNjRCNUY2O1xyXG4kaW5mby1jb250cmFzdDogIzAwMDtcclxuJHdhcm5pbmctY29sb3I6ICNlOWUxNjU7XHJcbiR3YXJuaW5nLWNvbnRyYXN0OiAjMDAwO1xyXG4kZXJyb3ItY29sb3I6ICNlZDU1NjQ7XHJcbiRlcnJvci1jb250cmFzdDogI2ZmZjtcclxuXHJcbi8vTWFpblxyXG4kbWFpbi1mczogMTRweDtcclxuJG1haW4tZmY6ICdMYXRvJywgc2Fucy1zZXJpZjtcclxuJG1haW4tZnc6IDQwMDtcclxuJG1vZHVsZTogMTBweDtcclxuJG1haW4tbGg6ICgkbW9kdWxlICogMiAvICRtYWluLWZzKTtcclxuJG1vZHVsZS1yZW06ICgkbW9kdWxlIC8gJG1haW4tZnMpICogMXJlbTtcclxuJHNoYXBlOiA2cHg7XHJcbiRzaGFkb3c6IDAgMThweCAyNHB4IHJnYmEoIzAwMCwuMTIpO1xyXG4kc2hhZG93LWhvdmVyOiAwcHggOHB4IDI0cHggcmdiYSgjMDAwLC4xMik7XHJcbiRhbmltYXRpb246IGVhc2UtaW4tb3V0O1xyXG5cclxuLy9TZWNvbmRcclxuJHNlY29uZC1mZjogJG1haW4tZmY7XHJcblxyXG5cclxuLy9NZWRpYVxyXG4kbWF4NTQzIDogb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDU0M3B4KTtcclxuJG1pbjU0NCA6IG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA1NDRweCk7XHJcbiRtYXg3NjcgOiBvbmx5IHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3cHgpO1xyXG4kbWluNzY4IDogb25seSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2OHB4KTtcclxuJG1heDk5MSA6IG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA5OTFweCk7XHJcbiRtaW45OTIgOiBvbmx5IHNjcmVlbiBhbmQgKG1pbi13aWR0aDogOTkycHgpO1xyXG4kbWF4MTE5OSA6IG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiAxMTk5cHgpO1xyXG4kbWluMTIwMCA6IG9ubHkgc2NyZWVuIGFuZCAobWluLXdpZHRoOiAxMjAwcHgpO1xyXG5cclxuLy9IZWFkZXJzXHJcbiRoZWFkZXJzLWZmOiAkc2Vjb25kLWZmO1xyXG4kaGVhZGVycy1mdzogNzAwO1xyXG5cclxuLy9OYXZiYXJcclxuJG5hdmJhci1iZzogI2VlZWVlZjtcclxuJG5hdmJhci1jb2xvcjogcmdiYShtYWluLXBhbGV0dGUoNTAwKSwuNSk7XHJcbiR2ZXJ0aWNhbC1uYXZiYXItd2lkdGg6ICRtb2R1bGUtcmVtICogMjQ7XHJcblxyXG4vL0Zvb3RlclxyXG4kZm9vdGVyLWhlaWdodDogJG1vZHVsZS1yZW0gKiA2O1xyXG5cclxuLy9QcmVsb2FkZXJcclxuJGxvYWRlci1vdmVybGF5LWJnOiAjZmZmO1xyXG4kbG9hZGVyLWNvbG9yOiBhY2NlbnQtcGFsZXR0ZSg1MDApO1xyXG5cclxuIiwiQGltcG9ydCAnfmFzc2V0cy9zYXNzL3ZhcmlhYmxlcyc7XHJcbjpob3N0IHtcclxuICAuYWRkLWFjdGlvbi1ib3gge1xyXG4gICAgdG9wOiAkbW9kdWxlLXJlbSAqIDg7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICByaWdodDogJG1vZHVsZS1yZW0gKiA4O1xyXG4gICAgei1pbmRleDogOTk5NztcclxuICAgIC50Yy1idG4ge1xyXG4gICAgICBmb250LXNpemU6IDE1cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gIC5hZGRsYWItYWN0aW9uLWJveCB7XHJcbiAgICB0b3A6ICRtb2R1bGUtcmVtICogODtcclxuICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgIHJpZ2h0OiAkbW9kdWxlLXJlbSAqIDMwO1xyXG4gICAgei1pbmRleDogOTk5NztcclxuICAgIC50Yy1idG4ge1xyXG4gICAgICBmb250LXNpemU6IDE1cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gIC5iYWNrLWFjdGlvbi1ib3gge1xyXG4gICAgYm90dG9tOiAkbW9kdWxlLXJlbSAqIDg7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICBsZWZ0OiAkbW9kdWxlLXJlbSAqIDI7XHJcbiAgICB6LWluZGV4OiA5OTk3O1xyXG4gICAgLnRjLWJ0biB7XHJcbiAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuJF9iZzogI2Q0ZDNkMztcclxuJF9jb2xvcjogI2ZmZjtcclxuJF9iZy1hY3RpdmU6IGFjY2VudC1wYWxldHRlKDUwMCk7XHJcbiRfY29sb3ItYWNsaXZlOiBhY2NlbnQtY29udHJhc3QoNTAwKTtcclxuJF9iZy1kaXNhYmxlZDogcmdiYSgkX2JnLCAwLjYpO1xyXG4kX2NvbG9yLWRpc2FibGVkOiAkX2NvbG9yO1xyXG4kX21vZHVsZS1yZW06ICRtb2R1bGUtcmVtO1xyXG4kX3NoYXBlOiA1MDBweDtcclxuJF9hbmltYXRpb246ICRhbmltYXRpb247XHJcblxyXG46aG9zdCB7XHJcbiAgZGlzcGxheTogYmxvY2s7XHJcbiAgbWFyZ2luLXRvcDogJF9tb2R1bGUtcmVtICogMjtcclxuICBwYWRkaW5nOiAwO1xyXG5cclxuICAucGFnaW5hdGlvbi11bCB7XHJcbiAgICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgbWFyZ2luOiAwICgtJF9tb2R1bGUtcmVtIC8gNCk7XHJcbiAgICBwYWRkaW5nOiAwO1xyXG5cclxuICAgIC5wYWdpbmF0aW9uLWxpIHtcclxuICAgICAgbWFyZ2luOiAwICgkX21vZHVsZS1yZW0gLyA0KTtcclxuXHJcbiAgICAgIC5wYWdpbmF0aW9uLWxpbmsge1xyXG4gICAgICAgIGJhY2tncm91bmQ6ICRfYmc7XHJcbiAgICAgICAgYm9yZGVyLXJhZGl1czogJF9zaGFwZTtcclxuICAgICAgICBjb2xvcjogJF9jb2xvcjtcclxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgbWluLXdpZHRoOiAkX21vZHVsZS1yZW0gKiAzO1xyXG4gICAgICAgIHBhZGRpbmc6ICgkX21vZHVsZS1yZW0gLyAyKTtcclxuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICAgICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gICAgICAgIHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgMC4ycyAkX2FuaW1hdGlvbiwgY29sb3IgMC4ycyAkX2FuaW1hdGlvbjtcclxuXHJcbiAgICAgICAgJjpob3ZlcixcclxuICAgICAgICAmLmFjdGl2ZSB7XHJcbiAgICAgICAgICBiYWNrZ3JvdW5kOiAkX2JnLWFjdGl2ZTtcclxuICAgICAgICAgIGNvbG9yOiAkX2NvbG9yLWFjbGl2ZTtcclxuICAgICAgICB9XHJcbiAgICAgICAgJi5kaXNhYmxlZCB7XHJcbiAgICAgICAgICBiYWNrZ3JvdW5kOiAkX2JnLWRpc2FibGVkO1xyXG4gICAgICAgICAgY29sb3I6ICRfY29sb3ItZGlzYWJsZWQ7XHJcbiAgICAgICAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -6340,6 +7086,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
 /* harmony import */ var _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../Services/Laboratorio/laboratorio.service */ "./src/app/Services/Laboratorio/laboratorio.service.ts");
 /* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../config/API */ "./src/app/config/API.ts");
+
 
 
 
@@ -6388,6 +7135,7 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
         this.apetitoOption = [];
         this.consultasRecibidas = [];
         this.examenesRecibidos = [];
+        this.detalleT = [];
         this.datoBus = this.httpSv.getNroHC();
         this.idCitaRecibida = this.httpSv.getIdHC();
         this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data => {
@@ -6395,6 +7143,7 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
         });
         this.cargarDatos();
         this.cargarConsultas();
+        this.cargarExamenes(this.dniRecibido);
     }
     ngOnInit() {
         super.ngOnInit();
@@ -6469,13 +7218,49 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
     }
     /***
        * autor: Milagros Motta R.
+       * nextPageE: si se hace click en siguiente, se aumenta el contador de la página 'pageNum' y se envia el url al servicio
+       ***/
+    /*public nextPageE() {
+      if (this.data.next) {
+        this.pageNum++;
+        this.labservice.loadExamenPagination(this.data.next).subscribe(data => {
+          this.examenesRecibidos = data.results;
+          for (let index = 0; index < this.examenesRecibidos.length; index++) {
+            this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+          }
+        });
+      }
+    }
+      /***
+       * autor: Milagros Motta R.
+       * prevPageE: si se hace click en anterior, se resta el contador de la página 'pageNum' y se envia el url al servicio
+       ***/
+    /*public prevPageE() {
+      if (this.pageNum > 1) {
+        this.pageNum--;
+        this.labservice.loadExamenPagination(this.data.previous).subscribe(data => {
+          this.examenesRecibidos = data.results;
+          for (let index = 0; index < this.examenesRecibidos.length; index++) {
+            this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+          }
+        });
+      }
+    }
+  
+  
+    /***
+       * autor: Milagros Motta R.
        * cargarExamenes: Carga los examenes del paciente haciendo una llamata al servicio
       ***/
     cargarExamenes(dni) {
         this.labservice.searchExamenbDni(dni).subscribe(data => {
+            console.log(data);
             this.examenesRecibidos = data;
             for (let index = 0; index < this.examenesRecibidos.length; index++) {
                 this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+            }
+            if (this.examenesRecibidos.length > 0) {
+                this.hayEx = false;
             }
         });
     }
@@ -6531,12 +7316,12 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
       ***/
     initConsultForm() {
         this.consultForm = this.formBuilder.group({
-            motivoConsulta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],
+            motivoConsulta: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
             apetito: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
             orina: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
             deposiciones: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
-            examenFisico: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
-            diagnostico: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
+            examenFisico: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
+            diagnostico: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
             tratamiento: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
             ordenExam: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
             proximaCita: [null]
@@ -6613,14 +7398,27 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
        * openModalExamenes: Abre el modal e inicializa sus formGroups
       ***/
     openModalExamenes(body, header = null, footer = null, options) {
-        if (this.examenesRecibidos.length > 0) {
-            this.hayEx = false;
-        }
+        this.initExamenForm(options);
+        this.loadTabla(options);
         this.modal.open({
             body: body,
             header: header,
             footer: footer,
             options: options
+        });
+    }
+    //Valida y muestra los datos del modal ver mas 
+    initExamenForm(data) {
+        this.examenForm = this.formBuilder.group({
+            tipoExam: [data.tipoExam.nombre ? data.tipoExam.nombre : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            fecha: [data.fecha ? data.fecha : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            observaciones: [data.observaciones ? data.observaciones : '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+        });
+    }
+    //Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
+    loadTabla(row) {
+        this.labservice.loadTabla(row.id).subscribe(detalleT => {
+            this.detalleT = detalleT;
         });
     }
     /***
@@ -6639,10 +7437,26 @@ let ListarConsultasComponent = class ListarConsultasComponent extends _base_page
         this.toastr.success("Se ha generado el Pdf");
     }
     //fin de Modal Examenes de Laboratorio
+    /***
+     * autor: Milagros Motta R.
+     * Atender: Hace una llamada al servicio para cambiar el estado de la cita
+    ***/
     Atender(id) {
         this.httpSv.AtenderCita(id).subscribe(cita => {
             this.cargarConsultas();
         });
+    }
+    /***
+     * autor: Milagros Motta R.
+     * onKeydownHandler: Asigna acciones para cada vez que las teclas 'esc' y 'enter' sean presionadas
+    ***/
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModalExamenes();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
     }
 };
 ListarConsultasComponent.ctorParameters = () => [
@@ -6663,6 +7477,12 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalFooter', { static: true }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
 ], ListarConsultasComponent.prototype, "modalFooter", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], ListarConsultasComponent.prototype, "onKeydownHandler", null);
 ListarConsultasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-consultas',
@@ -6678,6 +7498,212 @@ ListarConsultasComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
         ngx_toastr__WEBPACK_IMPORTED_MODULE_10__["ToastrService"]])
 ], ListarConsultasComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/pages/Lab/atender/atender.component.scss":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/Lab/atender/atender.component.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL0xhYi9hdGVuZGVyL2F0ZW5kZXIuY29tcG9uZW50LnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/pages/Lab/atender/atender.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/pages/Lab/atender/atender.component.ts ***!
+  \********************************************************/
+/*! exports provided: AtenderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AtenderComponent", function() { return AtenderComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _base_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../base-page */ "./src/app/pages/base-page/index.ts");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm2015/store.js");
+/* harmony import */ var _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/http/http.service */ "./src/app/services/http/http.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../ui/services/modal/modal.service */ "./src/app/ui/services/modal/modal.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
+/* harmony import */ var _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../Services/Laboratorio/laboratorio.service */ "./src/app/Services/Laboratorio/laboratorio.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+
+
+
+
+
+
+
+
+
+let AtenderComponent = class AtenderComponent extends _base_page__WEBPACK_IMPORTED_MODULE_2__["BasePageComponent"] {
+    constructor(store, httpSv, labService, modal, formBuilder, http, toastr, router) {
+        super(store, httpSv);
+        this.labService = labService;
+        this.modal = modal;
+        this.formBuilder = formBuilder;
+        this.http = http;
+        this.toastr = toastr;
+        this.router = router;
+        this.data = {};
+        this.detalleT = [];
+        this.pageData = {
+            title: 'Atender Ordenes',
+            loaded: true,
+            breadcrumbs: [
+                {
+                    title: 'UI Kit',
+                    route: 'default-dashboard'
+                },
+                {
+                    title: 'Tables',
+                    route: 'default-dashboard'
+                },
+                {
+                    title: 'atender'
+                },
+                {
+                    title: 'Search'
+                }
+            ]
+        };
+        this.detalleT = [];
+        this.datoBus = this.labService.getDni();
+        this.cargarDatos();
+        this.initDetalleForm();
+        this.loadOrdenes();
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        this.initDetalleForm();
+    }
+    ngOnChanges($event) {
+        console.log();
+    }
+    cargarDatos() {
+        this.labService.searchExamenbName(this.datoBus).subscribe(data => {
+            this.dniR = data[0].dni;
+            this.tipoEr = data[0].tipoExam.nombre;
+            this.ordenR = data[0].orden;
+            this.fechaR = data[0].fecha;
+            this.tipoExId = data[0].tipoExam.id;
+        });
+    }
+    //Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
+    loadTabla(row) {
+        this.labService.loadTabla(row).subscribe(detalleT => {
+            this.detalleT = detalleT;
+        });
+    }
+    //Valida los campos del formulario de crear detalle
+    initDetalleForm() {
+        this.detalleForm = this.formBuilder.group({
+            descripcion: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            resultado_obtenido: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            unidades: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            rango_referencia: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+        });
+    }
+    //Fin de Modal Crear Detalle
+    // Metodo de Crear detalle: llama al servicio de creacion createDetalle
+    addDetalle(form) {
+        if (form.valid) {
+            let newDetalle = form.value;
+            let exam;
+            newDetalle.descripcion = form.value.descripcion;
+            newDetalle.rango_referencia = form.value.rango_referencia;
+            newDetalle.resultado_obtenido = form.value.resultado_obtenido;
+            newDetalle.unidades = form.value.unidades;
+            this.rr = this.labService.getIdCabecera();
+            console.log("DETALlEFORM=" + this.rr);
+            newDetalle.codigoExam = this.rr;
+            this.labService.createDetalle(newDetalle);
+            this.detalleForm.reset();
+            this.loadTabla(this.rr);
+        }
+    }
+    cancelar() {
+        this.labService.eliminarCabecera(this.labService.getIdCabecera()).subscribe(cita => {
+            console.log("Aparentemente lo hizo " + cita.id);
+            this.cargarDatos();
+        });
+        this.router.navigate(['/vertical/ordenes']);
+    }
+    irLaboratorio() {
+        this.router.navigate(['/vertical/laboratorio']);
+    }
+    loadOrdenes() {
+        this.labService.loadOrden().subscribe(ord => {
+            this.data = ord;
+            this.ordenes = ord.results;
+        });
+    }
+    estado(row) {
+        this.ido = this.labService.getIdOrden();
+        row = this.ido;
+        console.log("ID de row CAMBIO DE ESTADO" + row);
+        this.labService.cambioEstado(row).subscribe(ord => {
+            this.loadOrdenes();
+            this.irLaboratorio();
+        });
+        ;
+    }
+    onKeydownHandler(event) {
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
+};
+AtenderComponent.ctorParameters = () => [
+    { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
+    { type: _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"] },
+    { type: _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_9__["LaboratorioService"] },
+    { type: _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_8__["ToastrService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalBody', { static: true }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], AtenderComponent.prototype, "modalBody", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalFooter', { static: true }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], AtenderComponent.prototype, "modalFooter", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], AtenderComponent.prototype, "onKeydownHandler", null);
+AtenderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-atender',
+        template: __webpack_require__(/*! raw-loader!./atender.component.html */ "./node_modules/raw-loader/index.js!./src/app/pages/Lab/atender/atender.component.html"),
+        styles: [__webpack_require__(/*! ./atender.component.scss */ "./src/app/pages/Lab/atender/atender.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"],
+        _services_http_http_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"],
+        _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_9__["LaboratorioService"],
+        _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"],
+        ngx_toastr__WEBPACK_IMPORTED_MODULE_8__["ToastrService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"]])
+], AtenderComponent);
 
 
 
@@ -6715,6 +7741,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
 /* harmony import */ var _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../Services/Laboratorio/laboratorio.service */ "./src/app/Services/Laboratorio/laboratorio.service.ts");
 /* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../config/API */ "./src/app/config/API.ts");
+
 
 
 
@@ -6962,6 +7989,16 @@ let LaboratorioComponent = class LaboratorioComponent extends _base_page__WEBPAC
     closeModalH() {
         this.modal.close();
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModal();
+            this.closeModalD();
+            this.closeModalH();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 LaboratorioComponent.ctorParameters = () => [
     { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
@@ -6980,6 +8017,12 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('modalFooter', { static: true }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
 ], LaboratorioComponent.prototype, "modalFooter", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], LaboratorioComponent.prototype, "onKeydownHandler", null);
 LaboratorioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-laboratorio',
@@ -7031,6 +8074,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
 /* harmony import */ var _Services_Laboratorio_laboratorio_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../Services/Laboratorio/laboratorio.service */ "./src/app/Services/Laboratorio/laboratorio.service.ts");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
@@ -7043,7 +8089,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let OrdenesComponent = class OrdenesComponent extends _base_page__WEBPACK_IMPORTED_MODULE_2__["BasePageComponent"] {
-    constructor(store, httpSv, labService, modal, formBuilder, http, toastr, modaH) {
+    constructor(store, httpSv, labService, modal, formBuilder, http, toastr, modaH, router) {
         super(store, httpSv);
         this.labService = labService;
         this.modal = modal;
@@ -7051,6 +8097,7 @@ let OrdenesComponent = class OrdenesComponent extends _base_page__WEBPACK_IMPORT
         this.http = http;
         this.toastr = toastr;
         this.modaH = modaH;
+        this.router = router;
         this.data = {};
         this.ordenes = [];
         this.pageData = {
@@ -7077,11 +8124,45 @@ let OrdenesComponent = class OrdenesComponent extends _base_page__WEBPACK_IMPORT
         this.ordenes = [];
         this.loadOrdenes();
     }
-    ngOnInit() {
-        super.ngOnInit();
-    }
     ngOnChanges($event) {
         console.log();
+    }
+    initBusForm() {
+        this.busForm = this.formBuilder.group({
+            datoBus: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+        });
+    }
+    buscarOrden(dni) {
+        this.labService.searchOrdenDni(dni).subscribe(data => {
+            if (data.results.length == 0) {
+                this.toastr.error("No se ha encontrado");
+                this.loadOrdenes();
+            }
+            else {
+                this.data = data;
+                this.ordenes = data.results;
+                this.toastr.info("Mostrando resultados");
+            }
+            console.log("entro busqueda" + dni);
+        });
+        ;
+    }
+    buscar(busca) {
+        this.dato = busca.get('datoBus').value;
+        this.buscarOrden(this.dato);
+    }
+    ngOnInit() {
+        super.ngOnInit();
+        this.initBusForm();
+        this.store.select('ordenes').subscribe(ordenes => {
+            if (ordenes && ordenes.length) {
+                this.ordenes = ordenes;
+                !this.pageData.loaded ? this.setLoaded() : null;
+            }
+        });
+    }
+    ngOnDestroy() {
+        super.ngOnDestroy();
     }
     nextPage() {
         if (this.data.next) {
@@ -7101,26 +8182,11 @@ let OrdenesComponent = class OrdenesComponent extends _base_page__WEBPACK_IMPORT
             });
         }
     }
-    loadOrdenes() {
-        this.labService.loadOrden().subscribe(ord => {
-            this.data = ord;
-            this.ordenes = ord.results;
-        });
-    }
-    openModalH(body, header = null, footer = null, row) {
+    atender(dni, row) {
         this.initPatientForm(row);
-        this.initDetalleForm();
-        //this.rr = row.id;
-        this.modaH.open({
-            body: body,
-            header: header,
-            footer: footer,
-            options: null
-        });
-    }
-    closeModalH() {
-        this.modaH.close();
-        this.modal.close();
+        this.labService.setDni(dni);
+        this.labService.setIdo(row.id);
+        this.router.navigate(['/vertical/atender']);
     }
     initPatientForm(data) {
         this.patientForm = this.formBuilder.group({
@@ -7137,26 +8203,30 @@ let OrdenesComponent = class OrdenesComponent extends _base_page__WEBPACK_IMPORT
         newCab.fecha = Object(_angular_common__WEBPACK_IMPORTED_MODULE_10__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
         newCab.tipoExam = data.tipoExam;
         newCab.orden = data.orden;
-        newCab.observaciones = "";
+        newCab.observaciones = "ninguna";
         this.labService.createCabecera(newCab);
-        this.rr = this.labService.getIdCabecera();
-        this.rr++;
-        console.log("cxc" + this.rr);
+        console.log("CABECERA CREADA ");
     }
-    addExamen(form) {
-        if (form.valid) {
-            this.today = new Date();
-            let newCabecera = form.value;
-            console.log(newCabecera.dni);
-            newCabecera.nombre = form.value.nombre;
-            newCabecera.dni = form.value.dni;
-            newCabecera.fecha = Object(_angular_common__WEBPACK_IMPORTED_MODULE_10__["formatDate"])(this.today, 'yyyy-MM-dd', 'en-US');
-            newCabecera.tipoExam = form.value.tipoExam;
-            newCabecera.orden = form.value.orden;
-            newCabecera.observaciones = form.value.observaciones;
-            console.log(newCabecera.dni);
-            this.labService.createCabecera(newCabecera);
-        }
+    loadOrdenes() {
+        this.labService.loadOrden().subscribe(ord => {
+            this.data = ord;
+            this.ordenes = ord.results;
+        });
+    }
+    openModalH(body, header = null, footer = null, row) {
+        //this.initPatientForm(row);
+        this.initDetalleForm();
+        //this.rr = row.id;
+        this.modaH.open({
+            body: body,
+            header: header,
+            footer: footer,
+            options: null
+        });
+    }
+    closeModalH() {
+        this.modaH.close();
+        this.modal.close();
     }
     closeModalD() {
         this.modal.close();
@@ -7190,6 +8260,15 @@ let OrdenesComponent = class OrdenesComponent extends _base_page__WEBPACK_IMPORT
         ;
         console.log("ID de row" + row);
     }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModalD();
+            this.closeModalH();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 OrdenesComponent.ctorParameters = () => [
     { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
@@ -7199,8 +8278,15 @@ OrdenesComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_8__["ToastrService"] },
-    { type: _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"] }
+    { type: _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], OrdenesComponent.prototype, "onKeydownHandler", null);
 OrdenesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-ordenes',
@@ -7214,7 +8300,8 @@ OrdenesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"],
         ngx_toastr__WEBPACK_IMPORTED_MODULE_8__["ToastrService"],
-        _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"]])
+        _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__["TCModalService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"]])
 ], OrdenesComponent);
 
 
@@ -7251,6 +8338,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_services_modal_modal_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../ui/services/modal/modal.service */ "./src/app/ui/services/modal/modal.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
+
 
 
 
@@ -7326,10 +8414,15 @@ let ListarDatosComponent = class ListarDatosComponent extends _base_page__WEBPAC
         else {
             this.toastr.warning('Buscando');
             this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
-                console.log("Entro al servicio");
-                this.triaj = data;
-                this.citasTriaje = data.results;
-                console.log(this.citasTriaje);
+                if (data.results[0] == null) {
+                    this.toastr.error("No se encontraron coincidencias");
+                    this.cargarCitas();
+                }
+                else {
+                    this.toastr.success("Mostrando Resultados");
+                    this.triaj = data;
+                    this.citasTriaje = data.results;
+                }
             }, error => {
                 console.log(error.message);
             });
@@ -7420,6 +8513,43 @@ let ListarDatosComponent = class ListarDatosComponent extends _base_page__WEBPAC
             this.cargarCitas();
         });
     }
+    initHistoriaForm(data) {
+        this.historiaForm = this.formBuilder.group({
+            numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            talla: [data.talla ? data.talla : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            peso: [data.peso ? data.peso : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            presionArt: [data.presionArt ? data.presionArt : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            temperatura: [data.temperatura ? data.temperatura : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            frecuenciaC: [data.frecuenciaC ? data.frecuenciaC : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            frecuenciaR: [data.frecuenciaR ? data.frecuenciaR : "", _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+        });
+    }
+    // Ver Mas Historial
+    openModalVerMas(body, header = null, footer = null, row) {
+        this.httpSv.searcTriajeC(row.id).subscribe(data => {
+            this.verTriaje = data;
+            console.log(this.verTriaje);
+            this.initHistoriaForm(this.verTriaje);
+            this.modal.open({
+                body: body,
+                header: header,
+                footer: footer,
+                options: null
+            });
+        });
+    }
+    closeModalH() {
+        this.modal.close();
+    }
+    onKeydownHandler(event) {
+        if (event.key === "Escape") {
+            this.closeModalH();
+            this.closeModal();
+        }
+        if (event.key === "Enter") {
+            return false;
+        }
+    }
 };
 ListarDatosComponent.ctorParameters = () => [
     { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_2__["Store"] },
@@ -7430,6 +8560,12 @@ ListarDatosComponent.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"] },
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_8__["ToastrService"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostListener"])('document:keydown', ['$event']),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Function),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [KeyboardEvent]),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:returntype", void 0)
+], ListarDatosComponent.prototype, "onKeydownHandler", null);
 ListarDatosComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-listar-datos',
@@ -10337,6 +11473,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Administrador_tipo_personal_tipo_personal_component__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./Administrador/tipo-personal/tipo-personal.component */ "./src/app/pages/Administrador/tipo-personal/tipo-personal.component.ts");
 /* harmony import */ var _Lab_ordenes_ordenes_component__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./Lab/ordenes/ordenes.component */ "./src/app/pages/Lab/ordenes/ordenes.component.ts");
 /* harmony import */ var _Admision_conexion_laboratorio_conexion_laboratorio_component__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./Admision/conexion-laboratorio/conexion-laboratorio.component */ "./src/app/pages/Admision/conexion-laboratorio/conexion-laboratorio.component.ts");
+/* harmony import */ var _Admision_historial_citas_historial_citas_component__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./Admision/historial-citas/historial-citas.component */ "./src/app/pages/Admision/historial-citas/historial-citas.component.ts");
+/* harmony import */ var _Lab_atender_atender_component__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./Lab/atender/atender.component */ "./src/app/pages/Lab/atender/atender.component.ts");
+/* harmony import */ var _Administrador_personal_adm_personal_adm_component__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./Administrador/personal-adm/personal-adm.component */ "./src/app/pages/Administrador/personal-adm/personal-adm.component.ts");
+
+
+
 
 
 
@@ -10509,7 +11651,10 @@ PagesModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _Administrador_especialidad_especialidad_component__WEBPACK_IMPORTED_MODULE_79__["EspecialidadComponent"],
             _Administrador_tipo_personal_tipo_personal_component__WEBPACK_IMPORTED_MODULE_80__["TipoPersonalComponent"],
             _Lab_ordenes_ordenes_component__WEBPACK_IMPORTED_MODULE_81__["OrdenesComponent"],
-            _Admision_conexion_laboratorio_conexion_laboratorio_component__WEBPACK_IMPORTED_MODULE_82__["ConexionLaboratorioComponent"]
+            _Admision_conexion_laboratorio_conexion_laboratorio_component__WEBPACK_IMPORTED_MODULE_82__["ConexionLaboratorioComponent"],
+            _Admision_historial_citas_historial_citas_component__WEBPACK_IMPORTED_MODULE_83__["HistorialCitasComponent"],
+            _Lab_atender_atender_component__WEBPACK_IMPORTED_MODULE_84__["AtenderComponent"],
+            _Administrador_personal_adm_personal_adm_component__WEBPACK_IMPORTED_MODULE_85__["PersonalAdmComponent"]
         ],
         exports: [],
         entryComponents: []
@@ -15129,6 +16274,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Administrador_especialidad_especialidad_component__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ../pages/Administrador/especialidad/especialidad.component */ "./src/app/pages/Administrador/especialidad/especialidad.component.ts");
 /* harmony import */ var _pages_Administrador_tipo_personal_tipo_personal_component__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ../pages/Administrador/tipo-personal/tipo-personal.component */ "./src/app/pages/Administrador/tipo-personal/tipo-personal.component.ts");
 /* harmony import */ var _pages_Admision_conexion_laboratorio_conexion_laboratorio_component__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ../pages/Admision/conexion-laboratorio/conexion-laboratorio.component */ "./src/app/pages/Admision/conexion-laboratorio/conexion-laboratorio.component.ts");
+/* harmony import */ var _pages_Admision_historial_citas_historial_citas_component__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ../pages/Admision/historial-citas/historial-citas.component */ "./src/app/pages/Admision/historial-citas/historial-citas.component.ts");
+/* harmony import */ var _Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ../Guards/login.guard */ "./src/app/Guards/login.guard.ts");
+/* harmony import */ var _pages_Lab_atender_atender_component__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ../pages/Lab/atender/atender.component */ "./src/app/pages/Lab/atender/atender.component.ts");
+/* harmony import */ var _pages_Administrador_personal_adm_personal_adm_component__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ../pages/Administrador/personal-adm/personal-adm.component */ "./src/app/pages/Administrador/personal-adm/personal-adm.component.ts");
+
+
+
+
 
 
 
@@ -15201,97 +16354,103 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const VERTICAL_ROUTES = [
-    { path: 'default-dashboard', component: _pages_dashboards_dashboard_1__WEBPACK_IMPORTED_MODULE_6__["PageDashboardComponent"] },
-    { path: 'doctors', component: _pages_medicine_doctors__WEBPACK_IMPORTED_MODULE_37__["PageDoctorsComponent"] },
-    { path: 'doctor-profile', component: _pages_medicine_doctor_profile__WEBPACK_IMPORTED_MODULE_40__["PageDoctorProfileComponent"] },
-    { path: 'patients', component: _pages_medicine_patients__WEBPACK_IMPORTED_MODULE_38__["PagePatientsComponent"] },
-    { path: 'patient-profile', component: _pages_medicine_patient_profile__WEBPACK_IMPORTED_MODULE_47__["PagePatientProfileComponent"] },
-    { path: 'payments', component: _pages_medicine_payments__WEBPACK_IMPORTED_MODULE_41__["PagePaymentsComponent"] },
-    { path: 'appointments', component: _pages_medicine_appointments__WEBPACK_IMPORTED_MODULE_42__["PageAppointmentsComponent"] },
-    { path: 'departments', component: _pages_medicine_departments__WEBPACK_IMPORTED_MODULE_43__["PageDepartmentsComponent"] },
-    { path: 'alerts', component: _pages_ui_components_alerts__WEBPACK_IMPORTED_MODULE_20__["PageAlertsComponent"] },
-    { path: 'buttons', component: _pages_ui_components_buttons__WEBPACK_IMPORTED_MODULE_7__["PageButtonsComponent"] },
-    { path: 'cards', component: _pages_ui_components_cards__WEBPACK_IMPORTED_MODULE_8__["PageCardsComponent"] },
-    { path: 'inputs', component: _pages_ui_components_inputs__WEBPACK_IMPORTED_MODULE_9__["PageInputsComponent"] },
-    { path: 'selects', component: _pages_ui_components_selects__WEBPACK_IMPORTED_MODULE_10__["PageSelectsComponent"] },
-    { path: 'textareas', component: _pages_ui_components_textareas__WEBPACK_IMPORTED_MODULE_11__["PageTextareasComponent"] },
-    { path: 'autocompletes', component: _pages_ui_components_autocompletes__WEBPACK_IMPORTED_MODULE_12__["PageAutocompletesComponent"] },
-    { path: 'badges', component: _pages_ui_components_badges__WEBPACK_IMPORTED_MODULE_13__["PageBadgesComponent"] },
-    { path: 'ratings', component: _pages_ui_components_ratings__WEBPACK_IMPORTED_MODULE_14__["PageRatingsComponent"] },
-    { path: 'checkboxes', component: _pages_ui_components_checkboxes__WEBPACK_IMPORTED_MODULE_21__["PageCheckboxesComponent"] },
-    { path: 'contacts', component: _pages_ui_components_contacts__WEBPACK_IMPORTED_MODULE_36__["PageContactsComponent"] },
-    { path: 'radio-buttons', component: _pages_ui_components_radio_buttons__WEBPACK_IMPORTED_MODULE_22__["PageRadioButtonsComponent"] },
-    { path: 'switchers', component: _pages_ui_components_switchers__WEBPACK_IMPORTED_MODULE_23__["PageSwitchersComponent"] },
-    { path: 'modal-windows', component: _pages_ui_components_modal_windows__WEBPACK_IMPORTED_MODULE_39__["PageModalWindowsComponent"] },
-    { path: 'v-timeline', component: _pages_ui_components_v_timeline__WEBPACK_IMPORTED_MODULE_46__["PageVTimelineComponent"] },
-    { path: 'simple-table', component: _pages_ui_tables_simple_tables__WEBPACK_IMPORTED_MODULE_15__["PageSimpleTablesComponent"] },
-    { path: 'sorting-table', component: _pages_ui_tables_sorting_table__WEBPACK_IMPORTED_MODULE_16__["PageSortingTableComponent"] },
-    { path: 'search-table', component: _pages_ui_tables_search_table__WEBPACK_IMPORTED_MODULE_17__["PageSearchTableComponent"] },
-    { path: 'search-pagination-table', component: _pages_ui_tables_search_pagination_table__WEBPACK_IMPORTED_MODULE_57__["PageSearchPaginationTableComponent"] },
-    { path: 'filtering-table', component: _pages_ui_tables_filter_table__WEBPACK_IMPORTED_MODULE_18__["PageFilterTableComponent"] },
-    { path: 'pagination-table', component: _pages_ui_tables_pagination_table__WEBPACK_IMPORTED_MODULE_19__["PagePaginationTableComponent"] },
-    { path: 'form-elements', component: _pages_ui_forms_form_elements__WEBPACK_IMPORTED_MODULE_24__["PageFormElementsComponent"] },
-    { path: 'form-layout', component: _pages_ui_forms_form_layouts__WEBPACK_IMPORTED_MODULE_25__["PageFormLayoutsComponent"] },
-    { path: 'form-validation', component: _pages_ui_forms_form_validation__WEBPACK_IMPORTED_MODULE_26__["PageFormValidationComponent"] },
-    { path: 'ng2-charts', component: _pages_ui_charts_ng2_charts__WEBPACK_IMPORTED_MODULE_27__["PageNg2ChartsComponent"] },
-    { path: 'ngx-charts', component: _pages_ui_charts_ngx_charts__WEBPACK_IMPORTED_MODULE_28__["PageNgxChartsComponent"] },
-    { path: 'ngx-echarts', component: _pages_ui_charts_ngx_echarts__WEBPACK_IMPORTED_MODULE_29__["PageNgxEchartsComponent"] },
-    { path: 'google-map', component: _pages_ui_maps_google_maps__WEBPACK_IMPORTED_MODULE_30__["PageGoogleMapsComponent"] },
-    { path: 'leaflet-map', component: _pages_ui_maps_leaflet_maps__WEBPACK_IMPORTED_MODULE_45__["PageLeafletMapsComponent"] },
-    { path: 'world-map', component: _pages_ui_maps_world_map__WEBPACK_IMPORTED_MODULE_31__["PageWorldMapComponent"] },
-    { path: 'typography', component: _pages_ui_typography__WEBPACK_IMPORTED_MODULE_32__["PageTypographyComponent"] },
-    { path: 'icons-options', component: _pages_ui_icons_icons_options__WEBPACK_IMPORTED_MODULE_33__["PageIconsOptionsComponent"] },
-    { path: 'icons-if', component: _pages_ui_icons_icons_if__WEBPACK_IMPORTED_MODULE_34__["PageIconsIfComponent"] },
-    { path: 'icons-sli', component: _pages_ui_icons_icons_sli__WEBPACK_IMPORTED_MODULE_35__["PageIconsSliComponent"] },
-    { path: 'invoices', component: _pages_apps_service_pages_invoice__WEBPACK_IMPORTED_MODULE_48__["PageInvoiceComponent"] },
-    { path: 'pricing', component: _pages_apps_service_pages_pricing__WEBPACK_IMPORTED_MODULE_49__["PagePricingComponent"] },
-    { path: 'events-timeline', component: _pages_apps_service_pages_timeline__WEBPACK_IMPORTED_MODULE_50__["PageTimelineComponent"] },
-    { path: 'user-profile', component: _pages_apps_service_pages_user_profile__WEBPACK_IMPORTED_MODULE_51__["PageUserProfileComponent"] },
-    { path: 'edit-account', component: _pages_apps_service_pages_edit_account__WEBPACK_IMPORTED_MODULE_52__["PageEditAccountComponent"] },
-    { path: 'events-calendar', component: _pages_apps_service_pages_calendar__WEBPACK_IMPORTED_MODULE_53__["PageCalendarComponent"] },
-    { path: 'settings', component: _pages_settings__WEBPACK_IMPORTED_MODULE_56__["PageSettingsComponent"] },
-    { path: 'citas', component: _pages_Admision_citas_citas_component__WEBPACK_IMPORTED_MODULE_58__["CitasComponent"] },
-    { path: 'historial', component: _pages_Admision_historial_historial_component__WEBPACK_IMPORTED_MODULE_59__["HistorialComponent"] },
-    { path: 'adminUser', component: _pages_Administrador_editar_editar_component__WEBPACK_IMPORTED_MODULE_60__["EditarComponent"] },
-    { path: 'typeUser', component: _pages_Administrador_tipo_personal_tipo_personal_component__WEBPACK_IMPORTED_MODULE_69__["TipoPersonalComponent"] },
-    { path: 'especialidad', component: _pages_Administrador_especialidad_especialidad_component__WEBPACK_IMPORTED_MODULE_68__["EspecialidadComponent"] },
-    { path: 'area', component: _pages_Administrador_area_area_component__WEBPACK_IMPORTED_MODULE_67__["AreaComponent"] },
-    { path: 'personal', component: _pages_Administrador_personal_personal_component__WEBPACK_IMPORTED_MODULE_66__["PersonalComponent"] },
-    { path: 'listar-datos', component: _pages_Triaje_listar_datos_listar_datos_component__WEBPACK_IMPORTED_MODULE_61__["ListarDatosComponent"] },
-    { path: 'consultas', component: _pages_Consultorio_consultas_consultas_component__WEBPACK_IMPORTED_MODULE_62__["ConsultasComponent"] },
-    { path: 'Lconsultas', component: _pages_Consultorio_listar_consultas_listar_consultas_component__WEBPACK_IMPORTED_MODULE_63__["ListarConsultasComponent"] },
-    { path: 'laboratorio', component: _pages_Lab_laboratorio_laboratorio_component__WEBPACK_IMPORTED_MODULE_64__["LaboratorioComponent"] },
-    { path: 'ordenes', component: _pages_Lab_ordenes_ordenes_component__WEBPACK_IMPORTED_MODULE_65__["OrdenesComponent"] },
-    { path: 'conex-lab', component: _pages_Admision_conexion_laboratorio_conexion_laboratorio_component__WEBPACK_IMPORTED_MODULE_70__["ConexionLaboratorioComponent"] },
-    { path: '**', component: _pages_page_404__WEBPACK_IMPORTED_MODULE_44__["Page404Component"] }
+    { path: "default-dashboard", component: _pages_dashboards_dashboard_1__WEBPACK_IMPORTED_MODULE_6__["PageDashboardComponent"] },
+    { path: "doctors", component: _pages_medicine_doctors__WEBPACK_IMPORTED_MODULE_37__["PageDoctorsComponent"] },
+    { path: "doctor-profile", component: _pages_medicine_doctor_profile__WEBPACK_IMPORTED_MODULE_40__["PageDoctorProfileComponent"] },
+    { path: "patients", component: _pages_medicine_patients__WEBPACK_IMPORTED_MODULE_38__["PagePatientsComponent"] },
+    { path: "patient-profile", component: _pages_medicine_patient_profile__WEBPACK_IMPORTED_MODULE_47__["PagePatientProfileComponent"] },
+    { path: "payments", component: _pages_medicine_payments__WEBPACK_IMPORTED_MODULE_41__["PagePaymentsComponent"] },
+    { path: "appointments", component: _pages_medicine_appointments__WEBPACK_IMPORTED_MODULE_42__["PageAppointmentsComponent"] },
+    { path: "departments", component: _pages_medicine_departments__WEBPACK_IMPORTED_MODULE_43__["PageDepartmentsComponent"] },
+    { path: "alerts", component: _pages_ui_components_alerts__WEBPACK_IMPORTED_MODULE_20__["PageAlertsComponent"] },
+    { path: "buttons", component: _pages_ui_components_buttons__WEBPACK_IMPORTED_MODULE_7__["PageButtonsComponent"] },
+    { path: "cards", component: _pages_ui_components_cards__WEBPACK_IMPORTED_MODULE_8__["PageCardsComponent"] },
+    { path: "inputs", component: _pages_ui_components_inputs__WEBPACK_IMPORTED_MODULE_9__["PageInputsComponent"] },
+    { path: "selects", component: _pages_ui_components_selects__WEBPACK_IMPORTED_MODULE_10__["PageSelectsComponent"] },
+    { path: "textareas", component: _pages_ui_components_textareas__WEBPACK_IMPORTED_MODULE_11__["PageTextareasComponent"] },
+    { path: "autocompletes", component: _pages_ui_components_autocompletes__WEBPACK_IMPORTED_MODULE_12__["PageAutocompletesComponent"] },
+    { path: "badges", component: _pages_ui_components_badges__WEBPACK_IMPORTED_MODULE_13__["PageBadgesComponent"] },
+    { path: "ratings", component: _pages_ui_components_ratings__WEBPACK_IMPORTED_MODULE_14__["PageRatingsComponent"] },
+    { path: "checkboxes", component: _pages_ui_components_checkboxes__WEBPACK_IMPORTED_MODULE_21__["PageCheckboxesComponent"] },
+    { path: "contacts", component: _pages_ui_components_contacts__WEBPACK_IMPORTED_MODULE_36__["PageContactsComponent"] },
+    { path: "radio-buttons", component: _pages_ui_components_radio_buttons__WEBPACK_IMPORTED_MODULE_22__["PageRadioButtonsComponent"] },
+    { path: "switchers", component: _pages_ui_components_switchers__WEBPACK_IMPORTED_MODULE_23__["PageSwitchersComponent"] },
+    { path: "modal-windows", component: _pages_ui_components_modal_windows__WEBPACK_IMPORTED_MODULE_39__["PageModalWindowsComponent"] },
+    { path: "v-timeline", component: _pages_ui_components_v_timeline__WEBPACK_IMPORTED_MODULE_46__["PageVTimelineComponent"] },
+    { path: "simple-table", component: _pages_ui_tables_simple_tables__WEBPACK_IMPORTED_MODULE_15__["PageSimpleTablesComponent"] },
+    { path: "sorting-table", component: _pages_ui_tables_sorting_table__WEBPACK_IMPORTED_MODULE_16__["PageSortingTableComponent"] },
+    { path: "search-table", component: _pages_ui_tables_search_table__WEBPACK_IMPORTED_MODULE_17__["PageSearchTableComponent"] },
+    {
+        path: "search-pagination-table",
+        component: _pages_ui_tables_search_pagination_table__WEBPACK_IMPORTED_MODULE_57__["PageSearchPaginationTableComponent"]
+    },
+    { path: "filtering-table", component: _pages_ui_tables_filter_table__WEBPACK_IMPORTED_MODULE_18__["PageFilterTableComponent"] },
+    { path: "pagination-table", component: _pages_ui_tables_pagination_table__WEBPACK_IMPORTED_MODULE_19__["PagePaginationTableComponent"] },
+    { path: "form-elements", component: _pages_ui_forms_form_elements__WEBPACK_IMPORTED_MODULE_24__["PageFormElementsComponent"] },
+    { path: "form-layout", component: _pages_ui_forms_form_layouts__WEBPACK_IMPORTED_MODULE_25__["PageFormLayoutsComponent"] },
+    { path: "form-validation", component: _pages_ui_forms_form_validation__WEBPACK_IMPORTED_MODULE_26__["PageFormValidationComponent"] },
+    { path: "ng2-charts", component: _pages_ui_charts_ng2_charts__WEBPACK_IMPORTED_MODULE_27__["PageNg2ChartsComponent"] },
+    { path: "ngx-charts", component: _pages_ui_charts_ngx_charts__WEBPACK_IMPORTED_MODULE_28__["PageNgxChartsComponent"] },
+    { path: "ngx-echarts", component: _pages_ui_charts_ngx_echarts__WEBPACK_IMPORTED_MODULE_29__["PageNgxEchartsComponent"] },
+    { path: "google-map", component: _pages_ui_maps_google_maps__WEBPACK_IMPORTED_MODULE_30__["PageGoogleMapsComponent"] },
+    { path: "leaflet-map", component: _pages_ui_maps_leaflet_maps__WEBPACK_IMPORTED_MODULE_45__["PageLeafletMapsComponent"] },
+    { path: "world-map", component: _pages_ui_maps_world_map__WEBPACK_IMPORTED_MODULE_31__["PageWorldMapComponent"] },
+    { path: "typography", component: _pages_ui_typography__WEBPACK_IMPORTED_MODULE_32__["PageTypographyComponent"] },
+    { path: "icons-options", component: _pages_ui_icons_icons_options__WEBPACK_IMPORTED_MODULE_33__["PageIconsOptionsComponent"] },
+    { path: "icons-if", component: _pages_ui_icons_icons_if__WEBPACK_IMPORTED_MODULE_34__["PageIconsIfComponent"] },
+    { path: "icons-sli", component: _pages_ui_icons_icons_sli__WEBPACK_IMPORTED_MODULE_35__["PageIconsSliComponent"] },
+    { path: "invoices", component: _pages_apps_service_pages_invoice__WEBPACK_IMPORTED_MODULE_48__["PageInvoiceComponent"] },
+    { path: "pricing", component: _pages_apps_service_pages_pricing__WEBPACK_IMPORTED_MODULE_49__["PagePricingComponent"] },
+    { path: "events-timeline", component: _pages_apps_service_pages_timeline__WEBPACK_IMPORTED_MODULE_50__["PageTimelineComponent"] },
+    { path: "user-profile", component: _pages_apps_service_pages_user_profile__WEBPACK_IMPORTED_MODULE_51__["PageUserProfileComponent"] },
+    { path: "edit-account", component: _pages_apps_service_pages_edit_account__WEBPACK_IMPORTED_MODULE_52__["PageEditAccountComponent"] },
+    { path: "events-calendar", component: _pages_apps_service_pages_calendar__WEBPACK_IMPORTED_MODULE_53__["PageCalendarComponent"] },
+    { path: "settings", component: _pages_settings__WEBPACK_IMPORTED_MODULE_56__["PageSettingsComponent"] },
+    { path: "citas", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Admision_citas_citas_component__WEBPACK_IMPORTED_MODULE_58__["CitasComponent"] },
+    { path: "historial", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Admision_historial_historial_component__WEBPACK_IMPORTED_MODULE_59__["HistorialComponent"] },
+    { path: "adminUser", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Administrador_editar_editar_component__WEBPACK_IMPORTED_MODULE_60__["EditarComponent"] },
+    { path: "typeUser", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Administrador_tipo_personal_tipo_personal_component__WEBPACK_IMPORTED_MODULE_69__["TipoPersonalComponent"] },
+    { path: "especialidad", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Administrador_especialidad_especialidad_component__WEBPACK_IMPORTED_MODULE_68__["EspecialidadComponent"] },
+    { path: "area", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Administrador_area_area_component__WEBPACK_IMPORTED_MODULE_67__["AreaComponent"] },
+    { path: "personal", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Administrador_personal_personal_component__WEBPACK_IMPORTED_MODULE_66__["PersonalComponent"] },
+    { path: "listar-datos", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Triaje_listar_datos_listar_datos_component__WEBPACK_IMPORTED_MODULE_61__["ListarDatosComponent"] },
+    { path: "consultas", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Consultorio_consultas_consultas_component__WEBPACK_IMPORTED_MODULE_62__["ConsultasComponent"] },
+    { path: "Lconsultas", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Consultorio_listar_consultas_listar_consultas_component__WEBPACK_IMPORTED_MODULE_63__["ListarConsultasComponent"] },
+    { path: "laboratorio", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Lab_laboratorio_laboratorio_component__WEBPACK_IMPORTED_MODULE_64__["LaboratorioComponent"] },
+    { path: "ordenes", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Lab_ordenes_ordenes_component__WEBPACK_IMPORTED_MODULE_65__["OrdenesComponent"] },
+    { path: "conex-lab", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Admision_conexion_laboratorio_conexion_laboratorio_component__WEBPACK_IMPORTED_MODULE_70__["ConexionLaboratorioComponent"] },
+    { path: "hist-citas", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Admision_historial_citas_historial_citas_component__WEBPACK_IMPORTED_MODULE_71__["HistorialCitasComponent"] },
+    { path: 'atender', canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Lab_atender_atender_component__WEBPACK_IMPORTED_MODULE_73__["AtenderComponent"] },
+    { path: "personalAdm", canActivate: [_Guards_login_guard__WEBPACK_IMPORTED_MODULE_72__["LoginGuard"]], component: _pages_Administrador_personal_adm_personal_adm_component__WEBPACK_IMPORTED_MODULE_74__["PersonalAdmComponent"] },
+    { path: "**", component: _pages_page_404__WEBPACK_IMPORTED_MODULE_44__["Page404Component"] }
 ];
 const PUBLIC_ROUTES = [
-    { path: 'sign-in', component: _pages_apps_sessions_sign_in__WEBPACK_IMPORTED_MODULE_54__["PageSignInComponent"] },
-    { path: 'sign-up', component: _pages_apps_sessions_sign_up__WEBPACK_IMPORTED_MODULE_55__["PageSignUpComponent"] },
+    { path: "sign-in", component: _pages_apps_sessions_sign_in__WEBPACK_IMPORTED_MODULE_54__["PageSignInComponent"] },
+    { path: "sign-up", component: _pages_apps_sessions_sign_up__WEBPACK_IMPORTED_MODULE_55__["PageSignUpComponent"] }
 ];
 const ROUTES = [
     {
-        path: '',
-        redirectTo: '/public/sign-in',
-        pathMatch: 'full'
+        path: "",
+        redirectTo: "/public/sign-in",
+        pathMatch: "full"
     },
     {
-        path: 'vertical',
+        path: "vertical",
         component: _layout_vertical__WEBPACK_IMPORTED_MODULE_3__["VerticalLayoutComponent"],
         children: VERTICAL_ROUTES
     },
     {
-        path: 'horizontal',
+        path: "horizontal",
         component: _layout_horizontal__WEBPACK_IMPORTED_MODULE_4__["HorizontalLayoutComponent"],
         children: VERTICAL_ROUTES
     },
     {
-        path: 'public',
+        path: "public",
         component: _layout_public__WEBPACK_IMPORTED_MODULE_5__["PublicLayoutComponent"],
         children: PUBLIC_ROUTES
     },
     {
-        path: '**',
+        path: "**",
         component: _layout_vertical__WEBPACK_IMPORTED_MODULE_3__["VerticalLayoutComponent"],
         children: VERTICAL_ROUTES
     }
@@ -15301,9 +16460,7 @@ let RoutingModule = class RoutingModule {
 RoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [],
-        exports: [
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]
-        ],
+        exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
         declarations: []
     })
 ], RoutingModule);
@@ -15343,22 +16500,22 @@ let AdministradorService = class AdministradorService {
     }
     //Areas
     loadAreas() {
-        return this.http.get(this.url + "/areas/");
+        return this.http.get(this.url + "/areas/", this.getHeader());
     }
     loadAreasPagination(pag) {
         return this.http.get(pag);
     }
     loadAreasSP() {
-        return this.http.get(this.url + "/areasSP/");
+        return this.http.get(this.url + "/areasSP/", this.getHeader());
     }
     searchArea(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscararea/?ar=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscararea/?ar=" + id, this.getHeader());
     }
     createArea(area) {
         this.http
             .post(this.url + "/areas/", {
             nombre: area.nombre
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("Area Creada correctamente");
         }, error => {
@@ -15368,23 +16525,23 @@ let AdministradorService = class AdministradorService {
     }
     //Especialidades
     loadEspecialidades() {
-        return this.http.get(this.url + "/especialidad/");
+        return this.http.get(this.url + "/especialidad/", this.getHeader());
     }
     loadEspecialidadesPagination(pag) {
         return this.http.get(pag);
     }
     loadEspecialidadesSP() {
-        return this.http.get(this.url + "/especialidadSP/");
+        return this.http.get(this.url + "/especialidadSP/", this.getHeader());
     }
     searchEspecialidad(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscarespecialidad/?esp=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscarespecialidad/?esp=" + id, this.getHeader());
     }
     createEspecialidad(especialidad) {
         this.http
             .post(this.url + "/especialidad/", {
             nombre: especialidad.nombre,
             descripcion: especialidad.descripcion
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("Especialidad Creada correctamente");
         }, error => {
@@ -15394,22 +16551,22 @@ let AdministradorService = class AdministradorService {
     }
     //TipoPersonal
     loadTPersonal() {
-        return this.http.get(this.url + "/tipo-personal/");
+        return this.http.get(this.url + "/tipo-personal/", this.getHeader());
     }
     loadTPersonalPagination(pag) {
         return this.http.get(pag);
     }
     loadTPersonalSP() {
-        return this.http.get(this.url + "/tipo-personalSP/");
+        return this.http.get(this.url + "/tipo-personalSP/", this.getHeader());
     }
     searchTPersonal(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscartipousuario/?tip=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_4__["BASE_API_URL"] + "/administrador/buscartipousuario/?tip=" + id, this.getHeader());
     }
     createTPersonal(tipo) {
         this.http
             .post(this.url + "/tipo-personal/", {
             nombre: tipo.nombre
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("Tipo personal Creado correctamente");
         }, error => {
@@ -15453,10 +16610,10 @@ let AdministradorService = class AdministradorService {
         return this.http.get(url, this.getHeader());
     }
     searchPersonal(id) {
-        return this.http.get(this.url + "/ver-personal/" + id + "/");
+        return this.http.get(this.url + "/ver-personal/" + id + "/", this.getHeader());
     }
     searchPersonalDNI(dni) {
-        return this.http.get(this.url + "/personaldni/" + dni + "/");
+        return this.http.get(this.url + "/personaldni/" + dni + "/", this.getHeader());
     }
     createPersonal(tipo) {
         // console.log(JSON.stringify(tipo));
@@ -15473,23 +16630,26 @@ let AdministradorService = class AdministradorService {
             area: tipo.area,
             tipo_personal: tipo.tipo_personal,
             especialidad: tipo.especialidad
-        })
+        }, this.getHeader())
             .subscribe(data => {
             this.toastr.success("personal Creado correctamente");
+            this.bool = true;
         }, error => {
             console.log(error.message);
             this.toastr.error("No se pudo crear personal");
+            this.bool = false;
         });
+        return this.bool;
     }
     //user
     loadUser() {
-        return this.http.get(this.url + "/usuarios/");
+        return this.http.get(this.url + "/usuarios/", this.getHeader());
     }
     loadUserPagination(pag) {
-        return this.http.get(pag);
+        return this.http.get(pag, this.getHeader());
     }
     loadUserSP() {
-        return this.http.get(this.url + "/usuariosSP/");
+        return this.http.get(this.url + "/usuariosSP/", this.getHeader());
     }
 };
 AdministradorService.ctorParameters = () => [
@@ -15642,7 +16802,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm2015/ngx-toastr.js");
-/* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../config/API */ "./src/app/config/API.ts");
+/* harmony import */ var _Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Administrador/administrador.service */ "./src/app/services/Administrador/administrador.service.ts");
+/* harmony import */ var _config_API__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../config/API */ "./src/app/config/API.ts");
+
 
 
 
@@ -15652,9 +16814,10 @@ __webpack_require__.r(__webpack_exports__);
 // BASE_API_URL
 
 let HttpService = class HttpService {
-    constructor(http, toastr) {
+    constructor(http, toastr, adminService) {
         this.http = http;
         this.toastr = toastr;
+        this.adminService = adminService;
         this.admin = false;
         this.admis = false;
         this.triaje = false;
@@ -15730,96 +16893,101 @@ let HttpService = class HttpService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(error.error || "Server error");
     }
     searchCitaDNI(dni) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/citadni/?dni=" + dni);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/citadni/?dni=" + dni, this.adminService.getHeader());
     }
     searchCitaEsp(esp) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/citasporespecialidad2/?esp=" + esp);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/citasporespecialidad2/?esp=" + esp, this.adminService.getHeader());
     }
     loadEspecialidadesSP() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/especialidadSP/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/especialidadSP/", this.adminService.getHeader());
     }
     loadEspecialidades() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/especialidad/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/especialidad/", this.adminService.getHeader());
     }
     loadEspecialidadesPag() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/especialidad/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/especialidad/", this.adminService.getHeader());
     }
     loadMedicoSP() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/ver-personalSP/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/ver-personalSP/", this.adminService.getHeader());
     }
     loadMedico() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/ver-personal/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/ver-personal/", this.adminService.getHeader());
     }
     loadMedicoEsp(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/personalporespecialidad/?" +
-            id +
-            "=idEspecialidad");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/personalporespecialidad/?" + id + "=idEspecialidad", this.adminService.getHeader());
     }
     loadHistorias() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/ver-historias/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/ver-historias/", this.adminService.getHeader());
     }
     loadHistoriaPagination(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminService.getHeader());
     }
     loadCitas() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/crear-cita/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/crear-cita/", this.adminService.getHeader());
     }
     loadCitasM() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/ver-citas/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/ver-citas/", this.adminService.getHeader());
     }
     loadCitasT() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/citasenespera/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/citasenespera/", this.adminService.getHeader());
+    }
+    //http://127.0.0.1:8000/consultorio/historialdecitas/
+    loadHistorialCitas() {
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/historialdecitas/", this.adminService.getHeader());
     }
     loadSolicitudes() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/ver-solicitudes/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/ver-solicitudes/", this.adminService.getHeader());
     }
     loadSolicitudesPag(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminService.getHeader());
+    }
+    searchSol(ab) {
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/buscarSolNom/?nom=" + ab, this.adminService.getHeader());
     }
     loadCitasTPag(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminService.getHeader());
     }
     loadCitasEdit() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/ver-citas/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/ver-citas/", this.adminService.getHeader());
     }
     loadCitaPagination(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminService.getHeader());
     }
     CancelarCita(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/cancelarcita/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/cancelarcita/" + id + "/", this.adminService.getHeader());
     }
     TriarCita(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/triarcita/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/triarcita/" + id + "/", this.adminService.getHeader());
     }
     loadGSang() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/grupo-sangre/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/grupo-sangre/", this.adminService.getHeader());
     }
     loadDistrito() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/distritos/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/distritos/", this.adminService.getHeader());
     }
     loadProvincia() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/provincias/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/provincias/", this.adminService.getHeader());
     }
     loadProvinciaId(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/buscarprovincias/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/buscarprovincias/" + id + "/", this.adminService.getHeader());
     }
     loadDepartamento() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/departamentos/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/departamentos/", this.adminService.getHeader());
     }
     searchCitasxEsp(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/citasporespecialidad/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/citasporespecialidad/" + id + "/", this.adminService.getHeader());
     }
     cancelarCitasPasadas() {
-        return this.http.post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/cancelarCitasFecha/", "");
+        return this.http.post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/cancelarCitasFecha/", this.adminService.getHeader());
     }
     searchHistoriaTriaje(dni) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/citadniespera/?dni=" + dni);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/citadniespera/?dni=" + dni, this.adminService.getHeader());
     }
     crearTriaje(newTriaje) {
         console.log("servicio triaje");
         console.log(newTriaje);
         this.http
-            .post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/crear-triaje/", {
+            .post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/crear-triaje/", {
             talla: newTriaje.talla,
             peso: newTriaje.peso,
             temperatura: newTriaje.temperatura,
@@ -15829,7 +16997,7 @@ let HttpService = class HttpService {
             numeroHistoria: newTriaje.numeroHistoria.id,
             cita: newTriaje.cita,
             personal: newTriaje.personal
-        })
+        }, this.adminService.getHeader())
             .subscribe(data => {
             this.toastr.success("", "Triaje Creado");
             console.log("triaje creado completo");
@@ -15841,7 +17009,7 @@ let HttpService = class HttpService {
     createOrden(newOrden, modal) {
         console.log(newOrden);
         this.http
-            .post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/crear-orden/", {
+            .post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/crear-orden/", {
             numeroHistoria: newOrden.numeroHistoria,
             dni: newOrden.dni,
             nombre: newOrden.nombre,
@@ -15850,7 +17018,7 @@ let HttpService = class HttpService {
             tipoExam: newOrden.tipoExam,
             fechaA: newOrden.fechaA,
             estadoOrden: "Creada",
-        })
+        }, this.adminService.getHeader())
             .subscribe(data => {
             this.toastr.success("Orden Creada correctamente");
             console.log("CREAR Historial Completo");
@@ -15861,9 +17029,8 @@ let HttpService = class HttpService {
         });
     }
     createHISTORIAL(newHistoria, modal) {
-        console.log(newHistoria);
         this.http
-            .post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/crear-historia/", {
+            .post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/crear-historia/", {
             numeroHistoria: newHistoria.numeroHistoria,
             dni: newHistoria.dni,
             nombres: newHistoria.nombres,
@@ -15884,45 +17051,45 @@ let HttpService = class HttpService {
             distrito: newHistoria.distrito,
             provincia: newHistoria.provincia,
             departamento: newHistoria.departamento
-        })
+        }, this.adminService.getHeader())
             .subscribe(data => {
             this.toastr.success("Historial Creado correctamente");
             console.log("CREAR Historial Completo");
             modal.close();
         }, error => {
-            console.error(error.message);
+            console.error("Leer errores de back", error);
             this.toastr.error("No se pudo crear el Historial");
         });
     }
     searcHistoriasDNI(dni) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/historiadni/" + dni + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/historiadni/" + dni + "/", this.adminService.getHeader());
     }
     searcHistoriasNroR(nroR) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/historianumero/?nro=" + nroR);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/historianumero/?nro=" + nroR, this.adminService.getHeader());
     }
     searcHistoriasNomAp(name) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/historianombre/?nom=" + name);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/historianombre/?nom=" + name, this.adminService.getHeader());
     }
     searcDptoxP(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/buscarprovincias/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/buscarprovincias/" + id + "/", this.adminService.getHeader());
     }
     searcProxDist(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/admision/buscardistritos/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/admision/buscardistritos/" + id + "/", this.adminService.getHeader());
     }
     searcMedxEsp(id) {
         console.log(id);
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/personalporespecialidad/?id=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/personalporespecialidad/?id=" + id, this.adminService.getHeader());
     }
     searchMedicoporEsp(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/personalporespecialidad/?id=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/personalporespecialidad/?id=" + id, this.adminService.getHeader());
     }
     searcMedxEspPag(id) {
         console.log(id);
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/personalporespecialidad/?id=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/personalporespecialidad/?id=" + id, this.adminService.getHeader());
     }
     createCITA(newCita, modal) {
         this.http
-            .post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/crear-cita/", {
+            .post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/crear-cita/", {
             numeroRecibo: newCita.numeroRecibo,
             fechaSeparacion: newCita.fechaSeparacion,
             fechaAtencion: newCita.fechaAtencion,
@@ -15933,7 +17100,7 @@ let HttpService = class HttpService {
             medico: newCita.medico,
             responsable: newCita.responsable,
             exonerado: newCita.exonerado
-        })
+        }, this.adminService.getHeader())
             .subscribe(data => {
             newCita = {};
             console.log("CITA Completo");
@@ -15945,17 +17112,17 @@ let HttpService = class HttpService {
         });
     }
     loadUsers() {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/usuarios/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/usuarios/", this.adminService.getHeader());
     }
     searchUsers(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/buscarusuario/?us=" + id);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/buscarusuario/?us=" + id, this.adminService.getHeader());
     }
     DeleteUser(id) {
-        return this.http.delete(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/usuarios/" + id + "/");
+        return this.http.delete(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/usuarios/" + id + "/", this.adminService.getHeader());
     }
     UpdateUser(user) {
         console.log(JSON.stringify(user));
-        return this.http.put(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/administrador/usuarios/" + user.id + "/", {
+        return this.http.put(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/administrador/usuarios/" + user.id + "/", {
             id: user.id,
             password: user.password,
             last_login: user.last_login,
@@ -15969,10 +17136,10 @@ let HttpService = class HttpService {
             date_joined: user.date_joined,
             groups: user.groups,
             user_permissions: user.user_permissions
-        });
+        }, this.adminService.getHeader());
     }
     CreateUser(user) {
-        return this.http.post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/api/rest-auth/registration/", {
+        return this.http.post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/api/rest-auth/registration/", {
             username: user.username,
             password1: user.password,
             password2: user.password,
@@ -15991,28 +17158,28 @@ let HttpService = class HttpService {
      * loadCitasMedico: recibe el id del medico
      ***/
     loadCitasMedico(nro) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/citaspormedico/?id=" + nro);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/citaspormedico/?id=" + nro, this.adminService.getHeader());
     }
     /*
      * autor: Milagros Motta R.
      * searcHistoriaCompleta: recibe el nro de historia
      */
     searcHistoriaCompleta(nro) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/buscarhistorialclinico/?nro=" + nro);
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/buscarhistorialclinico/?nro=" + nro, this.adminService.getHeader());
     }
     /***
      * autor: Milagros Motta R.
      * paginacionConsultasHistoriaC: Recibe la url de la paginación correspondiente, devolviendo así la data organizada con el modelo ConsultasPaginadas.
      ***/
     paginacionConsultasHistoriaC(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminService.getHeader());
     }
     /***
      * autor: Milagros Motta R.
      * searcTriajeC: recibe el id del medico
      ***/
     searcTriajeC(nro) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/triajeporcita/" + nro + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/triajeporcita/" + nro + "/", this.adminService.getHeader());
     }
     /***
      * autor: Milagros Motta R.
@@ -16021,7 +17188,7 @@ let HttpService = class HttpService {
      ***/
     crearConsulta(newConsulta) {
         this.http
-            .post(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/crear-consulta/", {
+            .post(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/crear-consulta/", {
             motivoConsulta: newConsulta.motivoConsulta,
             apetito: newConsulta.apetito,
             orina: newConsulta.orina,
@@ -16034,7 +17201,7 @@ let HttpService = class HttpService {
             ordenExam: newConsulta.ordenExam,
             numeroHistoria: newConsulta.numeroHistoria,
             medico: newConsulta.medico
-        })
+        }, this.adminService.getHeader())
             .subscribe(data => {
             this.toastr.success("Consulta Guardada correctamente");
             console.log("Crear Consulta Correcto");
@@ -16048,25 +17215,29 @@ let HttpService = class HttpService {
      * AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
      ***/
     AtenderCita(id) {
-        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_6__["BASE_API_URL"] + "/consultorio/atendercita/" + id + "/");
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + "/consultorio/atendercita/" + id + "/", this.adminService.getHeader());
     }
     /***
      * autor: Milagros Motta R.
      * paginacionCitasM: Recibe la url de la paginación correspondiente, devolviendo así la data organizada con el modelo CitasMPaginadas.
      ***/
     paginacionCitasM(url) {
-        return this.http.get(url);
+        return this.http.get(url, this.adminService.getHeader());
+    }
+    generarReporteDiario() {
+        return this.http.get(_config_API__WEBPACK_IMPORTED_MODULE_7__["BASE_API_URL"] + '/admision/reporteDiarioCitas', this.adminService.getHeader());
     }
 };
 HttpService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] },
+    { type: _Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_6__["AdministradorService"] }
 ];
 HttpService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: "root"
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"], _Administrador_administrador_service__WEBPACK_IMPORTED_MODULE_6__["AdministradorService"]])
 ], HttpService);
 
 
@@ -19438,9 +20609,10 @@ let TCModalComponent = class TCModalComponent {
         this.defaultOtions = {
             height: 'auto',
             width: 500,
-            closeButton: false,
+            closeButton: true,
             overlay: true,
-            overlayClose: true
+            overlayClose: true,
+            escapeToClose: true,
         };
         this.close = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
     }

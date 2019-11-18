@@ -3,14 +3,13 @@
     "label": "Nombre Completo",
     "value": "1"
   },
-  {
-    "label" : "DNI",
-    "value" : "3"
-  },
     
+    {
+      "label" : "DNI",
+      "value" : "3"
+  },
   {
     "label" : "Rango de Fecha",
     "value" : "2"
 }
-
 ]

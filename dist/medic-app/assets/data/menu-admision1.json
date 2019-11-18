@@ -20,6 +20,14 @@
 		"layout": "vertical"
 	},
 	{
+		"title": "Historial de Citas",
+		"icon": {
+			"class": "icofont-stethoscope-alt"
+		},
+		"routing": "hist-citas",
+		"layout": "vertical"
+	},
+	{
 		"title": "Solicitudes de Laboratorio",
 		"icon": {
 			"class": "icofont-stethoscope-alt"

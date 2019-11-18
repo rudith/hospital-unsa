@@ -16,6 +16,7 @@ import { Cabeceralab } from '../../../interfaces/cabeceralab';
 import { Detalle } from '../../../interfaces/detalle';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { ExamenLista } from '../../../interfaces/examen-lista';
+import { HostListener } from '@angular/core'; 
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -307,6 +308,17 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	closeModalH() {
 		this.modal.close();
 	}
+	
+@HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+	  this.closeModal();
+	  this.closeModalD();
+	  this.closeModalH();
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
+  }
 
 
 

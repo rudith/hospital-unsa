@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { citaLista } from '../../../interfaces/citaLista';
+import { HostListener } from '@angular/core'; 
 
 
 @Component({
@@ -145,6 +146,11 @@ export class ConsultasComponent extends BasePageComponent implements OnInit {
 					this.CitasC[i].fechaAtencion=this.CitasC[i].especialidad.nombre;
 				}
 			});
+    }
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Enter") { 
+      return false;
     }
   }
 }

@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  OnChanges
-} from "@angular/core";
+import {  Component,  ElementRef,  OnDestroy,  OnInit,  ViewChild,  OnChanges} from "@angular/core";
 import { BasePageComponent } from "../../base-page";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../../../interfaces/app-state";
@@ -630,5 +623,14 @@ export class HistorialComponent extends BasePageComponent
     );
   }
   
-
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModal();
+      this.closeModalH();
+      this.closeModalVH();
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
+  }
 }

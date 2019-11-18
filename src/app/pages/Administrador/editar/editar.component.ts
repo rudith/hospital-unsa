@@ -15,6 +15,7 @@ import { MessageService } from "primeng/components/common/messageservice";
 import { Personal } from "../../../interfaces/personal";
 import { ToastrService } from "ngx-toastr";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
+import { HostListener } from '@angular/core'; 
 
 @Component({
   selector: "app-editar",
@@ -360,5 +361,16 @@ export class EditarComponent extends BasePageComponent
       this.data = users;
       this.users = users.results;
     });
+  }
+
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModal();
+      this.closeModalPersonal();
+      
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 }

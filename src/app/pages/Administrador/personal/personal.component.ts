@@ -18,6 +18,8 @@ import { Tipopersonal } from "../../../interfaces/tipopersonal";
 import { Especialidad } from "../../../interfaces/especialidad";
 import { personalLista } from "../../../interfaces/personalLista";
 import { HttpClient } from "@angular/common/http";
+import { HostListener } from '@angular/core'; 
+
 @Component({
   selector: "app-personal",
   templateUrl: "./personal.component.html",
@@ -351,5 +353,15 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       updated_at: [data.updated_at ? data.updated_at : "", Validators.required],
       estReg: [data.estReg ? data.estReg : "", Validators.required]
     });
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModal();
+      this.closeModalP();
+      
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 }

@@ -17,6 +17,8 @@ import { Detalle } from '../../../interfaces/detalle';
 import { Cabcrear } from '../../../interfaces/cabcrear';
 import { Router } from '@angular/router';
 
+import { HostListener } from '@angular/core';
+
 
 @Component({
 	selector: 'app-ordenes',
@@ -229,6 +231,17 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 		});;
 		console.log("ID de row" + row);
 	}
+	
+@HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+	  this.closeModalD();
+	  this.closeModalH();
+
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
+  }
 
 }
 

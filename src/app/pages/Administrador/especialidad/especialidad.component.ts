@@ -10,6 +10,7 @@ import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Especialidad } from "../../../interfaces/especialidad";
+import { HostListener } from '@angular/core'; 
 
 @Component({
   selector: "app-especialidad",
@@ -155,6 +156,14 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       this.closeModal();
       this.appointmentForm.reset();
       this.loadEspecialidades();
+    }
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModal();
+    }
+    if (event.key === "Enter") { 
+      return false;
     }
   }
 }

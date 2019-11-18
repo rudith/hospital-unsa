@@ -17,6 +17,7 @@ import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
 import { Router } from '@angular/router';
+import { HostListener } from '@angular/core'; 
 
 import { BASE_API_URL } from "../../../config/API";
 
@@ -367,6 +368,15 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
 
     document.location.href = BASE_API_URL+"/admision/reporteCitasRangoFecha/"+this.a+"/"+this.b ;
     this.toastr.success("Se ha generado el Pdf");
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModal();
+      this.closeModalConf();
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 
   

@@ -27,6 +27,8 @@ import { Tipoexamen } from '../../../interfaces/tipoexamen';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { Orden } from '../../../interfaces/orden';
 
+import { HostListener } from '@angular/core'; 
+
 
 @Component({
   selector: 'app-conexion-laboratorio',
@@ -307,6 +309,15 @@ export class ConexionLaboratorioComponent extends BasePageComponent
         }
       }
     );
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModalH();
+    
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 }
 

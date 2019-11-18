@@ -17,6 +17,7 @@ import { CitaM } from "../../../interfaces/cita-m";
 import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
+import { HostListener } from '@angular/core'; 
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -400,5 +401,14 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         this.closeModalConf();
       }
     );
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModal();
+      this.closeModalConf();
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 }

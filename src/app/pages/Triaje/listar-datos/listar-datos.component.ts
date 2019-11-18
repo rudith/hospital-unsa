@@ -15,6 +15,8 @@ import { CitaM } from '../../../../app/interfaces/cita-m';
 import { ToastrService } from 'ngx-toastr';
 import { citaLista } from '../../../../app/interfaces/citaLista';
 
+import { HostListener } from '@angular/core';
+
 @Component({
   selector: 'app-listar-datos',
   templateUrl: './listar-datos.component.html',
@@ -264,5 +266,14 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 
   closeModalH() {
     this.modal.close();
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
+      this.closeModalH();
+      this.closeModal();
+    }
+    if (event.key === "Enter") { 
+      return false;
+    }
   }
 }

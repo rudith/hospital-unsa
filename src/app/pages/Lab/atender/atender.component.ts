@@ -18,6 +18,8 @@ import {Cabcrear} from '../../../interfaces/cabcrear';
 import { Router } from '@angular/router';
 import { Orden } from '../../../interfaces/orden';
 
+import { HostListener } from '@angular/core'; 
+
 
 
 
@@ -172,5 +174,10 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 		});;
 		
 	}
+	@HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+		if (event.key === "Enter") { 
+		  return false;
+		}
+	  }
 
 }

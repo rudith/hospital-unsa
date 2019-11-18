@@ -63,6 +63,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   busForm: FormGroup;
   patientForm: FormGroup;
   depa: number;
+  bus: string;
 
   historiaForm: FormGroup;
   historiaFormE: FormGroup;
@@ -74,6 +75,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   public espOption: IOption[];
   public busqOption: IOption[];
   public especialidades: Especialidad[];
+
 
   constructor(
     store: Store<IAppState>,
@@ -125,7 +127,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     this.solicitudes = [];
     this.loadSolici();
     this.loadData();
-    // this.loadData();
+    this.initBusForm();
   }
 
   public nextPage() {
@@ -138,7 +140,6 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     }
   }
 
-
   public prevPage() {
     console.log(this.pageNum);
     if (this.pageNum > 1) {
@@ -149,12 +150,14 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       });
     }
   }
+
   loadSolici() {
     this.httpSv.loadSolicitudes().subscribe(sol => {
       this.solicitudesLis = sol;
       this.solicitudes = sol.results;
     });
   }
+
   ngOnInit() {
     super.ngOnInit();
     this.estadoBusq = false;
@@ -246,7 +249,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
         };
     }
   }
-  openModalVerExtra<T>(body: Content<T>,header: Content<T> = null,
+  openModalVerExtra<T>(body: Content<T>, header: Content<T> = null,
     footer: Content<T> = null,
   ) {
     this.initHistoriaFormExtra();
@@ -260,7 +263,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   initHistoriaFormExtra() {
     this.today = new Date();
     this.historiaFormE = this.formBuilder.group({
-      dni: ["",[Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      dni: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
       nombre: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
       tipoExam: ["", Validators.required],
@@ -275,6 +278,35 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
       this.httpSv.createOrden(newOrden, this.modal);
     }
+  }
+
+  initBusForm() {
+    this.busForm = this.formBuilder.group({
+      datoBus: ["", [Validators.required]]
+    });
+  }
+
+  buscar(ab: FormGroup) {
+    this.bus = ab.get("datoBus").value;
+    console.log(this.bus);
+    this.httpSv.searchSol(this.bus).subscribe(
+      data => {
+        if (this.bus == "") {
+          this.toastr.info("No se ha ingresado ningun texto");
+        }
+        else {
+          if (data.results[0] == null) {
+            this.toastr.error("No se han encontrado coincidencias");
+            this.loadSolici();
+          }
+          else {
+            this.solicitudes = [];
+            this.solicitudes = data.results;
+            this.toastr.info("Mostrando resultados");
+          }
+        }
+      }
+    );
   }
 }
 

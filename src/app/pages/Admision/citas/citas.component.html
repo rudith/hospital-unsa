@@ -63,6 +63,7 @@
         <tc-input
           *ngIf="opBus == 2"
           [placeholder]="'Ingrese especialidad a buscar'"
+          [type]="'text'"
           [charLimiting]="20"
           pattern="[a-zA-Z]*"
           [suffixIcon]="'icofont-search-document'"
@@ -70,13 +71,10 @@
         >
         </tc-input>
         <tc-form-description
-          [tcColor]="'#e24d4d'"
+          [tcColor]="'#1666B3'"
           [tcFontSize]="'0.8em'"
-          *ngIf="
-            busForm.controls.campo.touched && busForm.controls.campo.invalid
-          "
-        >
-          Datos incorrectos DNI (Ejemplo:74256985), Especialidad
+          *ngIf="busForm.controls.campo.invalid" >
+          Ingrese DNI (Ejemplo:74256985), Especialidad
           (Ejemplo:Odontologia)
         </tc-form-description>
       </tc-form-group>
@@ -88,7 +86,6 @@
         [view]="'success'"
         [tcShape]="500"
         (click)="buscar(busForm)"
-        [disabled]="busForm.invalid"
       >
         Buscar
       </button>

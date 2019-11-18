@@ -89,6 +89,17 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 
 	buscarOrden(dni: string) {
 		this.labService.searchOrdenDni(dni).subscribe(data => {
+			if(data.results.length==0){
+				this.toastr.error("No se ha encontrado");
+				this.loadOrdenes();
+			}
+			else{
+				this.data=data;
+				this.ordenes=data.results;
+				this.toastr.info("Mostrando resultados");
+			}
+			
+			
 			console.log("entro busqueda" + dni);
 		});;
 	}

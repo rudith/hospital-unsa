@@ -1,233 +1,307 @@
 <div class="col-sm-12">
-  <form [formGroup]="busForm">
-    <div class="row">
-      <div class="col col-12 ">
-        <div class="row">
-          <div class="col-md-8">
-            <tc-form-group>
-              <tc-input type ="number" [placeholder]="'Ingrese numero de DNI*'" formControlName="datoBus"></tc-input>
-            </tc-form-group>
-          </div>
-          <div class="col-md-2">
-            <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
-              Buscar
-            </button>
-          </div>
-          <div class="col-md-2">
-              <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="200" (click)="cargarCitas()">
-              Cargar 
+    <form [formGroup]="busForm">
+      <div class="row">
+        <div class="col col-12 ">
+          <div class="row">
+            <div class="col-md-8">
+              <tc-form-group>
+                <tc-input type="number" [placeholder]="'Ingrese numero de DNI*'" formControlName="datoBus"></tc-input>
+              </tc-form-group>
+            </div>
+            <div class="col-md-2">
+              <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
+                Buscar
               </button>
             </div>
-        </div>
-      </div>
-    </div>
-  </form>
-  
-  <tc-card class="mb-0">
-		<div class="table-wrap">
-			<table class="table-box">
-				<thead>
-					<tr>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Numero de Historia
-						</th>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							DNI
-						</th>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Nombre Completo
-						</th>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Especialidad
-						</th>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Medico
-            </th>
-            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Estado
-						</th>					
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Fecha
-						</th>
-						<th [align]="headerAlign" [tcBgColor]="headerBgColor">
-							Registrar Triaje
-						</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<tr *ngFor="let row of citasTriaje">
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.numeroHistoria.numeroHistoria}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.numeroHistoria.dni}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.numeroHistoria.nombres}} {{row.numeroHistoria.apellido_paterno}} {{row.numeroHistoria.apellido_materno}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.especialidad.nombre}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-               {{row.medico.nombres}} {{row.medico.apellido_paterno}}
-            </td>
-            <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.estadoCita}}
-						</td><td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.fechaAtencion}}
-						</td>
-						<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }" [align]="center">
-							<div class="actions">
-                <button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'info'" [square]="true" [tcShape]="500" 
-                  [size]="'sm'" (click)="openModal(modalBody, 'Agregar Datos de Triaje', modalFooter, row)">
-                </button>
-              </div>
-
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-    <ul class="pagination-ul">
-      <li class="pagination-li prev">
-        <a
-          class="pagination-link"
-          (click)="prevPage()"
-          [ngClass]="{ disabled: pageNum == 1 }"
-        >
-          <i class="icofont-simple-left"></i>
-        </a>
-      </li>
-  
-      <li class="pagination-li next">
-        <a 
-          class="pagination-link" 
-          (click)="nextPage()">
-          <i class="icofont-simple-right"></i>
-        </a>
-      </li>
-    </ul>
-	</tc-card>
-
-
-
-</div>
-<!-- edit patient Modal window -->
-<ng-container>
-  <ng-template #modalBody>
-      <form [formGroup]="cabTri">
-
-          <div class="row">
-            <tc-form-group class="col-12 col-sm-6">
-              <tc-form-label>Numero de Historia</tc-form-label>
-              <tc-input [bgColor]="'#fff'"
-              [color]="'#3f51b5'"
-              formControlName="numeroHistoria" 
-              readonly="readonly">
-              </tc-input>
-            </tc-form-group>
-            <tc-form-group class="col-12 col-sm-6">
-              <tc-form-label>DNI</tc-form-label>
-              <tc-input [bgColor]="'#fff'"
-              [color]="'#3f51b5'"
-              formControlName="dni" 
-              readonly="readonly">
-              </tc-input>
-            </tc-form-group>
+            <div class="col-md-2">
+              <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="200" (click)="cargarCitas()">
+                Cargar
+              </button>
+            </div>
           </div>
-          <div class="row">
-            <tc-form-group class="col-12 col-sm-12">
-              <tc-form-label>Nombre Completo</tc-form-label>
-              <tc-input [bgColor]="'#fff'"
-              [color]="'#3f51b5'"
-              formControlName="nombres" 
-              readonly="readonly">
-              </tc-input>
-            </tc-form-group>
-          </div>
-        </form>
-
-
-    <form [formGroup]="patientForm2" novalidate class="new-patient-form">
-      <div class="row">
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Talla (cm)</tc-form-label>
-            <tc-input [placeholder]="'Talla (cm)'" formControlName="talla"></tc-input>
-            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-              *ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
-              La talla debe ser en 'cm' y un numero positivo
-            </tc-form-description>
-          </tc-form-group>
-        </div>
-
-
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Peso (Kg)</tc-form-label>
-            <tc-input [placeholder]="'Peso (Kg)'"  formControlName="peso"></tc-input>
-            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-              *ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
-              El peso debe ser en 'Kg' y un numero positivo
-            </tc-form-description>
-          </tc-form-group>
-        </div>
-
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Temperatura (°C)</tc-form-label>
-            <tc-input [placeholder]="'temperatura (°C) '" formControlName="temperatura"></tc-input>
-            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-              *ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
-              Se debe ingresar un numero positivo
-            </tc-form-description>
-          </tc-form-group>
-        </div>
-
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Frecuencia Resp.</tc-form-label>
-            <tc-input [placeholder]="'frecuencia Resp'" formControlName="frecuenciaR"></tc-input>
-            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-              *ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
-              Se debe ingresar un numero entero positivo
-            </tc-form-description>
-          </tc-form-group>
-        </div>
-
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Frecuencia Cardiaca</tc-form-label>
-            <tc-input [placeholder]="'Frecuencia Cardiaca'"  formControlName="frecuenciaC"></tc-input>
-            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-              *ngIf="patientForm2.controls.frecuenciaC.touched && patientForm2.controls.frecuenciaC.invalid ">
-              Se debe ingresar un numero entero positivo
-            </tc-form-description>
-          </tc-form-group>
-        </div>
-
-        <div class="col-12 col-sm-4">
-          <tc-form-group>
-            <tc-form-label>Presión Arterial</tc-form-label>
-            <tc-input [placeholder]="'Presion Arterial'" formControlName="presionArt"></tc-input>
-            <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
-              *ngIf="patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid ">
-              Se debe ingresar numeros enteros positivos con el siguiente formato "##/##"
-            </tc-form-description>
-          </tc-form-group>
         </div>
       </div>
     </form>
-  </ng-template>
-
-  <ng-template #modalFooter>
-    <div class="actions justify-content-between">
-      <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
-      <button tc-button [view]="'info'" [disabled]="patientForm2.invalid" (click)="CreateTriaje(patientForm2)">
-        Crear Triaje
-      </button>
-    </div>
-  </ng-template>
-</ng-container>
-<!-- end Modal window -->
+  
+    <tc-card class="mb-0">
+      <div class="table-wrap">
+        <table class="table-box">
+          <thead>
+            <tr>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Numero de Historia
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                DNI
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Nombre Completo
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Especialidad
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Medico
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Estado
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Actualizar
+              </th>
+              <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                Ver Triaje
+              </th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr *ngFor="let row of citasTriaje">
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                {{row.numeroHistoria.numeroHistoria}}
+              </td>
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                {{row.numeroHistoria.dni}}
+              </td>
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                {{row.numeroHistoria.nombres}} {{row.numeroHistoria.apellido_paterno}}
+                {{row.numeroHistoria.apellido_materno}}
+              </td>
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                {{row.especialidad.nombre}}
+              </td>
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                {{row.medico.nombres}} {{row.medico.apellido_paterno}}
+              </td>
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                {{row.estadoCita}}
+              </td>
+              <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }" [align]="center">
+                <div class="actions">
+                  <button tc-button [disabled]=" row.estadoCita == 'Triado' " [afterIcon]="'icofont-ui-edit'"
+                    [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+                    (click)="openModal(modalBody, 'Agregar Datos de Triaje', modalFooter, row)">
+                  </button>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <button tc-button [disabled]=" row.estadoCita == 'Espera' " [tcColor]="['#fff', '#3f51b5']"
+                    [tcBgColor]="['#3f51b5', '#fff']" [tcBorderColor]="'#3f51b5'" [square]="true" [tcShape]="300"
+                    [size]="'sm'" (click)="
+                  openModalVerMas(
+                    modalBodyH,
+                    'Ver Historial Completo',
+                    modalFooterH,
+                    row
+                  )
+                ">Ver Triaje
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="pagination-ul">
+        <li class="pagination-li prev">
+          <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
+            <i class="icofont-simple-left"></i>
+          </a>
+        </li>
+  
+        <li class="pagination-li next">
+          <a class="pagination-link" (click)="nextPage()">
+            <i class="icofont-simple-right"></i>
+          </a>
+        </li>
+      </ul>
+    </tc-card>
+  
+  
+  
+  </div>
+  <!-- edit patient Modal window -->
+  <ng-container>
+    <ng-template #modalBody>
+      <form [formGroup]="cabTri">
+  
+        <div class="row">
+          <tc-form-group class="col-12 col-sm-6">
+            <tc-form-label>Numero de Historia</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" formControlName="numeroHistoria" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+          <tc-form-group class="col-12 col-sm-6">
+            <tc-form-label>DNI</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" formControlName="dni" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+        <div class="row">
+          <tc-form-group class="col-12 col-sm-12">
+            <tc-form-label>Nombre Completo</tc-form-label>
+            <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" formControlName="nombres" readonly="readonly">
+            </tc-input>
+          </tc-form-group>
+        </div>
+      </form>
+  
+  
+      <form [formGroup]="patientForm2" novalidate class="new-patient-form">
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Talla (cm)</tc-form-label>
+              <tc-input [placeholder]="'Talla (cm)'" formControlName="talla"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="patientForm2.controls.talla.touched && patientForm2.controls.talla.invalid ">
+                La talla debe ser en 'cm' y un numero positivo
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+  
+  
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Peso (Kg)</tc-form-label>
+              <tc-input [placeholder]="'Peso (Kg)'" formControlName="peso"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="patientForm2.controls.peso.touched && patientForm2.controls.peso.invalid ">
+                El peso debe ser en 'Kg' y un numero positivo
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+  
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Temperatura (°C)</tc-form-label>
+              <tc-input [placeholder]="'temperatura (°C) '" formControlName="temperatura"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="patientForm2.controls.temperatura.touched && patientForm2.controls.temperatura.invalid ">
+                Se debe ingresar un numero positivo
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+  
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Frecuencia Resp.</tc-form-label>
+              <tc-input [placeholder]="'frecuencia Resp'" formControlName="frecuenciaR"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="patientForm2.controls.frecuenciaR.touched && patientForm2.controls.frecuenciaR.invalid ">
+                Se debe ingresar un numero entero positivo
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+  
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Frecuencia Cardiaca</tc-form-label>
+              <tc-input [placeholder]="'Frecuencia Cardiaca'" formControlName="frecuenciaC"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="patientForm2.controls.frecuenciaC.touched && patientForm2.controls.frecuenciaC.invalid ">
+                Se debe ingresar un numero entero positivo
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+  
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Presión Arterial</tc-form-label>
+              <tc-input [placeholder]="'Presion Arterial'" formControlName="presionArt"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="patientForm2.controls.presionArt.touched && patientForm2.controls.presionArt.invalid ">
+                Se debe ingresar numeros enteros positivos con el siguiente formato "##/##"
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #modalFooter>
+      <div class="actions justify-content-between">
+        <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancelar</button>
+        <button tc-button [view]="'info'" [disabled]="patientForm2.invalid" (click)="CreateTriaje(patientForm2)">
+          Crear Triaje
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+  <!-- end Modal window -->
+  
+  <ng-container>
+    <ng-template #modalBodyH>
+      <form [formGroup]="historiaForm" novalidate class="new-patient-form">
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <tc-form-group>
+              <tc-form-label>Numero de Historia</tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'name'"
+                formControlName="numeroHistoria" readonly="readonly">
+              </tc-input>
+            </tc-form-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Talla (cm)</tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'DNI'"
+                formControlName="talla" readonly="readonly"></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>Peso (kg)</tc-form-label>
+                <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Peso'"
+                  formControlName="peso" readonly="readonly"></tc-input>
+              </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>Temperatura (°C)</tc-form-label>
+                <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'temperatura'"
+                  formControlName="temperatura" readonly="readonly">
+                </tc-input>
+              </tc-form-group>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Frec. Cardiaca </tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'frecuenciaC'"
+                formControlName="frecuenciaC" readonly="readonly"></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Frec. Respiratoria </tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'frecuenciaR'"
+                formControlName="frecuenciaR" readonly="readonly"></tc-input>
+            </tc-form-group>
+          </div>
+  
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Presion Arterial</tc-form-label>
+              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'presionArt'"
+                formControlName="presionArt" readonly="readonly">
+              </tc-input>
+            </tc-form-group>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #modalFooterH>
+      <div class="actions justify-content-between">
+        <button tc-button [type]="'button'" [tcBgColor]="'#009688'" [block]="true" (click)="closeModalH()">
+          ACEPTAR
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+  <!--End Modal Ver Mas-->

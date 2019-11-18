@@ -66,7 +66,7 @@ export class LoginFormComponent implements OnInit {
         this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/historial"]);
       }
-      if(data.tipoUser=="Consultorio"){
+      if(data.tipoUser=="Consultorio" || data.tipoUser=="Medico"){
         this.http.admin = false;
         this.http.admis = false;
         this.http.consultorio = true;
@@ -97,6 +97,9 @@ export class LoginFormComponent implements OnInit {
         console.log(data.id);
         this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
         this.router.navigate(["/vertical/ordenes"]);
+      }
+      if(data.tipoUser!="Laboratorio" && data.tipoUser!="Triaje" && data.tipoUser!="Consultorio" && data.tipoUser!="Medico" && data.tipoUser!="Administrador" && data.tipoUser!="Admision" ){
+        this.toastr.error("Usuario:" + lg.get("login").value, "Usuario no registrado");
       }
     
       console.log(data.tipoUser)

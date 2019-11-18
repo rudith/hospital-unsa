@@ -2,7 +2,7 @@
     icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
 <h3>Personal</h3>
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-1">
     <button
       tc-button
       [view]="'info'"
@@ -14,7 +14,7 @@
       Agregar
     </button>
   </div>
-  <form [formGroup]="busForm" class="col-md-10 row">
+  <form [formGroup]="busForm" class="col-md-11 row">
     <div class="col-md-2">
       <tc-form-group>
         <tc-select
@@ -25,7 +25,7 @@
         </tc-select>
       </tc-form-group>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <tc-form-group>
         <tc-input
           [placeholder]="'Ingrese el dato a buscar'"
@@ -197,8 +197,8 @@
             <tc-input
               [prefixIcon]="'icofont-id'"
               formControlName="nombres"
-              [charLimiting]="20"
-              pattern="[a-zA-Z]*"
+              [charLimiting]="23"
+              pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -220,7 +220,7 @@
               [prefixIcon]="'icofont-id'"
               formControlName="apellido_paterno"
               [charLimiting]="20"
-              pattern="[a-zA-Z]*"
+              pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"
@@ -239,7 +239,7 @@
               [prefixIcon]="'icofont-id'"
               formControlName="apellido_materno"
               [charLimiting]="20"
-              pattern="[a-zA-Z]*"
+              pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+"
             ></tc-input>
             <tc-form-description
               [tcColor]="'#e24d4d'"

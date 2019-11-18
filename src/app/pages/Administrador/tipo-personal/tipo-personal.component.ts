@@ -33,7 +33,7 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   {
     super(store, httpSv);
     this.pageData = {
-      title: "Tipo Personal",
+      title: "Tipo Usuario",
       loaded: true,
       breadcrumbs: [
         {
@@ -137,7 +137,7 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   initForm() {
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
-      nombre: ["", Validators.required]
+      nombre: ["", [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]]
     });
   }
 

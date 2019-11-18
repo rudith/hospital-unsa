@@ -1,15 +1,46 @@
-<div class="row">
-  <div class="col col-12 ">
+
+        
+<div class="col col-12 ">
+    <form [formGroup]="busForm">
     <div class="row">
-      <div class="col-md-10"></div>
-      <div class="col-md-2">
-        <button tc-button [afterIcon]="'icofont-plus'" [block]="true" [view]="'info'" [tcShape]="20"
-          (click)="openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)">
-          Agregar Orden
-        </button>
+      <div class="col col-12 ">
+        <div class="row">
+          <div class="col-md-1">
+            <tc-form-group>
+              <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+                (click)="openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)"></button>
+            </tc-form-group>
+          </div>
+          <div class="col-md-7">
+            <tc-form-group>
+                <tc-input [placeholder]="'Ingrese el nombre y/o apellido'" type="text" [suffixIcon]="'icofont-search-document'"
+                formControlName="datoBus"
+              >
+              </tc-input>
+            </tc-form-group>
+          </div>
+          
+          <div class="col-md-2">
+            <button tc-button [view]="'success'" [tcShape]="500" (click)="buscar(busForm)" >
+              Buscar
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button
+              tc-button
+              [block]="true"
+              [tcBgColor]="'#3f51b5'"
+              [tcShape]="300"
+              (click)="loadSolici()"
+            >
+              Cargar
+            </button>
+          </div>
+        </div>
       </div>
+   
     </div>
-  </div>
+  </form>
 </div>
 
 <div class="col-sm-12">
@@ -190,8 +221,11 @@
           <div class="col-12 col-sm-6">
             <tc-form-group>
               <tc-form-label>DNI</tc-form-label>
-              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'DNI'"
+              <tc-input  [placeholder]="'DNI'"
                 formControlName="dni" ></tc-input>
+                <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'" *ngIf="historiaFormE.controls.dni.invalid">
+              Ingrese solo numeros
+            </tc-form-description>
             </tc-form-group>
           </div>
         </div>
@@ -199,7 +233,7 @@
           <div class="col-12 col-sm-12">
             <tc-form-group>
               <tc-form-label>Nombre</tc-form-label>
-              <tc-input [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Nombre'"
+              <tc-input  [placeholder]="'Nombre'"
                 formControlName="nombre" ></tc-input>
             </tc-form-group>
           </div>

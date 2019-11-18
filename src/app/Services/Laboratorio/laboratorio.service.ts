@@ -74,7 +74,7 @@ export class LaboratorioService {
 		return this.http.get<Examen>(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
 	}
 	searchOrdenDni(dni: string): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/consultorio/buscarOrden/?dni=DNI' + dni, this.adminSv.getHeader());
+		return this.http.get<any>('http://18.216.2.122:9000/consultorio/buscarOrden/?dni=' + dni, this.adminSv.getHeader());
 	}
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>(this.url + "/TipoExamen/", this.adminSv.getHeader());
@@ -162,9 +162,13 @@ export class LaboratorioService {
 				});
 
 	}
+	eliminarCabecera(a:number):Observable<Orden>{
+		console.log("vino al servicio");
+		return this.http.get<Orden>(this.url+"/eliminarExamenCompleto/"+a);
+	}
 	
 	
-
+	
 
 
 }

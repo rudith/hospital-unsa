@@ -138,13 +138,21 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 			newDetalle.codigoExam = this.rr;
 			this.labService.createDetalle(newDetalle);
 			this.detalleForm.reset();
-			this.loadTabla(this.rr	);
+			this.loadTabla(this.rr);
 		}
 		
 	}
 	cancelar(){
+		this.labService.eliminarCabecera(this.labService.getIdCabecera()).subscribe(cita => {
+			console.log("Aparentemente lo hizo "+cita.id)
+			this.cargarDatos();
+		  });
 		this.router.navigate(['/vertical/ordenes']);
+
+		
 	}
+
+	
 	irLaboratorio(){
 		this.router.navigate(['/vertical/laboratorio']);
 	}

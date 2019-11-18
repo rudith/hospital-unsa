@@ -149,9 +149,17 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
       this.httpSv.searchCitaEsp(this.campo).subscribe(data => {
-        this.data = data;
-        this.citasEdit = data.results;
-        this.toastr.warning("Buscando Citas", "Especialidad: " + valor);
+        if(data.results.length==0){
+          this.toastr.error("No se han encontrado coincidencias");
+        }
+        else{
+          this.data = data;
+          this.citasEdit = data.results;
+          this.toastr.success("Datos encontrados");
+        }
+
+        
+        
       });
     }
   }
@@ -161,14 +169,15 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
+      this.toastr.warning("Buscando Citas", "DNI: " + valor);
       this.httpSv.searchCitaDNI(this.campo).subscribe(data => {
-        if (this.data.results == null) {
+        if (this.data.results.length==0) {
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
           this.data = data;
           this.citasEdit = data.results;
-          this.toastr.warning("Buscando Citas", "DNI: " + valor);
+          this.toastr.warning("Datos encontrados"); 
         }
       });
     }

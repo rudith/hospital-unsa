@@ -28,6 +28,7 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { Personal } from "../../../interfaces/personal";
 import { HistorialLista } from '../../../interfaces/historial-lista';
+import { HostListener } from '@angular/core'; 
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -105,7 +106,7 @@ export class HistorialComponent extends BasePageComponent
     this.estadoCivilOption = [];
     this.medicos = [];
     this.loadData();
-    this.opBus = "1";
+    this.opBus = "0";
     this.historiales = [];
     this.espOption = [];
     this.newCita = <Cita>{};
@@ -139,6 +140,7 @@ export class HistorialComponent extends BasePageComponent
       this.especialidades = especialidades.results;
       this.loadOptions();
     });
+
   }
   ngOnChanges($event) {
     console.log();
@@ -171,6 +173,7 @@ export class HistorialComponent extends BasePageComponent
   ngOnInit() {
     super.ngOnInit();
     this.estadoBusq = false;
+    
     this.initBusForm();
     this.getData("assets/data/opcionBusqueda.json", "busqOption");
     this.store.select("historiales").subscribe(historiales => {
@@ -351,8 +354,7 @@ export class HistorialComponent extends BasePageComponent
   }
 
   // open modal Cita
-  openModal(
-    body: any,
+  openModal( body: any,
     header: any = null,
     footer: any = null,
     data: any = null,
@@ -449,9 +451,19 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(
         data => {
+          if(data.length==0){
+            this.toastr.error("No se han encontrado coincidencias");
+            this.httpSv.loadHistorias().subscribe(historiales => {
+              this.historiales = []
+              this.historiales = historiales.results;
+            });
+          }
+          else{
+          this.toastr.success("Mostrando resultados");
           this.historiales = []
           this.historiales = data;
           console.log("entro bus" + this.datoBus);
+          }
         },
         error => {
           this.toastr.error("No encontrado");
@@ -465,9 +477,18 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNomAp(this.datoBus).subscribe(
         data => {
+          if(data.results.length==0){
+            this.toastr.error("No se han encontrado coincidencias");
+            this.httpSv.loadHistorias().subscribe(historiales => {
+              this.historiales = []
+              this.historiales = historiales.results;
+            });
+          }else{
+          this.toastr.success("Mostrando resultados");
           this.historiales = [];
           this.historiales = data.results;
           console.log("entro bus" + this.datoBus);
+          }
         },
         error => {
           this.toastr.warning("No encontrado");
@@ -608,4 +629,6 @@ export class HistorialComponent extends BasePageComponent
       error => { }
     );
   }
+  
+
 }

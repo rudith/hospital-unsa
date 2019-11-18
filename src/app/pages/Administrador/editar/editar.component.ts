@@ -132,11 +132,22 @@ export class EditarComponent extends BasePageComponent
         this.toastr.info("Campo vacio");
       });
     } else {
+      this.toastr.info("Usuarios con: "+this.id,"Buscando...");
       this.httpSv.searchUsers(this.id).subscribe(data => {
-        this.toastr.info("Usuarios con: "+this.id,"Buscando...");
-        this.users = [];
-        this.users = data;
-        console.log(JSON.stringify(data));
+        if(data.length==0){
+          this.toastr.error("No encontrado");  
+          this.loadUsers();
+        }
+        else{
+          this.users = [];
+          this.users = data;
+          this.toastr.success("Encontrado");
+        }
+        
+        
+      },
+      error => {
+        this.toastr.warning("No encontrado");
       });
     }
   }

@@ -26,6 +26,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   citasTriaje:CitaM[];
   triaje: Triaje[];
   patientForm2: FormGroup;
+  historiaForm:FormGroup;
   today: Date;
   dato: string;
   opBus: string;
@@ -37,6 +38,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
   idCita:number;
   cabTri:FormGroup;
   n:string;
+  verTriaje:Triaje;
   pageNum:number;
   triaj:citaLista;
 
@@ -113,11 +115,15 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
     }else{
       this.toastr.warning( 'Buscando');
       this.httpSv.searchHistoriaTriaje(dni).subscribe(data => {
-      
-      console.log("Entro al servicio");
+      if(data.results[0]==null)   {
+        this.toastr.error("No se encontraron coincidencias");
+        this.cargarCitas();
+      }
+      else{
+        this.toastr.success("Mostrando Resultados");
         this.triaj = data;
         this.citasTriaje=data.results;
-        console.log(this.citasTriaje);
+      }
       
     },
     error => {
@@ -150,6 +156,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 
   //Metodo para abrir el modal de crear triaje donde se muestran datos del paciente y el form correspondiente
   openModal<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: any) {
+
     this.initPatientForm2(row);
     this.initFormModCita(row);
     this.idCita=row.id;
@@ -159,7 +166,7 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
       footer: footer,
       options: null
     });
-  }
+  }  
 
   //Metodo para cerrar el modal de Crear Triaje 
   closeModal() {
@@ -220,5 +227,42 @@ export class ListarDatosComponent extends BasePageComponent implements OnInit, O
 				this.httpSv.TriarCita(id).subscribe(cita => {
 					this.cargarCitas();
 				});
-	}
+  }
+  
+  initHistoriaForm(data: Triaje) {
+    this.historiaForm = this.formBuilder.group({
+      numeroHistoria: [data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria : "",Validators.required],
+      talla: [data.talla ? data.talla : "", Validators.required],
+      peso: [data.peso ? data.peso : "", Validators.required],      
+      presionArt: [data.presionArt ? data.presionArt : "", Validators.required],
+      temperatura: [data.temperatura ? data.temperatura : "",Validators.required  ],
+      frecuenciaC: [data.frecuenciaC ? data.frecuenciaC : "", Validators.required],
+      frecuenciaR: [data.frecuenciaR ? data.frecuenciaR : "", Validators.required],
+    });
+  }
+   // Ver Mas Historial
+   openModalVerMas<T>(
+    body: Content<T>,
+    header: Content<T> = null,
+    footer: Content<T> = null,
+    row: Historial
+  ) {
+    this.httpSv.searcTriajeC(row.id).subscribe(data => {
+      this.verTriaje = data;
+      console.log(this.verTriaje);
+      this.initHistoriaForm(this.verTriaje);
+      this.modal.open({
+        body: body,
+        header: header,
+        footer: footer,
+        options: null
+      });
+    });
+    
+   
+  }
+
+  closeModalH() {
+    this.modal.close();
+  }
 }

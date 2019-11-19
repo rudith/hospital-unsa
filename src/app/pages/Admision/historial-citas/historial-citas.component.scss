@@ -133,25 +133,25 @@ $_animation: $animation;
 }
 :host {
   .add-action-box {
-    bottom: $module-rem * 54;
+    top: $module-rem * 8;
     position: fixed;
-    right: $module-rem * 4;
+    right: $module-rem * 2.5;
     z-index: 9997;
-
     .tc-btn {
-      font-size: 14px;
+      font-size: 13px;
     }
   }
-  .add-action-box1 {
-    bottom: $module-rem * 54;
+  .addlab-action-box1 {
+    top: $module-rem * 8;
     position: fixed;
-    right: $module-rem * 18;
+    right: $module-rem * 15;
     z-index: 9997;
-
     .tc-btn {
-      font-size: 14px;
+      font-size: 13px;
     }
   }
+
+
 }
 .new-doctor-form {
   .avatar-box {

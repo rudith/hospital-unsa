@@ -368,6 +368,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
 
     document.location.href = BASE_API_URL+"/admision/reporteCitasRangoFecha/"+this.a+"/"+this.b ;
     this.toastr.success("Se ha generado el Pdf");
+    this.closeModal();
   }
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
     if (event.key === "Escape") { 

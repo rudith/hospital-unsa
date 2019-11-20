@@ -262,7 +262,7 @@ loadHistorialCitas(): Observable<citaLista> {
     );
   }
   cancelarCitasPasadas(): Observable<any> {
-    return this.http.post<any>(
+    return this.http.get<any>(
       BASE_API_URL + "/admision/cancelarCitasFecha/",this.adminService.getHeader());
   }
 

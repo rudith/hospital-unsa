@@ -31,6 +31,10 @@ export class LoginFormComponent implements OnInit {
     adminSV.loadUser();
     labSV.loadExamen();
     labSV.loadOrden();
+    http.cancelarCitasPasadas().subscribe(
+      data => {
+        http.loadCitas();
+      });
    
 
   }
@@ -103,6 +107,10 @@ export class LoginFormComponent implements OnInit {
       }
     
       console.log(data.tipoUser)
+    },
+    error=>{
+      this.toastr.error("Usuario no registrado");
+
     });
   }
 }

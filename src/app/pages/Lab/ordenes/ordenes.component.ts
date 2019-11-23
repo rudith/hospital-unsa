@@ -39,6 +39,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	pageNum: number;
 	dato: string;
 	rr: number;
+	manda:number;
 	detalleForm: FormGroup;
 	public cab: Cabcrear;
 	constructor(
@@ -98,7 +99,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			else{
 				this.data=data;
 				this.ordenes=data.results;
-				this.toastr.info("Mostrando resultados");
+				this.toastr.info("Búsqueda Exitosa");
 			}
 			
 			
@@ -156,6 +157,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			orden: [data.orden ? data.orden : '',],
 			observaciones: ['', Validators.required],
 			tipoExam: [data.tipoExam ? data.tipoExam : '', Validators.required],
+			id:[data.id?data.id:'',Validators.required]
 		});
 
 		let newCab: Cabcrear = this.patientForm.value;
@@ -168,6 +170,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 		newCab.observaciones = "ninguna";
 		this.labService.createCabecera(newCab);
 		console.log("CABECERA CREADA ");
+		
 
 
 	}

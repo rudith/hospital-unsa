@@ -10,6 +10,12 @@
 				<div class="col-md-6">
 					<tc-form-group>
 						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
+						<tc-form-description [tcColor]="'#1666B3'"
+						[tcFontSize]="'0.8em'"
+						*ngIf="busForm.controls.datoBus.invalid"> 
+						* Formato para la busqueda por rango: "2019-10-22/2019-11-22" ** Busqueda por nombre ingresar nombre completo del paciente  *
+					</tc-form-description>
+						
 					</tc-form-group>
 				</div>
 

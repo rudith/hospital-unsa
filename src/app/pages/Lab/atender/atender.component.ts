@@ -41,7 +41,10 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
   private ordenR:string;
   private fechaR:string;
   private tipoExId: number;
+  private idcab:number;
+
   detalleForm: FormGroup;
+  cabeceraForm: FormGroup;
   examenForm: FormGroup;
   rr: number;
   ido:number;
@@ -86,6 +89,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
     this.datoBus = this.labService.getDni();
 	this.cargarDatos();
 	this.initDetalleForm();
+	this.initcabeceraForm();
 	this.loadOrdenes();
 	
    }
@@ -93,6 +97,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
   ngOnInit() {
 	super.ngOnInit();
 	this.initDetalleForm();
+	this.initcabeceraForm();
   }
   ngOnChanges($event) {
 		console.log();
@@ -104,6 +109,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
       this.ordenR=data[0].orden;
 	  this.fechaR=data[0].fecha;
 	  this.tipoExId=data[0].tipoExam.id;
+	  this.idcab=data[0].id;
     });
   }
 
@@ -124,7 +130,27 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 			rango_referencia: ['', Validators.required],
 		});
 	}
-	//Fin de Modal Crear Detalle
+		//Valida los campos del formulario de observaciones 
+	initcabeceraForm(){
+		this.cabeceraForm=this.formBuilder.group({
+			observaciones: ['',Validators.required]
+		});
+	}
+	updateCabecera(form:FormGroup){
+		if(form.valid){
+			let newcab: Cabcrear=form.value;
+			newcab.observaciones=form.value.observaciones;
+			newcab.nombre=this.datoBus;
+			newcab.dni=this.dniR;
+			newcab.orden=this.ordenR;
+			newcab.fecha=this.fechaR;
+			newcab.tipoExam=this.tipoExId;
+			//console.log("1"+this.datoBus+"2"+this.dniR+"3"+this.ordenR +"4"+ this.fechaR +"5"+ this.tipoExId);
+			//this.idcab=this.labService.getIdOrden();
+			this.labService.updateCabecera(newcab);
+			
+		}
+	}
 
 	// Metodo de Crear detalle: llama al servicio de creacion createDetalle
 	addDetalle(form: FormGroup) {

@@ -50,7 +50,7 @@
                     <tc-input [placeholder]="'Descripcion*'" formControlName="descripcion"></tc-input>
                     <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
                         *ngIf="detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid ">
-                        Ingrese la descripcion, este solo debe contener letras.
+                        Ingrese la prueba realizada o muestra, este solo debe contener letras.
                     </tc-form-description>
                 </tc-form-group>
 
@@ -60,7 +60,7 @@
                     <tc-input [placeholder]="'Resultado Obtenido*'" formControlName="resultado_obtenido"></tc-input>
                     <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
                         *ngIf="detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid ">
-                        Ingrese Resultado Obtenido, este solo debe contener letras.
+                        Ingrese Resultado Obtenido.
                     </tc-form-description>
                 </tc-form-group>
             </div>
@@ -121,17 +121,26 @@
         </tc-table>
     </tc-card>
 
-    <tc-form-group>
-        <tc-form-label>Observaciones</tc-form-label>
-        <tc-input [placeholder]="'Agregar Observaciones*'"></tc-input>
-    </tc-form-group>
+
+
+
+    <tc-card [tcGradient]="['#fff', '#fbfbfb']">
+        <form [formGroup]="cabeceraForm" novalidate class="new-patient-form">
+            <tc-form-group>
+                <tc-form-label>Observaciones</tc-form-label>
+                <tc-input [placeholder]="'Agregar Observaciones*'" formControlName="observaciones"></tc-input>
+                
+            </tc-form-group>
+        </form>
+    </tc-card>
+    
 
     <div class="row">
         <div class="col-12 col-sm-6">
         <button tc-button [ngStyle]="{ 'width': '45%' }" [view]="'error'" (click)="cancelar()">Cancelar</button>
         </div>
         <div class="col-12 col-sm-6">
-        <button tc-button [ngStyle]="{ 'width': '45%' }"[view]="'info'" (click)="estado(row)">Agregar</button>
+        <button tc-button [ngStyle]="{ 'width': '45%' }"[view]="'info'" (click)="updateCabecera(cabeceraForm) ; estado(row)">Agregar</button>
         </div>
     </div>
 

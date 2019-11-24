@@ -133,10 +133,11 @@ export class HistorialComponent extends BasePageComponent
       this.especialidades = especialidades.results;
       this.loadOptions();
     });
-    this.httpSv.cancelarCitasPasadas().subscribe(his=>{
+    /*this.httpSv.cancelarCitasPasadas().subscribe(his=>{
       console.log("entro");
       this.loadHistorias();
     });
+    */
   }
   ngOnChanges($event) {
     console.log();

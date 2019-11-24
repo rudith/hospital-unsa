@@ -31,12 +31,6 @@ export class LoginFormComponent implements OnInit {
     adminSV.loadUser();
     labSV.loadExamen();
     labSV.loadOrden();
-    http.cancelarCitasPasadas().subscribe(
-      data => {
-        http.loadCitas();
-      });
-   
-
   }
 
   ngOnInit() {

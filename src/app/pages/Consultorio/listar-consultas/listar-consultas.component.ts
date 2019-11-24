@@ -17,6 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { Detalle } from '../../../interfaces/detalle';
 import { ConsultasPaginadas } from '../../../interfaces/consultas-paginadas';
+import { ExamenLista } from '../../../interfaces/examen-lista';
 import { IOption } from "./../../../ui/interfaces/option";
 import { HostListener } from '@angular/core'; 
 
@@ -32,9 +33,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   @ViewChild('modalBody', { static: true }) modalBody: ElementRef<any>;
   @ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
   data: ConsultasPaginadas = <ConsultasPaginadas>{};
+  dataExamen:ExamenLista=<ExamenLista>{};
   busForm: FormGroup;
-  pages: Array<number>;
-  pagesNumber: number;
+  pageNumEx: number;
   pageNum: number;
 
   examenForm: FormGroup;
@@ -72,7 +73,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
     super(store, httpSv);
     this.pageData = {
-      title: 'Historial Clinico',
+      title: 'Historial Clínico',
       loaded: true,
       breadcrumbs: [
         {
@@ -84,12 +85,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
           route: 'default-dashboard'
         },
         {
-          title: 'Historial Clinico'
+          title: 'Historial Clínico'
         }
       ]
     };
     this.idMedRecibido = this.httpSv.getIdMed();
     this.pageNum = 1;
+    this.pageNumEx=1;
     this.hayEx = true;
     this.hayConsultas = true;
     this.apetitoOption = [];
@@ -103,7 +105,6 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     });
     this.cargarDatos();
     this.cargarConsultas();
-    this.cargarExamenes(this.dniRecibido);
   }
   ngOnInit() {
     super.ngOnInit();
@@ -185,10 +186,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * nextPageE: si se hace click en siguiente, se aumenta el contador de la página 'pageNum' y se envia el url al servicio
 	 ***/
-  /*public nextPageE() {
-    if (this.data.next) {
-      this.pageNum++;
-      this.labservice.loadExamenPagination(this.data.next).subscribe(data => {
+  public nextPageE() {
+    console.log(this.dataExamen.next);
+    if (this.dataExamen.next) {
+      this.pageNumEx++;
+      this.labservice.loadExamenPagination(this.dataExamen.next).subscribe(data => {
+        console.log(data);
+        this.dataExamen=data;
         this.examenesRecibidos = data.results;
         for (let index = 0; index < this.examenesRecibidos.length; index++) {
           this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
@@ -200,10 +204,12 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * autor: Milagros Motta R.
 	 * prevPageE: si se hace click en anterior, se resta el contador de la página 'pageNum' y se envia el url al servicio
 	 ***/
-  /*public prevPageE() {
-    if (this.pageNum > 1) {
-      this.pageNum--;
-      this.labservice.loadExamenPagination(this.data.previous).subscribe(data => {
+  public prevPageE() {
+    if (this.pageNumEx > 1) {
+      this.pageNumEx--;
+      this.labservice.loadExamenPagination(this.dataExamen.previous).subscribe(data => {
+        
+        this.dataExamen=data;
         this.examenesRecibidos = data.results;
         for (let index = 0; index < this.examenesRecibidos.length; index++) {
           this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
@@ -218,9 +224,10 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	 * cargarExamenes: Carga los examenes del paciente haciendo una llamata al servicio 
 	***/
   cargarExamenes(dni: string) {
-    this.labservice.searchExamenbDni(dni).subscribe(data => {
-      console.log(data);
-      this.examenesRecibidos = data;
+    this.labservice.searchExamDNIPagination(dni).subscribe(data => {
+      this.dataExamen=data;
+      console.log(this.dataExamen);
+      this.examenesRecibidos = data.results;
       for (let index = 0; index < this.examenesRecibidos.length; index++) {
         this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
       }
@@ -294,7 +301,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       tratamiento: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
-      ordenExam: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
+      //ordenExam: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       proximaCita: [null]
     });
 

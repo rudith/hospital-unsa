@@ -83,6 +83,14 @@ export class LaboratorioService {
 	loadExamenPagination(url: string): Observable<ExamenLista> {
 		return this.http.get<ExamenLista>(url, this.adminSv.getHeader());
 	}
+	/*** 
+	 * autor: Milagros Motta R.
+	 * searchExamDNIPagination: Carga los examenes paginados del paciente por dni
+	***/
+	searchExamDNIPagination(dni: string): Observable<ExamenLista> {
+		return this.http.get<ExamenLista>(this.url + '/filtroCP/DNI/?dni=' + dni, this.adminSv.getHeader());
+	}
+
 	loadOrdenPAgination(url: string): Observable<OrdenLista> {
 		return this.http.get<OrdenLista>(url, this.adminSv.getHeader())
 	}

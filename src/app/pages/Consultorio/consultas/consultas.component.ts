@@ -110,7 +110,7 @@ export class ConsultasComponent extends BasePageComponent implements OnInit {
 	 ***/
 	atender(nro: string, id: number) {
 		this.httpSv.setNroHC(nro, id);
-		this.router.navigate(['/vertical/Lconsultas']);
+		this.router.navigate(['/vertical/Listarconsultas']);
 	}
 	/*** 
 	 * autor: Milagros Motta R.

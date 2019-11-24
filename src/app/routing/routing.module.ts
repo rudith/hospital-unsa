@@ -70,8 +70,9 @@ import { TipoPersonalComponent } from "../pages/Administrador/tipo-personal/tipo
 import { ConexionLaboratorioComponent } from "../pages/Admision/conexion-laboratorio/conexion-laboratorio.component";
 import { HistorialCitasComponent } from "../pages/Admision/historial-citas/historial-citas.component";
 import { LoginGuard } from '../Guards/login.guard';
-import {AtenderComponent} from '../pages/Lab/atender/atender.component';
+import { AtenderComponent } from '../pages/Lab/atender/atender.component';
 import { PersonalAdmComponent } from '../pages/Administrador/personal-adm/personal-adm.component';
+import { TipoExamenComponent } from '../pages/Administrador/tipo-examen/tipo-examen.component';
 
 const VERTICAL_ROUTES: Routes = [
   { path: "default-dashboard", component: PageDashboardComponent },
@@ -138,13 +139,14 @@ const VERTICAL_ROUTES: Routes = [
   { path: "personal",canActivate:[LoginGuard], component: PersonalComponent },
   { path: "listar-datos",canActivate:[LoginGuard], component: ListarDatosComponent },
   { path: "consultas",canActivate:[LoginGuard], component: ConsultasComponent },
-  { path: "Lconsultas",canActivate:[LoginGuard], component: ListarConsultasComponent },
+  { path: "Listarconsultas",canActivate:[LoginGuard], component: ListarConsultasComponent },
   { path: "laboratorio",canActivate:[LoginGuard], component: LaboratorioComponent },
   { path: "ordenes",canActivate:[LoginGuard], component: OrdenesComponent },
   { path: "conex-lab",canActivate:[LoginGuard], component: ConexionLaboratorioComponent },
   { path: "hist-citas",canActivate:[LoginGuard], component: HistorialCitasComponent },
   { path: 'atender', canActivate:[LoginGuard],component:AtenderComponent},
   { path: "personalAdm",canActivate:[LoginGuard], component: PersonalAdmComponent},
+  { path: "tipoExamen",canActivate:[LoginGuard],component:TipoExamenComponent},
   { path: "**", component: Page404Component }
 ];
 

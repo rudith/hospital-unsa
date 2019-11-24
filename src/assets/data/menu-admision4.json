@@ -34,5 +34,13 @@
 		},
 		"routing": "especialidad",
 		"layout": "vertical"
+	},
+	{
+		"title": "Tipo Exámen",
+		"icon": {
+			"class": "icofont-thermometer-alt"
+		},
+		"routing": "tipoExamen",
+		"layout": "vertical"
 	}
 ]

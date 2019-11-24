@@ -1,7 +1,7 @@
 <tc-card [tcGradient]="['#fff', '#fbfbfb']">
   <div class="row">
     <div class="col-12 col-sm-2">
-      <tc-form-label>Numero de Historia</tc-form-label>
+      <tc-form-label>Número de Historia</tc-form-label>
     </div>
     <div class="col-12 col-sm-4">
       <tc-form-label>Nombre del Paciente</tc-form-label>
@@ -39,7 +39,7 @@
   <tc-table [rows]="consultasRecibidas" [hovered]="true">
     <tc-table-col [columnTitle]="'Especialidad'" [columnName]="'proximaCita'"></tc-table-col>
     <tc-table-col [columnTitle]="'Fecha de la Consulta'" [columnName]="'fechaCreacion'"></tc-table-col>
-    <tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
+    <tc-table-col [columnTitle]="'Ver Más'" [columnName]="''">
       <ng-template #tableTDTemplate let-row="row">
         <div class="actions">
           <button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
@@ -75,9 +75,9 @@
         <strong>{{value}}</strong>
       </ng-template>
     </tc-table-col>
-    <tc-table-col [columnTitle]="'Fecha'" [columnName]="'fecha'">
+    <tc-table-col [columnTitle]="'Fecha de Atención'" [columnName]="'fecha'">
     </tc-table-col>
-    <tc-table-col [columnTitle]="'VerMas'" [columnName]="''">
+    <tc-table-col [columnTitle]="'Ver Más'" [columnName]="''">
       <ng-template #tableTDTemplate let-row="row">
         <div class="actions">
           <button tc-button tc-button [tcColor]="['#fff', '#3f51b5']" [tcBgColor]="['#3f51b5', '#fff']"
@@ -98,9 +98,8 @@
   </tc-table>
 </tc-card>
 <tc-card *ngIf="hayEx" class="mb-0">
-  <h6>Esta persona NO posee examenes aun.</h6>
+  <h6>Esta persona NO posee Examenes aún.</h6>
 </tc-card>
-<!--
 <ul class="pagination-ul">
   <li class="pagination-li prev">
     <a class="pagination-link" (click)="prevPageE()" [ngClass]="{ disabled: pageNum == 1 }">
@@ -114,7 +113,6 @@
     </a>
   </li>
 </ul>
--->
 <div class="back-action-box">
   <button tc-button [afterIcon]="'icofont-rounded-left'" [square]="true" [tcShape]="500" [tcColor]="['#fff', '#000']"
     [tcBgColor]="['#000', '#fff']" [tcBorderColor]="'#000'" (click)="regresar()"></button>
@@ -183,12 +181,12 @@
       </div>
     </form>
     <form [formGroup]="consultForm" novalidate class="new-patient-form">
-      <label>Llene los campos con letras, no utilice números ni caracteres especiales </label>
+      <label>Llene los campos con letras o números según corresponda. Evite los caracteres especiales como ($,@,#,etc) </label>
       <tc-form-group>
         <tc-textarea [placeholder]="'Motivo de Consulta*'" formControlName="motivoConsulta"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.motivoConsulta.touched && consultForm.controls.motivoConsulta.invalid ">
-          Ingrese el Motivo de Consulta, este solo debe contener letras
+          Ingrese el Motivo de Consulta, este solo debe contener letras.
         </tc-form-description>
       </tc-form-group>
       <div class="row">
@@ -203,7 +201,7 @@
             <tc-input [placeholder]="'Orina*'" formControlName="orina"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="consultForm.controls.orina.touched && consultForm.controls.orina.invalid ">
-              Ingrese el Orina, este solo debe contener letras
+              Ingrese Orina, este solo debe contener letras
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -212,7 +210,7 @@
             <tc-input [placeholder]="'Deposiciones*'" formControlName="deposiciones"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="consultForm.controls.deposiciones.touched && consultForm.controls.deposiciones.invalid ">
-              Ingrese el Deposiciones, este solo debe contener letras
+              Ingrese Deposiciones, este solo debe contener letras
             </tc-form-description>
           </tc-form-group>
         </div>
@@ -221,30 +219,32 @@
         <tc-textarea [placeholder]="'Sintomas*'" formControlName="examenFisico"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.examenFisico.touched && consultForm.controls.examenFisico.invalid ">
-          Ingrese el Sintomas, este solo debe contener letras
+          Ingrese los Síntomas, este solo debe contener letras o números según sea el caso
         </tc-form-description>
       </tc-form-group>
       <tc-form-group>
-        <tc-textarea [placeholder]="'Diagnostico*'" formControlName="diagnostico"></tc-textarea>
+        <tc-textarea [placeholder]="'Diagnóstico*'" formControlName="diagnostico"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.diagnostico.touched && consultForm.controls.diagnostico.invalid ">
-          Ingrese el Diagnostico, este solo debe contener letras
+          Ingrese el Diagnóstico, este solo debe contener letras o números según sea el caso
         </tc-form-description>
       </tc-form-group>
       <tc-form-group>
         <tc-textarea [placeholder]="'Tratamiento*'" formControlName="tratamiento"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.tratamiento.touched && consultForm.controls.tratamiento.invalid ">
-          Ingrese el Tratamiento, este solo debe contener letras
+          Ingrese el Tratamiento, este solo debe contener letras o números según sea el caso
         </tc-form-description>
       </tc-form-group>
+      <!--
       <tc-form-group>
         <tc-form-label>Orden de Examen</tc-form-label><label>En caso se requiera, escriba la orden para realizar un
-          examen al laboratorio</label>
+          Examen al laboratorio</label>
         <tc-input [placeholder]="'Examen de ****** '" formControlName="ordenExam"></tc-input>
       </tc-form-group>
+      -->
       <tc-form-group>
-        <tc-form-label>Proxima Cita</tc-form-label>
+        <tc-form-label>Próxima Cita</tc-form-label>
         <tc-input type="date" formControlName="proximaCita"></tc-input>
       </tc-form-group>
     </form>
@@ -346,12 +346,12 @@
         </div>
       </div>
       <tc-form-group>
-        <tc-form-label>Sintomas</tc-form-label>
+        <tc-form-label>Síntomas</tc-form-label>
         <tc-textarea [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Sintomas'" formControlName="exaFis"
           readonly="readonly"></tc-textarea>
       </tc-form-group>
       <tc-form-group>
-        <tc-form-label>Diagnostico</tc-form-label>
+        <tc-form-label>Diagnóstico</tc-form-label>
         <tc-textarea [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Diagnostico'" formControlName="diagnostico"
           readonly="readonly"></tc-textarea>
       </tc-form-group>
@@ -441,7 +441,7 @@
   <ng-template #modalFooterVerUE>
     <div class="actions justify-content-between">
       <button tc-button [type]="'button'" [tcBgColor]="'#009688'" [block]="true"
-        (click)="closeModalExamenes()">ACEPTAR</button>
+        (click)="closeModalExamenes()">Aceptar</button>
     </div>
   </ng-template>
 </ng-container>

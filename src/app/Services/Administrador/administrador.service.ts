@@ -11,6 +11,7 @@ import { PersonalCreate } from "../../interfaces/personalCreate";
 import { IOption } from "../../ui/interfaces/option";
 import { User } from "../../interfaces/user";
 import { personalLista } from "../../interfaces/personalLista";
+import { Tipoexamen } from "../../interfaces/tipoexamen";
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
@@ -242,5 +243,38 @@ export class AdministradorService {
   }
   loadUserSP(): Observable<any> {
     return this.http.get<any>(this.url + "/usuariosSP/", this.getHeader());
+  }
+  /***
+   * autor: Milagros Motta R.
+   * createTipoExamen: recibe un objeto de tipo Tipoexamen y asigna los valores de este a un json para que sea creado
+   * en el back correctamente.
+   ***/
+  createTipoExamen(tipo:Tipoexamen){
+    this.http
+      .post<any>(
+        BASE_API_URL + "/laboratorio/TipoExamen/",
+        {
+          nombre: tipo.nombre
+        },
+        this.getHeader()
+      )
+      .subscribe(
+        data => {
+          this.toastr.success("Tipo de exámen creado correctamente");
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo crear el tipo de exámen");
+        }
+      );
+  }
+  /***
+   * autor: Milagros Motta R.
+   * loadCitasMedico: recibe el id del medico
+   ***/
+  loadTipoExamen(): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/laboratorio/TipoExamen" ,this.getHeader()
+    );
   }
 }

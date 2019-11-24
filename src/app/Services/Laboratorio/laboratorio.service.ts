@@ -36,6 +36,7 @@ export class LaboratorioService {
 	private tipo: number;
 	private dni: string;
 	private ido:number;
+	private dd: number;
 
 
 	constructor(private http: HttpClient, private toastr: ToastrService, private adminSv: AdministradorService) {
@@ -107,6 +108,8 @@ export class LaboratorioService {
 	getDni(): string {
 		return this.dni;
 	}
+	
+	
 	//crear cabecer
 	createCabecera(newCabecera: Cabcrear) {
 		console.log(newCabecera);
@@ -130,6 +133,28 @@ export class LaboratorioService {
 				});
 
 
+	}
+	updateCabecera(update: Cabcrear){
+		console.log(update);
+		this.dd=this.getIdCabecera();
+		this.http.put<Cabcrear>(this.url + '/CrearExamenLabCab/'+ this.dd + "/", {
+			nombre: update.nombre,
+			dni: update.dni,
+			orden: update.orden,
+			fecha: update.fecha,
+			tipoExam: update.tipoExam,
+			observaciones: update.observaciones,
+		}, this.adminSv.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR Cabecera ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
+		
 	}
 	getIdCabecera(): number {
 		return this.tipo;

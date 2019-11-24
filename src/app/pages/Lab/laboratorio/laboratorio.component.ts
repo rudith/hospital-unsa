@@ -234,7 +234,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.toastr.error("No se han encontrado coincidencias");
 					this.cargarExamn();
 				} else {
-					this.toastr.success('Examen  encontrado');
+					this.toastr.success('Búsqueda Exitosa');
 					this.examen = [];
 					this.examen = data;
 				}
@@ -248,7 +248,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.toastr.error("No se han encontrado coincidencias");
 					this.cargarExamn();
 				} else {
-					this.toastr.success('Examen  encontrado');
+					this.toastr.success('Búsqueda Exitosa');
 					this.examen = [];
 					this.examen = data;
 				}
@@ -263,7 +263,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 					this.toastr.error("No se han encontrado coincidencias");
 					this.cargarExamn();
 				} else {
-					this.toastr.success('Examen  encontrado');
+					this.toastr.success('Búsqueda Exitosa');
 					this.examen = [];
 					this.examen = data;
 				}

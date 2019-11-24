@@ -14,7 +14,7 @@ import { personalLista } from "../../interfaces/personalLista";
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
-
+import { Personal } from "../../interfaces/personal";
 
 @Injectable({
   providedIn: "root"
@@ -149,9 +149,9 @@ export class AdministradorService {
     var httpOptions = {
       headers: headers_object
     };
-    console.log(
-      "entro" + JSON.stringify(headers_object) + localStorage.getItem("token")
-    );
+    // console.log(
+    //   "entro" + JSON.stringify(headers_object) + localStorage.getItem("token")
+    // );
     return httpOptions;
   }
   // getHeader() {
@@ -173,39 +173,65 @@ export class AdministradorService {
     return this.http.get<personalLista>(url, this.getHeader());
   }
   searchPersonal(id: string): Observable<any> {
-    return this.http.get<any>(this.url + "/ver-personal/" + id + "/", this.getHeader());
+    return this.http.get<any>(
+      this.url + "/ver-personal/" + id + "/",
+      this.getHeader()
+    );
   }
   searchPersonalDNI(dni: string): Observable<any> {
-    return this.http.get<any>(this.url + "/personaldni/" + dni + "/", this.getHeader());
+    return this.http.get<any>(
+      this.url + "/personaldni/" + dni + "/",
+      this.getHeader()
+    );
   }
   createPersonal(tipo: PersonalCreate) {
     // console.log(JSON.stringify(tipo));
-    this.http
-      .post<any>(this.url + "/crear-personal/", {
-        user: tipo.user,
-        dni: tipo.dni,
-        nombres: tipo.nombres,
-        apellido_paterno: tipo.apellido_paterno,
-        apellido_materno: tipo.apellido_materno,
-        celular: tipo.celular,
-        telefono: tipo.telefono,
-        direccion: tipo.direccion,
-        area: tipo.area,
-        tipo_personal: tipo.tipo_personal,
-        especialidad: tipo.especialidad
-      }, this.getHeader())
-      .subscribe(
-        data => {
-          this.toastr.success("personal Creado correctamente");
-          this.bool = true;
+    return this.http
+      .post<any>(
+        this.url + "/crear-personal/",
+        {
+          user: tipo.user,
+          dni: tipo.dni,
+          nombres: tipo.nombres,
+          apellido_paterno: tipo.apellido_paterno,
+          apellido_materno: tipo.apellido_materno,
+          celular: tipo.celular,
+          telefono: tipo.telefono,
+          direccion: tipo.direccion,
+          area: tipo.area,
+          tipo_personal: tipo.tipo_personal,
+          especialidad: tipo.especialidad
         },
-        error => {
-          console.log(error.message);
-          this.toastr.error("No se pudo crear personal");
-          this.bool = false;
-        }
+        this.getHeader()
       );
-    return this.bool;
+
+  }
+  updatePersonal(tipo: PersonalCreate) {
+    console.log(JSON.stringify(tipo));
+    return this.http
+      .put<any>(
+        this.url + "/ver-personal/" + tipo.user + "/",
+        {
+          usuarioId: tipo.user,
+          areaId: tipo.area,
+          tipo_personalId: tipo.tipo_personal,
+          especialidadId: tipo.especialidad,
+          dni: tipo.dni,
+          nombres: tipo.nombres,
+          apellido_paterno: tipo.apellido_paterno,
+          apellido_materno: tipo.apellido_materno,
+          celular: tipo.celular,
+          telefono: tipo.telefono,
+          direccion: tipo.direccion
+        },
+        this.getHeader()
+      );
+  }
+  eliminarPers(id: string) {
+    return this.http.delete<any>(
+      this.url + "/ver-personal/" + id + "/",
+      this.getHeader()
+    );
   }
   //user
   loadUser(): Observable<any> {

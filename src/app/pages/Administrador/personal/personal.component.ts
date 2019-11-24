@@ -18,7 +18,7 @@ import { Tipopersonal } from "../../../interfaces/tipopersonal";
 import { Especialidad } from "../../../interfaces/especialidad";
 import { personalLista } from "../../../interfaces/personalLista";
 import { HttpClient } from "@angular/common/http";
-import { HostListener } from '@angular/core'; 
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: "app-personal",
@@ -47,6 +47,11 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   goToPage: EventEmitter<number> = new EventEmitter<number>();
   opBus: string;
   campo: string;
+  labelUser: string;
+  labelArea: string;
+  labelEsp: string;
+  labelTipo: string;
+  edit: boolean;
   constructor(
     httpSv: HttpService,
     private http: HttpClient,
@@ -89,7 +94,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     });
     this.admService.loadAreasSP().subscribe(areas => {
       this.areas = areas;
-      console.log(JSON.stringify(areas));
+      // console.log(JSON.stringify(areas));
       this.loadOptionsAreas();
     });
     this.admService.loadEspecialidadesSP().subscribe(especialidades => {
@@ -146,7 +151,18 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     });
   }
 
-  updateEst() {
+  loadusersSP(data: Personal) {
+    if (data != null) {
+      this.labelArea = "";
+      this.labelEsp = "";
+      this.labelTipo = "";
+      this.labelUser = "";
+      this.labelUser = data.user.username;
+      this.labelArea = data.area.nombre;
+      this.labelTipo = data.tipo_personal.nombre;
+      if (data.especialidad == null) this.labelEsp = "Ninguna";
+      else this.labelEsp = data.especialidad.nombre;
+    }
     this.admService.loadUserSP().subscribe(users => {
       this.users = users;
       this.loadOptionsUsers();
@@ -252,9 +268,11 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   openModal<T>(
     body: Content<T>,
     header: Content<T> = null,
-    footer: Content<T> = null
+    footer: Content<T> = null,
+    row: Personal
   ) {
-    this.initForm();
+    if (row == null) this.initForm();
+    else this.initFormEdit(row);
     this.modal.open({
       body: body,
       header: header,
@@ -269,6 +287,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
 
   //inicia formulario
   initForm() {
+    this.edit = false;
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
       user: ["", Validators.required],
@@ -284,19 +303,65 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       especialidad: [""]
     });
   }
-  async addAppointment(form: FormGroup) {
+  initFormEdit(data: Personal) {
+    this.edit = true;
+    // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
+    this.appointmentForm = this.formBuilder.group({
+      user: data.user.id,
+      dni: [data.dni, Validators.required],
+      nombres: [data.nombres, Validators.required],
+      apellido_paterno: [data.apellido_paterno, Validators.required],
+      apellido_materno: [data.apellido_materno, Validators.required],
+      celular: [data.celular, Validators.required],
+      telefono: [data.telefono, Validators.required],
+      direccion: [data.direccion, Validators.required],
+      area: ["", [Validators.required]],
+      tipo_personal: ["", [Validators.required]],
+      especialidad: [""]
+    });
+  }
+  addAppointment(form: FormGroup) {
+    if (form.valid) {
+      let newAppointment: PersonalCreate = form.value;
+      
+      this.admService.createPersonal(newAppointment)
+      .subscribe(
+        data => {
+          this.closeModal();
+          this.appointmentForm.reset();
+          this.loadPersonal();
+          this.toastr.success("personal Creado correctamente");
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo crear personal");
+        }
+      )
+    }
+  }
+  editPersonal(form: FormGroup) {
     if (form.valid) {
       let newAppointment: PersonalCreate = form.value;
       // console.log(JSON.stringify(newAppointment));
 
-      setTimeout(() => {
-        if (this.admService.createPersonal(newAppointment)) {
+      // setTimeout(() => {
+      //   if (this.admService.createPersonal(newAppointment)) {
+      this.admService.updatePersonal(newAppointment)
+      .subscribe(
+        data => {
           this.closeModal();
           this.appointmentForm.reset();
           this.loadPersonal();
+          this.toastr.success("Edicion correcta");
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo editar personal");
         }
-      }, 2000);
-      this.loadPersonal();
+      )
+      //   }
+      // }, 2000);
+      // this.loadPersonal();
     }
   }
 
@@ -323,7 +388,23 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   closeModalP() {
     this.modal.close();
   }
-
+  //eliminarpersonal
+  Eliminarpersonal(id: string) {
+    console.log(id);
+    this.admService.eliminarPers(id)
+    .subscribe(
+      data => {
+        this.loadPersonal();
+        this.toastr.success("Personal eliminado");
+      },
+      error => {
+        console.log(error.message);
+        this.toastr.error("No se pudo eliminar personal");
+      }
+    );
+    ;
+    
+  }
   initPersonalForm(data: Personal, especialidad: string) {
     this.personalForm = this.formBuilder.group({
       user: [data.user.username ? data.user.username : "", Validators.required],
@@ -354,13 +435,14 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       estReg: [data.estReg ? data.estReg : "", Validators.required]
     });
   }
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
-    if (event.key === "Escape") { 
+  @HostListener("document:keydown", ["$event"]) onKeydownHandler(
+    event: KeyboardEvent
+  ) {
+    if (event.key === "Escape") {
       this.closeModal();
       this.closeModalP();
-      
     }
-    if (event.key === "Enter") { 
+    if (event.key === "Enter") {
       return false;
     }
   }

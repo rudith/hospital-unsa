@@ -335,7 +335,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     }
   }
   updateCita(newCita: Cita) {
-    console.log(JSON.stringify(newCita));
+    // console.log(JSON.stringify(newCita));
     this.http
       .put<any>(
         BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/",
@@ -350,7 +350,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           especialidad: newCita.especialidad,
           numeroHistoria: newCita.numeroHistoria,
           medico: newCita.medico
-        }
+        },this.admService.getHeader()
       )
       .subscribe(
         data => {

@@ -57,7 +57,7 @@ export class LoginFormComponent implements OnInit {
         this.http.consultorio = false;
         this.http.triaje = false;
         this.http.laboratorio = false;
-        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+        this.toastr.info("Usuario:" + data.username, "Bienvenido");
         this.router.navigate(["/vertical/personalAdm"]);
         
       }
@@ -67,7 +67,7 @@ export class LoginFormComponent implements OnInit {
         this.http.consultorio = false;
         this.http.triaje = false;
         this.http.laboratorio = false;
-        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+        this.toastr.info("Usuario:" + data.username, "Bienvenido");
         this.router.navigate(["/vertical/historial"]);
       }
       if(data.tipoUser=="Consultorio" || data.tipoUser=="Medico"){
@@ -77,7 +77,7 @@ export class LoginFormComponent implements OnInit {
         this.http.triaje = false;
         this.http.laboratorio = false;
         this.http.setIdMedico(data.id);
-        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+        this.toastr.info("Usuario:" + data.username, "Bienvenido");
         this.router.navigate(["/vertical/consultas"]);
       }
      if(data.tipoUser=="Triaje"){
@@ -87,7 +87,7 @@ export class LoginFormComponent implements OnInit {
         this.http.triaje = true;
         this.http.laboratorio = false;
         this.http.setIdUs(data.id);
-        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+        this.toastr.info("Usuario:" + data.username, "Bienvenido");
         this.router.navigate(["/vertical/listar-datos"]);
       }
       
@@ -99,7 +99,7 @@ export class LoginFormComponent implements OnInit {
         this.http.laboratorio = true;
         this.http.setIdUs(data.id);
         console.log(data.id);
-        this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+        this.toastr.info("Usuario:" + data.username, "Bienvenido");
         this.router.navigate(["/vertical/ordenes"]);
       }
       if(data.tipoUser!="Laboratorio" && data.tipoUser!="Triaje" && data.tipoUser!="Consultorio" && data.tipoUser!="Medico" && data.tipoUser!="Administrador" && data.tipoUser!="Admision" ){

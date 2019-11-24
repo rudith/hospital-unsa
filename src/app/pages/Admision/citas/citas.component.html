@@ -1,6 +1,6 @@
 <ng-container>
   <ng-template #modalConf1>
-    <p>¿Continuar con esta acción?</p>
+    <p>¿Esta seguro que desea cancelar la cita?</p>
   </ng-template>
 
   <ng-template #modalConf2>
@@ -144,7 +144,10 @@
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.numeroHistoria.numeroHistoria }}
           </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+          <td *ngIf="row.numeroRecibo==null" [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            Exonerado
+          </td>
+          <td *ngIf="row.numeroRecibo" [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.numeroRecibo }}
           </td>
           <td

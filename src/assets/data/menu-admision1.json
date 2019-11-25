@@ -28,7 +28,7 @@
 		"layout": "vertical"
 	},
 	{
-		"title": "Solicitudes de Laboratorio",
+		"title": "Ordenes de Consultorio",
 		"icon": {
 			"class": "icofont-stethoscope-alt"
 		},

@@ -23,6 +23,9 @@ import { HostListener } from '@angular/core';
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
+import { Orden } from '../../../interfaces/orden';
+import { Personal } from '../../../interfaces/personal';
+import { Tipoexamen } from '../../../interfaces/tipoexamen';
 
 @Component({
   selector: 'app-consultas',
@@ -42,12 +45,16 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   consultForm: FormGroup;
   verMasCForm: FormGroup;
   verTriajeForm: FormGroup;
+  exm:FormGroup;
   consultasRecibidas: ConsultaCompleta[];
   examenesRecibidos: Examen[];
   triajeRecibido: Triaje;
   datoBus: string;
   apetitoOption: IOption[];
+
+  public tipoE: Tipoexamen[];
   detalleT: Detalle[];
+  ordenesT:string[];
 
   private idRecibido: number;
   private nombreRecibido: string;
@@ -57,8 +64,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   private sexoRecibido: string;
   private idCitaRecibida: number;
   private idMedRecibido: number;
+  private numHistId:number;
   private hayEx: boolean;
   private hayConsultas: boolean;
+  private consulta:Consulta;
+  private nomMedico:string;
+  private ordenn:string;
+  tipoExOption: IOption[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,6 +84,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   ) {
 
     super(store, httpSv);
+    this.detalleT = [];
     this.pageData = {
       title: 'Historial Clínico',
       loaded: true,
@@ -89,6 +102,9 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
         }
       ]
     };
+    this.tipoExOption = [];
+    this.ordenesT=[];
+    this.tipoE = [];
     this.idMedRecibido = this.httpSv.getIdMed();
     this.pageNum = 1;
     this.pageNumEx=1;
@@ -100,11 +116,18 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.detalleT=[];
     this.datoBus = this.httpSv.getNroHC();
     this.idCitaRecibida = this.httpSv.getIdHC();
+
     this.httpSv.searcTriajeC(this.idCitaRecibida).subscribe(data => {
       this.triajeRecibido = data;
     });
+    this.labservice.docName(this.idMedRecibido).subscribe(per => {
+      this.nomMedico=per.nombres+" "+per.apellido_paterno+" "+per.apellido_materno;
+      this.ordenn=per.especialidad.nombre;
+      console.log(this.nomMedico)
+    });
     this.cargarDatos();
     this.cargarConsultas();
+    this.loadData();
   }
   ngOnInit() {
     super.ngOnInit();
@@ -114,6 +137,14 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   ngOnDestroy() {
     super.ngOnDestroy();
   }
+
+  loadData() {
+    this.labservice.loadTipoEx().subscribe(tipo => {
+      this.tipoE = tipo,
+        this.loadtipoex(this.tipoE);
+    });
+  }
+  
 
   /*** 
 	 * autor: Milagros Motta R.
@@ -127,7 +158,19 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       this.edadRecibido = data[0].edad;
       this.sexoRecibido = data[0].sexo;
       this.cargarExamenes(data[0].dni);
+      this.numHistId=data[0].id;
     });
+  }
+
+  loadtipoex(tipoE: Tipoexamen[]) {
+    console.log(tipoE);
+    for (let i in tipoE) {
+      this.tipoExOption[i] =
+        {
+          label: this.tipoE[i].nombre,
+          value: this.tipoE[i].id.toString()
+        };
+    }
   }
 
   /*** 
@@ -255,6 +298,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.apetitoOption[1] = { label: "NO", value: "Sin apetito" };
     this.initverTriajeForm();
     this.initConsultForm();
+    this.initOrdenForm();
     this.modal.open({
       body: body,
       header: header,
@@ -307,6 +351,13 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   }
 
+  initOrdenForm() {
+    this.exm = this.formBuilder.group({
+      tipoExam: ['', [Validators.required]],
+    });
+
+  }
+
   /*** 
 	 * autor: Milagros Motta R.
 	 * addConsult: Agrega los valores del formularios y otros más al objeto newConsult que se envia al servicio de creación. 
@@ -320,6 +371,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       newConsult.numeroHistoria = this.idRecibido;
       newConsult.medico = this.idMedRecibido;
       newConsult.triaje = this.triajeRecibido.id;
+      this.consulta=newConsult;
+      console.log(this.consulta)
       this.httpSv.crearConsulta(newConsult);
       this.Atender(this.idCitaRecibida);
       this.closeModalC();
@@ -409,7 +462,6 @@ loadTabla(row: Examen) {
   })
 }
 
-
   /*** 
 	 * autor: Milagros Motta R.
 	 * closeModalExamenes: Cierra el modal 
@@ -419,8 +471,6 @@ loadTabla(row: Examen) {
   }
 
 
-
-  
   /*** 
    * autor: Milagros Motta R.
    * closeModalExamenes: Hace la llamada al servicio para imprimir el resultado del examen por ID 
@@ -440,6 +490,22 @@ loadTabla(row: Examen) {
       this.cargarConsultas();
     });
   }
+
+  crearOrden(form: FormGroup) {
+    if (form.valid) {
+      let newOrden: Orden = form.value;
+      newOrden.dni = this.dniRecibido;
+      newOrden.numeroHistoria = this.numHistId;
+      newOrden.nombre = this.nombreRecibido;
+      newOrden.medico = this.nomMedico;
+      newOrden.tipoExam = parseInt(form.get('tipoExam').value);
+      newOrden.orden=this.ordenn;
+      console.log(newOrden)
+      this.httpSv.createOrden(newOrden, this.modal, 0,1);
+      this.ordenesT.push(form.get('tipoExam').value+"ff");
+    }
+  }
+
   /*** 
    * autor: Milagros Motta R.
    * onKeydownHandler: Asigna acciones para cada vez que las teclas 'esc' y 'enter' sean presionadas

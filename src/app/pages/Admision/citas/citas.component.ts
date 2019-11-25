@@ -142,6 +142,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     if (this.opBus == "2") {
       this.buscarEsp(this.campo);
     }
+    if (this.opBus == "3") {
+      this.buscarNumHist(this.campo);
+    }
+    if (this.opBus == "4") {
+      this.buscarNom(this.campo);
+    }
   }
   buscarEsp(valor: string) {
     // console.log(this.campo);
@@ -150,17 +156,14 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
       this.httpSv.searchCitaEsp(this.campo).subscribe(data => {
-        if(data.results.length==0){
-          this.toastr.error("No se han encontrado coincidencias");
-        }
-        else{
-          this.data = data;
+        if (this.data.results.length == 0) {
+          this.toastr.info("No se encontraron coincidencias");
+          this.loadCitas();
+        } else {
+          this.data=data;
           this.citasEdit = data.results;
-          this.toastr.success("Datos encontrados");
+          this.toastr.warning("Mostrando Citas", "DNI: " + valor);
         }
-
-        
-        
       });
     }
   }
@@ -170,15 +173,54 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
     } else {
-      this.toastr.warning("Buscando Citas", "DNI: " + valor);
       this.httpSv.searchCitaDNI(this.campo).subscribe(data => {
-        if (this.data.results.length==0) {
+        if (this.data.results.length == 0) {
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data = data;
+          this.data=data;
           this.citasEdit = data.results;
-          this.toastr.warning("Datos encontrados"); 
+          this.toastr.warning("Mostrando Citas", "DNI: " + valor);
+        }
+      });
+    }
+  }
+
+  buscarNumHist(valor: string) {
+    console.log(this.campo);
+    if (this.campo === "" || this.campo === undefined) {
+      this.loadCitas();
+      this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
+    } else {
+      this.httpSv.searchCitaNroHist(this.campo).subscribe(data => {
+        if (this.data.results.length == 0) {
+          this.toastr.info("No se encontraron coincidencias");
+          this.loadCitas();
+        } else {
+          this.data=data;
+          this.citasEdit = data.results;
+          this.toastr.warning("Mostrando Citas", "Historia: " + valor);
+        }
+      });
+    }
+  }
+
+
+  buscarNom(valor: string) {
+    console.log(this.campo);
+    if (this.campo === "" || this.campo === undefined) {
+      this.loadCitas();
+      this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
+    } else {
+      this.httpSv.searchCitaNom(this.campo).subscribe(data => {
+        if (this.data.results.length == 0) {
+          this.toastr.info("No se encontraron coincidencias");
+          this.loadCitas();
+        } else {
+          console.log(data);
+          this.data=data;
+          this.citasEdit = data.results;
+          this.toastr.warning("Mostrando Citas", "Nombre: " + valor);
         }
       });
     }

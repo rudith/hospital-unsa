@@ -1,244 +1,260 @@
 <form [formGroup]="busForm" class="col-sm-12">
-        <div class="row">
-          <div class="col-md-2">
-            <tc-form-group>
-              <!-- [charLimiting]="8" -->
-              <tc-select
-                [placeholder]="'Opciones'"
-                formControlName="opBus"
-                [options]="busqOption"
-                (click)="selectOpt()"
-              >
-              </tc-select>
-            </tc-form-group>
-          </div>
-          <div class="col-md-6">
-            <tc-form-group>
-              <tc-input
-                *ngIf="opBus == 0"
-                [type]="'number'"
-                [suffixIcon]="'icofont-search-document'"
-                [placeholder]="'Seleccione una opcion'"
-                formControlName="campo"
-              ></tc-input>
-              <tc-input
-                *ngIf="opBus == 1"
-                [type]="'number'"
-                [charLimiting]="8"
-                pattern="[0-9]{8}"
-                [suffixIcon]="'icofont-search-document'"
-                [placeholder]="'DNI (8 digitos)'"
-                formControlName="campo"
-              ></tc-input>
-              <tc-input
-                *ngIf="opBus == 2"
-                [placeholder]="'Ingrese especialidad a buscar'"
-                [charLimiting]="20"
-                pattern="[a-zA-Z]*"
-                [suffixIcon]="'icofont-search-document'"
-                formControlName="campo"
-              >
-              </tc-input>
-              <tc-form-description
-                [tcColor]="'#1666B3'"
-                [tcFontSize]="'0.8em'"
-                *ngIf="
-                  busForm.controls.campo.invalid
-                "
-              >
-                Datos incorrectos DNI (Ejemplo:74256985), Especialidad
-                (Ejemplo:Odontologia)
-              </tc-form-description>
-            </tc-form-group>
-          </div>
-          <div class="col-md-2">
-            <button
-              tc-button
-              [block]="true"
-              [view]="'success'"
-              [tcShape]="500"
-              (click)="buscar(busForm)"
-            >
-              Buscar
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button
-              tc-button
-              [block]="true"
-              [tcBgColor]="'#3f51b5'"
-              [tcShape]="500"
-              (click)="loadCitas()"
-            >
-              Cargar
-            </button>
-          </div>
-         
-        </div>
-      </form>
-      <br />
-      <tc-card *ngIf="citasEdit?.length" class="mb-0">
-        <div class="table-wrap">
-          <table class="table-box">
-            <thead>
-              <tr>
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  Numero de Historia
-                </th>
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  N° Recibo
-                </th>
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  DNI
-                </th>
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  F. Editado
-                </th>
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  F. Atención
-                </th>
-                
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  Estado
-                </th>
-                <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-                  Especialidad
-                </th>
-                
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let row of citasEdit">
-                <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-                  {{ row.numeroHistoria.numeroHistoria }}
-                </td>
-                <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-                  {{ row.numeroRecibo }}
-                </td>
-                <td
-                  [ngStyle]="{ background: contentBgColor, color: contentColor }"
-                  [tcColor]="'#259FD0'"
-                >
-                  {{ row.numeroHistoria.dni }}
-                </td>
-                <!-- 
-                                  <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-                                  {{row.updated_at.substring(0,10)}}
-                              </td>
-                  -->
-                  <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-                    {{ row.updated_at.substring(0, 10) }}
-                  </td>
-                <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-                  {{ row.fechaAtencion }}
-                </td>
-      
-                <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-                  {{ row.estadoCita }}
-                </td>
-                <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-                  {{ row.especialidad.nombre }}
-                </td>
-                
-                
-              </tr>
-            </tbody>
-          </table>
-          <ul class="pagination-ul">
-            <li class="pagination-li prev">
-              <a
-                class="pagination-link"
-                (click)="prevPage()"
-                [ngClass]="{ disabled: pageNum == 1 }"
-              >
-                <i class="icofont-simple-left"></i>
-              </a>
-            </li>
-      
-            <li class="pagination-li next">
-              <a class="pagination-link" (click)="nextPage()">
-                <i class="icofont-simple-right"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </tc-card>
+  <div class="row">
+    <div class="col-md-2">
+      <tc-form-group>
+        <!-- [charLimiting]="8" -->
+        <tc-select
+          [placeholder]="'Opciones'"
+          formControlName="opBus"
+          [options]="busqOption"
+          (click)="selectOpt()"
+        >
+        </tc-select>
+      </tc-form-group>
+    </div>
+    <div class="col-md-6">
+      <tc-form-group>
+        <tc-input 
+      *ngIf="opBus == 0"
+      [type]="'number'"
+      [suffixIcon]="'icofont-search-document'"
+      [placeholder]="'Seleccione una opción'"
+      formControlName="campo"
+    ></tc-input>
+    <tc-input
+      *ngIf="opBus == 1"
+      [type]="'number'"
+      [suffixIcon]="'icofont-search-document'"
+      [placeholder]="'DNI (8 digitos)'"
+      formControlName="campo"
+      [charLimiting]="8"
+    ></tc-input>
+    <tc-input
+      *ngIf="opBus == 2"
+      [placeholder]="'Ingrese Especialidad'"
+      [charLimiting]="15"
+      type="text"
+      [suffixIcon]="'icofont-search-document'"
+      formControlName="campo"
+    >
+    </tc-input>
+    <tc-input
+      *ngIf="opBus == 3"
+      [placeholder]="'Ingrese el numero de historia'"
+      [charLimiting]="25"
+      type="'number'"
+      [suffixIcon]="'icofont-search-document'"
+      formControlName="campo"
+    >
+    </tc-input>
+    <tc-input
+      *ngIf="opBus == 4"
+      [placeholder]="'Ingrese el nombre'"
+      [charLimiting]="25"
+      type="'text'"
+      [suffixIcon]="'icofont-search-document'"
+      formControlName="campo"
+    >
+    </tc-input>
+          <tc-form-description
+            [tcColor]="'#e24d4d'"
+            [tcFontSize]="'0.8em'"
+            *ngIf="
+              busForm.controls.campo.touched &&
+              busForm.controls.campo.invalid
+            "
+          >
+            Ingrese datos correspodientes
+          </tc-form-description>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <button
+        tc-button
+        [block]="true"
+        [view]="'success'"
+        [tcShape]="500"
+        (click)="buscar(busForm)"
+      >
+        Buscar
+      </button>
+    </div>
+    <div class="col-md-2">
+      <button
+        tc-button
+        [block]="true"
+        [tcBgColor]="'#3f51b5'"
+        [tcShape]="500"
+        (click)="loadCitas()"
+      >
+        Cargar
+      </button>
+    </div>
+   
+  </div>
+</form>
+<br />
+<tc-card *ngIf="citasEdit?.length" class="mb-0">
+  <div class="table-wrap">
+    <table class="table-box">
+      <thead>
+        <tr>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Numero de Historia
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            N° Recibo
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            DNI
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            F. Editado
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            F. Atención
+          </th>
+          
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Estado
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Especialidad
+          </th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of citasEdit">
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.numeroHistoria.numeroHistoria }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.numeroRecibo }}
+          </td>
+          <td
+            [ngStyle]="{ background: contentBgColor, color: contentColor }"
+            [tcColor]="'#259FD0'"
+          >
+            {{ row.numeroHistoria.dni }}
+          </td>
+          <!-- 
+                            <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                            {{row.updated_at.substring(0,10)}}
+                        </td>
+            -->
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              {{ row.updated_at.substring(0, 10) }}
+            </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.fechaAtencion }}
+          </td>
 
-      <!--Modal-->
-      <ng-container>
-        <ng-template #modalBody>
-          <!-- (click)="loadOptionsMedEsp(appointmentForm.get('especialidad').value)"  [selected]="espSelected"-->
-          <form [formGroup]="appointmentForm">
-            <tc-form-group>
-              <tc-form-label
-                >Fecha de Separación(A partir del dia Actual)</tc-form-label
-              >
-            </tc-form-group>
-            <tc-form-group>
-              <tc-input type="date" formControlName="fechaAtencion1"></tc-input>
-              <tc-form-description
-                [tcColor]="'#e24d4d'"
-                [tcFontSize]="'0.8em'"
-                *ngIf="
-                  appointmentForm.controls.fechaAtencion1.touched &&
-                  appointmentForm.controls.fechaAtencion1.invalid
-                "
-              >
-                Ingrese Fecha de Atencion
-              </tc-form-description>
-            </tc-form-group>
-            <tc-form-group>
-                <tc-input type="date" formControlName="fechaAtencion2"></tc-input>
-                <tc-form-description
-                  [tcColor]="'#e24d4d'"
-                  [tcFontSize]="'0.8em'"
-                  *ngIf="
-                    appointmentForm.controls.fechaAtencion2.touched &&
-                    appointmentForm.controls.fechaAtencion2.invalid
-                  "
-                >
-                  Ingrese Fecha de Atencion
-                </tc-form-description>
-              </tc-form-group>
-          </form>
-        </ng-template>
-        <ng-template #modalFooter>
-            <div class="actions justify-content-between">
-              <button
-                tc-button
-                [type]="'button'"
-                [view]="'error'"
-                (click)="closeModal()"
-              >
-                Cancelar
-              </button>
-              <button
-                tc-button
-                [view]="'info'"
-                [disabled]="appointmentForm.invalid"
-                (click)="reporteRango(appointmentForm)"
-              >
-                Generar
-              </button>
-            </div>
-          </ng-template>
-        
-      </ng-container>
-      <div class="add-action-box">
-          <button
-            tc-button
-            [square]="true"
-            [tcShape]="500"
-            (click)="reporteDiario()"
-          >Reporte Diario</button>
-        </div>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.estadoCita }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.especialidad.nombre }}
+          </td>
+          
+          
+        </tr>
+      </tbody>
+    </table>
+    <ul class="pagination-ul">
+      <li class="pagination-li prev">
+        <a
+          class="pagination-link"
+          (click)="prevPage()"
+          [ngClass]="{ disabled: pageNum == 1 }"
+        >
+          <i class="icofont-simple-left"></i>
+        </a>
+      </li>
 
-        <div class="add-action-box1">
-            <button
-              tc-button
-              [square]="true"
-              [tcShape]="500"
-              (click)="openModal(modalBody, 'Generar Reporte', modalFooter)"
-            >Reporte por Fecha</button>
-          </div>
-      
+      <li class="pagination-li next">
+        <a class="pagination-link" (click)="nextPage()">
+          <i class="icofont-simple-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</tc-card>
+
+<!--Modal-->
+<ng-container>
+  <ng-template #modalBody>
+    <!-- (click)="loadOptionsMedEsp(appointmentForm.get('especialidad').value)"  [selected]="espSelected"-->
+    <form [formGroup]="appointmentForm">
+      <tc-form-group>
+        <tc-form-label
+          >Fecha de Separación(A partir del dia Actual)</tc-form-label
+        >
+      </tc-form-group>
+      <tc-form-group>
+        <tc-input type="date" formControlName="fechaAtencion1"></tc-input>
+        <tc-form-description
+          [tcColor]="'#e24d4d'"
+          [tcFontSize]="'0.8em'"
+          *ngIf="
+            appointmentForm.controls.fechaAtencion1.touched &&
+            appointmentForm.controls.fechaAtencion1.invalid
+          "
+        >
+          Ingrese Fecha de Atencion
+        </tc-form-description>
+      </tc-form-group>
+      <tc-form-group>
+          <tc-input type="date" formControlName="fechaAtencion2"></tc-input>
+          <tc-form-description
+            [tcColor]="'#e24d4d'"
+            [tcFontSize]="'0.8em'"
+            *ngIf="
+              appointmentForm.controls.fechaAtencion2.touched &&
+              appointmentForm.controls.fechaAtencion2.invalid
+            "
+          >
+            Ingrese Fecha de Atencion
+          </tc-form-description>
+        </tc-form-group>
+    </form>
+  </ng-template>
+  <ng-template #modalFooter>
+      <div class="actions justify-content-between">
+        <button
+          tc-button
+          [type]="'button'"
+          [view]="'error'"
+          (click)="closeModal()"
+        >
+          Cancelar
+        </button>
+        <button
+          tc-button
+          [view]="'info'"
+          [disabled]="appointmentForm.invalid"
+          (click)="reporteRango(appointmentForm)"
+        >
+          Generar
+        </button>
+      </div>
+    </ng-template>
+  
+</ng-container>
+<div class="add-action-box">
+    <button
+      tc-button
+      [square]="true"
+      [tcShape]="500"
+      (click)="reporteDiario()"
+    >Reporte Diario</button>
+  </div>
+
+  <div class="add-action-box1">
+      <button
+        tc-button
+        [square]="true"
+        [tcShape]="500"
+        (click)="openModal(modalBody, 'Generar Reporte', modalFooter)"
+      >Reporte por Fecha</button>
+    </div>

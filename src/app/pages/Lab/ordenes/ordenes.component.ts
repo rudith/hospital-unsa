@@ -91,7 +91,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 
 	buscarOrden(dni: string) {
-		this.labService.searchOrdenDni(dni).subscribe(data => {
+		this.labService.searchOrdenDniLab(dni).subscribe(data => {
 			if(data.results.length==0){
 				this.toastr.error("No se ha encontrado");
 				this.loadOrdenes();
@@ -176,7 +176,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 
 	loadOrdenes() {
-		this.labService.loadOrden().subscribe(ord => {
+		this.labService.loadOrdenPagadas().subscribe(ord => {
 			this.data = ord;
 			this.ordenes = ord.results;
 			

@@ -17,6 +17,7 @@ import { AdministradorService } from "../Administrador/administrador.service";
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
+import { Personal } from '../../interfaces/personal';
 
 @Injectable({
 	providedIn: 'root'
@@ -74,9 +75,8 @@ export class LaboratorioService {
 	searchLabDni(dni: string): Observable<any> {
 		return this.http.get<Examen>(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
 	}
-	searchOrdenDni(dni: string): Observable<any> {
-		return this.http.get<any>('http://18.216.2.122:9000/consultorio/buscarOrden/?dni=' + dni, this.adminSv.getHeader());
-	}
+
+	
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>(this.url + "/TipoExamen/", this.adminSv.getHeader());
 	}
@@ -95,7 +95,12 @@ export class LaboratorioService {
 	loadOrdenPAgination(url: string): Observable<OrdenLista> {
 		return this.http.get<OrdenLista>(url, this.adminSv.getHeader())
 	}
-	loadOrden(): Observable<OrdenLista> {
+
+	//Cargar dos tipos de ordenes
+	loadOrdenPagadas(): Observable<OrdenLista> {
+		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-ordenLaboratorio", this.adminSv.getHeader());
+	}
+	loadOrdenCreadas(): Observable<OrdenLista> {
 		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-orden/", this.adminSv.getHeader());
 	}
 	loadExamen(): Observable<ExamenLista> {
@@ -197,11 +202,16 @@ export class LaboratorioService {
 	}
 	eliminarCabecera(a:number):Observable<Orden>{
 		console.log("vino al servicio");
-		return this.http.get<Orden>(this.url+"/eliminarExamenCompleto/"+a);
+		return this.http.get<Orden>(this.url+"/eliminarExamenCompleto/"+a,this.adminSv.getHeader());
 	}
-	
-	
-	
-
-
+	cancelarOrden(a:number):Observable<Orden>{
+		console.log("vino al servicio de cancelar orden");
+		return this.http.get<Orden>(BASE_API_URL+"/consultorio/cancelarOrden/"+a,this.adminSv.getHeader());
+	}
+	docName(id:number):Observable<Personal>{		
+		return this.http.get<Personal>(BASE_API_URL+"/administrador/ver-personal/"+id,this.adminSv.getHeader());
+	}
+	searchOrdenDniLab(dni: string): Observable<any> {
+		return this.http.get<any>(BASE_API_URL+'/consultorio/buscarOrdenLab/?dni=' + dni, this.adminSv.getHeader());
+	}
 }

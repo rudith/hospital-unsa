@@ -27,7 +27,8 @@ import { Tipoexamen } from '../../../interfaces/tipoexamen';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { Orden } from '../../../interfaces/orden';
 
-import { HostListener } from '@angular/core'; 
+import { HostListener } from '@angular/core';
+import { OrdenLista } from '../../../interfaces/orden-lista';
 
 
 @Component({
@@ -59,8 +60,9 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   tableData: any[];
   appointmentForm: FormGroup;
   cabTri: FormGroup;
-  solicitudesLis: SolicitudLista = <SolicitudLista>{};
-  solicitudes: Solicitud[];
+  data: string[];
+  ordenesLis: OrdenLista = <OrdenLista>{};
+  ordenes: Orden[];
   numero: number;
   busForm: FormGroup;
   patientForm: FormGroup;
@@ -68,6 +70,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   bus: string;
 
   historiaForm: FormGroup;
+  ordenForm:FormGroup;
   historiaFormE: FormGroup;
   histTotal: HistorialLista
   pages: Array<number>;
@@ -76,7 +79,8 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   public newCita: Cita;
   public espOption: IOption[];
   public busqOption: IOption[];
-  public especialidades: Especialidad[];
+  public especialidades: Tipoexamen[];
+  public ordd:Orden;
 
 
   constructor(
@@ -97,14 +101,15 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     this.distritos = [];
     this.medOption = [];
     this.medicos = [];
-    // this.loadData();
+    this.data = [];
+    this.especialidades=[];
     this.opBus = "0";
-    this.solicitudes = [];
+    this.ordenes = [];
     this.espOption = [];
     this.tipoE = [];
     this.newCita = <Cita>{};
     this.pageData = {
-      title: "Solicitudes de Examenes",
+      title: "Órdenes",
       loaded: true,
       breadcrumbs: [
         {
@@ -112,11 +117,15 @@ export class ConexionLaboratorioComponent extends BasePageComponent
           route: "default-dashboard"
         },
         {
+          title: 'Components',
+          route: 'default-dashboard'
+        },
+        {
           title: "Tables",
           route: "default-dashboard"
         },
         {
-          title: "Solicitudes"
+          title: "Órdenes"
         },
         {
           title: "Search"
@@ -126,18 +135,27 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     this.pageNum = 1;
     this.perso = [];
     this.tableData = [];
-    this.solicitudes = [];
-    this.loadSolici();
+    this.ordenes = [];
+    this.loadOrdenes();
     this.loadData();
     this.initBusForm();
+    this.labService.loadTipoEx().subscribe(ex => {
+      console.log(ex);
+      console.log("entro a load examenes")
+      this.especialidades = ex;
+      for (let i in this.especialidades) {
+        this.data[i] = this.especialidades[i].nombre;
+        console.log(this.data[i]);
+      }
+    });
   }
 
   public nextPage() {
-    if (this.solicitudesLis.next) {
+    if (this.ordenesLis.next) {
       this.pageNum++;
-      this.httpSv.loadSolicitudesPag(this.solicitudesLis.next).subscribe(sol => {
-        this.solicitudesLis = sol;
-        this.solicitudes = sol.results;
+      this.labService.loadOrdenPAgination(this.ordenesLis.next).subscribe(ord => {
+        this.ordenesLis = ord;
+        this.ordenes = ord.results;
       });
     }
   }
@@ -146,27 +164,29 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     console.log(this.pageNum);
     if (this.pageNum > 1) {
       this.pageNum--;
-      this.httpSv.loadSolicitudesPag(this.solicitudesLis.previus).subscribe(sol => {
-        this.solicitudesLis = sol;
-        this.solicitudes = sol.results;
+      this.labService.loadOrdenPAgination(this.ordenesLis.previous).subscribe(sol => {
+        this.ordenesLis = sol;
+        this.ordenes = sol.results;
       });
     }
   }
 
-  loadSolici() {
-    this.httpSv.loadSolicitudes().subscribe(sol => {
-      this.solicitudesLis = sol;
-      this.solicitudes = sol.results;
+  loadOrdenes() {
+    this.labService.loadOrdenCreadas().subscribe(sol => {
+      this.ordenesLis = sol;
+      this.ordenes = sol.results;
     });
   }
+
+
 
   ngOnInit() {
     super.ngOnInit();
     this.estadoBusq = false;
     this.getData("assets/data/opcionBusqueda.json", "busqOption");
-    this.store.select("solicitudes").subscribe(sol => {
+    this.store.select("ordenes").subscribe(sol => {
       if (sol && sol.length) {
-        this.solicitudes = sol;
+        this.ordenes = sol;
         !this.pageData.loaded ? this.setLoaded() : null;
       }
     });
@@ -177,14 +197,10 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     super.ngOnDestroy();
   }
 
-  // Ver Mas Historial
-  openModalVerMas<T>(
-    body: Content<T>,
-    header: Content<T> = null,
-    footer: Content<T> = null,
-    row: Solicitud
+  openModalVerMas<T>( body: Content<T>,header: Content<T> = null,footer: Content<T> = null,row:Orden
   ) {
-    this.initHistoriaForm(row);
+    this.initHistoriaForm();
+    this.ordd=row;
     this.modal.open({
       body: body,
       header: header,
@@ -193,26 +209,10 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     });
   }
 
-  initHistoriaForm(data: Solicitud) {
+  initHistoriaForm() {
     this.today = new Date();
-    this.ab = data.numeroHistoria.id;
-    this.historiaForm = this.formBuilder.group({
-      numeroHistoria: [
-        data.numeroHistoria.numeroHistoria ? data.numeroHistoria.numeroHistoria : "",
-        Validators.required
-      ],
-      dni: [data.numeroHistoria.dni ? data.numeroHistoria.dni : "", Validators.required],
-      nombre: [data.numeroHistoria.nombres + " " + data.numeroHistoria.apellido_paterno + " " + data.numeroHistoria.apellido_materno ? data.numeroHistoria.nombres + " " + data.numeroHistoria.apellido_paterno + " " + data.numeroHistoria.apellido_materno : "", Validators.required],
-      medico: [
-        data.medico.nombres + " " + data.medico.apellido_paterno + " " + data.medico.apellido_materno ? data.medico.nombres + " " + data.medico.apellido_paterno + " " + data.medico.apellido_materno : "",
-        Validators.required
-      ],
-      orden: [data.ordenExam ? data.ordenExam : ""],
+    this.ordenForm = this.formBuilder.group({     
       fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
-      tipoExam: ["", Validators.required],
-
-
-
     });
   }
   closeModalH() {
@@ -229,7 +229,21 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.orden = form.get('orden').value;
       newOrden.fechaA = form.get('fecha').value;
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
-      this.httpSv.createOrden(newOrden, this.modal);
+      this.httpSv.createOrden(newOrden, this.modal, 1,2);
+    }
+  }
+  actualizarOrden(form: FormGroup) {
+    if (form.valid) {
+      let newOrden: Orden = form.value;
+      newOrden.dni = this.ordd.dni;
+      newOrden.numeroHistoria = this.ordd.numeroHistoria;
+      newOrden.nombre = this.ordd.nombre;
+      newOrden.medico = this.ordd.medico;
+      newOrden.orden = this.ordd.orden;
+      newOrden.fechaA = form.get('fecha').value;
+      newOrden.tipoExam = this.ordd.tipoExam;
+      this.httpSv.updateOrden(newOrden, this.modal,this.ordd.id);
+      this.loadOrdenes();
     }
   }
 
@@ -278,7 +292,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.nombre = form.get('nombre').value;
       newOrden.fechaA = form.get('fecha').value;
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
-      this.httpSv.createOrden(newOrden, this.modal);
+      this.httpSv.createOrden(newOrden, this.modal, 1,2);
     }
   }
 
@@ -291,31 +305,37 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   buscar(ab: FormGroup) {
     this.bus = ab.get("datoBus").value;
     console.log(this.bus);
-    this.httpSv.searchSol(this.bus).subscribe(
+    this.httpSv.searchOrdenDniAdmis(this.bus).subscribe(
       data => {
         if (this.bus == "") {
           this.toastr.info("No se ha ingresado ningun texto");
         }
         else {
-          if (data.results[0] == null) {
+          if (data.results.length == 0) {
             this.toastr.error("No se han encontrado coincidencias");
-            this.loadSolici();
+            this.loadOrdenes();
           }
           else {
-            this.solicitudes = [];
-            this.solicitudes = data.results;
+            this.ordenes = [];
+            this.ordenes = data.results;
             this.toastr.info("Mostrando resultados");
           }
         }
       }
     );
   }
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
-    if (event.key === "Escape") { 
+
+  cancelar(id:number){
+    this.labService.cancelarOrden(id).subscribe(sol => {
+      this.loadOrdenes();
+    });
+  }
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.key === "Escape") {
       this.closeModalH();
-    
+
     }
-    if (event.key === "Enter") { 
+    if (event.key === "Enter") {
       return false;
     }
   }

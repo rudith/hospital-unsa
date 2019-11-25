@@ -218,14 +218,14 @@ export class HistorialComponent extends BasePageComponent
   initPatientForm() {
     this.patientForm = this.formBuilder.group({
       dni: ["",[Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
-      nombres: ["", [Validators.required, Validators.pattern("[A-Za-z ]*")]],
+      nombres: ["",[Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       apellido_paterno: [
         "",
-        [Validators.required, Validators.pattern("[A-Za-z ]*")]
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
       apellido_materno: [
         "",
-        [Validators.required, Validators.pattern("[A-Za-z ]*")]
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
       sexo: ["", [Validators.required]],
       fechaNac: ["", [Validators.required]],

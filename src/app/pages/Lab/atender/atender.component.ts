@@ -185,7 +185,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 		this.router.navigate(['/vertical/laboratorio']);
 	}
 	loadOrdenes() {
-		this.labService.loadOrden().subscribe(ord => {
+		this.labService.loadOrdenPagadas().subscribe(ord => {
 			this.data=ord;
 			this.ordenes=ord.results;
 		});

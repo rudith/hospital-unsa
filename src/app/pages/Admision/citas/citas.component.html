@@ -44,39 +44,59 @@
     </div>
     <div class="col-md-6">
       <tc-form-group>
-        <tc-input
-          *ngIf="opBus == 0"
-          [type]="'number'"
-          [suffixIcon]="'icofont-search-document'"
-          [placeholder]="'Seleccione una opcion'"
-          formControlName="campo"
-        ></tc-input>
-        <tc-input
-          *ngIf="opBus == 1"
-          [type]="'number'"
-          [charLimiting]="8"
-          pattern="[0-9]{8}"
-          [suffixIcon]="'icofont-search-document'"
-          [placeholder]="'DNI (8 digitos)'"
-          formControlName="campo"
-        ></tc-input>
-        <tc-input
-          *ngIf="opBus == 2"
-          [placeholder]="'Ingrese especialidad a buscar'"
-          [type]="'text'"
-          [charLimiting]="20"
-          pattern="[a-zA-Z]*"
-          [suffixIcon]="'icofont-search-document'"
-          formControlName="campo"
-        >
-        </tc-input>
-        <tc-form-description
-          [tcColor]="'#1666B3'"
-          [tcFontSize]="'0.8em'"
-          *ngIf="busForm.controls.campo.invalid" >
-          Ingrese DNI (Ejemplo:74256985), Especialidad
-          (Ejemplo:Odontologia)
-        </tc-form-description>
+          <tc-input 
+      *ngIf="opBus == 0"
+      [type]="'number'"
+      [suffixIcon]="'icofont-search-document'"
+      [placeholder]="'Seleccione una opción'"
+      formControlName="campo"
+    ></tc-input>
+    <tc-input
+      *ngIf="opBus == 1"
+      [type]="'number'"
+      [suffixIcon]="'icofont-search-document'"
+      [placeholder]="'DNI (8 digitos)'"
+      formControlName="campo"
+      [charLimiting]="8"
+    ></tc-input>
+    <tc-input
+      *ngIf="opBus == 2"
+      [placeholder]="'Ingrese Especialidad'"
+      [charLimiting]="15"
+      type="text"
+      [suffixIcon]="'icofont-search-document'"
+      formControlName="campo"
+    >
+    </tc-input>
+    <tc-input
+      *ngIf="opBus == 3"
+      [placeholder]="'Ingrese el numero de historia'"
+      [charLimiting]="25"
+      type="'number'"
+      [suffixIcon]="'icofont-search-document'"
+      formControlName="campo"
+    >
+    </tc-input>
+    <tc-input
+      *ngIf="opBus == 4"
+      [placeholder]="'Ingrese el nombre'"
+      [charLimiting]="25"
+      type="'text'"
+      [suffixIcon]="'icofont-search-document'"
+      formControlName="campo"
+    >
+    </tc-input>
+          <tc-form-description
+            [tcColor]="'#e24d4d'"
+            [tcFontSize]="'0.8em'"
+            *ngIf="
+              busForm.controls.campo.touched &&
+              busForm.controls.campo.invalid
+            "
+          >
+            Ingrese datos correspodientes
+          </tc-form-description>
+  
       </tc-form-group>
     </div>
     <div class="col-md-2">

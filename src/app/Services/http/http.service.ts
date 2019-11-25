@@ -26,7 +26,8 @@ import { EspecialidadLista } from "../../interfaces/especialidad-lista";
 import { TCModalService } from "../../ui/services/modal/modal.service";
 import { SolicitudLista } from "../../interfaces/solicitud-lista";
 import { Orden } from "../../interfaces/orden";
-import{AdministradorService} from '../Administrador/administrador.service';
+import {OrdenLista} from "../../interfaces/orden-lista";
+import { AdministradorService } from '../Administrador/administrador.service';
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
@@ -57,9 +58,10 @@ export class HttpService {
   private nroHisCom: string;
   private idHisCom: number;
   private idMedico: number;
+  private nomMedico: string;
   private idUser: number;
 
-  constructor(private http: HttpClient, private toastr: ToastrService,private adminService:AdministradorService) { }
+  constructor(private http: HttpClient, private toastr: ToastrService, private adminService: AdministradorService) { }
 
   getData(source: string) {
     return this.http.get(source).pipe(
@@ -89,6 +91,10 @@ export class HttpService {
     return this.idMedico;
   }
 
+  getNomMed():string{
+    return this.nomMedico;
+  }
+
   /***
    * autor: Shirley Romero.
    * setIdMedico: establece el  id del usuario logeado
@@ -112,6 +118,10 @@ export class HttpService {
   setIdMedico(med: number) {
     this.idMedico = med;
   }
+
+  setNomMedico(med: string) {
+    this.nomMedico = med;
+  }
   /***
    * autor: Milagros Motta R.
    * getNroHC: establece el Nro de historia y el Id de la cita triada
@@ -125,130 +135,110 @@ export class HttpService {
     return observableThrowError(error.error || "Server error");
   }
 
-  searchCitaDNI(dni: string): Observable<any> {
-    return this.http.get<any>(
-      BASE_API_URL + "/consultorio/citadni/?dni=" + dni,this.adminService.getHeader()
-    );
-  }
 
-  searchCitaEsp(esp: string): Observable<any> {
-    return this.http.get<any>(
-      BASE_API_URL + "/consultorio/citasporespecialidad2/?esp=" + esp ,this.adminService.getHeader()
-    );
-  }
   loadEspecialidadesSP(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/especialidadSP/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/especialidadSP/", this.adminService.getHeader()
     );
   }
   loadEspecialidades(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/especialidad/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/especialidad/", this.adminService.getHeader()
     );
   }
   loadEspecialidadesPag(): Observable<EspecialidadLista> {
     return this.http.get<EspecialidadLista>(
-      BASE_API_URL + "/administrador/especialidad/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/especialidad/", this.adminService.getHeader()
     );
   }
-  
+
   loadMedicoSP(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/ver-personalSP/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/ver-personalSP/", this.adminService.getHeader()
     );
   }
   loadMedico(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/ver-personal/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/ver-personal/", this.adminService.getHeader()
     );
   }
   loadMedicoEsp(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/personalporespecialidad/?" + id +"=idEspecialidad" ,this.adminService.getHeader()
+      BASE_API_URL + "/administrador/personalporespecialidad/?" + id + "=idEspecialidad", this.adminService.getHeader()
     );
   }
   loadHistorias(): Observable<HistorialLista> {
     return this.http.get<HistorialLista>(
-      BASE_API_URL + "/admision/ver-historias/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/ver-historias/", this.adminService.getHeader()
     );
   }
   loadHistoriaPagination(url: string): Observable<HistorialLista> {
-    return this.http.get<HistorialLista>(url,this.adminService.getHeader());
+    return this.http.get<HistorialLista>(url, this.adminService.getHeader());
   }
   loadCitas(): Observable<Cita[]> {
-    return this.http.get<Cita[]>(BASE_API_URL + "/consultorio/crear-cita/",this.adminService.getHeader()
+    return this.http.get<Cita[]>(BASE_API_URL + "/consultorio/crear-cita/", this.adminService.getHeader()
     );
   }
   loadCitasM(): Observable<CitaM[]> {
     return this.http.get<CitaM[]>(
-      BASE_API_URL + "/consultorio/ver-citas/",this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/ver-citas/", this.adminService.getHeader()
     );
   }
   loadCitasT(): Observable<citaLista> {
     return this.http.get<citaLista>(
-      BASE_API_URL + "/consultorio/citasenespera/",this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/citasenespera/", this.adminService.getHeader()
     );
   }
 
-//http://127.0.0.1:8000/consultorio/historialdecitas/
-loadHistorialCitas(): Observable<citaLista> {
-  return this.http.get<citaLista>(
-    BASE_API_URL + "/consultorio/historialdecitas/",this.adminService.getHeader()
-  );
-}
-
-  loadSolicitudes(): Observable<SolicitudLista> {
-    return this.http.get<SolicitudLista>(
-      BASE_API_URL + "/consultorio/ver-solicitudes/",this.adminService.getHeader()
+  loadHistorialCitas(): Observable<citaLista> {
+    return this.http.get<citaLista>(
+      BASE_API_URL + "/consultorio/historialdecitas/", this.adminService.getHeader()
     );
   }
-  loadSolicitudesPag(url: string): Observable<SolicitudLista> {
-    return this.http.get<SolicitudLista>(url,this.adminService.getHeader());
-  }
 
-  searchSol(ab:string):Observable<SolicitudLista>{
-    return this.http.get<SolicitudLista>(BASE_API_URL+"/consultorio/buscarSolNom/?nom="+ab,this.adminService.getHeader());
-  }
+ 
+
+  
 
   loadCitasTPag(url: string): Observable<citaLista> {
-    return this.http.get<citaLista>(url,this.adminService.getHeader());
+    return this.http.get<citaLista>(url, this.adminService.getHeader());
   }
   loadCitasEdit(): Observable<any> {
-    return this.http.get<any>( BASE_API_URL + "/consultorio/ver-citas/",this.adminService.getHeader()
+    return this.http.get<any>(BASE_API_URL + "/consultorio/ver-citas/", this.adminService.getHeader()
     );
   }
   loadCitaPagination(url: string): Observable<citaLista> {
-    return this.http.get<citaLista>(url,this.adminService.getHeader());
+    return this.http.get<citaLista>(url, this.adminService.getHeader());
   }
   CancelarCita(id: string): Observable<Cita> {
     return this.http.get<Cita>(
-      BASE_API_URL + "/consultorio/cancelarcita/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/cancelarcita/" + id + "/", this.adminService.getHeader()
     );
   }
   TriarCita(id: number): Observable<Cita> {
     return this.http.get<Cita>(
-      BASE_API_URL + "/consultorio/triarcita/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/triarcita/" + id + "/", this.adminService.getHeader()
     );
   }
   loadGSang(): Observable<Grupsang[]> {
     return this.http.get<Grupsang[]>(
-      BASE_API_URL + "/admision/grupo-sangre/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/grupo-sangre/", this.adminService.getHeader()
     );
   }
 
   loadDistrito(): Observable<Distrito[]> {
     return this.http.get<Distrito[]>(
-      BASE_API_URL + "/admision/distritos/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/distritos/", this.adminService.getHeader()
     );
   }
   loadProvincia(): Observable<Provincia[]> {
     return this.http.get<Provincia[]>(
-      BASE_API_URL + "/admision/provincias/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/provincias/", this.adminService.getHeader()
     );
   }
   loadProvinciaId(id: number): Observable<Provincia[]> {
     return this.http.get<Provincia[]>(
-      BASE_API_URL + "/admision/buscarprovincias/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/buscarprovincias/" + id + "/", this.adminService.getHeader()
     );
   }
   loadDepartamento(): Observable<Departamento[]> {
@@ -256,22 +246,80 @@ loadHistorialCitas(): Observable<citaLista> {
       BASE_API_URL + "/admision/departamentos/", this.adminService.getHeader()
     );
   }
-  searchCitasxEsp(id: number): Observable<CitaM[]> {
-    return this.http.get<CitaM[]>(
-      BASE_API_URL + "/consultorio/citasporespecialidad/" + id + "/",this.adminService.getHeader()
-    );
-  }
+
   cancelarCitasPasadas(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/admision/cancelarCitasFecha/",this.adminService.getHeader());
+      BASE_API_URL + "/admision/cancelarCitasFecha/", this.adminService.getHeader());
   }
 
-  searchHistoriaTriaje(dni: string): Observable<citaLista> {
-    return this.http.get<citaLista>(
-      BASE_API_URL + "/consultorio/citadniespera/?dni=" + dni,this.adminService.getHeader()
+  searchCitasxEsp(id: number): Observable<CitaM[]> {
+    return this.http.get<CitaM[]>(
+      BASE_API_URL + "/consultorio/citasporespecialidad/" + id + "/", this.adminService.getHeader()
     );
   }
 
+  //Busqueda de citas para buscar cita (espera y triadas)
+  searchCitaDNI(dni: string): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/consultorio/citadni/?dni=" + dni, this.adminService.getHeader()
+    );
+  }
+
+  searchCitaEsp(esp: string): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/consultorio/citasporespecialidad2/?esp=" + esp, this.adminService.getHeader()
+    );
+  }
+
+  searchCitaNom(dni: string): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/consultorio/citaspornombre/?nom=" + dni, this.adminService.getHeader()
+    );
+  }
+
+  searchCitaNroHist(esp: string): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/consultorio/citasporhistoria/?nro=" + esp, this.adminService.getHeader()
+    );
+  }
+
+  //Busqueda de citas por dni para Triaje
+  searchHistoriaTriaje(dni: string): Observable<citaLista> {
+    return this.http.get<citaLista>(
+      BASE_API_URL + "/consultorio/citadniespera/?dni=" + dni, this.adminService.getHeader()
+    );
+  }
+
+  //Busqueda para Historial de Citas
+  searchHistCitasxDni(id: string): Observable<citaLista> {
+    return this.http.get<citaLista>(
+      BASE_API_URL + "/consultorio/citaHdni/?dni=" + id, this.adminService.getHeader()
+    );
+  }
+  searchHistCitasxEsp(id: string): Observable<citaLista> {
+    return this.http.get<citaLista>(
+      BASE_API_URL + "/consultorio/citasporespecialidad2H/?esp=" + id, this.adminService.getHeader()
+    );
+  }
+  searchHistCitasxNom(id: string): Observable<citaLista> {
+    return this.http.get<citaLista>(
+      BASE_API_URL + "/consultorio/citasHpornombre/?nom=" + id, this.adminService.getHeader()
+    );
+  }
+  searchHistCitasxNumHist(id: string): Observable<citaLista> {
+    return this.http.get<citaLista>(
+      BASE_API_URL + "/consultorio/citasHporhistoria/?nro=" + id, this.adminService.getHeader()
+    );
+  }
+
+//Buscra para ordens
+  searchOrdenesDni(ab: string): Observable<OrdenLista> {
+    return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/buscarOrden/?dni=" + ab, this.adminService.getHeader());
+  }
+
+  searchOrdenesNom(ab: string): Observable<OrdenLista> {
+    return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/buscarNombreOrden/?nom=" + ab, this.adminService.getHeader());
+  }
 
 
   crearTriaje(newTriaje: Triaje) {
@@ -288,7 +336,7 @@ loadHistorialCitas(): Observable<citaLista> {
         numeroHistoria: newTriaje.numeroHistoria.id,
         cita: newTriaje.cita,
         personal: newTriaje.personal
-      },this.adminService.getHeader())
+      }, this.adminService.getHeader())
       .subscribe(
         data => {
           this.toastr.success("", "Triaje Creado");
@@ -300,8 +348,14 @@ loadHistorialCitas(): Observable<citaLista> {
         }
       );
   }
-  createOrden(newOrden: Orden, modal: TCModalService) {
+  createOrden(newOrden: Orden, modal: TCModalService,a:number,e:number) {
     console.log(newOrden);
+    if(a==0){
+      newOrden.estadoOrden="Creado";
+    }
+    else{
+      newOrden.estadoOrden="Pagado";
+    }
     this.http
       .post<any>(BASE_API_URL + "/consultorio/crear-orden/", {
         numeroHistoria: newOrden.numeroHistoria,
@@ -311,13 +365,14 @@ loadHistorialCitas(): Observable<citaLista> {
         orden: newOrden.orden,
         tipoExam: newOrden.tipoExam,
         fechaA: newOrden.fechaA,
-        estadoOrden: "Creada",
-      },this.adminService.getHeader())
+        estadoOrden: newOrden.estadoOrden,
+      }, this.adminService.getHeader())
       .subscribe(
         data => {
           this.toastr.success("Orden Creada correctamente");
           console.log("CREAR Historial Completo");
-          modal.close();
+          if(e==2)
+            modal.close();
         },
         error => {
           console.log(error.message);
@@ -325,8 +380,35 @@ loadHistorialCitas(): Observable<citaLista> {
         }
       );
   }
+  updateOrden(newOrden: Orden, modal: TCModalService,id:number) {
+    console.log(newOrden);
+    this.http
+      .put<any>(BASE_API_URL + "/consultorio/crear-orden/"+id+"/", {
+        numeroHistoria: newOrden.numeroHistoria,
+        dni: newOrden.dni,
+        nombre: newOrden.nombre,
+        medico: newOrden.medico,
+        orden: newOrden.orden,
+        tipoExam: newOrden.tipoExam,
+        fechaA: newOrden.fechaA,
+        estadoOrden: "Pagado",
+      }, this.adminService.getHeader())
+      .subscribe(
+        data => {
+          this.toastr.success("Orden Creada correctamente");
+          console.log("Orden Actualizada ");
+            modal.close();
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo crear la Orden");
+        }
+      );
+  }
+
+
   createHISTORIAL(newHistoria: Historial, modal: TCModalService) {
-    
+
     this.http
       .post<any>(BASE_API_URL + "/admision/crear-historia/", {
         numeroHistoria: newHistoria.numeroHistoria,
@@ -349,7 +431,7 @@ loadHistorialCitas(): Observable<citaLista> {
         distrito: newHistoria.distrito,
         provincia: newHistoria.provincia,
         departamento: newHistoria.departamento
-      },this.adminService.getHeader())
+      }, this.adminService.getHeader())
       .subscribe(
         data => {
           this.toastr.success("Historial Creado correctamente");
@@ -357,53 +439,53 @@ loadHistorialCitas(): Observable<citaLista> {
           modal.close();
         },
         error => {
-          console.error("Leer errores de back",error)
+          console.error("Leer errores de back", error)
           this.toastr.error("No se pudo crear el Historial");
         }
       );
   }
   searcHistoriasDNI(dni: string): Observable<Historial> {
     return this.http.get<Historial>(
-      BASE_API_URL + "/admision/historiadni/" + dni + "/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/historiadni/" + dni + "/", this.adminService.getHeader()
     );
   }
   searcHistoriasNroR(nroR: string): Observable<Historial[]> {
     return this.http.get<Historial[]>(
-      BASE_API_URL + "/admision/historianumero/?nro=" + nroR,this.adminService.getHeader()
+      BASE_API_URL + "/admision/historianumero/?nro=" + nroR, this.adminService.getHeader()
     );
   }
   searcHistoriasNomAp(name: string): Observable<HistorialLista> {
     return this.http.get<HistorialLista>(
-      BASE_API_URL + "/admision/historianombre/?nom=" + name,this.adminService.getHeader()
+      BASE_API_URL + "/admision/historianombre/?nom=" + name, this.adminService.getHeader()
     );
   }
   searcDptoxP(id: number): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/admision/buscarprovincias/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/buscarprovincias/" + id + "/", this.adminService.getHeader()
     );
   }
   searcProxDist(id: number): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/admision/buscardistritos/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/admision/buscardistritos/" + id + "/", this.adminService.getHeader()
     );
   }
   searcMedxEsp(id: number): Observable<Personal[]> {
     console.log(id);
     return this.http.get<Personal[]>(
-      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id,this.adminService.getHeader()
+      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id, this.adminService.getHeader()
     );
   }
 
   searchMedicoporEsp(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id,this.adminService.getHeader()
+      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id, this.adminService.getHeader()
     );
   }
 
   searcMedxEspPag(id: number): Observable<Personal[]> {
     console.log(id);
     return this.http.get<Personal[]>(
-      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id,this.adminService.getHeader()
+      BASE_API_URL + "/administrador/personalporespecialidad/?id=" + id, this.adminService.getHeader()
     );
   }
 
@@ -420,7 +502,7 @@ loadHistorialCitas(): Observable<citaLista> {
         medico: newCita.medico,
         responsable: newCita.responsable,
         exonerado: newCita.exonerado
-      },this.adminService.getHeader())
+      }, this.adminService.getHeader())
       .subscribe(
         data => {
           newCita = <Cita>{};
@@ -437,18 +519,18 @@ loadHistorialCitas(): Observable<citaLista> {
 
   loadUsers(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/usuarios/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/usuarios/", this.adminService.getHeader()
     );
   }
   searchUsers(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/buscarusuario/?us=" + id,this.adminService.getHeader()
+      BASE_API_URL + "/administrador/buscarusuario/?us=" + id, this.adminService.getHeader()
     );
   }
 
   DeleteUser(id: string) {
     return this.http.delete<any>(
-      BASE_API_URL + "/administrador/usuarios/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/administrador/usuarios/" + id + "/", this.adminService.getHeader()
     );
   }
   UpdateUser(user: User): Observable<User> {
@@ -469,7 +551,7 @@ loadHistorialCitas(): Observable<citaLista> {
         date_joined: user.date_joined,
         groups: user.groups,
         user_permissions: user.user_permissions
-      },this.adminService.getHeader()
+      }, this.adminService.getHeader()
     );
   }
   CreateUser(user: User): Observable<any> {
@@ -498,7 +580,7 @@ loadHistorialCitas(): Observable<citaLista> {
    ***/
   loadCitasMedico(nro: number): Observable<citaLista> {
     return this.http.get<citaLista>(
-      BASE_API_URL + "/consultorio/citaspormedico/?id=" + nro,this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/citaspormedico/?id=" + nro, this.adminService.getHeader()
     );
   }
 
@@ -508,7 +590,7 @@ loadHistorialCitas(): Observable<citaLista> {
    */
   searcHistoriaCompleta(nro: string): Observable<ConsultasPaginadas> {
     return this.http.get<ConsultasPaginadas>(
-      BASE_API_URL + "/consultorio/buscarhistorialclinico/?nro=" + nro,this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/buscarhistorialclinico/?nro=" + nro, this.adminService.getHeader()
     );
   }
   /***
@@ -516,7 +598,7 @@ loadHistorialCitas(): Observable<citaLista> {
    * paginacionConsultasHistoriaC: Recibe la url de la paginación correspondiente, devolviendo así la data organizada con el modelo ConsultasPaginadas.
    ***/
   paginacionConsultasHistoriaC(url: string): Observable<ConsultasPaginadas> {
-    return this.http.get<ConsultasPaginadas>(url,this.adminService.getHeader());
+    return this.http.get<ConsultasPaginadas>(url, this.adminService.getHeader());
   }
 
   /***
@@ -525,7 +607,7 @@ loadHistorialCitas(): Observable<citaLista> {
    ***/
   searcTriajeC(nro: number): Observable<Triaje> {
     return this.http.get<Triaje>(
-      BASE_API_URL + "/consultorio/triajeporcita/" + nro + "/",this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/triajeporcita/" + nro + "/", this.adminService.getHeader()
     );
   }
   /***
@@ -548,7 +630,7 @@ loadHistorialCitas(): Observable<citaLista> {
         ordenExam: newConsulta.ordenExam,
         numeroHistoria: newConsulta.numeroHistoria,
         medico: newConsulta.medico
-      },this.adminService.getHeader())
+      }, this.adminService.getHeader())
       .subscribe(
         data => {
           this.toastr.success("Consulta Guardada correctamente");
@@ -566,7 +648,7 @@ loadHistorialCitas(): Observable<citaLista> {
    ***/
   AtenderCita(id: number): Observable<Cita> {
     return this.http.get<Cita>(
-      BASE_API_URL + "/consultorio/atendercita/" + id + "/",this.adminService.getHeader()
+      BASE_API_URL + "/consultorio/atendercita/" + id + "/", this.adminService.getHeader()
     );
   }
 
@@ -575,11 +657,17 @@ loadHistorialCitas(): Observable<citaLista> {
    * paginacionCitasM: Recibe la url de la paginación correspondiente, devolviendo así la data organizada con el modelo CitasMPaginadas.
    ***/
   paginacionCitasM(url: string): Observable<citaLista> {
-    return this.http.get<citaLista>(url,this.adminService.getHeader());
+    return this.http.get<citaLista>(url, this.adminService.getHeader());
   }
 
   generarReporteDiario(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL +'/admision/reporteDiarioCitas',this.adminService.getHeader());
+      BASE_API_URL + '/admision/reporteDiarioCitas', this.adminService.getHeader());
   }
+
+  //http://18.216.2.122:9000/consultorio/buscarOrdenLab/?dni=DNI
+  //http://18.216.2.122:9000/consultorio/buscarNombreOrden/?nom=Nombre
+	searchOrdenDniAdmis(dni: string): Observable<any> {
+		return this.http.get<any>(BASE_API_URL+'/consultorio/buscarNombreOrden/?nom=' + dni, this.adminService.getHeader());
+	}
 }

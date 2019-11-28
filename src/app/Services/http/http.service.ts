@@ -26,7 +26,7 @@ import { EspecialidadLista } from "../../interfaces/especialidad-lista";
 import { TCModalService } from "../../ui/services/modal/modal.service";
 import { SolicitudLista } from "../../interfaces/solicitud-lista";
 import { Orden } from "../../interfaces/orden";
-import {OrdenLista} from "../../interfaces/orden-lista";
+import { OrdenLista } from "../../interfaces/orden-lista";
 import { AdministradorService } from '../Administrador/administrador.service';
 
 // BASE_API_URL
@@ -91,7 +91,7 @@ export class HttpService {
     return this.idMedico;
   }
 
-  getNomMed():string{
+  getNomMed(): string {
     return this.nomMedico;
   }
 
@@ -196,9 +196,9 @@ export class HttpService {
     );
   }
 
- 
 
-  
+
+
 
   loadCitasTPag(url: string): Observable<citaLista> {
     return this.http.get<citaLista>(url, this.adminService.getHeader());
@@ -312,7 +312,7 @@ export class HttpService {
     );
   }
 
-//Buscra para ordens
+  //Buscra para ordens
   searchOrdenesDni(ab: string): Observable<OrdenLista> {
     return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/buscarOrden/?dni=" + ab, this.adminService.getHeader());
   }
@@ -348,13 +348,13 @@ export class HttpService {
         }
       );
   }
-  createOrden(newOrden: Orden, modal: TCModalService,a:number,e:number) {
+  createOrden(newOrden: Orden, modal: TCModalService, a: number, e: number) {
     console.log(newOrden);
-    if(a==0){
-      newOrden.estadoOrden="Creado";
+    if (a == 0) {
+      newOrden.estadoOrden = "Creado";
     }
-    else{
-      newOrden.estadoOrden="Pagado";
+    else {
+      newOrden.estadoOrden = "Pagado";
     }
     this.http
       .post<any>(BASE_API_URL + "/consultorio/crear-orden/", {
@@ -371,7 +371,7 @@ export class HttpService {
         data => {
           this.toastr.success("Orden Creada correctamente");
           console.log("CREAR Historial Completo");
-          if(e==2)
+          if (e == 2)
             modal.close();
         },
         error => {
@@ -380,10 +380,10 @@ export class HttpService {
         }
       );
   }
-  updateOrden(newOrden: Orden, modal: TCModalService,id:number) {
+  updateOrden(newOrden: Orden, modal: TCModalService, id: number) {
     console.log(newOrden);
     this.http
-      .put<any>(BASE_API_URL + "/consultorio/crear-orden/"+id+"/", {
+      .put<any>(BASE_API_URL + "/consultorio/crear-orden/" + id + "/", {
         numeroHistoria: newOrden.numeroHistoria,
         dni: newOrden.dni,
         nombre: newOrden.nombre,
@@ -397,7 +397,7 @@ export class HttpService {
         data => {
           this.toastr.success("Orden Creada correctamente");
           console.log("Orden Actualizada ");
-            modal.close();
+          modal.close();
         },
         error => {
           console.log(error.message);
@@ -665,9 +665,7 @@ export class HttpService {
       BASE_API_URL + '/admision/reporteDiarioCitas', this.adminService.getHeader());
   }
 
-  //http://18.216.2.122:9000/consultorio/buscarOrdenLab/?dni=DNI
-  //http://18.216.2.122:9000/consultorio/buscarNombreOrden/?nom=Nombre
-	searchOrdenDniAdmis(dni: string): Observable<any> {
-		return this.http.get<any>(BASE_API_URL+'/consultorio/buscarNombreOrden/?nom=' + dni, this.adminService.getHeader());
-	}
+  searchOrdenDniAdmis(dni: string): Observable<any> {
+    return this.http.get<any>(BASE_API_URL + '/consultorio/buscarNombreOrden/?nom=' + dni, this.adminService.getHeader());
+  }
 }

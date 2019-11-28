@@ -216,10 +216,10 @@
         </div>
       </div>
       <tc-form-group>
-        <tc-textarea [placeholder]="'Sintomas*'" formControlName="examenFisico"></tc-textarea>
+        <tc-textarea [placeholder]="'Examen Físico*'" formControlName="examenFisico"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.examenFisico.touched && consultForm.controls.examenFisico.invalid ">
-          Ingrese los Síntomas, este solo debe contener letras o números según sea el caso
+          Ingrese el Examen Físico, este solo debe contener letras o números según sea el caso
         </tc-form-description>
       </tc-form-group>
       <tc-form-group>
@@ -382,7 +382,7 @@
         </div>
       </div>
       <tc-form-group>
-        <tc-form-label>Síntomas</tc-form-label>
+        <tc-form-label>Examen Físico</tc-form-label>
         <tc-textarea [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Sintomas'" formControlName="exaFis"
           readonly="readonly"></tc-textarea>
       </tc-form-group>

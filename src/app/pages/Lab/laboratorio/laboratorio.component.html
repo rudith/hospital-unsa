@@ -10,12 +10,12 @@
 				<div class="col-md-6">
 					<tc-form-group>
 						<tc-input [placeholder]="'Ingrese Dato a buscar*'" formControlName="datoBus"></tc-input>
-						<tc-form-description [tcColor]="'#1666B3'"
-						[tcFontSize]="'0.8em'"
-						*ngIf="busForm.controls.datoBus.invalid"> 
-						* Formato para la busqueda por rango: "2019-10-22/2019-11-22" ** Busqueda por nombre ingresar nombre completo del paciente  *
-					</tc-form-description>
-						
+						<tc-form-description [tcColor]="'#1666B3'" [tcFontSize]="'0.8em'"
+							*ngIf="busForm.controls.datoBus.invalid">
+							* Formato para la busqueda por rango: "2019-10-22/2019-11-22" ** Busqueda por nombre
+							ingresar nombre completo del paciente *
+						</tc-form-description>
+
 					</tc-form-group>
 				</div>
 
@@ -25,7 +25,7 @@
 					</button>
 				</div>
 				<div class="col-md-2">
-					<button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="cargarExamn()">
+					<button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="500" (click)="loadOrdenes()">
 						Cargar Todo
 					</button>
 				</div>
@@ -67,8 +67,8 @@
 			<ng-template #tableTDTemplate let-row="row">
 				<div class="actions align-items-center ">
 					<button tc-button [afterIcon]="'icofont-print'" [tcColor]="['#795548', '#fff']"
-						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true" [tcShape]="500"
-						[size]="'sm'" (click)="imprimir(row)"></button>
+						[tcBgColor]="['transparent', '#795548']" [tcBorderColor]="'#795548'" [square]="true"
+						[tcShape]="500" [size]="'sm'" (click)="imprimir(row)"></button>
 				</div>
 			</ng-template>
 		</tc-table-col>
@@ -172,7 +172,7 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Nombre</tc-form-label>
-						<tc-input [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
+						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>
@@ -180,7 +180,7 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>DNI</tc-form-label>
-						<tc-input [placeholder]="'Fecha'" formControlName="dni" readonly="readonly"></tc-input>
+						<tc-input  [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="dni" readonly="readonly"></tc-input>
 					</tc-form-group>
 				</div>
 			</div>
@@ -188,7 +188,7 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Tipo de Examen</tc-form-label>
-						<tc-input [placeholder]="'Tipo de Examen'" formControlName="tipoExam" readonly="readonly">
+						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Tipo de Examen'" formControlName="tipoExam" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>
@@ -196,7 +196,7 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Fecha</tc-form-label>
-						<tc-input [placeholder]="'Fecha'" formControlName="fecha" readonly="readonly"></tc-input>
+						<tc-input  [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="fecha" readonly="readonly"></tc-input>
 					</tc-form-group>
 				</div>
 
@@ -205,7 +205,7 @@
 			<div class="col-12 col-sm-12">
 				<tc-form-group>
 					<tc-form-label> Observaciones </tc-form-label>
-					<tc-input [placeholder]="'Observaciones'" formControlName="observaciones" readonly="readonly">
+					<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Observaciones'" formControlName="observaciones" readonly="readonly">
 					</tc-input>
 				</tc-form-group>
 			</div>

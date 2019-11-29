@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { Orden } from '../../../interfaces/orden';
 
 import { HostListener } from '@angular/core'; 
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 
@@ -43,6 +44,13 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
   private tipoExId: number;
   private idcab:number;
 
+
+  private desR:string;
+  private resultR:string;
+  private unidadR:string;
+  private rangoR:string;
+
+  private deta:Detalle;
   detalleForm: FormGroup;
   cabeceraForm: FormGroup;
   examenForm: FormGroup;
@@ -112,6 +120,8 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 	  this.idcab=data[0].id;
     });
   }
+ 
+  
 
   //Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
 	loadTabla(row: number) {
@@ -145,11 +155,24 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 			newcab.orden=this.ordenR;
 			newcab.fecha=this.fechaR;
 			newcab.tipoExam=this.tipoExId;
-			//console.log("1"+this.datoBus+"2"+this.dniR+"3"+this.ordenR +"4"+ this.fechaR +"5"+ this.tipoExId);
-			//this.idcab=this.labService.getIdOrden();
 			this.labService.updateCabecera(newcab);
 			
 		}
+	}
+
+	eliminarDet(row:string, row2:string,row3:string, row4:string,f:FormGroup ){
+		console.log(row)
+		console.log(row2)
+		console.log(row3)
+		console.log(row4)
+		let newDetalle: Detalle = f.value;
+		newDetalle.resultado_obtenido=row2;
+		newDetalle.descripcion=row;
+		newDetalle.unidades=row3;
+		newDetalle.rango_referencia=row4;
+		console.log(newDetalle)
+		this.labService.elimiarDet(newDetalle);
+		
 	}
 
 	// Metodo de Crear detalle: llama al servicio de creacion createDetalle
@@ -179,6 +202,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 
 		
 	}
+	
 
 	
 	irLaboratorio(){

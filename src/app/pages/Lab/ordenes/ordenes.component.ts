@@ -16,6 +16,7 @@ import { formatDate } from '@angular/common';
 import { Detalle } from '../../../interfaces/detalle';
 import { Cabcrear } from '../../../interfaces/cabcrear';
 import { Router } from '@angular/router';
+import { IOption } from './../../../ui/interfaces/option';
 
 import { HostListener } from '@angular/core';
 
@@ -27,6 +28,10 @@ import { HostListener } from '@angular/core';
 })
 export class OrdenesComponent extends BasePageComponent implements OnInit, OnDestroy, OnChanges {
 
+	datoBus: string;
+	opBus: string;
+	estadoBusq: boolean;
+	public busqOption: IOption[];
 	ordenes: Orden[];
 	idO:number;
 	busForm: FormGroup;
@@ -86,33 +91,73 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	}
 	initBusForm() {
 		this.busForm = this.formBuilder.group({
+			opBus: ['', Validators.required],
 			datoBus: ['', Validators.required],
 		});
 	}
 
-	buscarOrden(dni: string) {
-		this.labService.searchOrdenDniLab(dni).subscribe(data => {
-			if(data.results.length==0){
-				this.toastr.error("No se ha encontrado");
-				this.loadOrdenes();
-			}
-			else{
-				this.data=data;
-				this.ordenes=data.results;
-				this.toastr.info("Búsqueda Exitosa");
-			}
-			
-			
-			console.log("entro busqueda" + dni);
-		});;
-	}
+
+
 	buscar(busca: FormGroup) {
-		this.dato = busca.get('datoBus').value;
-		this.buscarOrden(this.dato);
+		this.datoBus = busca.get('datoBus').value;
+		this.opBus = busca.get('opBus').value;
+		this.onChangeTable();
 	}
+
+	onChangeTable() {
+		if (this.opBus == "1") {
+			//console.log("VA ALL SERVICIO");
+			this.labService.searchOrdenDniLab(this.datoBus).subscribe(data => {
+				//console.log("DATO DNI "+ this.datoBus);
+				if (data.results.length==null) {
+					this.toastr.error("No se han encontrado coincidencias");
+					this.loadOrdenes();
+					
+				} else {
+					this.toastr.success('Búsqueda Exitosa');
+					//this.ordenes = [];
+					this.data=data;
+					this.ordenes = data.results;
+					
+				}
+			}, error => {
+				this.toastr.warning('No encontrado');
+			});
+		}
+		else if (this.opBus == "2") {
+			console.log("VA ALL SERVICIO");
+			this.labService.searchOrdenNombreLab(this.datoBus).subscribe(data => {
+				//console.log("DATO NOMBRE "+ this.datoBus);
+				if (data.results.length==null) {
+					this.toastr.error("No se han encontrado coincidencias");
+					this.loadOrdenes();
+					
+				} else {
+					this.toastr.success('Búsqueda Exitosa');
+					//this.ordenes = [];
+					this.data=data;
+					this.ordenes = data.results;
+					
+				}
+
+			}, error => {
+				this.toastr.warning('No encontrado');
+			});
+		} 
+	}
+
+
+
+
+
+
+
+
 	ngOnInit() {
 		super.ngOnInit();
+		this.estadoBusq = false;
 		this.initBusForm();
+		this.getData('assets/data/opcionBusquedaOrd.json', 'busqOption');
 		this.store.select('ordenes').subscribe(ordenes => {
 			if (ordenes && ordenes.length) {
 				this.ordenes = ordenes;
@@ -167,7 +212,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 		newCab.fecha = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
 		newCab.tipoExam = data.tipoExam;
 		newCab.orden = data.orden;
-		newCab.observaciones = "ninguna";
+		newCab.observaciones = "Ninguna";
 		this.labService.createCabecera(newCab);
 		console.log("CABECERA CREADA ");
 		

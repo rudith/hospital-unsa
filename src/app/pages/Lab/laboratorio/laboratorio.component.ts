@@ -50,7 +50,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	data: ExamenLista = <ExamenLista>{};
 	pageNum: number;
 	exa: Examen[];
-	tipo: string;
+	Extipo: string;
 
 	constructor(
 		store: Store<IAppState>,
@@ -278,8 +278,11 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	// modal ver mas 
 	openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Examen) {
+		this.Extipo = row.tipoExam.nombre;
+		console.log("TIPO DE EXAMEN "+ this.Extipo);
 		this.initExamenForm(row);
-		this.tipo = row.tipoExam.nombre;
+		
+	
 		this.modal.open({
 			body: body,
 			header: header,
@@ -294,7 +297,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 		this.examenForm = this.formBuilder.group({
 			nombre: [data.nombre ? data.nombre : '', Validators.required],
 			dni: [data.dni ? data.dni : '', Validators.required],
-			tipoExam: [this.tipo ? this.tipo : '', Validators.required],
+			tipoExam: [this.Extipo ? this.Extipo : '', Validators.required],
 			fecha: [data.fecha ? data.fecha : '', Validators.required],
 			observaciones: [data.observaciones ? data.observaciones : '', Validators.required],
 		});

@@ -128,7 +128,7 @@
                 <ng-template #tableTDTemplate let-row="row">
                     <div class="actions align-items-center ">
                         <button tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'"  [size]="'sm'"  [square]="true" [tcShape]="500"
-                            [size]="'sm'" (click)="eliminarDet(row.unidades, row.resultado_obtenido, row.unidades, row.rango_referencia,detalleForm)"></button>
+                            [size]="'sm'" (click)="eliminarDet(row.id);actualizar()"></button>
                     </div>
                 </ng-template>
         </tc-table-col>

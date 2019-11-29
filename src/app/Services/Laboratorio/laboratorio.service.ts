@@ -38,7 +38,7 @@ export class LaboratorioService {
 	private dni: string;
 	private ido: number;
 	private dd: number;
-	private desc:string;
+	private dis:number;
 	private result:string;
 	private unidad:string;
 	private rango:string;
@@ -111,7 +111,7 @@ export class LaboratorioService {
 	}
 
 	loadTabla(idEx: number): Observable<Detalle[]> {
-		console.log("ENTRA AL SERVICIO de tabla");
+		//console.log("ENTRA AL SERVICIO de tabla");
 		return this.http.get<Detalle[]>(this.url + '/filtro/Detalles/?id=' + idEx, this.adminSv.getHeader())
 	}
 	cambioEstado(id: number): Observable<Orden> {
@@ -172,47 +172,6 @@ export class LaboratorioService {
 	}
 
 	
-
-
-	elimiarDet(det: Detalle) {
-		//console.log(update);
-		//this.dd = this.getIdCabecera();
-		this.http.put<Detalle>(this.url + '/ExamenLabDet/' + det.id + "/", {
-			descripcion: det.descripcion,
-			resultado_obtenido: det.resultado_obtenido,
-			unidades: det.unidades,
-			rango_referencia: det.rango_referencia,
-			codigoExam: det.codigoExam,
-		}, this.adminSv.getHeader())
-			.subscribe(
-				data => {
-					console.log("ELIMINAR DETALLE ");
-				},
-				error => {
-					this.toastr.error(error);
-					console.log(error);
-				});
-	}
-
-
-	getDes():string{
-		return this.desc;
-	}
-	getResu():string{
-		return this.result;
-	}
-	getUni():string{
-		return this.unidad;
-	}
-	getRango():string{
-		return this.rango;
-	}
-	
-
-
-
-	
-
 	getIdCabecera(): number {
 		return this.tipo;
 	}
@@ -264,5 +223,20 @@ export class LaboratorioService {
 		console.log("ENTRA AL SERVICIO " + nombre);
 		return this.http.get<OrdenLista>(BASE_API_URL + '/consultorio/buscarNombreOrdenLab/?nom=' + nombre, this.adminSv.getHeader());
 	}
+	elimiarDet(det: number) {
+		this.http.delete<Detalle>(this.url + '/ExamenLabDet/' + det + "/"  ,this.adminSv.getHeader())
+			.subscribe(
+				data => {
+					this.toastr.success("Detalle Eliminado");
+					console.log("Detalle Eliminado ");
+				
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+				
+	}
+
 
 }

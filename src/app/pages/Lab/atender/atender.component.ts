@@ -45,7 +45,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
   private idcab:number;
 
 
-  private desR:string;
+  private idt:number;
   private resultR:string;
   private unidadR:string;
   private rangoR:string;
@@ -94,11 +94,12 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
     };
     
     this.detalleT = []; 
-    this.datoBus = this.labService.getDni();
+	this.datoBus = this.labService.getDni();
 	this.cargarDatos();
 	this.initDetalleForm();
 	this.initcabeceraForm();
 	this.loadOrdenes();
+	
 	
    }
 
@@ -106,6 +107,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 	super.ngOnInit();
 	this.initDetalleForm();
 	this.initcabeceraForm();
+	
   }
   ngOnChanges($event) {
 		console.log();
@@ -160,20 +162,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 		}
 	}
 
-	eliminarDet(row:string, row2:string,row3:string, row4:string,f:FormGroup ){
-		console.log(row)
-		console.log(row2)
-		console.log(row3)
-		console.log(row4)
-		let newDetalle: Detalle = f.value;
-		newDetalle.resultado_obtenido=row2;
-		newDetalle.descripcion=row;
-		newDetalle.unidades=row3;
-		newDetalle.rango_referencia=row4;
-		console.log(newDetalle)
-		this.labService.elimiarDet(newDetalle);
-		
-	}
+	
 
 	// Metodo de Crear detalle: llama al servicio de creacion createDetalle
 	addDetalle(form: FormGroup) {
@@ -192,6 +181,15 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 			this.loadTabla(this.rr);
 		}
 		
+	}
+	eliminarDet(row:number){
+		console.log("ID eliminar "+row)
+		this.labService.elimiarDet(row);
+	}
+	actualizar()
+	{
+		this.labService.loadTabla(this.rr);
+		console.log("ID tablar "+this.rr)
 	}
 	cancelar(){
 		this.labService.eliminarCabecera(this.labService.getIdCabecera()).subscribe(cita => {

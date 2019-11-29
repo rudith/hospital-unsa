@@ -181,8 +181,11 @@
       </div>
     </form>
     <form [formGroup]="consultForm" novalidate class="new-patient-form">
-      <label>Llene los campos con letras o números según corresponda. Evite los caracteres especiales como ($,@,#,etc) </label>
+      <label>Llene los campos con letras o números según corresponda. Evite los caracteres especiales como ($,@,#,etc)
+      </label>
+      <br>
       <tc-form-group>
+        <tc-form-label>Motivo de Consulta*</tc-form-label>
         <tc-textarea [placeholder]="'Motivo de Consulta*'" formControlName="motivoConsulta"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.motivoConsulta.touched && consultForm.controls.motivoConsulta.invalid ">
@@ -191,6 +194,7 @@
       </tc-form-group>
       <div class="row">
         <div class="col-12 col-sm-4">
+          <tc-form-label>Apetito*</tc-form-label>
           <tc-form-group>
             <tc-select [placeholder]="'Apetito'" formControlName="apetito" [options]="apetitoOption">
             </tc-select>
@@ -198,6 +202,7 @@
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
+            <tc-form-label>Orina*</tc-form-label>
             <tc-input [placeholder]="'Orina*'" formControlName="orina"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="consultForm.controls.orina.touched && consultForm.controls.orina.invalid ">
@@ -207,6 +212,7 @@
         </div>
         <div class="col-12 col-sm-4">
           <tc-form-group>
+            <tc-form-label>Deposiciones*</tc-form-label>
             <tc-input [placeholder]="'Deposiciones*'" formControlName="deposiciones"></tc-input>
             <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
               *ngIf="consultForm.controls.deposiciones.touched && consultForm.controls.deposiciones.invalid ">
@@ -216,6 +222,7 @@
         </div>
       </div>
       <tc-form-group>
+        <tc-form-label>Examen Físico*</tc-form-label>
         <tc-textarea [placeholder]="'Examen Físico*'" formControlName="examenFisico"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.examenFisico.touched && consultForm.controls.examenFisico.invalid ">
@@ -223,6 +230,7 @@
         </tc-form-description>
       </tc-form-group>
       <tc-form-group>
+        <tc-form-label>Diagnóstico*</tc-form-label>
         <tc-textarea [placeholder]="'Diagnóstico*'" formControlName="diagnostico"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.diagnostico.touched && consultForm.controls.diagnostico.invalid ">
@@ -230,48 +238,75 @@
         </tc-form-description>
       </tc-form-group>
       <tc-form-group>
+        <tc-form-label>Tratamiento*</tc-form-label>
         <tc-textarea [placeholder]="'Tratamiento*'" formControlName="tratamiento"></tc-textarea>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
           *ngIf="consultForm.controls.tratamiento.touched && consultForm.controls.tratamiento.invalid ">
           Ingrese el Tratamiento, este solo debe contener letras o números según sea el caso
         </tc-form-description>
       </tc-form-group>
-      <!--
-      <tc-form-group>
-        <tc-form-label>Orden de Examen</tc-form-label><label>En caso se requiera, escriba la orden para realizar un
-          Examen al laboratorio</label>
-        <tc-input [placeholder]="'Examen de ****** '" formControlName="ordenExam"></tc-input>
-      </tc-form-group>
-      -->
       <tc-form-group>
         <tc-form-label>Próxima Cita</tc-form-label>
         <tc-input type="date" formControlName="proximaCita"></tc-input>
-      </tc-form-group>      
-      
+      </tc-form-group>
+
 
     </form>
     <form [formGroup]="exm" novalidate class="new-patient-form">
 
-        <div class="row">
-          <div class="col-12 col-sm-3">
-            <tc-form-group>
-              <tc-form-label>Agregar Orden de Examen:</tc-form-label>
-            </tc-form-group>
-          </div>
-          <div class="col-12 col-sm-6">
-              <tc-form-group>
-              <tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
-                </tc-select>
-              </tc-form-group>
-            </div>
-          <tc-form-group class="col-md-2">
-              <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500"
-                  [size]="'sm'" (click)=" crearOrden(exm)">Agregar
-              </button>
+      <div class="row">
+        <div class="col-12 col-sm-3">
+          <tc-form-group>
+            <tc-form-label>Agregar Orden de Examen:</tc-form-label>
           </tc-form-group>
-  
         </div>
-        <!--
+        <div class="col-12 col-sm-6">
+          <tc-form-group>
+            <tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
+            </tc-select>
+          </tc-form-group>
+        </div>
+        <tc-form-group class="col-md-2">
+          <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+            (click)=" crearOrden(exm)">Agregar
+          </button>
+        </tc-form-group>
+
+      </div>
+      <div class="col-12">
+          <tc-card class="mb-0">
+              <tc-table [rows]="ordenes" [hovered]="true">
+                  <tc-table-col [columnTitle]="'Tipo Examen'" [columnName]="'tipoExam'">
+                      <ng-template #tableTDTemplate let-value>
+                          <strong>{{ value }}</strong>
+                      </ng-template>
+                  </tc-table-col>
+      
+                  <tc-table-col [columnTitle]="'Fecha de Creación'" [columnName]="'fechaCreacion'">
+                      <ng-template #tableTDTemplate let-value>
+                          <strong>{{ value }}</strong>
+                      </ng-template>
+                  </tc-table-col>
+                  <tc-table-col [columnTitle]="'Eliminar'" [columnName]="'actions'">
+                      <ng-template #tableTDTemplate let-row="row">
+                        <div class="actions">
+                          <button
+                            tc-button
+                            [afterIcon]="'icofont-ui-delete'"
+                            [view]="'error'"
+                            [square]="true"
+                            [tcShape]="500"
+                            [size]="'sm'"
+                            (click)="deleteOrden(row.id)"
+                          ></button>
+                        </div>
+                      </ng-template>
+                    </tc-table-col>
+      
+              </tc-table>
+          </tc-card>
+      </div>
+      <!--
         <tc-card [title]="'Ordenes'" class="mb-0">
             <tc-table [rows]="ordenesT" [hovered]="true" [pagination]="true">
             <tc-table-col [columnTitle]="'tipoExam'" [columnName]="'ordenesT'">
@@ -282,8 +317,8 @@
           </tc-table>
         </tc-card>
         -->
-  
-      </form>
+
+    </form>
   </ng-template>
 
   <ng-template #modalCrearCFooter>

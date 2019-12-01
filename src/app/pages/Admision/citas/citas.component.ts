@@ -17,7 +17,7 @@ import { CitaM } from "../../../interfaces/cita-m";
 import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
-import { HostListener } from '@angular/core'; 
+import { HostListener } from "@angular/core";
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -38,7 +38,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   citasEdit: CitaM[] = [];
   public today: Date;
   tableData: any;
-  patientForm: FormGroup;
+  patientForm: FormGroup=<FormGroup>{};
   gender: IOption[];
   status: IOption[];
   dni: string;
@@ -134,7 +134,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
 
   buscar(busca: FormGroup) {
     this.campo = busca.get("campo").value;
-
     // console.log("entra" + this.opBus + " " + this.campo);
     if (this.opBus == "1") {
       this.buscarDNI(this.campo);
@@ -160,7 +159,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "DNI: " + valor);
         }
@@ -178,7 +177,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "DNI: " + valor);
         }
@@ -197,14 +196,13 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "Historia: " + valor);
         }
       });
     }
   }
-
 
   buscarNom(valor: string) {
     console.log(this.campo);
@@ -218,7 +216,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.loadCitas();
         } else {
           console.log(data);
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "Nombre: " + valor);
         }
@@ -239,10 +237,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   public prevPage() {
     if (this.pageNum > 1) {
       this.pageNum--;
-      this.httpSv.loadCitaPagination(this.data.previous).subscribe(citalista => {
-        this.data = citalista;
-        this.citasEdit = this.data.results;
-      });
+      this.httpSv
+        .loadCitaPagination(this.data.previous)
+        .subscribe(citalista => {
+          this.data = citalista;
+          this.citasEdit = this.data.results;
+        });
     }
   }
 
@@ -255,6 +255,12 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     }
   }
   loadOptionsMed() {
+    let newAppointment: Cita = this.appointmentForm.value;
+    this.appointmentForm.setValue({
+      medico: "",
+      fechaAtencion: newAppointment.fechaAtencion,
+      especialidad: newAppointment.especialidad
+    });
     for (let i in this.medicos) {
       this.medOption[i] = {
         label:
@@ -272,10 +278,11 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       data => {
         this.medicos = [];
         this.medOption = [];
+        this.medSelectedName="";
         this.medicos = data;
         this.loadOptionsMed();
       },
-      error => { }
+      error => {}
     );
   }
   // open modal window
@@ -354,12 +361,14 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       newAppointment.fechaAtencion = formatDate(
         form.value.fechaAtencion,
         "yyyy-MM-dd",
-        "en-US", '+0530'
+        "en-US",
+        "+0530"
       );
       newAppointment.fechaSeparacion = formatDate(
         this.today,
         "yyyy-MM-dd",
-        "en-US", '+0530'
+        "en-US",
+        "+0530"
       );
       //newAppointment.fechaAtencion = this.cita.fechaAtencion;
       newAppointment.especialidad = form.value.especialidad;
@@ -392,7 +401,8 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           especialidad: newCita.especialidad,
           numeroHistoria: newCita.numeroHistoria,
           medico: newCita.medico
-        },this.admService.getHeader()
+        },
+        this.admService.getHeader()
       )
       .subscribe(
         data => {
@@ -444,12 +454,14 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       }
     );
   }
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
-    if (event.key === "Escape") { 
+  @HostListener("document:keydown", ["$event"]) onKeydownHandler(
+    event: KeyboardEvent
+  ) {
+    if (event.key === "Escape") {
       this.closeModal();
       this.closeModalConf();
     }
-    if (event.key === "Enter") { 
+    if (event.key === "Enter") {
       return false;
     }
   }

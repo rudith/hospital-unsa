@@ -1,4 +1,35 @@
 <!-- <p-toast [style]="{ background: '#F9F7AE', opacity: '0.8' }"></p-toast> -->
+<ng-container>
+  <ng-template #modalConf1>
+    <p>¿Esta seguro que desea eliminar Usuario?</p>
+  </ng-template>
+
+  <ng-template #modalConf2>
+    <h5>Cancelar Cita</h5>
+  </ng-template>
+
+  <ng-template #modalConf3>
+    <div class="row actions justify-content-between">
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'success'"
+        (click)="deleteUser()"
+      >
+        Si
+      </button>
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'error'"
+        (click)="closeModalDelete()"
+      >
+        No
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+
 <h3>Usuarios</h3>
 
 <div class="row">
@@ -52,8 +83,6 @@
       <tc-table-col [columnTitle]="'Id'" [columnName]="'id'"> </tc-table-col>
       <tc-table-col [columnTitle]="'UserName'" [columnName]="'username'">
       </tc-table-col>
-      <tc-table-col [columnTitle]="'Email'" [columnName]="'email'">
-      </tc-table-col>
       <tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
         <ng-template #tableTDTemplate let-row="row">
           <div class="actions">
@@ -84,7 +113,9 @@
               [square]="true"
               [tcShape]="500"
               [size]="'sm'"
-              (click)="deleteUser(row.id)"
+              (click)="
+                openModalEliminar(modalConf1, modalConf2, modalConf3, row.id)
+              "
             ></button>
           </div>
         </ng-template>

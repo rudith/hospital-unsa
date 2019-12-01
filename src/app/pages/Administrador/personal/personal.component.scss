@@ -13,6 +13,9 @@ $_striped-bg: rgba(main-palette(500), 0.08);
 $_shape: $shape;
 $_animation: $animation;
 $_shadow: 0 0 10px rgba(#000, 0.5);
+input[readonly] {
+  color:red;
+  }
 :host {
   display: block;
   margin: 0;

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { HttpService } from "../../../services/http/http.service";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
-import {LaboratorioService} from "../../../Services/Laboratorio/laboratorio.service";
+import { LaboratorioService } from "../../../Services/Laboratorio/laboratorio.service";
 import { ToastrService } from "ngx-toastr";
 
 @Component({
@@ -42,70 +42,49 @@ export class LoginFormComponent implements OnInit {
   }
 
   iniciosesion(lg: FormGroup) {
-   //usar el servicio debusqueda y compararlo con el area 
-    this.adminSV.getToken(lg.get("login").value,lg.get("pass").value).subscribe(data => {
-      //this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
-      localStorage.setItem("token", data.token);
-      if(data.tipoUser=="Administrador"){
-        this.http.admin = true;
-        this.http.admis = false;
-        this.http.consultorio = false;
-        this.http.triaje = false;
-        this.http.laboratorio = false;
-        this.toastr.info(data.username, "Bienvenido");
-        this.router.navigate(["/vertical/personalAdm"]);
-        
-      }
-      if(data.tipoUser=="Admision" || data.tipoUser=="Admisión"){
-        this.http.admin = false;
-        this.http.admis = true;
-        this.http.consultorio = false;
-        this.http.triaje = false;
-        this.http.laboratorio = false;
-        this.toastr.info(data.username, "Bienvenido");
-        this.router.navigate(["/vertical/historial"]);
-      }
-      if(data.tipoUser=="Consultorio" || data.tipoUser=="Medico" || data.tipoUser=="Médico" ){
-        this.http.admin = false;
-        this.http.admis = false;
-        this.http.consultorio = true;
-        this.http.triaje = false;
-        this.http.laboratorio = false;
-        this.http.setIdMedico(data.id);
-        this.toastr.info(data.username, "Bienvenido");
-        this.router.navigate(["/vertical/consultas"]);
-      }
-     if(data.tipoUser=="Triaje"){
-        this.http.admin = false;
-        this.http.admis = false;
-        this.http.consultorio = false;
-        this.http.triaje = true;
-        this.http.laboratorio = false;
-        this.http.setIdUs(data.id);
-        this.toastr.info(data.username, "Bienvenido");
-        this.router.navigate(["/vertical/listar-datos"]);
-      }
-      
-     if(data.tipoUser=="Laboratorio"){
-        this.http.admin = false;
-        this.http.admis = false;
-        this.http.consultorio = false;
-        this.http.triaje = false;
-        this.http.laboratorio = true;
-        this.http.setIdUs(data.id);
-        console.log(data.id);
-        this.toastr.info(data.username, "Bienvenido");
-        this.router.navigate(["/vertical/ordenes"]);
-      }
-      if(data.tipoUser!="Laboratorio" && data.tipoUser!="Triaje" && data.tipoUser!="Consultorio" && data.tipoUser!="Medico" && data.tipoUser!="Administrador" && data.tipoUser!="Admision" ){
-        this.toastr.error("Usuario:" + lg.get("login").value, "Usuario no registrado");
-      }
-    
-      console.log(data.tipoUser)
-    },
-    error=>{
-      this.toastr.error("Usuario no registrado");
+    //usar el servicio debusqueda y compararlo con el area
+    this.adminSV
+      .getToken(lg.get("login").value, lg.get("pass").value)
+      .subscribe(
+        data => {
+          //this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
+          localStorage.setItem("token", data.token);
+          if (data.tipoUser == "Administrador") {
+            localStorage.setItem("menu", "admin");
+            this.toastr.info(data.username, "Bienvenido");
+            this.router.navigate(["/vertical/personalAdm"]);
+          }
+          if (data.tipoUser == "Admision" || data.tipoUser == "Admisión") {
+            localStorage.setItem("menu", "admision");
+            this.toastr.info(data.username, "Bienvenido");
+            this.router.navigate(["/vertical/historial"]);
+          }
+          if (
+            data.tipoUser == "Consultorio" ||
+            data.tipoUser == "Medico" ||
+            data.tipoUser == "Médico"
+          ) {
+            localStorage.setItem("menu", "consultorio");
+            this.toastr.info(data.username, "Bienvenido");
+            this.router.navigate(["/vertical/consultas"]);
+          }
+          if (data.tipoUser == "Triaje") {
+            localStorage.setItem("menu", "triaje");
+            this.toastr.info(data.username, "Bienvenido");
+            this.router.navigate(["/vertical/listar-datos"]);
+          }
 
-    });
+          if (data.tipoUser == "Laboratorio") {
+            localStorage.setItem("menu", "laboratorio");
+            this.toastr.info(data.username, "Bienvenido");
+            this.router.navigate(["/vertical/ordenes"]);
+          }
+
+          console.log(data.tipoUser);
+        },
+        error => {
+          this.toastr.error("Usuario no registrado");
+        }
+      );
   }
 }

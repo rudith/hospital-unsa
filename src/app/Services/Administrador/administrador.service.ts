@@ -12,6 +12,8 @@ import { IOption } from "../../ui/interfaces/option";
 import { User } from "../../interfaces/user";
 import { personalLista } from "../../interfaces/personalLista";
 import { Tipoexamen } from "../../interfaces/tipoexamen";
+import { TipoExamenP } from "../../interfaces/tipoExamenP";
+
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
@@ -260,7 +262,7 @@ export class AdministradorService {
       )
       .subscribe(
         data => {
-          this.toastr.success("Tipo de exámen creado correctamente");
+          this.toastr.success("Tipo de examen creado correctamente");
         },
         error => {
           console.log(error.message);
@@ -270,7 +272,7 @@ export class AdministradorService {
   }
   /***
    * autor: Milagros Motta R.
-   * loadCitasMedico: recibe el id del medico
+   * loadTipoExamen: recibe listado de tipo de examenes
    ***/
   loadTipoExamen(): Observable<any> {
     return this.http.get<any>(

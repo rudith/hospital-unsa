@@ -24,7 +24,7 @@ import { HostListener } from '@angular/core';
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
 import { Orden } from '../../../interfaces/orden';
-import { Personal } from '../../../interfaces/personal';
+import { OrdenLista } from '../../../interfaces/orden-lista';
 import { Tipoexamen } from '../../../interfaces/tipoexamen';
 
 @Component({
@@ -37,6 +37,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   @ViewChild('modalFooter', { static: true }) modalFooter: ElementRef<any>;
   data: ConsultasPaginadas = <ConsultasPaginadas>{};
   dataExamen:ExamenLista=<ExamenLista>{};
+  dataOrden:OrdenLista=<OrdenLista>{};
   busForm: FormGroup;
   pageNumEx: number;
   pageNum: number;
@@ -45,6 +46,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   consultForm: FormGroup;
   verMasCForm: FormGroup;
   verTriajeForm: FormGroup;
+  verOrdenen:FormGroup;
   exm:FormGroup;
   consultasRecibidas: ConsultaCompleta[];
   examenesRecibidos: Examen[];
@@ -54,7 +56,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   public tipoE: Tipoexamen[];
   detalleT: Detalle[];
-  ordenesT:string[];
+  ordenesT: string[];
+  ordenes: Orden[];
 
   private idRecibido: number;
   private nombreRecibido: string;
@@ -114,6 +117,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.consultasRecibidas = [];
     this.examenesRecibidos = [];
     this.detalleT=[];
+    this.ordenes=[]
     this.datoBus = this.httpSv.getNroHC();
     this.idCitaRecibida = this.httpSv.getIdHC();
 
@@ -158,8 +162,10 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       this.edadRecibido = data[0].edad;
       this.sexoRecibido = data[0].sexo;
       this.cargarExamenes(data[0].dni);
+      this.cargarOrdenes(data[0].dni);
       this.numHistId=data[0].id;
     });
+    console.log("DNI: " +this.dniRecibido);
   }
 
   loadtipoex(tipoE: Tipoexamen[]) {
@@ -282,6 +288,22 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   /*** 
 	 * autor: Milagros Motta R.
+	 * cargarOrdenes: Carga los examenes del paciente haciendo una llamata al servicio 
+	***/
+  cargarOrdenes(dni: string) {
+    this.httpSv.listarOrdenesDNIPaginacion(dni).subscribe(data => {
+      this.dataOrden=data;
+      console.log(this.dataOrden);
+      this.ordenes = data.results;
+      /*
+      for (let index = 0; index < this.examenesRecibidos.length; index++) {
+        this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
+      }*/
+    });
+  }
+
+  /*** 
+	 * autor: Milagros Motta R.
 	 * regresar: Retorna al componente consultas que muestra las citas Pendientes 
 	***/
   regresar() {
@@ -334,7 +356,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 
   /*** 
 	 * autor: Milagros Motta R.
-	 * initConsultForm: Hace 
+	 * initConsultForm: inicializa el consultform 
 	***/
   initConsultForm() {
     this.consultForm = this.formBuilder.group({
@@ -345,12 +367,14 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       examenFisico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       diagnostico: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
       tratamiento: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.0-9]+')]],
-      //ordenExam: ['', [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ,;.]+')]],
       proximaCita: [null]
     });
 
   }
-
+  /*** 
+	 * autor: Milagros Motta R.
+	 * initConsultForm: inicializa el ordenform 
+	***/
   initOrdenForm() {
     this.exm = this.formBuilder.group({
       tipoExam: ['', [Validators.required]],
@@ -447,7 +471,10 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     });
   }
 
-//Valida y muestra los datos del modal ver mas 
+/*** 
+* autor: Milagros Motta R.
+* initExamenForm: Valida y muestra los datos del modal ver mas 
+***/
 initExamenForm(data: Examen) {
   this.examenForm = this.formBuilder.group({
     tipoExam: [data.tipoExam.nombre ? data.tipoExam.nombre : '', Validators.required],
@@ -455,7 +482,10 @@ initExamenForm(data: Examen) {
     observaciones: [data.observaciones ? data.observaciones : '', Validators.required],
   });
 }
-//Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
+/*** 
+	 * autor: Milagros Motta R.
+	 * loadTabla: Metodo que muestra en un listado los detalles de examen llamando al servicio loadTabla
+	***/
 loadTabla(row: Examen) {
   this.labservice.loadTabla(row.id).subscribe(detalleT => {
     this.detalleT = detalleT;
@@ -502,8 +532,19 @@ loadTabla(row: Examen) {
       newOrden.orden=this.ordenn;
       console.log(newOrden)
       this.httpSv.createOrden(newOrden, this.modal, 0,1);
-      this.ordenesT.push(form.get('tipoExam').value+"ff");
+      this.cargarOrdenes(this.dniRecibido);
     }
+  }
+  /*** 
+   * autor: Milagros Motta R.
+   * deleteOrden: Hace un llamado al servicio para eliminar la orden
+  ***/
+  deleteOrden(id:string){
+    console.log(id);
+    this.httpSv.deleteOrden(id).subscribe(data => {
+      this.toastr.info("Orden Eliminada");
+      this.cargarOrdenes(this.dniRecibido);
+    });
   }
 
   /*** 

@@ -17,7 +17,7 @@ import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
 import { Router } from '@angular/router';
-import { HostListener } from '@angular/core'; 
+import { HostListener } from '@angular/core';
 
 import { BASE_API_URL } from "../../../config/API";
 
@@ -56,10 +56,10 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
   multiple: boolean;
   busqOption: IOption[];
   opBus: string = "";
-  busForm: FormGroup;  
+  busForm: FormGroup;
   data: citaLista = <citaLista>{};
-  a:string;
-  b:string;
+  a: string;
+  b: string;
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
@@ -70,7 +70,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     private toastr: ToastrService,
     // private conf: ConfirmationService,
     private admService: AdministradorService,
-		private router: Router,
+    private router: Router,
   ) {
     super(store, httpSv);
 
@@ -165,7 +165,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "DNI: " + valor);
         }
@@ -183,7 +183,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "DNI: " + valor);
         }
@@ -202,7 +202,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
           this.toastr.info("No se encontraron coincidencias");
           this.loadCitas();
         } else {
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "Historia: " + valor);
         }
@@ -223,7 +223,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
           this.loadCitas();
         } else {
           console.log(data);
-          this.data=data;
+          this.data = data;
           this.citasEdit = data.results;
           this.toastr.warning("Mostrando Citas", "Nombre: " + valor);
         }
@@ -303,7 +303,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
   }
   initForm() {
     // console.log(JSON.stringify(data));
-    this.today=new Date();
+    this.today = new Date();
     this.appointmentForm = this.formBuilder.group({
       fechaAtencion1: [
         formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "",
@@ -313,11 +313,11 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
         formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "",
         Validators.required
       ],
-      
+
     });
   }
 
-  
+
   // close modal window
   closeModal() {
     this.modal.close();
@@ -407,30 +407,30 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
       this.citasEdit = data.results;
     });
   }
-  
+
   /*Problema en reportes*/
-  reporteDiario(){
-    document.location.href = "http://18.216.2.122:9000/admision/reporteDiarioCitas" ;
+  reporteDiario() {
+    document.location.href = BASE_API_URL + "/admision/reporteDiarioCitas";
     //this.router.navigate(['/vertical/citas'])
     this.toastr.success("Se ha generado el Pdf");
   }
-  reporteRango(ab:FormGroup){
-    this.a=ab.get('fechaAtencion1').value;
-    this.b=ab.get('fechaAtencion2').value;
+  reporteRango(ab: FormGroup) {
+    this.a = ab.get('fechaAtencion1').value;
+    this.b = ab.get('fechaAtencion2').value;
 
-    document.location.href = BASE_API_URL+"/admision/reporteCitasRangoFecha/"+this.a+"/"+this.b ;
+    document.location.href = BASE_API_URL + "/admision/reporteCitasRangoFecha/" + this.a + "/" + this.b;
     this.toastr.success("Se ha generado el Pdf");
     this.closeModal();
   }
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
-    if (event.key === "Escape") { 
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    if (event.key === "Escape") {
       this.closeModal();
       this.closeModalConf();
     }
-    if (event.key === "Enter") { 
+    if (event.key === "Enter") {
       return false;
     }
   }
 
-  
+
 }

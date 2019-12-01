@@ -5,29 +5,29 @@
     <div class="col-md-1">
       <tc-form-group>
         <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
-          (click)="openModal(modalArea, 'Agregar Tipo de Examen', modalActions)"></button>
+          (click)="openModal(modalArea, 'Agregar Tipo de Examen', modalActions); updateEst(false)"></button>
       </tc-form-group>
     </div>
     <div class="col-md-7">
-      <!--<tc-form-group>
-        <tc-input [placeholder]="'Buscar Tipo de Examen por Nombre'" [(ngModel)]="id"
+      <tc-form-group>
+        <tc-input [placeholder]="'Buscar Tipo de Examen por Nombre'" [(ngModel)]="nameTipo"
           [suffixIcon]="'icofont-search-document'">
         </tc-input>
-      </tc-form-group>-->
+      </tc-form-group>
     </div>
     <div class="col-md-2">
-      <!--<tc-form-group>
-        <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar()">
+      <tc-form-group>
+        <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscarTipoE()">
           Buscar
         </button>
-      </tc-form-group>-->
+      </tc-form-group>
     </div>
     <div class="col-md-2">
-      <!--<tc-form-group>
+      <tc-form-group>
         <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="300" (click)="loadTipoExamen()">
           Cargar
         </button>
-      </tc-form-group>-->
+      </tc-form-group>
     </div>
   </div>
   <tc-card class="mb-0">
@@ -41,6 +41,9 @@
             <th [align]="headerAlign" [tcBgColor]="headerBgColor">
               Nombre
             </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Editar
+            </th>
           </tr>
         </thead>
 
@@ -52,36 +55,41 @@
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
               {{ row.nombre }}
             </td>
+            <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }" [align]="center">
+              <div class="actions">
+                <button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'info'" [square]="true" [tcShape]="500"
+                  [size]="'sm'" (click)="openModalEdit(modalBody, 'Editar Tipo de Examen', modalFooter, row);
+                    sendTipo(row);
+                    updateEst(true)">
+                </button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
-      <!--
-          <ul class="pagination-ul">
-            <li class="pagination-li prev">
-              <a
-                class="pagination-link"
-                (click)="prevPage()"
-                [ngClass]="{ disabled: pageNum == 1 }"
-              >
-                <i class="icofont-simple-left"></i>
-              </a>
-            </li>
-      
-            <li class="pagination-li next">
-              <a class="pagination-link" (click)="nextPage()">
-                <i class="icofont-simple-right"></i>
-              </a>
-            </li>
-          </ul>-->
+      <ul class="pagination-ul">
+        <li class="pagination-li prev">
+          <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
+            <i class="icofont-simple-left"></i>
+          </a>
+        </li>
+
+        <li class="pagination-li next">
+          <a class="pagination-link" (click)="nextPage()">
+            <i class="icofont-simple-right"></i>
+          </a>
+        </li>
+      </ul>
     </div>
   </tc-card>
 </div>
+<!--Modal Crear-->
 <ng-container>
   <ng-template #modalArea>
     <form [formGroup]="TipoExamenForm">
       <tc-form-group>
         <tc-form-label class="mb-md-0">Nombre:</tc-form-label><br>
-        <tc-input [placeholder]="'Nombre del Tipo de Exámen*'" formControlName="nombre"></tc-input>
+        <tc-input [placeholder]="'Nombre del Tipo de Examen*'" formControlName="nombre"></tc-input>
         <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'" *ngIf="
                 TipoExamenForm.controls.nombre.touched &&
                 TipoExamenForm.controls.nombre.invalid
@@ -101,3 +109,32 @@
     </div>
   </ng-template>
 </ng-container>
+<!--Fin Modal Crear-->
+
+<!--Modal Editar-->
+<ng-container>
+  <ng-template #modalBody>
+    <form [formGroup]="TipoExamenEditForm">
+      <tc-form-group>
+        <tc-form-label class="mb-md-0">Nombre:</tc-form-label><br>
+        <tc-input [placeholder]="'Nombre del Tipo de Examen*'" formControlName="nombre"></tc-input>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'" *ngIf="
+            TipoExamenEditForm.controls.nombre.touched &&
+            TipoExamenEditForm.controls.nombre.invalid
+                ">
+          Ingrese nombre del tipo de examen correcto
+        </tc-form-description>
+      </tc-form-group>
+    </form>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div class="actions justify-content-between row">
+      <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalE()">Cancelar</button>
+      <button tc-button [view]="'info'" [disabled]="TipoExamenEditForm.invalid" (click)="agregarTipoExamen(TipoExamenEditForm)">
+        Actualizar el Tipo de Examen
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+<!--Fin Modal Editar-->

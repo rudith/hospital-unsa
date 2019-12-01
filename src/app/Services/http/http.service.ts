@@ -644,6 +644,15 @@ export class HttpService {
   }
   /***
    * autor: Milagros Motta R.
+   * deleteOrden: Elimina la Orden creada desde consultorio.
+   ***/
+  deleteOrden(id: string) {
+    return this.http.delete<any>(
+      BASE_API_URL + "/consultorio/crear-orden/" + id + "/", this.adminService.getHeader()
+    );
+  }
+  /***
+   * autor: Milagros Motta R.
    * AtenderCita: Cambia el estado de la cita a atendido, solo recibe el id de la cita.
    ***/
   AtenderCita(id: number): Observable<Cita> {
@@ -658,6 +667,18 @@ export class HttpService {
    ***/
   paginacionCitasM(url: string): Observable<citaLista> {
     return this.http.get<citaLista>(url, this.adminService.getHeader());
+  }
+
+  
+  /***
+   * autor: Milagros Motta R.
+   * createTipoExamen: recibe un objeto de tipo Tipoexamen y asigna los valores de este a un json para que sea creado
+   * en el back correctamente.
+   ***/
+  listarOrdenesDNIPaginacion(dni:string): Observable<any>{
+    return this.http.get<any>(
+      BASE_API_URL + "/consultorio/buscarOrden/?dni="+dni ,this.adminService.getHeader()
+    );
   }
 
   generarReporteDiario(): Observable<any> {

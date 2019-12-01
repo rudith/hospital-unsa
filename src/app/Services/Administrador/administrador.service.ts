@@ -12,6 +12,8 @@ import { IOption } from "../../ui/interfaces/option";
 import { User } from "../../interfaces/user";
 import { personalLista } from "../../interfaces/personalLista";
 import { Tipoexamen } from "../../interfaces/tipoexamen";
+import { TipoExamenP } from "../../interfaces/tipoExamenP";
+
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
@@ -260,7 +262,7 @@ export class AdministradorService {
       )
       .subscribe(
         data => {
-          this.toastr.success("Tipo de exámen creado correctamente");
+          this.toastr.success("Tipo de examen creado correctamente");
         },
         error => {
           console.log(error.message);
@@ -270,11 +272,53 @@ export class AdministradorService {
   }
   /***
    * autor: Milagros Motta R.
-   * loadCitasMedico: recibe el id del medico
+   * loadTipoExamen: recibe listado de tipo de examenes
    ***/
   loadTipoExamen(): Observable<any> {
     return this.http.get<any>(
       BASE_API_URL + "/laboratorio/TipoExamen" ,this.getHeader()
+    );
+  }
+  /***
+   * autor: Milagros Motta R.
+   * loadTipoExamenP: recibe listado de tipo de examenes paginados
+   ***/
+  loadTipoExamenP(): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/laboratorio/TipoExamenPa" ,this.getHeader()
+    );
+  }
+  /***
+   * autor: Milagros Motta R.
+   * loadTipoEPagination: recibe listado de tipo de examenes paginados a traves de a url ingresada 
+   ***/
+  loadTipoExamenPagination(url: string): Observable<TipoExamenP> {
+    return this.http.get<TipoExamenP>(url, this.getHeader());
+  }
+  
+
+  /***
+   * autor: Milagros Motta R.
+   * searchTipoExamen: recibe el nombre del tipo de examen para buscar
+   ***/
+  searchTipoExamen(name:string): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/laboratorio/buscarTipoExamen/?tipo="+name,this.getHeader()
+    );
+  }
+
+  /***
+   * autor: Milagros Motta R.
+   * searchTipoExamen: recibe el nombre del tipo de examen para buscar
+   ***/
+  updateTipo(tipo: Tipoexamen): Observable<Tipoexamen> {
+    console.log(JSON.stringify(tipo));
+    return this.http.put<any>(
+      BASE_API_URL + "/laboratorio/TipoExamen/" + tipo.id + "/",
+      {
+        id: tipo.id,
+        nombre: tipo.nombre,
+      }, this.getHeader()
     );
   }
 }

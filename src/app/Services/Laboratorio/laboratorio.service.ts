@@ -36,9 +36,12 @@ export class LaboratorioService {
 	ff: string;
 	private tipo: number;
 	private dni: string;
-	private ido:number;
+	private ido: number;
 	private dd: number;
-
+	private dis:number;
+	private result:string;
+	private unidad:string;
+	private rango:string;
 
 	constructor(private http: HttpClient, private toastr: ToastrService, private adminSv: AdministradorService) {
 
@@ -76,7 +79,7 @@ export class LaboratorioService {
 		return this.http.get<Examen>(this.url + '/filtro/DNI/?dni=' + dni, this.adminSv.getHeader());
 	}
 
-	
+
 	loadTipoEx(): Observable<Tipoexamen[]> {
 		return this.http.get<Tipoexamen[]>(this.url + "/TipoExamen/", this.adminSv.getHeader());
 	}
@@ -108,7 +111,7 @@ export class LaboratorioService {
 	}
 
 	loadTabla(idEx: number): Observable<Detalle[]> {
-		console.log("ENTRA AL SERVICIO de tabla");
+		//console.log("ENTRA AL SERVICIO de tabla");
 		return this.http.get<Detalle[]>(this.url + '/filtro/Detalles/?id=' + idEx, this.adminSv.getHeader())
 	}
 	cambioEstado(id: number): Observable<Orden> {
@@ -121,8 +124,8 @@ export class LaboratorioService {
 	getDni(): string {
 		return this.dni;
 	}
-	
-	
+
+
 	//crear cabecer
 	createCabecera(newCabecera: Cabcrear) {
 		console.log(newCabecera);
@@ -147,10 +150,10 @@ export class LaboratorioService {
 
 
 	}
-	updateCabecera(update: Cabcrear){
+	updateCabecera(update: Cabcrear) {
 		console.log(update);
-		this.dd=this.getIdCabecera();
-		this.http.put<Cabcrear>(this.url + '/CrearExamenLabCab/'+ this.dd + "/", {
+		this.dd = this.getIdCabecera();
+		this.http.put<Cabcrear>(this.url + '/CrearExamenLabCab/' + this.dd + "/", {
 			nombre: update.nombre,
 			dni: update.dni,
 			orden: update.orden,
@@ -166,16 +169,16 @@ export class LaboratorioService {
 					this.toastr.error(error);
 					console.log(error);
 				});
-
-		
 	}
+
+	
 	getIdCabecera(): number {
 		return this.tipo;
 	}
 	setIdo(ido: number) {
 		this.ido = ido;
 	}
-	getIdOrden(): number{
+	getIdOrden(): number {
 		return this.ido;
 	}
 	createDetalle(detalle: Detalle) {
@@ -200,18 +203,40 @@ export class LaboratorioService {
 				});
 
 	}
-	eliminarCabecera(a:number):Observable<Orden>{
+	eliminarCabecera(a: number): Observable<Orden> {
 		console.log("vino al servicio");
-		return this.http.get<Orden>(this.url+"/eliminarExamenCompleto/"+a,this.adminSv.getHeader());
+		return this.http.get<Orden>(this.url + "/eliminarExamenCompleto/" + a, this.adminSv.getHeader());
 	}
-	cancelarOrden(a:number):Observable<Orden>{
+	cancelarOrden(a: number): Observable<Orden> {
 		console.log("vino al servicio de cancelar orden");
-		return this.http.get<Orden>(BASE_API_URL+"/consultorio/cancelarOrden/"+a,this.adminSv.getHeader());
+		return this.http.get<Orden>(BASE_API_URL + "/consultorio/cancelarOrden/" + a, this.adminSv.getHeader());
 	}
-	docName(id:number):Observable<Personal>{		
-		return this.http.get<Personal>(BASE_API_URL+"/administrador/ver-personal/"+id,this.adminSv.getHeader());
+	docName(id: number): Observable<Personal> {
+		return this.http.get<Personal>(BASE_API_URL + "/administrador/ver-personal/" + id, this.adminSv.getHeader());
 	}
-	searchOrdenDniLab(dni: string): Observable<any> {
-		return this.http.get<any>(BASE_API_URL+'/consultorio/buscarOrdenLab/?dni=' + dni, this.adminSv.getHeader());
+	searchOrdenDniLab(dni: string): Observable<OrdenLista> {
+		console.log("ENTRA AL SERVICIO " + dni);
+		return this.http.get<OrdenLista>(BASE_API_URL + '/consultorio/buscarOrdenLab/?dni=' + dni, this.adminSv.getHeader());
 	}
+
+	searchOrdenNombreLab(nombre: string): Observable<OrdenLista> {
+		console.log("ENTRA AL SERVICIO " + nombre);
+		return this.http.get<OrdenLista>(BASE_API_URL + '/consultorio/buscarNombreOrdenLab/?nom=' + nombre, this.adminSv.getHeader());
+	}
+	elimiarDet(det: number) {
+		this.http.delete<Detalle>(this.url + '/ExamenLabDet/' + det + "/"  ,this.adminSv.getHeader())
+			.subscribe(
+				data => {
+					this.toastr.success("Detalle Eliminado");
+					console.log("Detalle Eliminado ");
+				
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+				
+	}
+
+
 }

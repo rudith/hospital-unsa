@@ -24,6 +24,7 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
   id: string;
   tipopersonal: Tipopersonal[];
   appointmentForm: FormGroup;
+  pesonalEdit:FormGroup;
   constructor(
     httpSv: HttpService,
     private admService: AdministradorService,
@@ -155,6 +156,44 @@ export class TipoPersonalComponent extends BasePageComponent implements OnInit {
       this.loadTipopersonal();
     }
   }
+
+
+
+
+
+  openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Tipopersonal) {
+		this.initPersonalForm(row);
+		this.modal.open({
+			body: body,
+			header: header,
+			footer: footer,
+			options: null
+		});
+  }
+  initPersonalForm(data: Tipopersonal) {
+		this.pesonalEdit = this.formBuilder.group({
+      nombre: [data.nombre ? data.nombre : '', Validators.required],
+      id: [data.id ? data.id : '', Validators.required],
+		});
+  }
+
+  updatePersonal(form:FormGroup){
+		if(form.valid){
+			let newcab: Tipopersonal=form.value;
+			newcab.nombre=form.value.nombre;
+      this.admService.updatePer(newcab);
+      this.loadTipopersonal();
+      this.closeModalH();
+    }
+  }	
+		
+  closeModalH() {
+		this.modal.close();
+	}
+
+
+
+
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
     if (event.key === "Escape") { 
       this.closeModal();

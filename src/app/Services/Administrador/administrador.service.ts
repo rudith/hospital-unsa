@@ -279,46 +279,59 @@ export class AdministradorService {
       BASE_API_URL + "/laboratorio/TipoExamen" ,this.getHeader()
     );
   }
-  /***
-   * autor: Milagros Motta R.
-   * loadTipoExamenP: recibe listado de tipo de examenes paginados
-   ***/
-  loadTipoExamenP(): Observable<any> {
-    return this.http.get<any>(
-      BASE_API_URL + "/laboratorio/TipoExamenPa" ,this.getHeader()
-    );
-  }
-  /***
-   * autor: Milagros Motta R.
-   * loadTipoEPagination: recibe listado de tipo de examenes paginados a traves de a url ingresada 
-   ***/
-  loadTipoExamenPagination(url: string): Observable<TipoExamenP> {
-    return this.http.get<TipoExamenP>(url, this.getHeader());
-  }
+
   
 
-  /***
-   * autor: Milagros Motta R.
-   * searchTipoExamen: recibe el nombre del tipo de examen para buscar
-   ***/
-  searchTipoExamen(name:string): Observable<any> {
-    return this.http.get<any>(
-      BASE_API_URL + "/laboratorio/buscarTipoExamen/?tipo="+name,this.getHeader()
-    );
+  updateArea(dato: Area){
+    this.http.put<Area>(this.url + "/areas/" + dato.id + "/", {
+			nombre: dato.nombre
+		}, this.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR  ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
   }
 
-  /***
-   * autor: Milagros Motta R.
-   * searchTipoExamen: recibe el nombre del tipo de examen para buscar
-   ***/
-  updateTipo(tipo: Tipoexamen): Observable<Tipoexamen> {
-    console.log(JSON.stringify(tipo));
-    return this.http.put<any>(
-      BASE_API_URL + "/laboratorio/TipoExamen/" + tipo.id + "/",
-      {
-        id: tipo.id,
-        nombre: tipo.nombre,
-      }, this.getHeader()
-    );
+  updatePer(dato: Tipopersonal){
+    this.http.put<Tipopersonal>(this.url + "/tipo-personal/" + dato.id + "/", {
+			nombre: dato.nombre
+		}, this.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR  ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
   }
+
+  
+
+  updateEspecialidad(dato: Especialidad){
+    this.http.put<Tipopersonal>(this.url + "/especialidad/" + dato.id + "/", {
+      nombre: dato.nombre,
+      descripcion: dato.descripcion 
+		}, this.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR  ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
+  }
+
+
+
+
+
 }

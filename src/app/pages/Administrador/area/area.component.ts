@@ -24,7 +24,9 @@ export class AreaComponent extends BasePageComponent implements OnInit {
   data: any = <any>{};
   pageNum: number;
   areas: Area[];
+  area:Area;
   appointmentForm: FormGroup;
+  areaEdit:FormGroup;
   constructor(
     httpSv: HttpService,
     private admService: AdministradorService,
@@ -157,6 +159,38 @@ export class AreaComponent extends BasePageComponent implements OnInit {
       this.loadAreas();
     }
   }
+
+  openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Area) {
+		this.initAreaForm(row);
+		this.modal.open({
+			body: body,
+			header: header,
+			footer: footer,
+			options: null
+		});
+  }
+  initAreaForm(data: Area) {
+		this.areaEdit = this.formBuilder.group({
+      nombre: [data.nombre ? data.nombre : '', Validators.required],
+      id: [data.id ? data.id : '', Validators.required],
+		});
+  }
+
+  updateArea(form:FormGroup){
+		if(form.valid){
+			let newcab: Area=form.value;
+			newcab.nombre=form.value.nombre;
+      this.admService.updateArea(newcab);
+      this.loadAreas();
+      this.closeModalH();
+    }
+  }	
+		
+  closeModalH() {
+		this.modal.close();
+	}
+
+
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
     if (event.key === "Escape") { 
       this.closeModal();

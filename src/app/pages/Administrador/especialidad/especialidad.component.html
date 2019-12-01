@@ -3,54 +3,32 @@
 <div class="col-sm-12">
   <div class="row">
     <div class="col-md-1">
-    <tc-form-group >
-      <button
-        tc-button
-        [afterIcon]="'icofont-plus'"
-        [view]="'info'"
-        [square]="true"
-        [tcShape]="500"
-        [size]="'sm'"
-        (click)="openModal(modalArea, 'Agregar Especialidad', modalActions)"
-      ></button>
-    </tc-form-group>
-  </div>
-  <div class="col-md-7">
-    <tc-form-group >
-      <tc-input
-        [placeholder]="'Buscar Especialidad por Nombre'"
-        [(ngModel)]="id"
-        [suffixIcon]="'icofont-search-document'"
-      >
-      </tc-input>
-    </tc-form-group>
-  </div>
-  <div class="col-md-2">
-    <tc-form-group >
-      <button
-        tc-button
-        [block]="true"
-        [view]="'success'"
-        [tcShape]="500"
-        (click)="buscar()"
-      >
-        Buscar
-      </button>
-    </tc-form-group>
-  </div>
-  <div class="col-md-2">
-    <tc-form-group >
-        <button
-        tc-button
-        [block]="true"
-        [tcBgColor]="'#3f51b5'"
-        [tcShape]="300"
-        (click)="loadEspecialidades()"
-      >
-        Cargar
-      </button>
-</tc-form-group>
-</div>
+      <tc-form-group>
+        <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
+          (click)="openModal(modalArea, 'Agregar Especialidad', modalActions)"></button>
+      </tc-form-group>
+    </div>
+    <div class="col-md-7">
+      <tc-form-group>
+        <tc-input [placeholder]="'Buscar Especialidad por Nombre'" [(ngModel)]="id"
+          [suffixIcon]="'icofont-search-document'">
+        </tc-input>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+        <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar()">
+          Buscar
+        </button>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+        <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="300" (click)="loadEspecialidades()">
+          Cargar
+        </button>
+      </tc-form-group>
+    </div>
   </div>
   <tc-card class="mb-0">
     <div class="table-wrap">
@@ -66,6 +44,9 @@
             <th [align]="headerAlign" [tcBgColor]="headerBgColor">
               Descripción
             </th>
+            <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+              Editar
+            </th>
           </tr>
         </thead>
 
@@ -80,20 +61,22 @@
             <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
               {{ row.descripcion }}
             </td>
+
+            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+              <button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true" [tcShape]="500"
+                [size]="'sm'" (click)="openModalVerMas(modalBodyH, 'Editar Especialidad', modalFooterH, row)"></button>
+            </td>
+            
           </tr>
         </tbody>
       </table>
       <ul class="pagination-ul">
         <li class="pagination-li prev">
-          <a
-            class="pagination-link"
-            (click)="prevPage()"
-            [ngClass]="{ disabled: pageNum == 1 }"
-          >
+          <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
             <i class="icofont-simple-left"></i>
           </a>
         </li>
-  
+
         <li class="pagination-li next">
           <a class="pagination-link" (click)="nextPage()">
             <i class="icofont-simple-right"></i>
@@ -108,35 +91,21 @@
     <form [formGroup]="appointmentForm">
       <tc-form-group>
         <tc-form-label class="mb-md-0">Nombre:</tc-form-label>
-        <tc-input
-          [prefixIcon]="'icofont-id'"
-          formControlName="nombre"
-        ></tc-input>
-        <tc-form-description
-          [tcColor]="'#e24d4d'"
-          [tcFontSize]="'0.8em'"
-          *ngIf="
+        <tc-input [prefixIcon]="'icofont-id'" formControlName="nombre"></tc-input>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'" *ngIf="
             appointmentForm.controls.nombre.touched &&
             appointmentForm.controls.nombre.invalid
-          "
-        >
+          ">
           Ingrese nombre de especialidad correcto
         </tc-form-description>
       </tc-form-group>
       <tc-form-group>
         <tc-form-label class="mb-md-0">Descripción:</tc-form-label>
-        <tc-input
-          [prefixIcon]="'icofont-id'"
-          formControlName="descripcion"
-        ></tc-input>
-        <tc-form-description
-          [tcColor]="'#e24d4d'"
-          [tcFontSize]="'0.8em'"
-          *ngIf="
+        <tc-input [prefixIcon]="'icofont-id'" formControlName="descripcion"></tc-input>
+        <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'" *ngIf="
             appointmentForm.controls.descripcion.touched &&
             appointmentForm.controls.descripcion.invalid
-          "
-        >
+          ">
           Ingrese una descripción de especialidad correcto
         </tc-form-description>
       </tc-form-group>
@@ -145,27 +114,43 @@
 
   <ng-template #modalActions>
     <div class="actions justify-content-between row">
-      <button
-        class="col"
-        tc-button
-        [type]="'button'"
-        [view]="'error'"
-        [tcShape]="500"
-        (click)="closeModal()"
-      >
+      <button class="col" tc-button [type]="'button'" [view]="'error'" [tcShape]="500" (click)="closeModal()">
         Cancelar
       </button>
-      <button
-        class="col"
-        tc-button
-        [view]="'success'"
-        [tcShape]="500"
-        [afterIcon]="'icofont-save'"
-        [disabled]="appointmentForm.invalid"
-        (click)="addAppointment(appointmentForm)"
-      >
+      <button class="col" tc-button [view]="'success'" [tcShape]="500" [afterIcon]="'icofont-save'"
+        [disabled]="appointmentForm.invalid" (click)="addAppointment(appointmentForm)">
         Crear Especialidad
       </button>
     </div>
   </ng-template>
 </ng-container>
+
+<!-- Open Modal Editar -->
+<ng-container>
+    <ng-template #modalBodyH>
+        <form [formGroup]="especialidadEdit">
+            <tc-form-group>
+                <tc-form-label>Nombre</tc-form-label>
+                <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Nombre'" formControlName="nombre">
+                </tc-input>
+            </tc-form-group>
+            <tc-form-group>
+                <tc-form-label>Descripción</tc-form-label>
+                <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Descripción'" formControlName="descripcion">
+                </tc-input>
+            </tc-form-group>
+            
+    
+        </form>
+    </ng-template>
+
+    <ng-template #modalFooterH>
+        <div class="actions justify-content-between">
+            <button tc-button [type]="'button'" [view]="'error'" (click)=" closeModalH()">Cancelar</button>
+            <button tc-button [view]="'info'" [disabled]="especialidadEdit.invalid" (click)="updateEspecialidad(especialidadEdit)">
+                Modificar
+            </button>
+        </div>
+    </ng-template>
+</ng-container>
+<!--End Modal editar-->

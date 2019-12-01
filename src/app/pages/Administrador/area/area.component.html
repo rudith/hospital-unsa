@@ -12,26 +12,14 @@
             </tc-input>
         </tc-form-group>
         <tc-form-group class="col-sm-4 col-lg-2">
-                <button
-                tc-button
-                [block]="true"
-                [view]="'success'"
-                [tcShape]="500"
-                (click)="buscar()"
-              >
+            <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar()">
                 Buscar
-              </button>
+            </button>
         </tc-form-group>
         <tc-form-group class="col-sm-4 col-lg-2">
-                <button
-                tc-button
-                [block]="true"
-                [tcBgColor]="'#3f51b5'"
-                [tcShape]="300"
-                (click)="loadAreas()"
-              >
+            <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="300" (click)="loadAreas()">
                 Cargar
-              </button>
+            </button>
         </tc-form-group>
     </div>
     <tc-card class="mb-0">
@@ -45,6 +33,11 @@
                         <th [align]="headerAlign" [tcBgColor]="headerBgColor">
                             Nombre
                         </th>
+
+                        <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+                            Editar
+                        </th>
+
                     </tr>
                 </thead>
 
@@ -56,26 +49,30 @@
                         <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
                             {{row.nombre}}
                         </td>
+
+                        <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
+                            <button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [square]="true"
+                                [tcShape]="500" [size]="'sm'"
+                                (click)="openModalVerMas(modalBodyH, 'Editar Area', modalFooterH, row)"></button>
+                        </td>
+
+
                     </tr>
                 </tbody>
             </table>
             <ul class="pagination-ul">
                 <li class="pagination-li prev">
-                  <a
-                    class="pagination-link"
-                    (click)="prevPage()"
-                    [ngClass]="{ disabled: pageNum == 1 }"
-                  >
-                    <i class="icofont-simple-left"></i>
-                  </a>
+                    <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
+                        <i class="icofont-simple-left"></i>
+                    </a>
                 </li>
-          
+
                 <li class="pagination-li next">
-                  <a class="pagination-link" (click)="nextPage()">
-                    <i class="icofont-simple-right"></i>
-                  </a>
+                    <a class="pagination-link" (click)="nextPage()">
+                        <i class="icofont-simple-right"></i>
+                    </a>
                 </li>
-              </ul>
+            </ul>
         </div>
 
     </tc-card>
@@ -96,12 +93,39 @@
 
     <ng-template #modalActions>
         <div class="actions justify-content-between row">
-            <button class="col" tc-button [type]="'button'" [view]="'error'" [tcShape]="500" (click)="closeModal()">Cancelar</button>
-            <button class="col" tc-button [view]="'success'" [tcShape]="500"
-                [afterIcon]="'icofont-save'" [disabled]="appointmentForm.invalid"
-                (click)="addAppointment(appointmentForm)">
+            <button class="col" tc-button [type]="'button'" [view]="'error'" [tcShape]="500"
+                (click)="closeModal()">Cancelar</button>
+            <button class="col" tc-button [view]="'success'" [tcShape]="500" [afterIcon]="'icofont-save'"
+                [disabled]="appointmentForm.invalid" (click)="addAppointment(appointmentForm)">
                 Crear Area
             </button>
         </div>
     </ng-template>
 </ng-container>
+
+
+
+
+
+<!-- Open Modal Editar -->
+<ng-container>
+    <ng-template #modalBodyH>
+        <form [formGroup]="areaEdit">
+            <tc-form-group>
+                <tc-form-label>Nombre</tc-form-label>
+                <tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Nombre'" formControlName="nombre">
+                </tc-input>
+            </tc-form-group>
+        </form>
+    </ng-template>
+
+    <ng-template #modalFooterH>
+        <div class="actions justify-content-between">
+            <button tc-button [type]="'button'" [view]="'error'" (click)=" closeModalH()">Cancelar</button>
+            <button tc-button [view]="'info'" [disabled]="areaEdit.invalid" (click)="updateArea(areaEdit)">
+                Modificar
+            </button>
+        </div>
+    </ng-template>
+</ng-container>
+<!--End Modal editar-->

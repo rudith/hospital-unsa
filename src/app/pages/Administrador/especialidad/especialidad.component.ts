@@ -24,6 +24,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
   id: string;
   especialidades: Especialidad[];
   appointmentForm: FormGroup;
+  especialidadEdit:FormGroup;
   constructor(
     httpSv: HttpService,
     private admService: AdministradorService,
@@ -158,6 +159,45 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
       this.loadEspecialidades();
     }
   }
+
+
+
+  openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Especialidad) {
+		this.initAreaForm(row);
+		this.modal.open({
+			body: body,
+			header: header,
+			footer: footer,
+			options: null
+		});
+  }
+  initAreaForm(data: Especialidad) {
+		this.especialidadEdit = this.formBuilder.group({
+      nombre: [data.nombre ? data.nombre : '', Validators.required],
+      descripcion:[data.descripcion? data.descripcion: '',Validators.required],
+      id: [data.id ? data.id : '', Validators.required],
+		});
+  }
+
+  updateEspecialidad(form:FormGroup){
+		if(form.valid){
+			let newcab: Especialidad=form.value;
+      newcab.nombre=form.value.nombre;
+      newcab.descripcion=form.value.descripcion;
+      this.admService.updateEspecialidad(newcab);
+      this.loadEspecialidades();
+      this.closeModalH();
+      
+    }
+  }	
+		
+  closeModalH() {
+		this.modal.close();
+	}
+
+
+
+
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
     if (event.key === "Escape") { 
       this.closeModal();

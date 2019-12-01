@@ -47,6 +47,7 @@
         <DIV class="row">
             <div class="col-md-3">
                 <tc-form-group>
+                    <tc-form-label>Descripcion</tc-form-label>
                     <tc-input [placeholder]="'Descripcion*'" formControlName="descripcion"></tc-input>
                     <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
                         *ngIf="detalleForm.controls.descripcion.touched && detalleForm.controls.descripcion.invalid ">
@@ -57,6 +58,7 @@
             </div>
             <div class="col-md-3">
                 <tc-form-group>
+                    <tc-form-label>Resultado Obtenido</tc-form-label>
                     <tc-input [placeholder]="'Resultado Obtenido*'" formControlName="resultado_obtenido"></tc-input>
                     <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
                         *ngIf="detalleForm.controls.resultado_obtenido.touched && detalleForm.controls.resultado_obtenido.invalid ">
@@ -68,6 +70,7 @@
 
             <div class="col-md-2">
                 <tc-form-group>
+                    <tc-form-label>Unidades</tc-form-label>
                     <tc-input [placeholder]="'Unidades*'" formControlName="unidades"></tc-input>
                     <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
                         *ngIf="detalleForm.controls.unidades.touched && detalleForm.controls.unidades.invalid ">
@@ -78,6 +81,7 @@
 
             <div class="col-md-3">
                 <tc-form-group>
+                    <tc-form-label>Rango de Referencia</tc-form-label>
                     <tc-input [placeholder]="'Rango de Referencia*'" formControlName="rango_referencia"></tc-input>
                     <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
                         *ngIf="detalleForm.controls.rango_referencia.touched && detalleForm.controls.rango_referencia.invalid ">
@@ -118,7 +122,18 @@
                     <strong>{{ value }}</strong>
                 </ng-template>
             </tc-table-col>
-        </tc-table>
+    
+
+        <tc-table-col [columnTitle]="'Eliminar'">
+                <ng-template #tableTDTemplate let-row="row">
+                    <div class="actions align-items-center ">
+                        <button tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'"  [size]="'sm'"  [square]="true" [tcShape]="500"
+                            [size]="'sm'" (click)="eliminarDet(row.id);actualizar()"></button>
+                    </div>
+                </ng-template>
+        </tc-table-col>
+
+    </tc-table>
     </tc-card>
 
 

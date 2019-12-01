@@ -329,6 +329,50 @@ export class AdministradorService {
 				});
 
   }
+  
+  /***
+   * autor: Milagros Motta R.
+   * loadTipoExamenP: recibe listado de tipo de examenes paginados
+   ***/
+  loadTipoExamenP(): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/laboratorio/TipoExamenPa" ,this.getHeader()
+    );
+  }
+  /***
+   * autor: Milagros Motta R.
+   * loadTipoEPagination: recibe listado de tipo de examenes paginados a traves de a url ingresada 
+   ***/
+  loadTipoExamenPagination(url: string): Observable<TipoExamenP> {
+    return this.http.get<TipoExamenP>(url, this.getHeader());
+  }
+  
+
+  /***
+   * autor: Milagros Motta R.
+   * searchTipoExamen: recibe el nombre del tipo de examen para buscar
+   ***/
+  searchTipoExamen(name:string): Observable<any> {
+    return this.http.get<any>(
+      BASE_API_URL + "/laboratorio/buscarTipoExamen/?tipo="+name,this.getHeader()
+    );
+  }
+
+  /***
+   * autor: Milagros Motta R.
+   * searchTipoExamen: recibe el nombre del tipo de examen para buscar
+   ***/
+  updateTipo(tipo: Tipoexamen): Observable<Tipoexamen> {
+    console.log(JSON.stringify(tipo));
+    return this.http.put<any>(
+      BASE_API_URL + "/laboratorio/TipoExamen/" + tipo.id + "/",
+      {
+        id: tipo.id,
+        nombre: tipo.nombre,
+      }, this.getHeader()
+    );
+  }
+
 
 
 

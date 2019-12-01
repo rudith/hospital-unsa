@@ -314,7 +314,8 @@ export class AdministradorService {
 
   updateEspecialidad(dato: Especialidad){
     this.http.put<Tipopersonal>(this.url + "/especialidad/" + dato.id + "/", {
-			nombre: dato.nombre
+      nombre: dato.nombre,
+      descripcion: dato.descripcion 
 		}, this.getHeader())
 			.subscribe(
 				data => {

@@ -174,6 +174,7 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
   initAreaForm(data: Especialidad) {
 		this.especialidadEdit = this.formBuilder.group({
       nombre: [data.nombre ? data.nombre : '', Validators.required],
+      descripcion:[data.descripcion? data.descripcion: '',Validators.required],
       id: [data.id ? data.id : '', Validators.required],
 		});
   }
@@ -182,9 +183,11 @@ export class EspecialidadComponent extends BasePageComponent implements OnInit {
 		if(form.valid){
 			let newcab: Especialidad=form.value;
       newcab.nombre=form.value.nombre;
+      newcab.descripcion=form.value.descripcion;
       this.admService.updateEspecialidad(newcab);
-      this.closeModalH();
       this.loadEspecialidades();
+      this.closeModalH();
+      
     }
   }	
 		

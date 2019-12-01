@@ -15,7 +15,7 @@ import { MessageService } from "primeng/components/common/messageservice";
 import { Personal } from "../../../interfaces/personal";
 import { ToastrService } from "ngx-toastr";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
-import { HostListener } from '@angular/core'; 
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: "app-editar",
@@ -25,6 +25,7 @@ import { HostListener } from '@angular/core';
 })
 export class EditarComponent extends BasePageComponent
   implements OnInit, OnDestroy {
+  idUser: string;
   data: any = <any>{};
   pageNum: number;
   user: User;
@@ -115,13 +116,16 @@ export class EditarComponent extends BasePageComponent
    * autor: Gerson Huarcaya
    * deleteUser: Elimina un  usuario.,se envia el id y retorna un mensaje de confirmacion
    ***/
-  deleteUser(id: string) {
-    this.httpSv.DeleteUser(id).subscribe(data => {
+  deleteUser() {
+    this.closeModalDelete();
+    this.httpSv.DeleteUser(this.idUser).subscribe(data => {
       this.toastr.info("Datos Eliminados");
       this.loadUsers();
     });
   }
-
+  closeModalDelete() {
+    this.modal.close();
+  }
   /***
    * autor: Gerson Huarcaya
    * onChangeTable: Verifica el campo de texto antes de la busqueda  y devuelve un mensaje de confirmacion
@@ -133,23 +137,22 @@ export class EditarComponent extends BasePageComponent
         this.toastr.info("Campo vacio");
       });
     } else {
-      this.toastr.info("Usuarios con: "+this.id,"Buscando...");
-      this.httpSv.searchUsers(this.id).subscribe(data => {
-        if(data.length==0){
-          this.toastr.error("No encontrado");  
-          this.loadUsers();
+      this.toastr.info("Usuarios con: " + this.id, "Buscando...");
+      this.httpSv.searchUsers(this.id).subscribe(
+        data => {
+          if (data.length == 0) {
+            this.toastr.error("No encontrado");
+            this.loadUsers();
+          } else {
+            this.users = [];
+            this.users = data;
+            this.toastr.success("Encontrado");
+          }
+        },
+        error => {
+          this.toastr.warning("No encontrado");
         }
-        else{
-          this.users = [];
-          this.users = data;
-          this.toastr.success("Encontrado");
-        }
-        
-        
-      },
-      error => {
-        this.toastr.warning("No encontrado");
-      });
+      );
     }
   }
 
@@ -170,7 +173,21 @@ export class EditarComponent extends BasePageComponent
       options: null
     });
   }
-
+  openModalEliminar<T>(
+    body: Content<T>,
+    header: Content<T> = null,
+    footer: Content<T> = null,
+    id: string,
+    options: any = null
+  ) {
+    this.idUser = id;
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: options
+    });
+  }
   /***
    * autor: Gerson Huarcaya
    * initForm: Inicializa el formulario para crear usuario
@@ -363,13 +380,14 @@ export class EditarComponent extends BasePageComponent
     });
   }
 
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
-    if (event.key === "Escape") { 
+  @HostListener("document:keydown", ["$event"]) onKeydownHandler(
+    event: KeyboardEvent
+  ) {
+    if (event.key === "Escape") {
       this.closeModal();
       this.closeModalPersonal();
-      
     }
-    if (event.key === "Enter") { 
+    if (event.key === "Enter") {
       return false;
     }
   }

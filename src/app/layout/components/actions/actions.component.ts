@@ -56,6 +56,7 @@ export class ActionsComponent implements OnInit {
 
     setTimeout(() => {
       localStorage.removeItem("token");
+      localStorage.removeItem("menu");
       this.toastr.info("","Se ha cerrado Sesion");
       this.router.navigate([layout ? layout : this.layout, link]);
     });

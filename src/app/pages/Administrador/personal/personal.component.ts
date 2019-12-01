@@ -27,6 +27,7 @@ import { HostListener } from "@angular/core";
 })
 export class PersonalComponent extends BasePageComponent implements OnInit {
   id: number;
+  idPersonal: string;
   personales: Personal[] = [];
   data: personalLista = <personalLista>{};
   appointmentForm: FormGroup;
@@ -35,7 +36,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   usersOpt: IOption[] = [];
   areasOpt: IOption[] = [];
   tiposOpt: IOption[] = [];
-  busqOption: IOption[];
+  // busqOption: IOption[];
   especialidadesOpt: IOption[] = [];
   users: User[];
   areas: Area[];
@@ -115,7 +116,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         !this.pageData.loaded ? this.setLoaded() : null;
       }
     });
-    this.getData("assets/data/opcionBusquedaPersonal.json", "busqOption");
+    // this.getData("assets/data/opcionBusquedaPersonal.json", "busqOption");
     this.initBusForm();
   }
 
@@ -204,7 +205,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   //busca segun el input y devuelve un mensaje de confirmación
   initBusForm() {
     this.busForm = this.formBuilder.group({
-      opBus: ["", Validators.required],
+      // opBus: ["", Validators.required],
       campo: [
         "",
         [
@@ -218,34 +219,34 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   }
   buscar(busca: FormGroup) {
     this.campo = busca.get("campo").value;
-    this.opBus = busca.get("opBus").value;
+    // this.opBus = busca.get("opBus").value;
 
-    console.log("entra" + this.opBus + " " + this.campo);
-    if (this.opBus == "1") {
-      this.buscarDNI();
-    }
-    if (this.opBus == "2") {
-      this.buscarId();
-    }
+    // console.log("entra" + this.opBus + " " + this.campo);
+    // if (this.opBus == "1") {
+    this.buscarDNI();
+    // }
+    // if (this.opBus == "2") {
+    //   this.buscarId();
+    // }
   }
-  buscarId() {
-    console.log(this.id);
-    if (this.campo === "" || this.campo === undefined) {
-      this.loadPersonal();
-      this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
-    } else {
-      this.admService.searchPersonal(this.campo).subscribe(
-        data => {
-          this.personales = [];
-          this.personales[0] = data;
-          this.toastr.info("Personal con: " + this.id, "Buscando...");
-        },
-        error => {
-          this.toastr.warning("No encontrado");
-        }
-      );
-    }
-  }
+  // buscarId() {
+  //   console.log(this.id);
+  //   if (this.campo === "" || this.campo === undefined) {
+  //     this.loadPersonal();
+  //     this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
+  //   } else {
+  //     this.admService.searchPersonal(this.campo).subscribe(
+  //       data => {
+  //         this.personales = [];
+  //         this.personales[0] = data;
+  //         this.toastr.info("Personal con: " + this.id, "Buscando...");
+  //       },
+  //       error => {
+  //         this.toastr.warning("No encontrado");
+  //       }
+  //     );
+  //   }
+  // }
   buscarDNI() {
     console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
@@ -323,9 +324,8 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   addAppointment(form: FormGroup) {
     if (form.valid) {
       let newAppointment: PersonalCreate = form.value;
-      
-      this.admService.createPersonal(newAppointment)
-      .subscribe(
+
+      this.admService.createPersonal(newAppointment).subscribe(
         data => {
           this.closeModal();
           this.appointmentForm.reset();
@@ -336,7 +336,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
           console.log(error.message);
           this.toastr.error("No se pudo crear personal");
         }
-      )
+      );
     }
   }
   editPersonal(form: FormGroup) {
@@ -346,8 +346,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
 
       // setTimeout(() => {
       //   if (this.admService.createPersonal(newAppointment)) {
-      this.admService.updatePersonal(newAppointment)
-      .subscribe(
+      this.admService.updatePersonal(newAppointment).subscribe(
         data => {
           this.closeModal();
           this.appointmentForm.reset();
@@ -358,7 +357,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
           console.log(error.message);
           this.toastr.error("No se pudo editar personal");
         }
-      )
+      );
       //   }
       // }, 2000);
       // this.loadPersonal();
@@ -388,11 +387,24 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   closeModalP() {
     this.modal.close();
   }
+  openModalEliminar<T>(
+    body: Content<T>,
+    header: Content<T> = null,
+    footer: Content<T> = null,
+    id: string,
+    options: any = null
+  ) {
+    this.idPersonal = id;
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: options
+    });
+  }
   //eliminarpersonal
-  Eliminarpersonal(id: string) {
-    console.log(id);
-    this.admService.eliminarPers(id)
-    .subscribe(
+  Eliminarpersonal() {
+    this.admService.eliminarPers(this.idPersonal).subscribe(
       data => {
         this.loadPersonal();
         this.toastr.success("Personal eliminado");
@@ -402,8 +414,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         this.toastr.error("No se pudo eliminar personal");
       }
     );
-    ;
-    
+    this.closeModal();
   }
   initPersonalForm(data: Personal, especialidad: string) {
     this.personalForm = this.formBuilder.group({

@@ -164,7 +164,7 @@
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.numeroHistoria.numeroHistoria }}
           </td>
-          <td *ngIf="row.numeroRecibo==null" [ngStyle]="{ background: contentBgColor, color: contentColor }">
+          <td *ngIf="row.numeroRecibo==null||row.numeroRecibo==''" [ngStyle]="{ background: contentBgColor, color: contentColor }">
             Exonerado
           </td>
           <td *ngIf="row.numeroRecibo" [ngStyle]="{ background: contentBgColor, color: contentColor }">

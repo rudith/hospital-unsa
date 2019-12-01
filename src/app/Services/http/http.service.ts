@@ -36,11 +36,11 @@ import { BASE_API_URL } from "../../config/API";
   providedIn: "root"
 })
 export class HttpService {
-  public admin: boolean = false;
-  public admis: boolean = false;
-  public triaje: boolean = false;
-  public consultorio: boolean = false;
-  public laboratorio: boolean = false;
+  // public admin: boolean = false;
+  // public admis: boolean = false;
+  // public triaje: boolean = false;
+  // public consultorio: boolean = false;
+  // public laboratorio: boolean = false;
   public HistorialGetUpdate: Historial[] = [];
   public CitaGetUpdate: Cita[] = [];
   public GrupSangGetUpdate: Grupsang[] = [];

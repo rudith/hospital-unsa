@@ -20,6 +20,7 @@ import { AdministradorService } from "../../Services/Administrador/administrador
 })
 export class VerticalLayoutComponent extends BaseLayoutComponent
   implements OnInit {
+  url: string;
   constructor(
     private http: HttpClient,
     store: Store<IAppState>,
@@ -27,16 +28,35 @@ export class VerticalLayoutComponent extends BaseLayoutComponent
     httpSv: HttpService,
     router: Router,
     elRef: ElementRef,
+
     private modal: TCModalService,
     private admService: AdministradorService
   ) {
     super(store, fb, httpSv, router, elRef);
-
+    this.setUrl();
   }
 
   ngOnInit() {
     super.ngOnInit();
 
     this.store.dispatch(new SettingsActions.Update({ layout: "vertical" }));
+  }
+  setUrl() {
+    if (localStorage.getItem("menu")=="admin") {
+      this.url = "assets/data/menu-admision4.json";
+    }
+    if (localStorage.getItem("menu")=="admision") {
+      this.url = "assets/data/menu-admision1.json";
+    }
+    if (localStorage.getItem("menu")=="consultorio") {
+      this.url = "assets/data/menu-admision3.json";
+    }
+    if (localStorage.getItem("menu")=="triaje") {
+      this.url = "assets/data/menu-admision2.json";
+    }
+    if (localStorage.getItem("menu")=="laboratorio") {
+      this.url = "assets/data/menu-admision5.json";
+    }
+    console.log("menu cargando" + this.url);
   }
 }

@@ -277,4 +277,58 @@ export class AdministradorService {
       BASE_API_URL + "/laboratorio/TipoExamen" ,this.getHeader()
     );
   }
+
+  
+
+  updateArea(dato: Area){
+    this.http.put<Area>(this.url + "/areas/" + dato.id + "/", {
+			nombre: dato.nombre
+		}, this.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR  ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
+  }
+
+  updatePer(dato: Tipopersonal){
+    this.http.put<Tipopersonal>(this.url + "/tipo-personal/" + dato.id + "/", {
+			nombre: dato.nombre
+		}, this.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR  ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
+  }
+
+  
+
+  updateEspecialidad(dato: Especialidad){
+    this.http.put<Tipopersonal>(this.url + "/especialidad/" + dato.id + "/", {
+			nombre: dato.nombre
+		}, this.getHeader())
+			.subscribe(
+				data => {
+					console.log("ACTUALIZAR  ");
+				},
+				error => {
+					this.toastr.error(error);
+					console.log(error);
+				});
+
+  }
+
+
+
+
+
 }

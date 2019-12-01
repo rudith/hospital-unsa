@@ -119,7 +119,7 @@ export class EditarComponent extends BasePageComponent
   deleteUser() {
     this.closeModalDelete();
     this.httpSv.DeleteUser(this.idUser).subscribe(data => {
-      this.toastr.info("Datos Eliminados");
+      this.toastr.success("Datos Eliminados");
       this.loadUsers();
     });
   }

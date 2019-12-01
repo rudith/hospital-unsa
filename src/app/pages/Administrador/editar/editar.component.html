@@ -50,7 +50,7 @@
   </div>
   <div class="col-md-6">
     <tc-input
-      [placeholder]="'Buscar Usuario por nombre'"
+      [placeholder]="'Ingrese nombre del usuario'"
       [(ngModel)]="id"
       [suffixIcon]="'icofont-search-document'"
     >
@@ -81,7 +81,7 @@
   <tc-card class="col-md-12 mt-2">
     <tc-table [rows]="users" [hovered]="true">
       <tc-table-col [columnTitle]="'Id'" [columnName]="'id'"> </tc-table-col>
-      <tc-table-col [columnTitle]="'UserName'" [columnName]="'username'">
+      <tc-table-col [columnTitle]="'Nombre de usuario'" [columnName]="'username'">
       </tc-table-col>
       <tc-table-col [columnTitle]="'Modificar'" [columnName]="'actions'">
         <ng-template #tableTDTemplate let-row="row">

@@ -9,15 +9,12 @@ import { Especialidad } from "../../interfaces/especialidad";
 import { Tipopersonal } from "../../interfaces/tipopersonal";
 import { PersonalCreate } from "../../interfaces/personalCreate";
 import { IOption } from "../../ui/interfaces/option";
-import { User } from "../../interfaces/user";
 import { personalLista } from "../../interfaces/personalLista";
 import { Tipoexamen } from "../../interfaces/tipoexamen";
 import { TipoExamenP } from "../../interfaces/tipoExamenP";
 
-
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
-import { Personal } from "../../interfaces/personal";
 
 @Injectable({
   providedIn: "root"
@@ -26,25 +23,48 @@ export class AdministradorService {
   bool: boolean;
   private url: string = BASE_API_URL + "/administrador";
   medOption: IOption[];
-  //username: string = "adminq";
-  //password: string = "admin";
+
   constructor(private http: HttpClient, private toastr: ToastrService) {}
-  //Areas
+
+   /***
+   * autor: Gerson Huarcaya
+   * loadAreas: Servicio para cargar todas las areas con paginacion 
+   ***/
   loadAreas(): Observable<any> {
     return this.http.get<any>(this.url + "/areas/", this.getHeader());
   }
+
+  /***
+   * autor: Gerson Huarcaya
+   * loadAreasPagination: Servicio para cargar la paginacion 
+   ***/
   loadAreasPagination(pag: string): Observable<any> {
-    return this.http.get<any>(pag);
+    return this.http.get<any>(pag,this.getHeader());
   }
+
+  /***
+   * autor: Gerson Huarcaya
+   * loadAreasSP: Servicio para cargar todas las areas sin paginacion 
+   ***/ 
   loadAreasSP(): Observable<any> {
     return this.http.get<any>(this.url + "/areasSP/", this.getHeader());
   }
+
+  /***
+   * autor: Gerson Huarcaya
+   * searchArea: Servicio para buscar areas por nombre
+   ***/
   searchArea(id: string): Observable<any> {
     return this.http.get<any>(
       BASE_API_URL + "/administrador/buscararea/?ar=" + id,
       this.getHeader()
     );
   }
+
+  /***
+   * autor: Gerson Huarcaya
+   * createArea: Servicio para crear areas el cual recibe un objeto de tipo Area
+   ***/
   createArea(area: Area) {
     this.http
       .post<any>(
@@ -70,7 +90,7 @@ export class AdministradorService {
     return this.http.get<any>(this.url + "/especialidad/", this.getHeader());
   }
   loadEspecialidadesPagination(pag: string): Observable<any> {
-    return this.http.get<any>(pag);
+    return this.http.get<any>(pag,this.getHeader());
   }
   loadEspecialidadesSP(): Observable<any> {
     return this.http.get<any>(this.url + "/especialidadSP/", this.getHeader());
@@ -106,7 +126,7 @@ export class AdministradorService {
     return this.http.get<any>(this.url + "/tipo-personal/", this.getHeader());
   }
   loadTPersonalPagination(pag: string): Observable<any> {
-    return this.http.get<any>(pag);
+    return this.http.get<any>(pag,this.getHeader());
   }
   loadTPersonalSP(): Observable<any> {
     return this.http.get<any>(this.url + "/tipo-personalSP/", this.getHeader());
@@ -157,17 +177,7 @@ export class AdministradorService {
     // );
     return httpOptions;
   }
-  // getHeader() {
-  //   let token = new HttpHeaders({ "Content-Type": "application/json" });
-  //   token = token.append(
-  //     "Authorization",
-  //     "Bearer" + localStorage.getItem("token")
-  //   );
-  //   console.log(
-  //     "entro" + JSON.stringify(token) + " " + localStorage.getItem("token")
-  //   );
-  //   return token;
-  // }
+
   // Personal
   loadPersonal(): Observable<any> {
     return this.http.get<any>(this.url + "/ver-personales/", this.getHeader());
@@ -188,7 +198,6 @@ export class AdministradorService {
     );
   }
   createPersonal(tipo: PersonalCreate) {
-    // console.log(JSON.stringify(tipo));
     return this.http
       .post<any>(
         this.url + "/crear-personal/",
@@ -246,6 +255,7 @@ export class AdministradorService {
   loadUserSP(): Observable<any> {
     return this.http.get<any>(this.url + "/usuariosSP/", this.getHeader());
   }
+
   /***
    * autor: Milagros Motta R.
    * createTipoExamen: recibe un objeto de tipo Tipoexamen y asigna los valores de este a un json para que sea creado
@@ -288,7 +298,8 @@ export class AdministradorService {
 		}, this.getHeader())
 			.subscribe(
 				data => {
-					console.log("ACTUALIZAR  ");
+          console.log("ACTUALIZAR  ");
+          this.toastr.success("Área actualizada con éxito");
 				},
 				error => {
 					this.toastr.error(error);
@@ -303,7 +314,8 @@ export class AdministradorService {
 		}, this.getHeader())
 			.subscribe(
 				data => {
-					console.log("ACTUALIZAR  ");
+          console.log("ACTUALIZAR  ");          
+          this.toastr.success("Tipo de Personal actualizado con éxito");
 				},
 				error => {
 					this.toastr.error(error);
@@ -321,7 +333,7 @@ export class AdministradorService {
 		}, this.getHeader())
 			.subscribe(
 				data => {
-					console.log("ACTUALIZAR  ");
+          this.toastr.success("Especialidad actualizada con éxito");
 				},
 				error => {
 					this.toastr.error(error);
@@ -339,6 +351,7 @@ export class AdministradorService {
       BASE_API_URL + "/laboratorio/TipoExamenPa" ,this.getHeader()
     );
   }
+
   /***
    * autor: Milagros Motta R.
    * loadTipoEPagination: recibe listado de tipo de examenes paginados a traves de a url ingresada 
@@ -370,7 +383,7 @@ export class AdministradorService {
         id: tipo.id,
         nombre: tipo.nombre,
       }, this.getHeader()
-    );
+);
   }
 
 

@@ -26,7 +26,7 @@ import { Solicitud } from '../../../interfaces/solicitud';
 import { Tipoexamen } from '../../../interfaces/tipoexamen';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { Orden } from '../../../interfaces/orden';
-
+import { OrdenM } from '../../../interfaces/orden-m';
 import { HostListener } from '@angular/core';
 import { OrdenLista } from '../../../interfaces/orden-lista';
 
@@ -40,6 +40,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   implements OnInit, OnDestroy, OnChanges {
   n: string;
   ab: number;
+  idCita: string;
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     throw new Error("Method not implemented.");
   }
@@ -221,7 +222,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
 
   crearOrden(form: FormGroup) {
     if (form.valid) {
-      let newOrden: Orden = form.value;
+      let newOrden: OrdenM = form.value;
       newOrden.dni = form.get('dni').value;
       newOrden.numeroHistoria = this.ab;
       newOrden.nombre = form.get('nombre').value;
@@ -229,24 +230,39 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.orden = form.get('orden').value;
       newOrden.fechaA = form.get('fecha').value;
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
-      this.httpSv.createOrden(newOrden, this.modal, 1,2);
+      this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
     }
   }
   actualizarOrden(form: FormGroup) {
     if (form.valid) {
-      let newOrden: Orden = form.value;
+      let newOrden: OrdenM = form.value;
       newOrden.dni = this.ordd.dni;
       newOrden.numeroHistoria = this.ordd.numeroHistoria;
       newOrden.nombre = this.ordd.nombre;
       newOrden.medico = this.ordd.medico;
       newOrden.orden = this.ordd.orden;
       newOrden.fechaA = form.get('fecha').value;
-      newOrden.tipoExam = this.ordd.tipoExam;
-      this.httpSv.updateOrden(newOrden, this.modal,this.ordd.id);
+      newOrden.tipoExam = this.ordd.tipoExam.id;
+      this.httpSv.updateOrdenM(newOrden, this.modal,this.ordd.id);
       this.loadOrdenes();
     }
   }
 
+  openModalCancelar<T>(
+    body: Content<T>,
+    header: Content<T> = null,
+    footer: Content<T> = null,
+    id: string,
+    options: any = null
+  ) {
+    this.idCita = id;
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: options
+    });
+  }
   loadData() {
     this.labService.loadTipoEx().subscribe(tipo => {
       this.tipoE = tipo,
@@ -285,14 +301,16 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       tipoExam: ["", Validators.required],
     });
   }
+
   crearOrdenE(form: FormGroup) {
     if (form.valid) {
-      let newOrden: Orden = form.value;
+      let newOrden: OrdenM = form.value;
       newOrden.dni = form.get('dni').value;
       newOrden.nombre = form.get('nombre').value;
       newOrden.fechaA = form.get('fecha').value;
-      newOrden.tipoExam = parseInt(form.get('tipoExam').value);
-      this.httpSv.createOrden(newOrden, this.modal, 1,2);
+      newOrden.tipoExam= parseInt(form.get('tipoExam').value);
+      newOrden.orden="Externo";
+      this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
     }
   }
 
@@ -325,10 +343,11 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     );
   }
 
-  cancelar(id:number){
-    this.labService.cancelarOrden(id).subscribe(sol => {
+  cancelar(){
+    this.labService.cancelarOrden(parseInt(this.idCita)).subscribe(sol => {
       this.loadOrdenes();
     });
+    this.closeModalH();
   }
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.key === "Escape") {

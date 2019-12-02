@@ -24,8 +24,8 @@ import { ConsultasPaginadas } from "../../interfaces/consultas-paginadas";
 import { HistorialLista } from "../../interfaces/historial-lista";
 import { EspecialidadLista } from "../../interfaces/especialidad-lista";
 import { TCModalService } from "../../ui/services/modal/modal.service";
-import { SolicitudLista } from "../../interfaces/solicitud-lista";
 import { Orden } from "../../interfaces/orden";
+import { OrdenM } from "../../interfaces/orden-m";
 import { OrdenLista } from "../../interfaces/orden-lista";
 import { AdministradorService } from '../Administrador/administrador.service';
 import { UltHist } from '../../interfaces/ult-hist';
@@ -37,25 +37,6 @@ import { BASE_API_URL } from "../../config/API";
   providedIn: "root"
 })
 export class HttpService {
-  // public admin: boolean = false;
-  // public admis: boolean = false;
-  // public triaje: boolean = false;
-  // public consultorio: boolean = false;
-  // public laboratorio: boolean = false;
-  public HistorialGetUpdate: Historial[] = [];
-  public CitaGetUpdate: Cita[] = [];
-  public GrupSangGetUpdate: Grupsang[] = [];
-  public DistritoGetUpdate: Distrito[] = [];
-  public TipoexamenGetUpdate: Tipoexamen[] = [];
-  public ProvinciaGetUpdate: Provincia[] = [];
-  public DepartamentoGetUpdate: Departamento[] = [];
-  public EspecialidadGetUpdate: Especialidad[] = [];
-  public MedicoGetUpdate: Medico[] = [];
-  public historia: Historial;
-  public historiaLis: HistorialLista;
-  public detalle: Detalle[] = [];
-  public cita: Cita[] = [];
-  public examen: Examen[] = [];
   private nroHisCom: string;
   private idHisCom: number;
   private idMedico: number;
@@ -381,7 +362,66 @@ export class HttpService {
         }
       );
   }
+  createOrdenM(newOrden: OrdenM, modal: TCModalService, a: number, e: number) {
+    console.log(newOrden);
+    if (a == 0) {
+      newOrden.estadoOrden = "Creado";
+    }
+    else {
+      newOrden.estadoOrden = "Pagado";
+    }
+    this.http
+      .post<any>(BASE_API_URL + "/consultorio/crear-orden/", {
+        numeroHistoria: newOrden.numeroHistoria,
+        dni: newOrden.dni,
+        nombre: newOrden.nombre,
+        medico: newOrden.medico,
+        orden: newOrden.orden,
+        tipoExam: newOrden.tipoExam,
+        fechaA: newOrden.fechaA,
+        estadoOrden: newOrden.estadoOrden,
+      }, this.adminService.getHeader())
+      .subscribe(
+        data => {
+          this.toastr.success("Orden Creada correctamente");
+          console.log("CREAR Historial Completo");
+          if (e == 2)
+            modal.close();
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo crear la Orden");
+        }
+      );
+  }
+
+
   updateOrden(newOrden: Orden, modal: TCModalService, id: number) {
+    console.log(newOrden);
+    this.http
+      .put<any>(BASE_API_URL + "/consultorio/crear-orden/" + id + "/", {
+        numeroHistoria: newOrden.numeroHistoria,
+        dni: newOrden.dni,
+        nombre: newOrden.nombre,
+        medico: newOrden.medico,
+        orden: newOrden.orden,
+        tipoExam: newOrden.tipoExam,
+        fechaA: newOrden.fechaA,
+        estadoOrden: "Pagado",
+      }, this.adminService.getHeader())
+      .subscribe(
+        data => {
+          this.toastr.success("Orden Creada correctamente");
+          console.log("Orden Actualizada ");
+          modal.close();
+        },
+        error => {
+          console.log(error.message);
+          this.toastr.error("No se pudo crear la Orden");
+        }
+      );
+  }
+  updateOrdenM(newOrden: OrdenM, modal: TCModalService, id: number) {
     console.log(newOrden);
     this.http
       .put<any>(BASE_API_URL + "/consultorio/crear-orden/" + id + "/", {

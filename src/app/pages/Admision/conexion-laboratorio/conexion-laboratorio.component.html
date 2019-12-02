@@ -1,5 +1,35 @@
 
-        
+<ng-container>
+  <ng-template #modalConf1>
+    <p>¿Esta seguro que desea eliminar orden?</p>
+  </ng-template>
+
+  <ng-template #modalConf2>
+    <h5>Cancelar orden</h5>
+  </ng-template>
+
+  <ng-template #modalConf3>
+    <div class="row actions justify-content-between">
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'success'"
+        (click)="cancelar()"
+      >
+        Si
+      </button>
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'error'"
+        (click)="closeModalH()"
+      >
+        No
+      </button>
+    </div>
+  </ng-template>
+</ng-container>        
+
 <div class="col col-12 ">
     <form [formGroup]="busForm">
     <div class="row">
@@ -76,7 +106,8 @@
         <ng-template #tableTDTemplate let-row="row">
           <div class="actions">
             <button tc-button tc-button [afterIcon]="'icofont-ui-delete'" [view]="'error'" [tcShape]="500" [size]="'sm'"
-              (click)="cancelar(row.id)"></button>
+              (click)="
+              openModalCancelar(modalConf1, modalConf2, modalConf3, row.id)"            ></button>
           </div>
         </ng-template>
       </tc-table-col>
@@ -106,6 +137,7 @@
       </div>
     </form>
   </ng-template>
+  
 
   <ng-template #modalFooterH>
     <div class="actions justify-content-between">
@@ -132,7 +164,11 @@
   </li>
 </ul>
 <!--End Modal Crear orden Mas-->
-
+<div class="add-action-box2">
+	
+		<input type="button" value="Crear Orden Externa" name="submit" tc-button [square]="true" [tcShape]="300" (click)="openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)"/>
+	
+</div>
 <ng-container>
     <ng-template #modalBodyE>
       <form [formGroup]="historiaFormE" novalidate class="new-patient-form">

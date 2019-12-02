@@ -23,7 +23,7 @@ import { HostListener } from '@angular/core';
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
-import { Orden } from '../../../interfaces/orden';
+import { OrdenM } from '../../../interfaces/orden-m';
 import { OrdenLista } from '../../../interfaces/orden-lista';
 import { OrdenV } from '../../../interfaces/orden-v'
 import { Tipoexamen } from '../../../interfaces/tipoexamen';
@@ -530,7 +530,7 @@ loadTabla(row: Examen) {
 
   crearOrden(form: FormGroup) {
     if (form.valid) {
-      let newOrden: Orden = form.value;
+      let newOrden: OrdenM = form.value;
       newOrden.dni = this.dniRecibido;
       newOrden.numeroHistoria = this.numHistId;
       newOrden.nombre = this.nombreRecibido;
@@ -538,7 +538,7 @@ loadTabla(row: Examen) {
       newOrden.tipoExam = parseInt(form.get('tipoExam').value);
       newOrden.orden=this.ordenn;
       console.log(newOrden)
-      this.httpSv.createOrden(newOrden, this.modal, 0,1);
+      this.httpSv.createOrdenM(newOrden, this.modal, 0,1);
       this.cargarOrdenes(this.dniRecibido);
     }
   }

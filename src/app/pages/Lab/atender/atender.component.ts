@@ -185,6 +185,7 @@ export class AtenderComponent extends BasePageComponent implements OnInit, OnDes
 	eliminarDet(row:number){
 		console.log("ID eliminar "+row)
 		this.labService.elimiarDet(row);
+		this.actualizar();
 	}
 	actualizar()
 	{

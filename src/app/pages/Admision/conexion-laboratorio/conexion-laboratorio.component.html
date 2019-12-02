@@ -38,7 +38,7 @@
           <div class="col-md-1">
             <tc-form-group>
               <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
-                (click)="openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)"></button>
+                (click)="openModalI(modalBodyI,'Crear Orden',modalFooterI)"></button>
             </tc-form-group>
           </div>
           <div class="col-md-7">
@@ -164,10 +164,8 @@
   </li>
 </ul>
 <!--End Modal Crear orden Mas-->
-<div class="add-action-box2">
-	
+<div class="add-action-box2">	
 		<input type="button" value="Crear Orden Externa" name="submit" tc-button [square]="true" [tcShape]="300" (click)="openModalVerExtra(modalBodyE,'Crear Orden',modalFooterE)"/>
-	
 </div>
 <ng-container>
     <ng-template #modalBodyE>
@@ -229,3 +227,62 @@
     </ng-template>
   </ng-container>
   <!--End Modal Ver Mas-->
+
+
+  <ng-container>
+    <ng-template #modalBodyI>
+      <form [formGroup]="historiaFormI" novalidate class="new-patient-form">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <tc-form-group>
+                  <tc-form-label>Fecha </tc-form-label>
+                  <tc-input [type]="'date'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Fecha'"
+                    formControlName="fecha" ></tc-input>
+                </tc-form-group>
+              </div>
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+              <tc-form-label>DNI</tc-form-label>
+              <tc-input  [placeholder]="'DNI'"
+                formControlName="dni" ></tc-input>
+                <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'" *ngIf="historiaFormI.controls.dni.invalid">
+              Ingrese solo numeros
+            </tc-form-description>
+            </tc-form-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <tc-form-group>
+              <tc-form-label>Orden</tc-form-label>
+              <tc-input  [placeholder]="'Orden'"
+                formControlName="orden" ></tc-input>
+            </tc-form-group>
+          </div>
+  
+        </div>
+        
+        <div class="row">
+          
+          <div class="col-12 col-sm-6">
+            <tc-form-label>Tipo de Examen </tc-form-label>
+                <tc-form-group>
+                  <tc-select [placeholder]="'Tipo de Examen'" formControlName="tipoExam" [options]="tipoExOption">
+                  </tc-select>
+                </tc-form-group>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+  
+    <ng-template #modalFooterI>
+      <div class="actions justify-content-between">
+        <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">
+          Cancelar
+        </button>
+        <button tc-button [view]="'info'" [disabled]="historiaFormI.invalid" (click)="crearOrdenI(historiaFormI)">
+          ACEPTAR
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>

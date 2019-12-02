@@ -72,7 +72,9 @@ export class ConexionLaboratorioComponent extends BasePageComponent
 
   historiaForm: FormGroup;
   ordenForm:FormGroup;
+  histI:Historial;
   historiaFormE: FormGroup;
+  historiaFormI: FormGroup;
   histTotal: HistorialLista
   pages: Array<number>;
   pagesNumber: number;
@@ -301,6 +303,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       tipoExam: ["", Validators.required],
     });
   }
+  
 
   crearOrdenE(form: FormGroup) {
     if (form.valid) {
@@ -312,6 +315,54 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.orden="Externo";
       this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
     }
+  }
+
+
+  openModalI<T>(body: Content<T>, header: Content<T> = null,
+    footer: Content<T> = null,
+  ) {
+    this.initHI();
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: null
+    });
+  }
+  initHI() {
+    this.today = new Date();
+    this.historiaFormI = this.formBuilder.group({
+      dni: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      orden: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
+      tipoExam: ["", Validators.required],
+    });
+  }
+  
+
+  crearOrdenI(form: FormGroup) {
+    this.httpSv.searcHistoriasDNI(form.get('dni').value).subscribe(
+      data => {
+        this.histI=data;
+        if (form.valid) {
+          let newOrden: OrdenM = form.value;
+          newOrden.dni = form.get('dni').value;
+          
+          newOrden.numeroHistoria=this.histI.numeroHistoria;
+          newOrden.nombre=this.histI.nombres+" "+this.histI.apellido_paterno+" "+this.histI.apellido_materno;
+          newOrden.orden = form.get('orden').value;
+          newOrden.fechaA = form.get('fecha').value;
+    
+          newOrden.tipoExam= parseInt(form.get('tipoExam').value);
+          
+          this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
+        }
+      },
+      error=>{
+          this.toastr.error("No existe paciente con ese DNI");
+      }
+    );
+   
   }
 
   initBusForm() {

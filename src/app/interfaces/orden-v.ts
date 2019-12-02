@@ -1,4 +1,4 @@
-export interface Orden {
+export interface OrdenV {
     id?: number,
     numeroHistoria?: number,
     dni?: string,
@@ -6,9 +6,10 @@ export interface Orden {
     medico?: string,
     orden? : string,
     tipoExam?: {
-        id?: number,
-        nombre?: string,
+        id: number,
+        nombre: string,
     },
     fechaA?: string,
     estadoOrden?:string
-}
+  }
+  

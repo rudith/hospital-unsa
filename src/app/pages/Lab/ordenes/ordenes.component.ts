@@ -44,6 +44,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	pageNum: number;
 	dato: string;
 	rr: number;
+	num:number;
 	manda:number;
 	detalleForm: FormGroup;
 	public cab: Cabcrear;
@@ -203,18 +204,21 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 			observaciones: ['', Validators.required],
 			tipoExam: [data.tipoExam ? data.tipoExam : '', Validators.required],
 			id:[data.id?data.id:'',Validators.required]
+			
 		});
-
+		this.num=data.tipoExam.id;
+console.log("tipo de examen "+ this.num)
 		let newCab: Cabcrear = this.patientForm.value;
 		this.today = new Date();
 		newCab.nombre = data.nombre;
 		newCab.dni = data.dni;
 		newCab.fecha = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
-		newCab.tipoExam = data.tipoExam;
+		newCab.tipoExam = data.tipoExam.id;
 		newCab.orden = data.orden;
 		newCab.observaciones = "Ninguna";
 		this.labService.createCabecera(newCab);
-		console.log("CABECERA CREADA ");
+		console.log("CABECERA enviada  ");
+		console.log("datos: "+ newCab)
 		
 
 

@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { IAppState } from '../../../interfaces/app-state';
 import { HttpService } from '../../../services/http/http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import { formatDate, LocationStrategy } from '@angular/common';
 import { Content } from '../../../ui/interfaces/modal';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
@@ -25,6 +25,7 @@ import { HostListener } from '@angular/core';
 import { BASE_API_URL } from "../../../config/API";
 import { Orden } from '../../../interfaces/orden';
 import { OrdenLista } from '../../../interfaces/orden-lista';
+import { OrdenV } from '../../../interfaces/orden-v'
 import { Tipoexamen } from '../../../interfaces/tipoexamen';
 
 @Component({
@@ -57,7 +58,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   public tipoE: Tipoexamen[];
   detalleT: Detalle[];
   ordenesT: string[];
-  ordenes: Orden[];
+  ordenes: OrdenV[];
 
   private idRecibido: number;
   private nombreRecibido: string;
@@ -76,6 +77,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
   tipoExOption: IOption[];
 
   constructor(
+    private location: LocationStrategy,
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
@@ -132,9 +134,11 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
     this.cargarDatos();
     this.cargarConsultas();
     this.loadData();
+    
   }
   ngOnInit() {
     super.ngOnInit();
+    this.preventBackButton();
   }
   ngOnChanges($event) {
   }
@@ -148,6 +152,8 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
         this.loadtipoex(this.tipoE);
     });
   }
+
+
   
 
   /*** 
@@ -185,6 +191,7 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
 	***/
   cargarConsultas() {
     this.httpSv.searcHistoriaCompleta(this.datoBus).subscribe(data => {
+      console.log(data);
       this.data = data;
       this.consultasRecibidas = [];
       this.consultasRecibidas = data.results;
@@ -295,10 +302,10 @@ export class ListarConsultasComponent extends BasePageComponent implements OnIni
       this.dataOrden=data;
       console.log(this.dataOrden);
       this.ordenes = data.results;
-      /*
-      for (let index = 0; index < this.examenesRecibidos.length; index++) {
-        this.examenesRecibidos[index].nombre = this.examenesRecibidos[index].tipoExam.nombre;
-      }*/
+      
+      for (let index = 0; index < this.ordenes.length; index++) {
+        this.ordenes[index].nombre = this.ordenes[index].tipoExam.nombre;
+      }
     });
   }
 
@@ -560,4 +567,14 @@ loadTabla(row: Examen) {
       return false;
     }
   }
+
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.modal.close();
+    });
+  }
+
+
 }

@@ -21,4 +21,5 @@ export interface Historial {
 	distrito: number,
 	provincia: number,
 	departamento: number,
+	fechaReg:String,
 }

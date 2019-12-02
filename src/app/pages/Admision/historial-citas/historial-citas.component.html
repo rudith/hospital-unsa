@@ -100,7 +100,10 @@
       <thead>
         <tr>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Numero de Historia
+            Nro Historia
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Nombres y Apellidos
           </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             N° Recibo
@@ -108,9 +111,7 @@
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             DNI
           </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            F. Editado
-          </th>
+         
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             F. Atención
           </th>
@@ -130,6 +131,9 @@
             {{ row.numeroHistoria.numeroHistoria }}
           </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.numeroHistoria.nombres.concat(" ",row.numeroHistoria.apellido_paterno," ",row.numeroHistoria.apellido_materno) }}
+          </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.numeroRecibo }}
           </td>
           <td
@@ -143,9 +147,7 @@
                             {{row.updated_at.substring(0,10)}}
                         </td>
             -->
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.updated_at.substring(0, 10) }}
-            </td>
+            
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.fechaAtencion }}
           </td>
@@ -184,7 +186,6 @@
 <!--Modal-->
 <ng-container>
   <ng-template #modalBody>
-    <!-- (click)="loadOptionsMedEsp(appointmentForm.get('especialidad').value)"  [selected]="espSelected"-->
     <form [formGroup]="appointmentForm">
       <tc-form-group>
         <tc-form-label
@@ -204,19 +205,6 @@
           Ingrese Fecha de Atencion
         </tc-form-description>
       </tc-form-group>
-      <tc-form-group>
-          <tc-input type="date" formControlName="fechaAtencion2"></tc-input>
-          <tc-form-description
-            [tcColor]="'#e24d4d'"
-            [tcFontSize]="'0.8em'"
-            *ngIf="
-              appointmentForm.controls.fechaAtencion2.touched &&
-              appointmentForm.controls.fechaAtencion2.invalid
-            "
-          >
-            Ingrese Fecha de Atencion
-          </tc-form-description>
-        </tc-form-group>
     </form>
   </ng-template>
   <ng-template #modalFooter>

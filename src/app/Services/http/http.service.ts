@@ -28,6 +28,7 @@ import { SolicitudLista } from "../../interfaces/solicitud-lista";
 import { Orden } from "../../interfaces/orden";
 import { OrdenLista } from "../../interfaces/orden-lista";
 import { AdministradorService } from '../Administrador/administrador.service';
+import { UltHist } from '../../interfaces/ult-hist';
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
@@ -408,7 +409,6 @@ export class HttpService {
 
 
   createHISTORIAL(newHistoria: Historial, modal: TCModalService) {
-
     this.http
       .post<any>(BASE_API_URL + "/admision/crear-historia/", {
         numeroHistoria: newHistoria.numeroHistoria,
@@ -444,6 +444,44 @@ export class HttpService {
         }
       );
   }
+  updateHISTORIAL(newHistoria: Historial, modal: TCModalService) {
+    this.http
+      .put<any>(BASE_API_URL + "/admision/crear-historia/"+newHistoria.id+"/", {
+        numeroHistoria: newHistoria.numeroHistoria,
+        dni: newHistoria.dni,
+        nombres: newHistoria.nombres,
+        apellido_paterno: newHistoria.apellido_paterno,
+        apellido_materno: newHistoria.apellido_materno,
+        sexo: newHistoria.sexo,
+        edad: newHistoria.edad,
+        fechaNac: newHistoria.fechaNac,
+        celular: newHistoria.celular,
+        telefono: newHistoria.telefono,
+        estadoCivil: newHistoria.estadoCivil,
+        gradoInstruccion: newHistoria.gradoInstruccion,
+        ocupacion: newHistoria.ocupacion,
+        direccion: newHistoria.direccion,
+        nacionalidad: newHistoria.nacionalidad,
+        email: newHistoria.email,
+        estReg: newHistoria.estReg,
+        distrito: newHistoria.distrito,
+        provincia: newHistoria.provincia,
+        departamento: newHistoria.departamento
+      }, this.adminService.getHeader())
+      .subscribe(
+        data => {
+          this.toastr.success("Historial Actualizado correctamente");
+          console.log("CREAR Historial Completo");
+          modal.close();
+        },
+        error => {
+          console.error("Leer errores de back", error)
+          this.toastr.error("No se pudo actualizar el Historial");
+        }
+      );
+  }
+
+
   searcHistoriasDNI(dni: string): Observable<Historial> {
     return this.http.get<Historial>(
       BASE_API_URL + "/admision/historiadni/" + dni + "/", this.adminService.getHeader()
@@ -681,12 +719,20 @@ export class HttpService {
     );
   }
 
-  generarReporteDiario(): Observable<any> {
-    return this.http.get<any>(
-      BASE_API_URL + '/admision/reporteDiarioCitas', this.adminService.getHeader());
-  }
+ 
 
   searchOrdenDniAdmis(dni: string): Observable<any> {
     return this.http.get<any>(BASE_API_URL + '/consultorio/buscarNombreOrden/?nom=' + dni, this.adminService.getHeader());
   }
+
+  getUltimoHist(){
+    return this.http.get<UltHist>(BASE_API_URL + '/admision/buscarUltimaHistoria', this.adminService.getHeader());
+  }
+  reporteRangoCitas(id:string){
+    return this.http.get<any>(BASE_API_URL + '/admision/reporteCitasRangoFecha/'+id+"/", this.adminService.getHeader());
+  }
+  generarReporteDiario(): Observable<any> {
+    return this.http.get<any>(BASE_API_URL + '/admision/reporteDiarioCitas', this.adminService.getHeader());
+  }
 }
+

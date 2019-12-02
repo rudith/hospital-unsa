@@ -23,8 +23,8 @@ export class ConsultasComponent extends BasePageComponent implements OnInit {
     data: citaLista = <citaLista>{};
 	busForm: FormGroup;
 	pages: Array<number>;
-  pagesNumber: number;
-  pageNum: number;
+	pagesNumber: number;
+	pageNum: number;
 	private idMedico: number;
 	private hayCitas:boolean;
 

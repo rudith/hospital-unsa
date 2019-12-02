@@ -193,8 +193,7 @@ export class LaboratorioService {
 			}, this.adminSv.getHeader())
 			.subscribe(
 				data => {
-
-					this.toastr.success("El detalle ha sido crado con exito");
+					this.toastr.success("El detalle ha sido creado con exito");
 					console.log("CREAR detalle Completo");
 				},
 				error => {

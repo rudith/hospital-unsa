@@ -60,6 +60,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
   data: citaLista = <citaLista>{};
   a: string;
   b: string;
+  stat:string;
   constructor(
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
@@ -98,6 +99,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     this.tableData = [];
     this.citas = [];
     this.loadCitas();
+    this.stat="";
     this.espOption = [];
     this.medOption = [];
     this.multiple = false;
@@ -309,10 +311,6 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
         formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "",
         Validators.required
       ],
-      fechaAtencion2: [
-        formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "",
-        Validators.required
-      ],
 
     });
   }
@@ -410,17 +408,17 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
 
   /*Problema en reportes*/
   reporteDiario() {
-    document.location.href = BASE_API_URL + "/admision/reporteDiarioCitas";
-    //this.router.navigate(['/vertical/citas'])
-    this.toastr.success("Se ha generado el Pdf");
+      document.location.href = BASE_API_URL + "/admision/reporteCitasRangoFecha/" + this.a + "/";
+      this.toastr.success("Se ha generado el Pdf");
   }
-  reporteRango(ab: FormGroup) {
-    this.a = ab.get('fechaAtencion1').value;
-    this.b = ab.get('fechaAtencion2').value;
 
-    document.location.href = BASE_API_URL + "/admision/reporteCitasRangoFecha/" + this.a + "/" + this.b;
+  reporteRango(ab: FormGroup) {
+    this.a=ab.get('fechaAtencion1').value;
+
+    document.location.href = BASE_API_URL+"/admision/reporteCitasRangoFecha/"+this.a ;
     this.toastr.success("Se ha generado el Pdf");
     this.closeModal();
+
   }
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.key === "Escape") {

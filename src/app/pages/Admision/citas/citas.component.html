@@ -130,7 +130,10 @@
       <thead>
         <tr>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Numero de Historia
+            Nro. Historia
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Nombre y Apellido
           </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             N° Recibo
@@ -138,9 +141,7 @@
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             DNI
           </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            F. Editado
-          </th>
+          
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             F. Atención
           </th>
@@ -164,6 +165,9 @@
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.numeroHistoria.numeroHistoria }}
           </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.numeroHistoria.nombres.concat(" ",row.numeroHistoria.apellido_paterno," ",row.numeroHistoria.apellido_materno) }}
+          </td>
           <td *ngIf="row.numeroRecibo==null||row.numeroRecibo==''" [ngStyle]="{ background: contentBgColor, color: contentColor }">
             Exonerado
           </td>
@@ -176,14 +180,6 @@
           >
             {{ row.numeroHistoria.dni }}
           </td>
-          <!-- 
-							<td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-							{{row.updated_at.substring(0,10)}}
-						</td>
-            -->
-            <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-              {{ row.updated_at.substring(0, 10) }}
-            </td>
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.fechaAtencion }}
           </td>

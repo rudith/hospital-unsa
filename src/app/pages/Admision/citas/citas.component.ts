@@ -64,7 +64,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
-    // private conf: ConfirmationService,
     private admService: AdministradorService
   ) {
     super(store, httpSv);
@@ -344,14 +343,8 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   }
   sendCita(cita: CitaM) {
     this.cita = cita;
-    this.medSelectedName =
-      cita.medico.nombres +
-      " " +
-      cita.medico.apellido_paterno +
-      " " +
-      cita.medico.apellido_materno;
+    this.medSelectedName = cita.medico.nombres +" " + cita.medico.apellido_paterno + " " +  cita.medico.apellido_materno;
     this.espSelectedName = cita.especialidad.nombre;
-    console.log(this.medSelectedName + "\n" + this.espSelectedName);
   }
   addAppointment(form: FormGroup) {
     // console.log(JSON.stringify(+form.value.especialidad));

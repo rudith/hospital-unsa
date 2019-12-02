@@ -191,6 +191,24 @@
             </div>
           </ng-template>
         </tc-table-col>
+        <tc-table-col [columnTitle]="'Modificar'" [columnName]="''">
+            <ng-template #tableTDTemplate let-row="row">
+              <div class="actions align-items-center">
+                <button
+                  tc-button
+                  [afterIcon]="'icofont-edit-alt'"
+                  [view]="'info'"
+                  [square]="true"
+                  [tcShape]="500"
+                  [tcColor]="['#3f51b5', '#fff']"
+                  [tcBgColor]="['transparent', '#3f51b5']"
+                  [tcBorderColor]="'#3f51b5'"
+                  [size]="'sm'"
+                  (click)=" openModalMod(modalMod, 'Editar Historial', footMod,row)"
+                ></button>
+              </div>
+            </ng-template>
+          </tc-table-col>
         <tc-table-col [columnTitle]="'Imprimir'" [columnName]="'abc'">
           <ng-template #tableTDTemplate let-row="row">
             <div class="actions align-items-center ">
@@ -292,6 +310,8 @@
         </tc-form-group>
         <br />
         <tc-form-group>
+          
+            <tc-form-label>Especialidad:</tc-form-label>
           <tc-select
             [placeholder]="'Especialidad'"
             formControlName="especialidad"
@@ -301,14 +321,18 @@
           </tc-select>
         </tc-form-group>
         <tc-form-group>
+
+            <tc-form-label>Médico:</tc-form-label>
           <tc-select
-            [placeholder]="'Medico'"
+            [placeholder]="Medico"
             formControlName="medico"
             [options]="medOption"
           >
           </tc-select>
         </tc-form-group>
         <tc-form-group>
+          
+            <tc-form-label>Fecha de Separación:</tc-form-label>
           <tc-input type="date" formControlName="fechaSeparacion"></tc-input>
           <tc-form-description
             [tcColor]="'#e24d4d'"
@@ -353,6 +377,18 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <tc-form-group>
+              <tc-form-label>Numero de Historia</tc-form-label>
+              <tc-input
+                [placeholder]="'NumH*'"
+                formControlName="NumH"
+                readonly="readonly"
+              ></tc-input>
+            </tc-form-group>
+          </div>
+  
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+                <tc-form-label>DNI:</tc-form-label>
               <tc-input
                 [placeholder]="'DNI*'"
                 formControlName="dni"
@@ -370,9 +406,11 @@
               </tc-form-description>
             </tc-form-group>
           </div>
-  
-          <div class="col-12 col-sm-6">
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
             <tc-form-group>
+                <tc-form-label>Nombres:</tc-form-label>
               <tc-input
                 [placeholder]="'Nombres*'"
                 formControlName="nombres"
@@ -393,6 +431,7 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <tc-form-group>
+                <tc-form-label>Apellido Paterno:</tc-form-label>
               <tc-input
                 [placeholder]="'Apellido Paterno*'"
                 formControlName="apellido_paterno"
@@ -411,6 +450,7 @@
           </div>
           <div class="col-12 col-sm-6">
             <tc-form-group>
+                <tc-form-label>Apellido Materno:</tc-form-label>
               <tc-input
                 [placeholder]="'Apellido Materno*'"
                 formControlName="apellido_materno"
@@ -429,6 +469,7 @@
           </div>
         </div>
         <tc-form-group>
+            <tc-form-label>Dirección:</tc-form-label>
           <tc-input
             [placeholder]="'Dirección'"
             formControlName="direccion"
@@ -441,13 +482,14 @@
               patientForm.controls.direccion.invalid
             "
           >
-            Ingrese la direccion
+            Ingrese la dirección
           </tc-form-description>
         </tc-form-group>
   
         <div class="row">
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Departamento:</tc-form-label>
               <tc-select
                 [placeholder]="'Departamento'"
                 formControlName="departamento"
@@ -460,6 +502,7 @@
   
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Provincia:</tc-form-label>
               <tc-select
                 [placeholder]="'Provincia'"
                 formControlName="provincia"
@@ -471,6 +514,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Distrito:</tc-form-label>
               <tc-select
                 [placeholder]="'Distrito'"
                 formControlName="distrito"
@@ -484,6 +528,7 @@
         <div class="row">
           <div class="col-12 col-sm-3">
             <tc-form-group>
+                <tc-form-label>Nacionalidad: </tc-form-label>
               <tc-input
                 [placeholder]="'Nacionalidad'"
                 formControlName="nacionalidad"
@@ -502,6 +547,7 @@
           </div>
           <div class="col-12 col-sm-5">
             <tc-form-group>
+                <tc-form-label>Fecha de Nac.:</tc-form-label>
               <tc-input
                 type="date"
                 [placeholder]="'Fecha de Nacimiento'"
@@ -519,6 +565,7 @@
   
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Sexo:</tc-form-label>
               <tc-select
                 [placeholder]="'Sexo'"
                 formControlName="sexo"
@@ -532,6 +579,7 @@
         <div class="row">
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Estado Civil:</tc-form-label>
               <tc-select
                 [placeholder]="'Estado civil'"
                 formControlName="estadoCivil"
@@ -541,6 +589,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Teléfono:</tc-form-label>
               <tc-input
                 [placeholder]="'Teléfono'"
                 [type]="'number'"
@@ -558,6 +607,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
+                <tc-form-label>Celular:</tc-form-label>
               <tc-input
                 [placeholder]="'Celular*'"
                 [type]="'number'"
@@ -577,6 +627,7 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <tc-form-group>
+                <tc-form-label>Grado de Instrucción:</tc-form-label>
               <tc-select
                 [placeholder]="'Grado de Instrucción'"
                 formControlName="gradoInstruccion"
@@ -588,6 +639,7 @@
   
           <div class="col-12 col-sm-6">
             <tc-form-group>
+                <tc-form-label>Ocupación:</tc-form-label>
               <tc-select
                 [placeholder]="'Ocupación'"
                 formControlName="ocupacion"
@@ -631,7 +683,7 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <tc-form-group>
-              <tc-form-label>Numero de Historia</tc-form-label>
+              <tc-form-label>Numero de Historia:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -646,7 +698,7 @@
   
           <div class="col-12 col-sm-6">
             <tc-form-group>
-              <tc-form-label>DNI</tc-form-label>
+              <tc-form-label>DNI:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -659,9 +711,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-sm-4">
+          <div class="col-12 col-sm-11">
             <tc-form-group>
-              <tc-form-label>Nombre</tc-form-label>
+              <tc-form-label>Nombre:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -672,10 +724,11 @@
               ></tc-input>
             </tc-form-group>
           </div>
-  
-          <div class="col-12 col-sm-4">
+        </div>
+        <div class="row">         
+          <div class="col-12 col-sm-6">
             <tc-form-group>
-              <tc-form-label>Apellido Paterno</tc-form-label>
+              <tc-form-label>Apellido Paterno:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -688,9 +741,9 @@
             </tc-form-group>
           </div>
   
-          <div class="col-12 col-sm-4">
+          <div class="col-12 col-sm-6">
             <tc-form-group>
-              <tc-form-label>Apellido Materno</tc-form-label>
+              <tc-form-label>Apellido Materno:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -706,7 +759,7 @@
         <div class="row">
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Fecha Nacimiento </tc-form-label>
+              <tc-form-label>Fecha Nacimiento: </tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -719,7 +772,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Teléfono</tc-form-label>
+              <tc-form-label>Teléfono:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -734,7 +787,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Celular</tc-form-label>
+              <tc-form-label>Celular:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -751,7 +804,7 @@
         <div class="row">
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Estado Civil</tc-form-label>
+              <tc-form-label>Estado Civil:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -765,7 +818,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Grado de Instrucción</tc-form-label>
+              <tc-form-label>Grado de Instrucción:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -779,7 +832,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Ocupación</tc-form-label>
+              <tc-form-label>Ocupación:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -793,9 +846,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 col-sm-4">
+          <div class="col-12 col-sm-3">
             <tc-form-group>
-              <tc-form-label>Edad</tc-form-label>
+              <tc-form-label>Edad:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -807,9 +860,9 @@
               </tc-input>
             </tc-form-group>
           </div>
-          <div class="col-12 col-sm-4">
+          <div class="col-12 col-sm-9">
             <tc-form-group>
-              <tc-form-label>Dirección</tc-form-label>
+              <tc-form-label>Dirección:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -821,25 +874,12 @@
               </tc-input>
             </tc-form-group>
           </div>
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-              <tc-form-label>Nacionalidad</tc-form-label>
-              <tc-input
-                [bgColor]="'#fff'"
-                [borderColor]="'#3f51b5'"
-                [color]="'#3f51b5'"
-                [placeholder]="'Nacionalidad'"
-                formControlName="nacionalidad"
-                readonly="readonly"
-              >
-              </tc-input>
-            </tc-form-group>
-          </div>
+          
         </div>
         <div class="row">
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Distrito</tc-form-label>
+              <tc-form-label>Distrito:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -852,7 +892,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Provincia</tc-form-label>
+              <tc-form-label>Provincia:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -866,7 +906,7 @@
           </div>
           <div class="col-12 col-sm-4">
             <tc-form-group>
-              <tc-form-label>Departamento</tc-form-label>
+              <tc-form-label>Departamento:</tc-form-label>
               <tc-input
                 [bgColor]="'#fff'"
                 [borderColor]="'#3f51b5'"
@@ -878,6 +918,36 @@
               </tc-input>
             </tc-form-group>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Fecha de Creación:</tc-form-label>
+              <tc-input
+                [bgColor]="'#fff'"
+                [borderColor]="'#3f51b5'"
+                [color]="'#3f51b5'"
+                [placeholder]="'fechaReg'"
+                formControlName="fechaReg"
+                readonly="readonly"
+              ></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Nacionalidad:</tc-form-label>
+              <tc-input
+                [bgColor]="'#fff'"
+                [borderColor]="'#3f51b5'"
+                [color]="'#3f51b5'"
+                [placeholder]="'Nacionalidad'"
+                formControlName="nacionalidad"
+                readonly="readonly"
+              >
+              </tc-input>
+            </tc-form-group>
+          </div>
+          
         </div>
       </form>
     </ng-template>
@@ -897,4 +967,261 @@
     </ng-template>
   </ng-container>
   <!--End Modal Ver Mas-->
-  
+
+
+
+
+  <ng-container>
+      <ng-template #modalMod>
+        <form [formGroup]="ModForm" novalidate class="new-patient-form">
+          <div class="row">
+            <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>Numero de Historia:</tc-form-label>
+                <tc-input
+                  [placeholder]="'name'"
+                  formControlName="numeroHistoria"
+                  readonly="readonly"
+                >
+                </tc-input>
+              </tc-form-group>
+            </div>
+    
+            <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>DNI:</tc-form-label>
+                <tc-input
+                  [placeholder]="'DNI'"
+                  formControlName="dni"
+                  readonly="readonly"
+                ></tc-input>
+              </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-4">
+                <tc-form-group>
+                  <tc-form-label>Fecha Nacimiento: </tc-form-label>
+                  <tc-input
+                    [placeholder]="'Edad'"
+                    formControlName="fechaNac"
+                    readonly="readonly"
+                  ></tc-input>
+                </tc-form-group>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-11">
+              <tc-form-group>
+                <tc-form-label>Nombre:</tc-form-label>
+                <tc-input
+                  [placeholder]="'Nombre'"
+                  formControlName="nombres"
+                  readonly="readonly"
+                ></tc-input>
+              </tc-form-group>
+            </div>
+          </div>
+          <div class="row">         
+            <div class="col-12 col-sm-6">
+              <tc-form-group>
+                <tc-form-label>Apellido Paterno:</tc-form-label>
+                <tc-input
+                  [placeholder]="'Apellido Paterno'"
+                  formControlName="apellido_paterno"
+                  readonly="readonly"
+                >
+                </tc-input>
+              </tc-form-group>
+            </div>
+    
+            <div class="col-12 col-sm-6">
+              <tc-form-group>
+                <tc-form-label>Apellido Materno:</tc-form-label>
+                <tc-input
+                  [placeholder]="'Apellido Materno'"
+                  formControlName="apellido_materno"
+                  readonly="readonly"
+                >
+                </tc-input>
+              </tc-form-group>
+            </div>
+          </div>
+          <div class="row">
+            
+            
+            <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>Teléfono:</tc-form-label>
+                <tc-input
+                [placeholder]="'Teléfono'"
+                [type]="'number'"
+                formControlName="telefono"
+                [charLimiting]="6"
+              ></tc-input>
+              <tc-form-description
+                [tcColor]="'#e24d4d'"
+                [tcFontSize]="'0.8em'"
+                *ngIf="ModForm.controls.telefono.invalid"
+              >
+                Ingrese el numero de teléfono, este solo debe contener 6 digitos
+              </tc-form-description>
+              </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-4">
+                <tc-form-group>
+                    <tc-form-label>Celular:</tc-form-label>
+                  <tc-input
+                    [placeholder]="'Celular*'"
+                    [type]="'number'"
+                    formControlName="celular"
+                    [charLimiting]="9"
+                  ></tc-input>
+                  <tc-form-description
+                    [tcColor]="'#e24d4d'"
+                    [tcFontSize]="'0.8em'"
+                    *ngIf="ModForm.controls.celular.invalid"
+                  >
+                    Ingrese el numero de celular, este solo debe contener 9 digitos
+                  </tc-form-description>
+                </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-4">
+                <tc-form-group>
+                  <tc-form-label>Nacionalidad:</tc-form-label>
+                  <tc-input
+                    [placeholder]="'Nacionalidad'"
+                    formControlName="nacionalidad"
+                  >
+                  </tc-input>
+                  <tc-form-description
+                  [tcColor]="'#e24d4d'"
+                  [tcFontSize]="'0.8em'"
+                  *ngIf="
+                    ModForm.controls.nacionalidad.touched &&
+                    ModForm.controls.nacionalidad.invalid
+                  "
+                >
+                  Este campo solo debe tener letras
+                </tc-form-description>
+                </tc-form-group>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-4">
+                <tc-form-group>
+                    <tc-form-label>Estado Civil:</tc-form-label>
+                  <tc-select
+                    [placeholder]="'Estado civil'"
+                    formControlName="estadoCivil"
+                    [options]="estadoCivilOption"
+                  ></tc-select>
+                </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-4">
+                <tc-form-group>
+                    <tc-form-label>Grado de Instrucción:</tc-form-label>
+                  <tc-select
+                    [placeholder]="'Grado de Instrucción'"
+                    formControlName="gradoInstruccion"
+                    [options]="gradoInstruccionOption"
+                  >
+                  </tc-select>
+                </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>Ocupación:</tc-form-label>
+              <tc-select
+                [placeholder]="'Ocupación'"
+                formControlName="ocupacion"
+                [options]="ocupacionOption"
+              >
+              </tc-select>
+            </tc-form-group>
+            </div>
+          </div>
+          <div class="row">            
+            <div class="col-12 col-sm-12">
+              <tc-form-group>
+                <tc-form-label>Dirección:</tc-form-label>
+                <tc-input                 
+                  [placeholder]="'Dirección'"
+                  formControlName="direccion"
+                >
+                </tc-input>
+                <tc-form-description
+            [tcColor]="'#e24d4d'"
+            [tcFontSize]="'0.8em'"
+            *ngIf="
+              ModForm.controls.direccion.touched &&
+              ModForm.controls.direccion.invalid
+            "
+          >
+            Ingrese la dirección
+          </tc-form-description>
+              </tc-form-group>
+            </div>
+            
+          </div>
+          <div class="row">
+              <div class="col-12 col-sm-4">
+                  <tc-form-group>
+                    <tc-form-label>Departamento:</tc-form-label>
+                    <tc-select
+                    [placeholder]="mod2"
+                    formControlName="departamento"
+                    (click)="cargarProvXDepto(ModForm.get('departamento').value)"
+                    [options]="departamentosOption"
+                  >
+                  </tc-select>
+                  </tc-form-group>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <tc-form-group>
+                      <tc-form-label>Provincia:</tc-form-label>
+                      <tc-select
+                      [placeholder]="mod3"
+                      formControlName="provincia"
+                      [options]="provinciasOption"
+                      (click)="cargarDistXProv(ModForm.get('provincia').value)"
+                    >
+                    </tc-select>
+                    </tc-form-group>
+                  </div>
+            <div class="col-12 col-sm-4">
+              <tc-form-group>
+                <tc-form-label>Distrito:</tc-form-label>
+                <tc-select
+                [placeholder]="mod1"
+                formControlName="distrito"
+                [options]="distritosOption"
+              ></tc-select>
+              </tc-form-group>
+            </div>
+            
+            
+          </div>
+          
+        </form>
+      </ng-template>
+    
+      <ng-template #footMod>
+          <div class="actions justify-content-between">
+            <button
+              tc-button
+              [type]="'button'"
+              [view]="'error'"
+              (click)="closeModalH()"
+            >
+              Cancelar
+            </button>
+            <button
+              tc-button
+              [view]="'info'"
+              [disabled]="ModForm.invalid"
+              (click)="updatePatient(ModForm)"
+            >
+              Actualizar Historial
+            </button>
+          </div>
+        </ng-template>
+    </ng-container>

@@ -408,7 +408,8 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
 
   /*Problema en reportes*/
   reporteDiario() {
-      document.location.href = BASE_API_URL + "/admision/reporteCitasRangoFecha/" + this.a + "/";
+      //http://18.216.2.122:9000/admision/reporteDiarioCitas
+      document.location.href = BASE_API_URL + "/admision/reporteDiarioCitas/";
       this.toastr.success("Se ha generado el Pdf");
   }
 

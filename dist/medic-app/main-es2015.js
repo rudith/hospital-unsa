@@ -7002,7 +7002,8 @@ let HistorialCitasComponent = class HistorialCitasComponent extends _base_page__
     }
     /*Problema en reportes*/
     reporteDiario() {
-        document.location.href = _config_API__WEBPACK_IMPORTED_MODULE_12__["BASE_API_URL"] + "/admision/reporteCitasRangoFecha/" + this.a + "/";
+        //http://18.216.2.122:9000/admision/reporteDiarioCitas
+        document.location.href = _config_API__WEBPACK_IMPORTED_MODULE_12__["BASE_API_URL"] + "/admision/reporteDiarioCitas/";
         this.toastr.success("Se ha generado el Pdf");
     }
     reporteRango(ab) {

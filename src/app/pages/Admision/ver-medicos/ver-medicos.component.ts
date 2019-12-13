@@ -9,7 +9,6 @@ import { IOption } from "./../../../ui/interfaces/option";
 import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { HttpClient } from "@angular/common/http";
-import { formatDate } from "@angular/common";
 import { Historial } from "../../../interfaces/historial";
 import { Provincia } from "../../../interfaces/provincia";
 import { Departamento } from "../../../interfaces/departamento";
@@ -28,6 +27,7 @@ import { personalLista } from '../../../interfaces/personalLista';
 import { Especialidad } from '../../../interfaces/especialidad';
 import { AdministradorService } from '../../../services/Administrador/administrador.service';
 import { PersonalCreate } from '../../../interfaces/personalCreate';
+import { formatDate, LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-ver-medicos',
@@ -86,6 +86,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
 
 
   constructor(
+    private location: LocationStrategy,
     store: Store<IAppState>,
     httpSv: HttpService,
     private labService: LaboratorioService,
@@ -212,6 +213,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
       }
     });
     this.loadData();
+    this.preventBackButton();
   }
 
   ngOnDestroy() {
@@ -399,6 +401,13 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
     if (event.key === "Enter") {
       return false;
     }
+  }
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModalH();
+    });
   }
 }
 

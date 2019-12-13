@@ -11,6 +11,7 @@ import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HostListener } from '@angular/core'; 
+import { formatDate, LocationStrategy } from '@angular/common';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class AreaComponent extends BasePageComponent implements OnInit {
   appointmentForm: FormGroup;
   areaEdit:FormGroup;
   constructor(
+    private location: LocationStrategy,
     httpSv: HttpService,
     private admService: AdministradorService,
     private toastr: ToastrService,
@@ -69,6 +71,7 @@ export class AreaComponent extends BasePageComponent implements OnInit {
         !this.pageData.loaded ? this.setLoaded() : null;
       }
     });
+    this.preventBackButton();
   }
   //Paginacion
   public nextPage() {
@@ -198,5 +201,12 @@ export class AreaComponent extends BasePageComponent implements OnInit {
     if (event.key === "Enter") { 
       return false;
     }
+  }
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModal();
+    });
   }
 }

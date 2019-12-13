@@ -12,11 +12,11 @@ import { Orden } from '../../../interfaces/orden';
 import { Content } from '../../../ui/interfaces/modal';
 import { Cabeceralab } from '../../../interfaces/cabeceralab';
 import { OrdenLista } from '../../../interfaces/orden-lista';
-import { formatDate } from '@angular/common';
 import { Detalle } from '../../../interfaces/detalle';
 import { Cabcrear } from '../../../interfaces/cabcrear';
 import { Router } from '@angular/router';
 import { IOption } from './../../../ui/interfaces/option';
+import { formatDate, LocationStrategy } from '@angular/common';
 
 import { HostListener } from '@angular/core';
 
@@ -49,6 +49,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 	detalleForm: FormGroup;
 	public cab: Cabcrear;
 	constructor(
+		private location: LocationStrategy,
 		store: Store<IAppState>,
 		httpSv: HttpService,
 		private labService: LaboratorioService,
@@ -165,6 +166,7 @@ export class OrdenesComponent extends BasePageComponent implements OnInit, OnDes
 				!this.pageData.loaded ? this.setLoaded() : null;
 			}
 		});
+		this.preventBackButton();
 	}
 	ngOnDestroy() {
 		super.ngOnDestroy();
@@ -293,6 +295,14 @@ console.log("tipo de examen "+ this.num)
     if (event.key === "Enter") { 
       return false;
     }
+  }
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModalD();
+	  this.closeModalH();
+    });
   }
 
 }

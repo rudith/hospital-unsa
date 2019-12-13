@@ -8,7 +8,6 @@ import { IOption } from './../../../ui/interfaces/option';
 import { Content } from '../../../ui/interfaces/modal';
 import { TCModalService } from '../../../ui/services/modal/modal.service';
 import { HttpClient } from '@angular/common/http';
-import { formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Examen } from '../../../interfaces/examen';
 import { Tipoexamen } from '../../../interfaces/tipoexamen';
@@ -17,6 +16,8 @@ import { Detalle } from '../../../interfaces/detalle';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { ExamenLista } from '../../../interfaces/examen-lista';
 import { HostListener } from '@angular/core'; 
+import { formatDate, LocationStrategy } from '@angular/common';
+
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -53,6 +54,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 	Extipo: string;
 
 	constructor(
+		private location: LocationStrategy,
 		store: Store<IAppState>,
 		httpSv: HttpService,
 		private labService: LaboratorioService,
@@ -146,6 +148,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 				!this.pageData.loaded ? this.setLoaded() : null;
 			}
 		});
+		this.preventBackButton();
 	}
 
 	ngOnDestroy() {
@@ -321,6 +324,15 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
     if (event.key === "Enter") { 
       return false;
     }
+  }
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+	  this.closeModal();
+	  this.closeModalD();
+	  this.closeModalH();
+    });
   }
 
 

@@ -9,7 +9,6 @@ import { IOption } from "./../../../ui/interfaces/option";
 import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { HttpClient } from "@angular/common/http";
-import { formatDate } from "@angular/common";
 import { Historial } from "../../../interfaces/historial";
 import { Especialidad } from "../../../interfaces/especialidad";
 import { Grupsang } from "../../../interfaces/grupsang";
@@ -28,6 +27,8 @@ import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.se
 import { Orden } from '../../../interfaces/orden';
 import { OrdenM } from '../../../interfaces/orden-m';
 import { HostListener } from '@angular/core';
+
+import { formatDate, LocationStrategy } from '@angular/common';
 import { OrdenLista } from '../../../interfaces/orden-lista';
 
 
@@ -87,6 +88,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
 
 
   constructor(
+    private location: LocationStrategy,
     store: Store<IAppState>,
     httpSv: HttpService,
     private labService: LaboratorioService,
@@ -194,6 +196,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       }
     });
     this.loadData();
+    this.preventBackButton();
   }
 
   ngOnDestroy() {
@@ -414,6 +417,13 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     if (event.key === "Enter") {
       return false;
     }
+  }
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModalH();
+    });
   }
 }
 

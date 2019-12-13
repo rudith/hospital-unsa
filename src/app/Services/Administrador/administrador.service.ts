@@ -15,6 +15,7 @@ import { TipoExamenP } from "../../interfaces/tipoExamenP";
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../config/API";
+import { Personal } from '../../interfaces/personal';
 
 @Injectable({
   providedIn: "root"
@@ -198,11 +199,12 @@ export class AdministradorService {
     );
   }
   createPersonal(tipo: PersonalCreate) {
+    console.log(tipo)
     return this.http
       .post<any>(
         this.url + "/crear-personal/",
         {
-          user: tipo.user,
+          user: tipo.id,
           dni: tipo.dni,
           nombres: tipo.nombres,
           apellido_paterno: tipo.apellido_paterno,
@@ -218,13 +220,64 @@ export class AdministradorService {
       );
 
   }
+
+  createMedico(tipo: Personal) {
+    return this.http
+      .post<any>(
+        this.url + "/crear-personal/",
+        {
+          dni: tipo.dni,
+          nombres: tipo.nombres,
+          apellido_paterno: tipo.apellido_paterno,
+          apellido_materno: tipo.apellido_materno,
+          especialidad: tipo.especialidad,
+          estReg:tipo.estReg,
+        },this.getHeader())
+        .subscribe(
+          data => {
+            this.toastr.success("", "Medico Creado");
+            console.log("medico creado completo");
+          },
+          error => {
+            this.toastr.error("", "No se pudo crear medico");
+            console.error(error);
+          }
+        );
+    }
+
+    updateMedico(tipo: PersonalCreate,a:number) {
+      console.log(JSON.stringify(tipo));
+      return this.http
+        .put<any>(
+          this.url + "/crear-personal/" + tipo.id + "/",
+          {
+            especialidad: tipo.especialidad,
+            dni: tipo.dni,
+            nombres: tipo.nombres,
+            apellido_paterno: tipo.apellido_paterno,
+            apellido_materno: tipo.apellido_materno,
+            estReg:tipo.estReg,      
+          },
+          
+          this.getHeader())
+          .subscribe(
+            data => {
+              this.toastr.success("", "Médico Modificado");
+              console.log("medico creado completo");
+            },
+            error => {
+              this.toastr.error("", "No se pudo modificar medico");
+              console.error(error);
+            }
+          );
+    }
   updatePersonal(tipo: PersonalCreate) {
     console.log(JSON.stringify(tipo));
     return this.http
       .put<any>(
-        this.url + "/ver-personal/" + tipo.user + "/",
+        this.url + "/crear-personal/" + tipo.id + "/",
         {
-          usuarioId: tipo.user,
+          usuarioId: tipo.id,
           areaId: tipo.area,
           tipo_personalId: tipo.tipo_personal,
           especialidadId: tipo.especialidad,

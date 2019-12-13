@@ -1,0 +1,235 @@
+<ng-container>
+  <ng-template #modalConf1>
+    <p>¿Esta seguro que desea eliminar orden?</p>
+  </ng-template>
+
+  <ng-template #modalConf2>
+    <h5>Cancelar orden</h5>
+  </ng-template>
+
+  <ng-template #modalConf3>
+    <div class="row actions justify-content-between">
+      <button class="col-sm-3" tc-button [view]="'success'" (click)="cancelar()">
+        Si
+      </button>
+      <button class="col-sm-3" tc-button [view]="'error'" (click)="closeModalH()">
+        No
+      </button>
+    </div>
+  </ng-template>
+</ng-container>
+
+<div class="col-sm-12">
+    <form [formGroup]="busForm">
+  <div class="row">
+    <div class="col-md-2">
+        <tc-form-group>
+            <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500"
+              [size]="'sm'" (click)="openModalI(modalBodyI,'Agregar Médico',modalFooterI)">Agregar Médico</button>
+          </tc-form-group>
+    </div>
+    <div class="col-md-6">
+        <tc-form-group>
+            <tc-input [placeholder]="'Ingrese el DNI del médico'" type="text"
+              [suffixIcon]="'icofont-search-document'" formControlName="datoBus">
+            </tc-input>
+          </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+        <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
+          Buscar
+        </button>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+          <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="300" (click)="loadOrdenes()">
+              Cargar
+            </button>
+      </tc-form-group>
+    </div>
+  </div>
+  </form>
+</div>
+
+<tc-card class="mb-0">
+  <tc-table [rows]="ordenes" [hovered]="true" [pagination]="true">
+    <tc-table-col [columnTitle]="'DNI'" [columnName]="'dni'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'Nombre'" [columnName]="'nombres'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+    
+    <tc-table-col [columnTitle]="'Apellido Paterno'" [columnName]="'apellido_paterno'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'Apellido Materno'" [columnName]="'apellido_materno'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'Especialidad'" [columnName]="'direccion'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+
+    <tc-table-col [columnTitle]="'Modificar Médico'">
+      <ng-template #tableTDTemplate let-row="row">
+        <div class="actions">
+          <button tc-button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [tcShape]="500" [size]="'sm'"
+            (click)="
+            openModalMI(modalBodyM,'Modificar Médico',modalFooterM,row)"></button>
+        </div>
+      </ng-template>
+    </tc-table-col>
+
+  </tc-table>
+
+  <ul class="pagination-ul">
+    <li class="pagination-li prev">
+      <a class="pagination-link" (click)="prevPage()" [ngClass]="{ disabled: pageNum == 1 }">
+        <i class="icofont-simple-left"></i>
+      </a>
+    </li>
+
+    <li class="pagination-li next">
+      <a class="pagination-link" (click)="nextPage()">
+        <i class="icofont-simple-right"></i>
+      </a>
+    </li>
+  </ul>
+  
+
+  <ng-container>
+    <ng-template #modalBodyI>
+      <form [formGroup]="historiaFormI" novalidate class="new-patient-form">
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+              <tc-form-label>DNI:</tc-form-label>
+              <tc-input [placeholder]="'DNI'" formControlName="dni"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="historiaFormI.controls.dni.invalid">
+                Ingrese solo numeros
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-6">
+              <tc-form-label>Especialidad:  </tc-form-label>
+              <tc-form-group>
+                <tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="tipoExOption">
+                </tc-select>
+              </tc-form-group>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <tc-form-group>
+              <tc-form-label>Nombres:</tc-form-label>
+              <tc-input [placeholder]="'Ingrese nombre del medico'" formControlName="nombre"></tc-input>
+            </tc-form-group>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+              <tc-form-group>
+                <tc-form-label>Apellido Paterno:</tc-form-label>
+                <tc-input [placeholder]="'Ingrese apellido paterno del medico'" formControlName="apellido_paterno"></tc-input>
+              </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-6">
+                <tc-form-group>
+                  <tc-form-label>Apellido Materno:</tc-form-label>
+                  <tc-input [placeholder]="'Ingrese apellido materno del medico'" formControlName="apellido_materno"></tc-input>
+                </tc-form-group>
+              </div>
+          </div>
+
+        
+      </form>
+    </ng-template>
+
+    <ng-template #modalFooterI>
+      <div class="actions justify-content-between">
+        <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">
+          Cancelar
+        </button>
+        <button tc-button [view]="'info'" [disabled]="historiaFormI.invalid" (click)="crearMedicoI(historiaFormI)">
+          ACEPTAR
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-container>
+    <ng-template #modalBodyM>
+      <form [formGroup]="historiaFormI" novalidate class="new-patient-form">
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+              <tc-form-label>DNI:</tc-form-label>
+              <tc-input [placeholder]="'DNI'" formControlName="dni"></tc-input>
+              <tc-form-description [tcColor]="'#e24d4d'" [tcFontSize]="'0.8em'"
+                *ngIf="historiaFormI.controls.dni.invalid">
+                Ingrese solo numeros
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-6">
+              <tc-form-label>Especialidad:  </tc-form-label>
+              <tc-form-group>
+                <tc-select [placeholder]="'Especialidad'" formControlName="especialidad" [options]="tipoExOption">
+                </tc-select>
+              </tc-form-group>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <tc-form-group>
+              <tc-form-label>Nombres:</tc-form-label>
+              <tc-input [placeholder]="'Ingrese nombre del medico'" formControlName="nombres"></tc-input>
+            </tc-form-group>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6">
+              <tc-form-group>
+                <tc-form-label>Apellido Paterno:</tc-form-label>
+                <tc-input [placeholder]="'Ingrese apellido paterno del medico'" formControlName="apellido_paterno"></tc-input>
+              </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-6">
+                <tc-form-group>
+                  <tc-form-label>Apellido Materno:</tc-form-label>
+                  <tc-input [placeholder]="'Ingrese apellido materno del medico'" formControlName="apellido_materno"></tc-input>
+                </tc-form-group>
+              </div>
+          </div>
+
+        
+      </form>
+    </ng-template>
+
+    <ng-template #modalFooterM>
+      <div class="actions justify-content-between">
+        <button tc-button [type]="'button'" [view]="'error'" (click)="closeModalH()">
+          Cancelar
+        </button>
+        <button tc-button [view]="'info'" [disabled]="historiaFormI.invalid" (click)="updateMedicoI(historiaFormI)">
+          ACEPTAR
+        </button>
+      </div>
+    </ng-template>
+  </ng-container>

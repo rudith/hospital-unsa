@@ -9,7 +9,7 @@ import { IOption } from "./../../../ui/interfaces/option";
 import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { HttpClient } from "@angular/common/http";
-import { formatDate } from "@angular/common";
+import { formatDate, LocationStrategy } from '@angular/common';
 import { Historial } from "../../../interfaces/historial";
 import { Especialidad } from "../../../interfaces/especialidad";
 import { Grupsang } from "../../../interfaces/grupsang";
@@ -42,6 +42,7 @@ export class HistorialComponent extends BasePageComponent
   public departamentosOption: IOption[];
   public provinciasOption: IOption[];
   public sexOption: IOption[];
+  public conOption: IOption[];
   public ocupacionOption: IOption[];
   public distritosOption: IOption[];
   public medOption: IOption[];
@@ -50,6 +51,7 @@ export class HistorialComponent extends BasePageComponent
   public distritos: Distrito[];
   public medicos: Medico[];
   public perso: Personal[];
+  public turn:number;
   today: Date;
   datoBus: string;
   opBus: string;
@@ -82,6 +84,7 @@ export class HistorialComponent extends BasePageComponent
 
 
   constructor(
+    private location: LocationStrategy,
     store: Store<IAppState>,
     httpSv: HttpService,
     private modal: TCModalService,
@@ -100,6 +103,7 @@ export class HistorialComponent extends BasePageComponent
     this.provincias = [];
     this.provinciasOption = [];
     this.sexOption = [];
+    this.conOption=[];
     this.ocupacionOption = [];
     this.distritos = [];
     this.medOption = [];
@@ -141,11 +145,7 @@ export class HistorialComponent extends BasePageComponent
       this.especialidades = especialidades.results;
       this.loadOptions();
     });
-    /*this.httpSv.cancelarCitasPasadas().subscribe(his=>{
-      console.log("entro");
-      this.loadHistorias();
-    });
-    */
+    
    this.httpSv.getUltimoHist().subscribe(hist => {
     this.ulH=hist.NroHistoria;
     this.ulH1=parseInt(this.ulH)+1;
@@ -193,6 +193,7 @@ export class HistorialComponent extends BasePageComponent
         !this.pageData.loaded ? this.setLoaded() : null;
       }
     });
+    this.preventBackButton();
     
   }
   loadOptions() {
@@ -236,47 +237,53 @@ export class HistorialComponent extends BasePageComponent
     });
     this.patientForm = this.formBuilder.group({
       NumH:[this.ulH1 ? this.ulH1 : ""],
-      dni: ["",[Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      dni: [null,[ Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
       nombres: ["",[Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       apellido_paterno: [
         "",
         [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
-      apellido_materno: [
-        "",
-        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
+      apellido_materno: ["",[Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
       sexo: ["", [Validators.required]],
-      fechaNac: ["", [Validators.required]],
+      fechaNac: [null, ],
       celular: ["", [Validators.minLength(9), Validators.maxLength(9)]],
       telefono: ["", [Validators.minLength(6), Validators.maxLength(6)]],
-      estadoCivil: ["", [Validators.required]],
-      gradoInstruccion: ["", [Validators.required]],
-      ocupacion: ["", [Validators.required]],
-      direccion: ["", Validators.required],
+      estadoCivil: ["", ],
+      gradoInstruccion: ["", ],
+      ocupacion: ["", ],
+      direccion: ["", ],
       nacionalidad: ["Peruana", [Validators.pattern("[A-Za-z ]*")]],
       email: [""],
-      distrito: ["", Validators.required],
-      provincia: ["", Validators.required],
-      departamento: ["", Validators.required]
+      distrito: ["", ],
+      provincia: ["",],
+      departamento: ["",],
+      procedencia:["", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
+      lugarNac:["", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
     });
   }
 
   addPatient(form: FormGroup) {
+    this.today = new Date();
     if (form.valid) {
-      let newPatient: Historial = form.value;
+      let newPatient: Historial = form.value;      
       newPatient.fechaNac = formatDate(
         form.value.fechaNac,
         "yyyy-MM-dd",
         "en-US"
       );
+      if(form.get("fechaNac").value==null){
+        newPatient.fechaNac=null;
+      }
       newPatient.estReg = true;
-      newPatient.distrito = parseInt(form.get("distrito").value);
-      newPatient.departamento = parseInt(form.get("departamento").value);
-      newPatient.provincia = parseInt(form.get("provincia").value);
-
+      newPatient.fechaReg=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+      console.log(newPatient.fechaReg)
+      console.log(newPatient);
       this.httpSv.createHISTORIAL(newPatient, this.modal);
       this.loadHistorias();
+
+      
+    
     }
   }
   closeModal() {
@@ -288,6 +295,12 @@ export class HistorialComponent extends BasePageComponent
   }
 
   loadData() {
+    //Condicion
+    this.conOption[0]={label:"N", value:"N"};
+    this.conOption[1]={label:"C", value:"C"};
+    this.conOption[2]={label:"R", value:"R"};
+
+
     //Sexo
     this.sexOption[0] = { label: "Masculino", value: "Masculino" };
     this.sexOption[1] = { label: "Femenino", value: "Femenino" };
@@ -397,7 +410,8 @@ export class HistorialComponent extends BasePageComponent
       especialidad: ["", Validators.required],
       medico: ["", Validators.required],
       responsable: ["", [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],
-      eleccion: [""]
+      eleccion: [""],
+      condicion:["",Validators.required]
     });
   }
 
@@ -426,39 +440,38 @@ export class HistorialComponent extends BasePageComponent
         data.numeroHistoria ? data.numeroHistoria : "",
         Validators.required
       ],
-      dni: [data.dni ? data.dni : "", Validators.required],
-      nombres: [data.nombres ? data.nombres : "", Validators.required],
+      dni: [data.dni ? data.dni : null,[ Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      nombres: [data.nombres ? data.nombres : "", [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       apellido_paterno: [
         data.apellido_paterno ? data.apellido_paterno : "",
-        Validators.required
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
       apellido_materno: [
         data.apellido_materno ? data.apellido_materno : "",
-        Validators.required
+        [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
-      fechaNac: [data.fechaNac ? data.fechaNac : "", Validators.required],
-      celular: [data.celular ? data.celular : "", Validators.required],
-      telefono: [data.telefono ? data.telefono : "", Validators.required],
+      fechaNac: [data.fechaNac ? data.fechaNac : "", ],
+      celular: [data.celular ? data.celular : "", [Validators.minLength(9), Validators.maxLength(9)]],
+      telefono: [data.telefono ? data.telefono : "",[Validators.minLength(6), Validators.maxLength(6)]],
       estadoCivil: [
         data.estadoCivil ? data.estadoCivil : "",
-        Validators.required
+        
       ],
       gradoInstruccion: [
         data.gradoInstruccion ? data.gradoInstruccion : "",
-        Validators.required
+        
       ],
-      ocupacion: [data.ocupacion ? data.ocupacion : "", Validators.required],
-      direccion: [data.direccion ? data.direccion : "", Validators.required],
+      ocupacion: [data.ocupacion ? data.ocupacion : "", ],
+      direccion: [data.direccion ? data.direccion : "", ],
       nacionalidad: [
         data.nacionalidad ? data.nacionalidad : "",
-        Validators.required
+       
       ],
-      distrito: ["", Validators.required],
-      provincia: ["", Validators.required],
-      departamento: [
-        "",
-        Validators.required
-      ],
+      distrito: ["", ],
+      provincia: ["", ],
+      departamento: ["", ],
+      procedencia:[data.procedencia ? data.procedencia:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
+      lugarNac:[data.lugarNac ? data.lugarNac:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
     });
   }
 
@@ -468,8 +481,13 @@ export class HistorialComponent extends BasePageComponent
       nHist.id=this.histTemp.id;
       nHist.sexo=this.histTemp.sexo;
       nHist.estReg=this.histTemp.estReg;
+
+      if(fr.get("fechaNac").value==""){
+        nHist.fechaNac=null;
+      }
       console.log(nHist);
       this.httpSv.updateHISTORIAL(nHist,this.modal)
+      this.loadHistorias();
 
     }
 
@@ -487,7 +505,13 @@ export class HistorialComponent extends BasePageComponent
   }
 
   // add new appointment
-  addAppointment(form: FormGroup) {
+  addAppointment(form: FormGroup) {    
+    console.log(form.get('fechaSeparacion').value)
+    this.httpSv.cantidadCitasTurno(form.get('fechaSeparacion').value).subscribe(historiales => {
+      this.turn=historiales.orden+1;
+    });
+    
+    
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
@@ -504,6 +528,7 @@ export class HistorialComponent extends BasePageComponent
       newAppointment.estadoCita = "Espera";
       newAppointment.estReg = true;
       newAppointment.numeroHistoria = this.numero;
+      newAppointment.turno=this.turn+1;
 
       if (newAppointment.responsable == "") {
         newAppointment.exonerado = false;
@@ -511,7 +536,8 @@ export class HistorialComponent extends BasePageComponent
         newAppointment.numeroRecibo = null;
         newAppointment.exonerado = true;
       }
-
+      
+      console.log(newAppointment.turno)
       this.httpSv.createCITA(newAppointment, this.modal);
 
     }
@@ -618,8 +644,10 @@ export class HistorialComponent extends BasePageComponent
   closeModalVH() {
     this.modal.close();
   }
+
   //Ver Mas
   initHistoriaForm(data: Historial) {
+    
     this.historiaForm = this.formBuilder.group({
       numeroHistoria: [
         data.numeroHistoria ? data.numeroHistoria : "",
@@ -662,7 +690,9 @@ export class HistorialComponent extends BasePageComponent
         data.departamento ? data.departamento : "",
         Validators.required
       ],
-      fechaReg:[data.fechaReg.substring(0,10) ? data.fechaReg.substring(0,10) :"",Validators.required]
+      fechaReg:[data.fechaReg ? data.fechaReg :"",Validators.required],
+      procedencia:[data.procedencia ? data.procedencia:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
+      lugarNac:[data.lugarNac ? data.lugarNac:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
     });
   }
 
@@ -681,10 +711,9 @@ export class HistorialComponent extends BasePageComponent
   /* Encargado: Shirley Romero
 	   Descripcion: Metodo que se encarga de generar el pdf de la historia clinica seleccionada, este metodo necesita el dni de la historia para generarlo
 	*/
-  imprimir1(data) {
-    document.location.href =
-      BASE_API_URL + "/admision/historiaPDF/" + data.dni;
-    this.toastr.success("Se ha generado el Pdf");
+  imprimir1(data) {    
+       document.location.href = BASE_API_URL + "/admision/historiaPDF/" + data.numeroHistoria;
+       this.toastr.success("Se ha generado el Pdf");     
   }
   cargarProvXDepto(a: number) {
     this.httpSv.searcDptoxP(a).subscribe(
@@ -711,7 +740,7 @@ export class HistorialComponent extends BasePageComponent
   }
   
   cargarMedXEsp(a: number) {
-    console.log(a);
+    
     this.httpSv.searcMedxEspPag(a).subscribe(
       data => {
         this.perso = [];
@@ -734,5 +763,20 @@ export class HistorialComponent extends BasePageComponent
     if (event.key === "Enter") { 
       return false;
     }
+  }
+
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModal();
+      this.closeModalH();
+      this.closeModalVH();
+    });
+  }
+  
+  descargarExcel(){
+    document.location.href = "http://18.219.251.250:8000/admision/export/xls/" ;
+    this.toastr.success("Se ha descargado el Excel de Historias");
   }
 }

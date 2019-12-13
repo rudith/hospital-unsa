@@ -30,46 +30,37 @@
   </ng-template>
 </ng-container>        
 
-<div class="col col-12 ">
+<div class="col-sm-12">
     <form [formGroup]="busForm">
-    <div class="row">
-      <div class="col col-12 ">
-        <div class="row">
-          <div class="col-md-1">
-            <tc-form-group>
-              <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500" [size]="'sm'"
-                (click)="openModalI(modalBodyI,'Crear Orden',modalFooterI)"></button>
-            </tc-form-group>
-          </div>
-          <div class="col-md-7">
-            <tc-form-group>
-                <tc-input [placeholder]="'Ingrese el nombre y/o apellido'" type="text" [suffixIcon]="'icofont-search-document'"
-                formControlName="datoBus"
-              >
-              </tc-input>
-            </tc-form-group>
-          </div>
-          
-          <div class="col-md-2">
-            <button tc-button [view]="'success'" [tcShape]="500" (click)="buscar(busForm)" >
-              Buscar
-            </button>
-          </div>
-          <div class="col-md-2">
-            <button
-              tc-button
-              [block]="true"
-              [tcBgColor]="'#3f51b5'"
-              [tcShape]="300"
-              (click)="loadOrdenes()"
-            >
+  <div class="row">
+    <div class="col-md-2">
+        <tc-form-group>
+            <button tc-button [afterIcon]="'icofont-plus'" [view]="'info'" [square]="true" [tcShape]="500"
+              [size]="'sm'" (click)="openModalI(modalBodyI,'Agregar Orden',modalFooterI)">Agregar Orden</button>
+          </tc-form-group>
+    </div>
+    <div class="col-md-6">
+        <tc-form-group>
+            <tc-input [placeholder]="'Ingrese el nombre y/o apellido'" type="text"
+              [suffixIcon]="'icofont-search-document'" formControlName="datoBus">
+            </tc-input>
+          </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+        <button tc-button [block]="true" [view]="'success'" [tcShape]="500" (click)="buscar(busForm)">
+          Buscar
+        </button>
+      </tc-form-group>
+    </div>
+    <div class="col-md-2">
+      <tc-form-group>
+          <button tc-button [block]="true" [tcBgColor]="'#3f51b5'" [tcShape]="300" (click)="loadOrdenes()">
               Cargar
             </button>
-          </div>
-        </div>
-      </div>
-   
+      </tc-form-group>
     </div>
+  </div>
   </form>
 </div>
 
@@ -118,23 +109,31 @@
   <ng-template #modalBodyH>
     <form [formGroup]="ordenForm" novalidate class="new-patient-form">
         <div class="row">
-            <div class="col-12 col-sm-9">   
+            <div class="col-12 col-sm-12">   
             <tc-form-group>
                 <tc-form-label>Ingrese Fecha:(posterior a la actual) </tc-form-label> 
+                <tc-input  [type]="'date'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Fecha'"
+                formControlName="fecha" ></tc-input>
               </tc-form-group>
             </div>
         </div>
-      <div class="row">
-        <div class="col-12 col-sm-3">
- 
-        </div>
-        <div class="col-12 col-sm-6">
-            <tc-form-group>
-              <tc-input  [type]="'date'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Fecha'"
-                formControlName="fecha" ></tc-input>
+        <div class="row">
+          <div class="col-12 col-sm-6">   
+          <tc-form-group>
+              <tc-form-label>Número de Recibo: </tc-form-label> 
+              <tc-input  [type]="'text'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Numero de Recibo'"
+              formControlName="nroRecibo" ></tc-input>
             </tc-form-group>
           </div>
+          <div class="col-12 col-sm-6">   
+            <tc-form-group>
+                <tc-form-label>Monto: </tc-form-label> 
+                <tc-input  [type]="'text'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Ingrese Monto'"
+                formControlName="monto" ></tc-input>
+              </tc-form-group>
+            </div>
       </div>
+        
     </form>
   </ng-template>
   
@@ -212,6 +211,22 @@
                 </tc-form-group>
           </div>
         </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">   
+          <tc-form-group>
+              <tc-form-label>Número de Recibo: </tc-form-label> 
+              <tc-input  [type]="'text'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Numero de Recibo'"
+              formControlName="nroRecibo" ></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-6">   
+            <tc-form-group>
+                <tc-form-label>Monto: </tc-form-label> 
+                <tc-input  [type]="'text'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Ingrese monto'"
+                formControlName="monto" ></tc-input>
+              </tc-form-group>
+            </div>
+      </div>
       </form>
     </ng-template>
   
@@ -272,6 +287,22 @@
                 </tc-form-group>
           </div>
         </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">   
+          <tc-form-group>
+              <tc-form-label>Número de Recibo: </tc-form-label> 
+              <tc-input  [type]="'text'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Numero de Recibo'"
+              formControlName="nroRecibo" ></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-6">   
+            <tc-form-group>
+                <tc-form-label>Monto: </tc-form-label> 
+                <tc-input  [type]="'text'" [bgColor]="'#fff'" [borderColor]="'#3f51b5'" [color]="'#3f51b5'" [placeholder]="'Ingrese monto'"
+                formControlName="monto" ></tc-input>
+              </tc-form-group>
+            </div>
+      </div>
       </form>
     </ng-template>
   

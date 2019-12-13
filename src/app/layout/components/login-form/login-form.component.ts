@@ -13,9 +13,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
-
-  constructor(
-    private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
     private router: Router,
     private http: HttpService,
     private toastr: ToastrService,
@@ -42,12 +40,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   iniciosesion(lg: FormGroup) {
-    //usar el servicio debusqueda y compararlo con el area
     this.adminSV
       .getToken(lg.get("login").value, lg.get("pass").value)
       .subscribe(
         data => {
-          //this.toastr.info("Usuario:" + lg.get("login").value, "Bienvenido");
           localStorage.setItem("token", data.token);
           if (data.tipoUser == "Administrador") {
             localStorage.setItem("menu", "admin");
@@ -61,21 +57,21 @@ export class LoginFormComponent implements OnInit {
           }
           if (data.tipoUser == "Consultorio" || data.tipoUser == "Medico" || data.tipoUser == "Médico") {
             localStorage.setItem("menu", "consultorio");
-            console.log("Entro consultorio " +data.id)
-            this.http.setIdMedico(data.id);            
+            console.log("Entro consultorio " +data.personal_id)
+            this.http.setIdMedico(data.personal_id);            
             this.toastr.info(data.username, "Bienvenido");
             this.router.navigate(["/vertical/consultas"]);
           }
           if (data.tipoUser == "Triaje") {
             localStorage.setItem("menu", "triaje");
-            this.http.setIdUs(data.id);
+            this.http.setIdUs(data.personal_id);
             this.toastr.info(data.username, "Bienvenido");
             this.router.navigate(["/vertical/listar-datos"]);
           }
 
           if (data.tipoUser == "Laboratorio") {
             localStorage.setItem("menu", "laboratorio");
-            console.log("Entro lab " +data.id)
+            console.log("Entro lab " +data.personal_id)
             this.http.setIdUs(data.id);
             this.toastr.info(data.username, "Bienvenido");
             this.router.navigate(["/vertical/ordenes"]);

@@ -117,7 +117,7 @@
             Area
           </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Tipo Personal
+            Tipo de Personal
           </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Especialidad
@@ -128,9 +128,7 @@
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Eliminar
           </th>
-          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Ver más
-          </th>
+          
         </tr>
       </thead>
 
@@ -142,12 +140,25 @@
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.dni }}
           </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+          <td  *ngIf="!row.area"[ngStyle]="{ background: contentBgColor, color: contentColor }">
+            Sin Area
+          </td>
+          <td
+            *ngIf="row.area"
+            [ngStyle]="{ background: contentBgColor, color: contentColor }"
+          >
             {{ row.area.nombre }}
           </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+          <td  *ngIf="!row.tipo_personal"[ngStyle]="{ background: contentBgColor, color: contentColor }">
+            Sin Tipo de Personal
+          </td>
+          <td
+            *ngIf="row.tipo_personal"
+            [ngStyle]="{ background: contentBgColor, color: contentColor }"
+          >
             {{ row.tipo_personal.nombre }}
           </td>
+          
           <td
             *ngIf="!row.especialidad"
             [ngStyle]="{
@@ -200,36 +211,13 @@
                     modalConf1,
                     modalConf2,
                     modalConf3,
-                    row.user.id
+                    row.id
                   )
                 "
               ></button>
             </div>
           </td>
-          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            <div class="actions">
-              <button
-                tc-button
-                tc-button
-                [tcColor]="['#fff', '#3f51b5']"
-                [tcBgColor]="['#3f51b5', '#fff']"
-                [tcBorderColor]="'#3f51b5'"
-                [square]="true"
-                [tcShape]="500"
-                [size]="'sm'"
-                (click)="
-                  openModalVerMas(
-                    modalBodyH,
-                    'Ver Personal Completo',
-                    modalFooterH,
-                    row
-                  )
-                "
-              >
-                Ver Mas
-              </button>
-            </div>
-          </td>
+          
         </tr>
       </tbody>
     </table>
@@ -267,8 +255,8 @@
             <tc-form-label>Usuario</tc-form-label>
             <tc-select
               [placeholder]="labelUser"
-              type="number"
-              formControlName="user"
+              type="text"
+              formControlName="id"
               [options]="usersOpt"
             >
             </tc-select>
@@ -276,8 +264,8 @@
               [tcColor]="'#e24d4d'"
               [tcFontSize]="'0.8em'"
               *ngIf="
-                appointmentForm.controls.user.untouched &&
-                appointmentForm.controls.user.invalid
+                appointmentForm.controls.id.untouched &&
+                appointmentForm.controls.id.invalid
               "
             >
               Seleccione un usuario
@@ -534,12 +522,7 @@
   <ng-template #modalBodyH>
     <form [formGroup]="personalForm">
       <div class="row">
-        <div class="col-12 col-sm-6">
-          <tc-form-group>
-            <tc-form-label>Usuario</tc-form-label>
-            <tc-input formControlName="user" readonly="readonly"> </tc-input>
-          </tc-form-group>
-        </div>
+        
 
         <div class="col-12 col-sm-6">
           <tc-form-group>

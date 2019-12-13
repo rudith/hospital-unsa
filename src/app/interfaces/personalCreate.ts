@@ -1,5 +1,5 @@
 export interface PersonalCreate {
-  user?: number,
+  id?: number,
   dni?: number,
   nombres?: string,
   apellido_paterno?: string,

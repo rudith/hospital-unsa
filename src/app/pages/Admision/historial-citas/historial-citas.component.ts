@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit, OnChanges } from "@angular/core";
 import { BasePageComponent } from "../../base-page";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../../../interfaces/app-state";
@@ -9,16 +9,11 @@ import { IOption } from "../../../ui/interfaces/option";
 import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { HttpClient } from "@angular/common/http";
-import { formatDate } from "@angular/common";
-import { Especialidad } from "../../../interfaces/especialidad";
 import { ToastrService } from "ngx-toastr";
 import { CitaM } from "../../../interfaces/cita-m";
-import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
-import { AdministradorService } from "../../../services/Administrador/administrador.service";
-import { Router } from '@angular/router';
+import { formatDate, LocationStrategy } from '@angular/common';
 import { HostListener } from '@angular/core';
-
 import { BASE_API_URL } from "../../../config/API";
 
 @Component({
@@ -30,51 +25,33 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     throw new Error("Method not implemented.");
   }
-
-  idCita: string;
   pageNum: number;
-  medSelectedName: string = <string>{};
-  espSelectedName: string = <string>{};
   cita: CitaM = <CitaM>{};
   citas: Cita[];
   citasEdit: CitaM[] = [];
   public today: Date;
   tableData: any;
-  patientForm: FormGroup;
-  gender: IOption[];
-  status: IOption[];
-  dni: string;
   campo: string;
   appointmentForm: FormGroup;
-  cabModCita: FormGroup;
-  public espOption: IOption[];
-  medOption: IOption[];
-  public especialidades: Especialidad[] = [];
-  medicos: Medico[] = [];
   options: IOption[];
-  selectedOptions: any;
-  multiple: boolean;
   busqOption: IOption[];
   opBus: string = "";
   busForm: FormGroup;
   data: citaLista = <citaLista>{};
   a: string;
   b: string;
-  stat:string;
+  stat: string;
+  turn: number;
   constructor(
-    private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
+    private location: LocationStrategy,
+    private formBuilder: FormBuilder,
     private modal: TCModalService,
-    private fb: FormBuilder,
     private http: HttpClient,
     private toastr: ToastrService,
-    // private conf: ConfirmationService,
-    private admService: AdministradorService,
-    private router: Router,
   ) {
     super(store, httpSv);
-
     this.pageData = {
       title: "Historial de Citas",
       loaded: true,
@@ -99,21 +76,11 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     this.tableData = [];
     this.citas = [];
     this.loadCitas();
-    this.stat="";
-    this.espOption = [];
-    this.medOption = [];
-    this.multiple = false;
-    this.httpSv.loadEspecialidadesSP().subscribe(especialidades => {
-      this.especialidades = especialidades;
-      this.loadOptionsEsp();
-    });
-    this.httpSv.loadMedicoSP().subscribe(medicos => {
-      this.medicos = medicos;
-      this.loadOptionsMed();
-    });
+    this.stat = "";
     this.pageNum = 1;
     //this.httpSv.cancelarCitasPasadas();
   }
+
   ngOnInit() {
     super.ngOnInit();
     this.store.select("citas").subscribe(citas => {
@@ -125,24 +92,26 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
 
     this.getData("assets/data/opcionBusquedaCita.json", "busqOption");
     this.initBusForm();
+    this.preventBackButton();
   }
+
   initBusForm() {
     this.busForm = this.formBuilder.group({
       opBus: ["", Validators.required],
       campo: ["", Validators.required]
     });
   }
+
   selectOpt() {
     this.opBus = this.busForm.get("opBus").value;
   }
+
   ngOnDestroy() {
     super.ngOnDestroy();
   }
 
   buscar(busca: FormGroup) {
     this.campo = busca.get("campo").value;
-
-    // console.log("entra" + this.opBus + " " + this.campo);
     if (this.opBus == "1") {
       this.buscarDNI(this.campo);
     }
@@ -156,6 +125,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
       this.buscarNom(this.campo);
     }
   }
+
   buscarEsp(valor: string) {
     // console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
@@ -174,6 +144,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
       });
     }
   }
+
   buscarDNI(valor: string) {
     console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
@@ -254,57 +225,18 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     }
   }
 
-  loadOptionsEsp() {
-    for (let i in this.especialidades) {
-      this.espOption[i] = {
-        label: this.especialidades[i].nombre,
-        value: this.especialidades[i].id.toString()
-      };
-    }
-  }
-  loadOptionsMed() {
-    for (let i in this.medicos) {
-      this.medOption[i] = {
-        label:
-          this.medicos[i].nombres +
-          " " +
-          this.medicos[i].apellido_paterno +
-          " " +
-          this.medicos[i].apellido_materno,
-        value: this.medicos[i].user.id.toString()
-      };
-    }
-  }
-  loadOptionsMedEsp(a: string) {
-    this.httpSv.searchMedicoporEsp(a).subscribe(
-      data => {
-        this.medicos = [];
-        this.medOption = [];
-        this.medicos = data;
-        this.loadOptionsMed();
-      },
-      error => { }
-    );
-  }
-  // open modal window
-  openModal<T>(
-    body: Content<T>,
-    header: Content<T> = null,
-    footer: Content<T> = null,
-  ) {
-    // console.log(JSON.stringify(row));
+  
+  openModal<T>(body: Content<T>,header: Content<T> = null,footer: Content<T> = null,) {
     this.initForm();
-    //this.initFormCabecera(row.numeroHistoria.numeroHistoria,row.);
     this.modal.open({
       body: body,
       header: header,
       footer: footer,
       options: null
     });
-    // console.log("Cita obtenida" + JSON.stringify(row));
   }
+
   initForm() {
-    // console.log(JSON.stringify(data));
     this.today = new Date();
     this.appointmentForm = this.formBuilder.group({
       fechaAtencion1: [
@@ -315,42 +247,21 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     });
   }
 
-
-  // close modal window
   closeModal() {
     this.modal.close();
     this.appointmentForm.reset();
   }
+
   closeModalConf() {
     this.modal.close();
   }
-  sendCita(cita: CitaM) {
-    this.cita = cita;
-    this.medSelectedName =
-      cita.medico.nombres +
-      " " +
-      cita.medico.apellido_paterno +
-      " " +
-      cita.medico.apellido_materno;
-    this.espSelectedName = cita.especialidad.nombre;
-    console.log(this.medSelectedName + "\n" + this.espSelectedName);
-  }
+  
   addAppointment(form: FormGroup) {
-    // console.log(JSON.stringify(+form.value.especialidad));
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
-      newAppointment.fechaAtencion = formatDate(
-        form.value.fechaAtencion,
-        "yyyy-MM-dd",
-        "en-US", '+0530'
-      );
-      newAppointment.fechaSeparacion = formatDate(
-        this.today,
-        "yyyy-MM-dd",
-        "en-US", '+0530'
-      );
-      //newAppointment.fechaAtencion = this.cita.fechaAtencion;
+      newAppointment.fechaAtencion = formatDate(form.value.fechaAtencion,"yyyy-MM-dd","en-US", '+0530');
+      newAppointment.fechaSeparacion = formatDate(this.today,"yyyy-MM-dd","en-US", '+0530' );
       newAppointment.especialidad = form.value.especialidad;
       newAppointment.id = this.cita.id;
       newAppointment.numeroRecibo = this.cita.numeroRecibo;
@@ -359,14 +270,13 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
       newAppointment.numeroHistoria = this.cita.numeroHistoria.id;
       newAppointment.exonerado = this.cita.exonerado;
       newAppointment.responsable = this.cita.responsable;
-      // newAppointment.medico = this.cita.medico.id.toString();
       this.updateCita(newAppointment);
       this.closeModal();
       this.appointmentForm.reset();
     }
   }
+
   updateCita(newCita: Cita) {
-    console.log(JSON.stringify(newCita));
     this.http
       .put<any>(
         BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/",
@@ -386,7 +296,6 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
       .subscribe(
         data => {
           this.toastr.success("", "Cita ACtualizada");
-          // this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
           newCita = <Cita>{};
           this.loadCitas();
         },
@@ -394,10 +303,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
           this.toastr.warning("Error Cita no Actualizada");
         }
       );
-    // console.log(JSON.stringify(this.newHistoria));
   }
-
-  // init form
 
   loadCitas() {
     this.httpSv.loadHistorialCitas().subscribe(data => {
@@ -406,21 +312,37 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     });
   }
 
-  /*Problema en reportes*/
   reporteDiario() {
-      //http://18.216.2.122:9000/admision/reporteDiarioCitas
-      document.location.href = BASE_API_URL + "/admision/reporteDiarioCitas/";
-      this.toastr.success("Se ha generado el Pdf");
+    this.today=new Date();
+    this.httpSv.cantidadCitasTurno(formatDate(this.today,"yyyy-MM-dd","en-US", '+0530' )).subscribe(historiales => {
+      this.turn = historiales.orden;
+      if (this.turn == 0) {
+        this.toastr.warning("No hay citas disponibles");
+        this.closeModal();
+      } else {
+        document.location.href = BASE_API_URL + "/admision/reporteDiarioCitas/";
+    this.toastr.success("Se ha generado el Pdf");
+        this.closeModal();
+      }
+    });
   }
 
   reporteRango(ab: FormGroup) {
-    this.a=ab.get('fechaAtencion1').value;
-
-    document.location.href = BASE_API_URL+"/admision/reporteCitasRangoFecha/"+this.a ;
-    this.toastr.success("Se ha generado el Pdf");
-    this.closeModal();
-
+    console.log(ab.get('fechaAtencion1').value)
+    this.a = ab.get('fechaAtencion1').value;
+    this.httpSv.cantidadCitasTurno(ab.get('fechaAtencion1').value).subscribe(historiales => {
+      this.turn = historiales.orden;
+      if (this.turn == 0) {
+        this.toastr.warning("No hay citas disponibles");
+        this.closeModal();
+      } else {
+        document.location.href = BASE_API_URL + "/admision/reporteCitasRangoFecha/" + this.a + "/";
+        this.toastr.success("Se ha generado el Pdf");
+        this.closeModal();
+      }
+    });
   }
+
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.key === "Escape") {
       this.closeModal();
@@ -429,6 +351,15 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
     if (event.key === "Enter") {
       return false;
     }
+  }
+
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModal();
+      this.closeModalConf();
+    });
   }
 
 

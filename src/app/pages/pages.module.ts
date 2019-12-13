@@ -87,6 +87,7 @@ import { HistorialCitasComponent } from './Admision/historial-citas/historial-ci
 import { AtenderComponent } from './Lab/atender/atender.component';
 import { PersonalAdmComponent } from './Administrador/personal-adm/personal-adm.component';
 import { TipoExamenComponent } from './Administrador/tipo-examen/tipo-examen.component';
+import { VerMedicosComponent } from './Admision/ver-medicos/ver-medicos.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -177,7 +178,8 @@ import { TipoExamenComponent } from './Administrador/tipo-examen/tipo-examen.com
     HistorialCitasComponent,
     AtenderComponent,
     PersonalAdmComponent,
-    TipoExamenComponent
+    TipoExamenComponent,
+    VerMedicosComponent
   ],
   exports: [],
   entryComponents: []

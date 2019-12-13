@@ -529,17 +529,21 @@ loadTabla(row: Examen) {
   }
 
   crearOrden(form: FormGroup) {
-    if (form.valid) {
-      let newOrden: OrdenM = form.value;
-      newOrden.dni = this.dniRecibido;
-      newOrden.numeroHistoria = this.numHistId;
-      newOrden.nombre = this.nombreRecibido;
-      newOrden.medico = this.nomMedico;
-      newOrden.tipoExam = parseInt(form.get('tipoExam').value);
-      newOrden.orden=this.ordenn;
-      console.log(newOrden)
-      this.httpSv.createOrdenM(newOrden, this.modal, 0,1);
-      this.cargarOrdenes(this.dniRecibido);
+    if (this.dniRecibido == undefined)
+      this.toastr.warning("No se puede crear Orden sin DNI por el momento");
+    else {
+      if (form.valid) {
+        let newOrden: OrdenM = form.value;
+        newOrden.dni = this.dniRecibido;
+        newOrden.numeroHistoria = this.numHistId;
+        newOrden.nombre = this.nombreRecibido;
+        newOrden.medico = this.nomMedico;
+        newOrden.tipoExam = parseInt(form.get('tipoExam').value);
+        newOrden.orden=this.ordenn;
+        console.log(newOrden)
+        this.httpSv.createOrdenM(newOrden, this.modal, 0,1);
+        this.cargarOrdenes(this.dniRecibido);
+      }
     }
   }
   /*** 

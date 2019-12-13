@@ -11,4 +11,6 @@ export interface Orden {
     },
     fechaA?: string,
     estadoOrden?:string
+    nroRecibo?:string,
+        monto?:string,
 }

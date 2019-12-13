@@ -148,7 +148,6 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     this.admService.loadPersonal().subscribe(personalLista => {
       this.data = personalLista;
       this.personales = this.data.results;
-      // console.log(JSON.stringify(this.personales));
     });
   }
 
@@ -158,20 +157,25 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
       this.labelEsp = "";
       this.labelTipo = "";
       this.labelUser = "";
-      this.labelUser = data.user.username;
-      this.labelArea = data.area.nombre;
       this.labelTipo = data.tipo_personal.nombre;
       if (data.especialidad == null) this.labelEsp = "Ninguna";
       else this.labelEsp = data.especialidad.nombre;
+      if (data.user == null) this.labelUser = "Sin usuario";
+      else this.labelUser = data.user.username;
+      if (data.area == null) this.labelArea = "Sin area";
+      else this.labelArea = data.area.nombre;
+      if (data.tipo_personal == null) this.labelTipo = "Sin Tipo";
+      else this.labelTipo =data.tipo_personal.nombre;
     }
     this.admService.loadUserSP().subscribe(users => {
       this.users = users;
+      console.log(users)
       this.loadOptionsUsers();
     });
   }
   loadOptionsUsers() {
     for (let i in this.users) {
-      this.usersOpt[i] = {
+      this.usersOpt[i] = {  
         label: this.users[i].username,
         value: this.users[i].id.toString()
       };
@@ -219,34 +223,11 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   }
   buscar(busca: FormGroup) {
     this.campo = busca.get("campo").value;
-    // this.opBus = busca.get("opBus").value;
-
-    // console.log("entra" + this.opBus + " " + this.campo);
-    // if (this.opBus == "1") {
+  
     this.buscarDNI();
-    // }
-    // if (this.opBus == "2") {
-    //   this.buscarId();
-    // }
+    
   }
-  // buscarId() {
-  //   console.log(this.id);
-  //   if (this.campo === "" || this.campo === undefined) {
-  //     this.loadPersonal();
-  //     this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
-  //   } else {
-  //     this.admService.searchPersonal(this.campo).subscribe(
-  //       data => {
-  //         this.personales = [];
-  //         this.personales[0] = data;
-  //         this.toastr.info("Personal con: " + this.id, "Buscando...");
-  //       },
-  //       error => {
-  //         this.toastr.warning("No encontrado");
-  //       }
-  //     );
-  //   }
-  // }
+  
   buscarDNI() {
     console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
@@ -291,14 +272,14 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     this.edit = false;
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
-      user: ["", Validators.required],
+      id: ["", Validators.required],
       dni: ["", Validators.required],
       nombres: ["", Validators.required],
       apellido_paterno: ["", Validators.required],
       apellido_materno: ["", Validators.required],
-      celular: ["", Validators.required],
-      telefono: ["", Validators.required],
-      direccion: ["", Validators.required],
+      celular: ["", ],
+      telefono: ["", ],
+      direccion: ["",],
       area: ["", Validators.required],
       tipo_personal: ["", Validators.required],
       especialidad: [""]
@@ -308,14 +289,14 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     this.edit = true;
     // this.user.BirthdayDate = this.datePipe.transform(this.user.BirthdayDate, 'dd-MM-yyyy');
     this.appointmentForm = this.formBuilder.group({
-      user: data.user.id,
+      id: data.id,
       dni: [data.dni, Validators.required],
       nombres: [data.nombres, Validators.required],
       apellido_paterno: [data.apellido_paterno, Validators.required],
       apellido_materno: [data.apellido_materno, Validators.required],
-      celular: [data.celular, Validators.required],
-      telefono: [data.telefono, Validators.required],
-      direccion: [data.direccion, Validators.required],
+      celular: [data.celular, ],
+      telefono: [data.telefono, ],
+      direccion: [data.direccion, ],
       area: ["", [Validators.required]],
       tipo_personal: ["", [Validators.required]],
       especialidad: [""]
@@ -324,6 +305,8 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
   addAppointment(form: FormGroup) {
     if (form.valid) {
       let newAppointment: PersonalCreate = form.value;
+     
+      console.log(newAppointment)
 
       this.admService.createPersonal(newAppointment).subscribe(
         data => {
@@ -373,10 +356,26 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     row: Personal
   ) {
     if (row.especialidad) {
-      this.initPersonalForm(row, row.especialidad.nombre);
+      //this.initPersonalForm(row, row.especialidad.nombre);
     } else {
-      this.initPersonalForm(row, "Ninguna");
+      row.especialidad.nombre= "Ninguna";
     }
+
+    if (row.area) {
+      //this.initPersonalForm(row, row.especialidad.nombre);
+    } else {
+      row.area.nombre= "Ninguna";
+    }
+
+    if (row.user.username) {
+      //this.initPersonalForm(row, row.especialidad.nombre);
+    } else {
+      row.user.username= "Ninguna";
+    }
+
+
+    this.initPersonalForm(row);
+
     this.modal.open({
       body: body,
       header: header,
@@ -416,7 +415,9 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
     );
     this.closeModal();
   }
-  initPersonalForm(data: Personal, especialidad: string) {
+  initPersonalForm(data: Personal) {
+    console.log(data)
+    
     this.personalForm = this.formBuilder.group({
       user: [data.user.username ? data.user.username : "", Validators.required],
       area: [data.area.nombre ? data.area.nombre : "", Validators.required],
@@ -424,7 +425,7 @@ export class PersonalComponent extends BasePageComponent implements OnInit {
         data.tipo_personal.nombre ? data.tipo_personal.nombre : "",
         Validators.required
       ],
-      especialidad: [especialidad],
+      especialidad: [data.especialidad.nombre],
       dni: [
         data.apellido_materno ? data.apellido_materno : "",
         Validators.required

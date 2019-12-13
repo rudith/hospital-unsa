@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { BasePageComponent } from "../../base-page";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../../../interfaces/app-state";
@@ -9,17 +9,15 @@ import { IOption } from "../../../ui/interfaces/option";
 import { Content } from "../../../ui/interfaces/modal";
 import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { HttpClient } from "@angular/common/http";
-import { formatDate } from "@angular/common";
+import { formatDate, LocationStrategy } from '@angular/common';
 import { Especialidad } from "../../../interfaces/especialidad";
 import { ToastrService } from "ngx-toastr";
-// import { ConfirmationService } from "primeng/api";
 import { CitaM } from "../../../interfaces/cita-m";
 import { Medico } from "../../../interfaces/medico";
 import { citaLista } from "../../../interfaces/citaLista";
 import { AdministradorService } from "../../../services/Administrador/administrador.service";
 import { HostListener } from "@angular/core";
 
-// BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
 
 @Component({
@@ -60,6 +58,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     private formBuilder: FormBuilder,
     store: Store<IAppState>,
     httpSv: HttpService,
+    private location: LocationStrategy,
     private modal: TCModalService,
     private fb: FormBuilder,
     private http: HttpClient,
@@ -116,6 +115,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     });
 
     this.getData("assets/data/opcionBusquedaCita.json", "busqOption");
+    this.preventBackButton();
     this.initBusForm();
   }
   initBusForm() {
@@ -133,7 +133,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
 
   buscar(busca: FormGroup) {
     this.campo = busca.get("campo").value;
-    // console.log("entra" + this.opBus + " " + this.campo);
     if (this.opBus == "1") {
       this.buscarDNI(this.campo);
     }
@@ -148,7 +147,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     }
   }
   buscarEsp(valor: string) {
-    // console.log(this.campo);
     if (this.campo === "" || this.campo === undefined) {
       this.loadCitas();
       this.toastr.warning("Todas las citas cargadas", "Ningun valor ingresado");
@@ -291,20 +289,16 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     footer: Content<T> = null,
     row: CitaM
   ) {
-    // console.log(JSON.stringify(row));
     this.initForm(row);
     this.initFormModCita(row);
-    //this.initFormCabecera(row.numeroHistoria.numeroHistoria,row.);
     this.modal.open({
       body: body,
       header: header,
       footer: footer,
       options: null
     });
-    // console.log("Cita obtenida" + JSON.stringify(row));
   }
   initForm(data: CitaM) {
-    // console.log(JSON.stringify(data));
     this.appointmentForm = this.formBuilder.group({
       fechaAtencion: [
         data.fechaAtencion ? data.fechaAtencion : "",
@@ -333,7 +327,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       ]
     });
   }
-  // close modal window
   closeModal() {
     this.modal.close();
     this.appointmentForm.reset();
@@ -347,7 +340,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     this.espSelectedName = cita.especialidad.nombre;
   }
   addAppointment(form: FormGroup) {
-    // console.log(JSON.stringify(+form.value.especialidad));
     if (form.valid) {
       this.today = new Date();
       let newAppointment: Cita = form.value;
@@ -379,11 +371,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     }
   }
   updateCita(newCita: Cita) {
-    // console.log(JSON.stringify(newCita));
-    this.http
-      .put<any>(
-        BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/",
-        {
+    this.http.put<any>(BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/", {
           numeroRecibo: newCita.numeroRecibo,
           fechaSeparacion: newCita.fechaSeparacion,
           fechaAtencion: newCita.fechaAtencion,
@@ -400,7 +388,6 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       .subscribe(
         data => {
           this.toastr.success("", "Cita ACtualizada");
-          // this.messageService.add({ severity: 'info', summary: 'Cita Actualizada' });
           newCita = <Cita>{};
           this.loadCitas();
         },
@@ -408,10 +395,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.toastr.warning("Error Cita no Actualizada");
         }
       );
-    // console.log(JSON.stringify(this.newHistoria));
   }
-
-  // init form
 
   loadCitas() {
     this.httpSv.loadCitasEdit().subscribe(data => {
@@ -419,13 +403,8 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       this.citasEdit = data.results;
     });
   }
-  openModalCancelar<T>(
-    body: Content<T>,
-    header: Content<T> = null,
-    footer: Content<T> = null,
-    id: string,
-    options: any = null
-  ) {
+
+  openModalCancelar<T>(body: Content<T>, header: Content<T> = null,footer: Content<T> = null,id: string,options: any = null) {
     this.idCita = id;
     this.modal.open({
       body: body,
@@ -447,9 +426,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       }
     );
   }
-  @HostListener("document:keydown", ["$event"]) onKeydownHandler(
-    event: KeyboardEvent
-  ) {
+  @HostListener("document:keydown", ["$event"]) onKeydownHandler(event: KeyboardEvent) {
     if (event.key === "Escape") {
       this.closeModal();
       this.closeModalConf();
@@ -457,5 +434,13 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     if (event.key === "Enter") {
       return false;
     }
+  }
+  preventBackButton() {
+    history.pushState(null, null, location.href);
+    this.location.onPopState(() => {
+      history.pushState(null, null, location.href);
+      this.closeModal();
+      this.closeModalConf();
+    });
   }
 }

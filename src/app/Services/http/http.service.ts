@@ -348,6 +348,8 @@ export class HttpService {
         tipoExam: newOrden.tipoExam,
         fechaA: newOrden.fechaA,
         estadoOrden: newOrden.estadoOrden,
+        nroRecibo:newOrden.nroRecibo,
+        monto:newOrden.monto
       }, this.adminService.getHeader())
       .subscribe(
         data => {
@@ -380,6 +382,8 @@ export class HttpService {
         tipoExam: newOrden.tipoExam,
         fechaA: newOrden.fechaA,
         estadoOrden: newOrden.estadoOrden,
+        nroRecibo:newOrden.nroRecibo,
+        monto:newOrden.monto
       }, this.adminService.getHeader())
       .subscribe(
         data => {
@@ -407,7 +411,9 @@ export class HttpService {
         orden: newOrden.orden,
         tipoExam: newOrden.tipoExam,
         fechaA: newOrden.fechaA,
-        estadoOrden: "Pagado",
+        estadoOrden: "Pagado"  ,
+        nroRecibo:newOrden.nroRecibo,
+        monto:newOrden.monto
       }, this.adminService.getHeader())
       .subscribe(
         data => {
@@ -433,6 +439,8 @@ export class HttpService {
         tipoExam: newOrden.tipoExam,
         fechaA: newOrden.fechaA,
         estadoOrden: "Pagado",
+        nroRecibo:newOrden.nroRecibo,
+        monto:newOrden.monto
       }, this.adminService.getHeader())
       .subscribe(
         data => {
@@ -470,7 +478,8 @@ export class HttpService {
         estReg: newHistoria.estReg,
         distrito: newHistoria.distrito,
         provincia: newHistoria.provincia,
-        departamento: newHistoria.departamento
+        departamento: newHistoria.departamento,
+        fechaReg:newHistoria.fechaReg,
       }, this.adminService.getHeader())
       .subscribe(
         data => {
@@ -568,6 +577,7 @@ export class HttpService {
   }
 
   createCITA(newCita: Cita, modal: TCModalService) {
+    console.log("TURNO:   "+newCita.turno)
     this.http
       .post<any>(BASE_API_URL + "/consultorio/crear-cita/", {
         numeroRecibo: newCita.numeroRecibo,
@@ -579,7 +589,9 @@ export class HttpService {
         numeroHistoria: newCita.numeroHistoria,
         medico: newCita.medico,
         responsable: newCita.responsable,
-        exonerado: newCita.exonerado
+        exonerado: newCita.exonerado,
+        condicion:newCita.condicion,
+        turno:newCita.turno
       }, this.adminService.getHeader())
       .subscribe(
         data => {
@@ -773,6 +785,9 @@ export class HttpService {
   }
   generarReporteDiario(): Observable<any> {
     return this.http.get<any>(BASE_API_URL + '/admision/reporteDiarioCitas', this.adminService.getHeader());
+  }
+  cantidadCitasTurno(fecha:String ): Observable<any> {
+    return this.http.get<any>(BASE_API_URL + '/consultorio/verOrdencita/'+fecha+"/", this.adminService.getHeader());
   }
 }
 

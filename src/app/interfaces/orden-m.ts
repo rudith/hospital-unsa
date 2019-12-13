@@ -7,6 +7,8 @@ export interface OrdenM {
         orden? : string,
         tipoExam?: number,
         fechaA?: string,
-        estadoOrden?:string
+        estadoOrden?:string,
+        nroRecibo?:string,
+        monto?:string,
 
 }

@@ -12,6 +12,8 @@ export interface Cita {
 	numeroHistoria: number,
 	medico: number,
 	exonerado: boolean,
-	responsable: string,	
+	responsable: string,
+	condicion:string,
+	turno:number	
 }
     

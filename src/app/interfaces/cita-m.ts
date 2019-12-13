@@ -30,5 +30,7 @@ export interface CitaM {
   estadoCita?: string,
   exonerado?: boolean,
   responsable?: string,
-  estReg?: boolean
+  estReg?: boolean,
+  turno?:number,
+  condicion?:string
 }

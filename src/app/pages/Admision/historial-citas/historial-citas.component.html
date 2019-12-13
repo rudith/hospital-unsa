@@ -117,7 +117,10 @@
           </th>
           
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
-            Estado
+            Turno
+          </th>
+          <th [align]="headerAlign" [tcBgColor]="headerBgColor">
+            Condicion
           </th>
           <th [align]="headerAlign" [tcBgColor]="headerBgColor">
             Especialidad
@@ -142,19 +145,18 @@
           >
             {{ row.numeroHistoria.dni }}
           </td>
-          <!-- 
-                            <td [ngStyle]="{ 'background': contentBgColor, 'color': contentColor }">
-                            {{row.updated_at.substring(0,10)}}
-                        </td>
-            -->
-            
+
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.fechaAtencion }}
           </td>
 
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
-            {{ row.estadoCita }}
+            {{ row.turno }}
           </td>
+          <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
+            {{ row.condicion }}
+          </td>
+          
           <td [ngStyle]="{ background: contentBgColor, color: contentColor }">
             {{ row.especialidad.nombre }}
           </td>

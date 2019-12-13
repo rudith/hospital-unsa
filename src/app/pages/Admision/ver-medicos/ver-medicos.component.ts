@@ -11,8 +11,6 @@ import { TCModalService } from "../../../ui/services/modal/modal.service";
 import { HttpClient } from "@angular/common/http";
 import { formatDate } from "@angular/common";
 import { Historial } from "../../../interfaces/historial";
-import { Especialidad } from "../../../interfaces/especialidad";
-import { Grupsang } from "../../../interfaces/grupsang";
 import { Provincia } from "../../../interfaces/provincia";
 import { Departamento } from "../../../interfaces/departamento";
 import { Distrito } from "../../../interfaces/distrito";
@@ -21,23 +19,23 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { Personal } from "../../../interfaces/personal";
 import { HistorialLista } from '../../../interfaces/historial-lista';
-import { SolicitudLista } from '../../../interfaces/solicitud-lista';
-import { Solicitud } from '../../../interfaces/solicitud';
 import { Tipoexamen } from '../../../interfaces/tipoexamen';
 import { LaboratorioService } from '../../../Services/Laboratorio/laboratorio.service';
 import { Orden } from '../../../interfaces/orden';
 import { OrdenM } from '../../../interfaces/orden-m';
 import { HostListener } from '@angular/core';
-import { OrdenLista } from '../../../interfaces/orden-lista';
-
+import { personalLista } from '../../../interfaces/personalLista';
+import { Especialidad } from '../../../interfaces/especialidad';
+import { AdministradorService } from '../../../services/Administrador/administrador.service';
+import { PersonalCreate } from '../../../interfaces/personalCreate';
 
 @Component({
-  selector: 'app-conexion-laboratorio',
-  templateUrl: './conexion-laboratorio.component.html',
-  styleUrls: ['./conexion-laboratorio.component.scss']
+  selector: 'app-ver-medicos',
+  templateUrl: './ver-medicos.component.html',
+  styleUrls: ['./ver-medicos.component.scss']
 })
-export class ConexionLaboratorioComponent extends BasePageComponent
-  implements OnInit, OnDestroy, OnChanges {
+export class VerMedicosComponent extends BasePageComponent implements OnInit, OnDestroy, OnChanges {
+
   n: string;
   ab: number;
   idCita: string;
@@ -47,7 +45,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   @ViewChild("modalBody", { static: true }) modalBody: ElementRef<any>;
   @ViewChild("modalFooter", { static: true }) modalFooter: ElementRef<any>;
   public tipoExOption: IOption[];
-  public tipoE: Tipoexamen[];
+  public tipoE: Especialidad[];
   public medOption: IOption[];
   public provincias: Provincia[];
   public departamentos: Departamento[];
@@ -62,8 +60,8 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   appointmentForm: FormGroup;
   cabTri: FormGroup;
   data: string[];
-  ordenesLis: OrdenLista = <OrdenLista>{};
-  ordenes: Orden[];
+  ordenesLis: personalLista = <personalLista>{};
+  ordenes: Personal[];
   numero: number;
   busForm: FormGroup;
   patientForm: FormGroup;
@@ -71,25 +69,27 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   bus: string;
 
   historiaForm: FormGroup;
-  ordenForm:FormGroup;
-  histI:Historial;
+  ordenForm: FormGroup;
+  histI: Historial;
   historiaFormE: FormGroup;
   historiaFormI: FormGroup;
   histTotal: HistorialLista
   pages: Array<number>;
   pagesNumber: number;
   pageNum: number;
+  idP:number;
   public newCita: Cita;
   public espOption: IOption[];
   public busqOption: IOption[];
   public especialidades: Tipoexamen[];
-  public ordd:Orden;
+  public ordd: Orden;
 
 
   constructor(
     store: Store<IAppState>,
     httpSv: HttpService,
     private labService: LaboratorioService,
+    private adminSv: AdministradorService,
     private modal: TCModalService,
     private modalCita: TCModalService,
     private formBuilder: FormBuilder,
@@ -105,14 +105,14 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     this.medOption = [];
     this.medicos = [];
     this.data = [];
-    this.especialidades=[];
+    this.especialidades = [];
     this.opBus = "0";
     this.ordenes = [];
     this.espOption = [];
     this.tipoE = [];
     this.newCita = <Cita>{};
     this.pageData = {
-      title: "Órdenes",
+      title: "Listado de Médicos",
       loaded: true,
       breadcrumbs: [
         {
@@ -128,7 +128,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
           route: "default-dashboard"
         },
         {
-          title: "Órdenes"
+          title: "Listado de Médicos"
         },
         {
           title: "Search"
@@ -156,9 +156,13 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   public nextPage() {
     if (this.ordenesLis.next) {
       this.pageNum++;
-      this.labService.loadOrdenPAgination(this.ordenesLis.next).subscribe(ord => {
+      this.adminSv.loadPersonalPagination(this.ordenesLis.next).subscribe(ord => {
         this.ordenesLis = ord;
-        this.ordenes = ord.results;
+        this.ordenes = ord.results;      
+
+        for (let index = 0; index < this.ordenes.length; index++) {
+          this.ordenes[index].direccion = this.ordenes[index].especialidad.nombre;
+        }
       });
     }
   }
@@ -167,17 +171,28 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     console.log(this.pageNum);
     if (this.pageNum > 1) {
       this.pageNum--;
-      this.labService.loadOrdenPAgination(this.ordenesLis.previous).subscribe(sol => {
+      this.adminSv.loadPersonalPagination(this.ordenesLis.previous).subscribe(sol => {
         this.ordenesLis = sol;
         this.ordenes = sol.results;
+
+        for (let index = 0; index < this.ordenes.length; index++) {
+  
+          this.ordenes[index].direccion = this.ordenes[index].especialidad.nombre;
+        }
       });
     }
   }
 
   loadOrdenes() {
-    this.labService.loadOrdenCreadas().subscribe(sol => {
+    this.adminSv.loadPersonal().subscribe(sol => {
       this.ordenesLis = sol;
       this.ordenes = sol.results;
+      for (let index = 0; index < this.ordenes.length; index++) {
+        if(this.ordenes[index].especialidad=null)
+        this.ordenes[index].direccion=="Falta"
+        else
+        this.ordenes[index].direccion = this.ordenes[index].especialidad.nombre;
+      }
     });
   }
 
@@ -190,6 +205,9 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     this.store.select("ordenes").subscribe(sol => {
       if (sol && sol.length) {
         this.ordenes = sol;
+        for (let i in this.ordenes) {
+          this.ordenes[i].direccion = this.ordenes[i].especialidad.nombre;
+        }
         !this.pageData.loaded ? this.setLoaded() : null;
       }
     });
@@ -200,10 +218,10 @@ export class ConexionLaboratorioComponent extends BasePageComponent
     super.ngOnDestroy();
   }
 
-  openModalVerMas<T>( body: Content<T>,header: Content<T> = null,footer: Content<T> = null,row:Orden
+  openModalVerMas<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, row: Orden
   ) {
     this.initHistoriaForm();
-    this.ordd=row;
+    this.ordd = row;
     this.modal.open({
       body: body,
       header: header,
@@ -214,29 +232,15 @@ export class ConexionLaboratorioComponent extends BasePageComponent
 
   initHistoriaForm() {
     this.today = new Date();
-    this.ordenForm = this.formBuilder.group({     
+    this.ordenForm = this.formBuilder.group({
       fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
-      nroRecibo:["",[Validators.pattern("[0-9]*")]],
-      monto:["",[Validators.pattern("[0-9]*")]]
     });
   }
   closeModalH() {
     this.modal.close();
   }
 
-  crearOrden(form: FormGroup) {
-    if (form.valid) {
-      let newOrden: OrdenM = form.value;
-      newOrden.dni = form.get('dni').value;
-      newOrden.numeroHistoria = this.ab;
-      newOrden.nombre = form.get('nombre').value;
-      newOrden.medico = form.get('medico').value;
-      newOrden.orden = form.get('orden').value;
-      newOrden.fechaA = form.get('fecha').value;
-      newOrden.tipoExam = parseInt(form.get('tipoExam').value);
-      this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
-    }
-  }
+
   actualizarOrden(form: FormGroup) {
     if (form.valid) {
       let newOrden: OrdenM = form.value;
@@ -247,79 +251,30 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       newOrden.orden = this.ordd.orden;
       newOrden.fechaA = form.get('fecha').value;
       newOrden.tipoExam = this.ordd.tipoExam.id;
-      this.httpSv.updateOrdenM(newOrden, this.modal,this.ordd.id);
+      this.httpSv.updateOrdenM(newOrden, this.modal, this.ordd.id);
       this.loadOrdenes();
     }
   }
 
-  openModalCancelar<T>(
-    body: Content<T>,
-    header: Content<T> = null,
-    footer: Content<T> = null,
-    id: string,
-    options: any = null
-  ) {
-    this.idCita = id;
-    this.modal.open({
-      body: body,
-      header: header,
-      footer: footer,
-      options: options
-    });
-  }
+
   loadData() {
-    this.labService.loadTipoEx().subscribe(tipo => {
+    this.httpSv.loadEspecialidadesSP().subscribe(tipo => {
       this.tipoE = tipo,
         this.loadtipoex(this.tipoE);
     });
 
   }
 
-  loadtipoex(tipoE: Tipoexamen[]) {
-    console.log(tipoE);
+  loadtipoex(tipoE: Especialidad[]) {
     for (let i in tipoE) {
       this.tipoExOption[i] =
-        {
-          label: this.tipoE[i].nombre,
-          value: this.tipoE[i].id.toString()
-        };
+      {
+        label: this.tipoE[i].nombre,
+        value: this.tipoE[i].id.toString()
+      };
     }
   }
-  openModalVerExtra<T>(body: Content<T>, header: Content<T> = null,
-    footer: Content<T> = null,
-  ) {
-    this.initHistoriaFormExtra();
-    this.modal.open({
-      body: body,
-      header: header,
-      footer: footer,
-      options: null
-    });
-  }
-  initHistoriaFormExtra() {
-    this.today = new Date();
-    this.historiaFormE = this.formBuilder.group({
-      dni: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
-      nombre: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
-      fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
-      tipoExam: ["", Validators.required],
-      nroRecibo:["",[Validators.pattern("[0-9]*")]],
-      monto:["",[Validators.pattern("[0-9]*")]]
-    });
-  }
-  
 
-  crearOrdenE(form: FormGroup) {
-    if (form.valid) {
-      let newOrden: OrdenM = form.value;
-      newOrden.dni = form.get('dni').value;
-      newOrden.nombre = form.get('nombre').value;
-      newOrden.fechaA = form.get('fecha').value;
-      newOrden.tipoExam= parseInt(form.get('tipoExam').value);
-      newOrden.orden="Externo";
-      this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
-    }
-  }
 
 
   openModalI<T>(body: Content<T>, header: Content<T> = null,
@@ -333,42 +288,77 @@ export class ConexionLaboratorioComponent extends BasePageComponent
       options: null
     });
   }
+
+  openModalMI<T>(body: Content<T>, header: Content<T> = null,
+    footer: Content<T> = null,ap:Personal
+  ) {
+    this.initMI(ap);
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: null
+    });
+  }
   initHI() {
     this.today = new Date();
     this.historiaFormI = this.formBuilder.group({
       dni: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
-      orden: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
-      fecha: [formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') ? formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530') : "", Validators.required],
-      tipoExam: ["", Validators.required],
-      nroRecibo:["",[Validators.pattern("[0-9]*")]],
-      monto:["",[Validators.pattern("[0-9]*")]]
+      nombre: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      apellido_paterno: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      apellido_materno: ['', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      especialidad: ["", Validators.required],
     });
   }
-  
 
-  crearOrdenI(form: FormGroup) {
-    this.httpSv.searcHistoriasDNI(form.get('dni').value).subscribe(
-      data => {
-        this.histI=data;
-        if (form.valid) {
-          let newOrden: OrdenM = form.value;
-          newOrden.dni = form.get('dni').value;
-          
-          newOrden.numeroHistoria=this.histI.numeroHistoria;
-          newOrden.nombre=this.histI.nombres+" "+this.histI.apellido_paterno+" "+this.histI.apellido_materno;
-          newOrden.orden = form.get('orden').value;
-          newOrden.fechaA = form.get('fecha').value;
-    
-          newOrden.tipoExam= parseInt(form.get('tipoExam').value);
-          
-          this.httpSv.createOrdenM(newOrden, this.modal, 1,2);
-        }
-      },
-      error=>{
-          this.toastr.error("No existe paciente con ese DNI");
-      }
-    );
-   
+  initMI(a:Personal) {
+    this.idP=a.id;
+    console.log(this.idP)
+    this.today = new Date();
+    this.historiaFormI = this.formBuilder.group({
+      dni: [a.dni ? a.dni:"", [Validators.required, Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      nombres: [a.nombres ? a.nombres:'', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      apellido_paterno: [a.apellido_paterno ? a.apellido_paterno:'', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      apellido_materno: [a.apellido_materno ? a.apellido_materno:'', [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      especialidad: [, Validators.required],
+    });
+  }
+
+
+  crearMedicoI(form: FormGroup) {
+    if (form.valid) {
+      let newMedico: Personal = form.value;
+      newMedico.dni = form.get('dni').value;
+      newMedico.nombres = form.get('nombre').value;
+      newMedico.apellido_paterno = form.get('apellido_paterno').value;
+      newMedico.apellido_materno = form.get('apellido_materno').value;
+      newMedico.especialidad = form.get('especialidad').value;
+      newMedico.estReg = true;
+      console.log(newMedico)
+      this.adminSv.createMedico(newMedico);
+    }
+    this.closeModalH();
+    this.loadData();
+  }
+
+  updateMedicoI(form: FormGroup) {
+    console.log(this.idP)
+    if (form.valid) {
+      let newMedico: PersonalCreate = form.value;
+      newMedico.id=this.idP;
+      newMedico.dni = form.get('dni').value;
+      newMedico.nombres = form.get('nombres').value;
+      newMedico.apellido_paterno = form.get('apellido_paterno').value;
+      newMedico.apellido_materno = form.get('apellido_materno').value;
+      newMedico.especialidad = form.get('especialidad').value;
+      newMedico.estReg = true;
+      console.log("update")
+      console.log(newMedico)
+      this.adminSv.updateMedico(newMedico,this.idP);
+    }
+    this.closeModalH();
+    this.loadData();
+    this.loadOrdenes();
   }
 
   initBusForm() {
@@ -380,32 +370,27 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   buscar(ab: FormGroup) {
     this.bus = ab.get("datoBus").value;
     console.log(this.bus);
-    this.httpSv.searchOrdenDniAdmis(this.bus).subscribe(
+    this.adminSv.searchPersonalDNI(this.bus).subscribe(
       data => {
+        console.log(data);
         if (this.bus == "") {
           this.toastr.info("No se ha ingresado ningun texto");
         }
         else {
-          if (data.results.length == 0) {
-            this.toastr.error("No se han encontrado coincidencias");
-            this.loadOrdenes();
-          }
-          else {
             this.ordenes = [];
-            this.ordenes = data.results;
+            this.ordenes[0] = data;
+            console.log(this.ordenes);
+            for (let i in this.ordenes) {       
+              this.ordenes[i].direccion = this.ordenes[i].especialidad.nombre;
+            } 
             this.toastr.info("Mostrando resultados");
-          }
+          
         }
       }
     );
   }
 
-  cancelar(){
-    this.labService.cancelarOrden(parseInt(this.idCita)).subscribe(sol => {
-      this.loadOrdenes();
-    });
-    this.closeModalH();
-  }
+
   @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
     if (event.key === "Escape") {
       this.closeModalH();

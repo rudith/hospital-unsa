@@ -11,5 +11,7 @@ export interface OrdenV {
     },
     fechaA?: string,
     estadoOrden?:string
+    nroRecibo?:string,
+        monto?:string,
   }
   

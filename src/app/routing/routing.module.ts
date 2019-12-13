@@ -73,6 +73,7 @@ import { LoginGuard } from '../Guards/login.guard';
 import { AtenderComponent } from '../pages/Lab/atender/atender.component';
 import { PersonalAdmComponent } from '../pages/Administrador/personal-adm/personal-adm.component';
 import { TipoExamenComponent } from '../pages/Administrador/tipo-examen/tipo-examen.component';
+import { VerMedicosComponent } from '../pages/Admision/ver-medicos/ver-medicos.component';
 
 const VERTICAL_ROUTES: Routes = [
   { path: "default-dashboard", component: PageDashboardComponent },
@@ -147,6 +148,7 @@ const VERTICAL_ROUTES: Routes = [
   { path: 'atender', canActivate:[LoginGuard],component:AtenderComponent},
   { path: "personalAdm",canActivate:[LoginGuard], component: PersonalAdmComponent},
   { path: "tipoExamen",canActivate:[LoginGuard],component:TipoExamenComponent},
+  { path: "ver-medicos",canActivate:[LoginGuard],component:VerMedicosComponent},
   { path: "**", component: Page404Component }
 ];
 

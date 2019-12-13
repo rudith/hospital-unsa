@@ -331,8 +331,18 @@
           </tc-select>
         </tc-form-group>
         <tc-form-group>
+
+          <tc-form-label>Condición:</tc-form-label>
+        <tc-select
+          [placeholder]="Condicion"
+          formControlName="condicion"
+          [options]="conOption"
+        >
+        </tc-select>
+      </tc-form-group>
+        <tc-form-group>
           
-            <tc-form-label>Fecha de Separación:</tc-form-label>
+            <tc-form-label>Fecha de Atención:</tc-form-label>
           <tc-input type="date" formControlName="fechaSeparacion"></tc-input>
           <tc-form-description
             [tcColor]="'#e24d4d'"
@@ -373,9 +383,10 @@
   <!-- Modal Crear Historial -->
   <ng-container>
     <ng-template #modalCrearHBody>
+      <p>Solo los campos con * son obligatorios</p>
       <form [formGroup]="patientForm" novalidate class="new-patient-form">
         <div class="row">
-          <div class="col-12 col-sm-6">
+          <div class="col-12 col-sm-4">
             <tc-form-group>
               <tc-form-label>Numero de Historia</tc-form-label>
               <tc-input
@@ -386,7 +397,7 @@
             </tc-form-group>
           </div>
   
-          <div class="col-12 col-sm-6">
+          <div class="col-12 col-sm-4">
             <tc-form-group>
                 <tc-form-label>DNI:</tc-form-label>
               <tc-input
@@ -406,11 +417,22 @@
               </tc-form-description>
             </tc-form-group>
           </div>
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+                <tc-form-label>Sexo:*</tc-form-label>
+              <tc-select
+                [placeholder]="'Sexo'"
+                formControlName="sexo"
+                [options]="sexOption"
+              >
+              </tc-select>
+            </tc-form-group>
+          </div>
         </div>
         <div class="row">
           <div class="col-12 col-sm-12">
             <tc-form-group>
-                <tc-form-label>Nombres:</tc-form-label>
+                <tc-form-label>Nombres:*</tc-form-label>
               <tc-input
                 [placeholder]="'Nombres*'"
                 formControlName="nombres"
@@ -431,7 +453,7 @@
         <div class="row">
           <div class="col-12 col-sm-6">
             <tc-form-group>
-                <tc-form-label>Apellido Paterno:</tc-form-label>
+                <tc-form-label>Apellido Paterno:*</tc-form-label>
               <tc-input
                 [placeholder]="'Apellido Paterno*'"
                 formControlName="apellido_paterno"
@@ -450,7 +472,7 @@
           </div>
           <div class="col-12 col-sm-6">
             <tc-form-group>
-                <tc-form-label>Apellido Materno:</tc-form-label>
+                <tc-form-label>Apellido Materno:*</tc-form-label>
               <tc-input
                 [placeholder]="'Apellido Materno*'"
                 formControlName="apellido_materno"
@@ -526,7 +548,7 @@
         </div>
   
         <div class="row">
-          <div class="col-12 col-sm-3">
+          <div class="col-12 col-sm-6">
             <tc-form-group>
                 <tc-form-label>Nacionalidad: </tc-form-label>
               <tc-input
@@ -545,7 +567,7 @@
               </tc-form-description>
             </tc-form-group>
           </div>
-          <div class="col-12 col-sm-5">
+          <div class="col-12 col-sm-6">
             <tc-form-group>
                 <tc-form-label>Fecha de Nac.:</tc-form-label>
               <tc-input
@@ -563,17 +585,7 @@
             </tc-form-group>
           </div>
   
-          <div class="col-12 col-sm-4">
-            <tc-form-group>
-                <tc-form-label>Sexo:</tc-form-label>
-              <tc-select
-                [placeholder]="'Sexo'"
-                formControlName="sexo"
-                [options]="sexOption"
-              >
-              </tc-select>
-            </tc-form-group>
-          </div>
+          
         </div>
   
         <div class="row">
@@ -649,7 +661,47 @@
             </tc-form-group>
           </div>
         </div>
-        <div class="row"></div>
+        
+
+        <div class="row">
+            
+            <div class="col-12 col-sm-6">
+              <tc-form-group>
+                  <tc-form-label>Procedencia:</tc-form-label>
+                <tc-input
+                  [placeholder]="'Procedencia'"
+                  [type]="'text'"
+                  formControlName="procedencia"
+                ></tc-input>
+                <tc-form-description
+                  [tcColor]="'#e24d4d'"
+                  [tcFontSize]="'0.8em'"
+                  *ngIf="patientForm.controls.procedencia.invalid"
+                >
+                  Ingrese procedencia del paciente
+                </tc-form-description>
+              </tc-form-group>
+            </div>
+            <div class="col-12 col-sm-6">
+              <tc-form-group>
+                  <tc-form-label>Lugar de Nacimiento:</tc-form-label>
+                <tc-input
+                  [placeholder]="'Lugar de Nacimiento*'"
+                  [type]="'text'"
+                  formControlName="lugarNac"
+                ></tc-input>
+                <tc-form-description
+                  [tcColor]="'#e24d4d'"
+                  [tcFontSize]="'0.8em'"
+                  *ngIf="patientForm.controls.lugarNac.invalid"
+                >
+                  Ingrese el lugar de nacimiento
+                </tc-form-description>
+              </tc-form-group>
+            </div>
+          </div>
+
+      
       </form>
     </ng-template>
   
@@ -949,6 +1001,37 @@
           </div>
           
         </div>
+        <div class="row">
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Procedencia:</tc-form-label>
+              <tc-input
+                [bgColor]="'#fff'"
+                [borderColor]="'#3f51b5'"
+                [color]="'#3f51b5'"
+                [placeholder]="'Procedencia'"
+                formControlName="procedencia"
+                readonly="readonly"
+              ></tc-input>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-4">
+            <tc-form-group>
+              <tc-form-label>Lugar de Nacimiento:</tc-form-label>
+              <tc-input
+                [bgColor]="'#fff'"
+                [borderColor]="'#3f51b5'"
+                [color]="'#3f51b5'"
+                [placeholder]="'Lugar de Nacimiento'"
+                formControlName="lugarNac"
+                readonly="readonly"
+              >
+              </tc-input>
+            </tc-form-group>
+          </div>
+          
+        </div>
+
       </form>
     </ng-template>
   
@@ -993,7 +1076,7 @@
                 <tc-input
                   [placeholder]="'DNI'"
                   formControlName="dni"
-                  readonly="readonly"
+                  
                 ></tc-input>
               </tc-form-group>
             </div>
@@ -1003,7 +1086,7 @@
                   <tc-input
                     [placeholder]="'Edad'"
                     formControlName="fechaNac"
-                    readonly="readonly"
+                    
                   ></tc-input>
                 </tc-form-group>
               </div>
@@ -1015,7 +1098,7 @@
                 <tc-input
                   [placeholder]="'Nombre'"
                   formControlName="nombres"
-                  readonly="readonly"
+                  
                 ></tc-input>
               </tc-form-group>
             </div>
@@ -1027,7 +1110,7 @@
                 <tc-input
                   [placeholder]="'Apellido Paterno'"
                   formControlName="apellido_paterno"
-                  readonly="readonly"
+                  
                 >
                 </tc-input>
               </tc-form-group>
@@ -1039,7 +1122,7 @@
                 <tc-input
                   [placeholder]="'Apellido Materno'"
                   formControlName="apellido_materno"
-                  readonly="readonly"
+                  
                 >
                 </tc-input>
               </tc-form-group>
@@ -1201,6 +1284,44 @@
             
           </div>
           
+        <div class="row">
+            
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+                <tc-form-label>Procedencia:</tc-form-label>
+              <tc-input
+                [placeholder]="'Procedencia'"
+                [type]="'text'"
+                formControlName="procedencia"
+              ></tc-input>
+              <tc-form-description
+                [tcColor]="'#e24d4d'"
+                [tcFontSize]="'0.8em'"
+                *ngIf="ModForm.controls.procedencia.invalid"
+              >
+                Ingrese procedencia del paciente
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+          <div class="col-12 col-sm-6">
+            <tc-form-group>
+                <tc-form-label>Lugar de Nacimiento:</tc-form-label>
+              <tc-input
+                [placeholder]="'Lugar de Nacimiento*'"
+                [type]="'text'"
+                formControlName="lugarNac"
+              ></tc-input>
+              <tc-form-description
+                [tcColor]="'#e24d4d'"
+                [tcFontSize]="'0.8em'"
+                *ngIf="ModForm.controls.lugarNac.invalid"
+              >
+                Ingrese el lugar de nacimiento
+              </tc-form-description>
+            </tc-form-group>
+          </div>
+        </div>
+          
         </form>
       </ng-template>
     
@@ -1225,3 +1346,7 @@
           </div>
         </ng-template>
     </ng-container>
+
+    <div class="add-action-box">
+      <button tc-button [square]="true" [tcShape]="500" (click)="descargarExcel()" >Descargar Excel </button>
+    </div>

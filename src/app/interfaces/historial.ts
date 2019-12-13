@@ -22,4 +22,7 @@ export interface Historial {
 	provincia: number,
 	departamento: number,
 	fechaReg:String,
+	lugarNac:String,
+	procedencia:String,
+	updated_at:String,
 }

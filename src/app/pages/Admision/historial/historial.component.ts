@@ -237,7 +237,7 @@ export class HistorialComponent extends BasePageComponent
     });
     this.patientForm = this.formBuilder.group({
       NumH:[this.ulH1 ? this.ulH1 : ""],
-      dni: [null,[ Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      dni: [null,[ Validators.minLength(8)]],
       nombres: ["",[Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       apellido_paterno: [
         "",

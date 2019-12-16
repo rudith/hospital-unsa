@@ -183,6 +183,10 @@ export class AdministradorService {
   loadPersonal(): Observable<any> {
     return this.http.get<any>(this.url + "/ver-personales/", this.getHeader());
   }
+
+  loadMedicos(): Observable<any> {
+    return this.http.get<any>(this.url + "/ver-medicos/", this.getHeader());
+  }
   loadPersonalPagination(url: string): Observable<personalLista> {
     return this.http.get<personalLista>(url, this.getHeader());
   }
@@ -195,6 +199,12 @@ export class AdministradorService {
   searchPersonalDNI(dni: string): Observable<any> {
     return this.http.get<any>(
       this.url + "/personaldni/" + dni + "/",
+      this.getHeader()
+    );
+  }
+  searchMedicoDNI(dni: string): Observable<any> {
+    return this.http.get<any>(
+      this.url + "/medicodni/" + dni + "/",
       this.getHeader()
     );
   }

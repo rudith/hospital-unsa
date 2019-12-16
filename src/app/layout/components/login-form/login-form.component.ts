@@ -57,8 +57,8 @@ export class LoginFormComponent implements OnInit {
           }
           if (data.tipoUser == "Consultorio" || data.tipoUser == "Medico" || data.tipoUser == "Médico") {
             localStorage.setItem("menu", "consultorio");
-            console.log("Entro consultorio " +data.personal_id)
-            this.http.setIdMedico(data.personal_id);            
+            console.log("Entro consultorio " + data.personal_id)
+            this.http.setIdMedico(data.personal_id);
             this.toastr.info(data.username, "Bienvenido");
             this.router.navigate(["/vertical/consultas"]);
           }
@@ -71,12 +71,12 @@ export class LoginFormComponent implements OnInit {
 
           if (data.tipoUser == "Laboratorio") {
             localStorage.setItem("menu", "laboratorio");
-            console.log("Entro lab " +data.personal_id)
-            this.http.setIdUs(data.id);
+            console.log("Entro lab " + data.personal_id)
+            this.http.setIdUs(data.personal_id);
             this.toastr.info(data.username, "Bienvenido");
             this.router.navigate(["/vertical/ordenes"]);
           }
-          if(data.tipoUser!="Laboratorio" && data.tipoUser!="Triaje" && data.tipoUser!="Consultorio" && data.tipoUser!="Medico" && data.tipoUser!="Administrador" && data.tipoUser!="Admision" ){
+          if (data.tipoUser != "Laboratorio" && data.tipoUser != "Triaje" && data.tipoUser != "Consultorio" && data.tipoUser != "Medico" && data.tipoUser != "Administrador" && data.tipoUser != "Admision") {
             this.toastr.error("Usuario:" + lg.get("login").value, "Usuario no registrado");
           }
 

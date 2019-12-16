@@ -2789,7 +2789,7 @@ let LoginFormComponent = class LoginFormComponent {
             if (data.tipoUser == "Laboratorio") {
                 localStorage.setItem("menu", "laboratorio");
                 console.log("Entro lab " + data.personal_id);
-                this.http.setIdUs(data.id);
+                this.http.setIdUs(data.personal_id);
                 this.toastr.info(data.username, "Bienvenido");
                 this.router.navigate(["/vertical/ordenes"]);
             }

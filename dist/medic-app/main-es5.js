@@ -2827,7 +2827,7 @@ var LoginFormComponent = /** @class */ (function () {
             if (data.tipoUser == "Laboratorio") {
                 localStorage.setItem("menu", "laboratorio");
                 console.log("Entro lab " + data.personal_id);
-                _this.http.setIdUs(data.id);
+                _this.http.setIdUs(data.personal_id);
                 _this.toastr.info(data.username, "Bienvenido");
                 _this.router.navigate(["/vertical/ordenes"]);
             }

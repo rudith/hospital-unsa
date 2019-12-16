@@ -185,7 +185,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
   }
 
   loadOrdenes() {
-    this.adminSv.loadPersonal().subscribe(sol => {
+    this.adminSv.loadMedicos().subscribe(sol => {
       this.ordenesLis = sol;
       this.ordenes = sol.results;
       for (let index = 0; index < this.ordenes.length; index++) {
@@ -372,7 +372,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
   buscar(ab: FormGroup) {
     this.bus = ab.get("datoBus").value;
     console.log(this.bus);
-    this.adminSv.searchPersonalDNI(this.bus).subscribe(
+    this.adminSv.searchMedicoDNI(this.bus).subscribe(
       data => {
         console.log(data);
         if (this.bus == "") {

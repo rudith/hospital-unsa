@@ -7533,7 +7533,7 @@ var HistorialComponent = /** @class */ (function (_super) {
         });
         this.patientForm = this.formBuilder.group({
             NumH: [this.ulH1 ? this.ulH1 : ""],
-            dni: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].maxLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern("[0-9]*")]],
+            dni: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(8)]],
             nombres: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
             apellido_paterno: [
                 "",

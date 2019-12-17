@@ -151,6 +151,12 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
         this.data[i] = this.especialidades[i].nombre;
         console.log(this.data[i]);
       }
+      for (let index = 0; index < this.ordenes.length; index++) {
+        if(this.ordenes[index].especialidad==null)
+        this.ordenes[index].direccion="Falta"
+        else
+        this.ordenes[index].direccion = this.ordenes[index].especialidad.nombre;
+      }
     });
   }
 
@@ -189,7 +195,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
       this.ordenesLis = sol;
       this.ordenes = sol.results;
       for (let index = 0; index < this.ordenes.length; index++) {
-        if(this.ordenes[index].especialidad=null)
+        if(this.ordenes[index].especialidad==null)
         this.ordenes[index].direccion=="Falta"
         else
         this.ordenes[index].direccion = this.ordenes[index].especialidad.nombre;

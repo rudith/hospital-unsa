@@ -380,7 +380,7 @@ export class HistorialComponent extends BasePageComponent
     for (let i in this.perso) {
       this.medOption[i] = {
         label: this.perso[i].nombres + " " + this.perso[i].apellido_paterno + " " + this.perso[i].apellido_materno,
-        value: this.perso[i].user.id + ""
+        value: this.perso[i].id + ""
       };
     }
   }
@@ -741,13 +741,12 @@ export class HistorialComponent extends BasePageComponent
   
   cargarMedXEsp(a: number) {
     
-    this.httpSv.searcMedxEspPag(a).subscribe(
+    this.httpSv.searcMedxEsp(a).subscribe(
       data => {
         this.perso = [];
         this.medOption = [];
         this.perso = data;
-        //console.log(data);
-        //console.log(this.perso);
+        console.log(this.perso);
         this.loadmedicos();
       },
       error => { }

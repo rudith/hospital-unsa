@@ -91,7 +91,7 @@ export class TCSelectComponent implements OnInit, ControlValueAccessor {
     this.disabled = false;
     this.filter = false;
     this.filterForm = new FormControl('');
-    this.notFoundMsg = 'No results found!';
+    this.notFoundMsg = 'No se encontraron resultados';
     this.opened = false;
     this.valueSelected = new EventEmitter();
     this.size = 'md';

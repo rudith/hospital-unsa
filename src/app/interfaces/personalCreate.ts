@@ -9,7 +9,7 @@ export interface PersonalCreate {
   direccion?: string,
   fechaReg?: string,
   updated_at?: string,
-  estReg?: true,
+  estReg?: boolean,
   area?: number,
   tipo_personal?: number,
   especialidad?: number,

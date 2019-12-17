@@ -143,6 +143,14 @@
           [enableSorting]="true"
         >
         </tc-table-col>
+        <tc-table-col
+          [columnTitle]="'Edad'"
+          [columnName]="'edad'"
+          [enableSorting]="true"
+        >
+        </tc-table-col>
+        
+        
   
         <tc-table-col [columnTitle]="'Ver Mas'" [columnName]="''">
           <ng-template #tableTDTemplate let-row="row">
@@ -331,7 +339,7 @@
           </tc-select>
         </tc-form-group>
         <tc-form-group>
-
+    
           <tc-form-label>Condición:</tc-form-label>
         <tc-select
           [placeholder]="Condicion"
@@ -911,6 +919,7 @@
               </tc-input>
             </tc-form-group>
           </div>
+          
           <div class="col-12 col-sm-9">
             <tc-form-group>
               <tc-form-label>Dirección:</tc-form-label>

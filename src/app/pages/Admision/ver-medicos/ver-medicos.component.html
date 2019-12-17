@@ -1,18 +1,28 @@
 <ng-container>
   <ng-template #modalConf1>
-    <p>¿Esta seguro que desea eliminar orden?</p>
+    <p>¿Esta seguro que desea cambiar el estado del médico?</p>
   </ng-template>
 
   <ng-template #modalConf2>
-    <h5>Cancelar orden</h5>
+    <h5>Cambiar Estado Cita</h5>
   </ng-template>
 
   <ng-template #modalConf3>
     <div class="row actions justify-content-between">
-      <button class="col-sm-3" tc-button [view]="'success'" (click)="cancelar()">
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'success'"
+        (click)="CambiarEstado()"
+      >
         Si
       </button>
-      <button class="col-sm-3" tc-button [view]="'error'" (click)="closeModalH()">
+      <button
+        class="col-sm-3"
+        tc-button
+        [view]="'error'"
+        (click)="closeModalH()"
+      >
         No
       </button>
     </div>
@@ -85,12 +95,27 @@
       </ng-template>
     </tc-table-col>
 
+    <tc-table-col [columnTitle]="'Estado'" [columnName]="'estReg'">
+      <ng-template #tableTDTemplate let-value>
+        <strong>{{ value }}</strong>
+      </ng-template>
+    </tc-table-col>
+
     <tc-table-col [columnTitle]="'Modificar Médico'">
       <ng-template #tableTDTemplate let-row="row">
         <div class="actions">
           <button tc-button tc-button [afterIcon]="'icofont-edit-alt'" [view]="'info'" [tcShape]="500" [size]="'sm'"
             (click)="
             openModalMI(modalBodyM,'Modificar Médico',modalFooterM,row)"></button>
+        </div>
+      </ng-template>
+    </tc-table-col>
+    <tc-table-col [columnTitle]="'Cambiar Estado'">
+      <ng-template #tableTDTemplate let-row="row">
+        <div class="actions">
+          <button tc-button tc-button [afterIcon]="'icofont-ui-edit'" [view]="'error'" [tcShape]="500" [size]="'sm'"
+            (click)="
+            openModalEstado(modalConf1,modalConf2,modalConf3,row)"></button>
         </div>
       </ng-template>
     </tc-table-col>

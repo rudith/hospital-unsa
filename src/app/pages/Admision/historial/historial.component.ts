@@ -526,7 +526,7 @@ export class HistorialComponent extends BasePageComponent
         newAppointment.estadoCita = "Espera";
         newAppointment.estReg = true;
         newAppointment.numeroHistoria = this.numero;
-        newAppointment.turno=this.turn+1;
+        newAppointment.turno=this.turn;
   
         if (newAppointment.responsable == "") {
           newAppointment.exonerado = false;

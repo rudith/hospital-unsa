@@ -52,6 +52,8 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
   public distritos: Distrito[];
   public medicos: Medico[];
   public perso: Personal[];
+  public ah:Personal;
+  public ai:PersonalCreate;
   today: Date;
   datoBus: string;
   opBus: string;
@@ -78,6 +80,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
   pagesNumber: number;
   pageNum: number;
   idP:number;
+  ahj:Personal;
   public newCita: Cita;
   public espOption: IOption[];
   public busqOption: IOption[];
@@ -136,6 +139,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
         }
       ]
     };
+  
     this.pageNum = 1;
     this.perso = [];
     this.tableData = [];
@@ -157,6 +161,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
         else
         this.ordenes[index].direccion = this.ordenes[index].especialidad.nombre;
       }
+      this.initHI()
     });
   }
 
@@ -320,6 +325,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
   }
 
   initMI(a:Personal) {
+    console.log(a.id)
     this.idP=a.id;
     console.log(this.idP)
     this.today = new Date();
@@ -396,6 +402,42 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
         }
       }
     );
+  }
+
+  openModalEstado<T>(body: Content<T>, header: Content<T> = null,footer: Content<T> = null,row: Personal,options: any = null) {
+    //this.idCita = id;
+    console.log(row)
+    this.ah=row;
+    console.log(this.ah)
+    this.modal.open({
+      body: body,
+      header: header,
+      footer: footer,
+      options: options
+    });
+  }
+  CambiarEstado() {  
+
+
+      let newMedico: PersonalCreate=this.historiaFormI.value ;      
+      console.log(newMedico)
+      newMedico.id=this.ah.id;
+      newMedico.dni = this.ah.dni;
+      newMedico.nombres = this.ah.nombres;
+      newMedico.apellido_paterno =this.ah.apellido_paterno;
+      newMedico.apellido_materno = this.ah.apellido_materno;
+      newMedico.especialidad = this.ah.especialidad.id;
+      if(this.ah.estReg==true)
+        newMedico.estReg = false;
+      else
+        newMedico.estReg=true;
+      console.log("update")
+      console.log(newMedico)
+      this.adminSv.updateMedico(newMedico,this.ah.id);
+    
+    this.closeModalH();
+    this.loadData();
+    this.loadOrdenes();
   }
 
 

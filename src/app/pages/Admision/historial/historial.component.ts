@@ -777,7 +777,7 @@ export class HistorialComponent extends BasePageComponent
   }
   
   descargarExcel(){
-    document.location.href = "http://18.219.251.250:8000/admision/export/xls/" ;
+    document.location.href = "http://localhost:8000/admision/export/xls/" ;
     this.toastr.success("Se ha descargado el Excel de Historias");
   }
 }

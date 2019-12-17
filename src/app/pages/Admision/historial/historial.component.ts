@@ -509,38 +509,40 @@ export class HistorialComponent extends BasePageComponent
     console.log(form.get('fechaSeparacion').value)
     this.httpSv.cantidadCitasTurno(form.get('fechaSeparacion').value).subscribe(historiales => {
       this.turn=historiales.orden+1;
+      console.log(this.turn)
+      if (form.valid) {
+        this.today = new Date();
+        let newAppointment: Cita = form.value;
+        newAppointment.fechaAtencion = formatDate(
+          form.value.fechaSeparacion,
+          "yyyy-MM-dd",
+          "en-US"
+        );
+        newAppointment.fechaSeparacion = formatDate(
+          this.today,
+          "yyyy-MM-dd",
+          "en-US"
+        );
+        newAppointment.estadoCita = "Espera";
+        newAppointment.estReg = true;
+        newAppointment.numeroHistoria = this.numero;
+        newAppointment.turno=this.turn+1;
+  
+        if (newAppointment.responsable == "") {
+          newAppointment.exonerado = false;
+        } else {
+          newAppointment.numeroRecibo = null;
+          newAppointment.exonerado = true;
+        }
+        
+        console.log(newAppointment.turno)
+        this.httpSv.createCITA(newAppointment, this.modal);
+  
+      }
     });
     
     
-    if (form.valid) {
-      this.today = new Date();
-      let newAppointment: Cita = form.value;
-      newAppointment.fechaAtencion = formatDate(
-        form.value.fechaSeparacion,
-        "yyyy-MM-dd",
-        "en-US"
-      );
-      newAppointment.fechaSeparacion = formatDate(
-        this.today,
-        "yyyy-MM-dd",
-        "en-US"
-      );
-      newAppointment.estadoCita = "Espera";
-      newAppointment.estReg = true;
-      newAppointment.numeroHistoria = this.numero;
-      newAppointment.turno=this.turn+1;
-
-      if (newAppointment.responsable == "") {
-        newAppointment.exonerado = false;
-      } else {
-        newAppointment.numeroRecibo = null;
-        newAppointment.exonerado = true;
-      }
-      
-      console.log(newAppointment.turno)
-      this.httpSv.createCITA(newAppointment, this.modal);
-
-    }
+    
   }
 
   onChangeTable() {

@@ -157,7 +157,6 @@
             <div class="actions">
               <button
                 tc-button
-                tc-button
                 [tcColor]="['#fff', '#3f51b5']"
                 [tcBgColor]="['#3f51b5', '#fff']"
                 [tcBorderColor]="'#3f51b5'"
@@ -1092,7 +1091,8 @@
                 <tc-form-group>
                   <tc-form-label>Fecha Nacimiento: </tc-form-label>
                   <tc-input
-                    [placeholder]="'Edad'"
+                  type="date"
+                    [placeholder]="'Fecha de nacimiento'"
                     formControlName="fechaNac"
                     
                   ></tc-input>

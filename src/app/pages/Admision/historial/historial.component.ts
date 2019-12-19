@@ -481,6 +481,11 @@ export class HistorialComponent extends BasePageComponent
       nHist.id=this.histTemp.id;
       nHist.sexo=this.histTemp.sexo;
       nHist.estReg=this.histTemp.estReg;
+      nHist.fechaNac = formatDate(
+        form.value.fechaNac,
+        "yyyy-MM-dd",
+        "en-US"
+      );
 
       if(fr.get("fechaNac").value==""){
         nHist.fechaNac=null;

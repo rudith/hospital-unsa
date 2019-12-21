@@ -22,7 +22,7 @@ import { Personal } from '../../interfaces/personal';
 })
 export class AdministradorService {
   bool: boolean;
-  private url: string = BASE_API_URL + "/administrador";
+  private url: string = "/administrador";
   medOption: IOption[];
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
@@ -57,7 +57,7 @@ export class AdministradorService {
    ***/
   searchArea(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/buscararea/?ar=" + id,
+      "/administrador/buscararea/?ar=" + id,
       this.getHeader()
     );
   }
@@ -98,7 +98,7 @@ export class AdministradorService {
   }
   searchEspecialidad(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/buscarespecialidad/?esp=" + id,
+      "/administrador/buscarespecialidad/?esp=" + id,
       this.getHeader()
     );
   }
@@ -134,7 +134,7 @@ export class AdministradorService {
   }
   searchTPersonal(id: string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/administrador/buscartipousuario/?tip=" + id,
+      "/administrador/buscartipousuario/?tip=" + id,
       this.getHeader()
     );
   }
@@ -159,7 +159,7 @@ export class AdministradorService {
   }
   //o gettoken, despues de implementarse en el login se cambiaran estos metodos
   getToken(user: string, pass: string) {
-    return this.http.post<any>(BASE_API_URL + "/administrador/login/", {
+    return this.http.post<any>("/administrador/login/", {
       username: user,
       password: pass
     });
@@ -327,7 +327,7 @@ export class AdministradorService {
   createTipoExamen(tipo:Tipoexamen){
     this.http
       .post<any>(
-        BASE_API_URL + "/laboratorio/TipoExamen/",
+        "/laboratorio/TipoExamen/",
         {
           nombre: tipo.nombre
         },
@@ -349,7 +349,7 @@ export class AdministradorService {
    ***/
   loadTipoExamen(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/laboratorio/TipoExamen" ,this.getHeader()
+      "/laboratorio/TipoExamen" ,this.getHeader()
     );
   }
 
@@ -411,7 +411,7 @@ export class AdministradorService {
    ***/
   loadTipoExamenP(): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/laboratorio/TipoExamenPa" ,this.getHeader()
+      "/laboratorio/TipoExamenPa" ,this.getHeader()
     );
   }
 
@@ -430,7 +430,7 @@ export class AdministradorService {
    ***/
   searchTipoExamen(name:string): Observable<any> {
     return this.http.get<any>(
-      BASE_API_URL + "/laboratorio/buscarTipoExamen/?tipo="+name,this.getHeader()
+      "/laboratorio/buscarTipoExamen/?tipo="+name,this.getHeader()
     );
   }
 
@@ -441,7 +441,7 @@ export class AdministradorService {
   updateTipo(tipo: Tipoexamen): Observable<Tipoexamen> {
     console.log(JSON.stringify(tipo));
     return this.http.put<any>(
-      BASE_API_URL + "/laboratorio/TipoExamen/" + tipo.id + "/",
+      "/laboratorio/TipoExamen/" + tipo.id + "/",
       {
         id: tipo.id,
         nombre: tipo.nombre,

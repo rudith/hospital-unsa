@@ -91,13 +91,13 @@
 
 
 <div class="add-action-box2">
-	<a href="http://localhost:8000/laboratorio/reporteMensual">
+	<a href="/laboratorio/reporteMensual">
 		<input type="button" value="Reporte Mensual" name="submit" tc-button [square]="true" [tcShape]="300" />
 	</a>
 </div>
 
 <div class="addlab-action-box">
-	<a href="http://localhost:8000/laboratorio/reporteSemanal">
+	<a href="/laboratorio/reporteSemanal">
 		<input type="button" value="Reporte Semanal" name="submit" tc-button [square]="true" [tcShape]="300" />
 	</a>
 </div>
@@ -172,7 +172,8 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Nombre</tc-form-label>
-						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Nombre'" formControlName="nombre" readonly="readonly">
+						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Nombre'"
+							formControlName="nombre" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>
@@ -180,7 +181,8 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>DNI</tc-form-label>
-						<tc-input  [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="dni" readonly="readonly"></tc-input>
+						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="dni"
+							readonly="readonly"></tc-input>
 					</tc-form-group>
 				</div>
 			</div>
@@ -188,7 +190,8 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Tipo de Examen</tc-form-label>
-						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Tipo de Examen'" formControlName="tipoExam" readonly="readonly">
+						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Tipo de Examen'"
+							formControlName="tipoExam" readonly="readonly">
 						</tc-input>
 					</tc-form-group>
 				</div>
@@ -196,7 +199,8 @@
 				<div class="col-12 col-sm-6">
 					<tc-form-group>
 						<tc-form-label>Fecha</tc-form-label>
-						<tc-input  [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="fecha" readonly="readonly"></tc-input>
+						<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Fecha'" formControlName="fecha"
+							readonly="readonly"></tc-input>
 					</tc-form-group>
 				</div>
 
@@ -205,7 +209,8 @@
 			<div class="col-12 col-sm-12">
 				<tc-form-group>
 					<tc-form-label> Observaciones </tc-form-label>
-					<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Observaciones'" formControlName="observaciones" readonly="readonly">
+					<tc-input [bgColor]="'#fff'" [color]="'#3f51b5'" [placeholder]="'Observaciones'"
+						formControlName="observaciones" readonly="readonly">
 					</tc-input>
 				</tc-form-group>
 			</div>

@@ -203,7 +203,7 @@ export class LaboratorioComponent extends BasePageComponent implements OnInit, O
 
 	//Metodo que llama al servicio imprimirExam 
 	imprimir(row: Examen) {
-		document.location.href = BASE_API_URL + '/laboratorio/resultadoExamen/' + row.id;
+		document.location.href = '/laboratorio/resultadoExamen/' + row.id;
 		this.toastr.success("Se ha generado el Pdf");
 	}
 

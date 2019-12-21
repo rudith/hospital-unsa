@@ -513,7 +513,7 @@ loadTabla(row: Examen) {
    * closeModalExamenes: Hace la llamada al servicio para imprimir el resultado del examen por ID 
   ***/
   imprimirEx(Ex: Examen) {
-    document.location.href = BASE_API_URL + '/laboratorio/resultadoExamen/' + Ex.id + '/';
+    document.location.href = '/laboratorio/resultadoExamen/' + Ex.id + '/';
     this.toastr.success("Se ha generado el Pdf");
   }
   //fin de Modal Examenes de Laboratorio

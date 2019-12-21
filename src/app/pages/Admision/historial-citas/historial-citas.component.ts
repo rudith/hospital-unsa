@@ -279,7 +279,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
   updateCita(newCita: Cita) {
     this.http
       .put<any>(
-        BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/",
+        "/consultorio/crear-cita/" + newCita.id + "/",
         {
           numeroRecibo: newCita.numeroRecibo,
           fechaSeparacion: newCita.fechaSeparacion,
@@ -320,7 +320,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
         this.toastr.warning("No hay citas disponibles");
         this.closeModal();
       } else {
-        document.location.href = BASE_API_URL + "/admision/reporteDiarioCitas/";
+        document.location.href = "/admision/reporteDiarioCitas/";
     this.toastr.success("Se ha generado el Pdf");
         this.closeModal();
       }
@@ -336,7 +336,7 @@ export class HistorialCitasComponent extends BasePageComponent implements OnInit
         this.toastr.warning("No hay citas disponibles");
         this.closeModal();
       } else {
-        document.location.href = BASE_API_URL + "/admision/reporteCitasRangoFecha/" + this.a + "/";
+        document.location.href = "/admision/reporteCitasRangoFecha/" + this.a + "/";
         this.toastr.success("Se ha generado el Pdf");
         this.closeModal();
       }

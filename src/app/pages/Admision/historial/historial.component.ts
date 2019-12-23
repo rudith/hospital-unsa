@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, OnChanges } from "@angular/core";
+import {  Component,  ElementRef,  OnDestroy,  OnInit,  ViewChild,  OnChanges} from "@angular/core";
 import { BasePageComponent } from "../../base-page";
 import { Store } from "@ngrx/store";
 import { IAppState } from "../../../interfaces/app-state";
@@ -21,7 +21,7 @@ import { ToastrService } from "ngx-toastr";
 import { Router } from "@angular/router";
 import { Personal } from "../../../interfaces/personal";
 import { HistorialLista } from '../../../interfaces/historial-lista';
-import { HostListener } from '@angular/core';
+import { HostListener } from '@angular/core'; 
 
 // BASE_API_URL
 import { BASE_API_URL } from "../../../config/API";
@@ -51,7 +51,7 @@ export class HistorialComponent extends BasePageComponent
   public distritos: Distrito[];
   public medicos: Medico[];
   public perso: Personal[];
-  public turn: number;
+  public turn:number;
   today: Date;
   datoBus: string;
   opBus: string;
@@ -59,7 +59,7 @@ export class HistorialComponent extends BasePageComponent
   tableData: any[];
   appointmentForm: FormGroup;
   historiaForm: FormGroup;
-  ModForm: FormGroup;
+  ModForm:FormGroup;
   historiaLis: HistorialLista;
   historiales: Historial[];
   numero: number;
@@ -71,12 +71,12 @@ export class HistorialComponent extends BasePageComponent
   pages: Array<number>;
   pagesNumber: number;
   pageNum: number;
-  ulH: string;
-  ulH1: number;
-  mod1: string;
-  mod2: string;
-  mod3: string;
-  histTemp: Historial;
+  ulH:string;
+  ulH1:number;
+  mod1:string;
+  mod2:string;
+  mod3:string;
+  histTemp:Historial;
   public newCita: Cita;
   public espOption: IOption[];
   public busqOption: IOption[];
@@ -103,7 +103,7 @@ export class HistorialComponent extends BasePageComponent
     this.provincias = [];
     this.provinciasOption = [];
     this.sexOption = [];
-    this.conOption = [];
+    this.conOption=[];
     this.ocupacionOption = [];
     this.distritos = [];
     this.medOption = [];
@@ -145,12 +145,12 @@ export class HistorialComponent extends BasePageComponent
       this.especialidades = especialidades.results;
       this.loadOptions();
     });
+    
+   this.httpSv.getUltimoHist().subscribe(hist => {
+    this.ulH=hist.NroHistoria;
+    this.ulH1=parseInt(this.ulH)+1;
 
-    this.httpSv.getUltimoHist().subscribe(hist => {
-      this.ulH = hist.NroHistoria;
-      this.ulH1 = parseInt(this.ulH) + 1;
-
-    });
+  });
   }
   ngOnChanges($event) {
     console.log();
@@ -182,9 +182,9 @@ export class HistorialComponent extends BasePageComponent
   }
   ngOnInit() {
     super.ngOnInit();
-
+    
     this.estadoBusq = false;
-
+    
     this.initBusForm();
     this.getData("assets/data/opcionBusqueda.json", "busqOption");
     this.store.select("historiales").subscribe(historiales => {
@@ -194,7 +194,7 @@ export class HistorialComponent extends BasePageComponent
       }
     });
     this.preventBackButton();
-
+    
   }
   loadOptions() {
     for (let i in this.especialidades) {
@@ -231,59 +231,59 @@ export class HistorialComponent extends BasePageComponent
 
   initPatientForm() {
     this.httpSv.getUltimoHist().subscribe(hist => {
-      this.ulH = hist.NroHistoria;
-      this.ulH1 = parseInt(this.ulH) + 1;
+      this.ulH=hist.NroHistoria;
+      this.ulH1=parseInt(this.ulH)+1;
 
     });
     this.patientForm = this.formBuilder.group({
-      NumH: [this.ulH1 ? this.ulH1 : ""],
-      dni: [null, [Validators.minLength(8)]],
-      nombres: ["", [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
+      NumH:[this.ulH1 ? this.ulH1 : ""],
+      dni: [null,[ Validators.minLength(8)]],
+      nombres: ["",[Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       apellido_paterno: [
         "",
         [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
-      apellido_materno: ["", [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
+      apellido_materno: ["",[Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
       sexo: ["", [Validators.required]],
-      fechaNac: [null,],
+      fechaNac: [null, ],
       celular: ["", [Validators.minLength(9), Validators.maxLength(9)]],
       telefono: ["", [Validators.minLength(6), Validators.maxLength(6)]],
-      estadoCivil: ["",],
-      gradoInstruccion: ["",],
-      ocupacion: ["",],
-      direccion: ["",],
+      estadoCivil: ["", ],
+      gradoInstruccion: ["", ],
+      ocupacion: ["", ],
+      direccion: ["", ],
       nacionalidad: ["Peruana", [Validators.pattern("[A-Za-z ]*")]],
       email: [""],
-      distrito: ["",],
+      distrito: ["", ],
       provincia: ["",],
       departamento: ["",],
-      procedencia: ["", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
-      lugarNac: ["", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
+      procedencia:["", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
+      lugarNac:["", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
     });
   }
 
   addPatient(form: FormGroup) {
     this.today = new Date();
     if (form.valid) {
-      let newPatient: Historial = form.value;
+      let newPatient: Historial = form.value;      
       newPatient.fechaNac = formatDate(
         form.value.fechaNac,
         "yyyy-MM-dd",
         "en-US"
       );
-      if (form.get("fechaNac").value == null) {
-        newPatient.fechaNac = null;
+      if(form.get("fechaNac").value==null){
+        newPatient.fechaNac=null;
       }
       newPatient.estReg = true;
-      newPatient.fechaReg = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+      newPatient.fechaReg=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
       console.log(newPatient.fechaReg)
       console.log(newPatient);
       this.httpSv.createHISTORIAL(newPatient, this.modal);
       this.loadHistorias();
 
-
-
+      
+    
     }
   }
   closeModal() {
@@ -296,9 +296,9 @@ export class HistorialComponent extends BasePageComponent
 
   loadData() {
     //Condicion
-    this.conOption[0] = { label: "N", value: "N" };
-    this.conOption[1] = { label: "C", value: "C" };
-    this.conOption[2] = { label: "R", value: "R" };
+    this.conOption[0]={label:"N", value:"N"};
+    this.conOption[1]={label:"C", value:"C"};
+    this.conOption[2]={label:"R", value:"R"};
 
 
     //Sexo
@@ -386,7 +386,7 @@ export class HistorialComponent extends BasePageComponent
   }
 
   // open modal Cita
-  openModal(body: any,
+  openModal( body: any,
     header: any = null,
     footer: any = null,
     data: any = null,
@@ -411,16 +411,16 @@ export class HistorialComponent extends BasePageComponent
       medico: ["", Validators.required],
       responsable: ["", [Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s .,;]+')]],
       eleccion: [""],
-      condicion: ["", Validators.required]
+      condicion:["",Validators.required]
     });
   }
 
-  openModalMod(body: any,
+  openModalMod( body: any,
     header: any = null,
     footer: any = null,
     data: any = null,
   ) {
-    this.histTemp = data;
+    this.histTemp=data;
     console.log(this.histTemp);
     this.initModForm(data);
     this.modal.open({
@@ -432,15 +432,15 @@ export class HistorialComponent extends BasePageComponent
 
   // init form
   initModForm(data: any) {
-    this.mod1 = data.distrito;
-    this.mod2 = data.departamento;
-    this.mod3 = data.provincia;
+    this.mod1=data.distrito;
+    this.mod2=data.departamento;
+    this.mod3=data.provincia;
     this.ModForm = this.formBuilder.group({
       numeroHistoria: [
         data.numeroHistoria ? data.numeroHistoria : "",
         Validators.required
       ],
-      dni: [data.dni ? data.dni : null, [Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
+      dni: [data.dni ? data.dni : null,[ Validators.minLength(8), Validators.maxLength(8), Validators.pattern("[0-9]*")]],
       nombres: [data.nombres ? data.nombres : "", [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]],
       apellido_paterno: [
         data.apellido_paterno ? data.apellido_paterno : "",
@@ -450,48 +450,48 @@ export class HistorialComponent extends BasePageComponent
         data.apellido_materno ? data.apellido_materno : "",
         [Validators.required, Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
       ],
-      fechaNac: [data.fechaNac ? data.fechaNac : "",],
+      fechaNac: [data.fechaNac ? data.fechaNac : "", ],
       celular: [data.celular ? data.celular : "", [Validators.minLength(9), Validators.maxLength(9)]],
-      telefono: [data.telefono ? data.telefono : "", [Validators.minLength(6), Validators.maxLength(6)]],
+      telefono: [data.telefono ? data.telefono : "",[Validators.minLength(6), Validators.maxLength(6)]],
       estadoCivil: [
         data.estadoCivil ? data.estadoCivil : "",
-
+        
       ],
       gradoInstruccion: [
         data.gradoInstruccion ? data.gradoInstruccion : "",
-
+        
       ],
-      ocupacion: [data.ocupacion ? data.ocupacion : "",],
-      direccion: [data.direccion ? data.direccion : "",],
+      ocupacion: [data.ocupacion ? data.ocupacion : "", ],
+      direccion: [data.direccion ? data.direccion : "", ],
       nacionalidad: [
         data.nacionalidad ? data.nacionalidad : "",
-
+       
       ],
-      distrito: ["",],
-      provincia: ["",],
-      departamento: ["",],
-      procedencia: [data.procedencia ? data.procedencia : "", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
-      lugarNac: [data.lugarNac ? data.lugarNac : "", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
+      distrito: ["", ],
+      provincia: ["", ],
+      departamento: ["", ],
+      procedencia:[data.procedencia ? data.procedencia:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
+      lugarNac:[data.lugarNac ? data.lugarNac:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
     });
   }
 
-  updatePatient(fr: FormGroup) {
+  updatePatient(fr:FormGroup){
     if (fr.valid) {
-      let nHist: Historial = fr.value;
-      nHist.id = this.histTemp.id;
-      nHist.sexo = this.histTemp.sexo;
-      nHist.estReg = this.histTemp.estReg;
+      let nHist:Historial=fr.value;
+      nHist.id=this.histTemp.id;
+      nHist.sexo=this.histTemp.sexo;
+      nHist.estReg=this.histTemp.estReg;
       nHist.fechaNac = formatDate(
         fr.value.fechaNac,
         "yyyy-MM-dd",
         "en-US"
       );
 
-      if (fr.get("fechaNac").value == "") {
-        nHist.fechaNac = null;
+      if(fr.get("fechaNac").value==""){
+        nHist.fechaNac=null;
       }
       console.log(nHist);
-      this.httpSv.updateHISTORIAL(nHist, this.modal)
+      this.httpSv.updateHISTORIAL(nHist,this.modal)
       this.loadHistorias();
 
     }
@@ -510,10 +510,10 @@ export class HistorialComponent extends BasePageComponent
   }
 
   // add new appointment
-  addAppointment(form: FormGroup) {
+  addAppointment(form: FormGroup) {    
     console.log(form.get('fechaSeparacion').value)
     this.httpSv.cantidadCitasTurno(form.get('fechaSeparacion').value).subscribe(historiales => {
-      this.turn = historiales.orden + 1;
+      this.turn=historiales.orden+1;
       console.log(this.turn)
       if (form.valid) {
         this.today = new Date();
@@ -531,23 +531,23 @@ export class HistorialComponent extends BasePageComponent
         newAppointment.estadoCita = "Espera";
         newAppointment.estReg = true;
         newAppointment.numeroHistoria = this.numero;
-        newAppointment.turno = this.turn;
-
+        newAppointment.turno=this.turn;
+  
         if (newAppointment.responsable == "") {
           newAppointment.exonerado = false;
         } else {
           newAppointment.numeroRecibo = null;
           newAppointment.exonerado = true;
         }
-
+        
         console.log(newAppointment.turno)
         this.httpSv.createCITA(newAppointment, this.modal);
-
+  
       }
     });
-
-
-
+    
+    
+    
   }
 
   onChangeTable() {
@@ -577,18 +577,18 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNroR(this.datoBus).subscribe(
         data => {
-          if (data.length == 0) {
+          if(data.length==0){
             this.toastr.error("No se han encontrado coincidencias");
             this.httpSv.loadHistorias().subscribe(historiales => {
               this.historiales = []
               this.historiales = historiales.results;
             });
           }
-          else {
-            this.toastr.success("Mostrando resultados");
-            this.historiales = []
-            this.historiales = data;
-            console.log("entro bus" + this.datoBus);
+          else{
+          this.toastr.success("Mostrando resultados");
+          this.historiales = []
+          this.historiales = data;
+          console.log("entro bus" + this.datoBus);
           }
         },
         error => {
@@ -603,17 +603,17 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasNomAp(this.datoBus).subscribe(
         data => {
-          if (data.results.length == 0) {
+          if(data.results.length==0){
             this.toastr.error("No se han encontrado coincidencias");
             this.httpSv.loadHistorias().subscribe(historiales => {
               this.historiales = []
               this.historiales = historiales.results;
             });
-          } else {
-            this.toastr.success("Mostrando resultados");
-            this.historiales = [];
-            this.historiales = data.results;
-            console.log("entro bus" + this.datoBus);
+          }else{
+          this.toastr.success("Mostrando resultados");
+          this.historiales = [];
+          this.historiales = data.results;
+          console.log("entro bus" + this.datoBus);
           }
         },
         error => {
@@ -654,7 +654,7 @@ export class HistorialComponent extends BasePageComponent
 
   //Ver Mas
   initHistoriaForm(data: Historial) {
-
+    
     this.historiaForm = this.formBuilder.group({
       numeroHistoria: [
         data.numeroHistoria ? data.numeroHistoria : "",
@@ -697,9 +697,9 @@ export class HistorialComponent extends BasePageComponent
         data.departamento ? data.departamento : "",
         Validators.required
       ],
-      fechaReg: [data.fechaReg ? data.fechaReg : "", Validators.required],
-      procedencia: [data.procedencia ? data.procedencia : "", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
-      lugarNac: [data.lugarNac ? data.lugarNac : "", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
+      fechaReg:[data.fechaReg ? data.fechaReg :"",Validators.required],
+      procedencia:[data.procedencia ? data.procedencia:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')],
+      lugarNac:[data.lugarNac ? data.lugarNac:"", Validators.pattern('[a-zA-ZñÑáéíóúÁÉÍÓÚ\s ]+')]
     });
   }
 
@@ -718,9 +718,9 @@ export class HistorialComponent extends BasePageComponent
   /* Encargado: Shirley Romero
 	   Descripcion: Metodo que se encarga de generar el pdf de la historia clinica seleccionada, este metodo necesita el dni de la historia para generarlo
 	*/
-  imprimir1(data) {
-    document.location.href = "/admision/historiaPDF/" + data.numeroHistoria;
-    this.toastr.success("Se ha generado el Pdf");
+  imprimir1(data) {    
+       document.location.href = BASE_API_URL + "/admision/historiaPDF/" + data.numeroHistoria;
+       this.toastr.success("Se ha generado el Pdf");     
   }
   cargarProvXDepto(a: number) {
     this.httpSv.searcDptoxP(a).subscribe(
@@ -745,9 +745,9 @@ export class HistorialComponent extends BasePageComponent
       error => { }
     );
   }
-
+  
   cargarMedXEsp(a: number) {
-
+    
     this.httpSv.searcMedxEsp(a).subscribe(
       data => {
         this.perso = [];
@@ -759,14 +759,14 @@ export class HistorialComponent extends BasePageComponent
       error => { }
     );
   }
-
-  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    if (event.key === "Escape") {
+  
+  @HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) { 
+    if (event.key === "Escape") { 
       this.closeModal();
       this.closeModalH();
       this.closeModalVH();
     }
-    if (event.key === "Enter") {
+    if (event.key === "Enter") { 
       return false;
     }
   }
@@ -780,9 +780,9 @@ export class HistorialComponent extends BasePageComponent
       this.closeModalVH();
     });
   }
-
-  descargarExcel() {
-    document.location.href = "/admision/export/xls/";
+  
+  descargarExcel(){
+    document.location.href = "http://localhost:8000/admision/export/xls/" ;
     this.toastr.success("Se ha descargado el Excel de Historias");
   }
 }

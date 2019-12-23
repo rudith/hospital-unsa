@@ -37,7 +37,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   citasEdit: CitaM[] = [];
   public today: Date;
   tableData: any;
-  patientForm: FormGroup = <FormGroup>{};
+  patientForm: FormGroup=<FormGroup>{};
   gender: IOption[];
   status: IOption[];
   dni: string;
@@ -276,11 +276,11 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       data => {
         this.medicos = [];
         this.medOption = [];
-        this.medSelectedName = "";
+        this.medSelectedName="";
         this.medicos = data;
         this.loadOptionsMed();
       },
-      error => { }
+      error => {}
     );
   }
   // open modal window
@@ -337,7 +337,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
   }
   sendCita(cita: CitaM) {
     this.cita = cita;
-    this.medSelectedName = cita.medico.nombres + " " + cita.medico.apellido_paterno + " " + cita.medico.apellido_materno;
+    this.medSelectedName = cita.medico.nombres +" " + cita.medico.apellido_paterno + " " +  cita.medico.apellido_materno;
     this.espSelectedName = cita.especialidad.nombre;
   }
   addAppointment(form: FormGroup) {
@@ -372,20 +372,20 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     }
   }
   updateCita(newCita: Cita) {
-    this.http.put<any>("/consultorio/crear-cita/" + newCita.id + "/", {
-      numeroRecibo: newCita.numeroRecibo,
-      fechaSeparacion: newCita.fechaSeparacion,
-      fechaAtencion: newCita.fechaAtencion,
-      estadoCita: newCita.estadoCita,
-      exonerado: newCita.exonerado,
-      responsable: newCita.responsable,
-      estReg: newCita.estReg,
-      especialidad: newCita.especialidad,
-      numeroHistoria: newCita.numeroHistoria,
-      medico: newCita.medico
-    },
-      this.admService.getHeader()
-    )
+    this.http.put<any>(BASE_API_URL + "/consultorio/crear-cita/" + newCita.id + "/", {
+          numeroRecibo: newCita.numeroRecibo,
+          fechaSeparacion: newCita.fechaSeparacion,
+          fechaAtencion: newCita.fechaAtencion,
+          estadoCita: newCita.estadoCita,
+          exonerado: newCita.exonerado,
+          responsable: newCita.responsable,
+          estReg: newCita.estReg,
+          especialidad: newCita.especialidad,
+          numeroHistoria: newCita.numeroHistoria,
+          medico: newCita.medico
+        },
+        this.admService.getHeader()
+      )
       .subscribe(
         data => {
           this.toastr.success("", "Cita ACtualizada");
@@ -405,7 +405,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
     });
   }
 
-  openModalCancelar<T>(body: Content<T>, header: Content<T> = null, footer: Content<T> = null, id: string, options: any = null) {
+  openModalCancelar<T>(body: Content<T>, header: Content<T> = null,footer: Content<T> = null,id: string,options: any = null) {
     this.idCita = id;
     this.modal.open({
       body: body,

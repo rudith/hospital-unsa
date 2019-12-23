@@ -23,7 +23,7 @@ import { Personal } from '../../interfaces/personal';
 	providedIn: 'root'
 })
 export class LaboratorioService {
-	private url: string = "/laboratorio";
+	private url: string = BASE_API_URL + "/laboratorio";
 	public historia: Historial;
 	public cabecera: Cabeceralab[] = [];
 	public cabcrear: Cabcrear[] = [];
@@ -38,10 +38,10 @@ export class LaboratorioService {
 	private dni: string;
 	private ido: number;
 	private dd: number;
-	private dis: number;
-	private result: string;
-	private unidad: string;
-	private rango: string;
+	private dis:number;
+	private result:string;
+	private unidad:string;
+	private rango:string;
 
 	constructor(private http: HttpClient, private toastr: ToastrService, private adminSv: AdministradorService) {
 
@@ -101,10 +101,10 @@ export class LaboratorioService {
 
 	//Cargar dos tipos de ordenes
 	loadOrdenPagadas(): Observable<OrdenLista> {
-		return this.http.get<OrdenLista>("/consultorio/ver-ordenLaboratorio", this.adminSv.getHeader());
+		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-ordenLaboratorio", this.adminSv.getHeader());
 	}
 	loadOrdenCreadas(): Observable<OrdenLista> {
-		return this.http.get<OrdenLista>("/consultorio/ver-orden/", this.adminSv.getHeader());
+		return this.http.get<OrdenLista>(BASE_API_URL + "/consultorio/ver-orden/", this.adminSv.getHeader());
 	}
 	loadExamen(): Observable<ExamenLista> {
 		return this.http.get<ExamenLista>(this.url + "/ExamenLabCab/", this.adminSv.getHeader());
@@ -116,7 +116,7 @@ export class LaboratorioService {
 	}
 	cambioEstado(id: number): Observable<Orden> {
 		console.log("Entra al servicio=" + id);
-		return this.http.get<Orden>("/consultorio/atenderOrden/" + id, this.adminSv.getHeader());
+		return this.http.get<Orden>(BASE_API_URL + "/consultorio/atenderOrden/" + id, this.adminSv.getHeader());
 	}
 	setDni(dnir: string) {
 		this.dni = dnir;
@@ -171,7 +171,7 @@ export class LaboratorioService {
 				});
 	}
 
-
+	
 	getIdCabecera(): number {
 		return this.tipo;
 	}
@@ -208,33 +208,33 @@ export class LaboratorioService {
 	}
 	cancelarOrden(a: number): Observable<Orden> {
 		console.log("vino al servicio de cancelar orden");
-		return this.http.get<Orden>("/consultorio/cancelarOrden/" + a, this.adminSv.getHeader());
+		return this.http.get<Orden>(BASE_API_URL + "/consultorio/cancelarOrden/" + a, this.adminSv.getHeader());
 	}
 	docName(id: number): Observable<Personal> {
-		return this.http.get<Personal>("/administrador/ver-personal/" + id, this.adminSv.getHeader());
+		return this.http.get<Personal>(BASE_API_URL + "/administrador/ver-personal/" + id, this.adminSv.getHeader());
 	}
 	searchOrdenDniLab(dni: string): Observable<OrdenLista> {
 		console.log("ENTRA AL SERVICIO " + dni);
-		return this.http.get<OrdenLista>('/consultorio/buscarOrdenLab/?dni=' + dni, this.adminSv.getHeader());
+		return this.http.get<OrdenLista>(BASE_API_URL + '/consultorio/buscarOrdenLab/?dni=' + dni, this.adminSv.getHeader());
 	}
 
 	searchOrdenNombreLab(nombre: string): Observable<OrdenLista> {
 		console.log("ENTRA AL SERVICIO " + nombre);
-		return this.http.get<OrdenLista>('/consultorio/buscarNombreOrdenLab/?nom=' + nombre, this.adminSv.getHeader());
+		return this.http.get<OrdenLista>(BASE_API_URL + '/consultorio/buscarNombreOrdenLab/?nom=' + nombre, this.adminSv.getHeader());
 	}
 	elimiarDet(det: number) {
-		this.http.delete<Detalle>(this.url + '/ExamenLabDet/' + det + "/", this.adminSv.getHeader())
+		this.http.delete<Detalle>(this.url + '/ExamenLabDet/' + det + "/"  ,this.adminSv.getHeader())
 			.subscribe(
 				data => {
 					this.toastr.success("Detalle Eliminado");
 					console.log("Detalle Eliminado ");
-
+				
 				},
 				error => {
 					this.toastr.error(error);
 					console.log(error);
 				});
-
+				
 	}
 
 

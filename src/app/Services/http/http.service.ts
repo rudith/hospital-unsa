@@ -480,6 +480,8 @@ export class HttpService {
         provincia: newHistoria.provincia,
         departamento: newHistoria.departamento,
         fechaReg:newHistoria.fechaReg,
+        lugarNac:newHistoria.lugarNac,
+        procedencia:newHistoria.procedencia
       }, this.adminService.getHeader())
       .subscribe(
         data => {

@@ -533,9 +533,9 @@ export class HttpService {
   }
 
 
-  searcHistoriasDNI(dni: string): Observable<Historial> {
-    return this.http.get<Historial>(
-      BASE_API_URL + "/admision/historiadni/" + dni + "/", this.adminService.getHeader()
+  searcHistoriasDNI(dni: string): Observable<HistorialLista> {
+    return this.http.get<HistorialLista>(
+      BASE_API_URL + "/admision/historiadni/?dni=" + dni , this.adminService.getHeader()
     );
   }
   searcHistoriasNroR(nroR: string): Observable<Historial[]> {

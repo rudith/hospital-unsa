@@ -70,7 +70,7 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   patientForm: FormGroup;
   depa: number;
   bus: string;
-
+  historiales: Historial[];
   historiaForm: FormGroup;
   ordenForm:FormGroup;
   histI:Historial;
@@ -352,7 +352,11 @@ export class ConexionLaboratorioComponent extends BasePageComponent
   crearOrdenI(form: FormGroup) {
     this.httpSv.searcHistoriasDNI(form.get('dni').value).subscribe(
       data => {
-        this.histI=data;
+        this.httpSv.loadHistorias().subscribe(historiales => {
+          this.historiales = []
+          this.historiales = historiales.results;
+        });
+        this.histI=this.historiales[0];
         if (form.valid) {
           let newOrden: OrdenM = form.value;
           newOrden.dni = form.get('dni').value;

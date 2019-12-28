@@ -141,8 +141,9 @@ export class HistorialComponent extends BasePageComponent
     this.historiales = [];
     this.loadHistorias();
     this.loadData();
-    this.httpSv.loadEspecialidadesPag().subscribe(especialidades => {
-      this.especialidades = especialidades.results;
+    this.httpSv.loadEspecialidadesSP().subscribe(especialidades => {
+      this.especialidades = especialidades;
+      console.log(this.especialidades);
       this.loadOptions();
     });
     
@@ -561,9 +562,19 @@ export class HistorialComponent extends BasePageComponent
       this.toastr.warning("Buscando...");
       this.httpSv.searcHistoriasDNI(this.datoBus).subscribe(
         data => {
-          this.historiales = []
-          this.historiales[0] = data;
+          console.log(data)
+          if(data.results.length==0){
+            this.toastr.error("No se han encontrado coincidencias");
+            this.httpSv.loadHistorias().subscribe(historiales => {
+              this.historiales = []
+              this.historiales = historiales.results;
+            });
+          }else{
+          this.toastr.success("Mostrando resultados");
+          this.historiales = [];
+          this.historiales = data.results;
           console.log("entro bus" + this.datoBus);
+          }
         },
         error => {
           this.toastr.error("No encontrado");

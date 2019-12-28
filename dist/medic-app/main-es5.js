@@ -2317,8 +2317,8 @@ var AppModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BASE_API_URL", function() { return BASE_API_URL; });
 //export const BASE_API_URL = 'http://192.168.1.57:8000';
-//export const BASE_API_URL = 'http://192.168.1.57:8000';
-var BASE_API_URL = 'http://localhost:8000';
+var BASE_API_URL = 'http://192.168.1.57:8000';
+//export const BASE_API_URL = 'http://localhost:8000';
 
 
 /***/ }),

@@ -160,6 +160,7 @@ export class AreaComponent extends BasePageComponent implements OnInit {
       this.closeModal();
       this.appointmentForm.reset();
       this.loadAreas();
+      //location.reload();
     }
   }
 

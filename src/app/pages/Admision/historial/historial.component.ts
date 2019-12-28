@@ -281,7 +281,7 @@ export class HistorialComponent extends BasePageComponent
       console.log(newPatient.fechaReg)
       console.log(newPatient);
       this.httpSv.createHISTORIAL(newPatient, this.modal);
-      this.loadHistorias();
+      location.reload();
 
       
     
@@ -493,7 +493,7 @@ export class HistorialComponent extends BasePageComponent
       }
       console.log(nHist);
       this.httpSv.updateHISTORIAL(nHist,this.modal)
-      this.loadHistorias();
+      location.reload();
 
     }
 

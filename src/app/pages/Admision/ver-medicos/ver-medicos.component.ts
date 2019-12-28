@@ -350,9 +350,10 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
       newMedico.estReg = true;
       console.log(newMedico)
       this.adminSv.createMedico(newMedico);
+      location.reload();
     }
     this.closeModalH();
-    this.loadData();
+    
   }
 
   updateMedicoI(form: FormGroup) {
@@ -369,10 +370,8 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
       console.log("update")
       console.log(newMedico)
       this.adminSv.updateMedico(newMedico,this.idP);
+      location.reload();
     }
-    this.closeModalH();
-    this.loadData();
-    this.loadOrdenes();
   }
 
   initBusForm() {
@@ -419,7 +418,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
   CambiarEstado() {  
 
 
-      let newMedico: PersonalCreate=this.historiaFormI.value ;      
+      let newMedico: PersonalCreate=this.historiaFormI.value;
       console.log(newMedico)
       newMedico.id=this.ah.id;
       newMedico.dni = this.ah.dni;
@@ -438,6 +437,7 @@ export class VerMedicosComponent extends BasePageComponent implements OnInit, On
     this.closeModalH();
     this.loadData();
     this.loadOrdenes();
+    location.reload();
   }
 
 

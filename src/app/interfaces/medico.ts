@@ -1,4 +1,5 @@
 export interface Medico {
+  id: number;
   user: {
     id: 1;
     username: string;

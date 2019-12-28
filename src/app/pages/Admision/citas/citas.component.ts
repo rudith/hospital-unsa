@@ -260,6 +260,9 @@ export class CitasComponent extends BasePageComponent implements OnInit {
       especialidad: newAppointment.especialidad
     });
     for (let i in this.medicos) {
+      console.log("Nombres: ");
+      console.log(this.medicos[i].nombres);
+
       this.medOption[i] = {
         label:
           this.medicos[i].nombres +
@@ -267,7 +270,8 @@ export class CitasComponent extends BasePageComponent implements OnInit {
           this.medicos[i].apellido_paterno +
           " " +
           this.medicos[i].apellido_materno,
-        value: this.medicos[i].user.id.toString()
+        value: this.medicos[i].id + ""
+        
       };
     }
   }
@@ -278,6 +282,7 @@ export class CitasComponent extends BasePageComponent implements OnInit {
         this.medOption = [];
         this.medSelectedName="";
         this.medicos = data;
+        console.log(this.medicos)
         this.loadOptionsMed();
       },
       error => {}

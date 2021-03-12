@@ -35,7 +35,7 @@
     "d3": "5.9.2",
     "echarts": "4.2.1",
     "echarts-gl": "1.1.1",
-    "jspdf": "^1.4.1",
+    "jspdf": "^2.3.1",
     "leaflet": "1.5.1",
     "ng2-charts": "2.2.4",
     "ng2-dragula": "2.1.1",
